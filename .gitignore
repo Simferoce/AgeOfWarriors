@@ -5,3 +5,13 @@
 /My project/obj
 /My project/*.csproj
 /My project/.vs
+/Unity/.vs
+/Unity/*.vsconfig
+/Unity/*.csproj
+/Unity/Library
+/Unity/Logs
+/Unity/obj
+/Unity/Temp
+/Unity/UserSettings
+/Unity/*.sln
+/Unity/debug.log
