@@ -37,7 +37,7 @@ namespace Game
             Gizmos.DrawLine(this.transform.position + Vector3.right * attackRange, this.transform.position - Vector3.right * attackRange);
         }
 
-        public override void Tick()
+        public void Update()
         {
             UpdateMovement();
 
@@ -63,7 +63,7 @@ namespace Game
         {
             float attackRangeMin = this.Direction > 0 ? this.Position : this.Position - this.attackRange;
             float attackRangeMax = this.Direction > 0 ? this.Position + this.attackRange : this.Position;
-            List<ITargeteable> intersectedObjects = this.Lane.Intersecting(attackRangeMin, attackRangeMax)
+            List<ITargeteable> intersectedObjects = Lane.Instance.Intersecting(attackRangeMin, attackRangeMax)
                 .Where(x => x != this && (x.Agent == null || this.Agent == null || x.Agent.Faction != this.Agent.Faction))
                 .Select(x => x.GetComponent<ITargeteable>())
                 .Where(x => x != null && x.Attackable(this.gameObject)).ToList();
@@ -82,7 +82,7 @@ namespace Game
             if (!CanAttack())
                 return;
 
-            List<(float, ITargeteable)> inRange = Lane.CastAll<LaneObject>(this.Position, this.Position + this.Direction * this.attackRange)
+            List<(float, ITargeteable)> inRange = Lane.Instance.CastAll<LaneObject>(this.Position, this.Position + this.Direction * this.attackRange)
                 .Where(x => x.Item2.Agent == null || this.Agent == null || this.Agent.Faction != x.Item2.Agent.Faction)
                 .Select(x => (x.Item1, x.Item2.GetComponent<ITargeteable>()))
                 .Where(x => x.Item2 != null && x.Item2.Attackable(this.gameObject))
@@ -113,7 +113,7 @@ namespace Game
 
         public void UpdateMovement()
         {
-            IEnumerable<LaneObject> intersectingObjects = this.Lane.Intersecting(this.Position - this.CollisionRange, this.Position + this.CollisionRange);
+            IEnumerable<LaneObject> intersectingObjects = Lane.Instance.Intersecting(this.Position - this.CollisionRange, this.Position + this.CollisionRange);
             List<LaneObject> filteredIntersectingObjects = FilterCollision(intersectingObjects).ToList();
 
             if (filteredIntersectingObjects.Count() == 0)
@@ -132,7 +132,7 @@ namespace Game
             float translation = this.Speed * this.Direction * Time.deltaTime;
 
             float border = this.Direction > 0 ? this.Max : this.Min;
-            if (this.Lane.Cast<LaneObject>(border, border + translation, out float hit))
+            if (Lane.Instance.Cast<LaneObject>(border, border + translation, out float hit))
             {
                 this.Position = hit - (this.Direction > 0 ? this.Max - this.Position : this.Min - this.Position);
             }

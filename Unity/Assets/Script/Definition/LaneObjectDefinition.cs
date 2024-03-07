@@ -4,6 +4,6 @@ namespace Game
 {
     public abstract class LaneObjectDefinition : ScriptableObject
     {
-        public abstract LaneObject Spawn(Lane lane, Agent agent, int spawnNumber, float position, int direction);
+        public abstract LaneObject Spawn(Agent agent, int spawnNumber, float position, int direction);
     }
 }

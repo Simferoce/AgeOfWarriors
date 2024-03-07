@@ -6,20 +6,16 @@ namespace Game
 {
     public class Lane : MonoBehaviour
     {
-        [SerializeField] private Ground ground;
-        [SerializeField] private List<SpawnPoint> spawnPoints;
+        public static Lane Instance;
 
+        [SerializeField] private float bounds;
+
+        private float TotalLength => bounds * 2;
         private List<LaneObject> laneObjects = new List<LaneObject>();
 
-        public Ground Ground { get => ground; }
-        public List<SpawnPoint> SpawnPoints { get => spawnPoints; }
-
-        public void Update()
+        private void Awake()
         {
-            foreach (LaneObject laneObject in laneObjects)
-            {
-                laneObject.Tick();
-            }
+            Instance = this;
         }
 
         public void Add(LaneObject laneObject)
@@ -37,11 +33,6 @@ namespace Game
         {
             laneObject.Destroyed -= OnLaneObjectDestroyed;
             Remove(laneObject);
-        }
-
-        public float Clamp(float position)
-        {
-            return ground.Clamp(position);
         }
 
         public T Cast<T>(float from, float to, out float hit)
@@ -99,6 +90,32 @@ namespace Game
                 || (laneObject.Max > min && laneObject.Max < min)
                 || (min > laneObject.Min && min < laneObject.Max)
                 || (max > laneObject.Min && max < laneObject.Max);
+        }
+
+        public float Clamp(float length)
+        {
+            return Mathf.Clamp(length, 0, TotalLength);
+        }
+
+        public Vector3 GetPosition(float length)
+        {
+            length = Clamp(length);
+
+            return this.transform.position + (Vector3.right * (length - TotalLength / 2));
+        }
+
+        public Vector3 Project(Vector3 point, out float length)
+        {
+            length = Clamp(bounds + point.x - this.transform.position.x);
+            return new Vector3(GetPosition(length).x, this.transform.position.y, point.z);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.black;
+            Gizmos.DrawSphere(this.transform.position + Vector3.right * bounds, 0.1f);
+            Gizmos.DrawSphere(this.transform.position - Vector3.right * bounds, 0.1f);
+            Gizmos.DrawLine(this.transform.position + Vector3.right * bounds, this.transform.position - Vector3.right * bounds);
         }
     }
 }

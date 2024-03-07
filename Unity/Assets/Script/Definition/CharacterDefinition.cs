@@ -7,10 +7,10 @@ namespace Game
     {
         [SerializeField] private GameObject prefab;
 
-        public override LaneObject Spawn(Lane lane, Agent agent, int spawnNumber, float position, int direction)
+        public override LaneObject Spawn(Agent agent, int spawnNumber, float position, int direction)
         {
             Character character = GameObject.Instantiate(prefab).GetComponent<Character>();
-            character.Spawn(lane, agent, spawnNumber, position, direction);
+            character.Spawn(agent, spawnNumber, position, direction);
 
             return character;
         }

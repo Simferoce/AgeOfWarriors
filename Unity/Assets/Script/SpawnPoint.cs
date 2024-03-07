@@ -10,14 +10,12 @@ namespace Game
         private float position;
 
         public Faction Faction { get => faction; }
-        public Lane Lane { get; private set; }
         public float Position { get => position; }
         public int Direction { get => direction; }
 
-        public void Initialize(Lane lane)
+        public void Start()
         {
-            this.Lane = lane;
-            lane.Ground.Project(this.transform.position, out position);
+            Lane.Instance.Project(this.transform.position, out position);
         }
     }
 }

@@ -7,16 +7,12 @@ namespace Game
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
         [SerializeField] private SpawnPoint spawnPoint;
-        [SerializeField] private Lane lane;
+
+        public SpawnPoint SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
 
         private void Awake()
         {
             health = maxHealth;
-        }
-
-        private void Start()
-        {
-            spawnPoint.Initialize(lane);
         }
 
         public void Attack(float damage)

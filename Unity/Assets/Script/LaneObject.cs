@@ -23,19 +23,17 @@ namespace Game
             set
             {
                 position = value;
-                this.transform.position = Lane.Ground.GetPosition(position);
+                this.transform.position = Lane.Instance.GetPosition(position);
             }
         }
         public float CollisionRange { get => collisionRange; set => collisionRange = value; }
-        public Lane Lane { get; protected set; }
         public int Direction { get; protected set; }
         public Agent Agent { get; private set; }
         public int SpawnNumber { get; private set; }
 
-        public virtual void Spawn(Lane lane, Agent agent, int spawnNumber, float position, int direction)
+        public virtual void Spawn(Agent agent, int spawnNumber, float position, int direction)
         {
-            lane.Add(this);
-            this.Lane = lane;
+            Lane.Instance.Add(this);
             this.Position = position;
             this.Direction = direction;
             this.SpawnNumber = spawnNumber;
@@ -44,8 +42,6 @@ namespace Game
             if (direction < 0)
                 transform.localScale = Vector3.Scale(transform.localScale, new Vector3(-1, 1, 1));
         }
-
-        public virtual void Tick() { }
 
         protected virtual void OnDrawGizmosSelected()
         {
