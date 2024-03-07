@@ -43,6 +43,12 @@ namespace Game
 
         private static Dictionary<Animator, ChannelManager> channelManagers = new Dictionary<Animator, ChannelManager>();
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void Init()
+        {
+            channelManagers = new Dictionary<Animator, ChannelManager>();
+        }
+
         public static void Subscribe(Animator animator, Event evt, string name, Action action)
         {
             Channel channel = GetChannel(animator, evt, name);

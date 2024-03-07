@@ -8,6 +8,12 @@ namespace Game
 
         [SerializeField] private CharacterDefinition characterDefinition;
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void Init()
+        {
+            Instance = null;
+        }
+
         private void Awake()
         {
             Instance = this;

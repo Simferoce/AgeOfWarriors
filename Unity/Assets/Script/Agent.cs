@@ -9,6 +9,12 @@ namespace Game
         public static List<Agent> agents = new List<Agent>();
         public static Agent Player => agents.FirstOrDefault(x => x.Faction == Faction.Player);
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void Init()
+        {
+            agents = new List<Agent>();
+        }
+
         [SerializeField] private Faction faction;
         [SerializeField] private Base agentBase;
         [SerializeField] private int direction;

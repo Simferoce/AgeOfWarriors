@@ -8,6 +8,12 @@ namespace Game
     {
         public static Lane Instance;
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        static void Init()
+        {
+            Instance = null;
+        }
+
         [SerializeField] private float bounds;
 
         private float TotalLength => bounds * 2;
