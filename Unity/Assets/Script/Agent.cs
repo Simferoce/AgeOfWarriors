@@ -30,6 +30,11 @@ namespace Game
             agentBase.Spawn(this, 0, agentBasePosition, direction);
         }
 
+        private void Update()
+        {
+            factory.Update();
+        }
+
         private void OnEnable()
         {
             agents.Add(this);
