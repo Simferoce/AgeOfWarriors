@@ -12,6 +12,6 @@ namespace Game
         public float ProductionDuration { get => productionDuration; set => productionDuration = value; }
         public float Cost { get => cost; set => cost = value; }
 
-        public abstract LaneObject Spawn(Agent agent, int spawnNumber, float position, int direction);
+        public abstract AgentObject Spawn(Agent agent, Vector3 position, int spawnNumber, int direction);
     }
 }

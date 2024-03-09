@@ -1,10 +1,10 @@
-﻿using UnityEngine;
-
-namespace Game
+﻿namespace Game
 {
     public interface ITargeteable
     {
-        public bool Attackable(GameObject from);
+        public Faction Faction { get; }
+        public bool Attackable();
         public void Attack(float damage);
+        public int Priority { get; }
     }
 }

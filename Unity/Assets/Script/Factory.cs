@@ -34,7 +34,7 @@ namespace Game
 
             commands.Add(new Command()
             {
-                Action = () => laneObjectDefinition.Spawn(agent, currentSpawnNumber++, spawnPoint.Position, spawnPoint.Direction),
+                Action = () => laneObjectDefinition.Spawn(agent, spawnPoint.transform.position, currentSpawnNumber++, spawnPoint.Direction),
                 ProductionDuration = laneObjectDefinition.ProductionDuration,
                 LaneObjectDefinition = laneObjectDefinition
             });

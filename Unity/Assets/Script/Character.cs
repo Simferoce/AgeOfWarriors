@@ -1,80 +1,102 @@
-﻿using System.Collections.Generic;
+﻿using Character;
+using Extension;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class Character : LaneObject, ITargeteable
+    public class Character : AgentObject, ITargeteable
     {
-        [SerializeField] private float attackRange;
-        [SerializeField] private float health;
-        [SerializeField] private float maxHealth;
+        [Header("Stats")]
         [SerializeField] private float speed;
+        [SerializeField] private float maxHealth;
 
-        private CharacterAnimator characterAnimator = null;
-        private bool isAttacking = false;
+        [Header("Collision")]
+        [SerializeField] private new Rigidbody2D rigidbody;
+        [SerializeField] private DetectionCollision hitBox;
+        [SerializeField] private DetectionCollision hitZone;
 
-        public CharacterAnimator CharacterAnimator { get => characterAnimator; }
         public float Speed { get => speed; set => speed = value; }
         public float MaxHealth { get => maxHealth; set => maxHealth = value; }
         public float Health { get => health; set => health = value; }
-        public float AttackRange { get => attackRange; set => attackRange = value; }
+        public int Priority { get => SpawnNumber; }
+        public Faction Faction { get => Agent.Faction; }
+
+        private CharacterAnimator characterAnimator = null;
+        private bool isAttacking = false;
+        private bool isDead = false;
+        private float health;
 
         private void Start()
         {
-            health = maxHealth;
+            health = MaxHealth;
             characterAnimator = GetComponentInChildren<CharacterAnimator>();
             characterAnimator.Attacked += OnAttacked;
         }
 
-        protected override void OnDrawGizmosSelected()
+        public void FixedUpdate()
         {
-            base.OnDrawGizmosSelected();
+            if (isDead)
+                return;
 
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(this.transform.position + Vector3.right * attackRange, 0.02f);
-            Gizmos.DrawSphere(this.transform.position - Vector3.right * attackRange, 0.02f);
-            Gizmos.DrawLine(this.transform.position + Vector3.right * attackRange, this.transform.position - Vector3.right * attackRange);
-        }
-
-        public void Update()
-        {
-            UpdateMovement();
-
-            if (CanAttack() && !InAttackRange())
+            if (CanMove())
             {
-                isAttacking = false;
-                this.CharacterAnimator.SetLayerWeight(CharacterAnimator.LAYER_UPPER_BODY, 0f);
+                this.characterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 1);
+                rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Speed * Time.deltaTime);
             }
             else
             {
+                this.characterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 0f);
+            }
+
+            if (CanAttack())
+            {
                 if (isAttacking == false)
                 {
-                    this.CharacterAnimator.SetTrigger(CharacterAnimator.ATTACK);
-                    this.CharacterAnimator.SetLayerWeight(CharacterAnimator.LAYER_UPPER_BODY, 1f);
+                    this.characterAnimator.SetTrigger(CharacterAnimator.ATTACK);
+                    this.characterAnimator.SetLayerWeight(CharacterAnimator.LAYER_UPPER_BODY, 1f);
                 }
 
                 isAttacking = true;
             }
+            else
+            {
+                isAttacking = false;
+                this.characterAnimator.SetLayerWeight(CharacterAnimator.LAYER_UPPER_BODY, 0f);
+            }
+        }
+
+        private bool CanMove()
+        {
+            foreach (GameObject collision in hitBox.InCollisions)
+            {
+                if (!collision.CompareTag(GameTag.HIT_BOX))
+                    continue;
+
+                if (!collision.TryGetComponentInParent<AgentObject>(out AgentObject laneObject))
+                    continue;
+
+                if (laneObject == this)
+                    continue;
+
+                if (laneObject.Agent.Faction != this.Agent.Faction)
+                    return false;
+
+                if (laneObject.SpawnNumber > this.SpawnNumber)
+                    return false;
+            }
+
+            return true;
         }
 
         #region Attack
-        public bool InAttackRange()
-        {
-            float attackRangeMin = this.Direction > 0 ? this.Position : this.Position - this.attackRange;
-            float attackRangeMax = this.Direction > 0 ? this.Position + this.attackRange : this.Position;
-            List<ITargeteable> intersectedObjects = Lane.Instance.Intersecting(attackRangeMin, attackRangeMax)
-                .Where(x => x != this && (x.Agent == null || this.Agent == null || x.Agent.Faction != this.Agent.Faction))
-                .Select(x => x.GetComponent<ITargeteable>())
-                .Where(x => x != null && x.Attackable(this.gameObject)).ToList();
-            ITargeteable intersecting = intersectedObjects.FirstOrDefault();
-
-            return intersecting != null;
-        }
-
         public bool CanAttack()
         {
-            return health > 0;
+            if (health <= 0 || isDead)
+                return false;
+
+            return GetTarget() != null;
         }
 
         public void OnAttacked()
@@ -82,20 +104,39 @@ namespace Game
             if (!CanAttack())
                 return;
 
-            List<(float, ITargeteable)> inRange = Lane.Instance.CastAll<LaneObject>(this.Position, this.Position + this.Direction * this.attackRange)
-                .Where(x => x.Item2.Agent == null || this.Agent == null || this.Agent.Faction != x.Item2.Agent.Faction)
-                .Select(x => (x.Item1, x.Item2.GetComponent<ITargeteable>()))
-                .Where(x => x.Item2 != null && x.Item2.Attackable(this.gameObject))
-                .ToList();
+            ITargeteable target = GetTarget();
 
-            if (inRange.Count > 0)
-            {
-                (_, ITargeteable target) = inRange.OrderBy(x => x.Item1).First();
+            if (target != null)
                 target.Attack(1);
-            }
         }
 
-        public bool Attackable(GameObject from)
+        public ITargeteable GetTarget()
+        {
+            List<ITargeteable> potentialTargets = new List<ITargeteable>();
+            foreach (GameObject inRange in hitZone.InCollisions)
+            {
+                if (!inRange.CompareTag(GameTag.HIT_BOX))
+                    continue;
+
+                if (!inRange.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable))
+                    continue;
+
+                if (targeteable.Equals(this))
+                    continue;
+
+                if (!targeteable.Attackable())
+                    continue;
+
+                if (targeteable.Faction != this.Agent.Faction)
+                    potentialTargets.Add(targeteable);
+            }
+
+            return potentialTargets
+                .OrderBy(x => x.Priority)
+                .FirstOrDefault();
+        }
+
+        public bool Attackable()
         {
             return this.health > 0;
         }
@@ -105,64 +146,19 @@ namespace Game
             this.health -= damage;
 
             if (health <= 0)
-                GameObject.Destroy(this.gameObject);
+                Death();
         }
-        #endregion
 
-        #region Movement
-
-        public void UpdateMovement()
+        public void Death()
         {
-            IEnumerable<LaneObject> intersectingObjects = Lane.Instance.Intersecting(this.Position - this.CollisionRange, this.Position + this.CollisionRange);
-            List<LaneObject> filteredIntersectingObjects = FilterCollision(intersectingObjects).ToList();
+            isDead = true;
+            this.characterAnimator.SetLayerWeight(CharacterAnimator.LAYER_UPPER_BODY, 0f);
+            this.characterAnimator.SetTrigger(CharacterAnimator.DEAD);
 
-            if (filteredIntersectingObjects.Count() == 0)
-            {
-                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 1);
-                Move();
-            }
-            else
-            {
-                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 0.0f);
-            }
+            hitBox.gameObject.SetActive(false);
+            GameObject.Destroy(this.gameObject, 2);
         }
 
-        public void Move()
-        {
-            float translation = this.Speed * this.Direction * Time.deltaTime;
-
-            float border = this.Direction > 0 ? this.Max : this.Min;
-            if (Lane.Instance.Cast<LaneObject>(border, border + translation, out float hit))
-            {
-                this.Position = hit - (this.Direction > 0 ? this.Max - this.Position : this.Min - this.Position);
-            }
-            else
-            {
-                this.Position += translation;
-            }
-        }
-
-        public List<LaneObject> FilterCollision(IEnumerable<LaneObject> collisions)
-        {
-            List<LaneObject> results = new List<LaneObject>();
-            foreach (LaneObject collision in collisions)
-            {
-                if (this.Agent == null || collision.Agent == null)
-                {
-                    results.Add(collision);
-                }
-                else if (collision.Agent.Faction != this.Agent.Faction)
-                {
-                    results.Add(collision);
-                }
-                else if (collision.Agent == this.Agent && collision is Character intersectingCharacter && intersectingCharacter.SpawnNumber < this.SpawnNumber)
-                {
-                    results.Add(collision);
-                }
-            }
-
-            return results;
-        }
         #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class Wall : LaneObject
+    public class Wall : AgentObject
     {
 
     }

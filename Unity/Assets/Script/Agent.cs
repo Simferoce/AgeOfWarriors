@@ -8,6 +8,7 @@ namespace Game
     {
         public static List<Agent> agents = new List<Agent>();
         public static Agent Player => agents.FirstOrDefault(x => x.Faction == Faction.Player);
+        public static Agent Opponent => agents.FirstOrDefault(x => x.Faction == Faction.Opponent);
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
@@ -26,8 +27,8 @@ namespace Game
 
         private void Start()
         {
-            agentBase.transform.position = Lane.Instance.Project(agentBase.transform.position, out float agentBasePosition);
-            agentBase.Spawn(this, 0, agentBasePosition, direction);
+            agentBase.transform.position = Lane.Instance.Project(agentBase.transform.position);
+            agentBase.Spawn(this, 0, direction);
         }
 
         private void Update()

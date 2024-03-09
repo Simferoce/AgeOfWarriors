@@ -9,7 +9,7 @@ namespace Game
     {
         public static readonly int SPEED_RATIO = Animator.StringToHash("SpeedRatio");
         public static readonly int ATTACK = Animator.StringToHash("Attack");
-        public static readonly int MOVE = Animator.StringToHash("Move");
+        public static readonly int DEAD = Animator.StringToHash("Dead");
         public static readonly int LAYER_UPPER_BODY = 1;
 
         private Animator animator;
