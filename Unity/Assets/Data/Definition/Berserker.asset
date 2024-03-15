@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
-  m_Name: Character
+  m_Name: Berserker
   m_EditorClassIdentifier: 
   productionDuration: 2
   cost: 0
