@@ -4,7 +4,7 @@
     {
         public Faction Faction { get; }
         public bool Attackable();
-        public void Attack(float damage);
+        public void TakeAttack(float damage);
         public int Priority { get; }
     }
 }

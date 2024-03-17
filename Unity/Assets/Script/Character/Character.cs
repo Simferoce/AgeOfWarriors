@@ -22,53 +22,51 @@ namespace Game
         public float Health { get => health; set => health = value; }
         public int Priority { get => SpawnNumber; }
         public Faction Faction { get => Agent.Faction; }
+        public bool IsDead { get; set; } = false;
+        public CharacterAnimator CharacterAnimator { get; set; }
 
-        private CharacterAnimator characterAnimator = null;
-        private bool isAttacking = false;
-        private bool isDead = false;
+        private CharacterAbility ability = null;
         private float health;
 
         private void Start()
         {
+            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
+
             health = MaxHealth;
-            characterAnimator = GetComponentInChildren<CharacterAnimator>();
-            characterAnimator.Attacked += OnAttacked;
+            ability = new CharacterAbility(this);
+        }
+
+        private void OnDestroy()
+        {
+            ability.Dispose();
         }
 
         public void FixedUpdate()
         {
-            if (isDead)
+            if (IsDead)
                 return;
 
             if (CanMove())
             {
-                this.characterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 1);
+                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 1);
                 rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Speed * Time.deltaTime);
             }
             else
             {
-                this.characterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 0f);
+                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 0f);
             }
 
-            if (CanAttack())
+            if (CanUseAbility())
             {
-                if (isAttacking == false)
-                {
-                    this.characterAnimator.SetTrigger(CharacterAnimator.ATTACK);
-                    this.characterAnimator.SetLayerWeight(CharacterAnimator.LAYER_UPPER_BODY, 1f);
-                }
-
-                isAttacking = true;
-            }
-            else
-            {
-                isAttacking = false;
-                this.characterAnimator.SetLayerWeight(CharacterAnimator.LAYER_UPPER_BODY, 0f);
+                ability.Use();
             }
         }
 
         private bool CanMove()
         {
+            if (ability.IsCasting)
+                return false;
+
             foreach (GameObject collision in hitBox.InCollisions)
             {
                 if (!collision.CompareTag(GameTag.HIT_BOX))
@@ -91,23 +89,16 @@ namespace Game
         }
 
         #region Attack
-        public bool CanAttack()
+
+        public bool CanUseAbility()
         {
-            if (health <= 0 || isDead)
+            if (!ability.CanUse())
                 return false;
 
-            return GetTarget() != null;
-        }
+            if (health <= 0 || IsDead)
+                return false;
 
-        public void OnAttacked()
-        {
-            if (!CanAttack())
-                return;
-
-            ITargeteable target = GetTarget();
-
-            if (target != null)
-                target.Attack(1);
+            return true;
         }
 
         public ITargeteable GetTarget()
@@ -141,7 +132,7 @@ namespace Game
             return this.health > 0;
         }
 
-        public void Attack(float damage)
+        public void TakeAttack(float damage)
         {
             this.health -= damage;
 
@@ -151,9 +142,8 @@ namespace Game
 
         public void Death()
         {
-            isDead = true;
-            this.characterAnimator.SetLayerWeight(CharacterAnimator.LAYER_UPPER_BODY, 0f);
-            this.characterAnimator.SetTrigger(CharacterAnimator.DEAD);
+            IsDead = true;
+            this.CharacterAnimator.SetTrigger(CharacterAnimator.DEAD);
 
             hitBox.gameObject.SetActive(false);
             GameObject.Destroy(this.gameObject, 2);

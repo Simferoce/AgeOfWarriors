@@ -19,7 +19,7 @@ namespace Game
             health = maxHealth;
         }
 
-        public void Attack(float damage)
+        public void TakeAttack(float damage)
         {
             health -= damage;
         }

@@ -6,6 +6,11 @@ namespace Game
 {
     public class AnimatorEventChannel : StateMachineBehaviour
     {
+        public enum Id
+        {
+            Ability
+        }
+
         #region Subscription
         public enum Event
         {
@@ -15,7 +20,7 @@ namespace Game
 
         private class ChannelManager
         {
-            public Dictionary<(Event, string), Channel> Channels { get; set; } = new Dictionary<(Event, string), Channel>();
+            public Dictionary<(Event, Id), Channel> Channels { get; set; } = new Dictionary<(Event, Id), Channel>();
         }
 
         private class Channel
@@ -49,32 +54,32 @@ namespace Game
             channelManagers = new Dictionary<Animator, ChannelManager>();
         }
 
-        public static void Subscribe(Animator animator, Event evt, string name, Action action)
+        public static void Subscribe(Animator animator, Event evt, Id id, Action action)
         {
-            Channel channel = GetChannel(animator, evt, name);
+            Channel channel = GetChannel(animator, evt, id);
             channel.Subscribe(action);
         }
 
-        public static void Unsubscribe(Animator animator, Event evt, string name, Action action)
+        public static void Unsubscribe(Animator animator, Event evt, Id id, Action action)
         {
-            Channel channel = GetChannel(animator, evt, name);
+            Channel channel = GetChannel(animator, evt, id);
             channel.Unsubscribe(action);
         }
 
-        private static Channel GetChannel(Animator animator, Event evt, string name)
+        private static Channel GetChannel(Animator animator, Event evt, Id id)
         {
             if (!channelManagers.ContainsKey(animator))
                 channelManagers.Add(animator, new ChannelManager());
 
             ChannelManager channelManager = channelManagers[animator];
-            if (!channelManager.Channels.ContainsKey((evt, name)))
-                channelManager.Channels.Add((evt, name), new Channel());
+            if (!channelManager.Channels.ContainsKey((evt, id)))
+                channelManager.Channels.Add((evt, id), new Channel());
 
-            return channelManager.Channels[(evt, name)];
+            return channelManager.Channels[(evt, id)];
         }
         #endregion
 
-        [SerializeField] private string id;
+        [SerializeField] private Id id;
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
