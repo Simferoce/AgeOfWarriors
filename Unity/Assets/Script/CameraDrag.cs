@@ -13,10 +13,14 @@ public class CameraDrag : MonoBehaviour
 
     private new Camera camera;
     private Vector3 lastMousePosition = Vector3.zero;
+    private Vector3 origin = Vector3.zero;
+
+    public float Delta => camera.transform.position.x - origin.x;
 
     private void Awake()
     {
         camera = GetComponent<Camera>();
+        origin = camera.transform.position;
     }
 
     private void Update()
