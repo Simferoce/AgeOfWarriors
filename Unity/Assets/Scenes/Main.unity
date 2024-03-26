@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afa5e7c5f0628043a80d0cc92ff8ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterDefinition: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+  characterDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
 --- !u!4 &97917530
 Transform:
   m_ObjectHideFlags: 0
@@ -3357,6 +3357,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8087841544425277899, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
+      propertyPath: laneObjectDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
