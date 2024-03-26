@@ -28,6 +28,11 @@ namespace Game
         {
             return this.health > 0;
         }
+
+        public bool CanBlocks(Faction faction)
+        {
+            return faction != this.Faction;
+        }
     }
 }
 

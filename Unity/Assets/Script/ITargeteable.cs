@@ -6,5 +6,6 @@
         public bool Attackable();
         public void TakeAttack(float damage);
         public int Priority { get; }
+        public bool CanBlocks(Faction faction);
     }
 }

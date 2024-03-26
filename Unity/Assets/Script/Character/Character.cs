@@ -72,19 +72,27 @@ namespace Game
                 if (!collision.CompareTag(GameTag.HIT_BOX))
                     continue;
 
-                if (!collision.TryGetComponentInParent<AgentObject>(out AgentObject laneObject))
+                if (!collision.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable))
                     continue;
 
-                if (laneObject == this)
+                if (targeteable == (this as ITargeteable))
                     continue;
 
-                if (laneObject.Agent.Faction != this.Agent.Faction)
+                if (!targeteable.CanBlocks(this.Faction))
+                    continue;
+
+                if (targeteable.Faction != this.Faction)
                     return false;
 
-                if (laneObject.SpawnNumber > this.SpawnNumber)
+                if (targeteable.Priority < this.Priority)
                     return false;
             }
 
+            return true;
+        }
+
+        public bool CanBlocks(Faction faction)
+        {
             return true;
         }
 
@@ -148,6 +156,8 @@ namespace Game
             hitBox.gameObject.SetActive(false);
             GameObject.Destroy(this.gameObject, 2);
         }
+
+
 
         #endregion
     }
