@@ -14,7 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346730578860438931, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346730578860438931, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346730578860438931, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6346730578860438931, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -67,6 +75,10 @@ PrefabInstance:
     - target: {fileID: 8599345966726902995, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
       propertyPath: m_Name
       value: BaseOponent
+      objectReference: {fileID: 0}
+    - target: {fileID: 9106889649075548176, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: m_FlipX
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

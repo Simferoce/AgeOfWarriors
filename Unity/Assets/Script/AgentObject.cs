@@ -15,7 +15,7 @@ namespace Game
             this.Agent = agent;
 
             if (direction < 0)
-                transform.localScale = Vector3.Scale(transform.localScale, new Vector3(-1, 1, 1));
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
     }
 }
