@@ -14,15 +14,13 @@ namespace Game
         }
 
         [SerializeField]
-        private int commandSlot = 5;
+        private int commandSlot = 1;
 
-        public List<Command> Commands { get => commands; }
+        public float TimeBeforeNextProductionNormalized => commands.Count == 0 ? -1 : (Time.time - productionStart) / commands[0].ProductionDuration;
 
         private List<Command> commands = new List<Command>();
         private int currentSpawnNumber;
         private float productionStart;
-
-        public float TimeBeforeNextProductionNormalized => commands.Count == 0 ? -1 : (Time.time - productionStart) / commands[0].ProductionDuration;
 
         public void SpawnLaneObject(Agent agent, SpawnPoint spawnPoint, LaneObjectDefinition laneObjectDefinition)
         {

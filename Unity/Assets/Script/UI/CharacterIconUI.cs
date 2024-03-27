@@ -6,8 +6,7 @@ namespace UI
 {
     public class CharacterIconUI : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField]
-        private LaneObjectDefinition laneObjectDefinition;
+        [SerializeField] private LaneObjectDefinition laneObjectDefinition;
 
         public void OnPointerClick(PointerEventData eventData)
         {
