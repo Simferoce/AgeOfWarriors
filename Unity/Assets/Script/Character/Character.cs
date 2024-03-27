@@ -25,6 +25,7 @@ namespace Game
         public bool IsDead { get; set; } = false;
         public CharacterAnimator CharacterAnimator { get; set; }
 
+        [SerializeReference, SubclassSelector]
         private CharacterAbility ability = null;
         private float health;
 
@@ -33,7 +34,7 @@ namespace Game
             CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
 
             health = MaxHealth;
-            ability = new CharacterAbility(this);
+            ability.Initialize(this);
         }
 
         private void OnDestroy()

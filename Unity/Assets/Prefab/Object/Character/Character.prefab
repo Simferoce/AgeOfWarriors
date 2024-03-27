@@ -53,6 +53,13 @@ MonoBehaviour:
   rigidbody: {fileID: 9215057588866617565}
   hitBox: {fileID: 5979231024054761784}
   hitZone: {fileID: 1750255367122084491}
+  ability:
+    rid: 3490450864352264229
+  references:
+    version: 2
+    RefIds:
+    - rid: 3490450864352264229
+      type: {class: CharacterAbilityMelee, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &9215057588866617565
 Rigidbody2D:
   serializedVersion: 4
