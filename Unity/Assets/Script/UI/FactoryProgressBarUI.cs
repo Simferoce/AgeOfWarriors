@@ -2,7 +2,7 @@ using Game;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FactoryProgressBar : MonoBehaviour
+public class FactoryProgressBarUI : MonoBehaviour
 {
     [SerializeField]
     private Image bar;

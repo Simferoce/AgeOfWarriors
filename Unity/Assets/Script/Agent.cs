@@ -24,6 +24,7 @@ namespace Game
 
         public Faction Faction { get => faction; }
         public Factory Factory { get => factory; set => factory = value; }
+        public Base Base { get => agentBase; set => agentBase = value; }
 
         private void Start()
         {
