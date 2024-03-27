@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Shieldbearer
   m_EditorClassIdentifier: 
   productionDuration: 2
-  cost: 0
+  cost: 10
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
   prefab: {fileID: 6705402225686340843, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}

@@ -30,6 +30,11 @@ namespace Game
             if (commands.Count == 0)
                 productionStart = Time.time;
 
+            if (!agent.InfiniteMoney && agent.Currency < laneObjectDefinition.Cost)
+                return;
+
+            agent.Currency -= laneObjectDefinition.Cost;
+
             commands.Add(new Command()
             {
                 Action = () => laneObjectDefinition.Spawn(agent, spawnPoint.transform.position, currentSpawnNumber++, spawnPoint.Direction),

@@ -19,12 +19,16 @@ namespace Game
         [SerializeField] private Faction faction;
         [SerializeField] private Base agentBase;
         [SerializeField] private int direction;
+        [SerializeField] private bool infiniteCurrency = false;
+        [SerializeField] private float currencyGainRate = 5f;
 
         private Factory factory = new Factory();
 
         public Faction Faction { get => faction; }
         public Factory Factory { get => factory; set => factory = value; }
         public Base Base { get => agentBase; set => agentBase = value; }
+        public float Currency { get; set; }
+        public bool InfiniteMoney { get => infiniteCurrency; set => infiniteCurrency = value; }
 
         private void Start()
         {
@@ -35,6 +39,8 @@ namespace Game
         private void Update()
         {
             factory.Update();
+
+            Currency += currencyGainRate * Time.deltaTime;
         }
 
         private void OnEnable()

@@ -47,3 +47,5 @@ MonoBehaviour:
   faction: 1
   agentBase: {fileID: 0}
   direction: -1
+  infiniteCurrency: 1
+  currencyGainRate: 1

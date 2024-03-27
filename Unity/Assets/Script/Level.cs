@@ -21,7 +21,6 @@ namespace Game
 
         private void Start()
         {
-            //Agent.Player.SpawnLaneObject(characterDefinition);
             Agent.Opponent.SpawnLaneObject(characterDefinition);
         }
     }
