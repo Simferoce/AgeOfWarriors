@@ -22,13 +22,19 @@ namespace Game
         [SerializeField] private bool infiniteCurrency = false;
         [SerializeField] private float currencyGainRate = 5f;
 
-        private Factory factory = new Factory();
+        private Factory factory;
 
         public Faction Faction { get => faction; }
         public Factory Factory { get => factory; set => factory = value; }
         public Base Base { get => agentBase; set => agentBase = value; }
         public float Currency { get; set; }
         public bool InfiniteMoney { get => infiniteCurrency; set => infiniteCurrency = value; }
+        public int Direction { get => direction; set => direction = value; }
+
+        private void Awake()
+        {
+            factory = new Factory(this);
+        }
 
         private void Start()
         {
@@ -55,7 +61,7 @@ namespace Game
 
         public void SpawnLaneObject(LaneObjectDefinition laneObjectDefinition)
         {
-            factory.SpawnLaneObject(this, agentBase.SpawnPoint, laneObjectDefinition);
+            factory.QueueLaneObject(agentBase.SpawnPoint, laneObjectDefinition);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Game
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private DetectionCollision hitBox;
         [SerializeField] private DetectionCollision hitZone;
+        [SerializeField] private Transform targetPosition;
 
         public float Speed { get => speed; set => speed = value; }
         public float MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -24,6 +25,7 @@ namespace Game
         public Faction Faction { get => Agent.Faction; }
         public bool IsDead { get; set; } = false;
         public CharacterAnimator CharacterAnimator { get; set; }
+        public Vector3 Position => targetPosition.position;
 
         [SerializeReference, SubclassSelector]
         private CharacterAbility ability = null;

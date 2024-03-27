@@ -21,8 +21,14 @@ namespace Game
         private List<Command> commands = new List<Command>();
         private int currentSpawnNumber;
         private float productionStart;
+        private Agent agent;
 
-        public void SpawnLaneObject(Agent agent, SpawnPoint spawnPoint, LaneObjectDefinition laneObjectDefinition)
+        public Factory(Agent agent)
+        {
+            this.agent = agent;
+        }
+
+        public void QueueLaneObject(SpawnPoint spawnPoint, LaneObjectDefinition laneObjectDefinition)
         {
             if (commands.Count >= commandSlot)
                 return;
@@ -41,6 +47,11 @@ namespace Game
                 ProductionDuration = laneObjectDefinition.ProductionDuration,
                 LaneObjectDefinition = laneObjectDefinition
             });
+        }
+
+        public void SpawnAgentObject(AgentObject agentObject)
+        {
+            agentObject.Spawn(agent, currentSpawnNumber++, agent.Direction);
         }
 
         public void Update()
