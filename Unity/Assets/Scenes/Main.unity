@@ -1859,6 +1859,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1588921558}
     m_Modifications:
+    - target: {fileID: 2432990637176469474, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
+      propertyPath: laneObjectDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
     - target: {fileID: 3943553404270811982, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
       propertyPath: m_Name
       value: CharacterSlot (3)
@@ -2859,6 +2863,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1588921558}
     m_Modifications:
+    - target: {fileID: 2432990637176469474, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
+      propertyPath: laneObjectDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
     - target: {fileID: 3943553404270811982, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
       propertyPath: m_Name
       value: CharacterSlot (2)
@@ -3269,6 +3277,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1588921558}
     m_Modifications:
+    - target: {fileID: 2432990637176469474, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
+      propertyPath: laneObjectDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
     - target: {fileID: 3943553404270811982, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
       propertyPath: m_Name
       value: CharacterSlot (1)
@@ -3738,6 +3750,10 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 1588921558}
     m_Modifications:
+    - target: {fileID: 2432990637176469474, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
+      propertyPath: laneObjectDefinition
+      value: 
+      objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
     - target: {fileID: 3943553404270811982, guid: 7cac3315e635d4648a0fbc29cd0b3727, type: 3}
       propertyPath: m_Name
       value: CharacterSlot
