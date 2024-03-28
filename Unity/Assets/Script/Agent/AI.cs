@@ -3,19 +3,17 @@
 namespace Game
 {
     [Serializable]
-    public class AI
+    public class AI : AgentBehaviour
     {
-        private Agent agent;
-
         private int next;
 
-        public void Initialize(Agent agent)
+        public override void Initialize(Agent agent)
         {
-            this.agent = agent;
+            base.Initialize(agent);
             next = ChooseNextToSpawn();
         }
 
-        public void Update()
+        public override void Update()
         {
             if (agent.SpawnLaneObject(next))
             {

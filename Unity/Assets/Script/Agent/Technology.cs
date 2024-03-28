@@ -12,6 +12,8 @@ namespace Game
         public float CurrentLevel { get; set; }
         public float CurrentTechnologyNormalized { get => CurrentTechnology / maxTechnology; }
 
+        public event Action OnLevelUp;
+
         private Agent agent;
 
         public void Initialize(Agent agent)
