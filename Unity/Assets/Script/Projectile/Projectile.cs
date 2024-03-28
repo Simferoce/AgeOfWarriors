@@ -12,6 +12,9 @@ namespace Game
         }
 
         [SerializeField] private new Rigidbody2D rigidbody;
+        [SerializeReference, SubclassSelector] private ProjectileDeath projectileDeath = new ProjectileStickDeath();
+
+        public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
 
         private float damage;
         private Agent source;
@@ -30,6 +33,9 @@ namespace Game
         private void Update()
         {
             this.transform.right = rigidbody.velocity;
+
+            if (state == State.Dead)
+                projectileDeath.Update(this);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -58,14 +64,7 @@ namespace Game
         {
             state = State.Dead;
 
-            this.transform.parent = collision.transform;
-            Invoke(nameof(Stop), 0.1f);
-            Destroy(this.gameObject, 0.5f);
-        }
-
-        private void Stop()
-        {
-            rigidbody.simulated = false;
+            projectileDeath.Start(this, collision);
         }
 
         private void SolveForVelocity(Vector3 startPosition, Vector3 endPosition, float gravity, float angle, out Vector3 velocity)
@@ -91,7 +90,6 @@ namespace Game
             float h = delta.y;
             float g = gravity;
             float sin = Mathf.Sin(Mathf.Deg2Rad * angle);
-            float sin2 = sin * sin;
             float cos = Mathf.Cos(Mathf.Deg2Rad * angle);
             float cos2 = cos * cos;
 
