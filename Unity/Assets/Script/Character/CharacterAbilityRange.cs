@@ -8,10 +8,7 @@ namespace Game
     {
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private float angle = 30f;
-        [SerializeField] private float cooldown = 1f;
         [SerializeField] private Transform origin;
-
-        private float lastUsed = 0f;
 
         public override void Initialize(Character character)
         {
@@ -34,15 +31,14 @@ namespace Game
 
         public override bool CanUse()
         {
-            return Time.time - lastUsed > cooldown && IsCasting == false && character.GetTarget() != null;
+            return base.CanUse() && IsCasting == false && character.GetTarget() != null;
         }
 
         public override void Use()
         {
+            base.Use();
             character.CharacterAnimator.SetTrigger(CharacterAnimator.ATTACK);
             IsCasting = true;
-
-            lastUsed = Time.time;
         }
 
         public void OnAnimatorEventAbilityUsed()
@@ -54,7 +50,7 @@ namespace Game
                 GameObject gameObject = GameObject.Instantiate(projectilePrefab, origin.transform.position, Quaternion.identity);
                 Projectile projectile = gameObject.GetComponent<Projectile>();
 
-                projectile.Initialize(character.Agent, 1, angle, target.Position);
+                projectile.Initialize(character.Agent, character.AttackPower, angle, target.Position);
             }
         }
     }

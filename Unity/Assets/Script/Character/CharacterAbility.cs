@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Game
 {
@@ -8,6 +9,7 @@ namespace Game
         public bool IsCasting { get; set; }
 
         protected Character character;
+        private float lastUsed = 0f;
 
         public virtual void Initialize(Character character)
         {
@@ -18,8 +20,14 @@ namespace Game
         {
         }
 
-        public abstract bool CanUse();
+        public virtual bool CanUse()
+        {
+            return Time.time - lastUsed > character.AttackPerSeconds;
+        }
 
-        public abstract void Use();
+        public virtual void Use()
+        {
+            lastUsed = Time.time;
+        }
     }
 }

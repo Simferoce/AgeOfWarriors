@@ -8,10 +8,6 @@ namespace Game
 {
     public class Character : AgentObject<CharacterDefinition>, ITargeteable
     {
-        [Header("Stats")]
-        [SerializeField] private float speed;
-        [SerializeField] private float maxHealth;
-
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private DetectionCollision hitBox;
@@ -19,9 +15,10 @@ namespace Game
         [SerializeField] private Transform targetPosition;
         [SerializeField] private ReachHandler reachHandler;
 
-        public float Speed { get => speed; set => speed = value; }
-        public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+        public float MaxHealth { get => Definition.MaxHealth; }
         public float Health { get => health; set => health = value; }
+        public float AttackPerSeconds { get => Definition.AttackPerSeconds; }
+        public float AttackPower { get => Definition.AttackPower; }
         public int Priority { get => SpawnNumber; }
         public Faction Faction { get => Agent.Faction; }
         public bool IsDead { get; set; } = false;
@@ -33,14 +30,6 @@ namespace Game
         private CharacterAbility ability = null;
         private float health;
 
-        private void Start()
-        {
-            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
-
-            health = MaxHealth;
-            ability.Initialize(this);
-        }
-
         private void OnDestroy()
         {
             ability.Dispose();
@@ -51,19 +40,19 @@ namespace Game
             if (IsDead)
                 return;
 
-            if (CanMove())
-            {
-                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 1);
-                rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Speed * Time.deltaTime);
-            }
-            else
-            {
-                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 0f);
-            }
-
             if (CanUseAbility())
             {
                 ability.Use();
+            }
+
+            if (CanMove())
+            {
+                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 1, 0.25f);
+                rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Definition.Speed * Time.deltaTime);
+            }
+            else
+            {
+                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 0f, 0.25f);
             }
         }
 
@@ -71,6 +60,9 @@ namespace Game
         {
             base.Spawn(agent, spawnNumber, direction);
 
+            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
+            health = MaxHealth;
+            ability.Initialize(this);
             reachHandler.SetReach(Definition.Reach);
         }
 
@@ -154,7 +146,8 @@ namespace Game
 
         public void TakeAttack(float damage)
         {
-            this.health -= damage;
+            float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(damage, Definition.Defense);
+            this.health -= damageReduced;
 
             if (health <= 0)
                 Death();

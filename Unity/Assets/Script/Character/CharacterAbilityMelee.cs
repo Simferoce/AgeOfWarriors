@@ -26,11 +26,13 @@ namespace Game
 
         public override bool CanUse()
         {
-            return IsCasting == false && character.GetTarget() != null;
+            return base.CanUse() && IsCasting == false && character.GetTarget() != null;
         }
 
         public override void Use()
         {
+            base.Use();
+
             character.CharacterAnimator.SetTrigger(CharacterAnimator.ATTACK);
             IsCasting = true;
         }
@@ -40,7 +42,7 @@ namespace Game
             ITargeteable target = character.GetTarget();
 
             if (target != null)
-                target.TakeAttack(1);
+                target.TakeAttack(character.AttackPower);
         }
     }
 }
