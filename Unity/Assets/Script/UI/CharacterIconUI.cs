@@ -6,11 +6,11 @@ namespace UI
 {
     public class CharacterIconUI : MonoBehaviour, IPointerClickHandler
     {
-        [SerializeField] private AgentObjectDefinition laneObjectDefinition;
+        [SerializeField] private int index = 0;
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Agent.Player.SpawnLaneObject(laneObjectDefinition);
+            Agent.Player.SpawnLaneObject(index);
         }
     }
 }

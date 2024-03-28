@@ -19,24 +19,25 @@ namespace Game
         [SerializeField] private Faction faction;
         [SerializeField] private Base agentBase;
         [SerializeField] private int direction;
-        [SerializeField] private bool infiniteCurrency = false;
         [SerializeField] private float currencyGainRate = 5f;
         [SerializeField] private Technology technology;
-
-        private Factory factory;
+        [SerializeField] private Factory factory;
+        [SerializeReference, SubclassSelector] private AI ai;
 
         public Faction Faction { get => faction; }
         public Factory Factory { get => factory; set => factory = value; }
         public Base Base { get => agentBase; set => agentBase = value; }
         public float Currency { get; set; }
-        public bool InfiniteMoney { get => infiniteCurrency; set => infiniteCurrency = value; }
         public int Direction { get => direction; set => direction = value; }
         public Technology Technology { get => technology; }
 
         private void Awake()
         {
-            factory = new Factory(this);
+            factory.Initialize(this);
             technology.Initialize(this);
+
+            if (ai != null)
+                ai.Initialize(this);
         }
 
         private void Start()
@@ -49,6 +50,9 @@ namespace Game
         {
             factory.Update();
             technology.Update();
+
+            if (ai != null)
+                ai.Update();
 
             Currency += currencyGainRate * Time.deltaTime;
         }
@@ -63,9 +67,10 @@ namespace Game
             agents.Remove(this);
         }
 
-        public void SpawnLaneObject(AgentObjectDefinition laneObjectDefinition)
+        public bool SpawnLaneObject(int index)
         {
-            factory.QueueLaneObject(agentBase.SpawnPoint, laneObjectDefinition);
+            AgentObjectDefinition agentObjectDefinition = Factory.GetAgentObjectDefinitionAtIndex(index);
+            return factory.QueueLaneObject(agentBase.SpawnPoint, agentObjectDefinition);
         }
     }
 }

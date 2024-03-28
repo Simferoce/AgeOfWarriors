@@ -17,4 +17,5 @@ MonoBehaviour:
   productionDuration: 2
   cost: 10
   technologyGainPerSecond: 10
+  reach: 3
   prefab: {fileID: 6705402225686340843, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}

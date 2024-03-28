@@ -17,6 +17,7 @@ namespace Game
         [SerializeField] private DetectionCollision hitBox;
         [SerializeField] private DetectionCollision hitZone;
         [SerializeField] private Transform targetPosition;
+        [SerializeField] private ReachHandler reachHandler;
 
         public float Speed { get => speed; set => speed = value; }
         public float MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -64,6 +65,13 @@ namespace Game
             {
                 ability.Use();
             }
+        }
+
+        public override void Spawn(Agent agent, int spawnNumber, int direction)
+        {
+            base.Spawn(agent, spawnNumber, direction);
+
+            reachHandler.SetReach(Definition.Reach);
         }
 
         private bool CanMove()

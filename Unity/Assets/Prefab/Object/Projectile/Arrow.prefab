@@ -190,6 +190,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
+  projectileDeath:
+    rid: 3490450885554995228
+  references:
+    version: 2
+    RefIds:
+    - rid: 3490450885554995228
+      type: {class: ProjectileStickDeath, ns: Game, asm: Assembly-CSharp}
+      data:
+        stopSimulatedDelay: 0.1
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

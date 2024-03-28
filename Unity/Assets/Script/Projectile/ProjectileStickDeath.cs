@@ -8,12 +8,11 @@ namespace Game
     {
         [SerializeField] private float stopSimulatedDelay = 0.1f;
 
-        private Projectile projectile;
         private float startAt;
 
         public override void Start(Projectile projectile, GameObject collision)
         {
-            this.projectile = projectile;
+            this.startAt = Time.time;
 
             projectile.transform.parent = collision.transform;
             GameObject.Destroy(projectile.gameObject, 0.5f);

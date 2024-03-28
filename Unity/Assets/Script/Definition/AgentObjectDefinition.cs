@@ -7,7 +7,7 @@ namespace Game
         [Header("Display")]
         [SerializeField] private Sprite icon;
 
-        [Header("Statistics")]
+        [Header("General - Statistics")]
         [SerializeField] private float productionDuration;
         [SerializeField] private float cost;
         [SerializeField] private float technologyGainPerSecond;

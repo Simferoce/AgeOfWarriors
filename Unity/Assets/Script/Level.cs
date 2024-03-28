@@ -18,10 +18,5 @@ namespace Game
         {
             Instance = this;
         }
-
-        private void Start()
-        {
-            Agent.Opponent.SpawnLaneObject(characterDefinition);
-        }
     }
 }
