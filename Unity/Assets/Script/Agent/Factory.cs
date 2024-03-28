@@ -10,7 +10,7 @@ namespace Game
         {
             public Action Action;
             public float ProductionDuration;
-            public LaneObjectDefinition LaneObjectDefinition;
+            public AgentObjectDefinition LaneObjectDefinition;
         }
 
         [SerializeField]
@@ -28,7 +28,7 @@ namespace Game
             this.agent = agent;
         }
 
-        public void QueueLaneObject(SpawnPoint spawnPoint, LaneObjectDefinition laneObjectDefinition)
+        public void QueueLaneObject(SpawnPoint spawnPoint, AgentObjectDefinition laneObjectDefinition)
         {
             if (commands.Count >= commandSlot)
                 return;

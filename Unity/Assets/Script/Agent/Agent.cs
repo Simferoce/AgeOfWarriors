@@ -21,6 +21,7 @@ namespace Game
         [SerializeField] private int direction;
         [SerializeField] private bool infiniteCurrency = false;
         [SerializeField] private float currencyGainRate = 5f;
+        [SerializeField] private Technology technology;
 
         private Factory factory;
 
@@ -30,10 +31,12 @@ namespace Game
         public float Currency { get; set; }
         public bool InfiniteMoney { get => infiniteCurrency; set => infiniteCurrency = value; }
         public int Direction { get => direction; set => direction = value; }
+        public Technology Technology { get => technology; }
 
         private void Awake()
         {
             factory = new Factory(this);
+            technology.Initialize(this);
         }
 
         private void Start()
@@ -45,6 +48,7 @@ namespace Game
         private void Update()
         {
             factory.Update();
+            technology.Update();
 
             Currency += currencyGainRate * Time.deltaTime;
         }
@@ -59,7 +63,7 @@ namespace Game
             agents.Remove(this);
         }
 
-        public void SpawnLaneObject(LaneObjectDefinition laneObjectDefinition)
+        public void SpawnLaneObject(AgentObjectDefinition laneObjectDefinition)
         {
             factory.QueueLaneObject(agentBase.SpawnPoint, laneObjectDefinition);
         }

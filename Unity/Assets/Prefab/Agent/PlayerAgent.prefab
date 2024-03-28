@@ -49,3 +49,5 @@ MonoBehaviour:
   direction: 1
   infiniteCurrency: 0
   currencyGainRate: 1
+  technology:
+    maxTechnology: 100

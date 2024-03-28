@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
   m_Name: Berserker
   m_EditorClassIdentifier: 
+  id: c56e927deca89a0489ae45f81e216bd3
+  icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
   productionDuration: 2
   cost: 10
-  icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
+  technologyGainPerSecond: 10
   prefab: {fileID: 6705402225686340843, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}

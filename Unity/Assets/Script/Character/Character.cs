@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Character : AgentObject, ITargeteable
+    public class Character : AgentObject<CharacterDefinition>, ITargeteable
     {
         [Header("Stats")]
         [SerializeField] private float speed;
@@ -26,6 +26,7 @@ namespace Game
         public bool IsDead { get; set; } = false;
         public CharacterAnimator CharacterAnimator { get; set; }
         public Vector3 Position => targetPosition.position;
+        public CharacterDefinition CharacterDefinition { get; set; }
 
         [SerializeReference, SubclassSelector]
         private CharacterAbility ability = null;
