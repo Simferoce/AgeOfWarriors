@@ -14,6 +14,8 @@ namespace Game
 
         private Agent agent;
 
+        public event Action OnLeveledUp;
+
         public void Initialize(Agent agent)
         {
             this.agent = agent;
@@ -39,6 +41,7 @@ namespace Game
         private void LevelUp()
         {
             CurrentLevel++;
+            OnLeveledUp?.Invoke();
         }
     }
 }

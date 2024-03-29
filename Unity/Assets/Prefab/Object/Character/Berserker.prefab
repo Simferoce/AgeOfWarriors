@@ -17,7 +17,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: 09b7c9b8ea28a9440b6cc6ceee4293c8, type: 2}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[-2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilities.Array.data[0]
+      value: 8758732288822083589
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[3490450864352264228]
+      value: Assembly-CSharp Game.CharacterAbilityMelee
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732288822083589]
       value: Assembly-CSharp Game.CharacterAbilityMelee
       objectReference: {fileID: 0}
     - target: {fileID: 1645757101492874935, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}

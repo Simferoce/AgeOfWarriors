@@ -7,15 +7,13 @@ namespace Game
     [RequireComponent(typeof(Animator))]
     public class CharacterAnimator : MonoBehaviour
     {
+
+
         private class Damping
         {
             public float DampTime;
             public float Target;
         }
-
-        public static readonly int SPEED_RATIO = Animator.StringToHash("SpeedRatio");
-        public static readonly int ATTACK = Animator.StringToHash("Attack");
-        public static readonly int DEAD = Animator.StringToHash("Dead");
 
         private Animator animator;
         private Dictionary<int, Damping> dampings = new Dictionary<int, Damping>();
@@ -36,26 +34,26 @@ namespace Game
             }
         }
 
-        public void SetTrigger(int trigger)
+        public void SetTrigger(CharacterAnimatorParameter.Parameter trigger)
         {
-            animator.SetTrigger(trigger);
+            animator.SetTrigger(trigger.Convert());
         }
 
-        public void SetFloat(int trigger, float value)
+        public void SetFloat(CharacterAnimatorParameter.Parameter trigger, float value)
         {
-            animator.SetFloat(trigger, value);
+            animator.SetFloat(trigger.Convert(), value);
         }
 
-        public void SetFloat(int trigger, float value, float dampTime)
+        public void SetFloat(CharacterAnimatorParameter.Parameter trigger, float value, float dampTime)
         {
-            if (!dampings.ContainsKey(trigger))
+            if (!dampings.ContainsKey(trigger.Convert()))
             {
-                dampings[trigger] = new Damping() { Target = value, DampTime = dampTime };
+                dampings[trigger.Convert()] = new Damping() { Target = value, DampTime = dampTime };
             }
             else
             {
-                dampings[trigger].Target = value;
-                dampings[trigger].DampTime = dampTime;
+                dampings[trigger.Convert()].Target = value;
+                dampings[trigger.Convert()].DampTime = dampTime;
             }
         }
 
@@ -63,5 +61,6 @@ namespace Game
         {
             OnAbilityUsed?.Invoke();
         }
+
     }
 }

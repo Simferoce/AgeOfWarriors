@@ -52,7 +52,23 @@ PrefabInstance:
       value: 3490450885554995200
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilities.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[-2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilities.Array.data[0]
+      value: 8758732288822083590
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[3490450885554995200]
+      value: Assembly-CSharp Game.CharacterAbilityRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732288822083590]
       value: Assembly-CSharp Game.CharacterAbilityRange
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
@@ -60,7 +76,15 @@ PrefabInstance:
       value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732288822083590].angle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[3490450885554995200].origin
+      value: 
+      objectReference: {fileID: 4608189016881164230}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732288822083590].origin
       value: 
       objectReference: {fileID: 4608189016881164230}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
@@ -69,6 +93,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[3490450885554995200].projectilePrefab
+      value: 
+      objectReference: {fileID: 6675190562695518451, guid: a1525bb3bf8a49f4f963d86f5e9cd819, type: 3}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732288822083590].projectilePrefab
       value: 
       objectReference: {fileID: 6675190562695518451, guid: a1525bb3bf8a49f4f963d86f5e9cd819, type: 3}
     - target: {fileID: 427610621448729964, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}

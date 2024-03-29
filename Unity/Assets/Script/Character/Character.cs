@@ -15,6 +15,10 @@ namespace Game
         [SerializeField] private Transform targetPosition;
         [SerializeField] private ReachHandler reachHandler;
 
+        [Header("Abilities")]
+        [SerializeReference, SubclassSelector]
+        private List<CharacterAbility> abilities = new List<CharacterAbility>();
+
         public float MaxHealth { get => Definition.MaxHealth; }
         public float Health { get => health; set => health = value; }
         public float AttackPerSeconds { get => Definition.AttackPerSeconds; }
@@ -25,15 +29,9 @@ namespace Game
         public CharacterAnimator CharacterAnimator { get; set; }
         public Vector3 Position => targetPosition.position;
         public CharacterDefinition CharacterDefinition { get; set; }
+        public float LastAbilityUsed { get; set; }
 
-        [SerializeReference, SubclassSelector]
-        private CharacterAbility ability = null;
         private float health;
-
-        private void OnDestroy()
-        {
-            ability.Dispose();
-        }
 
         public void FixedUpdate()
         {
@@ -42,17 +40,32 @@ namespace Game
 
             if (CanUseAbility())
             {
-                ability.Use();
+                foreach (CharacterAbility ability in abilities)
+                {
+                    if (ability.CanUse())
+                    {
+                        ability.Use();
+                        break;
+                    }
+                }
             }
 
             if (CanMove())
             {
-                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 1, 0.25f);
+                this.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 1, 0.25f);
                 rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Definition.Speed * Time.deltaTime);
             }
             else
             {
-                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 0f, 0.25f);
+                this.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 0f, 0.25f);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            foreach (CharacterAbility ability in abilities)
+            {
+                ability.Dispose();
             }
         }
 
@@ -62,13 +75,18 @@ namespace Game
 
             CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
             health = MaxHealth;
-            ability.Initialize(this);
+
+            foreach (CharacterAbility ability in abilities)
+            {
+                ability.Initialize(this);
+            }
+
             reachHandler.SetReach(Definition.Reach);
         }
 
         private bool CanMove()
         {
-            if (ability.IsCasting)
+            if (abilities.Any(x => x.IsCasting))
                 return false;
 
             foreach (GameObject collision in hitBox.InCollisions)
@@ -104,7 +122,7 @@ namespace Game
 
         public bool CanUseAbility()
         {
-            if (!ability.CanUse())
+            if (abilities.Any(x => x.IsCasting))
                 return false;
 
             if (health <= 0 || IsDead)
@@ -156,7 +174,7 @@ namespace Game
         public void Death()
         {
             IsDead = true;
-            this.CharacterAnimator.SetTrigger(CharacterAnimator.DEAD);
+            this.CharacterAnimator.SetTrigger(CharacterAnimatorParameter.Parameter.Dead);
 
             hitBox.gameObject.SetActive(false);
             GameObject.Destroy(this.gameObject, 2);

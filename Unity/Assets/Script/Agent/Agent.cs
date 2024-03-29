@@ -22,7 +22,7 @@ namespace Game
         [SerializeField] private float currencyGainRate = 5f;
         [SerializeField] private Technology technology;
         [SerializeField] private Factory factory;
-        [SerializeReference, SubclassSelector] private AI ai;
+        [SerializeReference, SubclassSelector] private AgentBehaviour agentBehaviour;
 
         public Faction Faction { get => faction; }
         public Factory Factory { get => factory; set => factory = value; }
@@ -35,9 +35,7 @@ namespace Game
         {
             factory.Initialize(this);
             technology.Initialize(this);
-
-            if (ai != null)
-                ai.Initialize(this);
+            agentBehaviour.Initialize(this);
         }
 
         private void Start()
@@ -50,9 +48,7 @@ namespace Game
         {
             factory.Update();
             technology.Update();
-
-            if (ai != null)
-                ai.Update();
+            agentBehaviour.Update();
 
             Currency += currencyGainRate * Time.deltaTime;
         }
@@ -65,6 +61,11 @@ namespace Game
         private void OnDisable()
         {
             agents.Remove(this);
+        }
+
+        private void OnDestroy()
+        {
+            agentBehaviour.Dispose();
         }
 
         public bool SpawnLaneObject(int index)
