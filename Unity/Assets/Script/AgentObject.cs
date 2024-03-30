@@ -5,12 +5,12 @@ namespace Game
 {
     public abstract class AgentObject : MonoBehaviour
     {
-        public static List<AgentObject> AgentObjects { get; private set; }
+        public static List<AgentObject> All { get; private set; }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
         {
-            AgentObjects = new List<AgentObject>();
+            All = new List<AgentObject>();
         }
 
         public int Direction { get; protected set; }
@@ -18,14 +18,14 @@ namespace Game
         public int SpawnNumber { get; private set; }
         public virtual float TechnologyGainPerSecond { get => 0f; }
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            AgentObjects.Add(this);
+            All.Add(this);
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
-            AgentObjects.Remove(this);
+            All.Remove(this);
         }
 
         public virtual AgentObjectDefinition GetDefinition() { return null; }

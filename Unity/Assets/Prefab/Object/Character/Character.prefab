@@ -49,20 +49,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e9fa78c47bc8147bc985d3200f0230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  maxHealth: 10
   rigidbody: {fileID: 9215057588866617565}
   hitBox: {fileID: 5979231024054761784}
   hitZone: {fileID: 1750255367122084491}
   targetPosition: {fileID: 7840795603293673896}
   reachHandler: {fileID: 8990274041655715421}
-  ability:
-    rid: 3490450864352264229
+  abilities:
+  - rid: 8758732296968470551
   references:
     version: 2
     RefIds:
-    - rid: 3490450864352264229
-      type: {class: CharacterAbilityMelee, ns: Game, asm: Assembly-CSharp}
+    - rid: 8758732296968470551
+      type: {class: CharacterAbility, ns: Game, asm: Assembly-CSharp}
+      data:
+        conditions:
+        - rid: 8758732296968470557
+        - rid: 8758732296968470558
+        parameter: 1
+        effects:
+        - rid: 8758732296968470559
+    - rid: 8758732296968470557
+      type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+    - rid: 8758732296968470558
+      type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
+    - rid: 8758732296968470559
+      type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &9215057588866617565
 Rigidbody2D:
   serializedVersion: 4

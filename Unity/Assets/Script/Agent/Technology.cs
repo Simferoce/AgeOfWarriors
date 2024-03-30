@@ -23,7 +23,7 @@ namespace Game
 
         public void Update()
         {
-            foreach (AgentObject agentObject in AgentObject.AgentObjects)
+            foreach (AgentObject agentObject in AgentObject.All)
             {
                 if (agentObject.Agent == agent)
                 {

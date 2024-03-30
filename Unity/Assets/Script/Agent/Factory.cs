@@ -43,10 +43,20 @@ namespace Game
             if (commands.Count == 0)
                 productionStart = Time.time;
 
-            if (agent.Currency < laneObjectDefinition.Cost)
-                return false;
+            if (Level.Instance.CheatCost)
+            {
+                if (agent.Currency < 1)
+                    return false;
 
-            agent.Currency -= laneObjectDefinition.Cost;
+                agent.Currency -= 1;
+            }
+            else
+            {
+                if (agent.Currency < laneObjectDefinition.Cost)
+                    return false;
+
+                agent.Currency -= laneObjectDefinition.Cost;
+            }
 
             commands.Add(new Command()
             {

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3946624883433810025
+--- !u!1001 &2008831875276335565
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -62,67 +62,79 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: abilities.Array.data[0]
-      value: 8758732296968470569
+      value: 8758732296968470576
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: abilities.Array.data[1]
       value: 8758732296968470551
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569]
+      propertyPath: managedReferences[8758732296968470576]
       value: Assembly-CSharp Game.CharacterAbility
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470570]
-      value: Assembly-CSharp Game.AttackSpeedAbilityCondition
+      propertyPath: managedReferences[8758732296968470577]
+      value: Assembly-CSharp Game.InspiringPresenceAbilityEffect
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470571]
+      propertyPath: managedReferences[8758732296968470578]
       value: Assembly-CSharp Game.CooldownCondition
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470572]
-      value: Assembly-CSharp Game.HasTargetAbilityCondition
+      propertyPath: managedReferences[8758732296968470579]
+      value: Assembly-CSharp Game.AttackSpeedAbilityCondition
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470573]
-      value: Assembly-CSharp Game.DealDamageAbilityEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470571].cooldown
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569].parameter
+      propertyPath: managedReferences[8758732296968470577].area
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569].effects.Array.size
-      value: 1
+      propertyPath: managedReferences[8758732296968470577].defense
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569].conditions.Array.size
+      propertyPath: managedReferences[8758732296968470577].duration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732296968470578].cooldown
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569].effects.Array.data[0]
-      value: 8758732296968470573
+      propertyPath: managedReferences[8758732296968470576].parameter
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569].conditions.Array.data[0]
-      value: 8758732296968470570
+      propertyPath: managedReferences[8758732296968470577].buffDuration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569].conditions.Array.data[1]
-      value: 8758732296968470571
+      propertyPath: managedReferences[8758732296968470577].speedIncrease
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569].conditions.Array.data[2]
-      value: 8758732296968470572
+      propertyPath: managedReferences[8758732296968470576].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732296968470576].conditions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732296968470576].effects.Array.data[0]
+      value: 8758732296968470577
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732296968470576].conditions.Array.data[0]
+      value: 8758732296968470579
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732296968470576].conditions.Array.data[1]
+      value: 8758732296968470579
       objectReference: {fileID: 0}
     - target: {fileID: 6705402225686340843, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: m_Name
-      value: OnslaughtWarrior
+      value: Leader
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

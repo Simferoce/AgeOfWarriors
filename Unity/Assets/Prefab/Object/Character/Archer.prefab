@@ -48,61 +48,49 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: 6e79b9e866ec46b4f818a471ac60b196, type: 2}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: ability
-      value: 3490450864352264232
-      objectReference: {fileID: 0}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: abilities.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[-2]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: abilities.Array.data[0]
-      value: 8758732288822083588
+      propertyPath: managedReferences[8758732296968470567]
+      value: Assembly-CSharp Game.CooldownCondition
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450864352264227]
-      value: Assembly-CSharp Game.CharacterAbilityMelee
+      propertyPath: managedReferences[8758732296968470568]
+      value: Assembly-CSharp Game.ProjectileAbilityEffect
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450864352264232]
-      value: Assembly-CSharp Game.CharacterAbilityRange
-      objectReference: {fileID: 0}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[8758732288822083588]
-      value: Assembly-CSharp Game.CharacterAbilityRange
-      objectReference: {fileID: 0}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450864352264232].angle
+      propertyPath: managedReferences[8758732296968470568].angle
       value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[8758732288822083588].angle
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450864352264232].origin
+      propertyPath: managedReferences[8758732296968470568].origin
       value: 
       objectReference: {fileID: 4225139334779525104}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[8758732288822083588].origin
-      value: 
-      objectReference: {fileID: 4225139334779525104}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450864352264232].cooldown
-      value: 0.5
+      propertyPath: managedReferences[8758732296968470567].cooldown
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450864352264232].projectilePrefab
+      propertyPath: managedReferences[8758732296968470568].projectilePrefab
       value: 
       objectReference: {fileID: 6675190562695518451, guid: 9a33a33555180bf4690eff9ada726b89, type: 3}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[8758732288822083588].projectilePrefab
-      value: 
-      objectReference: {fileID: 6675190562695518451, guid: 9a33a33555180bf4690eff9ada726b89, type: 3}
+      propertyPath: managedReferences[8758732296968470551].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470551].conditions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470551].effects.Array.data[0]
+      value: 8758732296968470568
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470551].conditions.Array.data[2]
+      value: 8758732296968470567
+      objectReference: {fileID: 0}
     - target: {fileID: 427610621448729964, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: m_IsActive
       value: 1

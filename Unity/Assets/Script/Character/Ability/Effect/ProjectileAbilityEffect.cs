@@ -4,13 +4,13 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class CharacterAbilityRange : CharacterAbility
+    public class ProjectileAbilityEffect : AbilityEffect
     {
         [SerializeField] private GameObject projectilePrefab;
         [SerializeField] private float angle = 30f;
         [SerializeField] private Transform origin;
 
-        protected override void OnAnimatorEventAbilityUsed()
+        public override void Apply(Character character)
         {
             ITargeteable target = character.GetTarget();
 

@@ -3,9 +3,9 @@
 namespace Game
 {
     [Serializable]
-    public class CharacterAbilityMelee : CharacterAbility
+    public class DealDamageAbilityEffect : AbilityEffect
     {
-        protected override void OnAnimatorEventAbilityUsed()
+        public override void Apply(Character character)
         {
             ITargeteable target = character.GetTarget();
 

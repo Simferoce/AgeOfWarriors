@@ -27,7 +27,7 @@ namespace Game
 
         public float ParseDamage(float damage, float defense)
         {
-            return damage * (1 - (1 / (1 + defense * growRate)));
+            return damage * (1 / (1 + defense * growRate));
         }
     }
 }

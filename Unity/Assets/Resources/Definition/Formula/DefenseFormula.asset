@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4092d3bcc6a5ad8498f72642d95f846e, type: 3}
   m_Name: DefenseFormula
   m_EditorClassIdentifier: 
-  id: 
+  id: f054d27fb81d9ca47a8da202f43a5321
   growRate: 0.1

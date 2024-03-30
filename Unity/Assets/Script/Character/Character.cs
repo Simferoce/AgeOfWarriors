@@ -23,6 +23,9 @@ namespace Game
         public float Health { get => health; set => health = value; }
         public float AttackPerSeconds { get => Definition.AttackPerSeconds; }
         public float AttackPower { get => Definition.AttackPower; }
+        public float Speed { get => Definition.Speed * (1 + CharacterModifierHandler.SpeedPercentage ?? 0f); }
+        public float Defense { get => Definition.Defense + CharacterModifierHandler.Defense ?? 0f; }
+        public CharacterModifierHandler CharacterModifierHandler { get; } = new CharacterModifierHandler();
         public int Priority { get => SpawnNumber; }
         public Faction Faction { get => Agent.Faction; }
         public bool IsDead { get; set; } = false;
@@ -32,6 +35,15 @@ namespace Game
         public float LastAbilityUsed { get; set; }
 
         private float health;
+
+        public void Update()
+        {
+            foreach (CharacterAbility ability in abilities)
+            {
+                if (ability.IsActive)
+                    ability.Update();
+            }
+        }
 
         public void FixedUpdate()
         {
@@ -53,7 +65,7 @@ namespace Game
             if (CanMove())
             {
                 this.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 1, 0.25f);
-                rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Definition.Speed * Time.deltaTime);
+                rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Speed * Time.deltaTime);
             }
             else
             {
@@ -61,7 +73,7 @@ namespace Game
             }
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             foreach (CharacterAbility ability in abilities)
             {
@@ -122,9 +134,6 @@ namespace Game
 
         public bool CanUseAbility()
         {
-            if (abilities.Any(x => x.IsCasting))
-                return false;
-
             if (health <= 0 || IsDead)
                 return false;
 
@@ -164,7 +173,7 @@ namespace Game
 
         public void TakeAttack(float damage)
         {
-            float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(damage, Definition.Defense);
+            float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(damage, Defense);
             this.health -= damageReduced;
 
             if (health <= 0)
@@ -179,8 +188,6 @@ namespace Game
             hitBox.gameObject.SetActive(false);
             GameObject.Destroy(this.gameObject, 2);
         }
-
-
 
         #endregion
     }

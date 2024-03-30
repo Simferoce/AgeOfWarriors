@@ -6,13 +6,16 @@ namespace Game
     {
         public static Level Instance;
 
-        [SerializeField] private CharacterDefinition characterDefinition;
-
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
         {
             Instance = null;
         }
+
+        [SerializeField] private CharacterDefinition characterDefinition;
+        [SerializeField] private bool cheatCost;
+
+        public bool CheatCost { get => cheatCost; }
 
         private void Awake()
         {

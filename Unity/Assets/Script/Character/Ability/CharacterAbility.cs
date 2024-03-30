@@ -1,50 +1,97 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [Serializable]
-    public abstract class CharacterAbility : IDisposable
+    public class CharacterAbility : IDisposable
     {
         [SerializeField] private CharacterAnimatorParameter.Parameter parameter = CharacterAnimatorParameter.Parameter.Ability;
-        [SerializeField] private float cooldown = 0f;
+        [Space]
+        [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
+        [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();
 
+        public bool IsActive { get => IsCasting || IsLingering; }
         public bool IsCasting { get; set; }
+        public bool IsLingering { get; set; } = false;
 
         protected Character character;
-        private float lastUsed = 0f;
 
         public virtual void Initialize(Character character)
         {
             this.character = character;
             character.CharacterAnimator.OnAbilityUsed += OnAnimatorEventAbilityUsed;
 
-            AnimatorEventChannel.Subscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnAbilityEnded);
+            foreach (AbilityCondition condition in conditions)
+            {
+                condition.Initialize(character);
+            }
+
+            AnimatorEventChannel.Subscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
         }
 
-        private void OnAbilityEnded()
+        private void OnCastEnded()
         {
             IsCasting = false;
+
+            if (effects.OfType<ILingeringAbilityEffect>().Count() == 0)
+                End();
+            else
+                IsLingering = true;
         }
 
         public virtual void Dispose()
         {
-            AnimatorEventChannel.Unsubscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnAbilityEnded);
+            AnimatorEventChannel.Unsubscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
+        }
+
+        public virtual void Update()
+        {
+            bool end = true;
+            foreach (ILingeringAbilityEffect lingeringAbilityEffect in effects.OfType<ILingeringAbilityEffect>())
+            {
+                end &= lingeringAbilityEffect.Update(character);
+            }
+
+            if (end)
+                End();
         }
 
         public virtual bool CanUse()
         {
-            return Time.time - lastUsed > cooldown && Time.time - character.LastAbilityUsed > character.AttackPerSeconds && IsCasting == false && character.GetTarget() != null;
+            return conditions.All(x => x.Execute()) && IsCasting == false && IsLingering == false;
         }
 
         public virtual void Use()
         {
             character.CharacterAnimator.SetTrigger(parameter);
             character.LastAbilityUsed = Time.time;
-            lastUsed = Time.time;
             IsCasting = true;
         }
 
-        protected abstract void OnAnimatorEventAbilityUsed();
+        protected void OnAnimatorEventAbilityUsed()
+        {
+            foreach (AbilityEffect effect in effects)
+            {
+                effect.Apply(character);
+            }
+        }
+
+        private void End()
+        {
+            IsLingering = false;
+
+            foreach (AbilityCondition condition in conditions)
+            {
+                condition.OnAbilityEnded();
+            }
+
+            foreach (AbilityEffect effect in effects)
+            {
+                effect.OnAbilityEnded();
+            }
+        }
     }
 }

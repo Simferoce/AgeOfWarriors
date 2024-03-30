@@ -48,10 +48,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 22100000, guid: 4eeed3b237c03c04b89237b54d351ce0, type: 2}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: ability
-      value: 3490450885554995200
-      objectReference: {fileID: 0}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: abilities.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -61,44 +57,72 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: abilities.Array.data[0]
-      value: 8758732288822083590
+      value: 8758732296968470560
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450885554995200]
-      value: Assembly-CSharp Game.CharacterAbilityRange
+      propertyPath: managedReferences[8758732296968470560]
+      value: Assembly-CSharp Game.CharacterAbility
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[8758732288822083590]
-      value: Assembly-CSharp Game.CharacterAbilityRange
+      propertyPath: managedReferences[8758732296968470563]
+      value: Assembly-CSharp Game.AttackSpeedAbilityCondition
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450885554995200].angle
+      propertyPath: managedReferences[8758732296968470564]
+      value: Assembly-CSharp Game.CooldownCondition
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470565]
+      value: Assembly-CSharp Game.HasTargetAbilityCondition
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470566]
+      value: Assembly-CSharp Game.ProjectileAbilityEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470566].angle
       value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[8758732288822083590].angle
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450885554995200].origin
+      propertyPath: managedReferences[8758732296968470566].origin
       value: 
       objectReference: {fileID: 4608189016881164230}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[8758732288822083590].origin
-      value: 
-      objectReference: {fileID: 4608189016881164230}
-    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450885554995200].cooldown
+      propertyPath: managedReferences[8758732296968470564].cooldown
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[3490450885554995200].projectilePrefab
+      propertyPath: managedReferences[8758732296968470560].parameter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470566].projectilePrefab
       value: 
       objectReference: {fileID: 6675190562695518451, guid: a1525bb3bf8a49f4f963d86f5e9cd819, type: 3}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: managedReferences[8758732288822083590].projectilePrefab
-      value: 
-      objectReference: {fileID: 6675190562695518451, guid: a1525bb3bf8a49f4f963d86f5e9cd819, type: 3}
+      propertyPath: managedReferences[8758732296968470560].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470560].conditions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470560].effects.Array.data[0]
+      value: 8758732296968470566
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470560].conditions.Array.data[0]
+      value: 8758732296968470563
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470560].conditions.Array.data[1]
+      value: 8758732296968470564
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732296968470560].conditions.Array.data[2]
+      value: 8758732296968470565
+      objectReference: {fileID: 0}
     - target: {fileID: 427610621448729964, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: m_IsActive
       value: 0
