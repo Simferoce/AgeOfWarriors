@@ -10,7 +10,7 @@ namespace Game
         [SerializeField] private float maxHealth;
         [SerializeField] private Transform targetPosition;
 
-        public event Action<DamageSource, IAttackable> OnDamageTaken;
+        public event Action<Attack, IAttackable> OnDamageTaken;
 
         public Faction Faction => Agent.Faction;
         public int Priority => int.MaxValue;
@@ -41,11 +41,11 @@ namespace Game
             return faction != this.Faction;
         }
 
-        public void TakeAttack(DamageSource source, float damage)
+        public void TakeAttack(Attack attack)
         {
-            health -= damage;
+            health -= attack.Damage;
 
-            OnDamageTaken?.Invoke(source, this);
+            OnDamageTaken?.Invoke(attack, this);
 
             if (health <= 0)
                 Destroy(this.gameObject);

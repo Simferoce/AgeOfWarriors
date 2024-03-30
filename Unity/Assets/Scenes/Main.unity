@@ -471,7 +471,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 2a683f36d1e23b348a11b9d7031ddcc0, type: 2}
+      objectReference: {fileID: 11400000, guid: a0a3e2c88b079f4458c331514474afcc, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.data[3]
       value: 
@@ -1144,6 +1144,10 @@ PrefabInstance:
       propertyPath: factory.agentObjectsDefinition.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
+      propertyPath: managedReferences[8758732277519220758].active
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5053631171570033998, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: m_Name
       value: OpponentAgent
@@ -1204,6 +1208,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8415477105694862956, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
   m_PrefabInstance: {fileID: 813396478}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &813396480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
+  m_PrefabInstance: {fileID: 813396478}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9af73a6ddba4b5b4d8562d6d7f51a73a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &870796770
 GameObject:
   m_ObjectHideFlags: 0
@@ -2253,17 +2268,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1827421123 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
-  m_PrefabInstance: {fileID: 292448734}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9af73a6ddba4b5b4d8562d6d7f51a73a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1885658569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,7 +2284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1885658570
 Transform:
   m_ObjectHideFlags: 0
@@ -2289,7 +2293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1885658569}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.49, y: 0, z: 0}
+  m_LocalPosition: {x: -4.99, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2309,7 +2313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2078422403223860349, guid: 06542371bedaf284f9dd458c09ecf82b, type: 3}
-  agent: {fileID: 1827421123}
+  agent: {fileID: 813396480}
 --- !u!1 &1918672596
 GameObject:
   m_ObjectHideFlags: 0

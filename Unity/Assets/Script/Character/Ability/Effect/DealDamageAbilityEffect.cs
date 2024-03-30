@@ -4,14 +4,14 @@ using System.Collections.Generic;
 namespace Game
 {
     [Serializable]
-    public class DealDamageAbilityEffect : AbilityEffect, IDamageSource
+    public class DealDamageAbilityEffect : AbilityEffect, IAttackSource
     {
         public override void Apply()
         {
             IAttackable target = character.GetTarget();
 
             if (target != null)
-                target.TakeAttack(new DamageSource() { Sources = new List<IDamageSource>() { character, this } }, character.AttackPower);
+                target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { character, this }), character.AttackPower, 0f));
         }
     }
 }

@@ -19,15 +19,12 @@ namespace Game
         public override void Initialize(Character character)
         {
             base.Initialize(character);
-            character.CharacterAnimator.OnAbilityUsed += OnAnimatorEventAbilityUsed;
 
             foreach (AbilityCondition condition in conditions)
                 condition.Initialize(character);
 
             foreach (AbilityEffect effect in effects)
                 effect.Initialize(character);
-
-            AnimatorEventChannel.Subscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
         }
 
         private void OnCastEnded()
@@ -42,11 +39,15 @@ namespace Game
 
         public override void Dispose()
         {
+            character.CharacterAnimator.OnAbilityUsed -= OnAnimatorEventAbilityUsed;
             AnimatorEventChannel.Unsubscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
         }
 
         public override void Update()
         {
+            if (IsCasting == true)
+                return;
+
             bool end = true;
             foreach (ILingeringAbilityEffect lingeringAbilityEffect in effects.OfType<ILingeringAbilityEffect>())
             {
@@ -73,6 +74,9 @@ namespace Game
 
             foreach (AbilityEffect effect in effects)
                 effect.OnAbilityStarted();
+
+            character.CharacterAnimator.OnAbilityUsed += OnAnimatorEventAbilityUsed;
+            AnimatorEventChannel.Subscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
         }
 
         protected void OnAnimatorEventAbilityUsed()
@@ -90,6 +94,8 @@ namespace Game
 
             foreach (AbilityEffect effect in effects)
                 effect.OnAbilityEnded();
+
+            Dispose();
         }
     }
 }

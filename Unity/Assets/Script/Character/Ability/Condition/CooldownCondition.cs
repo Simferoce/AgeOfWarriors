@@ -13,7 +13,7 @@ namespace Game
         public override void Initialize(Character character)
         {
             base.Initialize(character);
-            lastUsed = Time.time;
+            lastUsed = -cooldown;
         }
 
         public override bool Execute()

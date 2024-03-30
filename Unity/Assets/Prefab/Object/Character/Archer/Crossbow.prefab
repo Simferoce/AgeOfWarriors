@@ -1,0 +1,162 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &5185127457739941819
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: abilities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[-2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: abilities.Array.data[0]
+      value: 8758732313942556676
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: abilities.Array.data[1]
+      value: 8758732309343764490
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556676]
+      value: Assembly-CSharp Game.AnimationBaseCharacterAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556677]
+      value: Assembly-CSharp Game.CooldownCondition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556678]
+      value: Assembly-CSharp Game.HasTargetAbilityCondition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556679]
+      value: Assembly-CSharp Game.AttackSpeedAbilityCondition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556680]
+      value: Assembly-CSharp Game.ProjectileAbilityEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556685]
+      value: Assembly-CSharp Game.ProjectileAbilityEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556680].origin
+      value: 
+      objectReference: {fileID: 9031951622399782987}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556685].origin
+      value: 
+      objectReference: {fileID: 9031951622399782987}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556677].cooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556676].parameter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556680].armorPenetration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556680].projectilePrefab
+      value: 
+      objectReference: {fileID: 6675190562695518451, guid: d1ba52d691518d048867931bca7e7531, type: 3}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556685].armorPenetration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556685].projectilePrefab
+      value: 
+      objectReference: {fileID: 6675190562695518451, guid: d1ba52d691518d048867931bca7e7531, type: 3}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556676].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556676].conditions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556676].effects.Array.data[0]
+      value: 8758732313942556685
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556676].conditions.Array.data[0]
+      value: 8758732313942556677
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556676].conditions.Array.data[1]
+      value: 8758732313942556678
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732313942556676].conditions.Array.data[2]
+      value: 8758732313942556679
+      objectReference: {fileID: 0}
+    - target: {fileID: 6705402225686340843, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_Name
+      value: Crossbow
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+--- !u!4 &9031951622399782987 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4225139334779525104, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+  m_PrefabInstance: {fileID: 5185127457739941819}
+  m_PrefabAsset: {fileID: 0}

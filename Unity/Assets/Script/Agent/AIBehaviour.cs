@@ -1,10 +1,13 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Game
 {
     [Serializable]
     public class AIBehaviour : AgentBehaviour
     {
+        [SerializeField] private bool active = true;
+
         private int next;
 
         public override void Initialize(Agent agent)
@@ -21,6 +24,9 @@ namespace Game
 
         public override void Update()
         {
+            if (active == false)
+                return;
+
             if (agent.SpawnLaneObject(next))
             {
                 next = ChooseNextToSpawn();

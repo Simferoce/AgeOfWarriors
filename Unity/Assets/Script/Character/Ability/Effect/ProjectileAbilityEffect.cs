@@ -7,8 +7,10 @@ namespace Game
     public class ProjectileAbilityEffect : AbilityEffect
     {
         [SerializeField] private GameObject projectilePrefab;
-        [SerializeField] private float angle = 30f;
         [SerializeField] private Transform origin;
+
+        [Header("Statistics")]
+        [SerializeField] private float armorPenetration;
 
         public override void Apply()
         {
@@ -19,7 +21,7 @@ namespace Game
                 GameObject gameObject = GameObject.Instantiate(projectilePrefab, origin.transform.position, Quaternion.identity);
                 Projectile projectile = gameObject.GetComponent<Projectile>();
 
-                projectile.Initialize(character, character.AttackPower, angle, target.Position);
+                projectile.Initialize(character, new Attack(new AttackSource(character), character.AttackPower, armorPenetration), target.Position);
             }
         }
     }

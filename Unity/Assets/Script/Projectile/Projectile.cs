@@ -1,10 +1,9 @@
 ﻿using Extension;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
-    public class Projectile : MonoBehaviour, IDamageSource
+    public class Projectile : MonoBehaviour, IAttackSource
     {
         private enum State
         {
@@ -14,26 +13,25 @@ namespace Game
 
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeReference, SubclassSelector] private ProjectileDeath projectileDeath = new ProjectileStickDeath();
+        [SerializeReference, SubclassSelector] private ProjectileMovement projectileMovement = new ProjectileAngledMovement();
 
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
 
-        private float damage;
+        private Attack attack;
         private Character source;
         private State state = State.Alive;
 
-        public void Initialize(Character source, float damage, float angle, Vector3 target)
+        public void Initialize(Character source, Attack attack, Vector3 target)
         {
             this.source = source;
-            this.damage = damage;
+            this.attack = attack;
 
-            SolveForVelocity(this.transform.position, target, Physics2D.gravity.y * rigidbody.gravityScale, angle, out Vector3 velocity);
-
-            rigidbody.velocity = velocity;
+            projectileMovement.Initialize(this, target);
         }
 
         private void Update()
         {
-            this.transform.right = rigidbody.velocity;
+            projectileMovement.Update();
 
             if (state == State.Dead)
                 projectileDeath.Update(this);
@@ -55,7 +53,10 @@ namespace Game
                 if (collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
                     && attackable.Faction != source.Faction)
                 {
-                    attackable.TakeAttack(new DamageSource() { Sources = new List<IDamageSource>() { source, this } }, damage);
+                    Attack clonedAttack = attack.Clone();
+                    clonedAttack.AttackSource.Sources.Add(this);
+
+                    attackable.TakeAttack(clonedAttack);
                     Kill(collision.gameObject);
                 }
             }
@@ -68,37 +69,6 @@ namespace Game
             projectileDeath.Start(this, collision);
         }
 
-        private void SolveForVelocity(Vector3 startPosition, Vector3 endPosition, float gravity, float angle, out Vector3 velocity)
-        {
-            //x = v * t
 
-            //x = v * cos(a) * t
-            //h = v * sin(a) * t + 1 / 2 * g * t ^ 2
-
-            //t = x / (cos(a) * v)
-            //h = v * sin(a) * (x / (cos(a) * v)) + 1 / 2 * g * (x / (cos(a) * v)) ^ 2
-            //h = v * sin(a) * (x / (cos(a) * v)) + 1 / 2 * g * (x / (cos(a) * v)) * (x / (cos(a) * v))
-            //h = v * sin(a) * (x / (cos(a) * v)) + 1 / 2 * g * x ^ 2 / (cos(a) ^ 2 * v ^ 2)
-            //h = sin(a) * (x / cos(a)) + 1 / 2 * g * x ^ 2 / (cos(a) ^ 2 * v ^ 2)
-            //h - sin(a) * (x / cos(a)) = 1 / 2 * g * x ^ 2 / (cos(a) ^ 2 * v ^ 2)
-            //1 / 2 * g * x ^ 2 / (h - sin(a) * (x / cos(a))) = cos(a) ^ 2 * v ^ 2
-            //1 / 2 * g * x ^ 2 / (h - sin(a) * (x / cos(a))) / cos(a) ^ 2 = v ^ 2
-
-            Vector3 delta = endPosition - startPosition;
-
-            float x = Mathf.Sqrt(delta.x * delta.x + delta.z * delta.z);
-            float x2 = x * x;
-            float h = delta.y;
-            float g = gravity;
-            float sin = Mathf.Sin(Mathf.Deg2Rad * angle);
-            float cos = Mathf.Cos(Mathf.Deg2Rad * angle);
-            float cos2 = cos * cos;
-
-            float r = Mathf.Sqrt((0.5f * g * x2) / (h * cos2 - sin * x * cos));
-
-            Vector2 planeDirection = new Vector3(Mathf.Cos(Mathf.Deg2Rad * angle), Mathf.Sin(Mathf.Deg2Rad * angle));
-            Vector3 direction = new Vector3(delta.x, 0, delta.z).normalized * planeDirection.x + Vector3.up * planeDirection.y;
-            velocity = direction * r;
-        }
     }
 }

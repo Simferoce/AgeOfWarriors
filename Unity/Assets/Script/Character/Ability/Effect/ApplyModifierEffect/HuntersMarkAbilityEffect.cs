@@ -11,7 +11,7 @@ namespace Game
         [SerializeField] private float damage;
         [SerializeField] private float duration;
 
-        public class HuntersMark : Modifier<HuntersMark>, IDamageSource
+        public class HuntersMark : Modifier<HuntersMark>, IAttackSource
         {
             private float damage;
             private IAttackable attackable;
@@ -25,13 +25,14 @@ namespace Game
                 attackable.OnDamageTaken += OnAttackableDamageTaken; ;
             }
 
-            private void OnAttackableDamageTaken(DamageSource source, IAttackable attackable)
+            private void OnAttackableDamageTaken(Attack attack, IAttackable attackable)
             {
-                if (source.Sources.Contains(this))
+                if (attack.AttackSource.Sources.Contains(this))
                     return;
 
+                AttackSource source = attack.AttackSource.Clone();
                 source.Sources.Add(this);
-                attackable.TakeAttack(source, damage);
+                attackable.TakeAttack(new Attack(source, damage, 0f));
             }
 
             public override void Dispose()

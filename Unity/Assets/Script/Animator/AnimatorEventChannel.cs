@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -34,7 +35,7 @@ namespace Game
 
             public void Publish()
             {
-                foreach (Action action in subscribers)
+                foreach (Action action in subscribers.ToList())
                 {
                     action.Invoke();
                 }

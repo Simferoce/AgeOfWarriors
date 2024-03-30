@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: -7442373754077631548}
   - component: {fileID: -9219538325602513416}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: PiercingArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -193,18 +193,18 @@ MonoBehaviour:
   projectileDeath:
     rid: 3490450885554995228
   projectileMovement:
-    rid: 1000
+    rid: 8758732313942556682
   references:
     version: 2
     RefIds:
-    - rid: 1000
-      type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
-      data:
-        angle: 30
     - rid: 3490450885554995228
       type: {class: ProjectileStickDeath, ns: Game, asm: Assembly-CSharp}
       data:
         stopSimulatedDelay: 0.1
+    - rid: 8758732313942556682
+      type: {class: ProjectileStraightMovement, ns: Game, asm: Assembly-CSharp}
+      data:
+        speed: 7
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4
@@ -220,7 +220,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1

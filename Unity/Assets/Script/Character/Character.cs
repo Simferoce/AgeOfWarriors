@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Character : AgentObject<CharacterDefinition>, ITargeteable, IDamageSource, IModifiable, IAttackable
+    public class Character : AgentObject<CharacterDefinition>, ITargeteable, IAttackSource, IModifiable, IAttackable
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -35,7 +35,7 @@ namespace Game
         public CharacterDefinition CharacterDefinition { get; set; }
         public float LastAbilityUsed { get; set; }
 
-        public event Action<DamageSource, IAttackable> OnDamageTaken;
+        public event Action<Attack, IAttackable> OnDamageTaken;
 
         private float health;
 
@@ -179,13 +179,13 @@ namespace Game
             return this.health > 0;
         }
 
-        public void TakeAttack(DamageSource source, float damage)
+        public void TakeAttack(Attack attack)
         {
-            float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(damage, Defense);
+            float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
             this.health -= damageReduced;
-            Debug.Log($"{this.name} took {damageReduced} from {source.Sources[^1]}");
 
-            OnDamageTaken?.Invoke(source, this);
+            Debug.Log($"{this.name} took {damageReduced} from {attack.AttackSource.Sources[^1]}");
+            OnDamageTaken?.Invoke(attack, this);
 
             if (health <= 0 && !IsDead)
                 Death();
