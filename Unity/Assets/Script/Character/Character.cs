@@ -1,12 +1,13 @@
 ﻿using Character;
 using Extension;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class Character : AgentObject<CharacterDefinition>, ITargeteable
+    public class Character : AgentObject<CharacterDefinition>, ITargeteable, IDamageSource, IModifiable, IAttackable
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -23,9 +24,9 @@ namespace Game
         public float Health { get => health; set => health = value; }
         public float AttackPerSeconds { get => Definition.AttackPerSeconds; }
         public float AttackPower { get => Definition.AttackPower; }
-        public float Speed { get => Definition.Speed * (1 + CharacterModifierHandler.SpeedPercentage ?? 0f); }
-        public float Defense { get => Definition.Defense + CharacterModifierHandler.Defense ?? 0f; }
-        public CharacterModifierHandler CharacterModifierHandler { get; } = new CharacterModifierHandler();
+        public float Speed { get => Definition.Speed * (1 + ModifierHandler.SpeedPercentage ?? 0f); }
+        public float Defense { get => Definition.Defense + ModifierHandler.Defense ?? 0f; }
+        public ModifierHandler ModifierHandler { get; } = new ModifierHandler();
         public int Priority { get => SpawnNumber; }
         public Faction Faction { get => Agent.Faction; }
         public bool IsDead { get; set; } = false;
@@ -33,6 +34,8 @@ namespace Game
         public Vector3 Position => targetPosition.position;
         public CharacterDefinition CharacterDefinition { get; set; }
         public float LastAbilityUsed { get; set; }
+
+        public event Action<DamageSource, IAttackable> OnDamageTaken;
 
         private float health;
 
@@ -76,9 +79,9 @@ namespace Game
         protected override void OnDestroy()
         {
             foreach (CharacterAbility ability in abilities)
-            {
                 ability.Dispose();
-            }
+
+            ModifierHandler.Dispose();
         }
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)
@@ -140,30 +143,35 @@ namespace Game
             return true;
         }
 
-        public ITargeteable GetTarget()
+        public IAttackable GetTarget()
         {
-            List<ITargeteable> potentialTargets = new List<ITargeteable>();
+            return GetTargets().FirstOrDefault();
+        }
+
+        public List<IAttackable> GetTargets()
+        {
+            List<IAttackable> potentialTargets = new List<IAttackable>();
             foreach (GameObject inRange in hitZone.InCollisions)
             {
                 if (!inRange.CompareTag(GameTag.HIT_BOX))
                     continue;
 
-                if (!inRange.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable))
+                if (!inRange.TryGetComponentInParent<IAttackable>(out IAttackable attackable))
                     continue;
 
-                if (targeteable.Equals(this))
+                if (attackable.Equals(this))
                     continue;
 
-                if (!targeteable.Attackable())
+                if (!attackable.Attackable())
                     continue;
 
-                if (targeteable.Faction != this.Agent.Faction)
-                    potentialTargets.Add(targeteable);
+                if (attackable.Faction != this.Agent.Faction)
+                    potentialTargets.Add(attackable);
             }
 
             return potentialTargets
                 .OrderBy(x => x.Priority)
-                .FirstOrDefault();
+                .ToList();
         }
 
         public bool Attackable()
@@ -171,12 +179,15 @@ namespace Game
             return this.health > 0;
         }
 
-        public void TakeAttack(float damage)
+        public void TakeAttack(DamageSource source, float damage)
         {
             float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(damage, Defense);
             this.health -= damageReduced;
+            Debug.Log($"{this.name} took {damageReduced} from {source.Sources[^1]}");
 
-            if (health <= 0)
+            OnDamageTaken?.Invoke(source, this);
+
+            if (health <= 0 && !IsDead)
                 Death();
         }
 
@@ -187,6 +198,21 @@ namespace Game
 
             hitBox.gameObject.SetActive(false);
             GameObject.Destroy(this.gameObject, 2);
+        }
+
+        public void AddModifier(Modifier modifier)
+        {
+            ModifierHandler.Add(modifier);
+        }
+
+        public void RemoveModifier(Modifier modifier)
+        {
+            ModifierHandler.Remove(modifier);
+        }
+
+        public List<Modifier> GetModifiers()
+        {
+            return ModifierHandler.Modifiers;
         }
 
         #endregion

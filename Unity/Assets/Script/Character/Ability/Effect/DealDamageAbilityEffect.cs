@@ -1,16 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Game
 {
     [Serializable]
-    public class DealDamageAbilityEffect : AbilityEffect
+    public class DealDamageAbilityEffect : AbilityEffect, IDamageSource
     {
-        public override void Apply(Character character)
+        public override void Apply()
         {
-            ITargeteable target = character.GetTarget();
+            IAttackable target = character.GetTarget();
 
             if (target != null)
-                target.TakeAttack(character.AttackPower);
+                target.TakeAttack(new DamageSource() { Sources = new List<IDamageSource>() { character, this } }, character.AttackPower);
         }
     }
 }

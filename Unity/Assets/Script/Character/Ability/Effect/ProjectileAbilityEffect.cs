@@ -10,16 +10,16 @@ namespace Game
         [SerializeField] private float angle = 30f;
         [SerializeField] private Transform origin;
 
-        public override void Apply(Character character)
+        public override void Apply()
         {
-            ITargeteable target = character.GetTarget();
+            IAttackable target = character.GetTarget();
 
             if (target != null)
             {
                 GameObject gameObject = GameObject.Instantiate(projectilePrefab, origin.transform.position, Quaternion.identity);
                 Projectile projectile = gameObject.GetComponent<Projectile>();
 
-                projectile.Initialize(character.Agent, character.AttackPower, angle, target.Position);
+                projectile.Initialize(character, character.AttackPower, angle, target.Position);
             }
         }
     }

@@ -13,6 +13,7 @@ namespace Game
         }
 
         public abstract bool Execute();
+        public virtual void OnAbilityStarted() { }
         public virtual void OnAbilityEnded() { }
     }
 }

@@ -55,25 +55,6 @@ MonoBehaviour:
   targetPosition: {fileID: 7840795603293673896}
   reachHandler: {fileID: 8990274041655715421}
   abilities:
-  - rid: 8758732296968470551
-  references:
-    version: 2
-    RefIds:
-    - rid: 8758732296968470551
-      type: {class: CharacterAbility, ns: Game, asm: Assembly-CSharp}
-      data:
-        conditions:
-        - rid: 8758732296968470557
-        - rid: 8758732296968470558
-        parameter: 1
-        effects:
-        - rid: 8758732296968470559
-    - rid: 8758732296968470557
-      type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
-    - rid: 8758732296968470558
-      type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
-    - rid: 8758732296968470559
-      type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &9215057588866617565
 Rigidbody2D:
   serializedVersion: 4

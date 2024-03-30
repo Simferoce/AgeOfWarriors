@@ -8,33 +8,18 @@ namespace Game
     [Serializable]
     public class InspiringPresenceAbilityEffect : AbilityEffect, ILingeringAbilityEffect
     {
-        private class InspiringPresenceBuff : CharacterModifier
+        private class InspiringPresenceBuff : Modifier<InspiringPresenceBuff>
         {
-            public InspiringPresenceAbilityEffect Source { get; }
-            public float Duration { get; private set; }
+            public InspiringPresenceAbilityEffect Source { get; set; }
             public override float? Defense => defense;
 
             private float defense;
-            private float startedAt;
 
-            public InspiringPresenceBuff(Character character, float defense, InspiringPresenceAbilityEffect source, float duration)
+            public InspiringPresenceBuff(Character character, float defense, InspiringPresenceAbilityEffect source)
                 : base(character)
             {
                 this.defense = defense;
                 this.Source = source;
-                Duration = duration;
-                startedAt = Time.time;
-            }
-
-            public override void Update()
-            {
-                if (Time.time - startedAt > Duration)
-                    character.CharacterModifierHandler.Modifiers.Remove(this);
-            }
-
-            public override void Refresh()
-            {
-                startedAt = Time.time;
             }
         }
 
@@ -45,7 +30,7 @@ namespace Game
 
         private float? startedAt = null;
 
-        public override void Apply(Character character)
+        public override void Apply()
         {
             startedAt = Time.time;
         }
@@ -71,7 +56,7 @@ namespace Game
 
             foreach (Character characterToBuff in characters)
             {
-                InspiringPresenceBuff inspiringPresenceBuff = (InspiringPresenceBuff)characterToBuff.CharacterModifierHandler.Modifiers.FirstOrDefault(x => x is InspiringPresenceBuff);
+                InspiringPresenceBuff inspiringPresenceBuff = (InspiringPresenceBuff)characterToBuff.ModifierHandler.Modifiers.FirstOrDefault(x => x is InspiringPresenceBuff);
                 if (inspiringPresenceBuff != null)
                 {
                     if (inspiringPresenceBuff.Source == this)
@@ -81,7 +66,10 @@ namespace Game
                 }
                 else
                 {
-                    characterToBuff.CharacterModifierHandler.Add(new InspiringPresenceBuff(character, defense, this, buffDuration));
+                    inspiringPresenceBuff = new InspiringPresenceBuff(character, defense, this)
+                        .With(new CharacterModifierTimeElement(buffDuration));
+
+                    characterToBuff.ModifierHandler.Add(inspiringPresenceBuff);
                 }
             }
 

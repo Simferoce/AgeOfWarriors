@@ -1,9 +1,10 @@
 ﻿using Extension;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : MonoBehaviour, IDamageSource
     {
         private enum State
         {
@@ -17,10 +18,10 @@ namespace Game
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
 
         private float damage;
-        private Agent source;
+        private Character source;
         private State state = State.Alive;
 
-        public void Initialize(Agent source, float damage, float angle, Vector3 target)
+        public void Initialize(Character source, float damage, float angle, Vector3 target)
         {
             this.source = source;
             this.damage = damage;
@@ -51,10 +52,10 @@ namespace Game
 
             if (collision.gameObject.CompareTag(GameTag.HIT_BOX))
             {
-                if (collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
-                    && targeteable.Faction != source.Faction)
+                if (collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
+                    && attackable.Faction != source.Faction)
                 {
-                    targeteable.TakeAttack(damage);
+                    attackable.TakeAttack(new DamageSource() { Sources = new List<IDamageSource>() { source, this } }, damage);
                     Kill(collision.gameObject);
                 }
             }

@@ -1,6 +1,8 @@
-﻿namespace Game
+﻿using System;
+
+namespace Game
 {
-    public interface IChararacterModifier
+    public interface IModifier : IDisposable
     {
         float? SpeedPercentage { get; }
         float? Defense { get; }
