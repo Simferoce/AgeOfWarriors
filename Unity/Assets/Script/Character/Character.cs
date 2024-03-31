@@ -1,20 +1,16 @@
-﻿using Character;
-using Extension;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class Character : AgentObject<CharacterDefinition>, ITargeteable, IAttackSource, IModifiable, IAttackable
+    public class Character : AgentObject<CharacterDefinition>, IBlocker, IAttackSource, IModifiable, IAttackable
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
-        [SerializeField] private DetectionCollision hitBox;
-        [SerializeField] private DetectionCollision hitZone;
+        [SerializeField] private Collider2D hitbox;
         [SerializeField] private Transform targetPosition;
-        [SerializeField] private ReachHandler reachHandler;
 
         [Header("Abilities")]
         [SerializeReference, SubclassSelector]
@@ -26,6 +22,7 @@ namespace Game
         public float AttackPower { get => Definition.AttackPower; }
         public float Speed { get => Definition.Speed * (1 + ModifierHandler.SpeedPercentage ?? 0f); }
         public float Defense { get => Definition.Defense + ModifierHandler.Defense ?? 0f; }
+        public float Reach { get => Definition.Reach; }
         public ModifierHandler ModifierHandler { get; } = new ModifierHandler();
         public int Priority { get => SpawnNumber; }
         public Faction Faction { get => Agent.Faction; }
@@ -34,6 +31,8 @@ namespace Game
         public Vector3 Position => targetPosition.position;
         public CharacterDefinition CharacterDefinition { get; set; }
         public float LastAbilityUsed { get; set; }
+        public Collider2D Collider { get => hitbox; }
+        public bool IsActive { get => !IsDead; }
 
         public event Action<Attack, IAttackable> OnDamageTaken;
 
@@ -78,6 +77,8 @@ namespace Game
 
         protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             foreach (CharacterAbility ability in abilities)
                 ability.Dispose();
 
@@ -95,8 +96,6 @@ namespace Game
             {
                 ability.Initialize(this);
             }
-
-            reachHandler.SetReach(Definition.Reach);
         }
 
         private bool CanMove()
@@ -104,31 +103,28 @@ namespace Game
             if (abilities.Any(x => x.IsCasting))
                 return false;
 
-            foreach (GameObject collision in hitBox.InCollisions)
+            foreach (IBlocker blocker in AgentObject.All.OfType<IBlocker>())
             {
-                if (!collision.CompareTag(GameTag.HIT_BOX))
+                if (!blocker.IsActive)
                     continue;
 
-                if (!collision.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable))
+                if (!blocker.Collider.IsTouching(Collider))
                     continue;
 
-                if (targeteable == (this as ITargeteable))
+                if (!blocker.IsBlocking(this.Faction))
                     continue;
 
-                if (!targeteable.CanBlocks(this.Faction))
-                    continue;
-
-                if (targeteable.Faction != this.Faction)
+                if (blocker.Faction != this.Faction)
                     return false;
 
-                if (targeteable.Priority < this.Priority)
+                if (blocker.Priority < this.Priority)
                     return false;
             }
 
             return true;
         }
 
-        public bool CanBlocks(Faction faction)
+        public bool IsBlocking(Faction faction)
         {
             return true;
         }
@@ -151,12 +147,12 @@ namespace Game
         public List<IAttackable> GetTargets()
         {
             List<IAttackable> potentialTargets = new List<IAttackable>();
-            foreach (GameObject inRange in hitZone.InCollisions)
+            foreach (IAttackable attackable in AgentObject.All.OfType<IAttackable>())
             {
-                if (!inRange.CompareTag(GameTag.HIT_BOX))
+                if (!attackable.IsActive)
                     continue;
 
-                if (!inRange.TryGetComponentInParent<IAttackable>(out IAttackable attackable))
+                if (Vector2.Distance(attackable.Collider.ClosestPoint(this.Position), this.Position) > Reach)
                     continue;
 
                 if (attackable.Equals(this))
@@ -195,8 +191,6 @@ namespace Game
         {
             IsDead = true;
             this.CharacterAnimator.SetTrigger(CharacterAnimatorParameter.Parameter.Dead);
-
-            hitBox.gameObject.SetActive(false);
             GameObject.Destroy(this.gameObject, 2);
         }
 

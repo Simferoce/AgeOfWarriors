@@ -17,7 +17,7 @@ MonoBehaviour:
   productionDuration: 2
   cost: 10
   technologyGainPerSecond: 0
-  reach: 12
+  reach: 2.5
   speed: 1
   attackPerSeconds: 1
   attackPower: 2.5

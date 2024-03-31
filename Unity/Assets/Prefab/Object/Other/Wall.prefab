@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 77300995818579428}
   - component: {fileID: 6981624252804279781}
   m_Layer: 0
-  m_Name: HitBox
+  m_Name: Hitbox
   m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,3 +223,4 @@ MonoBehaviour:
   health: 0
   maxHealth: 10
   targetPosition: {fileID: 1385432752745618168}
+  hitbox: {fileID: 6981624252804279781}

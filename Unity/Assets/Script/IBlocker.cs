@@ -2,11 +2,13 @@
 
 namespace Game
 {
-    public interface ITargeteable
+    public interface IBlocker
     {
+        public bool IsActive { get; }
         public Vector3 Position { get; }
         public int Priority { get; }
         public Faction Faction { get; }
-        public bool CanBlocks(Faction faction);
+        public bool IsBlocking(Faction faction);
+        public Collider2D Collider { get; }
     }
 }

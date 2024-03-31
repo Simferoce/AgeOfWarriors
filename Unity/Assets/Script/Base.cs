@@ -4,12 +4,13 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Base : AgentObject, ITargeteable, IModifiable, IAttackable
+    public class Base : AgentObject, IBlocker, IModifiable, IAttackable
     {
         [SerializeField] private float health;
         [SerializeField] private float maxHealth;
         [SerializeField] private SpawnPoint spawnPoint;
         [SerializeField] private Transform targetPosition;
+        [SerializeField] private Collider2D hitbox;
 
         public event Action<Attack, IAttackable> OnDamageTaken;
 
@@ -20,6 +21,8 @@ namespace Game
         public float Health { get => health; set => health = value; }
         public Vector3 Position => transform.position;
         public ModifierHandler ModifierHandler { get; set; } = new ModifierHandler();
+        public Collider2D Collider { get => hitbox; }
+        public bool IsActive { get => true; }
 
         protected override void Awake()
         {
@@ -37,7 +40,7 @@ namespace Game
             return this.health > 0;
         }
 
-        public bool CanBlocks(Faction faction)
+        public bool IsBlocking(Faction faction)
         {
             return faction != this.Faction;
         }
