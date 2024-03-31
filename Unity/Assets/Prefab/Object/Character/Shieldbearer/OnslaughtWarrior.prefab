@@ -62,51 +62,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: abilities.Array.data[0]
-      value: 8758732309343764499
+      value: 8758732338094669845
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: abilities.Array.data[1]
-      value: 8758732309343764495
+      value: 8758732338094669841
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470569]
-      value: Assembly-CSharp Game.CharacterAbility
-      objectReference: {fileID: 0}
-    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470570]
-      value: Assembly-CSharp Game.AttackSpeedAbilityCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470571]
-      value: Assembly-CSharp Game.CooldownCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470572]
-      value: Assembly-CSharp Game.HasTargetAbilityCondition
-      objectReference: {fileID: 0}
-    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732296968470573]
-      value: Assembly-CSharp Game.DealDamageAbilityEffect
-      objectReference: {fileID: 0}
-    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732309343764499]
+      propertyPath: managedReferences[8758732338094669845]
       value: Assembly-CSharp Game.AnimationBaseCharacterAbility
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732309343764500]
+      propertyPath: managedReferences[8758732338094669846]
       value: Assembly-CSharp Game.AttackSpeedAbilityCondition
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732309343764501]
+      propertyPath: managedReferences[8758732338094669847]
       value: Assembly-CSharp Game.CooldownCondition
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732309343764502]
+      propertyPath: managedReferences[8758732338094669848]
       value: Assembly-CSharp Game.HasTargetAbilityCondition
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: managedReferences[8758732309343764503]
+      propertyPath: managedReferences[8758732338094669849]
       value: Assembly-CSharp Game.DealDamageAbilityEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669849].leach
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[8758732296968470571].cooldown
@@ -114,6 +98,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[8758732309343764501].cooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669847].cooldown
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
@@ -125,11 +113,23 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669845].parameter
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669849].damagePercentage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[8758732296968470569].effects.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[8758732309343764499].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669845].effects.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
@@ -147,6 +147,14 @@ PrefabInstance:
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[8758732309343764499].effects.Array.data[0]
       value: 8758732309343764503
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669845].conditions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669845].effects.Array.data[0]
+      value: 8758732338094669849
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[8758732296968470569].conditions.Array.data[0]
@@ -171,6 +179,18 @@ PrefabInstance:
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[8758732309343764499].conditions.Array.data[2]
       value: 8758732309343764502
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669845].conditions.Array.data[0]
+      value: 8758732338094669846
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669845].conditions.Array.data[1]
+      value: 8758732338094669847
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: managedReferences[8758732338094669845].conditions.Array.data[2]
+      value: 8758732338094669848
       objectReference: {fileID: 0}
     - target: {fileID: 6705402225686340843, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: m_Name

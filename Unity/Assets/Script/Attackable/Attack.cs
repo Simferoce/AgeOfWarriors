@@ -5,6 +5,7 @@
         public AttackSource AttackSource { get; set; }
         public float Damage { get; set; }
         public float ArmorPenetration { get; set; }
+        public float Leach { get; set; }
 
         public Attack(AttackSource attackSource, float damage, float armorPenetration)
         {

@@ -129,6 +129,12 @@ namespace Game
             return true;
         }
 
+        public void Heal(float amount)
+        {
+            this.health += amount;
+            this.health = Mathf.Clamp(health, 0, MaxHealth);
+        }
+
         #region Attack
 
         public bool CanUseAbility()
@@ -175,10 +181,18 @@ namespace Game
             return this.health > 0;
         }
 
+        public void AttackLanded(Attack attack, float damageDealt)
+        {
+            Heal(damageDealt * attack.Leach);
+        }
+
         public void TakeAttack(Attack attack)
         {
             float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
             this.health -= damageReduced;
+
+            foreach (IAttackSource source in attack.AttackSource.Sources)
+                source.AttackLanded(attack, damageReduced);
 
             Debug.Log($"{this.name} took {damageReduced} from {attack.AttackSource.Sources[^1]}");
             OnDamageTaken?.Invoke(attack, this);
