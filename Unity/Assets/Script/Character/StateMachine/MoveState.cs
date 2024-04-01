@@ -59,13 +59,7 @@ namespace Game
                     if (!blocker.Collider.IsTouching(character.Collider))
                         continue;
 
-                    if (!blocker.IsBlocking(character.Faction))
-                        continue;
-
-                    if (blocker.Faction != character.Faction)
-                        return false;
-
-                    if (blocker.Priority < character.Priority)
+                    if (blocker.IsBlocking(character))
                         return false;
                 }
 

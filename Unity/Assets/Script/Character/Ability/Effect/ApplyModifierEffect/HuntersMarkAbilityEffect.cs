@@ -32,7 +32,7 @@ namespace Game
 
                 AttackSource source = attack.AttackSource.Clone();
                 source.Sources.Add(this);
-                attackable.TakeAttack(new Attack(source, damage, 0f));
+                attackable.TakeAttack(new Attack(source, damage, 0f, 0f));
             }
 
             public override void Dispose()
@@ -45,7 +45,7 @@ namespace Game
 
         public override void Apply()
         {
-            List<IAttackable> attackable = character.GetTargets();
+            List<IAttackable> attackable = ability.Targets;
             IModifiable modifiable = attackable.FirstOrDefault(x => x is IModifiable) as IModifiable;
 
             if (modifiable != null)

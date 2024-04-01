@@ -136,6 +136,8 @@ MonoBehaviour:
     rid: 3490450885554995206
   projectileMovement:
     rid: 1000
+  impacts:
+  - rid: 3656781095385956405
   references:
     version: 2
     RefIds:
@@ -149,6 +151,8 @@ MonoBehaviour:
         duration: 0.25
         scale: 1.25
         stopSimulatedDelay: 0.05
+    - rid: 3656781095385956405
+      type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -11,9 +12,11 @@ namespace Game
         public int Priority { get; }
         public Vector3 TargetPosition { get; }
         public Faction Faction { get; }
-        public bool Attackable();
+        public bool IsAttackable();
         public void TakeAttack(Attack attack);
-        public void Stagger(float duration) { }
+        public void Stagger(float duration);
         public Vector3 ClosestPoint(Vector3 point);
+
+        public List<Tag> EvaluateContextualTags(IAttackable attackable);
     }
 }

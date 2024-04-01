@@ -8,11 +8,11 @@ namespace Game
     {
         [SerializeField] private float speed;
 
-        public override void Initialize(Projectile projectile, Vector3 target)
+        public override void Initialize(Projectile projectile)
         {
-            base.Initialize(projectile, target);
+            base.Initialize(projectile);
 
-            Vector3 velocity = (target - projectile.transform.position).XY().normalized * speed;
+            Vector3 velocity = Vector3.right * projectile.Character.Direction * speed;
             projectile.Rigidbody.velocity = velocity;
             projectile.transform.right = projectile.Rigidbody.velocity;
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -8,11 +9,13 @@ namespace Game
     {
         [SerializeField] private float angle;
 
-        public override void Initialize(Projectile projectile, Vector3 target)
+        public override void Initialize(Projectile projectile)
         {
-            base.Initialize(projectile, target);
+            base.Initialize(projectile);
 
-            SolveForVelocity(projectile.transform.position, target, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, angle, out Vector3 velocity);
+            ProjectileTargetContext context = (ProjectileTargetContext)projectile.Contexts.FirstOrDefault(x => x is ProjectileTargetContext);
+
+            SolveForVelocity(projectile.transform.position, context.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, angle, out Vector3 velocity);
             projectile.Rigidbody.velocity = velocity;
         }
 

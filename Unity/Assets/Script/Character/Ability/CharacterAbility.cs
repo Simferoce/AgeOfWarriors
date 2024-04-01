@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Game
 {
     [Serializable]
     public abstract class CharacterAbility
     {
-        protected Character character;
+        public Character Character { get; set; }
 
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
+        public virtual List<IAttackable> Targets => new List<IAttackable>();
 
         public virtual void Initialize(Character character)
         {
-            this.character = character;
+            this.Character = character;
         }
 
         public abstract void Dispose();

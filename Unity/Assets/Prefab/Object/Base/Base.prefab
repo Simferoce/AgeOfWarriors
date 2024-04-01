@@ -338,7 +338,7 @@ Transform:
   - {fileID: 891195787}
   - {fileID: 3026845125957121751}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4385928984012920248
 MonoBehaviour:
@@ -352,11 +352,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdbe9a4f0fcedb24abd424212d328dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
-  spawnPoint: {fileID: 7750424142232137661}
-  targetPosition: {fileID: 3026845125957121751}
   hitbox: {fileID: 5105175081674111919}
+  targetPosition: {fileID: 3026845125957121751}
+  blocking: 04000000
+  inherentTag: 
+  maxHealth: 100
+  defense: 0
+  spawnPoint: {fileID: 7750424142232137661}
 --- !u!50 &7617356873761771249
 Rigidbody2D:
   serializedVersion: 4

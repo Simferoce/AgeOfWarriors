@@ -1,4 +1,4 @@
-﻿using Extension;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -14,19 +14,22 @@ namespace Game
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeReference, SubclassSelector] private ProjectileDeath projectileDeath = new ProjectileStickDeath();
         [SerializeReference, SubclassSelector] private ProjectileMovement projectileMovement = new ProjectileAngledMovement();
+        [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
 
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
+        public List<ProjectileContext> Contexts { get => contexts; set => contexts = value; }
+        public Character Character { get => character; set => character = value; }
 
-        private Attack attack;
-        private Character source;
+        private List<ProjectileContext> contexts;
+        private Character character;
         private State state = State.Alive;
 
-        public void Initialize(Character source, Attack attack, Vector3 target)
+        public void Initialize(Character character, List<ProjectileContext> contexts)
         {
-            this.source = source;
-            this.attack = attack;
+            this.character = character;
+            this.contexts = contexts;
 
-            projectileMovement.Initialize(this, target);
+            projectileMovement.Initialize(this);
         }
 
         private void Update()
@@ -42,24 +45,12 @@ namespace Game
             if (state != State.Alive)
                 return;
 
-            if (collision.gameObject.CompareTag(GameTag.GROUND))
-            {
+            bool impacted = false;
+            foreach (ProjectileImpact effect in impacts)
+                impacted |= effect.Impact(collision.gameObject, this);
+
+            if (impacted)
                 Kill(collision.gameObject);
-                return;
-            }
-
-            if (collision.gameObject.CompareTag(GameTag.HIT_BOX))
-            {
-                if (collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
-                    && attackable.Faction != source.Faction)
-                {
-                    Attack clonedAttack = attack.Clone();
-                    clonedAttack.AttackSource.Sources.Add(this);
-
-                    attackable.TakeAttack(clonedAttack);
-                    Kill(collision.gameObject);
-                }
-            }
         }
 
         private void Kill(GameObject collision)

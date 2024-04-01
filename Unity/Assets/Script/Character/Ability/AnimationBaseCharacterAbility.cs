@@ -8,11 +8,12 @@ namespace Game
     [Serializable]
     public class AnimationBaseCharacterAbility : CharacterAbility
     {
+        [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeField] private CharacterAnimatorParameter.Parameter parameter = CharacterAnimatorParameter.Parameter.Ability;
         [Space]
-        [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();
 
+        public override List<IAttackable> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
         public override bool IsActive { get => IsCasting || IsLingering; }
         public bool IsLingering { get; set; } = false;
 
@@ -24,7 +25,7 @@ namespace Game
                 condition.Initialize(character);
 
             foreach (AbilityEffect effect in effects)
-                effect.Initialize(character);
+                effect.Initialize(this);
         }
 
         public override bool CanUse()
@@ -34,9 +35,9 @@ namespace Game
 
         public override void Use()
         {
-            character.Cast();
-            character.CharacterAnimator.SetTrigger(parameter);
-            character.LastAbilityUsed = Time.time;
+            Character.Cast();
+            Character.CharacterAnimator.SetTrigger(parameter);
+            Character.LastAbilityUsed = Time.time;
             IsCasting = true;
 
             foreach (AbilityCondition condition in conditions)
@@ -45,8 +46,8 @@ namespace Game
             foreach (AbilityEffect effect in effects)
                 effect.OnAbilityStarted();
 
-            character.CharacterAnimator.OnAbilityUsed += OnAnimatorEventAbilityUsed;
-            AnimatorEventChannel.Subscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
+            Character.CharacterAnimator.OnAbilityUsed += OnAnimatorEventAbilityUsed;
+            AnimatorEventChannel.Subscribe(Character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
         }
 
         public override void Update()
@@ -57,7 +58,7 @@ namespace Game
             bool end = true;
             foreach (ILingeringAbilityEffect lingeringAbilityEffect in effects.OfType<ILingeringAbilityEffect>())
             {
-                end &= lingeringAbilityEffect.Update(character);
+                end &= lingeringAbilityEffect.Update(Character);
             }
 
             if (end)
@@ -78,17 +79,18 @@ namespace Game
                 End();
             else
                 IsLingering = true;
+
+            Character.EndCast();
         }
 
         public override void Dispose()
         {
-            character.CharacterAnimator.OnAbilityUsed -= OnAnimatorEventAbilityUsed;
-            AnimatorEventChannel.Unsubscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
+            Character.CharacterAnimator.OnAbilityUsed -= OnAnimatorEventAbilityUsed;
+            AnimatorEventChannel.Unsubscribe(Character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
         }
 
         private void End()
         {
-            character.EndCast();
             IsLingering = false;
 
             foreach (AbilityCondition condition in conditions)
@@ -102,7 +104,7 @@ namespace Game
 
         public override void Interrupt()
         {
-            character.EndCast();
+            Character.EndCast();
             IsLingering = false;
             IsCasting = false;
 

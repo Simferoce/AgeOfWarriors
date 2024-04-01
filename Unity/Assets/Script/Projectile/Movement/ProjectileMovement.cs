@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Game
 {
@@ -8,7 +7,7 @@ namespace Game
     {
         protected Projectile projectile;
 
-        public virtual void Initialize(Projectile projectile, Vector3 target)
+        public virtual void Initialize(Projectile projectile)
         {
             this.projectile = projectile;
         }

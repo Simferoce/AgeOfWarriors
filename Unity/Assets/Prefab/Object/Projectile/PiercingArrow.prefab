@@ -194,13 +194,17 @@ MonoBehaviour:
     rid: 3490450885554995228
   projectileMovement:
     rid: 8758732313942556682
+  impacts:
+  - rid: 3656781095385956448
   references:
     version: 2
     RefIds:
     - rid: 3490450885554995228
       type: {class: ProjectileStickDeath, ns: Game, asm: Assembly-CSharp}
       data:
-        stopSimulatedDelay: 0.1
+        stopSimulatedDelay: 0.01
+    - rid: 3656781095385956448
+      type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
     - rid: 8758732313942556682
       type: {class: ProjectileStraightMovement, ns: Game, asm: Assembly-CSharp}
       data:

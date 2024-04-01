@@ -7,8 +7,9 @@
         public float ArmorPenetration { get; set; }
         public float Leach { get; set; }
 
-        public Attack(AttackSource attackSource, float damage, float armorPenetration)
+        public Attack(AttackSource attackSource, float damage, float armorPenetration, float leach)
         {
+            Leach = leach;
             AttackSource = attackSource;
             Damage = damage;
             ArmorPenetration = armorPenetration;
@@ -16,7 +17,7 @@
 
         public Attack Clone()
         {
-            return new Attack(AttackSource.Clone(), Damage, ArmorPenetration);
+            return new Attack(AttackSource.Clone(), Damage, ArmorPenetration, Leach);
         }
     }
 }

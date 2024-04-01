@@ -56,7 +56,7 @@ namespace Game
 
             foreach (Character characterToBuff in characters)
             {
-                InspiringPresenceBuff inspiringPresenceBuff = (InspiringPresenceBuff)characterToBuff.ModifierHandler.Modifiers.FirstOrDefault(x => x is InspiringPresenceBuff);
+                InspiringPresenceBuff inspiringPresenceBuff = (InspiringPresenceBuff)characterToBuff.GetModifiers().FirstOrDefault(x => x is InspiringPresenceBuff);
                 if (inspiringPresenceBuff != null)
                 {
                     if (inspiringPresenceBuff.Source == this)
@@ -69,7 +69,7 @@ namespace Game
                     inspiringPresenceBuff = new InspiringPresenceBuff(character, defense, this)
                         .With(new CharacterModifierTimeElement(buffDuration));
 
-                    characterToBuff.ModifierHandler.Add(inspiringPresenceBuff);
+                    characterToBuff.AddModifier(inspiringPresenceBuff);
                 }
             }
 

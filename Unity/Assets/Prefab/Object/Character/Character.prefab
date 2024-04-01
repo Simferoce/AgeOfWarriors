@@ -140,9 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e9fa78c47bc8147bc985d3200f0230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 9215057588866617565}
   hitbox: {fileID: 8271833102721241429}
   targetPosition: {fileID: 7840795603293673896}
+  blocking: 0400000003000000
+  inherentTag: 000000000100000002000000
+  rigidbody: {fileID: 9215057588866617565}
   abilities: []
   references:
     version: 2

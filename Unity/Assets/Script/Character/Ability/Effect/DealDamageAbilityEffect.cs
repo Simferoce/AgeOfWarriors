@@ -7,15 +7,17 @@ namespace Game
     [Serializable]
     public class DealDamageAbilityEffect : AbilityEffect, IAttackSource
     {
-        [SerializeField, Range(0, 1)] private float leach = 0f;
+        [SerializeField, Range(0, 3)] private float leach = 0f;
         [SerializeField, Range(0, 3)] private float damagePercentage = 1f;
+        [SerializeField] private float armorPenetration = 0f;
 
         public override void Apply()
         {
-            IAttackable target = character.GetTarget();
+            if (ability.Targets.Count == 0)
+                return;
 
-            if (target != null)
-                target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { character, this }), damagePercentage * character.AttackPower, leach));
+            IAttackable target = ability.Targets[0];
+            target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { ability.Character, this }), damagePercentage * ability.Character.AttackPower, armorPenetration, leach));
         }
     }
 }

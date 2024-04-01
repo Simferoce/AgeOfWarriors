@@ -61,8 +61,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
-      propertyPath: abilities.Array.data[1]
+      propertyPath: abilities.Array.data[0]
       value: 8758732309343764515
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: abilities.Array.data[1]
+      value: 3656781095385956382
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: managedReferences[8758732309343764515]
@@ -81,6 +85,10 @@ PrefabInstance:
       value: Assembly-CSharp Game.HuntersMarkAbilityEffect
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732309343764516].count
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: managedReferences[8758732309343764518].damage
       value: 1
       objectReference: {fileID: 0}
@@ -93,7 +101,23 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732309343764516].reachPercentage
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732309343764516].tags.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: managedReferences[8758732309343764515].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732309343764516].tags.Array.data[0]
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[8758732309343764516].tags.Array.data[1]
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}

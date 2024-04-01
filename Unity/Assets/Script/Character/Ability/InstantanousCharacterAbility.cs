@@ -11,6 +11,8 @@ namespace Game
         [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();
 
+        public override List<IAttackable> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
+
         public override bool CanUse()
         {
             return conditions.All(x => x.Execute()) && effects.All(x => x.CanBeApplied());
@@ -29,7 +31,7 @@ namespace Game
                 condition.Initialize(character);
 
             foreach (AbilityEffect effect in effects)
-                effect.Initialize(character);
+                effect.Initialize(this);
         }
 
         public override void Update()
