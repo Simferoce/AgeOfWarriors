@@ -53,8 +53,6 @@ namespace Game
         #region Modifiable
         protected ModifierHandler modifierHandler = new ModifierHandler();
 
-        public event Action<Attack, IAttackable> OnDamageTaken;
-
         public void AddModifier(Modifier modifier)
         {
             modifierHandler.Add(modifier);
@@ -74,8 +72,6 @@ namespace Game
         {
             modifierHandler.Dispose();
         }
-
-
         #endregion
 
         #region Attackable
@@ -86,6 +82,7 @@ namespace Game
         public abstract float Defense { get; }
         public float Health { get; set; }
         public virtual bool IsDead { get => this.Health <= 0; }
+        public event Action<Attack, IAttackable> OnDamageTaken;
 
         public Vector3 TargetPosition => targetPosition.position;
 
