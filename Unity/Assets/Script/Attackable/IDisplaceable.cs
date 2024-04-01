@@ -6,7 +6,7 @@ namespace Game
     {
         public bool IsActive { get; }
         public int Priority { get; }
-        public Vector3 Position { get; }
+        public Vector3 CenterPosition { get; }
         public Faction Faction { get; }
         public void Displace(Vector2 displacement);
     }

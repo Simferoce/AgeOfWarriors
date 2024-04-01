@@ -121,6 +121,14 @@ PrefabInstance:
       value: Assembly-CSharp Game.ProjectileImpactData
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[4528059405929545741]
+      value: Assembly-CSharp Game.IsEnemyTargetCriteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[4528059405929545755]
+      value: Assembly-CSharp Game.IsEnemyTargetCriteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: managedReferences[8758732313942556676]
       value: Assembly-CSharp Game.AnimationBaseCharacterAbility
       objectReference: {fileID: 0}
@@ -179,6 +187,14 @@ PrefabInstance:
     - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: managedReferences[3656781095385956451].cooldown
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[3656781095385956452].criteria
+      value: 4528059405929545741
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: managedReferences[3656781095385956455].criteria
+      value: 4528059405929545755
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: managedReferences[8758732313942556677].cooldown

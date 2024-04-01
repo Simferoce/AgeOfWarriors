@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -7,16 +6,16 @@ namespace Game
     [Serializable]
     public class ProjectileImpactData : ProjectileData
     {
-        [SerializeField] private List<Tag> tags;
+        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
 
         public class Context : ProjectileContext
         {
-            public List<Tag> Tags { get; set; }
+            public TargetCriteria Criteria { get; set; }
         }
 
         public override ProjectileContext GetContext(Character character)
         {
-            return new Context() { Tags = tags };
+            return new Context() { Criteria = criteria };
         }
     }
 }

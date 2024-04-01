@@ -30,7 +30,7 @@ namespace Game
             Vector3 destination = character.transform.position + character.transform.right * destinationDistance;
 
             foreach (IDisplaceable target in ability.Targets.Cast<IDisplaceable>().ToList())
-                target.Displace(Vector3.Lerp(target.Position, destination, damping) - target.Position);
+                target.Displace(Vector3.Lerp(target.CenterPosition, destination, damping) - target.CenterPosition);
 
             return Time.time - startedAt > duration;
         }

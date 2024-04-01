@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public interface IModifiable
+    public interface IModifiable : ITargeteable
     {
         public void AddModifier(Modifier modifier);
         public void RemoveModifier(Modifier modifier);

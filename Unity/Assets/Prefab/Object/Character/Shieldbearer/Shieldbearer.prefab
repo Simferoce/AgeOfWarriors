@@ -33,6 +33,10 @@ PrefabInstance:
       value: 8758732338094669841
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[4528059405929545750]
+      value: Assembly-CSharp Game.IsEnemyTargetCriteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[8758732309343764495]
       value: Assembly-CSharp Game.AnimationBaseCharacterAbility
       objectReference: {fileID: 0}
@@ -73,6 +77,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732338094669843].criteria
+      value: 4528059405929545750
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[8758732309343764495].parameter
       value: 1
       objectReference: {fileID: 0}
@@ -87,6 +95,10 @@ PrefabInstance:
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[8758732338094669843].tags.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[8758732338094669844].armorPenetration
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[8758732338094669844].damagePercentage

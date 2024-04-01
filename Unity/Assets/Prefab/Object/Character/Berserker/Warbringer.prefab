@@ -89,12 +89,32 @@ PrefabInstance:
       value: Assembly-CSharp Game.GraspAbilityEffect
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059405929545745]
+      value: Assembly-CSharp Game.IsEnemyTargetCriteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059405929545746]
+      value: Assembly-CSharp Game.AndTargetCriteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059405929545747]
+      value: Assembly-CSharp Game.IsEnemyTargetCriteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059405929545748]
+      value: Assembly-CSharp Game.IsDisplaceableTargetCriteria
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: managedReferences[3656781095385956430].count
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: managedReferences[4528059385855344649].damping
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[3656781095385956430].criteria
+      value: 4528059405929545746
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: managedReferences[4528059385855344646].cooldown
@@ -141,12 +161,24 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059405929545746].criterias.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: managedReferences[4528059385855344645].conditions.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: managedReferences[4528059385855344645].effects.Array.data[0]
       value: 4528059385855344649
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059405929545746].criterias.Array.data[0]
+      value: 4528059405929545747
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059405929545746].criterias.Array.data[1]
+      value: 4528059405929545748
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: managedReferences[4528059385855344645].conditions.Array.data[0]

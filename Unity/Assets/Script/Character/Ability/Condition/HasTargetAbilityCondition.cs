@@ -7,7 +7,7 @@ namespace Game
     [Serializable]
     public class HasTargetAbilityCondition : AbilityCondition
     {
-        [SerializeField] private List<Tag> tags = new List<Tag>();
+        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private int count = 1;
         [SerializeField, Range(0, 3)] private float reachPercentage = 1f;
 
@@ -15,7 +15,7 @@ namespace Game
 
         public override bool Execute()
         {
-            Targets = character.GetTargets(tags, character.Reach * reachPercentage);
+            Targets = character.GetTargets(criteria, character.Reach * reachPercentage);
             return Targets.Count >= count;
         }
     }

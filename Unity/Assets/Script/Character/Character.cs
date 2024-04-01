@@ -24,7 +24,6 @@ namespace Game
         public CharacterDefinition CharacterDefinition { get; set; }
         public float LastAbilityUsed { get; set; }
         public override bool IsActive { get => !IsDead; }
-        public bool IsDisplaceable => true;
 
         private StateMachine stateMachine = new StateMachine();
 
@@ -81,12 +80,12 @@ namespace Game
             return true;
         }
 
-        public IAttackable GetTarget(List<Tag> target, float distance)
+        public IAttackable GetTarget(TargetCriteria criteria, float distance)
         {
-            return GetTargets(target, distance).FirstOrDefault();
+            return GetTargets(criteria, distance).FirstOrDefault();
         }
 
-        public List<IAttackable> GetTargets(List<Tag> tags, float distance)
+        public List<IAttackable> GetTargets(TargetCriteria criteria, float distance)
         {
             List<IAttackable> potentialTargets = new List<IAttackable>();
             foreach (IAttackable attackable in AgentObject.All.OfType<IAttackable>())
@@ -94,16 +93,13 @@ namespace Game
                 if (!attackable.IsActive)
                     continue;
 
-                if (!MatchAll(tags, attackable))
-                    continue;
-
-                if (Mathf.Abs((attackable.ClosestPoint(this.Position) - this.Position).x) > distance)
+                if (Mathf.Abs((attackable.ClosestPoint(this.CenterPosition) - this.CenterPosition).x) > distance)
                     continue;
 
                 if (attackable.Equals(this))
                     continue;
 
-                if (!attackable.IsAttackable())
+                if (!criteria.Execute(this, attackable))
                     continue;
 
                 potentialTargets.Add(attackable);

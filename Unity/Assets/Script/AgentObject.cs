@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IBlocker, IAttackSource
+    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IBlocker, IAttackSource, ITargeteable
     {
         public static List<AgentObject> All { get; private set; }
 
@@ -22,7 +21,7 @@ namespace Game
         public virtual bool IsActive { get => true; }
         public virtual int Priority { get => SpawnNumber; }
         public virtual Faction Faction { get => Agent.Faction; }
-        public Vector3 Position { get => transform.position; }
+        public Vector3 CenterPosition { get => transform.position; }
 
         protected virtual void Awake()
         {
@@ -142,46 +141,32 @@ namespace Game
         #endregion
 
         #region Blocker
-        [SerializeField] private List<Tag> blocking = new List<Tag>();
+        [SerializeReference, SubclassSelector] private TargetCriteria blocking;
 
         public Collider2D Collider => hitbox;
 
         public bool IsBlocking(AgentObject agentObject)
         {
-            bool match = MatchAny(blocking, agentObject);
-            if (match && agentObject.Faction == this.Faction)
-                return Priority < agentObject.Priority;
+            if (blocking == null)
+                return false;
 
-            return match;
+            return blocking.Execute(this, agentObject);
         }
-        #endregion
 
-        #region Tag
-        [SerializeField] private List<Tag> inherentTag = new List<Tag>();
-
-        public bool MatchAll(List<Tag> tags, IAttackable target)
+        public bool IsDisplaceable()
         {
-            List<Tag> targetTags = this.EvaluateContextualTags(target);
-            return tags.All(x => targetTags.Contains(x));
+            return this is IDisplaceable;
         }
 
-        public bool MatchAny(List<Tag> tags, IAttackable target)
+        public bool IsAlly(ITargeteable targeteable)
         {
-            List<Tag> targetTags = this.EvaluateContextualTags(target);
-            return tags.Any(x => targetTags.Contains(x));
+            return targeteable.Faction == Faction;
         }
 
-        public List<Tag> EvaluateContextualTags(IAttackable target)
+        public bool IsEnemy(ITargeteable targeteable)
         {
-            List<Tag> result = new List<Tag>(inherentTag);
-            if (target.Faction != this.Agent.Faction)
-                result.Add(Tag.Enemy);
-            else
-                result.Add(Tag.Ally);
-
-            return result;
+            return targeteable.Faction != Faction;
         }
-
         #endregion
     }
 
