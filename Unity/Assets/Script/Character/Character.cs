@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Character : AgentObject<CharacterDefinition>, IBlocker, IAttackSource, IModifiable, IAttackable
+    public partial class Character : AgentObject<CharacterDefinition>, IBlocker, IDisplaceable, IAttackSource, IModifiable, IAttackable
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -26,24 +26,31 @@ namespace Game
         public ModifierHandler ModifierHandler { get; } = new ModifierHandler();
         public int Priority { get => SpawnNumber; }
         public Faction Faction { get => Agent.Faction; }
-        public bool IsDead { get; set; } = false;
+        public bool IsDead { get => stateMachine.Current is DeathState; }
         public CharacterAnimator CharacterAnimator { get; set; }
-        public Vector3 Position => targetPosition.position;
+        public Vector3 TargetPosition => targetPosition.position;
+        public Vector3 Position => transform.position;
         public CharacterDefinition CharacterDefinition { get; set; }
         public float LastAbilityUsed { get; set; }
         public Collider2D Collider { get => hitbox; }
         public bool IsActive { get => !IsDead; }
-
+        public bool IsDisplaceable => true;
         public event Action<Attack, IAttackable> OnDamageTaken;
 
         private float health;
+        private StateMachine stateMachine = new StateMachine();
 
-        public void Update()
+        public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
+            base.Spawn(agent, spawnNumber, direction);
+
+            stateMachine.Initialize(new MoveState(this));
+            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
+            health = MaxHealth;
+
             foreach (CharacterAbility ability in abilities)
             {
-                if (ability.IsActive)
-                    ability.Update();
+                ability.Initialize(this);
             }
         }
 
@@ -52,27 +59,13 @@ namespace Game
             if (IsDead)
                 return;
 
-            if (CanUseAbility())
+            foreach (CharacterAbility ability in abilities)
             {
-                foreach (CharacterAbility ability in abilities)
-                {
-                    if (ability.CanUse())
-                    {
-                        ability.Use();
-                        break;
-                    }
-                }
+                if (ability.IsActive)
+                    ability.Update();
             }
 
-            if (CanMove())
-            {
-                this.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 1, 0.25f);
-                rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Speed * Time.deltaTime);
-            }
-            else
-            {
-                this.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 0f, 0.25f);
-            }
+            stateMachine.Update();
         }
 
         protected override void OnDestroy()
@@ -85,45 +78,6 @@ namespace Game
             ModifierHandler.Dispose();
         }
 
-        public override void Spawn(Agent agent, int spawnNumber, int direction)
-        {
-            base.Spawn(agent, spawnNumber, direction);
-
-            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
-            health = MaxHealth;
-
-            foreach (CharacterAbility ability in abilities)
-            {
-                ability.Initialize(this);
-            }
-        }
-
-        private bool CanMove()
-        {
-            if (abilities.Any(x => x.IsCasting))
-                return false;
-
-            foreach (IBlocker blocker in AgentObject.All.OfType<IBlocker>())
-            {
-                if (!blocker.IsActive)
-                    continue;
-
-                if (!blocker.Collider.IsTouching(Collider))
-                    continue;
-
-                if (!blocker.IsBlocking(this.Faction))
-                    continue;
-
-                if (blocker.Faction != this.Faction)
-                    return false;
-
-                if (blocker.Priority < this.Priority)
-                    return false;
-            }
-
-            return true;
-        }
-
         public bool IsBlocking(Faction faction)
         {
             return true;
@@ -133,6 +87,16 @@ namespace Game
         {
             this.health += amount;
             this.health = Mathf.Clamp(health, 0, MaxHealth);
+        }
+
+        public void Cast()
+        {
+            stateMachine.SetState(new CastingState(this));
+        }
+
+        public void EndCast()
+        {
+            stateMachine.SetState(new MoveState(this));
         }
 
         #region Attack
@@ -150,6 +114,11 @@ namespace Game
             return GetTargets().FirstOrDefault();
         }
 
+        public Vector3 ClosestPoint(Vector3 point)
+        {
+            return Collider.ClosestPoint(this.TargetPosition);
+        }
+
         public List<IAttackable> GetTargets()
         {
             List<IAttackable> potentialTargets = new List<IAttackable>();
@@ -158,7 +127,10 @@ namespace Game
                 if (!attackable.IsActive)
                     continue;
 
-                if (Vector2.Distance(attackable.Collider.ClosestPoint(this.Position), this.Position) > Reach)
+                if (attackable.Faction == this.Agent.Faction)
+                    continue;
+
+                if (Mathf.Abs((attackable.ClosestPoint(this.TargetPosition) - this.TargetPosition).x) > Reach)
                     continue;
 
                 if (attackable.Equals(this))
@@ -167,8 +139,7 @@ namespace Game
                 if (!attackable.Attackable())
                     continue;
 
-                if (attackable.Faction != this.Agent.Faction)
-                    potentialTargets.Add(attackable);
+                potentialTargets.Add(attackable);
             }
 
             return potentialTargets
@@ -203,9 +174,7 @@ namespace Game
 
         public void Death()
         {
-            IsDead = true;
-            this.CharacterAnimator.SetTrigger(CharacterAnimatorParameter.Parameter.Dead);
-            GameObject.Destroy(this.gameObject, 2);
+            stateMachine.SetState(new DeathState(this));
         }
 
         public void AddModifier(Modifier modifier)
@@ -221,6 +190,22 @@ namespace Game
         public List<Modifier> GetModifiers()
         {
             return ModifierHandler.Modifiers;
+        }
+
+        public void Displace(Vector2 displacement)
+        {
+            rigidbody.MovePosition(this.rigidbody.position + displacement);
+        }
+
+        public void Stagger(float duration)
+        {
+            foreach (CharacterAbility ability in abilities)
+            {
+                if (ability.IsActive)
+                    ability.Interrupt();
+            }
+
+            stateMachine.SetState(new StaggerState(this, duration));
         }
 
         #endregion

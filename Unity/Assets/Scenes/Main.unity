@@ -238,6 +238,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   cheatCost: 1
+  maxCharacter: 3
 --- !u!4 &97917530
 Transform:
   m_ObjectHideFlags: 0
@@ -267,7 +268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5500892645824906721, guid: 8c1a8bea46b43694d8abe1135a25d8a6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: -1.12
       objectReference: {fileID: 0}
     - target: {fileID: 5500892645824906721, guid: 8c1a8bea46b43694d8abe1135a25d8a6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -467,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 60c536792737d9e4f836dc60987db4c4, type: 2}
+      objectReference: {fileID: 11400000, guid: f8eb9f76999cb8547bc4379eb8f6d09a, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.data[2]
       value: 
@@ -1126,7 +1127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.data[0]
@@ -1135,11 +1136,11 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+      objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+      objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: factory.agentObjectsDefinition.Array.data[3]
       value: 
@@ -1468,7 +1469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5593740557771950854, guid: 9cae472d2f289ea458641f6d78a75b8c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10
+      value: -7.63
       objectReference: {fileID: 0}
     - target: {fileID: 5593740557771950854, guid: 9cae472d2f289ea458641f6d78a75b8c, type: 3}
       propertyPath: m_LocalPosition.y

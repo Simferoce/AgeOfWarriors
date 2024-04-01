@@ -17,7 +17,7 @@ namespace Game
         public int Priority => int.MaxValue;
         public float MaxHealth { get => maxHealth; set => maxHealth = value; }
         public float Health { get => health; set => health = value; }
-        public Vector3 Position => targetPosition.position;
+        public Vector3 TargetPosition => targetPosition.position;
         public ModifierHandler ModifierHandler { get; set; } = new ModifierHandler();
         public Collider2D Collider { get => hitbox; }
         public bool IsActive { get => true; }
@@ -37,6 +37,11 @@ namespace Game
         public bool Attackable()
         {
             return this.health > 0;
+        }
+
+        public Vector3 ClosestPoint(Vector3 point)
+        {
+            return Collider.ClosestPoint(this.TargetPosition);
         }
 
         public bool IsBlocking(Faction faction)

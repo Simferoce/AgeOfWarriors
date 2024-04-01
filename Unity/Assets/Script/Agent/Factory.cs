@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -38,6 +39,9 @@ namespace Game
         public bool QueueLaneObject(SpawnPoint spawnPoint, AgentObjectDefinition laneObjectDefinition)
         {
             if (commands.Count >= commandSlot)
+                return false;
+
+            if (AgentObject.All.Where(x => x is Character).Count(x => x.Agent == agent) >= Level.Instance.MaxCharacter)
                 return false;
 
             if (commands.Count == 0)

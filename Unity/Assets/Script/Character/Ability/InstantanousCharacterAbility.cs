@@ -13,7 +13,7 @@ namespace Game
 
         public override bool CanUse()
         {
-            return conditions.All(x => x.Execute());
+            return conditions.All(x => x.Execute()) && effects.All(x => x.CanBeApplied());
         }
 
         public override void Dispose()
@@ -57,6 +57,15 @@ namespace Game
 
             foreach (AbilityCondition condition in conditions)
                 condition.OnAbilityEnded();
+        }
+
+        public override void Interrupt()
+        {
+            foreach (AbilityEffect effect in effects)
+                effect.Interrupt();
+
+            foreach (AbilityCondition condition in conditions)
+                condition.Interrupt();
         }
     }
 }

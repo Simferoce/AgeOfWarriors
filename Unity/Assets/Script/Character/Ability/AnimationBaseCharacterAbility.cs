@@ -27,20 +27,26 @@ namespace Game
                 effect.Initialize(character);
         }
 
-        private void OnCastEnded()
+        public override bool CanUse()
         {
-            IsCasting = false;
-
-            if (effects.OfType<ILingeringAbilityEffect>().Count() == 0)
-                End();
-            else
-                IsLingering = true;
+            return conditions.All(x => x.Execute()) && effects.All(x => x.CanBeApplied()) && IsCasting == false && IsLingering == false;
         }
 
-        public override void Dispose()
+        public override void Use()
         {
-            character.CharacterAnimator.OnAbilityUsed -= OnAnimatorEventAbilityUsed;
-            AnimatorEventChannel.Unsubscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
+            character.Cast();
+            character.CharacterAnimator.SetTrigger(parameter);
+            character.LastAbilityUsed = Time.time;
+            IsCasting = true;
+
+            foreach (AbilityCondition condition in conditions)
+                condition.OnAbilityStarted();
+
+            foreach (AbilityEffect effect in effects)
+                effect.OnAbilityStarted();
+
+            character.CharacterAnimator.OnAbilityUsed += OnAnimatorEventAbilityUsed;
+            AnimatorEventChannel.Subscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
         }
 
         public override void Update()
@@ -58,35 +64,31 @@ namespace Game
                 End();
         }
 
-        public override bool CanUse()
-        {
-            return conditions.All(x => x.Execute()) && IsCasting == false && IsLingering == false;
-        }
-
-        public override void Use()
-        {
-            character.CharacterAnimator.SetTrigger(parameter);
-            character.LastAbilityUsed = Time.time;
-            IsCasting = true;
-
-            foreach (AbilityCondition condition in conditions)
-                condition.OnAbilityStarted();
-
-            foreach (AbilityEffect effect in effects)
-                effect.OnAbilityStarted();
-
-            character.CharacterAnimator.OnAbilityUsed += OnAnimatorEventAbilityUsed;
-            AnimatorEventChannel.Subscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
-        }
-
         protected void OnAnimatorEventAbilityUsed()
         {
             foreach (AbilityEffect effect in effects)
                 effect.Apply();
         }
 
+        private void OnCastEnded()
+        {
+            IsCasting = false;
+
+            if (effects.OfType<ILingeringAbilityEffect>().Count() == 0)
+                End();
+            else
+                IsLingering = true;
+        }
+
+        public override void Dispose()
+        {
+            character.CharacterAnimator.OnAbilityUsed -= OnAnimatorEventAbilityUsed;
+            AnimatorEventChannel.Unsubscribe(character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
+        }
+
         private void End()
         {
+            character.EndCast();
             IsLingering = false;
 
             foreach (AbilityCondition condition in conditions)
@@ -94,6 +96,21 @@ namespace Game
 
             foreach (AbilityEffect effect in effects)
                 effect.OnAbilityEnded();
+
+            Dispose();
+        }
+
+        public override void Interrupt()
+        {
+            character.EndCast();
+            IsLingering = false;
+            IsCasting = false;
+
+            foreach (AbilityCondition condition in conditions)
+                condition.Interrupt();
+
+            foreach (AbilityEffect effect in effects)
+                effect.Interrupt();
 
             Dispose();
         }

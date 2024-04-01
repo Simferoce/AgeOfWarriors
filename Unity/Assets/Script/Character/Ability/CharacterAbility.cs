@@ -22,5 +22,7 @@ namespace Game
         public abstract bool CanUse();
 
         public abstract void Use();
+
+        public abstract void Interrupt();
     }
 }

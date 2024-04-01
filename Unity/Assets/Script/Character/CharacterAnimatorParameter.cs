@@ -12,6 +12,8 @@ namespace Game
             SpecialAbility1,
             SpecialAbility2,
             Dead,
+            Stagger,
+            EndStagger
         }
 
         public static int Convert(this Parameter trigger)
@@ -23,6 +25,8 @@ namespace Game
                 Parameter.SpecialAbility1 => Animator.StringToHash("SpecialAbility1"),
                 Parameter.SpecialAbility2 => Animator.StringToHash("SpecialAbility2"),
                 Parameter.Dead => Animator.StringToHash("Dead"),
+                Parameter.Stagger => Animator.StringToHash("Stagger"),
+                Parameter.EndStagger => Animator.StringToHash("EndStagger"),
                 _ => throw new NotImplementedException()
             };
         }

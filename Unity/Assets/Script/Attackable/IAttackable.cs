@@ -9,10 +9,11 @@ namespace Game
 
         public bool IsActive { get; }
         public int Priority { get; }
-        public Vector3 Position { get; }
+        public Vector3 TargetPosition { get; }
         public Faction Faction { get; }
         public bool Attackable();
         public void TakeAttack(Attack attack);
-        public Collider2D Collider { get; }
+        public void Stagger(float duration) { }
+        public Vector3 ClosestPoint(Vector3 point);
     }
 }
