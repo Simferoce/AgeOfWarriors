@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 3206678443823752679}
   - component: {fileID: 5105175081674111919}
   m_Layer: 0
-  m_Name: HitBox
+  m_Name: Hitbox
   m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,6 +356,7 @@ MonoBehaviour:
   maxHealth: 100
   spawnPoint: {fileID: 7750424142232137661}
   targetPosition: {fileID: 3026845125957121751}
+  hitbox: {fileID: 5105175081674111919}
 --- !u!50 &7617356873761771249
 Rigidbody2D:
   serializedVersion: 4

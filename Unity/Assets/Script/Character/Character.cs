@@ -1,38 +1,57 @@
-﻿using Character;
-using Extension;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class Character : AgentObject<CharacterDefinition>, ITargeteable
+    public partial class Character : AgentObject<CharacterDefinition>, IBlocker, IDisplaceable, IAttackSource, IModifiable, IAttackable
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
-        [SerializeField] private DetectionCollision hitBox;
-        [SerializeField] private DetectionCollision hitZone;
+        [SerializeField] private Collider2D hitbox;
         [SerializeField] private Transform targetPosition;
-        [SerializeField] private ReachHandler reachHandler;
+
+        [Header("Abilities")]
+        [SerializeReference, SubclassSelector]
+        private List<CharacterAbility> abilities = new List<CharacterAbility>();
 
         public float MaxHealth { get => Definition.MaxHealth; }
         public float Health { get => health; set => health = value; }
         public float AttackPerSeconds { get => Definition.AttackPerSeconds; }
         public float AttackPower { get => Definition.AttackPower; }
+        public float Speed { get => Definition.Speed * (1 + ModifierHandler.SpeedPercentage ?? 0f); }
+        public float Defense { get => Definition.Defense + ModifierHandler.Defense ?? 0f; }
+        public float Reach { get => Definition.Reach; }
+        public ModifierHandler ModifierHandler { get; } = new ModifierHandler();
         public int Priority { get => SpawnNumber; }
         public Faction Faction { get => Agent.Faction; }
-        public bool IsDead { get; set; } = false;
+        public bool IsDead { get => stateMachine.Current is DeathState; }
         public CharacterAnimator CharacterAnimator { get; set; }
-        public Vector3 Position => targetPosition.position;
+        public Vector3 TargetPosition => targetPosition.position;
+        public Vector3 Position => transform.position;
         public CharacterDefinition CharacterDefinition { get; set; }
+        public float LastAbilityUsed { get; set; }
+        public Collider2D Collider { get => hitbox; }
+        public bool IsActive { get => !IsDead; }
+        public bool IsDisplaceable => true;
+        public event Action<Attack, IAttackable> OnDamageTaken;
 
-        [SerializeReference, SubclassSelector]
-        private CharacterAbility ability = null;
         private float health;
+        private StateMachine stateMachine = new StateMachine();
 
-        private void OnDestroy()
+        public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
-            ability.Dispose();
+            base.Spawn(agent, spawnNumber, direction);
+
+            stateMachine.Initialize(new MoveState(this));
+            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
+            health = MaxHealth;
+
+            foreach (CharacterAbility ability in abilities)
+            {
+                ability.Initialize(this);
+            }
         }
 
         public void FixedUpdate()
@@ -40,103 +59,92 @@ namespace Game
             if (IsDead)
                 return;
 
-            if (CanUseAbility())
+            foreach (CharacterAbility ability in abilities)
             {
-                ability.Use();
+                if (ability.IsActive)
+                    ability.Update();
             }
 
-            if (CanMove())
-            {
-                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 1, 0.25f);
-                rigidbody.MovePosition(this.rigidbody.position + Vector2.right * Direction * Definition.Speed * Time.deltaTime);
-            }
-            else
-            {
-                this.CharacterAnimator.SetFloat(CharacterAnimator.SPEED_RATIO, 0f, 0.25f);
-            }
+            stateMachine.Update();
         }
 
-        public override void Spawn(Agent agent, int spawnNumber, int direction)
+        protected override void OnDestroy()
         {
-            base.Spawn(agent, spawnNumber, direction);
+            base.OnDestroy();
 
-            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
-            health = MaxHealth;
-            ability.Initialize(this);
-            reachHandler.SetReach(Definition.Reach);
+            foreach (CharacterAbility ability in abilities)
+                ability.Dispose();
+
+            ModifierHandler.Dispose();
         }
 
-        private bool CanMove()
-        {
-            if (ability.IsCasting)
-                return false;
-
-            foreach (GameObject collision in hitBox.InCollisions)
-            {
-                if (!collision.CompareTag(GameTag.HIT_BOX))
-                    continue;
-
-                if (!collision.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable))
-                    continue;
-
-                if (targeteable == (this as ITargeteable))
-                    continue;
-
-                if (!targeteable.CanBlocks(this.Faction))
-                    continue;
-
-                if (targeteable.Faction != this.Faction)
-                    return false;
-
-                if (targeteable.Priority < this.Priority)
-                    return false;
-            }
-
-            return true;
-        }
-
-        public bool CanBlocks(Faction faction)
+        public bool IsBlocking(Faction faction)
         {
             return true;
+        }
+
+        public void Heal(float amount)
+        {
+            this.health += amount;
+            this.health = Mathf.Clamp(health, 0, MaxHealth);
+        }
+
+        public void Cast()
+        {
+            stateMachine.SetState(new CastingState(this));
+        }
+
+        public void EndCast()
+        {
+            stateMachine.SetState(new MoveState(this));
         }
 
         #region Attack
 
         public bool CanUseAbility()
         {
-            if (!ability.CanUse())
-                return false;
-
             if (health <= 0 || IsDead)
                 return false;
 
             return true;
         }
 
-        public ITargeteable GetTarget()
+        public IAttackable GetTarget()
         {
-            List<ITargeteable> potentialTargets = new List<ITargeteable>();
-            foreach (GameObject inRange in hitZone.InCollisions)
+            return GetTargets().FirstOrDefault();
+        }
+
+        public Vector3 ClosestPoint(Vector3 point)
+        {
+            return Collider.ClosestPoint(this.TargetPosition);
+        }
+
+        public List<IAttackable> GetTargets()
+        {
+            List<IAttackable> potentialTargets = new List<IAttackable>();
+            foreach (IAttackable attackable in AgentObject.All.OfType<IAttackable>())
             {
-                if (!inRange.CompareTag(GameTag.HIT_BOX))
+                if (!attackable.IsActive)
                     continue;
 
-                if (!inRange.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable))
+                if (attackable.Faction == this.Agent.Faction)
                     continue;
 
-                if (targeteable.Equals(this))
+                if (Mathf.Abs((attackable.ClosestPoint(this.TargetPosition) - this.TargetPosition).x) > Reach)
                     continue;
 
-                if (!targeteable.Attackable())
+                if (attackable.Equals(this))
                     continue;
 
-                if (targeteable.Faction != this.Agent.Faction)
-                    potentialTargets.Add(targeteable);
+                if (!attackable.Attackable())
+                    continue;
+
+                potentialTargets.Add(attackable);
             }
 
             return potentialTargets
                 .OrderBy(x => x.Priority)
-                .FirstOrDefault();
+                .ToList();
         }
 
         public bool Attackable()
@@ -144,25 +152,61 @@ namespace Game
             return this.health > 0;
         }
 
-        public void TakeAttack(float damage)
+        public void AttackLanded(Attack attack, float damageDealt)
         {
-            float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(damage, Definition.Defense);
+            Heal(damageDealt * attack.Leach);
+        }
+
+        public void TakeAttack(Attack attack)
+        {
+            float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
             this.health -= damageReduced;
 
-            if (health <= 0)
+            foreach (IAttackSource source in attack.AttackSource.Sources)
+                source.AttackLanded(attack, damageReduced);
+
+            Debug.Log($"{this.name} took {damageReduced} from {attack.AttackSource.Sources[^1]}");
+            OnDamageTaken?.Invoke(attack, this);
+
+            if (health <= 0 && !IsDead)
                 Death();
         }
 
         public void Death()
         {
-            IsDead = true;
-            this.CharacterAnimator.SetTrigger(CharacterAnimator.DEAD);
-
-            hitBox.gameObject.SetActive(false);
-            GameObject.Destroy(this.gameObject, 2);
+            stateMachine.SetState(new DeathState(this));
         }
 
+        public void AddModifier(Modifier modifier)
+        {
+            ModifierHandler.Add(modifier);
+        }
 
+        public void RemoveModifier(Modifier modifier)
+        {
+            ModifierHandler.Remove(modifier);
+        }
+
+        public List<Modifier> GetModifiers()
+        {
+            return ModifierHandler.Modifiers;
+        }
+
+        public void Displace(Vector2 displacement)
+        {
+            rigidbody.MovePosition(this.rigidbody.position + displacement);
+        }
+
+        public void Stagger(float duration)
+        {
+            foreach (CharacterAbility ability in abilities)
+            {
+                if (ability.IsActive)
+                    ability.Interrupt();
+            }
+
+            stateMachine.SetState(new StaggerState(this, duration));
+        }
 
         #endregion
     }

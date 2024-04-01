@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -40,13 +41,26 @@ namespace Game
             if (commands.Count >= commandSlot)
                 return false;
 
+            if (AgentObject.All.Where(x => x is Character).Count(x => x.Agent == agent) >= Level.Instance.MaxCharacter)
+                return false;
+
             if (commands.Count == 0)
                 productionStart = Time.time;
 
-            if (agent.Currency < laneObjectDefinition.Cost)
-                return false;
+            if (Level.Instance.CheatCost)
+            {
+                if (agent.Currency < 1)
+                    return false;
 
-            agent.Currency -= laneObjectDefinition.Cost;
+                agent.Currency -= 1;
+            }
+            else
+            {
+                if (agent.Currency < laneObjectDefinition.Cost)
+                    return false;
+
+                agent.Currency -= laneObjectDefinition.Cost;
+            }
 
             commands.Add(new Command()
             {

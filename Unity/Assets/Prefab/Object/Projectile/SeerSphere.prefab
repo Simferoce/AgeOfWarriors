@@ -134,9 +134,15 @@ MonoBehaviour:
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
     rid: 3490450885554995206
+  projectileMovement:
+    rid: 1000
   references:
     version: 2
     RefIds:
+    - rid: 1000
+      type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
+      data:
+        angle: 45
     - rid: 3490450885554995206
       type: {class: ProjectileBubbleUpDeath, ns: Game, asm: Assembly-CSharp}
       data:

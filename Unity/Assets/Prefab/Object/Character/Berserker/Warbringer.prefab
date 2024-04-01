@@ -1,0 +1,141 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6994277402426726251
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 2
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 464811166439803521, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: abilities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[-2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: abilities.Array.data[0]
+      value: 4528059385855344645
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: abilities.Array.data[1]
+      value: 8758732309343764480
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344645]
+      value: Assembly-CSharp Game.AnimationBaseCharacterAbility
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344646]
+      value: Assembly-CSharp Game.CooldownCondition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344647]
+      value: Assembly-CSharp Game.AttackSpeedAbilityCondition
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344649]
+      value: Assembly-CSharp Game.GraspAbilityEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344649].damping
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344646].cooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344649].duration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344645].parameter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344649].staggerDuration
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344645].effects.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344649].destinationDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344649].distanceBaseOnReach
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344645].conditions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344645].effects.Array.data[0]
+      value: 4528059385855344649
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344645].conditions.Array.data[0]
+      value: 4528059385855344646
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: managedReferences[4528059385855344645].conditions.Array.data[1]
+      value: 4528059385855344647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6705402225686340843, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: m_Name
+      value: Warbringer
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_AddedGameObjects: []
+  m_SourcePrefab: {fileID: 100100000, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}

@@ -6,13 +6,18 @@ namespace Game
     {
         public static Level Instance;
 
-        [SerializeField] private CharacterDefinition characterDefinition;
-
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
         {
             Instance = null;
         }
+
+        [SerializeField] private CharacterDefinition characterDefinition;
+        [SerializeField] private bool cheatCost;
+        [SerializeField] private int maxCharacter = 10;
+
+        public bool CheatCost { get => cheatCost; }
+        public int MaxCharacter { get => maxCharacter; set => maxCharacter = value; }
 
         private void Awake()
         {
