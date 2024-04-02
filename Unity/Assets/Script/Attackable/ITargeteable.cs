@@ -12,6 +12,7 @@ namespace Game
 
         public bool IsAttackable();
         public bool IsDisplaceable();
+        public bool IsInjured();
         public bool IsAlly(ITargeteable targeteable);
         public bool IsEnemy(ITargeteable targeteable);
     }

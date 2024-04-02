@@ -21,7 +21,7 @@ namespace Game
 
         public override void Update()
         {
-            projectile.transform.right = projectile.Rigidbody.velocity;
+
         }
 
         private void SolveForVelocity(Vector3 startPosition, Vector3 endPosition, float gravity, float angle, out Vector3 velocity)

@@ -96,9 +96,6 @@ namespace Game
                 if (Mathf.Abs((attackable.ClosestPoint(this.CenterPosition) - this.CenterPosition).x) > distance)
                     continue;
 
-                if (attackable.Equals(this))
-                    continue;
-
                 if (!criteria.Execute(this, attackable))
                     continue;
 

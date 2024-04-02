@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IBlocker, IAttackSource, ITargeteable
+    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IBlocker, IAttackSource, ITargeteable, IHealable
     {
         public static List<AgentObject> All { get; private set; }
 
@@ -81,6 +81,7 @@ namespace Game
         public abstract float Defense { get; }
         public float Health { get; set; }
         public virtual bool IsDead { get => this.Health <= 0; }
+        public bool IsInjured() => !IsDead && Health < MaxHealth;
         public event Action<Attack, IAttackable> OnDamageTaken;
 
         public Vector3 TargetPosition => targetPosition.position;

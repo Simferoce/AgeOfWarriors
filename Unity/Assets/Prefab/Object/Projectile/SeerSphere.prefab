@@ -134,17 +134,14 @@ MonoBehaviour:
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
     rid: 3490450885554995206
-  projectileMovement:
-    rid: 1000
+  projectileMovements:
+  - rid: 3656781118043062285
+  - rid: 3656781118043062286
   impacts:
   - rid: 3656781095385956405
   references:
     version: 2
     RefIds:
-    - rid: 1000
-      type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
-      data:
-        angle: 45
     - rid: 3490450885554995206
       type: {class: ProjectileBubbleUpDeath, ns: Game, asm: Assembly-CSharp}
       data:
@@ -153,6 +150,12 @@ MonoBehaviour:
         stopSimulatedDelay: 0.05
     - rid: 3656781095385956405
       type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781118043062285
+      type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
+      data:
+        angle: 45
+    - rid: 3656781118043062286
+      type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

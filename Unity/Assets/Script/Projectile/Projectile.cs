@@ -5,7 +5,7 @@ namespace Game
 {
     public class Projectile : MonoBehaviour, IAttackSource
     {
-        private enum State
+        public enum State
         {
             Alive,
             Dead
@@ -13,12 +13,13 @@ namespace Game
 
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeReference, SubclassSelector] private ProjectileDeath projectileDeath = new ProjectileStickDeath();
-        [SerializeReference, SubclassSelector] private ProjectileMovement projectileMovement = new ProjectileAngledMovement();
+        [SerializeReference, SubclassSelector] private List<ProjectileMovement> projectileMovements = new List<ProjectileMovement>();
         [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
 
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public List<ProjectileContext> Contexts { get => contexts; set => contexts = value; }
         public Character Character { get => character; set => character = value; }
+        public State StateValue { get => state; set => state = value; }
 
         private List<ProjectileContext> contexts;
         private Character character;
@@ -29,20 +30,22 @@ namespace Game
             this.character = character;
             this.contexts = contexts;
 
-            projectileMovement.Initialize(this);
+            foreach (ProjectileMovement context in projectileMovements)
+                context.Initialize(this);
         }
 
         private void Update()
         {
-            projectileMovement.Update();
+            foreach (ProjectileMovement context in projectileMovements)
+                context.Update();
 
-            if (state == State.Dead)
+            if (StateValue == State.Dead)
                 projectileDeath.Update(this);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (state != State.Alive)
+            if (StateValue != State.Alive)
                 return;
 
             bool impacted = false;
@@ -55,7 +58,7 @@ namespace Game
 
         private void Kill(GameObject collision)
         {
-            state = State.Dead;
+            StateValue = State.Dead;
 
             projectileDeath.Start(this, collision);
         }
