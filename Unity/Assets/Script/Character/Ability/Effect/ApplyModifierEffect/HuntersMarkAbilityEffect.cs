@@ -45,7 +45,7 @@ namespace Game
 
         public override void Apply()
         {
-            List<IAttackable> attackable = ability.Targets;
+            List<IAttackable> attackable = Ability.Targets;
             IModifiable modifiable = attackable.FirstOrDefault(x => x is IModifiable) as IModifiable;
 
             if (modifiable != null)

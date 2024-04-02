@@ -13,11 +13,11 @@ namespace Game
 
         public override void Apply()
         {
-            if (ability.Targets.Count == 0)
+            if (Ability.Targets.Count == 0)
                 return;
 
-            IAttackable target = ability.Targets[0];
-            target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { ability.Character, this }), damagePercentage * ability.Character.AttackPower, armorPenetration, leach));
+            IAttackable target = Ability.Targets[0];
+            target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { Ability.Character, this }), damagePercentage * Ability.Character.AttackPower, armorPenetration, leach));
         }
     }
 }

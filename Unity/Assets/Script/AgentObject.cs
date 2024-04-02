@@ -98,6 +98,9 @@ namespace Game
 
         public void TakeAttack(Attack attack)
         {
+            if (IsDead)
+                return;
+
             float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
             this.Health -= damageReduced;
 

@@ -32,6 +32,9 @@ namespace Game
 
             foreach (ProjectileMovement context in projectileMovements)
                 context.Initialize(this);
+
+            foreach (ProjectileImpact effect in impacts)
+                effect.Initialize(this);
         }
 
         private void Update()
@@ -39,8 +42,19 @@ namespace Game
             foreach (ProjectileMovement context in projectileMovements)
                 context.Update();
 
-            if (StateValue == State.Dead)
+            if (StateValue == State.Alive)
+            {
+                bool impacted = false;
+                foreach (ProjectileImpact effect in impacts)
+                    impacted |= effect.Update();
+
+                if (impacted)
+                    Kill(null);
+            }
+            else if (StateValue == State.Dead)
+            {
                 projectileDeath.Update(this);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -50,10 +64,16 @@ namespace Game
 
             bool impacted = false;
             foreach (ProjectileImpact effect in impacts)
-                impacted |= effect.Impact(collision.gameObject, this);
+                impacted |= effect.Impact(collision.gameObject);
 
             if (impacted)
                 Kill(collision.gameObject);
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            foreach (ProjectileImpact effect in impacts)
+                effect.LeaveZone(collision.gameObject);
         }
 
         private void Kill(GameObject collision)
@@ -62,7 +82,5 @@ namespace Game
 
             projectileDeath.Start(this, collision);
         }
-
-
     }
 }

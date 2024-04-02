@@ -8,7 +8,7 @@ namespace Game
     [Serializable]
     public class ProjectileHealImpact : ProjectileImpact
     {
-        public override bool Impact(GameObject collision, Projectile projectile)
+        public override bool Impact(GameObject collision)
         {
             if (projectile.Rigidbody.velocity.y > 0)
                 return false;

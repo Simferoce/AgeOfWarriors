@@ -5,11 +5,11 @@ namespace Game
     [Serializable]
     public abstract class AbilityEffect
     {
-        protected CharacterAbility ability;
+        public CharacterAbility Ability { get; protected set; }
 
         public virtual void Initialize(CharacterAbility ability)
         {
-            this.ability = ability;
+            this.Ability = ability;
         }
 
         public abstract void Apply();

@@ -16,7 +16,7 @@ namespace Game
 
         public override void Apply()
         {
-            foreach (IDisplaceable target in ability.Targets.Cast<IDisplaceable>().ToList())
+            foreach (IDisplaceable target in Ability.Targets.Cast<IDisplaceable>().ToList())
             {
                 if (target is IAttackable attackable)
                     attackable.Stagger(staggerDuration);
@@ -29,7 +29,7 @@ namespace Game
         {
             Vector3 destination = character.transform.position + character.transform.right * destinationDistance;
 
-            foreach (IDisplaceable target in ability.Targets.Cast<IDisplaceable>().ToList())
+            foreach (IDisplaceable target in Ability.Targets.Cast<IDisplaceable>().ToList())
                 target.Displace(Vector3.Lerp(target.CenterPosition, destination, damping) - target.CenterPosition);
 
             return Time.time - startedAt > duration;

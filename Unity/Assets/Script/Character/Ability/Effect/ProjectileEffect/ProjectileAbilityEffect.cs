@@ -9,18 +9,18 @@ namespace Game
     public class ProjectileAbilityEffect : AbilityEffect
     {
         [SerializeField] private GameObject projectilePrefab;
-        [SerializeField] private Transform origin;
+        [SerializeReference, SubclassSelector] private ProjectileAbilityEffectOrigin origin;
 
         [Space]
         [SerializeReference, SubclassSelector] private List<ProjectileData> datas = new List<ProjectileData>();
 
         public override void Apply()
         {
-            GameObject gameObject = GameObject.Instantiate(projectilePrefab, origin.transform.position, Quaternion.identity);
+            GameObject gameObject = GameObject.Instantiate(projectilePrefab, origin.GetPosition(this), Quaternion.identity);
             Projectile projectile = gameObject.GetComponent<Projectile>();
 
-            ProjectileTargetContext targetContext = new ProjectileTargetContext() { Target = ability.Targets[0] };
-            projectile.Initialize(ability.Character, datas.Select(x => x.GetContext(ability.Character)).Append(targetContext).ToList());
+            ProjectileTargetContext targetContext = new ProjectileTargetContext() { Target = Ability.Targets[0] };
+            projectile.Initialize(Ability.Character, datas.Select(x => x.GetContext(Ability.Character)).Append(targetContext).ToList());
         }
     }
 }
