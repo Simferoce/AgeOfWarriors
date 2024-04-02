@@ -15,9 +15,11 @@ namespace Game
         [SerializeField] private CharacterDefinition characterDefinition;
         [SerializeField] private bool cheatCost;
         [SerializeField] private int maxCharacter = 10;
+        [SerializeField] private float technologyGainMultiplier = 1;
 
         public bool CheatCost { get => cheatCost; }
         public int MaxCharacter { get => maxCharacter; set => maxCharacter = value; }
+        public float TechnologyGainMultiplier { get => technologyGainMultiplier; }
 
         private void Awake()
         {

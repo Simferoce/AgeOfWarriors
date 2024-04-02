@@ -33,7 +33,12 @@ namespace Game
 
         public AgentObjectDefinition GetAgentObjectDefinitionAtIndex(int index)
         {
-            return agentObjectsDefinition[index];
+            AgentObjectDefinition agentObjectDefinition = agentObjectsDefinition[index];
+            CharacterTierUpgradeTechnologyPerkDefinition factoryReplaceTechnologyPerkDefinition = agent.Technology.PerksUnlocked.OfType<CharacterTierUpgradeTechnologyPerkDefinition>().FirstOrDefault(x => x.ToReplace == agentObjectDefinition);
+            if (factoryReplaceTechnologyPerkDefinition != null)
+                agentObjectDefinition = factoryReplaceTechnologyPerkDefinition.Into;
+
+            return agentObjectDefinition;
         }
 
         public bool QueueLaneObject(SpawnPoint spawnPoint, AgentObjectDefinition laneObjectDefinition)

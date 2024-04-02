@@ -20,7 +20,7 @@ namespace Game
         [SerializeField] private Base agentBase;
         [SerializeField] private int direction;
         [SerializeField] private float currencyGainRate = 5f;
-        [SerializeField] private Technology technology;
+        [SerializeField] private TechnologyHandler technology;
         [SerializeField] private Factory factory;
         [SerializeReference, SubclassSelector] private AgentBehaviour agentBehaviour;
 
@@ -29,7 +29,7 @@ namespace Game
         public Base Base { get => agentBase; set => agentBase = value; }
         public float Currency { get; set; }
         public int Direction { get => direction; set => direction = value; }
-        public Technology Technology { get => technology; }
+        public TechnologyHandler Technology { get => technology; }
 
         private void Awake()
         {

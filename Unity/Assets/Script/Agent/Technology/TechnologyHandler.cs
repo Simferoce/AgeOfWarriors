@@ -1,18 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
     [Serializable]
-    public class Technology
+    public class TechnologyHandler
     {
         [SerializeField] private float maxTechnology;
 
         public float CurrentTechnology { get; set; }
         public float CurrentLevel { get; set; }
         public float CurrentTechnologyNormalized { get => CurrentTechnology / maxTechnology; }
+        public List<TechnologyPerkDefinition> PerksUnlocked { get => perksUnlocked; }
 
         private Agent agent;
+        private List<TechnologyPerkDefinition> perksUnlocked = new List<TechnologyPerkDefinition>();
 
         public event Action OnLeveledUp;
 
@@ -27,7 +30,7 @@ namespace Game
             {
                 if (agentObject.Agent == agent)
                 {
-                    CurrentTechnology += agentObject.TechnologyGainPerSecond * Time.deltaTime;
+                    CurrentTechnology += Level.Instance.TechnologyGainMultiplier * agentObject.TechnologyGainPerSecond * Time.deltaTime;
                 }
             }
 
@@ -36,6 +39,11 @@ namespace Game
                 CurrentTechnology -= maxTechnology;
                 LevelUp();
             }
+        }
+
+        public void Acquire(TechnologyPerkDefinition definition)
+        {
+            PerksUnlocked.Add(definition);
         }
 
         private void LevelUp()

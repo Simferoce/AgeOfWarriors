@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class CharacterModifierTimeElement : CharacterModifierElement
+    public class CharacterModifierTimeElement : ModifierElement
     {
         private float duration = 0f;
         private float startedAt = 0f;

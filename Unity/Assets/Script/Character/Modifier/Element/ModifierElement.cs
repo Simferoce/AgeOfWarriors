@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public abstract class CharacterModifierElement
+    public abstract class ModifierElement
     {
         public abstract void Initialize();
         public abstract bool Update();

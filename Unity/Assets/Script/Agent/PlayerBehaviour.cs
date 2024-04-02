@@ -8,7 +8,7 @@ namespace Game
         public override void OnLevelUp()
         {
             TechnologyWindow technologyWindow = WindowManager.Instance.GetWindow<TechnologyWindow>();
-            //technologyWindow.Show();
+            technologyWindow.Show();
         }
     }
 }

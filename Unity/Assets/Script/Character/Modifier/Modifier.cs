@@ -5,7 +5,7 @@ namespace Game
 {
     public abstract class Modifier : IModifier, IDisposable
     {
-        public List<CharacterModifierElement> modifierElements = new List<CharacterModifierElement>();
+        public List<ModifierElement> modifierElements = new List<ModifierElement>();
 
         protected IModifiable modifiable;
 
@@ -20,7 +20,7 @@ namespace Game
         public virtual void Update()
         {
             bool end = false;
-            foreach (CharacterModifierElement element in modifierElements)
+            foreach (ModifierElement element in modifierElements)
             {
                 end |= element.Update();
             }
@@ -31,7 +31,7 @@ namespace Game
 
         public virtual void Refresh()
         {
-            foreach (CharacterModifierElement element in modifierElements)
+            foreach (ModifierElement element in modifierElements)
             {
                 element.Refresh();
             }
@@ -47,13 +47,13 @@ namespace Game
         {
         }
 
-        public T With(List<CharacterModifierElement> modifierElements)
+        public T With(List<ModifierElement> modifierElements)
         {
             this.modifierElements.AddRange(modifierElements);
             return (T)this;
         }
 
-        public T With(CharacterModifierElement modifierElement)
+        public T With(ModifierElement modifierElement)
         {
             this.modifierElements.Add(modifierElement);
             return (T)this;
