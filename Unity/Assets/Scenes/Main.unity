@@ -2575,10 +2575,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -46.9415
       objectReference: {fileID: 0}
-    - target: {fileID: 1159003213068250302, guid: 2bbd627d802715d4a90ed6c5e78761a7, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1630590438749765366, guid: 2bbd627d802715d4a90ed6c5e78761a7, type: 3}
       propertyPath: m_Name
       value: TechnologySpecializationWindow
