@@ -34,9 +34,9 @@ namespace Game
         public AgentObjectDefinition GetAgentObjectDefinitionAtIndex(int index)
         {
             AgentObjectDefinition agentObjectDefinition = agentObjectsDefinition[index];
-            CharacterTierUpgradeTechnologyPerkDefinition factoryReplaceTechnologyPerkDefinition = agent.Technology.PerksUnlocked.OfType<CharacterTierUpgradeTechnologyPerkDefinition>().FirstOrDefault(x => x.ToReplace == agentObjectDefinition);
-            if (factoryReplaceTechnologyPerkDefinition != null)
-                agentObjectDefinition = factoryReplaceTechnologyPerkDefinition.Into;
+            SpecializationTechnologyPerkDefinition specializationTechnologyPerkDefinition = agent.Technology.PerksUnlocked.FirstOrDefault(x => x is SpecializationTechnologyPerkDefinition s && s.Specializee == agentObjectDefinition) as SpecializationTechnologyPerkDefinition;
+            if (specializationTechnologyPerkDefinition != null)
+                return specializationTechnologyPerkDefinition.Specialization;
 
             return agentObjectDefinition;
         }

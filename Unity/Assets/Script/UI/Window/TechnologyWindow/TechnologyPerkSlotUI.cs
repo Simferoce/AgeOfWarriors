@@ -22,14 +22,14 @@ namespace Game
         private void OnEnable()
         {
             icon.sprite = technologyPerkDefinition.Icon;
-            SetState(State.Unlockable);
+            Refresh();
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
             Agent.Player.Technology.Acquire(technologyPerkDefinition);
 
-            SetState(State.Unlocked);
+            Refresh();
         }
 
         public void SetState(State state)
@@ -47,6 +47,14 @@ namespace Game
                     animator.SetTrigger("Unlock");
                     break;
             }
+        }
+
+        public void Refresh()
+        {
+            if (Agent.Player.Technology.PerksUnlocked.Contains(technologyPerkDefinition))
+                SetState(State.Unlocked);
+            else
+                SetState(State.Unlockable);
         }
     }
 }

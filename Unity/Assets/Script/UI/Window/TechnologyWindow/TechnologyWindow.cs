@@ -4,22 +4,30 @@ namespace Game
 {
     public class TechnologyWindow : Window
     {
-        public override void Show()
+        public static TechnologyWindow Open()
         {
-            base.Show();
+            TechnologyWindow technologyWindow = WindowManager.Instance.GetWindow<TechnologyWindow>();
+            technologyWindow.Show();
+
             Time.timeScale = 0f;
+            return technologyWindow;
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Escape))
-                Hide();
+                Hide(null);
         }
 
-        public override void Hide()
+        public override void Hide(Result result)
         {
-            base.Hide();
+            base.Hide(result);
             Time.timeScale = 1f;
+        }
+
+        public void Close()
+        {
+            Hide(null);
         }
     }
 }

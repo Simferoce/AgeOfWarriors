@@ -22,7 +22,7 @@ namespace Game
             windows = GetComponentsInChildren<Window>(true).ToList();
 
             foreach (Window window in windows)
-                window.Hide();
+                window.Hide(null);
         }
 
         public T GetWindow<T>()
