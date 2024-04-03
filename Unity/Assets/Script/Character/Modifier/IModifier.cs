@@ -4,7 +4,8 @@ namespace Game
 {
     public interface IModifier : IDisposable
     {
-        float? SpeedPercentage { get; }
-        float? Defense { get; }
+        float? SpeedPercentage { get => null; }
+        float? Defense { get => null; }
+        float? MaxHealth { get => null; }
     }
 }

@@ -17,6 +17,7 @@ namespace Game
         public float Cost { get => cost; set => cost = value; }
         public float TechnologyGainPerSecond { get => technologyGainPerSecond; set => technologyGainPerSecond = value; }
 
+        public virtual bool IsSpecialization(AgentObjectDefinition agentObjectDefinition) { return false; }
         public abstract AgentObject Spawn(Agent agent, Vector3 position, int spawnNumber, int direction);
     }
 }

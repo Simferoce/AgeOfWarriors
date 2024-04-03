@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac6b2706789c05449bba83384b442858, type: 3}
-  m_Name: Alchemist
+  m_Name: Bloodseeker
   m_EditorClassIdentifier: 
-  id: 6102affa7a9225e479012284f2ae6011
+  id: aac2870085735864eab4fe822bd767de
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
-  toReplace: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
-  into: {fileID: 11400000, guid: 74a688cb15379f34dae1112a4198926c, type: 2}
+  specializations: {fileID: 11400000, guid: 60c536792737d9e4f836dc60987db4c4, type: 2}

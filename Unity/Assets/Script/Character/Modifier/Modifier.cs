@@ -16,6 +16,7 @@ namespace Game
 
         public virtual float? SpeedPercentage => null;
         public virtual float? Defense => null;
+        public virtual float? MaxHealth => null;
 
         public virtual void Update()
         {

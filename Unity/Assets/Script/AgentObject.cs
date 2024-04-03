@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Assets.Script.Agent.Technology;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -46,7 +48,15 @@ namespace Game
             if (direction < 0)
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
 
-            AwakeAttackable();
+            AgentObjectDefinition agentObjectDefinition = GetDefinition();
+            List<ITechnologyModify> modifiers = agent.Technology.PerksUnlocked.OfType<ITechnologyModify>().ToList();
+            foreach (ITechnologyModify modifier in modifiers)
+            {
+                if (modifier.Affect(agentObjectDefinition))
+                    this.AddModifier(modifier.GetModifier(this));
+            }
+
+            SpawnAttackable();
         }
 
         #region Modifiable
@@ -86,7 +96,7 @@ namespace Game
 
         public Vector3 TargetPosition => targetPosition.position;
 
-        public void AwakeAttackable()
+        public void SpawnAttackable()
         {
             this.Health = MaxHealth;
         }

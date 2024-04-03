@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac6b2706789c05449bba83384b442858, type: 3}
-  m_Name: Longbow
+  m_Name: OnslaughtWarrior
   m_EditorClassIdentifier: 
-  id: 454b0c6659c0bbb44aede3c2fefbada2
+  id: 11536e4c4960c094393bfebeb851220a
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
-  toReplace: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
-  into: {fileID: 11400000, guid: 2a683f36d1e23b348a11b9d7031ddcc0, type: 2}
+  specializations: {fileID: 11400000, guid: 3ddf776ed1310c04f9b4c5200636d2a3, type: 2}

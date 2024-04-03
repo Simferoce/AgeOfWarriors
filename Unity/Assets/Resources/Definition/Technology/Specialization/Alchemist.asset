@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac6b2706789c05449bba83384b442858, type: 3}
-  m_Name: OnslaughtWarrior
+  m_Name: Alchemist
   m_EditorClassIdentifier: 
-  id: 11536e4c4960c094393bfebeb851220a
+  id: 6102affa7a9225e479012284f2ae6011
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
-  toReplace: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-  into: {fileID: 11400000, guid: 3ddf776ed1310c04f9b4c5200636d2a3, type: 2}
+  specializations: {fileID: 11400000, guid: 74a688cb15379f34dae1112a4198926c, type: 2}

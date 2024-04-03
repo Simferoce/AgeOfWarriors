@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac6b2706789c05449bba83384b442858, type: 3}
-  m_Name: Bloodseeker
+  m_Name: Crossbow
   m_EditorClassIdentifier: 
-  id: aac2870085735864eab4fe822bd767de
+  id: 6a08ceddb00e39f49a0f867e113bd996
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
-  toReplace: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-  into: {fileID: 11400000, guid: 60c536792737d9e4f836dc60987db4c4, type: 2}
+  specializations: {fileID: 11400000, guid: a0a3e2c88b079f4458c331514474afcc, type: 2}

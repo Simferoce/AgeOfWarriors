@@ -26,6 +26,7 @@ namespace Game
         public static TechnologyDetailsPanelUI Open(TechnologyPerkDefinition technologyPerkDefinition)
         {
             TechnologyDetailsPanelUI technologyDetailsPanelUI = WindowManager.Instance.GetWindow<TechnologyDetailsPanelUI>();
+            technologyDetailsPanelUI.technologyPerkDefinition = technologyPerkDefinition;
             technologyDetailsPanelUI.icon.sprite = technologyPerkDefinition.Icon;
             technologyDetailsPanelUI.title.text = technologyPerkDefinition.Name;
             technologyDetailsPanelUI.description.text = "A Description";

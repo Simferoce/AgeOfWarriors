@@ -13,7 +13,7 @@ namespace Game
         [SerializeReference, SubclassSelector]
         private List<CharacterAbility> abilities = new List<CharacterAbility>();
 
-        public override float MaxHealth { get => Definition.MaxHealth; }
+        public override float MaxHealth { get => Definition.MaxHealth + modifierHandler.MaxHealth ?? 0; }
         public override float Defense { get => Definition.Defense + modifierHandler.Defense ?? 0f; }
         public float AttackPerSeconds { get => Definition.AttackPerSeconds; }
         public float AttackPower { get => Definition.AttackPower; }
@@ -21,7 +21,6 @@ namespace Game
         public float Reach { get => Definition.Reach; }
         public override bool IsDead { get => stateMachine.Current is DeathState; }
         public CharacterAnimator CharacterAnimator { get; set; }
-        public CharacterDefinition CharacterDefinition { get; set; }
         public float LastAbilityUsed { get; set; }
         public override bool IsActive { get => !IsDead; }
 
@@ -31,9 +30,9 @@ namespace Game
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            stateMachine.Initialize(new MoveState(this));
             CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
 
+            stateMachine.Initialize(new MoveState(this));
             foreach (CharacterAbility ability in abilities)
             {
                 ability.Initialize(this);

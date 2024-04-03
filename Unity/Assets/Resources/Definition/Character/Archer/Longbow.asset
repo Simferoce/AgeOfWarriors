@@ -17,6 +17,7 @@ MonoBehaviour:
   productionDuration: 2
   cost: 10
   technologyGainPerSecond: 0
+  baseDefinition: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   reach: 2.5
   speed: 1
   attackPerSeconds: 1

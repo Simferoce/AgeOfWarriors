@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac6b2706789c05449bba83384b442858, type: 3}
-  m_Name: Warbringer
+  m_Name: Leader
   m_EditorClassIdentifier: 
-  id: 1b0933b4dfebc324f93712b37e26fce8
+  id: 10dae033d3723de46af5c85870959e98
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
-  toReplace: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-  into: {fileID: 11400000, guid: f8eb9f76999cb8547bc4379eb8f6d09a, type: 2}
+  specializations: {fileID: 11400000, guid: e3785274f87475045bce6f63977d63fc, type: 2}

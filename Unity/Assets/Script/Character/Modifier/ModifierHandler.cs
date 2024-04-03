@@ -7,6 +7,7 @@ namespace Game
     {
         public float? SpeedPercentage => modifiers.Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value);
         public float? Defense => modifiers.Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value);
+        public float? MaxHealth => modifiers.Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value);
 
         public List<Modifier> Modifiers { get => modifiers; set => modifiers = value; }
 
