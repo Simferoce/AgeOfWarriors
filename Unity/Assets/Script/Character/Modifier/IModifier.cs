@@ -7,5 +7,7 @@ namespace Game
         float? SpeedPercentage { get => null; }
         float? Defense { get => null; }
         float? MaxHealth { get => null; }
+        float? AttackPower { get; }
+        bool? Invulnerable { get; }
     }
 }

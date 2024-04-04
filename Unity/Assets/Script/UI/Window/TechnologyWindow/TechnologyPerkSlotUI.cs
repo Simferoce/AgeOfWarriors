@@ -27,8 +27,13 @@ namespace Game
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Agent.Player.Technology.Acquire(technologyPerkDefinition);
+            TechnologyDetailsPanelUI technologyDetailsPanelUI = TechnologyDetailsPanelUI.Open(technologyPerkDefinition);
+            technologyDetailsPanelUI.OnHidden += TechnologyDetailsPanelUI_OnHidden;
+        }
 
+        private void TechnologyDetailsPanelUI_OnHidden(Window window, Window.Result result)
+        {
+            window.OnHidden -= TechnologyDetailsPanelUI_OnHidden;
             Refresh();
         }
 

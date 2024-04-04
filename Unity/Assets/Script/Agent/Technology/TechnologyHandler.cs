@@ -13,6 +13,7 @@ namespace Game
         public float CurrentLevel { get; set; }
         public float CurrentTechnologyNormalized { get => CurrentTechnology / maxTechnology; }
         public List<TechnologyPerkDefinition> PerksUnlocked { get => perksUnlocked; }
+        public float MaxTechnology { get => maxTechnology; set => maxTechnology = value; }
 
         private Agent agent;
         private List<TechnologyPerkDefinition> perksUnlocked = new List<TechnologyPerkDefinition>();
@@ -34,7 +35,7 @@ namespace Game
                 }
             }
 
-            if (CurrentTechnology > maxTechnology)
+            if (CurrentTechnology >= maxTechnology)
             {
                 CurrentTechnology -= maxTechnology;
                 LevelUp();

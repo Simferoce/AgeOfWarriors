@@ -7,6 +7,12 @@ namespace Game
     {
         public List<ModifierElement> modifierElements = new List<ModifierElement>();
 
+        public virtual float? SpeedPercentage => null;
+        public virtual float? Defense => null;
+        public virtual float? MaxHealth => null;
+        public virtual float? AttackPower => null;
+        public virtual bool? Invulnerable => null;
+
         protected IModifiable modifiable;
 
         protected Modifier(IModifiable modifiable)
@@ -14,9 +20,11 @@ namespace Game
             this.modifiable = modifiable;
         }
 
-        public virtual float? SpeedPercentage => null;
-        public virtual float? Defense => null;
-        public virtual float? MaxHealth => null;
+        public void Initialize()
+        {
+            foreach (ModifierElement element in modifierElements)
+                element.Initialize();
+        }
 
         public virtual void Update()
         {

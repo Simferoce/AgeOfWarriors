@@ -3,10 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Game.ITargeteable;
 
 namespace Game
 {
-    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IBlocker, IAttackSource, ITargeteable, IHealable
+    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IBlocker, IAttackSource, ITargeteable, IHealable, IShieldable
     {
         public static List<AgentObject> All { get; private set; }
 
@@ -37,6 +38,12 @@ namespace Game
             OnDestroyModifiable();
         }
 
+        public void Update()
+        {
+            UpdateShields();
+            modifierHandler.Update();
+        }
+
         public virtual AgentObjectDefinition GetDefinition() { return null; }
 
         public virtual void Spawn(Agent agent, int spawnNumber, int direction)
@@ -64,6 +71,7 @@ namespace Game
 
         public void AddModifier(Modifier modifier)
         {
+            modifier.Initialize();
             modifierHandler.Add(modifier);
         }
 
@@ -88,11 +96,16 @@ namespace Game
         [SerializeField] private Transform targetPosition;
 
         public abstract float MaxHealth { get; }
-        public abstract float Defense { get; }
         public float Health { get; set; }
+        public abstract float Defense { get; }
         public virtual bool IsDead { get => this.Health <= 0; }
         public bool IsInjured() => !IsDead && Health < MaxHealth;
+        public event DeathHandler OnDeath;
+        public virtual bool IsEngaged() => false;
         public event Action<Attack, IAttackable> OnDamageTaken;
+        public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
+        public virtual bool IsInvulnerable => false;
+        public event AttackedLanded OnAttackLanded;
 
         public Vector3 TargetPosition => targetPosition.position;
 
@@ -111,13 +124,26 @@ namespace Game
             if (IsDead)
                 return;
 
-            float damageReduced = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
-            this.Health -= damageReduced;
+            if (IsInvulnerable)
+                return;
+
+            float damageRemaining = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
+            for (int i = shields.Count - 1; i >= 0; i--)
+            {
+                Shield shield = shields[i];
+                if (!shield.Absorb(damageRemaining, out damageRemaining))
+                {
+                    OnShieldBroken?.Invoke(shield);
+                    shields.RemoveAt(i);
+                }
+            }
+
+            this.Health -= damageRemaining;
 
             foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attack, damageReduced);
+                source.AttackLanded(attack, damageRemaining, this.Health <= 0);
 
-            Debug.Log($"{this.name} took {damageReduced} from {attack.AttackSource.Sources[^1]}");
+            Debug.Log($"{this.name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
             OnDamageTaken?.Invoke(attack, this);
 
             if (Health <= 0 && !IsDead)
@@ -129,7 +155,14 @@ namespace Game
             return hitbox.ClosestPoint(point);
         }
 
-        public virtual void Death()
+        public void Death()
+        {
+            OnDeath?.Invoke(this);
+            EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
+            InternalDeath();
+        }
+
+        protected virtual void InternalDeath()
         {
             Destroy(this.gameObject);
         }
@@ -146,9 +179,10 @@ namespace Game
         }
 
         #region AttackSource
-        public void AttackLanded(Attack attack, float damageDealt)
+        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
         {
             Heal(damageDealt * attack.Leach);
+            OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
         }
         #endregion
 
@@ -180,6 +214,26 @@ namespace Game
         public bool IsEnemy(ITargeteable targeteable)
         {
             return targeteable.Faction != Faction;
+        }
+        #endregion
+
+        #region Shield
+        public event IShieldable.ShieldBroken OnShieldBroken;
+
+        private List<Shield> shields = new List<Shield>();
+        public List<Shield> Shields { get => shields; set => shields = value; }
+
+        public void AddShield(Shield shield)
+        {
+            shields.Add(shield);
+        }
+
+        public void UpdateShields()
+        {
+            foreach (Shield shield in shields)
+            {
+                shield.Update();
+            }
         }
         #endregion
     }

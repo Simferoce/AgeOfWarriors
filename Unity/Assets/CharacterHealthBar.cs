@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,10 +8,20 @@ namespace Game
     {
         [SerializeField] private Character character;
         [SerializeField] private Image image;
+        [SerializeField] private Image shield;
+        [SerializeField] private Image shieldUnderHealth;
 
         public void Update()
         {
-            image.fillAmount = Mathf.Clamp01(character.Health / character.MaxHealth);
+            if (Mathf.Sign(this.transform.localScale.x) == -1)
+                this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
+
+            float shieldPercentage = character.Shields.Sum(x => x.Remaining) / character.MaxHealth;
+            float healthPercentage = character.Health / character.MaxHealth;
+
+            shieldUnderHealth.fillAmount = Mathf.Min(shieldPercentage, healthPercentage);
+            shield.fillAmount = shieldPercentage;
+            image.fillAmount = Mathf.Clamp01(healthPercentage);
         }
     }
 }

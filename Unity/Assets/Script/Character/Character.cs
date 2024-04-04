@@ -16,15 +16,18 @@ namespace Game
         public override float MaxHealth { get => Definition.MaxHealth + modifierHandler.MaxHealth ?? 0; }
         public override float Defense { get => Definition.Defense + modifierHandler.Defense ?? 0f; }
         public float AttackPerSeconds { get => Definition.AttackPerSeconds; }
-        public float AttackPower { get => Definition.AttackPower; }
+        public float AttackPower { get => Definition.AttackPower + modifierHandler.AttackPower ?? 0f; }
         public float Speed { get => Definition.Speed * (1 + modifierHandler.SpeedPercentage ?? 0f); }
         public float Reach { get => Definition.Reach; }
         public override bool IsDead { get => stateMachine.Current is DeathState; }
         public CharacterAnimator CharacterAnimator { get; set; }
         public float LastAbilityUsed { get; set; }
         public override bool IsActive { get => !IsDead; }
+        public override bool IsEngaged() => GetTarget(engagedCriteria, Reach) != null;
+        public override bool IsInvulnerable => modifierHandler.Invulnerable ?? false;
 
         private StateMachine stateMachine = new StateMachine();
+        private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
@@ -106,7 +109,7 @@ namespace Game
                 .ToList();
         }
 
-        public override void Death()
+        protected override void InternalDeath()
         {
             stateMachine.SetState(new DeathState(this));
         }

@@ -25,5 +25,11 @@ namespace Game
         {
             Instance = this;
         }
+
+        [ContextMenu("LevelUp")]
+        public void LevelUp()
+        {
+            Agent.Player.Technology.CurrentTechnology += Agent.Player.Technology.MaxTechnology;
+        }
     }
 }
