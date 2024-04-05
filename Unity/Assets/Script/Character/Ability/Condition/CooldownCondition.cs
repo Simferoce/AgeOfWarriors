@@ -25,5 +25,13 @@ namespace Game
         {
             lastUsed = Time.time;
         }
+
+        public override AbilityCondition Clone()
+        {
+            CooldownCondition cooldownCondition = new CooldownCondition();
+            cooldownCondition.cooldown = cooldown;
+
+            return cooldownCondition;
+        }
     }
 }

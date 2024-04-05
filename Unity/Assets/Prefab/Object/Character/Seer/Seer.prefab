@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4608189016881164230}
   m_Layer: 0
-  m_Name: AttackOrigin
+  m_Name: ProjectileOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,6 +59,14 @@ PrefabInstance:
       propertyPath: abilities.Array.data[0]
       value: 3656781095385956391
       objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 17a9369d06834ff43ac94966702b4e6b, type: 2}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[3656781095385956391]
       value: Assembly-CSharp Game.AnimationBaseCharacterAbility
@@ -114,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[3656781118043062349].origin
       value: 
-      objectReference: {fileID: 4608189016881164230}
+      objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: managedReferences[3656781095385956393].cooldown
       value: 1

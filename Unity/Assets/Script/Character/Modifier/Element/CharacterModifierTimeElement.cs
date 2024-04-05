@@ -6,6 +6,8 @@ namespace Game
     {
         private float duration = 0f;
         private float startedAt = 0f;
+        public float Duration { get => duration; }
+        public float RemaingDuration { get => Time.time - startedAt; }
 
         public CharacterModifierTimeElement(float duration)
         {

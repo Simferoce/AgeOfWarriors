@@ -6,42 +6,11 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class HuntersMarkAbilityEffect : ApplyModifierAbilityEffect
+    public class HuntersMarkAbilityEffect : AbilityEffect
     {
         [SerializeField] private float damage;
         [SerializeField] private float duration;
-
-        public class HuntersMark : Modifier<HuntersMark>, IAttackSource
-        {
-            private float damage;
-            private IAttackable attackable;
-            public HuntersMarkAbilityEffect Source { get; set; }
-
-            public HuntersMark(HuntersMarkAbilityEffect source, float damage, IModifiable modifiable, IAttackable attackable) : base(modifiable)
-            {
-                this.Source = source;
-                this.attackable = attackable;
-                this.damage = damage;
-                attackable.OnDamageTaken += OnAttackableDamageTaken; ;
-            }
-
-            private void OnAttackableDamageTaken(Attack attack, IAttackable attackable)
-            {
-                if (attack.AttackSource.Sources.Contains(this))
-                    return;
-
-                AttackSource source = attack.AttackSource.Clone();
-                source.Sources.Add(this);
-                attackable.TakeAttack(new Attack(source, damage, 0f, 0f));
-            }
-
-            public override void Dispose()
-            {
-                base.Dispose();
-
-                attackable.OnDamageTaken -= OnAttackableDamageTaken;
-            }
-        }
+        [SerializeField] private HunterMarkModifierDefinition hunterMarkModifierDefinition;
 
         public override void Apply()
         {
@@ -50,7 +19,7 @@ namespace Game
 
             if (modifiable != null)
             {
-                HuntersMark huntersMark = (HuntersMark)modifiable.GetModifiers().FirstOrDefault(x => x is HuntersMark huntersMark && huntersMark.Source == this);
+                HunterMarkModifierDefinition.Modifier huntersMark = (HunterMarkModifierDefinition.Modifier)modifiable.GetModifiers().FirstOrDefault(x => x is HunterMarkModifierDefinition.Modifier huntersMark && huntersMark.Source == this);
 
                 if (huntersMark != null)
                 {
@@ -58,12 +27,21 @@ namespace Game
                 }
                 else
                 {
-                    huntersMark = new HuntersMark(this, damage, modifiable, modifiable as IAttackable)
+                    huntersMark = new HunterMarkModifierDefinition.Modifier(modifiable, hunterMarkModifierDefinition, this, damage, modifiable as IAttackable)
                         .With(new CharacterModifierTimeElement(duration));
 
                     modifiable.AddModifier(huntersMark);
                 }
             }
+        }
+
+        public override AbilityEffect Clone()
+        {
+            HuntersMarkAbilityEffect huntersMarkAbilityEffect = new HuntersMarkAbilityEffect();
+            huntersMarkAbilityEffect.hunterMarkModifierDefinition = hunterMarkModifierDefinition;
+            huntersMarkAbilityEffect.damage = damage;
+            huntersMarkAbilityEffect.duration = duration;
+            return huntersMarkAbilityEffect;
         }
     }
 }

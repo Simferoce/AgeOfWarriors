@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2a683f36d1e23b348a11b9d7031ddcc0
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
+  title: Archer - Longbow
   productionDuration: 2
   cost: 10
   technologyGainPerSecond: 0

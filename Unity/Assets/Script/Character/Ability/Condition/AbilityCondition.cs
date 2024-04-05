@@ -16,5 +16,6 @@ namespace Game
         public virtual void OnAbilityStarted() { }
         public virtual void OnAbilityEnded() { }
         public virtual void Interrupt() { }
+        public abstract AbilityCondition Clone();
     }
 }

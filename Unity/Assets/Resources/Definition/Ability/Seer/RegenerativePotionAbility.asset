@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db79c0df0cd7d4941a74ffc283f7f917, type: 3}
+  m_Name: RegenerativePotionAbility
+  m_EditorClassIdentifier: 
+  id: 2fbe3b7fa611e8a41b74fd71d17fc7d9
+  title: Regenerative Potion
+  icon: {fileID: 0}
+  characterAbility:
+    rid: 3656781184420020318
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781184420020318
+      type: {class: AnimationBaseCharacterAbility, ns: Game, asm: Assembly-CSharp}
+      data:
+        conditions:
+        - rid: 3656781184420020319
+        - rid: 3656781184420020320
+        - rid: 3656781184420020321
+        parameter: 1
+        effects:
+        - rid: 3656781184420020325
+    - rid: 3656781184420020319
+      type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781184420020320
+      type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        cooldown: 5
+    - rid: 3656781184420020321
+      type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        criteria:
+          rid: 3656781184420020322
+        count: 1
+    - rid: 3656781184420020322
+      type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        criterias:
+        - rid: 3656781184420020323
+        - rid: 3656781184420020324
+        - rid: 3656781184420020360
+        - rid: 3656781184420020364
+    - rid: 3656781184420020323
+      type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        reachPercentage: 1
+    - rid: 3656781184420020324
+      type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781184420020325
+      type: {class: ProjectileAbilityEffect, ns: Game, asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 6675190562695518451, guid: c315967ff12cba145a66a8eb3684b796, type: 3}
+        origin:
+          rid: 3656781184420020327
+        datas:
+        - rid: 3656781184420020328
+        - rid: 3656781184420020329
+    - rid: 3656781184420020327
+      type: {class: ProjectileAbilityEffectTransformOrigin, ns: Game, asm: Assembly-CSharp}
+      data:
+        origin: ProjectileOrigin
+    - rid: 3656781184420020328
+      type: {class: ProjectileHealData, ns: Game, asm: Assembly-CSharp}
+      data:
+        healPercentageAttackPower: 1
+    - rid: 3656781184420020329
+      type: {class: ProjectileImpactData, ns: Game, asm: Assembly-CSharp}
+      data:
+        criteria:
+          rid: 3656781184420020330
+    - rid: 3656781184420020330
+      type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781184420020360
+      type: {class: IsInjuredTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781184420020364
+      type: {class: ExcludeTypeCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        types: 00000000

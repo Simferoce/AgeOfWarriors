@@ -9,5 +9,10 @@ namespace Game
         {
             return targeteable.IsInjured();
         }
+
+        public override TargetCriteria Clone()
+        {
+            return new IsInjuredTargetCriteria();
+        }
     }
 }

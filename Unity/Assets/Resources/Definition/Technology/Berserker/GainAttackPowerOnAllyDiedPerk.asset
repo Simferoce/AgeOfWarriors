@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8666632616320345038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62942a986e629944ea34ecbc52bb4c0d, type: 3}
+  m_Name: AttackPowerModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 982f4fea1593aca4a8f35a8b024ff594
+  title: 
+  icon: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,7 +28,9 @@ MonoBehaviour:
   m_Name: GainAttackPowerOnAllyDiedPerk
   m_EditorClassIdentifier: 
   id: e2b24009f395ebe4d87baed0497b6870
+  title: 
   icon: {fileID: 0}
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   amount: 10
   duration: 5
+  attackPowerModifier: {fileID: -8666632616320345038}

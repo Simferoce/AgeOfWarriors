@@ -7,5 +7,6 @@ namespace Game
     public abstract class ProjectileAbilityEffectOrigin
     {
         public abstract Vector3 GetPosition(ProjectileAbilityEffect ability);
+        public abstract ProjectileAbilityEffectOrigin Clone();
     }
 }

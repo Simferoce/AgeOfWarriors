@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: a0a3e2c88b079f4458c331514474afcc
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
+  title: Archer - Crossbow
   productionDuration: 2
   cost: 10
   technologyGainPerSecond: 0

@@ -17,5 +17,6 @@ namespace Game
         public virtual void OnAbilityEnded() { }
         public virtual void OnAbilityStarted() { }
         public virtual void Interrupt() { }
+        public abstract AbilityEffect Clone();
     }
 }

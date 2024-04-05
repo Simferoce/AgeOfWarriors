@@ -8,25 +8,11 @@ namespace Game
     [Serializable]
     public class InspiringPresenceAbilityEffect : AbilityEffect, ILingeringAbilityEffect
     {
-        private class InspiringPresenceBuff : Modifier<InspiringPresenceBuff>
-        {
-            public InspiringPresenceAbilityEffect Source { get; set; }
-            public override float? Defense => defense;
-
-            private float defense;
-
-            public InspiringPresenceBuff(Character character, float defense, InspiringPresenceAbilityEffect source)
-                : base(character)
-            {
-                this.defense = defense;
-                this.Source = source;
-            }
-        }
-
         [SerializeField] private float duration = 5f;
         [SerializeField] private float area = 2f;
         [SerializeField] private float buffDuration = 3f;
         [SerializeField] private float defense = 5f;
+        [SerializeField] private InspiringPresenceModifierDefinition inspiringPresenceModifierDefinition;
 
         private float? startedAt = null;
 
@@ -49,14 +35,13 @@ namespace Game
             }
 
             List<Character> characters = AgentObject.All.OfType<Character>()
-                .Where(x => character != x
-                    && x.Faction == character.Faction
+                .Where(x => x.Faction == character.Faction
                     && Mathf.Abs(character.transform.position.x - x.transform.position.x) < area)
                 .ToList();
 
             foreach (Character characterToBuff in characters)
             {
-                InspiringPresenceBuff inspiringPresenceBuff = (InspiringPresenceBuff)characterToBuff.GetModifiers().FirstOrDefault(x => x is InspiringPresenceBuff);
+                InspiringPresenceModifierDefinition.Modifier inspiringPresenceBuff = (InspiringPresenceModifierDefinition.Modifier)characterToBuff.GetModifiers().FirstOrDefault(x => x is InspiringPresenceModifierDefinition.Modifier);
                 if (inspiringPresenceBuff != null)
                 {
                     if (inspiringPresenceBuff.Source == this)
@@ -66,7 +51,7 @@ namespace Game
                 }
                 else
                 {
-                    inspiringPresenceBuff = new InspiringPresenceBuff(character, defense, this)
+                    inspiringPresenceBuff = new InspiringPresenceModifierDefinition.Modifier(character, inspiringPresenceModifierDefinition, defense, this)
                         .With(new CharacterModifierTimeElement(buffDuration));
 
                     characterToBuff.AddModifier(inspiringPresenceBuff);
@@ -79,6 +64,18 @@ namespace Game
         public override void OnAbilityEnded()
         {
             startedAt = null;
+        }
+
+        public override AbilityEffect Clone()
+        {
+            InspiringPresenceAbilityEffect inspiringPresenceAbilityEffect = new InspiringPresenceAbilityEffect();
+            inspiringPresenceAbilityEffect.duration = duration;
+            inspiringPresenceAbilityEffect.area = area;
+            inspiringPresenceAbilityEffect.buffDuration = buffDuration;
+            inspiringPresenceAbilityEffect.defense = defense;
+            inspiringPresenceAbilityEffect.inspiringPresenceModifierDefinition = inspiringPresenceModifierDefinition;
+
+            return inspiringPresenceAbilityEffect;
         }
     }
 }

@@ -352,13 +352,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdbe9a4f0fcedb24abd424212d328dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  types: 00000000
   hitbox: {fileID: 5105175081674111919}
   targetPosition: {fileID: 3026845125957121751}
-  blocking: 04000000
-  inherentTag: 
+  blocking:
+    rid: 3656781184420020363
   maxHealth: 100
   defense: 0
   spawnPoint: {fileID: 7750424142232137661}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781184420020363
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &7617356873761771249
 Rigidbody2D:
   serializedVersion: 4

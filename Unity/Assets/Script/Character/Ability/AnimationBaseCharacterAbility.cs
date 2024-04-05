@@ -116,5 +116,15 @@ namespace Game
 
             Dispose();
         }
+
+        public override CharacterAbility Clone()
+        {
+            AnimationBaseCharacterAbility animationBaseCharacterAbility = new AnimationBaseCharacterAbility();
+            animationBaseCharacterAbility.conditions = conditions.Select(condition => condition.Clone()).ToList();
+            animationBaseCharacterAbility.effects = effects.Select(condition => condition.Clone()).ToList();
+            animationBaseCharacterAbility.parameter = parameter;
+
+            return animationBaseCharacterAbility;
+        }
     }
 }

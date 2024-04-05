@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: c56e927deca89a0489ae45f81e216bd3
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
+  title: Berserker
   productionDuration: 2
   cost: 15
   technologyGainPerSecond: 1
+  baseDefinition: {fileID: 0}
   reach: 0.5
   speed: 0.5
   attackPerSeconds: 1.5

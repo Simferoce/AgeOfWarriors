@@ -9,5 +9,10 @@ namespace Game
         {
             return targeteable.IsDisplaceable();
         }
+
+        public override TargetCriteria Clone()
+        {
+            return new IsDisplaceableTargetCriteria();
+        }
     }
 }

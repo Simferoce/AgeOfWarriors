@@ -9,13 +9,20 @@ namespace Game
 {
     public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IBlocker, IAttackSource, ITargeteable, IHealable, IShieldable
     {
-        public static List<AgentObject> All { get; private set; }
+        public enum Type
+        {
+            Building
+        }
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
         {
             All = new List<AgentObject>();
         }
+
+        public static List<AgentObject> All { get; private set; }
+
+        [SerializeField] private List<Type> types = new List<Type>();
 
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
@@ -25,6 +32,14 @@ namespace Game
         public virtual int Priority { get => SpawnNumber; }
         public virtual Faction Faction { get => Agent.Faction; }
         public Vector3 CenterPosition { get => transform.position; }
+
+        public virtual float MaxHealth { get; }
+        public virtual float Defense { get; }
+        public virtual float AttackPower { get; }
+        public virtual float Reach { get; }
+        public virtual float Speed { get; }
+        public virtual float AttackSpeed { get; }
+        public virtual List<Type> Types { get => types; }
 
         protected virtual void Awake()
         {
@@ -95,9 +110,8 @@ namespace Game
         [SerializeField] private Collider2D hitbox;
         [SerializeField] private Transform targetPosition;
 
-        public abstract float MaxHealth { get; }
+
         public float Health { get; set; }
-        public abstract float Defense { get; }
         public virtual bool IsDead { get => this.Health <= 0; }
         public bool IsInjured() => !IsDead && Health < MaxHealth;
         public event DeathHandler OnDeath;

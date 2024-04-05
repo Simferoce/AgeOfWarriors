@@ -17,5 +17,12 @@ namespace Game
         {
             return new Context() { Criteria = criteria };
         }
+
+        public override ProjectileData Clone()
+        {
+            ProjectileImpactData data = new ProjectileImpactData();
+            data.criteria = criteria.Clone();
+            return data;
+        }
     }
 }

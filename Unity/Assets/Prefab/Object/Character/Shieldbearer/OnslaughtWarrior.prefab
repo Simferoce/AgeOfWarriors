@@ -69,6 +69,18 @@ PrefabInstance:
       value: 8758732338094669841
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 2ba2120cbecc1054fa711e616ea597ac, type: 2}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c5df4c0c82f7fd3449fcd28473be2ec9, type: 2}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[4528059405929545751]
       value: Assembly-CSharp Game.IsEnemyTargetCriteria
       objectReference: {fileID: 0}

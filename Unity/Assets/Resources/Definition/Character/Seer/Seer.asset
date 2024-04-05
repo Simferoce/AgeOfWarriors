@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 97fc51b46f2ebbe49a1921ff727afb6b
   icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
+  title: Seer
   productionDuration: 2
   cost: 10
   technologyGainPerSecond: 0
+  baseDefinition: {fileID: 0}
   reach: 1.5
   speed: 0.5
   attackPerSeconds: 1

@@ -101,6 +101,18 @@ PrefabInstance:
       value: 8758732338094669841
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 28dc18028ccd1224180f0355f3e10a03, type: 2}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: c5df4c0c82f7fd3449fcd28473be2ec9, type: 2}
+    - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: managedReferences[8758732309343764508]
       value: Assembly-CSharp Game.InspiringPresenceAbilityEffect
       objectReference: {fileID: 0}

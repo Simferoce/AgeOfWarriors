@@ -69,6 +69,18 @@ PrefabInstance:
       value: 3656781095385956391
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 3002deeae55c17740b99d0905667043c, type: 2}
+    - target: {fileID: 5217243639580789687, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 17a9369d06834ff43ac94966702b4e6b, type: 2}
+    - target: {fileID: 5217243639580789687, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
       propertyPath: managedReferences[3656781118043062346]
       value: Assembly-CSharp Game.ProjectileAbilityEffectTargetCenterOrigin
       objectReference: {fileID: 0}

@@ -34,5 +34,16 @@ namespace Game
 
             return Time.time - startedAt > duration;
         }
+
+        public override AbilityEffect Clone()
+        {
+            GraspAbilityEffect graspAbilityEffect = new GraspAbilityEffect();
+            graspAbilityEffect.destinationDistance = destinationDistance;
+            graspAbilityEffect.duration = duration;
+            graspAbilityEffect.staggerDuration = staggerDuration;
+            graspAbilityEffect.damping = damping;
+
+            return graspAbilityEffect;
+        }
     }
 }

@@ -9,14 +9,22 @@ namespace Game
     {
         [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private int count = 1;
-        [SerializeField, Range(0, 3)] private float reachPercentage = 1f;
 
         public List<IAttackable> Targets = new List<IAttackable>();
 
         public override bool Execute()
         {
-            Targets = character.GetTargets(criteria, character.Reach * reachPercentage);
+            Targets = character.GetTargets(criteria);
             return Targets.Count >= count;
+        }
+
+        public override AbilityCondition Clone()
+        {
+            HasTargetAbilityCondition hasTargetAbilityCondition = new HasTargetAbilityCondition();
+            hasTargetAbilityCondition.criteria = criteria.Clone();
+            hasTargetAbilityCondition.count = count;
+
+            return hasTargetAbilityCondition;
         }
     }
 }

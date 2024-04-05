@@ -69,5 +69,14 @@ namespace Game
             foreach (AbilityCondition condition in conditions)
                 condition.Interrupt();
         }
+
+        public override CharacterAbility Clone()
+        {
+            InstantanousCharacterAbility instantanousCharacterAbility = new InstantanousCharacterAbility();
+            instantanousCharacterAbility.conditions = conditions.Select(x => x.Clone()).ToList();
+            instantanousCharacterAbility.effects = effects.Select(x => x.Clone()).ToList();
+
+            return instantanousCharacterAbility;
+        }
     }
 }

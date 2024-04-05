@@ -26,5 +26,14 @@ namespace Game
             Attack attack = new Attack(attackSource, character.AttackPower * attackPowerPercentage, armorPenetration, 0f);
             return new Context() { Attack = attack };
         }
+
+        public override ProjectileData Clone()
+        {
+            ProjectileAttackData data = new ProjectileAttackData();
+            data.attackPowerPercentage = attackPowerPercentage;
+            data.armorPenetration = armorPenetration;
+
+            return data;
+        }
     }
 }

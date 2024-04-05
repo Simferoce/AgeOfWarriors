@@ -7,6 +7,7 @@ namespace Game
     public abstract class CharacterAbility
     {
         public Character Character { get; set; }
+        public AbilityDefinition Definition { get; set; }
 
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
@@ -26,5 +27,7 @@ namespace Game
         public abstract void Use();
 
         public abstract void Interrupt();
+
+        public abstract CharacterAbility Clone();
     }
 }
