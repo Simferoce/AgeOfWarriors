@@ -7,20 +7,32 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier>
         {
-            private float invulnerabilityPeriod;
-            private float? lastKillingBlowResult = null;
+            private class ResistDeath : Modifier<ResistDeath>
+            {
+                public override bool? Invulnerable => true;
 
-            public override bool? Invulnerable => lastKillingBlowResult != null && Time.time - lastKillingBlowResult < invulnerabilityPeriod;
+                public ResistDeath(IModifiable modifiable) : base(modifiable)
+                {
+                }
+            }
+
+            private bool hasResists = false;
+            private float invulnerabilityPeriod;
 
             public Modifier(IModifiable modifiable, float invulnerabilityPeriod) : base(modifiable)
             {
                 this.invulnerabilityPeriod = invulnerabilityPeriod;
             }
 
-            public void OnKillingBlowResisted()
+            public bool CanResistsKillingBlow()
             {
-                if (lastKillingBlowResult == null)
-                    lastKillingBlowResult = Time.time;
+                return !hasResists;
+            }
+
+            public void ResistKillingBlow()
+            {
+                if (!hasResists)
+                    modifiable.AddModifier(new ResistDeath(modifiable).With(new CharacterModifierTimeElement(invulnerabilityPeriod)));
             }
         }
 

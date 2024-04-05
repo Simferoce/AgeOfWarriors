@@ -15,5 +15,5 @@ MonoBehaviour:
   id: a4f2a989b0db5664d9855e274b49e6af
   icon: {fileID: 0}
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  percentageAttackPower: 1
+  damagePerPointAbsorbed: 0.5
   percentageReach: 1

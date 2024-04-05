@@ -15,4 +15,4 @@ MonoBehaviour:
   id: ec0c8ec4bc9c4c440b7b29ce7f0167d9
   icon: {fileID: 0}
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  invulnerabilityPeriod: 0.2
+  invulnerabilityPeriod: 0.5

@@ -25,7 +25,7 @@ namespace Game
                 if (modifiable is not Character character)
                     return;
 
-                float heal = healPerShieldPoint * (shield.Remaining / shield.Initial);
+                float heal = healPerShieldPoint * shield.Remaining;
                 if (heal <= 0)
                     return;
 

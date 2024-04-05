@@ -140,6 +140,16 @@ namespace Game
 
             this.Health -= damageRemaining;
 
+            if (this.Health <= 0)
+            {
+                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)modifierHandler.Modifiers.FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
+                if (modifier != null)
+                {
+                    modifier.ResistKillingBlow();
+                    this.Health = 0.001f;
+                }
+            }
+
             foreach (IAttackSource source in attack.AttackSource.Sources)
                 source.AttackLanded(attack, damageRemaining, this.Health <= 0);
 
@@ -230,9 +240,14 @@ namespace Game
 
         public void UpdateShields()
         {
-            foreach (Shield shield in shields)
+            for (int i = shields.Count - 1; i >= 0; i--)
             {
-                shield.Update();
+                Shield shield = shields[i];
+                if (shield.Update())
+                {
+                    shields.Remove(shield);
+                    OnShieldBroken?.Invoke(shield);
+                }
             }
         }
         #endregion

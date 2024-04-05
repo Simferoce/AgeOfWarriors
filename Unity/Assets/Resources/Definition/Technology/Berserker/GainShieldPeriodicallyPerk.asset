@@ -15,6 +15,6 @@ MonoBehaviour:
   id: 124214902e069a84bbead87df45fb3b1
   icon: {fileID: 0}
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  amount: 0.25
-  duration: 3
+  amount: 1
+  duration: 1
   period: 5
