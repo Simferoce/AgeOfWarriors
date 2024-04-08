@@ -19,7 +19,7 @@ namespace Game
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<IHealable>(out IHealable healable)
                 && healable.IsActive
-                && targetContext.Criteria.Execute(projectile.Character, healable))
+                && targetContext.Criteria.Execute(projectile.Character, healable, null))
             {
                 healable.Heal(healContext.HealAmount);
 

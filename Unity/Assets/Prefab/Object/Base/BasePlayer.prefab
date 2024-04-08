@@ -8,6 +8,30 @@ PrefabInstance:
     serializedVersion: 2
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4385928984012920248, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: managedReferences[3656781252598956095]
+      value: Assembly-CSharp Game.StatisticSerializeFloat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385928984012920248, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: managedReferences[3656781252598956096]
+      value: Assembly-CSharp Game.StatisticSerializeFloat
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385928984012920248, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: managedReferences[3656781252598956095].value
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385928984012920248, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: managedReferences[3656781252598956096].value
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385928984012920248, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: managedReferences[3656781252598956095].definition
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4385928984012920248, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
+      propertyPath: managedReferences[3656781252598956096].definition
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6346730578860438931, guid: b2d05075b078bbb4bae7967c52e67b6e, type: 3}
       propertyPath: m_RootOrder
       value: -1

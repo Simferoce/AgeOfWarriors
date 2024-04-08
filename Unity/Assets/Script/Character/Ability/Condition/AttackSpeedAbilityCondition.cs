@@ -13,7 +13,7 @@ namespace Game
 
         public override bool Execute()
         {
-            return Time.time - character.LastAbilityUsed > character.AttackSpeed;
+            return Time.time - ability.Character.LastAbilityUsed > ability.Character.AttackSpeed.GetValue();
         }
     }
 }

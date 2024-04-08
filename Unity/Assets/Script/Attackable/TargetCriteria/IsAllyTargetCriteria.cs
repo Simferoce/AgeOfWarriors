@@ -5,7 +5,7 @@ namespace Game
     [Serializable]
     public class IsAllyTargetCriteria : TargetCriteria
     {
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, StatisticContext context)
         {
             return targeteable.IsAlly(owner);
         }

@@ -357,14 +357,26 @@ MonoBehaviour:
   targetPosition: {fileID: 3026845125957121751}
   blocking:
     rid: 3656781184420020363
-  maxHealth: 100
-  defense: 0
+  maxHealth:
+    rid: 3656781252598956097
+  defense:
+    rid: 3656781252598956098
   spawnPoint: {fileID: 7750424142232137661}
   references:
     version: 2
     RefIds:
     - rid: 3656781184420020363
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781252598956097
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 100
+    - rid: 3656781252598956098
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 20
 --- !u!50 &7617356873761771249
 Rigidbody2D:
   serializedVersion: 4

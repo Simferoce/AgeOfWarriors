@@ -38,7 +38,7 @@ namespace Game
                 if (CanMove())
                 {
                     character.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 1, 0.25f);
-                    character.rigidbody.MovePosition(character.rigidbody.position + Vector2.right * character.Direction * character.Speed * Time.deltaTime);
+                    character.rigidbody.MovePosition(character.rigidbody.position + Vector2.right * character.Direction * character.Speed.GetValue() * Time.deltaTime);
                 }
                 else
                 {

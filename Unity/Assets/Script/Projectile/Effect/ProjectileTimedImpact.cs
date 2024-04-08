@@ -34,7 +34,7 @@ namespace Game
         {
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
-                && criteria.Execute(projectile.Character, attackable))
+                && criteria.Execute(projectile.Character, attackable, null))
             {
                 targets.Add(attackable);
             }

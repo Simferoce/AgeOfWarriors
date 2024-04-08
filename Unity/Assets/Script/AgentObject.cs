@@ -33,12 +33,12 @@ namespace Game
         public virtual Faction Faction { get => Agent.Faction; }
         public Vector3 CenterPosition { get => transform.position; }
 
-        public virtual float MaxHealth { get; }
-        public virtual float Defense { get; }
-        public virtual float AttackPower { get; }
-        public virtual float Reach { get; }
-        public virtual float Speed { get; }
-        public virtual float AttackSpeed { get; }
+        public virtual IStatisticFloat MaxHealth { get; }
+        public virtual IStatisticFloat Defense { get; }
+        public virtual IStatisticFloat AttackPower { get; }
+        public virtual IStatisticFloat Reach { get; }
+        public virtual IStatisticFloat Speed { get; }
+        public virtual IStatisticFloat AttackSpeed { get; }
         public virtual List<Type> Types { get => types; }
 
         protected virtual void Awake()
@@ -110,10 +110,9 @@ namespace Game
         [SerializeField] private Collider2D hitbox;
         [SerializeField] private Transform targetPosition;
 
-
         public float Health { get; set; }
         public virtual bool IsDead { get => this.Health <= 0; }
-        public bool IsInjured() => !IsDead && Health < MaxHealth;
+        public bool IsInjured() => !IsDead && Health < MaxHealth.GetValue();
         public event DeathHandler OnDeath;
         public virtual bool IsEngaged() => false;
         public event Action<Attack, IAttackable> OnDamageTaken;
@@ -125,7 +124,7 @@ namespace Game
 
         public void SpawnAttackable()
         {
-            this.Health = MaxHealth;
+            this.Health = MaxHealth.GetValue();
         }
 
         public bool IsAttackable()
@@ -141,7 +140,7 @@ namespace Game
             if (IsInvulnerable)
                 return;
 
-            float damageRemaining = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
+            float damageRemaining = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense.GetValue() - attack.ArmorPenetration));
             for (int i = shields.Count - 1; i >= 0; i--)
             {
                 Shield shield = shields[i];
@@ -194,7 +193,7 @@ namespace Game
         public void Heal(float amount)
         {
             this.Health += amount;
-            this.Health = Mathf.Clamp(Health, 0, MaxHealth);
+            this.Health = Mathf.Clamp(Health, 0, MaxHealth.GetValue());
         }
 
         public virtual void Stagger(float duration)
@@ -222,7 +221,7 @@ namespace Game
             if (blocking == null)
                 return false;
 
-            return blocking.Execute(this, agentObject);
+            return blocking.Execute(this, agentObject, null);
         }
 
         public bool IsDisplaceable()

@@ -16,7 +16,7 @@ namespace Game
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
                 && attackable.IsActive
-                && targetContext.Criteria.Execute(projectile.Character, attackable))
+                && targetContext.Criteria.Execute(projectile.Character, attackable, null))
             {
                 attackContext.Attack.AttackSource.Sources.Add(projectile);
                 attackable.TakeAttack(attackContext.Attack);

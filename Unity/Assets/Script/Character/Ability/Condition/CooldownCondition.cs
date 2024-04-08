@@ -10,9 +10,9 @@ namespace Game
 
         private float lastUsed = 0f;
 
-        public override void Initialize(Character character)
+        public override void Initialize(CharacterAbility ability)
         {
-            base.Initialize(character);
+            base.Initialize(ability);
             lastUsed = -cooldown;
         }
 

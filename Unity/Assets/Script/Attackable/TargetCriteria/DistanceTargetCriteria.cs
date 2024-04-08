@@ -6,17 +6,17 @@ namespace Game
     [Serializable]
     public class DistanceTargetCriteria : TargetCriteria
     {
-        [SerializeField] private float reachPercentage;
+        [SerializeReference, SubclassSelector] private IStatisticFloat distance;
 
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, StatisticContext context)
         {
-            return Mathf.Abs((targeteable.ClosestPoint(owner.CenterPosition) - owner.CenterPosition).x) < (owner as AgentObject).Reach * reachPercentage;
+            return Mathf.Abs((targeteable.ClosestPoint(owner.CenterPosition) - owner.CenterPosition).x) < distance.GetValue(context);
         }
 
         public override TargetCriteria Clone()
         {
             DistanceTargetCriteria criteria = new DistanceTargetCriteria();
-            criteria.reachPercentage = reachPercentage;
+            criteria.distance = (IStatisticFloat)distance.Clone();
             return criteria;
         }
     }

@@ -5,11 +5,11 @@ namespace Game
     [Serializable]
     public abstract class AbilityCondition
     {
-        protected Character character;
+        protected CharacterAbility ability;
 
-        public virtual void Initialize(Character character)
+        public virtual void Initialize(CharacterAbility ability)
         {
-            this.character = character;
+            this.ability = ability;
         }
 
         public abstract bool Execute();

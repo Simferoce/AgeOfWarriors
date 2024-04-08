@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game
 {
@@ -28,7 +29,7 @@ namespace Game
                 {
                     if ((int)((accumulatedTime + Time.deltaTime) / period) != (int)(accumulatedTime / period))
                     {
-                        shieldable.AddShield(new Shield(amount * shieldable.MaxHealth, duration));
+                        shieldable.AddShield(new Shield(amount * shieldable.MaxHealth.GetValue(), duration));
                     }
 
                     accumulatedTime += Time.deltaTime;

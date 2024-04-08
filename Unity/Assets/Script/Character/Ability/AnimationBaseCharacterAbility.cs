@@ -17,12 +17,24 @@ namespace Game
         public override bool IsActive { get => IsCasting || IsLingering; }
         public bool IsLingering { get; set; } = false;
 
+        public AnimationBaseCharacterAbility() : base()
+        {
+
+        }
+
+        public AnimationBaseCharacterAbility(AnimationBaseCharacterAbility other) : base(other)
+        {
+            conditions = other.conditions.Select(condition => condition.Clone()).ToList();
+            effects = other.effects.Select(condition => condition.Clone()).ToList();
+            parameter = other.parameter;
+        }
+
         public override void Initialize(Character character)
         {
             base.Initialize(character);
 
             foreach (AbilityCondition condition in conditions)
-                condition.Initialize(character);
+                condition.Initialize(this);
 
             foreach (AbilityEffect effect in effects)
                 effect.Initialize(this);
@@ -119,12 +131,7 @@ namespace Game
 
         public override CharacterAbility Clone()
         {
-            AnimationBaseCharacterAbility animationBaseCharacterAbility = new AnimationBaseCharacterAbility();
-            animationBaseCharacterAbility.conditions = conditions.Select(condition => condition.Clone()).ToList();
-            animationBaseCharacterAbility.effects = effects.Select(condition => condition.Clone()).ToList();
-            animationBaseCharacterAbility.parameter = parameter;
-
-            return animationBaseCharacterAbility;
+            return new AnimationBaseCharacterAbility(this);
         }
     }
 }

@@ -35,7 +35,7 @@ namespace Game
             unitName.text = agentObject.GetDefinition().Title;
             unitIcon.sprite = agentObject.GetDefinition().Icon;
 
-            healthImage.fillAmount = agentObject.Health / agentObject.MaxHealth;
+            healthImage.fillAmount = agentObject.Health / agentObject.MaxHealth.GetValue(null);
             healthText.text = agentObject.Health.ToString();
             maxHealthText.text = agentObject.MaxHealth.ToString();
 

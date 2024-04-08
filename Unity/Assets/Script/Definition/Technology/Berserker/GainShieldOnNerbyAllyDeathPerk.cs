@@ -22,7 +22,7 @@ namespace Game
             {
                 if (evt.AgentObject.IsAlly(modifiable as ITargeteable) && modifiable is Character shieldable && (IModifiable)evt.AgentObject != modifiable)
                 {
-                    shieldable.AddShield(new Shield(amount * shieldable.MaxHealth, duration));
+                    shieldable.AddShield(new Shield(amount * shieldable.MaxHealth.GetValue(), duration));
                 }
             }
 

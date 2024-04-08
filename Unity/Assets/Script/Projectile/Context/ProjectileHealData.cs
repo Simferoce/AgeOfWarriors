@@ -15,7 +15,7 @@ namespace Game
 
         public override ProjectileContext GetContext(Character character)
         {
-            return new Context() { HealAmount = character.AttackPower * healPercentageAttackPower };
+            return new Context() { HealAmount = character.AttackPower.GetValue() * healPercentageAttackPower };
         }
 
         public override ProjectileData Clone()

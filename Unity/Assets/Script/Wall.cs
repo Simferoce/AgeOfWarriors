@@ -4,10 +4,10 @@ namespace Game
 {
     public class Wall : AgentObject
     {
-        [SerializeField] private float maxHealth;
-        [SerializeField] private float defense;
+        [SerializeReference, SubclassSelector] private IStatisticFloat maxHealth;
+        [SerializeReference, SubclassSelector] private IStatisticFloat defense;
 
-        public override float MaxHealth => maxHealth;
-        public override float Defense => defense;
+        public override IStatisticFloat MaxHealth => maxHealth;
+        public override IStatisticFloat Defense => defense;
     }
 }

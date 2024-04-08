@@ -13,6 +13,18 @@ namespace Game
 
         public override List<IAttackable> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
 
+        public InstantanousCharacterAbility() : base()
+        {
+
+        }
+
+
+        public InstantanousCharacterAbility(InstantanousCharacterAbility other) : base(other)
+        {
+            conditions = other.conditions.Select(x => x.Clone()).ToList();
+            effects = other.effects.Select(x => x.Clone()).ToList();
+        }
+
         public override bool CanUse()
         {
             return conditions.All(x => x.Execute()) && effects.All(x => x.CanBeApplied());
@@ -28,7 +40,7 @@ namespace Game
             base.Initialize(character);
 
             foreach (AbilityCondition condition in conditions)
-                condition.Initialize(character);
+                condition.Initialize(this);
 
             foreach (AbilityEffect effect in effects)
                 effect.Initialize(this);
@@ -72,11 +84,7 @@ namespace Game
 
         public override CharacterAbility Clone()
         {
-            InstantanousCharacterAbility instantanousCharacterAbility = new InstantanousCharacterAbility();
-            instantanousCharacterAbility.conditions = conditions.Select(x => x.Clone()).ToList();
-            instantanousCharacterAbility.effects = effects.Select(x => x.Clone()).ToList();
-
-            return instantanousCharacterAbility;
+            return new InstantanousCharacterAbility(this);
         }
     }
 }

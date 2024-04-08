@@ -15,6 +15,8 @@ MonoBehaviour:
   id: f12e6ee03f335864a86e5311c15f91da
   title: Basic Attack
   icon: {fileID: 0}
+  range:
+    rid: 3656781252598956045
   characterAbility:
     rid: 3656781184420020254
   references:
@@ -23,6 +25,8 @@ MonoBehaviour:
     - rid: 3656781184420020254
       type: {class: AnimationBaseCharacterAbility, ns: Game, asm: Assembly-CSharp}
       data:
+        range:
+          rid: 3656781252598956046
         conditions:
         - rid: 3656781184420020255
         - rid: 3656781184420020256
@@ -46,7 +50,8 @@ MonoBehaviour:
     - rid: 3656781184420020259
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
-        reachPercentage: 1
+        distance:
+          rid: 3656781252598956050
     - rid: 3656781184420020260
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781184420020261
@@ -55,3 +60,19 @@ MonoBehaviour:
         leach: 0
         damagePercentage: 1
         armorPenetration: 0
+    - rid: 3656781252598956045
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        reference:
+          path: ability.caster.reach
+        percentage: 1
+    - rid: 3656781252598956046
+      type: {class: StatisticInheritFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        reference:
+          path: ability.base.range
+    - rid: 3656781252598956050
+      type: {class: StatisticInheritFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        reference:
+          path: ability.range

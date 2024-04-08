@@ -9,22 +9,23 @@ namespace Game
         [SerializeField] private CharacterDefinition baseDefinition;
 
         [Header("Character - Statistic")]
-        [SerializeField] private float reach = 1f;
-        [SerializeField] private float speed = 1f;
-        [SerializeField] private float attackPerSeconds = 1f;
-        [SerializeField] private float attackPower = 1f;
-        [SerializeField] private float maxHealth = 10f;
-        [SerializeField] private float defense = 5f;
+        [SerializeReference, SubclassSelector] private IStatisticFloat reach = new StatisticSerializeFloat(0.5f);
+        [SerializeReference, SubclassSelector] private IStatisticFloat speed = new StatisticSerializeFloat(1f);
+        [SerializeReference, SubclassSelector] private IStatisticFloat attackPerSeconds = new StatisticSerializeFloat(1f);
+        [SerializeReference, SubclassSelector] private IStatisticFloat attackPower = new StatisticSerializeFloat(1f);
+        [SerializeReference, SubclassSelector] private IStatisticFloat maxHealth = new StatisticSerializeFloat(10f);
+        [SerializeReference, SubclassSelector] private IStatisticFloat defense = new StatisticSerializeFloat(5f);
 
         [Header("Prefab")]
         [SerializeField] private GameObject prefab;
 
-        public float Reach { get => reach; }
-        public float Speed { get => speed; }
-        public float AttackPerSeconds { get => attackPerSeconds; }
-        public float AttackPower { get => attackPower; }
-        public float MaxHealth { get => maxHealth; }
-        public float Defense { get => defense; }
+        public IStatisticFloat Reach { get => reach; }
+        public IStatisticFloat Speed { get => speed; }
+        public IStatisticFloat AttackPerSeconds { get => attackPerSeconds; }
+        public IStatisticFloat AttackPower { get => attackPower; }
+        public IStatisticFloat MaxHealth { get => maxHealth; }
+        public IStatisticFloat Defense { get => defense; }
+
         public override bool IsSpecialization(AgentObjectDefinition agentObjectDefinition)
         {
             return baseDefinition == agentObjectDefinition || (baseDefinition?.IsSpecialization(agentObjectDefinition) ?? false);
