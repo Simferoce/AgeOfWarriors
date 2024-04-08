@@ -5,7 +5,7 @@ namespace Game
     [CreateAssetMenu(fileName = "GenericAbilityDefinition", menuName = "Definition/Ability/GenericAbilityDefinition")]
     public class GenericAbilityDefinition : AbilityDefinition
     {
-        [SerializeReference, SubclassSelector] private CharacterAbility characterAbility;
+        [SerializeReference, SerializeReferenceDropdown] private CharacterAbility characterAbility;
 
         public override CharacterAbility GetAbility()
         {

@@ -4,8 +4,8 @@ namespace Game
 {
     public class Base : AgentObject
     {
-        [SerializeReference, SubclassSelector] private IStatisticFloat maxHealth;
-        [SerializeReference, SubclassSelector] private IStatisticFloat defense;
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat maxHealth;
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat defense;
         [SerializeField] private SpawnPoint spawnPoint;
 
         public SpawnPoint SpawnPoint { get => spawnPoint; set => spawnPoint = value; }

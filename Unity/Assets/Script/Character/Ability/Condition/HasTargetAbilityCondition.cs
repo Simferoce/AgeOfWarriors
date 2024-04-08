@@ -7,14 +7,14 @@ namespace Game
     [Serializable]
     public class HasTargetAbilityCondition : AbilityCondition
     {
-        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
+        [SerializeReference, SerializeReferenceDropdown] private TargetCriteria criteria;
         [SerializeField] private int count = 1;
 
         public List<IAttackable> Targets = new List<IAttackable>();
 
         public override bool Execute()
         {
-            Targets = ability.Character.GetTargets(criteria, new StatisticContext(("ability", new AbilityStatisticContext(ability))));
+            Targets = ability.Character.GetTargets(criteria, new StatisticContext(("ability", ability)));
             return Targets.Count >= count;
         }
 

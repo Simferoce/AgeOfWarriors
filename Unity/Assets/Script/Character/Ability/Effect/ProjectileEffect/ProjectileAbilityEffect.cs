@@ -9,10 +9,10 @@ namespace Game
     public class ProjectileAbilityEffect : AbilityEffect
     {
         [SerializeField] private GameObject projectilePrefab;
-        [SerializeReference, SubclassSelector] private ProjectileAbilityEffectOrigin origin;
+        [SerializeReference, SerializeReferenceDropdown] private ProjectileAbilityEffectOrigin origin;
 
         [Space]
-        [SerializeReference, SubclassSelector] private List<ProjectileData> datas = new List<ProjectileData>();
+        [SerializeReference, SerializeReferenceDropdown] private List<ProjectileData> datas = new List<ProjectileData>();
 
         public override void Apply()
         {

@@ -7,16 +7,17 @@ namespace Game
     [Serializable]
     public abstract class CharacterAbility
     {
+        [StatisticResolve("caster")]
         public Character Character { get; set; }
+        [StatisticResolve("base")]
         public AbilityDefinition Definition { get; set; }
 
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
         public virtual List<IAttackable> Targets => new List<IAttackable>();
 
-        //ability.base.range
-        [SerializeReference, SubclassSelector] private IStatisticFloat range;
-        public IStatisticFloat Range => range;
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat range;
+        [StatisticResolve("range")] public IStatisticFloat Range => range;
 
         public CharacterAbility()
         {

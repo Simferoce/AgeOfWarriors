@@ -108,16 +108,12 @@ namespace Game
 
         public List<IAttackable> GetTargets(TargetCriteria criteria, StatisticContext context)
         {
-            TargeableStatisticContext targeableStatisticContext = new TargeableStatisticContext(null);
-            context.Children.Add("target", targeableStatisticContext);
-
             List<IAttackable> potentialTargets = new List<IAttackable>();
             foreach (IAttackable attackable in AgentObject.All.OfType<IAttackable>())
             {
                 if (!attackable.IsActive)
                     continue;
 
-                targeableStatisticContext.Value = attackable;
                 if (!criteria.Execute(this, attackable, context))
                     continue;
 

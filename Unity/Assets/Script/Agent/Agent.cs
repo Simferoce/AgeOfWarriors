@@ -22,7 +22,7 @@ namespace Game
         [SerializeField] private float currencyGainRate = 5f;
         [SerializeField] private TechnologyHandler technology;
         [SerializeField] private Factory factory;
-        [SerializeReference, SubclassSelector] private AgentBehaviour agentBehaviour;
+        [SerializeReference, SerializeReferenceDropdown] private AgentBehaviour agentBehaviour;
 
         public Faction Faction { get => faction; }
         public Factory Factory { get => factory; set => factory = value; }

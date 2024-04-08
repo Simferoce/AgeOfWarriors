@@ -8,7 +8,7 @@ namespace Game
     [Serializable]
     public class OrTargetCriteria : TargetCriteria
     {
-        [SerializeReference, SubclassSelector] private List<TargetCriteria> criterias = new List<TargetCriteria>();
+        [SerializeReference, SerializeReferenceDropdown] private List<TargetCriteria> criterias = new List<TargetCriteria>();
 
         public override bool Execute(ITargeteable owner, ITargeteable targeteable, StatisticContext context)
         {

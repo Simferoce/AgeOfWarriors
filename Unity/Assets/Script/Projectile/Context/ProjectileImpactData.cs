@@ -6,7 +6,7 @@ namespace Game
     [Serializable]
     public class ProjectileImpactData : ProjectileData
     {
-        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
+        [SerializeReference, SerializeReferenceDropdown] private TargetCriteria criteria;
 
         public class Context : ProjectileContext
         {

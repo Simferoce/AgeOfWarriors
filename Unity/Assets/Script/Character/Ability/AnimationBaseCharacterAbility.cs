@@ -8,10 +8,10 @@ namespace Game
     [Serializable]
     public class AnimationBaseCharacterAbility : CharacterAbility
     {
-        [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
+        [SerializeReference, SerializeReferenceDropdown] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeField] private CharacterAnimatorParameter.Parameter parameter = CharacterAnimatorParameter.Parameter.Ability;
         [Space]
-        [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();
+        [SerializeReference, SerializeReferenceDropdown] private List<AbilityEffect> effects = new List<AbilityEffect>();
 
         public override List<IAttackable> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
         public override bool IsActive { get => IsCasting || IsLingering; }

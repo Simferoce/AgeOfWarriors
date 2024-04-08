@@ -9,12 +9,12 @@ namespace Game
         [SerializeField] private CharacterDefinition baseDefinition;
 
         [Header("Character - Statistic")]
-        [SerializeReference, SubclassSelector] private IStatisticFloat reach = new StatisticSerializeFloat(0.5f);
-        [SerializeReference, SubclassSelector] private IStatisticFloat speed = new StatisticSerializeFloat(1f);
-        [SerializeReference, SubclassSelector] private IStatisticFloat attackPerSeconds = new StatisticSerializeFloat(1f);
-        [SerializeReference, SubclassSelector] private IStatisticFloat attackPower = new StatisticSerializeFloat(1f);
-        [SerializeReference, SubclassSelector] private IStatisticFloat maxHealth = new StatisticSerializeFloat(10f);
-        [SerializeReference, SubclassSelector] private IStatisticFloat defense = new StatisticSerializeFloat(5f);
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat reach = new StatisticSerializeFloat(0.5f);
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat speed = new StatisticSerializeFloat(1f);
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat attackPerSeconds = new StatisticSerializeFloat(1f);
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat attackPower = new StatisticSerializeFloat(1f);
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat maxHealth = new StatisticSerializeFloat(10f);
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat defense = new StatisticSerializeFloat(5f);
 
         [Header("Prefab")]
         [SerializeField] private GameObject prefab;

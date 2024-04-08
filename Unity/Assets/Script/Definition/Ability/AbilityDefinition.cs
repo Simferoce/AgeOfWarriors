@@ -7,9 +7,8 @@ namespace Game
         [SerializeField] private string title;
         [SerializeField] private Sprite icon;
 
-        //ability.caster.reach * percentage
-        [SerializeReference, SubclassSelector] private IStatisticFloat range;
-        public IStatisticFloat Range => range;
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat range;
+        [StatisticResolve("range")] public IStatisticFloat Range => range;
 
         public Sprite Icon { get => icon; set => icon = value; }
         public string Title { get => title; set => title = value; }

@@ -6,7 +6,7 @@ namespace Game
     [Serializable]
     public class DistanceTargetCriteria : TargetCriteria
     {
-        [SerializeReference, SubclassSelector] private IStatisticFloat distance;
+        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat distance;
 
         public override bool Execute(ITargeteable owner, ITargeteable targeteable, StatisticContext context)
         {
