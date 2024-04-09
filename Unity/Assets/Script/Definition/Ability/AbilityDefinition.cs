@@ -10,7 +10,7 @@ namespace Game
         [SerializeField] private GameObject prefab;
 
         [SerializeField] private StatisticHolder statistics;
-        [StatisticResolve("statistics")] public StatisticHolder Statistics => statistics;
+        public StatisticHolder Statistics => statistics;
 
         public Sprite Icon { get => icon; set => icon = value; }
         public string Title { get => title; set => title = value; }

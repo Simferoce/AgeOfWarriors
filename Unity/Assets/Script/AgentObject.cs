@@ -36,7 +36,6 @@ namespace Game
         public virtual IStatisticFloat MaxHealth { get; }
         public virtual IStatisticFloat Defense { get; }
         public virtual IStatisticFloat AttackPower { get; }
-        [StatisticResolve("reach")]
         public virtual IStatisticFloat Reach { get; }
         public virtual IStatisticFloat Speed { get; }
         public virtual IStatisticFloat AttackSpeed { get; }

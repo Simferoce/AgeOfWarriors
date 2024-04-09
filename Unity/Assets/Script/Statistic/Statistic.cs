@@ -1,16 +1,11 @@
 ﻿using System;
-using UnityEngine;
 
 namespace Game
 {
     [Serializable]
     public abstract class Statistic
     {
-        [SerializeField] private string title;
-
         protected object owner;
-
-        public string Title { get => title; set => title = value; }
 
         public void Initialize(object owner)
         {

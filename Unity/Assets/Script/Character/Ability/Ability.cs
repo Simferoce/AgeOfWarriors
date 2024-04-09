@@ -5,9 +5,7 @@ namespace Game
 {
     public abstract class Ability : MonoBehaviour
     {
-        [StatisticResolve("caster")]
         public Character Character { get; set; }
-        [StatisticResolve("base")]
         public AbilityDefinition Definition { get; set; }
 
         public bool IsCasting { get; set; }
@@ -15,11 +13,21 @@ namespace Game
         public virtual List<IAttackable> Targets => new List<IAttackable>();
 
         [SerializeField] private StatisticHolder statistics;
-        [StatisticResolve("statistics")] public StatisticHolder Statistics => statistics;
+        public StatisticHolder Statistics => statistics;
+
+        private void OnValidate()
+        {
+            statistics.DefineReference("caster");
+            statistics.DefineReference("base");
+        }
 
         public virtual void Initialize(Character character)
         {
             this.Character = character;
+
+            statistics.SetReference("caster", () => Character.Statistics);
+            statistics.SetReference("base", () => Definition.Statistics);
+            statistics.Initialize(character);
         }
 
         public abstract void Dispose();

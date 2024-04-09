@@ -11,13 +11,7 @@ namespace Game
     {
         [SerializeField] protected StatisticDefinition definition;
 
-        protected Func<object, StatisticContext, T> func;
-
-        public void Initialize(object owner, Func<object, StatisticContext, T> func)
-        {
-            base.Initialize(owner);
-            this.func = func;
-        }
+        public Func<object, StatisticContext, T> Function { get; set; }
 
         public override StatisticDefinition GetDefinition(StatisticContext context)
         {
@@ -26,7 +20,7 @@ namespace Game
 
         public override T GetValue(StatisticContext context)
         {
-            return owner != null ? func.Invoke(owner, context) : default(T);
+            return owner != null ? Function.Invoke(owner, context) : default(T);
         }
     }
 }

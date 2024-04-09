@@ -13,6 +13,9 @@ namespace Game
         [SerializeField] private float cost;
         [SerializeField] private float technologyGainPerSecond;
 
+        [SerializeField] private StatisticHolder statistics;
+        public StatisticHolder Statistics => statistics;
+
         public Sprite Icon { get => icon; }
         public float ProductionDuration { get => productionDuration; set => productionDuration = value; }
         public float Cost { get => cost; set => cost = value; }

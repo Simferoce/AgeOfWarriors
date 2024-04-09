@@ -19,6 +19,9 @@ namespace Game
         //[SerializeField] private StatisticDynamicFloatCharacter speed = new StatisticDynamicFloatCharacter((o, c) => o.Definition.Speed.GetValue(c) * (1 + o.modifierHandler.SpeedPercentage ?? 0f));
         //[SerializeField] private StatisticDynamicFloatCharacter reach = new StatisticDynamicFloatCharacter((o, c) => o.Definition.Reach.GetValue(c));
 
+        [SerializeField] private StatisticHolder statistics;
+        public StatisticHolder Statistics => statistics;
+
         [SerializeField] private StatisticSerializeFloat maxHealth = new StatisticSerializeFloat(10);
         [SerializeField] private StatisticSerializeFloat defense = new StatisticSerializeFloat(5);
         [SerializeField] private StatisticSerializeFloat attackSpeed = new StatisticSerializeFloat(1);
