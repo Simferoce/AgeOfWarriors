@@ -14,13 +14,5 @@ namespace Game
         {
             return targeteable.Types.All(x => !types.Contains(x));
         }
-
-        public override TargetCriteria Clone()
-        {
-            ExcludeTypeCriteria typeCriteria = new ExcludeTypeCriteria();
-            typeCriteria.types = types.ToList();
-
-            return typeCriteria;
-        }
     }
 }

@@ -19,14 +19,5 @@ namespace Game
         {
             return reference.Get(context).GetValue(context) * percentage;
         }
-
-        public IStatisticFloat Clone()
-        {
-            StatisticPercentage statisticPercentage = new StatisticPercentage();
-            statisticPercentage.reference = reference.Clone();
-            statisticPercentage.percentage = percentage;
-            statisticPercentage.definition = definition;
-            return statisticPercentage;
-        }
     }
 }

@@ -6,6 +6,5 @@ namespace Game
     public abstract class ProjectileData
     {
         public abstract ProjectileContext GetContext(Character character);
-        public abstract ProjectileData Clone();
     }
 }

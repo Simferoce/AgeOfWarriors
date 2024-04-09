@@ -9,15 +9,6 @@ namespace Game
         public StatisticDynamicFloatCharacter(Func<Character, StatisticContext, float> func) : base(func)
         {
         }
-
-        public IStatisticFloat Clone()
-        {
-            StatisticDynamicFloatCharacter statisticDynamicFloatCharacter = new StatisticDynamicFloatCharacter(func);
-            statisticDynamicFloatCharacter.func = func;
-            statisticDynamicFloatCharacter.owner = owner;
-            statisticDynamicFloatCharacter.definition = definition;
-            return statisticDynamicFloatCharacter;
-        }
     }
 
     [Serializable]

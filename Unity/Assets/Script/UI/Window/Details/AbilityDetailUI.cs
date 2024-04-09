@@ -7,9 +7,9 @@ namespace Game
     {
         [SerializeField] private Image icon;
 
-        private CharacterAbility characterAbility;
+        private Ability characterAbility;
 
-        public void Refresh(CharacterAbility characterAbility)
+        public void Refresh(Ability characterAbility)
         {
             this.characterAbility = characterAbility;
             icon.sprite = characterAbility.Definition.Icon;

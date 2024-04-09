@@ -29,12 +29,5 @@ namespace Game
                 _ => throw new NotImplementedException()
             };
         }
-
-        public override TargetCriteria Clone()
-        {
-            PriorityTargetCriteria priorityTargetCriteria = new PriorityTargetCriteria();
-            priorityTargetCriteria.comparaison = comparaison;
-            return priorityTargetCriteria;
-        }
     }
 }

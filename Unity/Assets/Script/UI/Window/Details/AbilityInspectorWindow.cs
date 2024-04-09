@@ -9,7 +9,7 @@ namespace Game
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private Image icon;
 
-        public static AbilityInspectorWindow Open(CharacterAbility ability)
+        public static AbilityInspectorWindow Open(Ability ability)
         {
             AbilityInspectorWindow abilityInspectorWindow = WindowManager.Instance.GetWindow<AbilityInspectorWindow>();
             abilityInspectorWindow.Show();

@@ -32,11 +32,11 @@ namespace Game
         public override bool IsActive { get => !IsDead; }
         public override bool IsEngaged() => GetTarget(engagedCriteria, new StatisticContext()) != null;
         public override bool IsInvulnerable => modifierHandler.Invulnerable ?? false;
-        public List<CharacterAbility> Abilities { get => abilities; set => abilities = value; }
+        public List<Ability> Abilities { get => abilities; set => abilities = value; }
 
         private StateMachine stateMachine = new StateMachine();
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
-        private List<CharacterAbility> abilities = new List<CharacterAbility>();
+        private List<Ability> abilities = new List<Ability>();
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
@@ -50,11 +50,14 @@ namespace Game
             base.Spawn(agent, spawnNumber, direction);
 
             CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
-
             stateMachine.Initialize(new MoveState(this));
+
+            GameObject abilitiesHolder = new GameObject("Abilities");
+            abilitiesHolder.transform.parent = transform;
             foreach (AbilityDefinition definition in abilitiesDefinition)
             {
-                CharacterAbility characterAbility = definition.GetAbility();
+                Ability characterAbility = definition.GetAbility();
+                characterAbility.transform.parent = abilitiesHolder.transform;
                 characterAbility.Initialize(this);
 
                 abilities.Add(characterAbility);
@@ -66,7 +69,7 @@ namespace Game
             if (IsDead)
                 return;
 
-            foreach (CharacterAbility ability in abilities)
+            foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)
                     ability.Update();
@@ -79,7 +82,7 @@ namespace Game
         {
             base.OnDestroy();
 
-            foreach (CharacterAbility ability in abilities)
+            foreach (Ability ability in abilities)
                 ability.Dispose();
         }
 
@@ -137,7 +140,7 @@ namespace Game
 
         public override void Stagger(float duration)
         {
-            foreach (CharacterAbility ability in abilities)
+            foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)
                     ability.Interrupt();

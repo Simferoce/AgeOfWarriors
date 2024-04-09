@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
-    public class AnimationBaseCharacterAbility : CharacterAbility
+    public class AnimationBaseAbility : Ability
     {
         [SerializeReference, SerializeReferenceDropdown] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeField] private CharacterAnimatorParameter.Parameter parameter = CharacterAnimatorParameter.Parameter.Ability;
@@ -16,18 +14,6 @@ namespace Game
         public override List<IAttackable> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
         public override bool IsActive { get => IsCasting || IsLingering; }
         public bool IsLingering { get; set; } = false;
-
-        public AnimationBaseCharacterAbility() : base()
-        {
-
-        }
-
-        public AnimationBaseCharacterAbility(AnimationBaseCharacterAbility other) : base(other)
-        {
-            conditions = other.conditions.Select(condition => condition.Clone()).ToList();
-            effects = other.effects.Select(condition => condition.Clone()).ToList();
-            parameter = other.parameter;
-        }
 
         public override void Initialize(Character character)
         {
@@ -127,11 +113,6 @@ namespace Game
                 effect.Interrupt();
 
             Dispose();
-        }
-
-        public override CharacterAbility Clone()
-        {
-            return new AnimationBaseCharacterAbility(this);
         }
     }
 }

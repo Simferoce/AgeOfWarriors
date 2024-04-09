@@ -9,10 +9,5 @@ namespace Game
         {
             return targeteable.IsEnemy(owner);
         }
-
-        public override TargetCriteria Clone()
-        {
-            return new IsEnemyTargetCriteria();
-        }
     }
 }

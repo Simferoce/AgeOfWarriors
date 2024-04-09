@@ -6,12 +6,6 @@ namespace Game
     [Serializable]
     public class StatisticInheritFloat : StatisticInherit<float>, IStatisticFloat
     {
-        public IStatisticFloat Clone()
-        {
-            StatisticInheritFloat statisticInherit = new StatisticInheritFloat();
-            statisticInherit.reference = reference.Clone();
-            return statisticInherit;
-        }
     }
 
     [Serializable]

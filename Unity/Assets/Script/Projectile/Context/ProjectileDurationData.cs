@@ -17,13 +17,5 @@ namespace Game
         {
             return new Context() { Duration = duration };
         }
-
-        public override ProjectileData Clone()
-        {
-            ProjectileDurationData data = new ProjectileDurationData();
-            data.duration = duration;
-
-            return data;
-        }
     }
 }

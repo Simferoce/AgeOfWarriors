@@ -5,9 +5,9 @@ namespace Game
     [Serializable]
     public abstract class AbilityCondition
     {
-        protected CharacterAbility ability;
+        protected Ability ability;
 
-        public virtual void Initialize(CharacterAbility ability)
+        public virtual void Initialize(Ability ability)
         {
             this.ability = ability;
         }
@@ -16,6 +16,5 @@ namespace Game
         public virtual void OnAbilityStarted() { }
         public virtual void OnAbilityEnded() { }
         public virtual void Interrupt() { }
-        public abstract AbilityCondition Clone();
     }
 }

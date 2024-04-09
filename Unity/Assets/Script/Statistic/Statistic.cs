@@ -23,6 +23,5 @@ namespace Game
     {
         public abstract float GetValue();
         public abstract float GetValue(StatisticContext context);
-        public IStatisticFloat Clone();
     }
 }

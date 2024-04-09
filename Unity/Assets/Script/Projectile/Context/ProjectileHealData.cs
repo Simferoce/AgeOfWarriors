@@ -17,12 +17,5 @@ namespace Game
         {
             return new Context() { HealAmount = character.AttackPower.GetValue() * healPercentageAttackPower };
         }
-
-        public override ProjectileData Clone()
-        {
-            ProjectileHealData data = new ProjectileHealData();
-            data.healPercentageAttackPower = healPercentageAttackPower;
-            return data;
-        }
     }
 }

@@ -13,14 +13,6 @@ namespace Game
         public StatisticSerializeFloat(float value) : base(value)
         {
         }
-
-        public IStatisticFloat Clone()
-        {
-            StatisticSerializeFloat statisticSerializeFloat = new StatisticSerializeFloat();
-            statisticSerializeFloat.value = value;
-            statisticSerializeFloat.definition = definition;
-            return statisticSerializeFloat;
-        }
     }
 
     [Serializable]

@@ -12,12 +12,5 @@ namespace Game
         {
             return Mathf.Abs((targeteable.ClosestPoint(owner.CenterPosition) - owner.CenterPosition).x) < distance.GetValue(context);
         }
-
-        public override TargetCriteria Clone()
-        {
-            DistanceTargetCriteria criteria = new DistanceTargetCriteria();
-            criteria.distance = (IStatisticFloat)distance.Clone();
-            return criteria;
-        }
     }
 }

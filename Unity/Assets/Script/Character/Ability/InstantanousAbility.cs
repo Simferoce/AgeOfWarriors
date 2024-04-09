@@ -1,29 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
-    public class InstantanousCharacterAbility : CharacterAbility
+    public class InstantanousAbility : Ability
     {
         [SerializeReference, SerializeReferenceDropdown] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeReference, SerializeReferenceDropdown] private List<AbilityEffect> effects = new List<AbilityEffect>();
 
         public override List<IAttackable> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
-
-        public InstantanousCharacterAbility() : base()
-        {
-
-        }
-
-
-        public InstantanousCharacterAbility(InstantanousCharacterAbility other) : base(other)
-        {
-            conditions = other.conditions.Select(x => x.Clone()).ToList();
-            effects = other.effects.Select(x => x.Clone()).ToList();
-        }
 
         public override bool CanUse()
         {
@@ -80,11 +66,6 @@ namespace Game
 
             foreach (AbilityCondition condition in conditions)
                 condition.Interrupt();
-        }
-
-        public override CharacterAbility Clone()
-        {
-            return new InstantanousCharacterAbility(this);
         }
     }
 }

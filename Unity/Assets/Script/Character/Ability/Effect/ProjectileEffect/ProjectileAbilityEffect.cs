@@ -22,15 +22,5 @@ namespace Game
             ProjectileTargetContext targetContext = new ProjectileTargetContext() { Target = Ability.Targets[0] };
             projectile.Initialize(Ability.Character, datas.Select(x => x.GetContext(Ability.Character)).Append(targetContext).ToList());
         }
-
-        public override AbilityEffect Clone()
-        {
-            ProjectileAbilityEffect projectileAbilityEffect = new ProjectileAbilityEffect();
-            projectileAbilityEffect.projectilePrefab = projectilePrefab;
-            projectileAbilityEffect.origin = origin.Clone();
-            projectileAbilityEffect.datas = datas.Select(x => x.Clone()).ToList();
-
-            return projectileAbilityEffect;
-        }
     }
 }

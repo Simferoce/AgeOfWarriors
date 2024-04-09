@@ -10,7 +10,7 @@ namespace Game
 
         private float lastUsed = 0f;
 
-        public override void Initialize(CharacterAbility ability)
+        public override void Initialize(Ability ability)
         {
             base.Initialize(ability);
             lastUsed = -cooldown;
@@ -24,14 +24,6 @@ namespace Game
         public override void OnAbilityEnded()
         {
             lastUsed = Time.time;
-        }
-
-        public override AbilityCondition Clone()
-        {
-            CooldownCondition cooldownCondition = new CooldownCondition();
-            cooldownCondition.cooldown = cooldown;
-
-            return cooldownCondition;
         }
     }
 }

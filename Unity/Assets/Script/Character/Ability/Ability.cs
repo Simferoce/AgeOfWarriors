@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
-    public abstract class CharacterAbility
+    public abstract class Ability : MonoBehaviour
     {
         [StatisticResolve("caster")]
         public Character Character { get; set; }
@@ -18,16 +16,6 @@ namespace Game
 
         [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat range;
         [StatisticResolve("range")] public IStatisticFloat Range => range;
-
-        public CharacterAbility()
-        {
-
-        }
-
-        public CharacterAbility(CharacterAbility other)
-        {
-            range = other.range.Clone();
-        }
 
         public virtual void Initialize(Character character)
         {
@@ -43,7 +31,5 @@ namespace Game
         public abstract void Use();
 
         public abstract void Interrupt();
-
-        public abstract CharacterAbility Clone();
     }
 }

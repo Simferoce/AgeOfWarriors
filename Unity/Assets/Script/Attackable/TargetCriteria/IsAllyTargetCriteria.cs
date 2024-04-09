@@ -9,10 +9,5 @@ namespace Game
         {
             return targeteable.IsAlly(owner);
         }
-
-        public override TargetCriteria Clone()
-        {
-            return new IsAllyTargetCriteria();
-        }
     }
 }

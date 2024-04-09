@@ -40,13 +40,6 @@ namespace Game
 
             return statisticResolveAttribute.Name == name;
         }
-
-        public StatisticReference<T> Clone()
-        {
-            StatisticReference<T> statisticReference = new StatisticReference<T>();
-            statisticReference.path = path;
-            return statisticReference;
-        }
     }
 
     public class StatisticContext

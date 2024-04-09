@@ -17,14 +17,5 @@ namespace Game
             Targets = ability.Character.GetTargets(criteria, new StatisticContext(("ability", ability)));
             return Targets.Count >= count;
         }
-
-        public override AbilityCondition Clone()
-        {
-            HasTargetAbilityCondition hasTargetAbilityCondition = new HasTargetAbilityCondition();
-            hasTargetAbilityCondition.criteria = criteria.Clone();
-            hasTargetAbilityCondition.count = count;
-
-            return hasTargetAbilityCondition;
-        }
     }
 }

@@ -2,10 +2,12 @@
 
 namespace Game
 {
-    public abstract class AbilityDefinition : Definition
+    [CreateAssetMenu(fileName = "AbilityDefinition", menuName = "Definition/Ability")]
+    public class AbilityDefinition : Definition
     {
         [SerializeField] private string title;
         [SerializeField] private Sprite icon;
+        [SerializeField] private GameObject prefab;
 
         [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat range;
         [StatisticResolve("range")] public IStatisticFloat Range => range;
@@ -13,6 +15,11 @@ namespace Game
         public Sprite Icon { get => icon; set => icon = value; }
         public string Title { get => title; set => title = value; }
 
-        public abstract CharacterAbility GetAbility();
+        public Ability GetAbility()
+        {
+            Ability clone = GameObject.Instantiate(prefab).GetComponent<Ability>();
+            clone.Definition = this;
+            return clone;
+        }
     }
 }

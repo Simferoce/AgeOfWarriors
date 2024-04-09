@@ -58,7 +58,7 @@ namespace Game
 
             if (agentObject as Character is Character character)
             {
-                List<CharacterAbility> abilities = character.Abilities;
+                List<Ability> abilities = character.Abilities;
                 abilities.Reverse();
 
                 int j = 0;
