@@ -10,17 +10,9 @@ namespace Game
     {
         [SerializeField] private List<AgentObject.Type> types = new List<AgentObject.Type>();
 
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
         {
             return targeteable.Types.All(x => !types.Contains(x));
-        }
-
-        public override TargetCriteria Clone()
-        {
-            ExcludeTypeCriteria typeCriteria = new ExcludeTypeCriteria();
-            typeCriteria.types = types.ToList();
-
-            return typeCriteria;
         }
     }
 }

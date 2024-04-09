@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
-    public abstract class CharacterAbility
+    public abstract class Ability : MonoBehaviour
     {
         public Character Character { get; set; }
         public AbilityDefinition Definition { get; set; }
@@ -27,7 +26,5 @@ namespace Game
         public abstract void Use();
 
         public abstract void Interrupt();
-
-        public abstract CharacterAbility Clone();
     }
 }

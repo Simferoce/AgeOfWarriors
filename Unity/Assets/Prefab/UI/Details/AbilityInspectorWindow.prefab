@@ -611,7 +611,7 @@ Transform:
   m_Children:
   - {fileID: 4802477998713397077}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &649643592807536172
 MonoBehaviour:
@@ -626,6 +626,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   title: {fileID: 1265953446987103879}
+  description: {fileID: 8270441502425901796}
   icon: {fileID: 8445436469400252677}
 --- !u!1 &5277985280375297183
 GameObject:

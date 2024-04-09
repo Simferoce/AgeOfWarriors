@@ -13,13 +13,13 @@ namespace Game
             if (projectile.Rigidbody.velocity.y > 0)
                 return false;
 
-            ProjectileHealData.Context healContext = (ProjectileHealData.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileHealData.Context);
-            ProjectileImpactData.Context targetContext = (ProjectileImpactData.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileImpactData.Context);
+            ProjectileFactoryHealContext.Context healContext = (ProjectileFactoryHealContext.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileFactoryHealContext.Context);
+            ProjectileFactoryImpactContext.Context targetContext = (ProjectileFactoryImpactContext.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileFactoryImpactContext.Context);
 
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<IHealable>(out IHealable healable)
                 && healable.IsActive
-                && targetContext.Criteria.Execute(projectile.Character, healable))
+                && targetContext.Criteria.Execute(projectile.Character, healable, projectile))
             {
                 healable.Heal(healContext.HealAmount);
 

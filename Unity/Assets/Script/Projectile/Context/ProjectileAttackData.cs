@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class ProjectileAttackData : ProjectileData
+    public class ProjectileAttackData : ProjectileFactoryContext
     {
         public class Context : ProjectileContext
         {
@@ -25,15 +25,6 @@ namespace Game
             AttackSource attackSource = new AttackSource(character);
             Attack attack = new Attack(attackSource, character.AttackPower * attackPowerPercentage, armorPenetration, 0f);
             return new Context() { Attack = attack };
-        }
-
-        public override ProjectileData Clone()
-        {
-            ProjectileAttackData data = new ProjectileAttackData();
-            data.attackPowerPercentage = attackPowerPercentage;
-            data.armorPenetration = armorPenetration;
-
-            return data;
         }
     }
 }

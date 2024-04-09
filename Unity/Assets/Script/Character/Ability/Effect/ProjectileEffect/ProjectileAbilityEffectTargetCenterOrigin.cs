@@ -15,12 +15,5 @@ namespace Game
 
             return closest + new Vector3(offset.x * ability.Ability.Character.Direction, offset.y);
         }
-
-        public override ProjectileAbilityEffectOrigin Clone()
-        {
-            ProjectileAbilityEffectTargetCenterOrigin projectileAbilityEffectTargetCenterOrigin = new ProjectileAbilityEffectTargetCenterOrigin();
-            projectileAbilityEffectTargetCenterOrigin.offset = offset;
-            return projectileAbilityEffectTargetCenterOrigin;
-        }
     }
 }

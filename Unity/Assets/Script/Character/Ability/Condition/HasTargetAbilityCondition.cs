@@ -14,17 +14,8 @@ namespace Game
 
         public override bool Execute()
         {
-            Targets = character.GetTargets(criteria);
+            Targets = ability.Character.GetTargets(criteria, ability);
             return Targets.Count >= count;
-        }
-
-        public override AbilityCondition Clone()
-        {
-            HasTargetAbilityCondition hasTargetAbilityCondition = new HasTargetAbilityCondition();
-            hasTargetAbilityCondition.criteria = criteria.Clone();
-            hasTargetAbilityCondition.count = count;
-
-            return hasTargetAbilityCondition;
         }
     }
 }

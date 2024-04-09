@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class ProjectileImpactData : ProjectileData
+    public class ProjectileFactoryImpactContext : ProjectileFactoryContext
     {
         [SerializeReference, SubclassSelector] private TargetCriteria criteria;
 
@@ -16,13 +16,6 @@ namespace Game
         public override ProjectileContext GetContext(Character character)
         {
             return new Context() { Criteria = criteria };
-        }
-
-        public override ProjectileData Clone()
-        {
-            ProjectileImpactData data = new ProjectileImpactData();
-            data.criteria = criteria.Clone();
-            return data;
         }
     }
 }

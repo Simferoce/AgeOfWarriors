@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class ProjectileDurationData : ProjectileData
+    public class ProjectileFactoryDurationContext : ProjectileFactoryContext
     {
         public class Context : ProjectileContext
         {
@@ -16,14 +16,6 @@ namespace Game
         public override ProjectileContext GetContext(Character character)
         {
             return new Context() { Duration = duration };
-        }
-
-        public override ProjectileData Clone()
-        {
-            ProjectileDurationData data = new ProjectileDurationData();
-            data.duration = duration;
-
-            return data;
         }
     }
 }

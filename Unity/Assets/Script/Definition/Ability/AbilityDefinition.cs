@@ -1,15 +1,47 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Game
 {
-    public abstract class AbilityDefinition : Definition
+    [CreateAssetMenu(fileName = "AbilityDefinition", menuName = "Definition/Ability")]
+    public class AbilityDefinition : Definition
     {
-        [SerializeField] private string title;
         [SerializeField] private Sprite icon;
+        [SerializeField] private string title;
+        [SerializeField] private string description;
+        [SerializeReference, SerializeReferenceDropdown] private List<Statistic> statistics;
+        [SerializeField] private GameObject prefab;
 
         public Sprite Icon { get => icon; set => icon = value; }
         public string Title { get => title; set => title = value; }
 
-        public abstract CharacterAbility GetAbility();
+        public Statistic<T> GetStatistic<T>(string path)
+        {
+            Statistic statistic = statistics.FirstOrDefault(x => x.Name.ToLower() == path);
+
+            Debug.Assert(statistic != null, $"Could not find path: {path}");
+
+            return statistic as Statistic<T>;
+        }
+
+        public string ParseDescription(object caller)
+        {
+            string description = this.description;
+            foreach (Statistic statistic in statistics)
+            {
+                description = description.Replace($"{{{statistic.Name.ToLower()}}}", $"{statistic.GetValueText(caller)} ({statistic.GetDescription()})");
+            }
+
+            return description;
+        }
+
+        public Ability GetAbility()
+        {
+            GameObject gameObject = Instantiate(prefab);
+            Ability ability = gameObject.GetComponent<Ability>();
+            ability.Definition = this;
+            return ability;
+        }
     }
 }

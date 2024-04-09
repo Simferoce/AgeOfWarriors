@@ -5,14 +5,9 @@ namespace Game
     [Serializable]
     public class IsInjuredTargetCriteria : TargetCriteria
     {
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
         {
             return targeteable.IsInjured();
-        }
-
-        public override TargetCriteria Clone()
-        {
-            return new IsInjuredTargetCriteria();
         }
     }
 }

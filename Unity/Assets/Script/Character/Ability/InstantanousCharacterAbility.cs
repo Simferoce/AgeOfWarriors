@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
-    public class InstantanousCharacterAbility : CharacterAbility
+    public class InstantanousCharacterAbility : Ability
     {
         [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();
@@ -28,7 +26,7 @@ namespace Game
             base.Initialize(character);
 
             foreach (AbilityCondition condition in conditions)
-                condition.Initialize(character);
+                condition.Initialize(this);
 
             foreach (AbilityEffect effect in effects)
                 effect.Initialize(this);
@@ -40,6 +38,7 @@ namespace Game
 
         public override void Use()
         {
+            IsCasting = true;
             foreach (AbilityCondition condition in conditions)
                 condition.OnAbilityStarted();
 
@@ -59,6 +58,8 @@ namespace Game
 
             foreach (AbilityCondition condition in conditions)
                 condition.OnAbilityEnded();
+
+            IsCasting = false;
         }
 
         public override void Interrupt()
@@ -68,15 +69,8 @@ namespace Game
 
             foreach (AbilityCondition condition in conditions)
                 condition.Interrupt();
-        }
 
-        public override CharacterAbility Clone()
-        {
-            InstantanousCharacterAbility instantanousCharacterAbility = new InstantanousCharacterAbility();
-            instantanousCharacterAbility.conditions = conditions.Select(x => x.Clone()).ToList();
-            instantanousCharacterAbility.effects = effects.Select(x => x.Clone()).ToList();
-
-            return instantanousCharacterAbility;
+            IsCasting = false;
         }
     }
 }

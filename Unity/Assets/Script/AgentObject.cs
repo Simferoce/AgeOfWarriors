@@ -222,7 +222,7 @@ namespace Game
             if (blocking == null)
                 return false;
 
-            return blocking.Execute(this, agentObject);
+            return blocking.Execute(this, agentObject, this);
         }
 
         public bool IsDisplaceable()

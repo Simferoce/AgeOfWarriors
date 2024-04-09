@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -10,26 +9,18 @@ namespace Game
     {
         [SerializeReference, SubclassSelector] private List<TargetCriteria> criterias = new List<TargetCriteria>();
 
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
         {
             if (criterias.Count == 0)
                 return true;
 
             foreach (TargetCriteria criteria in criterias)
             {
-                if (criteria.Execute(owner, targeteable))
+                if (criteria.Execute(owner, targeteable, caller))
                     return true;
             }
 
             return false;
-        }
-
-        public override TargetCriteria Clone()
-        {
-            OrTargetCriteria orTargetCriteria = new OrTargetCriteria();
-            orTargetCriteria.criterias = criterias.Select(x => x.Clone()).ToList();
-
-            return orTargetCriteria;
         }
     }
 }

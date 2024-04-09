@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Name: AbilityDefinition
+  m_EditorClassIdentifier: 
+  id: bef61e67e44b5944bb0a2a95304474d1
+  icon: {fileID: 0}
+  title: 
+  description: Deals {damage} damage to a target at {range} unit of distance.
+  statistics:
+  - rid: 3656781275634074114
+  - rid: 3656781275634074136
+  prefab: {fileID: 234122527794856266, guid: b33d5e147315fe146b590de2182850ec, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781275634074114
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: Range
+        reference:
+          path: character.reach
+        percentage: 1
+    - rid: 3656781275634074136
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: Damage
+        reference:
+          path: character.attackpower
+        percentage: 1

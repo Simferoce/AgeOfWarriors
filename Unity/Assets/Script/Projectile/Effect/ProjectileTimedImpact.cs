@@ -20,8 +20,8 @@ namespace Game
             base.Initialize(projectile);
             startedAt = Time.time;
 
-            ProjectileDurationData.Context durationContext = (ProjectileDurationData.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileDurationData.Context);
-            ProjectileImpactData.Context targetContext = (ProjectileImpactData.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileImpactData.Context);
+            ProjectileFactoryDurationContext.Context durationContext = (ProjectileFactoryDurationContext.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileFactoryDurationContext.Context);
+            ProjectileFactoryImpactContext.Context targetContext = (ProjectileFactoryImpactContext.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileFactoryImpactContext.Context);
             ProjectileAttackData.Context attackContext = (ProjectileAttackData.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileAttackData.Context);
 
             attack = attackContext.Attack;
@@ -34,7 +34,7 @@ namespace Game
         {
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
-                && criteria.Execute(projectile.Character, attackable))
+                && criteria.Execute(projectile.Character, attackable, projectile))
             {
                 targets.Add(attackable);
             }

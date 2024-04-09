@@ -7,14 +7,16 @@ namespace Game
     public class AbilityInspectorWindow : Window
     {
         [SerializeField] private TextMeshProUGUI title;
+        [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private Image icon;
 
-        public static AbilityInspectorWindow Open(CharacterAbility ability)
+        public static AbilityInspectorWindow Open(Ability ability)
         {
             AbilityInspectorWindow abilityInspectorWindow = WindowManager.Instance.GetWindow<AbilityInspectorWindow>();
             abilityInspectorWindow.Show();
             abilityInspectorWindow.title.text = ability.Definition.Title;
             abilityInspectorWindow.icon.sprite = ability.Definition.Icon;
+            abilityInspectorWindow.description.text = ability.Definition.ParseDescription(ability);
 
             return abilityInspectorWindow;
         }

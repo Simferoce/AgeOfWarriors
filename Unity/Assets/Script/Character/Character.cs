@@ -23,13 +23,13 @@ namespace Game
         public CharacterAnimator CharacterAnimator { get; set; }
         public float LastAbilityUsed { get; set; }
         public override bool IsActive { get => !IsDead; }
-        public override bool IsEngaged() => GetTarget(engagedCriteria) != null;
+        public override bool IsEngaged() => GetTarget(engagedCriteria, this) != null;
         public override bool IsInvulnerable => modifierHandler.Invulnerable ?? false;
-        public List<CharacterAbility> Abilities { get => abilities; set => abilities = value; }
+        public List<Ability> Abilities { get => abilities; set => abilities = value; }
 
         private StateMachine stateMachine = new StateMachine();
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
-        private List<CharacterAbility> abilities = new List<CharacterAbility>();
+        private List<Ability> abilities = new List<Ability>();
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
@@ -38,12 +38,16 @@ namespace Game
             CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
 
             stateMachine.Initialize(new MoveState(this));
+            GameObject abilitiesParent = new GameObject("Abilities");
+            abilitiesParent.transform.parent = transform;
+
             foreach (AbilityDefinition definition in abilitiesDefinition)
             {
-                CharacterAbility characterAbility = definition.GetAbility();
-                characterAbility.Initialize(this);
+                Ability ability = definition.GetAbility();
+                ability.transform.parent = abilitiesParent.transform;
+                ability.Initialize(this);
 
-                abilities.Add(characterAbility);
+                abilities.Add(ability);
             }
         }
 
@@ -52,7 +56,7 @@ namespace Game
             if (IsDead)
                 return;
 
-            foreach (CharacterAbility ability in abilities)
+            foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)
                     ability.Update();
@@ -65,8 +69,13 @@ namespace Game
         {
             base.OnDestroy();
 
-            foreach (CharacterAbility ability in abilities)
+            foreach (Ability ability in abilities)
                 ability.Dispose();
+        }
+
+        public Ability GetCurrentAbility()
+        {
+            return abilities.FirstOrDefault(a => a.IsActive);
         }
 
         public void Cast()
@@ -87,12 +96,12 @@ namespace Game
             return true;
         }
 
-        public IAttackable GetTarget(TargetCriteria criteria)
+        public IAttackable GetTarget(TargetCriteria criteria, object caller)
         {
-            return GetTargets(criteria).FirstOrDefault();
+            return GetTargets(criteria, caller).FirstOrDefault();
         }
 
-        public List<IAttackable> GetTargets(TargetCriteria criteria)
+        public List<IAttackable> GetTargets(TargetCriteria criteria, object caller)
         {
             List<IAttackable> potentialTargets = new List<IAttackable>();
             foreach (IAttackable attackable in AgentObject.All.OfType<IAttackable>())
@@ -100,7 +109,7 @@ namespace Game
                 if (!attackable.IsActive)
                     continue;
 
-                if (!criteria.Execute(this, attackable))
+                if (!criteria.Execute(this, attackable, caller))
                     continue;
 
                 potentialTargets.Add(attackable);
@@ -123,7 +132,7 @@ namespace Game
 
         public override void Stagger(float duration)
         {
-            foreach (CharacterAbility ability in abilities)
+            foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)
                     ability.Interrupt();

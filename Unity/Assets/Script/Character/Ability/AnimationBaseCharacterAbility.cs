@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
-    public class AnimationBaseCharacterAbility : CharacterAbility
+    public class AnimationBaseCharacterAbility : Ability
     {
         [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeField] private CharacterAnimatorParameter.Parameter parameter = CharacterAnimatorParameter.Parameter.Ability;
@@ -22,7 +20,7 @@ namespace Game
             base.Initialize(character);
 
             foreach (AbilityCondition condition in conditions)
-                condition.Initialize(character);
+                condition.Initialize(this);
 
             foreach (AbilityEffect effect in effects)
                 effect.Initialize(this);
@@ -115,16 +113,6 @@ namespace Game
                 effect.Interrupt();
 
             Dispose();
-        }
-
-        public override CharacterAbility Clone()
-        {
-            AnimationBaseCharacterAbility animationBaseCharacterAbility = new AnimationBaseCharacterAbility();
-            animationBaseCharacterAbility.conditions = conditions.Select(condition => condition.Clone()).ToList();
-            animationBaseCharacterAbility.effects = effects.Select(condition => condition.Clone()).ToList();
-            animationBaseCharacterAbility.parameter = parameter;
-
-            return animationBaseCharacterAbility;
         }
     }
 }

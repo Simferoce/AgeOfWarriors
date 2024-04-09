@@ -17,7 +17,7 @@ namespace Game
 
         [SerializeField] private Comparaison comparaison;
 
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
         {
             return comparaison switch
             {
@@ -28,13 +28,6 @@ namespace Game
                 Comparaison.LowerOrEqual => targeteable.Priority <= owner.Priority,
                 _ => throw new NotImplementedException()
             };
-        }
-
-        public override TargetCriteria Clone()
-        {
-            PriorityTargetCriteria priorityTargetCriteria = new PriorityTargetCriteria();
-            priorityTargetCriteria.comparaison = comparaison;
-            return priorityTargetCriteria;
         }
     }
 }

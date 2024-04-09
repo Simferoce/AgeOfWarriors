@@ -11,12 +11,12 @@ namespace Game
         public override bool Impact(GameObject collision)
         {
             ProjectileAttackData.Context attackContext = (ProjectileAttackData.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileAttackData.Context);
-            ProjectileImpactData.Context targetContext = (ProjectileImpactData.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileImpactData.Context);
+            ProjectileFactoryImpactContext.Context targetContext = (ProjectileFactoryImpactContext.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileFactoryImpactContext.Context);
 
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
                 && attackable.IsActive
-                && targetContext.Criteria.Execute(projectile.Character, attackable))
+                && targetContext.Criteria.Execute(projectile.Character, attackable, projectile))
             {
                 attackContext.Attack.AttackSource.Sources.Add(projectile);
                 attackable.TakeAttack(attackContext.Attack);

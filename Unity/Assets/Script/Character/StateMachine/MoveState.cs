@@ -25,7 +25,7 @@ namespace Game
             {
                 if (character.CanUseAbility())
                 {
-                    foreach (CharacterAbility ability in character.abilities)
+                    foreach (Ability ability in character.abilities)
                     {
                         if (ability.CanUse())
                         {
