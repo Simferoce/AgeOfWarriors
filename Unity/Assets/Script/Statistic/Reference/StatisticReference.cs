@@ -18,15 +18,22 @@ namespace Game
             object current = context.Children[node[0]];
             for (int i = 1; i < node.Length; ++i)
             {
-                PropertyInfo propertyInfo = current
-                    .GetType()
-                    .GetProperties()
-                    .Where(x => Match(x, node[i]))
-                    .FirstOrDefault();
+                if (current is StatisticHolder holder)
+                {
+                    current = holder.Get(node[i]);
+                }
+                else
+                {
+                    PropertyInfo propertyInfo = current
+                        .GetType()
+                        .GetProperties()
+                        .Where(x => Match(x, node[i]))
+                        .FirstOrDefault();
 
-                Debug.Assert(propertyInfo != null, $"Could not resolve {path} - {node[i]} from {current.GetType().Name}");
+                    Debug.Assert(propertyInfo != null, $"Could not resolve {path} - {node[i]} from {current.GetType().Name}");
 
-                current = propertyInfo.GetValue(current);
+                    current = propertyInfo.GetValue(current);
+                }
             }
 
             return (Statistic<T>)current;

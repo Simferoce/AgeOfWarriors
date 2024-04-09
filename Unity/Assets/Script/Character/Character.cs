@@ -12,12 +12,19 @@ namespace Game
         [Header("Abilities")]
         [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
 
-        [SerializeField] private StatisticDynamicFloatCharacter maxHealth = new StatisticDynamicFloatCharacter((o, c) => o.Definition.MaxHealth.GetValue(c) + o.modifierHandler.MaxHealth ?? 0);
-        [SerializeField] private StatisticDynamicFloatCharacter defense = new StatisticDynamicFloatCharacter((o, c) => o.Definition.Defense.GetValue(c) + o.modifierHandler.Defense ?? 0f);
-        [SerializeField] private StatisticDynamicFloatCharacter attackSpeed = new StatisticDynamicFloatCharacter((o, c) => o.Definition.AttackPerSeconds.GetValue(c));
-        [SerializeField] private StatisticDynamicFloatCharacter attackPower = new StatisticDynamicFloatCharacter((o, c) => o.Definition.AttackPower.GetValue(c) + o.modifierHandler.AttackPower ?? 0f);
-        [SerializeField] private StatisticDynamicFloatCharacter speed = new StatisticDynamicFloatCharacter((o, c) => o.Definition.Speed.GetValue(c) * (1 + o.modifierHandler.SpeedPercentage ?? 0f));
-        [SerializeField] private StatisticDynamicFloatCharacter reach = new StatisticDynamicFloatCharacter((o, c) => o.Definition.Reach.GetValue(c));
+        //[SerializeField] private StatisticDynamicFloatCharacter maxHealth = new StatisticDynamicFloatCharacter((o, c) => o.Definition.MaxHealth.GetValue(c) + o.modifierHandler.MaxHealth ?? 0);
+        //[SerializeField] private StatisticDynamicFloatCharacter defense = new StatisticDynamicFloatCharacter((o, c) => o.Definition.Defense.GetValue(c) + o.modifierHandler.Defense ?? 0f);
+        //[SerializeField] private StatisticDynamicFloatCharacter attackSpeed = new StatisticDynamicFloatCharacter((o, c) => o.Definition.AttackPerSeconds.GetValue(c));
+        //[SerializeField] private StatisticDynamicFloatCharacter attackPower = new StatisticDynamicFloatCharacter((o, c) => o.Definition.AttackPower.GetValue(c) + o.modifierHandler.AttackPower ?? 0f);
+        //[SerializeField] private StatisticDynamicFloatCharacter speed = new StatisticDynamicFloatCharacter((o, c) => o.Definition.Speed.GetValue(c) * (1 + o.modifierHandler.SpeedPercentage ?? 0f));
+        //[SerializeField] private StatisticDynamicFloatCharacter reach = new StatisticDynamicFloatCharacter((o, c) => o.Definition.Reach.GetValue(c));
+
+        [SerializeField] private StatisticSerializeFloat maxHealth = new StatisticSerializeFloat(10);
+        [SerializeField] private StatisticSerializeFloat defense = new StatisticSerializeFloat(5);
+        [SerializeField] private StatisticSerializeFloat attackSpeed = new StatisticSerializeFloat(1);
+        [SerializeField] private StatisticSerializeFloat attackPower = new StatisticSerializeFloat(1);
+        [SerializeField] private StatisticSerializeFloat speed = new StatisticSerializeFloat(1);
+        [SerializeField] private StatisticSerializeFloat reach = new StatisticSerializeFloat(1);
 
         public override IStatisticFloat MaxHealth => maxHealth;
         public override IStatisticFloat Defense => defense;

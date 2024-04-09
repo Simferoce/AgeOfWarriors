@@ -14,8 +14,8 @@ namespace Game
         public virtual bool IsActive => IsCasting;
         public virtual List<IAttackable> Targets => new List<IAttackable>();
 
-        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat range;
-        [StatisticResolve("range")] public IStatisticFloat Range => range;
+        [SerializeField] private StatisticHolder statistics;
+        [StatisticResolve("statistics")] public StatisticHolder Statistics => statistics;
 
         public virtual void Initialize(Character character)
         {

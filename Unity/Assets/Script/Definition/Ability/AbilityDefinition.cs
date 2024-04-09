@@ -9,8 +9,8 @@ namespace Game
         [SerializeField] private Sprite icon;
         [SerializeField] private GameObject prefab;
 
-        [SerializeReference, SerializeReferenceDropdown] private IStatisticFloat range;
-        [StatisticResolve("range")] public IStatisticFloat Range => range;
+        [SerializeField] private StatisticHolder statistics;
+        [StatisticResolve("statistics")] public StatisticHolder Statistics => statistics;
 
         public Sprite Icon { get => icon; set => icon = value; }
         public string Title { get => title; set => title = value; }

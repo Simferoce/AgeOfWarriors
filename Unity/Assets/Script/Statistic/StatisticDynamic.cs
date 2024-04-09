@@ -4,27 +4,18 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class StatisticDynamicFloatCharacter : StatisticDynamic<float, Character>, IStatisticFloat
-    {
-        public StatisticDynamicFloatCharacter(Func<Character, StatisticContext, float> func) : base(func)
-        {
-        }
-    }
+    public class StatisticDynamicFloat : StatisticDynamic<float>, IStatisticFloat { }
 
     [Serializable]
-    public class StatisticDynamic<T, O> : Statistic<T>
+    public class StatisticDynamic<T> : Statistic<T>
     {
         [SerializeField] protected StatisticDefinition definition;
-        protected O owner;
-        protected Func<O, StatisticContext, T> func;
 
-        public void Initialize(O owner)
-        {
-            this.owner = owner;
-        }
+        protected Func<object, StatisticContext, T> func;
 
-        public StatisticDynamic(Func<O, StatisticContext, T> func)
+        public void Initialize(object owner, Func<object, StatisticContext, T> func)
         {
+            base.Initialize(owner);
             this.func = func;
         }
 

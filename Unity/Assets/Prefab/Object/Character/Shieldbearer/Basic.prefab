@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be16aabdaf49824ab3fc3d80b0975fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range:
-    rid: 3656781275413348382
+  statistics:
+    statistics:
+    - rid: 3656781275634073649
   conditions:
   - rid: 3656781275413348375
   - rid: 3656781275413348376
@@ -84,16 +85,18 @@ MonoBehaviour:
     - rid: 3656781275413348381
       type: {class: StatisticInheritFloat, ns: Game, asm: Assembly-CSharp}
       data:
+        title: 
         reference:
-          path: ability.range
-    - rid: 3656781275413348382
-      type: {class: StatisticInheritFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        reference:
-          path: ability.base.range
+          path: ability.statistics.range
     - rid: 3656781275413348383
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach: 0
         damagePercentage: 1
         armorPenetration: 0
+    - rid: 3656781275634073649
+      type: {class: StatisticInheritFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        title: Range
+        reference:
+          path: ability.base.statistics.range

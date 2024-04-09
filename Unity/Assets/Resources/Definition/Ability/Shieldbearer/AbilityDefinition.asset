@@ -16,13 +16,15 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   prefab: {fileID: 1486555480770057906, guid: a4297039bf4ff62419402eec1eeda2e0, type: 3}
-  range:
-    rid: 3656781275634073600
+  statistics:
+    statistics:
+    - rid: 3656781275634073648
   references:
     version: 2
     RefIds:
-    - rid: 3656781275634073600
+    - rid: 3656781275634073648
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
+        title: Range
         definition: {fileID: 0}
-        value: 0.5
+        value: 1
