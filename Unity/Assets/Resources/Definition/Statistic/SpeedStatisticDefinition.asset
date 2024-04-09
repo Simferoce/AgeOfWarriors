@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
   m_Name: SpeedStatisticDefinition
   m_EditorClassIdentifier: 
-  id: 
+  id: b6e7acc220a4175489e13715c3932744
   icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
-  title: 
+  title: Speed

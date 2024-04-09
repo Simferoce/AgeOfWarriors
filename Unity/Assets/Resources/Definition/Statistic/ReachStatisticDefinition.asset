@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
   m_Name: ReachStatisticDefinition
   m_EditorClassIdentifier: 
-  id: 
+  id: ace6cadc457dd1b4e90c5edc491000f1
   icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
-  title: 
+  title: Reach
