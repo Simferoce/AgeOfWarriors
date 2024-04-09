@@ -35,7 +35,7 @@ namespace Game
             unitName.text = agentObject.GetDefinition().Title;
             unitIcon.sprite = agentObject.GetDefinition().Icon;
 
-            healthImage.fillAmount = agentObject.Health / agentObject.MaxHealth.GetValue(null);
+            healthImage.fillAmount = agentObject.Health / agentObject.MaxHealth;
             healthText.text = agentObject.Health.ToString();
             maxHealthText.text = agentObject.MaxHealth.ToString();
 
@@ -58,7 +58,7 @@ namespace Game
 
             if (agentObject as Character is Character character)
             {
-                List<Ability> abilities = character.Abilities;
+                List<CharacterAbility> abilities = character.Abilities;
                 abilities.Reverse();
 
                 int j = 0;

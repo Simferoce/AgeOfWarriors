@@ -12,9 +12,9 @@ namespace Game
         }
 
         [SerializeField] private new Rigidbody2D rigidbody;
-        [SerializeReference, SerializeReferenceDropdown] private ProjectileDeath projectileDeath = new ProjectileStickDeath();
-        [SerializeReference, SerializeReferenceDropdown] private List<ProjectileMovement> projectileMovements = new List<ProjectileMovement>();
-        [SerializeReference, SerializeReferenceDropdown] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
+        [SerializeReference, SubclassSelector] private ProjectileDeath projectileDeath = new ProjectileStickDeath();
+        [SerializeReference, SubclassSelector] private List<ProjectileMovement> projectileMovements = new List<ProjectileMovement>();
+        [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
 
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public List<ProjectileContext> Contexts { get => contexts; set => contexts = value; }

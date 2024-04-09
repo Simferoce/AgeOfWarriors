@@ -5,9 +5,9 @@ namespace Game
     [Serializable]
     public abstract class AbilityEffect
     {
-        public Ability Ability { get; protected set; }
+        public CharacterAbility Ability { get; protected set; }
 
-        public virtual void Initialize(Ability ability)
+        public virtual void Initialize(CharacterAbility ability)
         {
             this.Ability = ability;
         }
@@ -17,5 +17,6 @@ namespace Game
         public virtual void OnAbilityEnded() { }
         public virtual void OnAbilityStarted() { }
         public virtual void Interrupt() { }
+        public abstract AbilityEffect Clone();
     }
 }

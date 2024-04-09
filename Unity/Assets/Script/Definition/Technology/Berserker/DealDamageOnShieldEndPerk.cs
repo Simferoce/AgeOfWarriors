@@ -44,7 +44,7 @@ namespace Game
                     if (!agent.IsActive)
                         continue;
 
-                    if (Mathf.Abs((attackable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach.GetValue(null) * percentageReach)
+                    if (Mathf.Abs((attackable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * percentageReach)
                         continue;
 
                     Attack attack = new Attack(new AttackSource(new List<IAttackSource>() { character, this }), damage, 0, 0);

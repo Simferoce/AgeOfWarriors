@@ -6,7 +6,7 @@ namespace Game
     [Serializable]
     public class ProjectileImpactData : ProjectileData
     {
-        [SerializeReference, SerializeReferenceDropdown] private TargetCriteria criteria;
+        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
 
         public class Context : ProjectileContext
         {
@@ -16,6 +16,13 @@ namespace Game
         public override ProjectileContext GetContext(Character character)
         {
             return new Context() { Criteria = criteria };
+        }
+
+        public override ProjectileData Clone()
+        {
+            ProjectileImpactData data = new ProjectileImpactData();
+            data.criteria = criteria.Clone();
+            return data;
         }
     }
 }

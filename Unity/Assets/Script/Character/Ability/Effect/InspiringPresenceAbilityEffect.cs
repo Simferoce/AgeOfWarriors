@@ -65,5 +65,17 @@ namespace Game
         {
             startedAt = null;
         }
+
+        public override AbilityEffect Clone()
+        {
+            InspiringPresenceAbilityEffect inspiringPresenceAbilityEffect = new InspiringPresenceAbilityEffect();
+            inspiringPresenceAbilityEffect.duration = duration;
+            inspiringPresenceAbilityEffect.area = area;
+            inspiringPresenceAbilityEffect.buffDuration = buffDuration;
+            inspiringPresenceAbilityEffect.defense = defense;
+            inspiringPresenceAbilityEffect.inspiringPresenceModifierDefinition = inspiringPresenceModifierDefinition;
+
+            return inspiringPresenceAbilityEffect;
+        }
     }
 }

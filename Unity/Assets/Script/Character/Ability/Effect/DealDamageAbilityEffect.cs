@@ -17,7 +17,17 @@ namespace Game
                 return;
 
             IAttackable target = Ability.Targets[0];
-            target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { Ability.Character, this }), damagePercentage * Ability.Character.AttackPower.GetValue(new StatisticContext(("ability", Ability.Statistics))), armorPenetration, leach));
+            target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { Ability.Character, this }), damagePercentage * Ability.Character.AttackPower, armorPenetration, leach));
+        }
+
+        public override AbilityEffect Clone()
+        {
+            DealDamageAbilityEffect dealDamageAbilityEffect = new DealDamageAbilityEffect();
+            dealDamageAbilityEffect.leach = leach;
+            dealDamageAbilityEffect.damagePercentage = damagePercentage;
+            dealDamageAbilityEffect.armorPenetration = armorPenetration;
+
+            return dealDamageAbilityEffect;
         }
     }
 }

@@ -34,5 +34,14 @@ namespace Game
                 }
             }
         }
+
+        public override AbilityEffect Clone()
+        {
+            HuntersMarkAbilityEffect huntersMarkAbilityEffect = new HuntersMarkAbilityEffect();
+            huntersMarkAbilityEffect.hunterMarkModifierDefinition = hunterMarkModifierDefinition;
+            huntersMarkAbilityEffect.damage = damage;
+            huntersMarkAbilityEffect.duration = duration;
+            return huntersMarkAbilityEffect;
+        }
     }
 }

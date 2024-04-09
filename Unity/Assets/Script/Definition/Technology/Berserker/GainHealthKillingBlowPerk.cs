@@ -20,7 +20,7 @@ namespace Game
             private void AgentObject_OnAttackLanded(Attack attack, float damageDealt, bool killingBlow)
             {
                 if (killingBlow && modifiable is IHealable healable)
-                    healable.Heal(amount * healable.MaxHealth.GetValue());
+                    healable.Heal(amount * healable.MaxHealth);
             }
 
             public override void Dispose()

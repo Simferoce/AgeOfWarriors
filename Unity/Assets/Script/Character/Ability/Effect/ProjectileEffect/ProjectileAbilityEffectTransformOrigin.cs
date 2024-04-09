@@ -18,5 +18,12 @@ namespace Game
 
             return Vector3.zero;
         }
+
+        public override ProjectileAbilityEffectOrigin Clone()
+        {
+            ProjectileAbilityEffectTransformOrigin projectileAbilityEffectTransformOrigin = new ProjectileAbilityEffectTransformOrigin();
+            projectileAbilityEffectTransformOrigin.origin = origin;
+            return projectileAbilityEffectTransformOrigin;
+        }
     }
 }

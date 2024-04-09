@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -11,7 +10,7 @@ namespace Game
             private float threshold;
             private float amount;
 
-            public override float? AttackPower => modifiable is IHealable healable && healable.Health / healable.MaxHealth.GetValue() < threshold ? amount : null;
+            public override float? AttackPower => modifiable is IHealable healable && healable.Health / healable.MaxHealth < threshold ? amount : null;
 
             public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float threshold, float amount) : base(modifiable, modifierDefinition)
             {
