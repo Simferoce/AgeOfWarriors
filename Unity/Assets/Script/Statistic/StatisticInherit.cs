@@ -11,7 +11,7 @@ namespace Game
     [Serializable]
     public class StatisticInherit<T> : Statistic<T>
     {
-        [SerializeField] protected StatisticReference<T> reference;
+        [SerializeField] protected StatisticReference<Statistic<T>> reference;
 
         public override StatisticDefinition GetDefinition(StatisticContext context)
         {

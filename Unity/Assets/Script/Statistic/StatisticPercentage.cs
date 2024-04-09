@@ -7,7 +7,7 @@ namespace Game
     public class StatisticPercentage : Statistic<float>, IStatisticFloat
     {
         [SerializeField] private StatisticDefinition definition;
-        [SerializeField] private StatisticReference<float> reference;
+        [SerializeField] private StatisticReference<Statistic<float>> reference;
         [SerializeField] private float percentage;
 
         public override StatisticDefinition GetDefinition(StatisticContext context)

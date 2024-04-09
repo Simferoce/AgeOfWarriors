@@ -10,19 +10,28 @@ namespace Game
     {
         [SerializeField] private string path;
 
-        public Statistic<T> Get(StatisticContext context)
+        public T Get(StatisticContext context)
         {
             string[] node = path.Split('.');
+
+            Debug.Assert(context.Children.ContainsKey(node[0]), $"Could not resolve {node[0]}");
             object current = context.Children[node[0]];
             for (int i = 1; i < node.Length; ++i)
             {
                 if (current is StatisticHolder holder)
                 {
                     current = holder.Get(node[i]);
+                    foreach (var reference in holder.GetReferences())
+                    {
+                        context.Children[reference.Item1] = reference.Item2;
+                    }
+
+                    context.Children[node[i]] = holder;
+                    context.Children["this"] = holder;
                 }
             }
 
-            Statistic<T> statistic = (Statistic<T>)current;
+            T statistic = (T)current;
             Debug.Assert(statistic != null, $"Could not resolve {path}");
 
             return statistic;

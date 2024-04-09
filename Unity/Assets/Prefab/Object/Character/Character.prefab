@@ -164,15 +164,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e9fa78c47bc8147bc985d3200f0230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  types: 
   hitbox: {fileID: 8271833102721241429}
   targetPosition: {fileID: 7840795603293673896}
   blocking:
     rid: 4528059405929545734
   rigidbody: {fileID: 9215057588866617565}
-  abilities: []
+  abilitiesDefinition: []
+  statistics:
+    references:
+    - name: base
+    statistics:
+    - name: Reach
+      statistic:
+        rid: 3656781275634073767
+  maxHealth:
+    definition: {fileID: 0}
+    value: 10
+  defense:
+    definition: {fileID: 0}
+    value: 5
+  attackSpeed:
+    definition: {fileID: 0}
+    value: 1
+  attackPower:
+    definition: {fileID: 0}
+    value: 1
+  speed:
+    definition: {fileID: 0}
+    value: 1
+  reach:
+    definition: {fileID: 0}
+    value: 1
   references:
     version: 2
     RefIds:
+    - rid: 3656781275634073767
+      type: {class: StatisticInheritFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        reference:
+          path: this.base.Reach
     - rid: 4528059405929545734
       type: {class: OrTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:

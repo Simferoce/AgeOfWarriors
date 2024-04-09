@@ -33,10 +33,8 @@ namespace Game
 
         public void Initialize(object owner)
         {
-            foreach (StatisticReference statisticReference in statistics)
-            {
-                statisticReference.Statistic.Initialize(owner);
-            }
+            foreach (IStatisticOwn statisticReference in statistics.Select(x => x.Statistic).OfType<IStatisticOwn>())
+                statisticReference.Owner = owner;
         }
 
         public object Get(string name)
@@ -56,6 +54,11 @@ namespace Game
         public object GetReference(string name)
         {
             return references.FirstOrDefault(x => x.Name.ToLower() == name.ToLower())?.Function?.Invoke();
+        }
+
+        public List<(string, StatisticHolder)> GetReferences()
+        {
+            return references.Select(x => (x.Name, x.Function.Invoke())).ToList();
         }
 
         public void DefineReference(string name)

@@ -48,14 +48,16 @@ namespace Game
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
         private List<Ability> abilities = new List<Ability>();
 
+        private void OnValidate()
+        {
+            if (statistics != null)
+                statistics.DefineReference("base");
+        }
+
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
-            maxHealth.Initialize(this);
-            defense.Initialize(this);
-            attackSpeed.Initialize(this);
-            attackPower.Initialize(this);
-            speed.Initialize(this);
-            reach.Initialize(this);
+            statistics.SetReference("base", () => Definition.Statistics);
+            statistics.Initialize(this);
 
             base.Spawn(agent, spawnNumber, direction);
 

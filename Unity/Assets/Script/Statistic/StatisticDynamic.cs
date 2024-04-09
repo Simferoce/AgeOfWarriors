@@ -7,11 +7,12 @@ namespace Game
     public class StatisticDynamicFloat : StatisticDynamic<float>, IStatisticFloat { }
 
     [Serializable]
-    public class StatisticDynamic<T> : Statistic<T>
+    public class StatisticDynamic<T> : Statistic<T>, IStatisticOwn
     {
         [SerializeField] protected StatisticDefinition definition;
 
         public Func<object, StatisticContext, T> Function { get; set; }
+        public object Owner { get; set; }
 
         public override StatisticDefinition GetDefinition(StatisticContext context)
         {
@@ -20,7 +21,7 @@ namespace Game
 
         public override T GetValue(StatisticContext context)
         {
-            return owner != null ? Function.Invoke(owner, context) : default(T);
+            return Owner != null ? Function.Invoke(Owner, context) : default(T);
         }
     }
 }

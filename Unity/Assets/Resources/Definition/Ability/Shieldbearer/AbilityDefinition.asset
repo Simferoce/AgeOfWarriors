@@ -21,12 +21,14 @@ MonoBehaviour:
     statistics:
     - name: Range
       statistic:
-        rid: 3656781275634073698
+        rid: 3656781275634073745
   references:
     version: 2
     RefIds:
-    - rid: 3656781275634073698
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781275634073745
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
         definition: {fileID: 0}
-        value: 1
+        reference:
+          path: caster.Reach
+        percentage: 1

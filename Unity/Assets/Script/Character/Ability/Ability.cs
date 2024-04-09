@@ -27,7 +27,7 @@ namespace Game
 
             statistics.SetReference("caster", () => Character.Statistics);
             statistics.SetReference("base", () => Definition.Statistics);
-            statistics.Initialize(character);
+            statistics.Initialize(this);
         }
 
         public abstract void Dispose();

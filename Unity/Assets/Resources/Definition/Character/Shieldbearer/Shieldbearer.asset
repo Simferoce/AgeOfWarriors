@@ -18,11 +18,61 @@ MonoBehaviour:
   productionDuration: 2
   cost: 15
   technologyGainPerSecond: 0
+  statistics:
+    references: []
+    statistics:
+    - name: Reach
+      statistic:
+        rid: 3656781275634073770
   baseDefinition: {fileID: 0}
-  reach: 0.5
-  speed: 0.5
-  attackPerSeconds: 0.5
-  attackPower: 1
-  maxHealth: 10
-  defense: 15
+  reach:
+    rid: 3656781275634073747
+  speed:
+    rid: 3656781275634073748
+  attackPerSeconds:
+    rid: 3656781275634073749
+  attackPower:
+    rid: 3656781275634073750
+  maxHealth:
+    rid: 3656781275634073751
+  defense:
+    rid: 3656781275634073752
   prefab: {fileID: 6705402225686340843, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781275634073747
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 0.5
+    - rid: 3656781275634073748
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 1
+    - rid: 3656781275634073749
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 1
+    - rid: 3656781275634073750
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 1
+    - rid: 3656781275634073751
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 10
+    - rid: 3656781275634073752
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 5
+    - rid: 3656781275634073770
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 0}
+        value: 1

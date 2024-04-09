@@ -5,12 +5,7 @@ namespace Game
     [Serializable]
     public abstract class Statistic
     {
-        protected object owner;
 
-        public void Initialize(object owner)
-        {
-            this.owner = owner;
-        }
     }
 
     [Serializable]
