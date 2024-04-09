@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b31875769f7aa0a4d8da8a7fce88dec8, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
   m_Name: MaxHealthStatisticDefinition
   m_EditorClassIdentifier: 
-  id: 73d27da68cca71f4ebc2e071904b1f80
+  id: 
   icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
-  title: Max Health
+  title: 

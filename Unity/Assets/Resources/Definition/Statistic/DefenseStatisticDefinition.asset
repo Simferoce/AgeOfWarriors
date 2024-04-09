@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80267bc1a5940e94a82768b1c6e35b61, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
   m_Name: DefenseStatisticDefinition
   m_EditorClassIdentifier: 
-  id: 88db1a8e78d4069418a57b284c51ab2a
+  id: 7f97419c07cf32d49ae612434c1fb6b8
   icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
-  title: Defense
+  title: 

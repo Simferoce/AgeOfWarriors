@@ -9,14 +9,14 @@ namespace Game
         [SerializeField] private StatisticReference<float> reference;
         [SerializeField] private float percentage;
 
-        public override string GetDescription()
+        public override string GetDescription(object caller)
         {
-            return $"{percentage * 100} % of {reference.Path}";
+            return $"{percentage * 100} % of {reference.GetMapper(caller).GetDefinition().Title}";
         }
 
         public override float GetValue(object caller)
         {
-            return reference.GetValue(caller) * percentage;
+            return reference.GetMapper(caller).GetValue() * percentage;
         }
     }
 }

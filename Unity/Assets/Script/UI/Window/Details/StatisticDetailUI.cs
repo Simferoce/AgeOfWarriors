@@ -9,13 +9,16 @@ namespace Game
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI label;
         [SerializeField] private TextMeshProUGUI value;
-        [SerializeField] private StatisticDefinition statisticDefinition;
+        [SerializeField] private StatisticReference<float> reference;
 
         public void Refresh(AgentObject agentObject)
         {
-            icon.sprite = statisticDefinition.Icon;
-            label.text = statisticDefinition.Title;
-            value.text = statisticDefinition.GetFormatedValue(agentObject);
+            StatisticReference<float>.StatisticReferenceMapper statisticReferenceMapper = reference.GetMapper(agentObject);
+            StatisticDefinition definition = statisticReferenceMapper.GetDefinition();
+
+            icon.sprite = definition.Icon;
+            label.text = definition.Title;
+            value.text = statisticReferenceMapper.GetValue().ToString();
         }
     }
 }

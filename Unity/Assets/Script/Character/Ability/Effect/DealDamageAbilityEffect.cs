@@ -17,7 +17,7 @@ namespace Game
                 return;
 
             IAttackable target = Ability.Targets[0];
-            target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { Ability.Character, this }), damage.GetValue(Ability), armorPenetration.GetValue(Ability), leach.GetValue(Ability)));
+            target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { Ability.Character, this }), damage.GetMapper(Ability).GetValue(), armorPenetration.GetMapper(Ability).GetValue(), leach.GetMapper(Ability).GetValue()));
         }
     }
 }

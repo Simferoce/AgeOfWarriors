@@ -2203,6 +2203,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.path
+      value: character.attackspeed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
@@ -2689,6 +2693,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.path
+      value: character.defense
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: 88db1a8e78d4069418a57b284c51ab2a, type: 2}
@@ -2827,6 +2835,10 @@ PrefabInstance:
     - target: {fileID: 1507662913855931189, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.path
+      value: character.speed
       objectReference: {fileID: 0}
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: statisticDefinition
@@ -3199,6 +3211,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.path
+      value: character.reach
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: 90759ef1a056ec2469b562a0243206ea, type: 2}
@@ -3569,6 +3585,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.path
+      value: character.maxhealth
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
@@ -3822,6 +3842,10 @@ PrefabInstance:
     - target: {fileID: 1507662913855931189, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.path
+      value: character.attackpower
       objectReference: {fileID: 0}
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: statisticDefinition

@@ -16,13 +16,13 @@ namespace Game
         public Sprite Icon { get => icon; set => icon = value; }
         public string Title { get => title; set => title = value; }
 
-        public Statistic<T> GetStatistic<T>(string path)
+        public Statistic GetStatistic(string path)
         {
             Statistic statistic = statistics.FirstOrDefault(x => x.Name.ToLower() == path);
 
             Debug.Assert(statistic != null, $"Could not find path: {path}");
 
-            return statistic as Statistic<T>;
+            return statistic as Statistic;
         }
 
         public string ParseDescription(object caller)
@@ -30,7 +30,7 @@ namespace Game
             string description = this.description;
             foreach (Statistic statistic in statistics)
             {
-                description = description.Replace($"{{{statistic.Name.ToLower()}}}", $"{statistic.GetValueText(caller)} ({statistic.GetDescription()})");
+                description = description.Replace($"{{{statistic.Name.ToLower()}}}", $"{statistic.GetValueText(caller)} ({statistic.GetDescription(caller)})");
             }
 
             return description;

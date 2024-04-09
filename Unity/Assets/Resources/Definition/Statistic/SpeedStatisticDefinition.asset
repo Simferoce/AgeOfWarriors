@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bd90d577c3d72740969cb687f47a68d, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
   m_Name: SpeedStatisticDefinition
   m_EditorClassIdentifier: 
-  id: b6e7acc220a4175489e13715c3932744
+  id: 
   icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
-  title: Speed
+  title: 

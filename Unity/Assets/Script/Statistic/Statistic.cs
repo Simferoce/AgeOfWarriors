@@ -7,10 +7,12 @@ namespace Game
     public abstract class Statistic
     {
         [SerializeField] private string name;
+        [SerializeField] private StatisticDefinition definition;
 
         public string Name { get => name; set => name = value; }
+        public StatisticDefinition Definition { get => definition; set => definition = value; }
 
-        public abstract string GetDescription();
+        public abstract string GetDescription(object caller);
         public abstract string GetValueText(object caller);
     }
 
