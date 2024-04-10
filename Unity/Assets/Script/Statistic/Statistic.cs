@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class Statistic
+    public abstract class Statistic
     {
         [SerializeField, HideInInspector] protected string description;
         [SerializeField] private StatisticDefinition definition;
@@ -16,18 +16,13 @@ namespace Game
             description = $"{Definition?.Title ?? "Undefined"} - {GetDescription()}";
         }
 
-        public virtual string GetDescription() { return ""; }
-        public virtual string GetValueText(object caller) { return ""; }
+        public abstract string GetDescriptionFormatted(object caller);
+        public abstract string GetDescription();
     }
 
     [Serializable]
     public abstract class Statistic<T> : Statistic
     {
         public abstract T GetValue(object caller);
-
-        public override string GetValueText(object caller)
-        {
-            return GetValue(caller).ToString();
-        }
     }
 }

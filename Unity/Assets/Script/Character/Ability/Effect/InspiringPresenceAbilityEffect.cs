@@ -8,10 +8,10 @@ namespace Game
     [Serializable]
     public class InspiringPresenceAbilityEffect : AbilityEffect, ILingeringAbilityEffect
     {
-        [SerializeField] private float duration = 5f;
-        [SerializeField] private float area = 2f;
-        [SerializeField] private float buffDuration = 3f;
-        [SerializeField] private float defense = 5f;
+        [SerializeField] private StatisticReference<float> duration;
+        [SerializeField] private StatisticReference<float> area;
+        [SerializeField] private StatisticReference<float> buffDuration;
+        [SerializeField] private StatisticReference<float> defense;
         [SerializeField] private InspiringPresenceModifierDefinition inspiringPresenceModifierDefinition;
 
         private float? startedAt = null;
@@ -29,14 +29,14 @@ namespace Game
             if (character.IsDead)
                 return true;
 
-            if (Time.time - startedAt > duration)
+            if (Time.time - startedAt > duration.GetValueOrThrow(Ability))
             {
                 return true;
             }
 
             List<Character> characters = AgentObject.All.OfType<Character>()
                 .Where(x => x.Faction == character.Faction
-                    && Mathf.Abs(character.transform.position.x - x.transform.position.x) < area)
+                    && Mathf.Abs(character.transform.position.x - x.transform.position.x) < area.GetValueOrThrow(Ability))
                 .ToList();
 
             foreach (Character characterToBuff in characters)
@@ -51,8 +51,8 @@ namespace Game
                 }
                 else
                 {
-                    inspiringPresenceBuff = new InspiringPresenceModifierDefinition.Modifier(character, inspiringPresenceModifierDefinition, defense, this)
-                        .With(new CharacterModifierTimeElement(buffDuration));
+                    inspiringPresenceBuff = new InspiringPresenceModifierDefinition.Modifier(character, inspiringPresenceModifierDefinition, defense.GetValueOrThrow(Ability), this)
+                        .With(new CharacterModifierTimeElement(buffDuration.GetValueOrThrow(Ability)));
 
                     characterToBuff.AddModifier(inspiringPresenceBuff);
                 }

@@ -92,6 +92,11 @@ namespace Game
             return TryGetValue(caller, out T value) == true ? value : default(T);
         }
 
+        public T GetValueOrThrow(object caller)
+        {
+            return TryGetValue(caller, out T value) == true ? value : throw new Exception($"Could not resolve the statistic {definition} for {mapper.GetType().Name} with {caller.ToString()}");
+        }
+
         public override string ToString()
         {
             return $"{{{Definition}}}";

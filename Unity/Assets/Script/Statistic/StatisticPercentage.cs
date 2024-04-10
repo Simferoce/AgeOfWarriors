@@ -9,9 +9,14 @@ namespace Game
         [SerializeField] private StatisticReference<float> reference;
         [SerializeField, Range(0, 5)] private float percentage;
 
+        public override string GetDescriptionFormatted(object caller)
+        {
+            return $"<color=#{Definition?.ColorHex}>{GetValue(caller)}</color>";
+        }
+
         public override string GetDescription()
         {
-            return $"<color=#{reference?.Definition?.ColorHex}>({percentage * 100} % of {reference?.Definition?.Title ?? "Undefined"})</color>";
+            return $"({percentage * 100} % of {reference?.Definition?.Title ?? "Undefined"})";
         }
 
         public override float GetValue(object caller)

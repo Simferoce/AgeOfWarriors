@@ -10,9 +10,14 @@ namespace Game
     {
         [SerializeField] private T value;
 
+        public override string GetDescriptionFormatted(object caller)
+        {
+            return $"<color=#{Definition?.ColorHex}>{GetValue(caller)}</color>";
+        }
+
         public override string GetDescription()
         {
-            return value.ToString();
+            return "";
         }
 
         public override T GetValue(object caller)

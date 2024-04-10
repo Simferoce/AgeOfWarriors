@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1722971267097484216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3785b5bfebc5674689630fe258eeb38, type: 3}
+  m_Name: InspiringPresenceModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 06d847f75400868408459a0345d91d65
+  title: 
+  icon: {fileID: 0}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Name: InspiringPresence
+  m_EditorClassIdentifier: 
+  id: 2fe57550d51a64f4897979212d8ac68d
+  icon: {fileID: 21300000, guid: 19370790a791d4fc99ee3830251366f8, type: 3}
+  title: Inspiring Presence
+  description: Increase the defense by {defense} of ally in {range} unit of distance
+    for {buff_duration} seconds.
+  statistics:
+  - rid: 3656781299071320137
+  - rid: 3656781299071320139
+  - rid: 3656781299071320140
+  - rid: 3656781299071320142
+  prefab: {fileID: 4759011807880347097, guid: 11db9b6c5b59ecc418da60fe709596c6, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781299071320137
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Duration - 5
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        value: 5
+    - rid: 3656781299071320139
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Buff Duration - 3
+        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
+        value: 3
+    - rid: 3656781299071320140
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Range - (100 % of Reach)
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+          mapper:
+            rid: 3656781299071320141
+        percentage: 1
+    - rid: 3656781299071320141
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781299071320142
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Defense - 25
+        definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
+        value: 25

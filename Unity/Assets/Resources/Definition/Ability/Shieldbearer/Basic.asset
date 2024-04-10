@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
-  m_Name: AbilityDefinition
+  m_Name: Basic
   m_EditorClassIdentifier: 
   id: bef61e67e44b5944bb0a2a95304474d1
   icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
