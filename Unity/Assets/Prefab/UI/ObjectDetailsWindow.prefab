@@ -562,8 +562,8 @@ RectTransform:
   - {fileID: 6903767728400934597}
   - {fileID: 1583680607846551912}
   - {fileID: 5924557105470678880}
-  - {fileID: 5558116462113183876}
   - {fileID: 4705334969869883895}
+  - {fileID: 5558116462113183876}
   m_Father: {fileID: 8806537578736235563}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2210,6 +2210,18 @@ PrefabInstance:
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.mapperFactory
+      value: 4528059587469246702
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246702]
+      value: Assembly-CSharp Game.CharacterMapperFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246702].statistic
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3903976262602705768, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2700,6 +2712,18 @@ PrefabInstance:
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: 88db1a8e78d4069418a57b284c51ab2a, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.mapperFactory
+      value: 4528059587469246700
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246700]
+      value: Assembly-CSharp Game.CharacterMapperFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246700].statistic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3903976262602705768, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2844,6 +2868,18 @@ PrefabInstance:
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: b6e7acc220a4175489e13715c3932744, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.mapperFactory
+      value: 4528059587469246704
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246704]
+      value: Assembly-CSharp Game.CharacterMapperFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246704].statistic
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3903976262602705768, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3218,6 +3254,18 @@ PrefabInstance:
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: 90759ef1a056ec2469b562a0243206ea, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.mapperFactory
+      value: 4528059587469246703
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246703]
+      value: Assembly-CSharp Game.CharacterMapperFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246703].statistic
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3903976262602705768, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3592,6 +3640,18 @@ PrefabInstance:
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.mapperFactory
+      value: 4528059587469246699
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246699]
+      value: Assembly-CSharp Game.CharacterMapperFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246699].statistic
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3903976262602705768, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -3851,6 +3911,18 @@ PrefabInstance:
       propertyPath: statisticDefinition
       value: 
       objectReference: {fileID: 11400000, guid: 97dd5fea2dc7e34408b95ddc16e6217f, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: reference.mapperFactory
+      value: 4528059587469246701
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246701]
+      value: Assembly-CSharp Game.CharacterMapperFactory
+      objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[4528059587469246701].statistic
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3903976262602705768, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -27,13 +27,25 @@ MonoBehaviour:
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
         name: Range
+        definition: {fileID: 0}
         reference:
-          path: character.reach
+          mapperFactory:
+            rid: 4528059587469246696
         percentage: 1
     - rid: 3656781275634074136
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
         name: Damage
+        definition: {fileID: 0}
         reference:
-          path: character.attackpower
+          mapperFactory:
+            rid: 4528059587469246695
         percentage: 1
+    - rid: 4528059587469246695
+      type: {class: CharacterMapperFactory, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: 2
+    - rid: 4528059587469246696
+      type: {class: CharacterMapperFactory, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: 4

@@ -53,6 +53,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 3656781275634074089
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781275634074091
@@ -73,13 +75,25 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          path: ability.range
+          mapperFactory:
+            rid: 4528059587469246692
     - rid: 3656781275634074095
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach:
-          path: 
+          mapperFactory:
+            rid: -2
         damage:
-          path: ability.damage
+          mapperFactory:
+            rid: 4528059587469246694
         armorPenetration:
-          path: 
+          mapperFactory:
+            rid: -2
+    - rid: 4528059587469246692
+      type: {class: AbilityMapperFactory, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: range
+    - rid: 4528059587469246694
+      type: {class: AbilityMapperFactory, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: damage

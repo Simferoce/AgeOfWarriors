@@ -13,7 +13,7 @@ namespace Game
 
         public void Refresh(AgentObject agentObject)
         {
-            StatisticReference<float>.StatisticReferenceMapper statisticReferenceMapper = reference.GetMapper(agentObject);
+            StatisticReferenceMapper<float> statisticReferenceMapper = reference.GetMapper(agentObject);
             StatisticDefinition definition = statisticReferenceMapper.GetDefinition();
 
             icon.sprite = definition.Icon;

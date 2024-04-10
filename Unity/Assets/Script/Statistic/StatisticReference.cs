@@ -4,85 +4,80 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class StatisticReference<T>
+    public abstract class MapperFactory
     {
-        [SerializeField] private string path;
+        public abstract StatisticReferenceMapper<T> GetMapper<T>(object context);
+    }
 
-        public string Path { get => path; set => path = value; }
-
-        public StatisticReferenceMapper GetMapper(object caller)
+    [Serializable]
+    public class CharacterMapperFactory : MapperFactory
+    {
+        public enum Statistic
         {
-            string[] split = path.ToLower().Split(".");
-            string current = split[0];
-            string next = split.Length > 0 ? path.Substring(current.Length + 1) : string.Empty;
-
-            switch (current)
-            {
-                case "ability":
-                    return new AbilityReferenceMapper(caller as Ability, next);
-                case "character":
-                    Character character = caller as Character;
-                    if (character == null)
-                        character = (caller as Ability)?.Character;
-                    return new CharacterReferenceMapper(character, next);
-            }
-
-            throw new NotImplementedException();
+            MaxHealth,
+            Defense,
+            AttackPower,
+            AttackSpeed,
+            Reach,
+            Speed
         }
 
-        public abstract class StatisticReferenceMapper
+        public class CharacterReferenceMapper<T> : StatisticReferenceMapper<Character, T>
         {
-            public abstract StatisticDefinition GetDefinition();
-            public abstract T GetValue();
-        }
+            private Statistic statistic;
 
-        public abstract class StatisticReferenceMapper<O> : StatisticReferenceMapper
-        {
-            protected O context;
-            protected string path;
-
-            public StatisticReferenceMapper(O context, string path)
+            public CharacterReferenceMapper(Character context, Statistic statistic) : base(context)
             {
-                this.context = context;
-                this.path = path;
-            }
-        }
-
-        public class CharacterReferenceMapper : StatisticReferenceMapper<Character>
-        {
-            public CharacterReferenceMapper(Character context, string path) : base(context, path)
-            {
+                this.statistic = statistic;
             }
 
             public override StatisticDefinition GetDefinition()
-                => path switch
+                => statistic switch
                 {
-                    "maxhealth" => StatisticDefinition.MaxHealth,
-                    "defense" => StatisticDefinition.Defense,
-                    "attackpower" => StatisticDefinition.AttackPower,
-                    "attackspeed" => StatisticDefinition.AttackSpeed,
-                    "speed" => StatisticDefinition.Speed,
-                    "reach" => StatisticDefinition.Reach,
+                    Statistic.MaxHealth => StatisticDefinition.MaxHealth,
+                    Statistic.Defense => StatisticDefinition.Defense,
+                    Statistic.AttackPower => StatisticDefinition.AttackPower,
+                    Statistic.AttackSpeed => StatisticDefinition.AttackSpeed,
+                    Statistic.Speed => StatisticDefinition.Speed,
+                    Statistic.Reach => StatisticDefinition.Reach,
                     _ => throw new NotImplementedException()
                 };
 
             public override T GetValue()
-                => path switch
+                => statistic switch
                 {
-                    "maxhealth" => (T)(object)context.MaxHealth,
-                    "defense" => (T)(object)context.Defense,
-                    "attackpower" => (T)(object)context.AttackPower,
-                    "attackspeed" => (T)(object)context.AttackSpeed,
-                    "speed" => (T)(object)context.Speed,
-                    "reach" => (T)(object)context.Reach,
+                    Statistic.MaxHealth => (T)(object)context.MaxHealth,
+                    Statistic.Defense => (T)(object)context.Defense,
+                    Statistic.AttackPower => (T)(object)context.AttackPower,
+                    Statistic.AttackSpeed => (T)(object)context.AttackSpeed,
+                    Statistic.Speed => (T)(object)context.Speed,
+                    Statistic.Reach => (T)(object)context.Reach,
                     _ => throw new NotImplementedException()
                 };
         }
 
-        public class AbilityReferenceMapper : StatisticReferenceMapper<Ability>
+        [SerializeField] private Statistic statistic;
+
+        public override StatisticReferenceMapper<T> GetMapper<T>(object context)
         {
-            public AbilityReferenceMapper(Ability context, string path) : base(context, path)
+            Character character = context as Character;
+            if (character == null)
+                character = (context as Ability)?.Character;
+
+            return new CharacterReferenceMapper<T>(character, statistic);
+        }
+    }
+
+    [Serializable]
+    public class AbilityMapperFactory : MapperFactory
+    {
+        public class AbilityReferenceMapper<T> : StatisticReferenceMapper<Ability, T>
+        {
+            private string path;
+
+            public AbilityReferenceMapper(Ability context, string path) : base(context)
             {
+                this.path = path;
             }
 
             public override StatisticDefinition GetDefinition()
@@ -94,6 +89,44 @@ namespace Game
             {
                 return (context.Definition.GetStatistic(path) as Statistic<T>).GetValue(context);
             }
+        }
+
+        [SerializeField] private string statistic;
+
+        public override StatisticReferenceMapper<T> GetMapper<T>(object context)
+        {
+            return new AbilityReferenceMapper<T>(context as Ability, statistic);
+        }
+    }
+
+    [Serializable]
+    public class StatisticReference<T>
+    {
+        [SerializeReference, SerializeReferenceDropdown] private MapperFactory mapperFactory;
+
+        public StatisticReferenceMapper<T> GetMapper(object caller)
+        {
+            return mapperFactory?.GetMapper<T>(caller);
+        }
+    }
+
+    public abstract class StatisticReferenceMapper
+    {
+        public abstract StatisticDefinition GetDefinition();
+    }
+
+    public abstract class StatisticReferenceMapper<T> : StatisticReferenceMapper
+    {
+        public abstract T GetValue();
+    }
+
+    public abstract class StatisticReferenceMapper<O, T> : StatisticReferenceMapper<T>
+    {
+        protected O context;
+
+        public StatisticReferenceMapper(O context)
+        {
+            this.context = context;
         }
     }
 }
