@@ -4,16 +4,20 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public abstract class Statistic
+    public class Statistic
     {
-        [SerializeField] private string name;
+        [SerializeField, HideInInspector] protected string description;
         [SerializeField] private StatisticDefinition definition;
 
-        public string Name { get => name; set => name = value; }
         public StatisticDefinition Definition { get => definition; set => definition = value; }
 
-        public abstract string GetDescription(object caller);
-        public abstract string GetValueText(object caller);
+        public void SetDescription()
+        {
+            description = $"{Definition?.Title ?? "Undefined"} - {GetDescription()}";
+        }
+
+        public virtual string GetDescription() { return ""; }
+        public virtual string GetValueText(object caller) { return ""; }
     }
 
     [Serializable]

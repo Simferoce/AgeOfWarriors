@@ -6,76 +6,22 @@ namespace Game
     public class StatisticDefinition : Definition
     {
         private static StatisticDefinition attackPower;
-        public static StatisticDefinition AttackPower
-        {
-            get
-            {
-                if (attackPower == null)
-                    attackPower = Resources.Load<StatisticDefinition>("Definition/Statistic/AttackPowerStatisticDefinition");
-
-                return attackPower;
-            }
-        }
+        public static StatisticDefinition AttackPower => attackPower ??= Resources.Load<StatisticDefinition>("Definition/Statistic/AttackPowerStatisticDefinition");
 
         private static StatisticDefinition reach;
-        public static StatisticDefinition Reach
-        {
-            get
-            {
-                if (reach == null)
-                    reach = Resources.Load<StatisticDefinition>("Definition/Statistic/ReachStatisticDefinition");
-
-                return reach;
-            }
-        }
+        public static StatisticDefinition Reach => reach ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ReachStatisticDefinition");
 
         private static StatisticDefinition maxHealth;
-        public static StatisticDefinition MaxHealth
-        {
-            get
-            {
-                if (maxHealth == null)
-                    maxHealth = Resources.Load<StatisticDefinition>("Definition/Statistic/MaxHealthStatisticDefinition");
-
-                return maxHealth;
-            }
-        }
+        public static StatisticDefinition MaxHealth => maxHealth ??= maxHealth = Resources.Load<StatisticDefinition>("Definition/Statistic/MaxHealthStatisticDefinition");
 
         private static StatisticDefinition defense;
-        public static StatisticDefinition Defense
-        {
-            get
-            {
-                if (defense == null)
-                    defense = Resources.Load<StatisticDefinition>("Definition/Statistic/DefenseStatisticDefinition");
-
-                return defense;
-            }
-        }
+        public static StatisticDefinition Defense => defense ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DefenseStatisticDefinition");
 
         private static StatisticDefinition attackSpeed;
-        public static StatisticDefinition AttackSpeed
-        {
-            get
-            {
-                if (attackSpeed == null)
-                    attackSpeed = Resources.Load<StatisticDefinition>("Definition/Statistic/AttackSpeedStatisticDefinition");
-
-                return attackSpeed;
-            }
-        }
+        public static StatisticDefinition AttackSpeed => attackSpeed ??= attackSpeed = Resources.Load<StatisticDefinition>("Definition/Statistic/AttackSpeedStatisticDefinition");
 
         private static StatisticDefinition speed;
-        public static StatisticDefinition Speed
-        {
-            get
-            {
-                if (speed == null)
-                    speed = Resources.Load<StatisticDefinition>("Definition/Statistic/SpeedStatisticDefinition");
-
-                return speed;
-            }
-        }
+        public static StatisticDefinition Speed => speed ??= speed = Resources.Load<StatisticDefinition>("Definition/Statistic/SpeedStatisticDefinition");
 
         [SerializeField] private Sprite icon;
         [SerializeField] private string title;

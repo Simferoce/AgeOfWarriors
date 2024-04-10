@@ -3,130 +3,98 @@ using UnityEngine;
 
 namespace Game
 {
-    [Serializable]
-    public abstract class MapperFactory
+    #region Float Field
+    public interface MapperFloat
     {
-        public abstract StatisticReferenceMapper<T> GetMapper<T>(object context);
+
     }
 
     [Serializable]
-    public class CharacterMapperFactory : MapperFactory
+    public class StatisticReference<T> : StatisticReference<T, MapperFloat> { }
+
+    [Serializable]
+    public class AbilityMapperFloat : AbilityMapper<float>, MapperFloat { }
+
+    [Serializable]
+    public class CharacterMapperFloat : CharacterMapper<float>, MapperFloat { }
+    #endregion
+
+    #region Mapper
+    [Serializable]
+    public abstract class Mapper
     {
-        public enum Statistic
-        {
-            MaxHealth,
-            Defense,
-            AttackPower,
-            AttackSpeed,
-            Reach,
-            Speed
-        }
 
-        public class CharacterReferenceMapper<T> : StatisticReferenceMapper<Character, T>
-        {
-            private Statistic statistic;
+    }
 
-            public CharacterReferenceMapper(Character context, Statistic statistic) : base(context)
-            {
-                this.statistic = statistic;
-            }
+    [Serializable]
+    public abstract class Mapper<T> : Mapper
+    {
+        public abstract bool TryGetValue(object context, StatisticDefinition definition, out T value);
+    }
 
-            public override StatisticDefinition GetDefinition()
-                => statistic switch
-                {
-                    Statistic.MaxHealth => StatisticDefinition.MaxHealth,
-                    Statistic.Defense => StatisticDefinition.Defense,
-                    Statistic.AttackPower => StatisticDefinition.AttackPower,
-                    Statistic.AttackSpeed => StatisticDefinition.AttackSpeed,
-                    Statistic.Speed => StatisticDefinition.Speed,
-                    Statistic.Reach => StatisticDefinition.Reach,
-                    _ => throw new NotImplementedException()
-                };
-
-            public override T GetValue()
-                => statistic switch
-                {
-                    Statistic.MaxHealth => (T)(object)context.MaxHealth,
-                    Statistic.Defense => (T)(object)context.Defense,
-                    Statistic.AttackPower => (T)(object)context.AttackPower,
-                    Statistic.AttackSpeed => (T)(object)context.AttackSpeed,
-                    Statistic.Speed => (T)(object)context.Speed,
-                    Statistic.Reach => (T)(object)context.Reach,
-                    _ => throw new NotImplementedException()
-                };
-        }
-
-        [SerializeField] private Statistic statistic;
-
-        public override StatisticReferenceMapper<T> GetMapper<T>(object context)
+    [Serializable]
+    public class CharacterMapper<T> : Mapper<T>
+    {
+        public override bool TryGetValue(object context, StatisticDefinition definition, out T value)
         {
             Character character = context as Character;
             if (character == null)
                 character = (context as Ability)?.Character;
 
-            return new CharacterReferenceMapper<T>(character, statistic);
+            if (character == null)
+            {
+                value = default(T);
+                return false;
+            }
+
+            return character.TryGetStatisticValue<T>(definition, out value);
         }
     }
 
     [Serializable]
-    public class AbilityMapperFactory : MapperFactory
+    public class AbilityMapper<T> : Mapper<T>
     {
-        public class AbilityReferenceMapper<T> : StatisticReferenceMapper<Ability, T>
+        public override bool TryGetValue(object context, StatisticDefinition definition, out T value)
         {
-            private string path;
-
-            public AbilityReferenceMapper(Ability context, string path) : base(context)
+            Ability ability = context as Ability;
+            if (ability == null)
             {
-                this.path = path;
+                value = default(T);
+                return false;
             }
 
-            public override StatisticDefinition GetDefinition()
-            {
-                return context.Definition.GetStatistic(path).Definition;
-            }
-
-            public override T GetValue()
-            {
-                return (context.Definition.GetStatistic(path) as Statistic<T>).GetValue(context);
-            }
-        }
-
-        [SerializeField] private string statistic;
-
-        public override StatisticReferenceMapper<T> GetMapper<T>(object context)
-        {
-            return new AbilityReferenceMapper<T>(context as Ability, statistic);
+            return ability.TryGetValue(definition, out value);
         }
     }
+    #endregion
 
     [Serializable]
-    public class StatisticReference<T>
+    public class StatisticReference<T, M>
     {
-        [SerializeReference, SerializeReferenceDropdown] private MapperFactory mapperFactory;
+        [SerializeField] private StatisticDefinition definition;
+        [SerializeReference, SerializeReferenceDropdown] private M mapper;
 
-        public StatisticReferenceMapper<T> GetMapper(object caller)
+        public StatisticDefinition Definition { get => definition; set => definition = value; }
+
+        public bool TryGetValue(object caller, out T value)
         {
-            return mapperFactory?.GetMapper<T>(caller);
+            if (mapper == null)
+            {
+                value = default(T);
+                return false;
+            }
+
+            return (mapper as Mapper<T>).TryGetValue(caller, Definition, out value);
         }
-    }
 
-    public abstract class StatisticReferenceMapper
-    {
-        public abstract StatisticDefinition GetDefinition();
-    }
-
-    public abstract class StatisticReferenceMapper<T> : StatisticReferenceMapper
-    {
-        public abstract T GetValue();
-    }
-
-    public abstract class StatisticReferenceMapper<O, T> : StatisticReferenceMapper<T>
-    {
-        protected O context;
-
-        public StatisticReferenceMapper(O context)
+        public T GetValueOrDefault(object caller)
         {
-            this.context = context;
+            return TryGetValue(caller, out T value) == true ? value : default(T);
+        }
+
+        public override string ToString()
+        {
+            return $"{{{Definition}}}";
         }
     }
 }

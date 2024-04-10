@@ -10,7 +10,10 @@ namespace Game
 
         public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
         {
-            return Mathf.Abs((targeteable.ClosestPoint(owner.CenterPosition) - owner.CenterPosition).x) < reference.GetMapper(caller).GetValue();
+            if (reference.TryGetValue(caller, out float value))
+                throw new Exception($"Could not resolve the reference {reference} from {caller}");
+
+            return Mathf.Abs((targeteable.ClosestPoint(owner.CenterPosition) - owner.CenterPosition).x) < value;
         }
     }
 }

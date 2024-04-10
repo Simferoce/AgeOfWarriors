@@ -31,6 +31,42 @@ namespace Game
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
         private List<Ability> abilities = new List<Ability>();
 
+        public override bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, out T value)
+        {
+            if (statisticDefinition == StatisticDefinition.MaxHealth)
+            {
+                value = (T)(object)MaxHealth;
+                return true;
+            }
+            else if (statisticDefinition == StatisticDefinition.Defense)
+            {
+                value = (T)(object)Defense;
+                return true;
+            }
+            else if (statisticDefinition == StatisticDefinition.AttackPower)
+            {
+                value = (T)(object)AttackPower;
+                return true;
+            }
+            else if (statisticDefinition == StatisticDefinition.AttackSpeed)
+            {
+                value = (T)(object)AttackSpeed;
+                return true;
+            }
+            else if (statisticDefinition == StatisticDefinition.Speed)
+            {
+                value = (T)(object)Speed;
+                return true;
+            }
+            else if (statisticDefinition == StatisticDefinition.Reach)
+            {
+                value = (T)(object)Reach;
+                return true;
+            }
+
+            return base.TryGetStatisticValue<T>(statisticDefinition, out value);
+        }
+
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
             base.Spawn(agent, spawnNumber, direction);

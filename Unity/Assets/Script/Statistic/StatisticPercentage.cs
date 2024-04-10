@@ -7,16 +7,16 @@ namespace Game
     public class StatisticPercentage : Statistic<float>
     {
         [SerializeField] private StatisticReference<float> reference;
-        [SerializeField] private float percentage;
+        [SerializeField, Range(0, 5)] private float percentage;
 
-        public override string GetDescription(object caller)
+        public override string GetDescription()
         {
-            return $"{percentage * 100} % of {reference.GetMapper(caller).GetDefinition().Title}";
+            return $"{percentage * 100} % of {reference?.Definition?.Title ?? "Undefined"}";
         }
 
         public override float GetValue(object caller)
         {
-            return reference.GetMapper(caller).GetValue() * percentage;
+            return reference.TryGetValue(caller, out float value) == true ? value * percentage : 0f;
         }
     }
 }

@@ -17,35 +17,33 @@ MonoBehaviour:
   title: 
   description: Deals {damage} damage to a target at {range} unit of distance.
   statistics:
-  - rid: 3656781275634074114
-  - rid: 3656781275634074136
+  - rid: 3656781299071320075
+  - rid: 3656781299071320102
   prefab: {fileID: 234122527794856266, guid: b33d5e147315fe146b590de2182850ec, type: 3}
   references:
     version: 2
     RefIds:
-    - rid: 3656781275634074114
+    - rid: 3656781299071320075
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
-        name: Range
-        definition: {fileID: 0}
+        description: Damage - 100 % of Attack Power
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
         reference:
-          mapperFactory:
-            rid: 4528059587469246696
+          definition: {fileID: 11400000, guid: 97dd5fea2dc7e34408b95ddc16e6217f, type: 2}
+          mapper:
+            rid: 3656781299071320101
         percentage: 1
-    - rid: 3656781275634074136
+    - rid: 3656781299071320101
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781299071320102
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
-        name: Damage
-        definition: {fileID: 0}
+        description: Range - 100 % of Reach
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
         reference:
-          mapperFactory:
-            rid: 4528059587469246695
+          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+          mapper:
+            rid: 3656781299071320103
         percentage: 1
-    - rid: 4528059587469246695
-      type: {class: CharacterMapperFactory, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: 2
-    - rid: 4528059587469246696
-      type: {class: CharacterMapperFactory, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: 4
+    - rid: 3656781299071320103
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}

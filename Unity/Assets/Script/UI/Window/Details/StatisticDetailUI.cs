@@ -13,12 +13,11 @@ namespace Game
 
         public void Refresh(AgentObject agentObject)
         {
-            StatisticReferenceMapper<float> statisticReferenceMapper = reference.GetMapper(agentObject);
-            StatisticDefinition definition = statisticReferenceMapper.GetDefinition();
+            StatisticDefinition definition = reference.Definition;
 
             icon.sprite = definition.Icon;
             label.text = definition.Title;
-            value.text = statisticReferenceMapper.GetValue().ToString();
+            value.text = reference.GetValueOrDefault(agentObject).ToString();
         }
     }
 }

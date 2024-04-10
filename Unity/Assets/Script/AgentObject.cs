@@ -81,6 +81,12 @@ namespace Game
             SpawnAttackable();
         }
 
+        public virtual bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, out T value)
+        {
+            value = default;
+            return false;
+        }
+
         #region Modifiable
         protected ModifierHandler modifierHandler = new ModifierHandler();
 

@@ -10,7 +10,7 @@ namespace Game
     {
         [SerializeField] private T value;
 
-        public override string GetDescription(object caller)
+        public override string GetDescription()
         {
             return value.ToString();
         }

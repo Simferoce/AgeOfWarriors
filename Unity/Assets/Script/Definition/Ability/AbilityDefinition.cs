@@ -10,19 +10,25 @@ namespace Game
         [SerializeField] private Sprite icon;
         [SerializeField] private string title;
         [SerializeField] private string description;
-        [SerializeReference, SerializeReferenceDropdown] private List<Statistic> statistics;
+        [SerializeReference] private List<Statistic> statistics;
         [SerializeField] private GameObject prefab;
 
         public Sprite Icon { get => icon; set => icon = value; }
         public string Title { get => title; set => title = value; }
 
-        public Statistic GetStatistic(string path)
+        public bool TryGetValue<T>(object context, StatisticDefinition definition, out T value)
         {
-            Statistic statistic = statistics.FirstOrDefault(x => x.Name.ToLower() == path);
-
-            Debug.Assert(statistic != null, $"Could not find path: {path}");
-
-            return statistic as Statistic;
+            Statistic<T> statistic = statistics.FirstOrDefault(x => x.Definition == definition) as Statistic<T>;
+            if (statistic == null)
+            {
+                value = default(T);
+                return false;
+            }
+            else
+            {
+                value = statistic.GetValue(context);
+                return true;
+            }
         }
 
         public string ParseDescription(object caller)
@@ -30,7 +36,7 @@ namespace Game
             string description = this.description;
             foreach (Statistic statistic in statistics)
             {
-                description = description.Replace($"{{{statistic.Name.ToLower()}}}", $"{statistic.GetValueText(caller)} ({statistic.GetDescription(caller)})");
+                description = description.Replace($"{{{statistic.Definition.Title.ToLower()}}}", $"{statistic.GetValueText(caller)} ({statistic.GetDescription()})");
             }
 
             return description;
