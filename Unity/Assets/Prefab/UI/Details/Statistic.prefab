@@ -36,8 +36,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -59.7, y: 0}
-  m_SizeDelta: {x: 146.4361, y: 24}
+  m_AnchoredPosition: {x: -78.338, y: 0}
+  m_SizeDelta: {x: 109.16, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8150489144217796216
 MonoBehaviour:
@@ -100,8 +100,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 184.30801, y: -12}
-  m_SizeDelta: {x: 51.448, y: 24}
+  m_AnchoredPosition: {x: 141.2, y: -12}
+  m_SizeDelta: {x: 48.2532, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8281993317231770783
 CanvasRenderer:
@@ -133,8 +133,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Value
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d0a2232da339e8441a6e31442315ebef, type: 2}
+  m_sharedMaterial: {fileID: -1906704254224132954, guid: d0a2232da339e8441a6e31442315ebef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -312,7 +312,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 124.40333, y: 24}
+  m_SizeDelta: {x: 85.16, y: 24}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4761693244394356294
 CanvasRenderer:
@@ -344,8 +344,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Name:'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d0a2232da339e8441a6e31442315ebef, type: 2}
+  m_sharedMaterial: {fileID: -1906704254224132954, guid: d0a2232da339e8441a6e31442315ebef, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -465,4 +465,12 @@ MonoBehaviour:
   icon: {fileID: 3833707603354914104}
   label: {fileID: 2511676713244847377}
   value: {fileID: 4422978766217377672}
-  statisticDefinition: {fileID: 0}
+  reference:
+    definition: {fileID: 0}
+    mapper:
+      rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

@@ -11,7 +11,7 @@ namespace Game
 
         public override string GetDescription()
         {
-            return $"{percentage * 100} % of {reference?.Definition?.Title ?? "Undefined"}";
+            return $"<color=#{reference?.Definition?.ColorHex}>({percentage * 100} % of {reference?.Definition?.Title ?? "Undefined"})</color>";
         }
 
         public override float GetValue(object caller)

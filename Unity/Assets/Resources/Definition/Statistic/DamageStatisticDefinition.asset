@@ -15,3 +15,4 @@ MonoBehaviour:
   id: 00df8ac314188b945945353a3fbb705b
   icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
   title: Damage
+  color: {r: 1, g: 0.5, b: 0, a: 1}

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Game
 {
@@ -25,8 +26,11 @@ namespace Game
 
         [SerializeField] private Sprite icon;
         [SerializeField] private string title;
+        [SerializeField] private Color color;
 
-        public Sprite Icon { get => icon; }
-        public string Title { get => title; }
+        public Sprite Icon => icon;
+        public string Title => title;
+        public string TitleFormatted => $"<color=#{ColorHex}>{Title}</color>";
+        public string ColorHex => color.ToHexString();
     }
 }

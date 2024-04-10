@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AbilityDefinition
   m_EditorClassIdentifier: 
   id: bef61e67e44b5944bb0a2a95304474d1
-  icon: {fileID: 0}
-  title: 
+  icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
+  title: Basic
   description: Deals {damage} damage to a target at {range} unit of distance.
   statistics:
   - rid: 3656781299071320075
