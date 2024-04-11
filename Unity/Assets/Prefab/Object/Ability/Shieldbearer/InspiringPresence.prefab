@@ -47,7 +47,7 @@ MonoBehaviour:
   conditions:
   - rid: 3656781299071320131
   - rid: 3656781301283291177
-  parameter: 1
+  parameter: 3
   effects:
   - rid: 3656781299071320134
   references:
