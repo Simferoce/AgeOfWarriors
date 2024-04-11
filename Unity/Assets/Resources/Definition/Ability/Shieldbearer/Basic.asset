@@ -26,10 +26,10 @@ MonoBehaviour:
     - rid: 3656781299071320075
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
-        description: Damage - 100 % of Attack Power
+        description: Damage - (100 % of Attack Power)
         definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
         reference:
-          definition: {fileID: 11400000, guid: 97dd5fea2dc7e34408b95ddc16e6217f, type: 2}
+          definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
           mapper:
             rid: 3656781299071320101
         percentage: 1
@@ -38,7 +38,7 @@ MonoBehaviour:
     - rid: 3656781299071320102
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
-        description: Range - 100 % of Reach
+        description: Range - (100 % of Reach)
         definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
         reference:
           definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}

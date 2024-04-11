@@ -29,13 +29,13 @@ namespace Game
     [Serializable]
     public abstract class Mapper<T> : Mapper
     {
-        public abstract bool TryGetValue(object context, StatisticDefinition definition, out T value);
+        public abstract bool TryGetValue(object context, StatisticDefinition definition, StatisticType type, out T value);
     }
 
     [Serializable]
     public class CharacterMapper<T> : Mapper<T>
     {
-        public override bool TryGetValue(object context, StatisticDefinition definition, out T value)
+        public override bool TryGetValue(object context, StatisticDefinition definition, StatisticType type, out T value)
         {
             Character character = context as Character;
             if (character == null)
@@ -47,14 +47,14 @@ namespace Game
                 return false;
             }
 
-            return character.TryGetStatisticValue<T>(definition, out value);
+            return character.TryGetStatisticValue<T>(definition, type, out value);
         }
     }
 
     [Serializable]
     public class AbilityMapper<T> : Mapper<T>
     {
-        public override bool TryGetValue(object context, StatisticDefinition definition, out T value)
+        public override bool TryGetValue(object context, StatisticDefinition definition, StatisticType type, out T value)
         {
             Ability ability = context as Ability;
             if (ability == null)
@@ -68,6 +68,14 @@ namespace Game
     }
     #endregion
 
+    public enum StatisticType
+    {
+        Base,
+        Modified,
+        Total
+    }
+
+
     [Serializable]
     public class StatisticReference<T, M>
     {
@@ -76,7 +84,7 @@ namespace Game
 
         public StatisticDefinition Definition { get => definition; set => definition = value; }
 
-        public bool TryGetValue(object caller, out T value)
+        public bool TryGetValue(object caller, out T value, StatisticType type = StatisticType.Total)
         {
             if (mapper == null)
             {
@@ -84,17 +92,17 @@ namespace Game
                 return false;
             }
 
-            return (mapper as Mapper<T>).TryGetValue(caller, Definition, out value);
+            return (mapper as Mapper<T>).TryGetValue(caller, Definition, type, out value);
         }
 
-        public T GetValueOrDefault(object caller)
+        public T GetValueOrDefault(object caller, StatisticType type = StatisticType.Total)
         {
-            return TryGetValue(caller, out T value) == true ? value : default(T);
+            return TryGetValue(caller, out T value, type) == true ? value : default(T);
         }
 
-        public T GetValueOrThrow(object caller)
+        public T GetValueOrThrow(object caller, StatisticType type = StatisticType.Total)
         {
-            return TryGetValue(caller, out T value) == true ? value : throw new Exception($"Could not resolve the statistic {definition} for {mapper.GetType().Name} with {caller.ToString()}");
+            return TryGetValue(caller, out T value, type) == true ? value : throw new Exception($"Could not resolve the statistic {definition} for {mapper.GetType().Name} with {caller.ToString()}");
         }
 
         public override string ToString()

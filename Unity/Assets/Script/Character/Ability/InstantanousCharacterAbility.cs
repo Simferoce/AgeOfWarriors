@@ -32,7 +32,7 @@ namespace Game
                 effect.Initialize(this);
         }
 
-        public override void Update()
+        public override void Tick()
         {
         }
 

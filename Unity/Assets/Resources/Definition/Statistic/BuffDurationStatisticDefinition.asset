@@ -15,4 +15,4 @@ MonoBehaviour:
   id: cbdb2f244b5bcc947aa217190b37b0f5
   icon: {fileID: 0}
   title: Buff Duration
-  color: {r: 0, g: 0, b: 1, a: 1}
+  color: {r: 0, g: 0, b: 0, a: 0}

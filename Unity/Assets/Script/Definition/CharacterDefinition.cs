@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game
 {
@@ -11,7 +12,7 @@ namespace Game
         [Header("Character - Statistic")]
         [SerializeField] private float reach = 1f;
         [SerializeField] private float speed = 1f;
-        [SerializeField] private float attackPerSeconds = 1f;
+        [SerializeField, FormerlySerializedAs("attackPerSeconds")] private float attackSpeed = 1f;
         [SerializeField] private float attackPower = 1f;
         [SerializeField] private float maxHealth = 10f;
         [SerializeField] private float defense = 5f;
@@ -21,7 +22,7 @@ namespace Game
 
         public float Reach { get => reach; }
         public float Speed { get => speed; }
-        public float AttackPerSeconds { get => attackPerSeconds; }
+        public float AttackSpeed { get => attackSpeed; }
         public float AttackPower { get => attackPower; }
         public float MaxHealth { get => maxHealth; }
         public float Defense { get => defense; }

@@ -48,7 +48,7 @@ namespace Game
             AnimatorEventChannel.Subscribe(Character.CharacterAnimator.Animator, AnimatorEventChannel.Event.OnExit, AnimatorEventChannel.Id.Ability, OnCastEnded);
         }
 
-        public override void Update()
+        public override void Tick()
         {
             if (IsCasting == true)
                 return;

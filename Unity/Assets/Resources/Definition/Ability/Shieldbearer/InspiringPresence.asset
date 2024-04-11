@@ -30,29 +30,24 @@ MonoBehaviour:
   id: 2fe57550d51a64f4897979212d8ac68d
   icon: {fileID: 21300000, guid: 19370790a791d4fc99ee3830251366f8, type: 3}
   title: Inspiring Presence
-  description: Increase the defense by {defense} of ally in {range} unit of distance
+  description: Increase defense by {defense} of any ally in {range} unit of distance
     for {buff_duration} seconds.
   statistics:
-  - rid: 3656781299071320137
   - rid: 3656781299071320139
   - rid: 3656781299071320140
   - rid: 3656781299071320142
+  - rid: 3656781301283291175
   prefab: {fileID: 4759011807880347097, guid: 11db9b6c5b59ecc418da60fe709596c6, type: 3}
   references:
     version: 2
     RefIds:
-    - rid: 3656781299071320137
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Duration - 5
-        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
-        value: 5
     - rid: 3656781299071320139
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: Buff Duration - 3
+        description: 'Buff Duration - '
         definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
-        value: 3
+        value: 7
+        showIcon: 0
     - rid: 3656781299071320140
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
@@ -68,6 +63,14 @@ MonoBehaviour:
     - rid: 3656781299071320142
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: Defense - 25
+        description: 'Defense - '
         definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
         value: 25
+        showIcon: 1
+    - rid: 3656781301283291175
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: 'Cooldown - '
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        value: 5
+        showIcon: 1

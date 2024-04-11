@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: SpeedStatisticDefinition
   m_EditorClassIdentifier: 
   id: b6e7acc220a4175489e13715c3932744
-  icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
+  icon: {fileID: 1597650535, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   title: Speed
+  color: {r: 0, g: 0.7490196, b: 0.31209156, a: 1}

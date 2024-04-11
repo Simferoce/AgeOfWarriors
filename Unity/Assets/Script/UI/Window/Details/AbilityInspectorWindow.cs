@@ -8,7 +8,9 @@ namespace Game
     {
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI description;
+        [SerializeField] private TextMeshProUGUI cooldownText;
         [SerializeField] private Image icon;
+        [SerializeField] private StatisticReference<float> cooldown;
 
         public static AbilityInspectorWindow Open(Ability ability)
         {
@@ -17,6 +19,16 @@ namespace Game
             abilityInspectorWindow.title.text = ability.Definition.Title;
             abilityInspectorWindow.icon.sprite = ability.Definition.Icon;
             abilityInspectorWindow.description.text = ability.Definition.ParseDescription(ability);
+
+            if (abilityInspectorWindow.cooldown.TryGetValue(ability, out float value))
+            {
+                abilityInspectorWindow.cooldownText.alpha = 1f;
+                abilityInspectorWindow.cooldownText.text = $"<color=#{abilityInspectorWindow.cooldown.Definition.ColorHex}>{value.ToString() + abilityInspectorWindow.cooldown.Definition.GetTextIcon}</color>";
+            }
+            else
+            {
+                abilityInspectorWindow.cooldownText.alpha = 0f;
+            }
 
             return abilityInspectorWindow;
         }

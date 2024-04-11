@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: AttackSpeedStatisticDefinition
   m_EditorClassIdentifier: 
   id: d71a191ae10eaf24f8e2f26ada07d54a
-  icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
+  icon: {fileID: 1748120172, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   title: Attack Speed
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}

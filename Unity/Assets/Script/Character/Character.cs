@@ -14,7 +14,7 @@ namespace Game
 
         public override float MaxHealth { get => Definition.MaxHealth + modifierHandler.MaxHealth ?? 0; }
         public override float Defense { get => Definition.Defense + modifierHandler.Defense ?? 0f; }
-        public override float AttackSpeed { get => Definition.AttackPerSeconds; }
+        public override float AttackSpeed { get => Definition.AttackSpeed; }
         public override float AttackPower { get => Definition.AttackPower + modifierHandler.AttackPower ?? 0f; }
         public override float Speed { get => Definition.Speed * (1 + modifierHandler.SpeedPercentage ?? 0f); }
         public override float Reach { get => Definition.Reach; }
@@ -31,40 +31,76 @@ namespace Game
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
         private List<Ability> abilities = new List<Ability>();
 
-        public override bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, out T value)
+        public override bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
         {
             if (statisticDefinition == StatisticDefinition.MaxHealth)
             {
-                value = (T)(object)MaxHealth;
+                if (statisticType == StatisticType.Base)
+                    value = (T)(object)Definition.MaxHealth;
+                else if (statisticType == StatisticType.Modified)
+                    value = (T)(object)(MaxHealth - Definition.MaxHealth);
+                else
+                    value = (T)(object)MaxHealth;
+
                 return true;
             }
             else if (statisticDefinition == StatisticDefinition.Defense)
             {
-                value = (T)(object)Defense;
+                if (statisticType == StatisticType.Base)
+                    value = (T)(object)Definition.Defense;
+                else if (statisticType == StatisticType.Modified)
+                    value = (T)(object)(Defense - Definition.Defense);
+                else
+                    value = (T)(object)Defense;
+
                 return true;
             }
             else if (statisticDefinition == StatisticDefinition.AttackPower)
             {
-                value = (T)(object)AttackPower;
+                if (statisticType == StatisticType.Base)
+                    value = (T)(object)Definition.AttackPower;
+                else if (statisticType == StatisticType.Modified)
+                    value = (T)(object)(AttackPower - Definition.AttackPower);
+                else
+                    value = (T)(object)AttackPower;
+
                 return true;
             }
             else if (statisticDefinition == StatisticDefinition.AttackSpeed)
             {
-                value = (T)(object)AttackSpeed;
+                if (statisticType == StatisticType.Base)
+                    value = (T)(object)Definition.AttackSpeed;
+                else if (statisticType == StatisticType.Modified)
+                    value = (T)(object)(AttackSpeed - Definition.AttackSpeed);
+                else
+                    value = (T)(object)AttackSpeed;
+
                 return true;
             }
             else if (statisticDefinition == StatisticDefinition.Speed)
             {
-                value = (T)(object)Speed;
+                if (statisticType == StatisticType.Base)
+                    value = (T)(object)Definition.Speed;
+                else if (statisticType == StatisticType.Modified)
+                    value = (T)(object)(Speed - Definition.Speed);
+                else
+                    value = (T)(object)Speed;
+
                 return true;
             }
             else if (statisticDefinition == StatisticDefinition.Reach)
             {
-                value = (T)(object)Reach;
+                if (statisticType == StatisticType.Base)
+                    value = (T)(object)Definition.Reach;
+                else if (statisticType == StatisticType.Modified)
+                    value = (T)(object)(Reach - Definition.Reach);
+                else
+                    value = (T)(object)Reach;
+
                 return true;
             }
 
-            return base.TryGetStatisticValue<T>(statisticDefinition, out value);
+            return base.TryGetStatisticValue<T>(statisticDefinition, statisticType, out value);
         }
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)
@@ -95,7 +131,7 @@ namespace Game
             foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)
-                    ability.Update();
+                    ability.Tick();
             }
 
             stateMachine.Update();

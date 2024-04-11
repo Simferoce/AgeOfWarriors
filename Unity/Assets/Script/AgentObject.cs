@@ -81,7 +81,7 @@ namespace Game
             SpawnAttackable();
         }
 
-        public virtual bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, out T value)
+        public virtual bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
         {
             value = default;
             return false;

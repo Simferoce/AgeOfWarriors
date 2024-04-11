@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
   m_Name: AttackPowerStatisticDefinition
   m_EditorClassIdentifier: 
-  id: 97dd5fea2dc7e34408b95ddc16e6217f
-  icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
+  id: ff6ee24adf3c8424aad04267addb363d
+  icon: {fileID: 1776116179, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   title: Attack Power
-  color: {r: 1, g: 0, b: 0, a: 1}
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}

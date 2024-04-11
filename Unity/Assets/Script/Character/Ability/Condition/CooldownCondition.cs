@@ -6,19 +6,19 @@ namespace Game
     [Serializable]
     public class CooldownCondition : AbilityCondition
     {
-        [SerializeField] private float cooldown;
+        [SerializeField] private StatisticReference<float> cooldown;
 
         private float lastUsed = 0f;
 
         public override void Initialize(Ability ability)
         {
             base.Initialize(ability);
-            lastUsed = -cooldown;
+            lastUsed = float.MinValue;
         }
 
         public override bool Execute()
         {
-            return Time.time - lastUsed > cooldown;
+            return Time.time - lastUsed > cooldown.GetValueOrThrow(ability);
         }
 
         public override void OnAbilityEnded()

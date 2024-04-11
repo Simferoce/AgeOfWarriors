@@ -9,10 +9,19 @@ namespace Game
     public class StatisticSerialize<T> : Statistic<T>
     {
         [SerializeField] private T value;
+        [SerializeField] private bool showIcon = false;
 
         public override string GetDescriptionFormatted(object caller)
         {
-            return $"<color=#{Definition?.ColorHex}>{GetValue(caller)}</color>";
+            if (showIcon)
+            {
+                string icon = Definition?.Icon != null ? $"<sprite name=\"{Definition.Icon.name.Trim()}\" color=#{Definition.ColorHex}>" : "";
+                return $"<color=#{Definition?.ColorHex}>{GetValue(caller)}</color>{icon}";
+            }
+            else
+            {
+                return GetValue(caller).ToString();
+            }
         }
 
         public override string GetDescription()

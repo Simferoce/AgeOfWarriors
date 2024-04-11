@@ -24,7 +24,7 @@ namespace Game
 
         public abstract void Dispose();
 
-        public abstract void Update();
+        public abstract void Tick();
 
         public abstract bool CanUse();
 
