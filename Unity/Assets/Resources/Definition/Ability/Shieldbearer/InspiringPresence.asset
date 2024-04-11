@@ -13,8 +13,12 @@ MonoBehaviour:
   m_Name: InspiringPresenceModifierDefinition
   m_EditorClassIdentifier: 
   id: 06d847f75400868408459a0345d91d65
-  title: 
-  icon: {fileID: 0}
+  title: Inspiring Presence - Defense
+  icon: {fileID: 21300000, guid: 07276aab954e6024eb8a2c5a06758ece, type: 3}
+  definitions:
+  - key: Defense
+    definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
+  description: Increase defense by {defense}.
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,8 +34,8 @@ MonoBehaviour:
   id: 2fe57550d51a64f4897979212d8ac68d
   icon: {fileID: 21300000, guid: 19370790a791d4fc99ee3830251366f8, type: 3}
   title: Inspiring Presence
-  description: Increase defense by {defense} of any ally in {range} unit of distance
-    for {buff_duration} seconds.
+  description: Increase defense by {defense} of any ally in {range} meters for {buff_duration}
+    seconds.
   statistics:
   - rid: 3656781299071320139
   - rid: 3656781299071320140
@@ -44,10 +48,9 @@ MonoBehaviour:
     - rid: 3656781299071320139
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: 'Buff Duration - '
+        description: Buff Duration - 7
         definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
         value: 7
-        showIcon: 0
     - rid: 3656781299071320140
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:
@@ -63,14 +66,12 @@ MonoBehaviour:
     - rid: 3656781299071320142
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: 'Defense - '
+        description: Defense - 25
         definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
         value: 25
-        showIcon: 1
     - rid: 3656781301283291175
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: 'Cooldown - '
+        description: Cooldown - 5
         definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
         value: 5
-        showIcon: 1

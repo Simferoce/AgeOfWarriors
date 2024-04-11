@@ -11,8 +11,8 @@ namespace Game
 
         public override string GetDescriptionFormatted(object caller)
         {
-            string info = reference.Definition != null ? $"(<color=#{Definition?.ColorHex}>{percentage * 100}%{reference.Definition.GetTextIcon}</color>)" : "";
-            return $"<color=#{Definition?.ColorHex}>{GetValue(caller)}{info}</color>";
+            string info = $"(<color=#{Definition?.ColorHex}>{percentage * 100}%{reference.Definition.GetTextIcon}</color>)";
+            return $"{GetValue(caller)} {info}";
         }
 
         public override string GetDescription()

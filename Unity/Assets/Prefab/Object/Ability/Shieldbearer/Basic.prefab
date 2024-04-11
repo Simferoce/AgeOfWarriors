@@ -45,55 +45,55 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditions:
-  - rid: 3656781275634074089
-  - rid: 3656781275634074091
+  - rid: 3656781301283291220
+  - rid: 3656781301283291221
   parameter: 1
   effects:
-  - rid: 3656781275634074095
+  - rid: 3656781301283291222
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 3656781275634074089
+    - rid: 3656781301283291220
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781275634074091
+    - rid: 3656781301283291221
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
-          rid: 3656781275634074092
+          rid: 3656781301283291224
         count: 1
-    - rid: 3656781275634074092
-      type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data:
-        criterias:
-        - rid: 3656781275634074093
-        - rid: 3656781275634074094
-    - rid: 3656781275634074093
-      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781275634074094
-      type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data:
-        reference:
-          mapperFactory:
-            rid: 4528059587469246692
-    - rid: 3656781275634074095
+    - rid: 3656781301283291222
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach:
-          mapperFactory:
+          definition: {fileID: 0}
+          mapper:
             rid: -2
         damage:
-          mapperFactory:
-            rid: 4528059587469246694
+          definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+          mapper:
+            rid: 3656781301283291223
         armorPenetration:
-          mapperFactory:
+          definition: {fileID: 0}
+          mapper:
             rid: -2
-    - rid: 4528059587469246692
-      type: {class: AbilityMapperFactory, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781301283291223
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781301283291224
+      type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
-        statistic: range
-    - rid: 4528059587469246694
-      type: {class: AbilityMapperFactory, ns: Game, asm: Assembly-CSharp}
+        criterias:
+        - rid: 3656781301283291225
+        - rid: 3656781301283291227
+    - rid: 3656781301283291225
+      type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
-        statistic: damage
+        reference:
+          definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+          mapper:
+            rid: 3656781301283291226
+    - rid: 3656781301283291226
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781301283291227
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}

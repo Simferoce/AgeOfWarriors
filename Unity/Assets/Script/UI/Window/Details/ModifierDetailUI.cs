@@ -13,7 +13,7 @@ namespace Game
         {
             this.modifier = modifier;
             icon.sprite = modifier.ModifierDefinition.Icon;
-            icon.fillAmount = modifier.GetPercentageRemaingDuration() ?? 1;
+            icon.fillAmount = modifier.GetPercentageRemainingDuration() ?? 1;
         }
 
         public void Inspect()

@@ -16,16 +16,6 @@ namespace Game
         public virtual float? AttackPower => null;
         public virtual bool? Invulnerable => null;
 
-        public virtual float? GetPercentageRemaingDuration()
-        {
-            CharacterModifierTimeElement modifierElement = (CharacterModifierTimeElement)modifierElements.FirstOrDefault(x => x is CharacterModifierTimeElement);
-
-            if (modifierElement == null)
-                return null;
-
-            return Mathf.Clamp01(modifierElement.RemaingDuration / modifierElement.Duration);
-        }
-
         protected IModifiable modifiable;
 
         protected Modifier(ModifierDefinition modifierDefinition, IModifiable modifiable)
@@ -50,6 +40,79 @@ namespace Game
 
             if (end)
                 modifiable.RemoveModifier(this);
+        }
+
+        public virtual float? GetPercentageRemainingDuration()
+        {
+            CharacterModifierTimeElement modifierElement = (CharacterModifierTimeElement)modifierElements.FirstOrDefault(x => x is CharacterModifierTimeElement);
+
+            if (modifierElement == null)
+                return null;
+
+            return Mathf.Clamp01(modifierElement.RemaingDuration / modifierElement.Duration);
+        }
+
+        public virtual bool TryGetStatistic<T>(StatisticDefinition definition, out T value)
+        {
+            if (definition == StatisticDefinition.AttackPower)
+            {
+                float? stat = AttackPower;
+                if (stat.HasValue)
+                {
+                    value = (T)(object)stat.Value;
+                    return true;
+                }
+                else
+                {
+                    value = default(T);
+                    return false;
+                }
+            }
+            else if (definition == StatisticDefinition.Defense)
+            {
+                float? stat = Defense;
+                if (stat.HasValue)
+                {
+                    value = (T)(object)stat.Value;
+                    return true;
+                }
+                else
+                {
+                    value = default(T);
+                    return false;
+                }
+            }
+            else if (definition == StatisticDefinition.Speed)
+            {
+                float? stat = SpeedPercentage;
+                if (stat.HasValue)
+                {
+                    value = (T)(object)stat.Value;
+                    return true;
+                }
+                else
+                {
+                    value = default(T);
+                    return false;
+                }
+            }
+            else if (definition == StatisticDefinition.MaxHealth)
+            {
+                float? stat = MaxHealth;
+                if (stat.HasValue)
+                {
+                    value = (T)(object)stat.Value;
+                    return true;
+                }
+                else
+                {
+                    value = default(T);
+                    return false;
+                }
+            }
+
+            value = default(T);
+            return false;
         }
 
         public virtual void Refresh()

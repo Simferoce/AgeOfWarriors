@@ -7,6 +7,7 @@ namespace Game
     public class ModifierInspectorWindow : Window
     {
         [SerializeField] private TextMeshProUGUI modifierName;
+        [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private Image icon;
 
         public static ModifierInspectorWindow Open(Modifier modifier)
@@ -21,6 +22,7 @@ namespace Game
         public void Refresh(Modifier modifier)
         {
             modifierName.text = modifier.ModifierDefinition.Title;
+            description.text = modifier.ModifierDefinition.ParseDescription(modifier);
             icon.sprite = modifier.ModifierDefinition.Icon;
         }
 
