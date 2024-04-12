@@ -12,7 +12,7 @@ namespace Game
         public void Refresh(Modifier modifier)
         {
             this.modifier = modifier;
-            icon.sprite = modifier.ModifierDefinition.Icon;
+            icon.sprite = modifier.Definition.Icon;
             icon.fillAmount = modifier.GetPercentageRemainingDuration() ?? 1;
         }
 

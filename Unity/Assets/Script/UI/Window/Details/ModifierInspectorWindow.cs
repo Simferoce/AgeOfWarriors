@@ -21,9 +21,9 @@ namespace Game
 
         public void Refresh(Modifier modifier)
         {
-            modifierName.text = modifier.ModifierDefinition.Title;
-            description.text = modifier.ModifierDefinition.ParseDescription(modifier);
-            icon.sprite = modifier.ModifierDefinition.Icon;
+            modifierName.text = modifier.Definition.Title;
+            description.text = modifier.Definition.ParseDescription(modifier);
+            icon.sprite = modifier.Definition.Icon;
         }
 
         public void Close()

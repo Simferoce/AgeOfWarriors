@@ -8,7 +8,7 @@ namespace Game
     public abstract class Modifier : IModifier, IDisposable
     {
         public List<ModifierElement> modifierElements = new List<ModifierElement>();
-        public ModifierDefinition ModifierDefinition { get; }
+        public ModifierDefinition Definition { get; }
 
         public virtual float? SpeedPercentage => null;
         public virtual float? Defense => null;
@@ -21,7 +21,7 @@ namespace Game
         protected Modifier(ModifierDefinition modifierDefinition, IModifiable modifiable)
         {
             this.modifiable = modifiable;
-            this.ModifierDefinition = modifierDefinition;
+            this.Definition = modifierDefinition;
         }
 
         public void Initialize()
