@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game
 {
@@ -9,15 +8,13 @@ namespace Game
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private TextMeshProUGUI cooldownText;
-        [SerializeField] private Image icon;
         [SerializeField] private StatisticReference<float> cooldown;
 
-        public static AbilityInspectorWindow Open(Ability ability)
+        public static AbilityInspectorWindow Open(Ability ability, string abilitySlotName)
         {
             AbilityInspectorWindow abilityInspectorWindow = WindowManager.Instance.GetWindow<AbilityInspectorWindow>();
             abilityInspectorWindow.Show();
             abilityInspectorWindow.title.text = ability.Definition.Title;
-            abilityInspectorWindow.icon.sprite = ability.Definition.Icon;
             abilityInspectorWindow.description.text = ability.Definition.ParseDescription(ability);
 
             if (abilityInspectorWindow.cooldown.TryGetValue(ability, out float value))

@@ -3891,6 +3891,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilitiesDetail (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4383633449065489080, guid: e26322b290ac7e64ca8dd2c63aae9e31, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6284562376293563411, guid: e26322b290ac7e64ca8dd2c63aae9e31, type: 3}
+      propertyPath: m_text
+      value: Ability 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500818030395858574, guid: e26322b290ac7e64ca8dd2c63aae9e31, type: 3}
+      propertyPath: slotName
+      value: Ability 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: e26322b290ac7e64ca8dd2c63aae9e31, type: 3}
@@ -4006,9 +4018,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: AbilitiesDetail (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2782173036161601363, guid: e26322b290ac7e64ca8dd2c63aae9e31, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+    - target: {fileID: 4383633449065489080, guid: e26322b290ac7e64ca8dd2c63aae9e31, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6284562376293563411, guid: e26322b290ac7e64ca8dd2c63aae9e31, type: 3}
+      propertyPath: m_text
+      value: Ability 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500818030395858574, guid: e26322b290ac7e64ca8dd2c63aae9e31, type: 3}
+      propertyPath: slotName
+      value: Ability 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

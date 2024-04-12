@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Name: InspiringPresence
   m_EditorClassIdentifier: 
   id: 2fe57550d51a64f4897979212d8ac68d
-  icon: {fileID: -412835066, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  color: {r: 0.9019608, g: 0.9019608, b: 0.09019608, a: 1}
   title: Inspiring Presence
   description: Increase defense by {defense} of any ally in {range} meters for {buff_duration}
     seconds.

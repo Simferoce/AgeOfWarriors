@@ -7,14 +7,12 @@ namespace Game
     [CreateAssetMenu(fileName = "AbilityDefinition", menuName = "Definition/Ability")]
     public class AbilityDefinition : Definition
     {
-        [SerializeField] private Sprite icon;
         [SerializeField] private string title;
         [SerializeField] private string description;
         [SerializeReference] private List<Statistic> statistics;
         [SerializeField] private GameObject prefab;
 
-        public Sprite Icon { get => icon; set => icon = value; }
-        public string Title { get => title; set => title = value; }
+        public string Title { get => title; }
 
         public bool TryGetValue<T>(object context, StatisticDefinition definition, out T value)
         {

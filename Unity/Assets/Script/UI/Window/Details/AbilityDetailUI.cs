@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game
@@ -6,18 +7,20 @@ namespace Game
     public class AbilityDetailUI : MonoBehaviour
     {
         [SerializeField] private Image icon;
+        [SerializeField] private string slotName;
+        [SerializeField] private TextMeshProUGUI slotNameText;
 
         private Ability characterAbility;
 
         public void Refresh(Ability characterAbility)
         {
             this.characterAbility = characterAbility;
-            icon.sprite = characterAbility.Definition.Icon;
+            slotNameText.text = slotName;
         }
 
         public void Inspect()
         {
-            AbilityInspectorWindow.Open(characterAbility);
+            AbilityInspectorWindow.Open(characterAbility, slotName);
         }
     }
 }
