@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Onslaught
   m_EditorClassIdentifier: 
   id: 3ddf776ed1310c04f9b4c5200636d2a3
-  icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
+  icon: {fileID: -1403394186, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   title: Shieldbearer - Onslaught
   productionDuration: 2
   cost: 15
@@ -21,7 +21,7 @@ MonoBehaviour:
   baseDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   reach: 0.5
   speed: 0.5
-  attackPerSeconds: 2
+  attackSpeed: 2
   attackPower: 1
   maxHealth: 10
   defense: 15
