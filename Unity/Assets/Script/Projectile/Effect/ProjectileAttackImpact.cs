@@ -22,9 +22,10 @@ namespace Game
         public override bool Impact(GameObject collision)
         {
             if (collision.CompareTag(GameTag.HIT_BOX) &&
-                collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
-                && attackable.IsActive
-                && criteria.Execute(projectile.Character, attackable, projectile))
+                collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
+                && targeteable.IsActive
+                && criteria.Execute(projectile.Character, targeteable, projectile)
+                && targeteable is IAttackable attackable)
             {
                 attackable.TakeAttack(attack);
 

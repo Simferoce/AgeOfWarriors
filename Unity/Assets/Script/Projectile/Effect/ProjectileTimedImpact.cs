@@ -30,8 +30,9 @@ namespace Game
         public override bool Impact(GameObject collision)
         {
             if (collision.CompareTag(GameTag.HIT_BOX) &&
-                collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable)
-                && criteria.Execute(projectile.Character, attackable, projectile))
+                collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
+                && criteria.Execute(projectile.Character, targeteable, projectile)
+                && targeteable is IAttackable attackable)
             {
                 targets.Add(attackable);
             }

@@ -10,7 +10,7 @@ namespace Game
 
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
-        public virtual List<IAttackable> Targets => new List<IAttackable>();
+        public virtual List<ITargeteable> Targets => new List<ITargeteable>();
 
         public bool TryGetValue<T>(StatisticDefinition definition, out T value)
         {

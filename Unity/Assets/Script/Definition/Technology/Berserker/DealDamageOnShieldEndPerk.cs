@@ -16,7 +16,7 @@ namespace Game
             {
                 if (modifiable is IShieldable shieldable)
                 {
-                    shieldable.OnDeath += Shieldable_OnDeath;
+                    shieldable.OnDestroyed += Shieldable_OnDestroyed;
                     shieldable.OnShieldBroken += Shieldable_OnShieldBroken;
                 }
 
@@ -38,27 +38,21 @@ namespace Game
                     if (agent == character)
                         continue;
 
-                    if (agent is not IAttackable attackable)
-                        continue;
-
                     if (!agent.IsActive)
                         continue;
 
-                    if (Mathf.Abs((attackable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * percentageReach)
+                    if (Mathf.Abs((agent.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * percentageReach)
                         continue;
 
                     Attack attack = new Attack(new AttackSource(new List<IAttackSource>() { character, this }), damage, 0, 0);
-                    attackable.TakeAttack(attack);
+                    agent.TakeAttack(attack);
                 }
             }
 
-            private void Shieldable_OnDeath(ITargeteable targeteable)
+            private void Shieldable_OnDestroyed(IShieldable shieldable)
             {
-                if (modifiable is IShieldable shieldable)
-                {
-                    shieldable.OnDeath -= Shieldable_OnDeath;
-                    shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
-                }
+                shieldable.OnDestroyed -= Shieldable_OnDestroyed;
+                shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
             }
 
             public override void Dispose()
@@ -68,7 +62,7 @@ namespace Game
                 if (modifiable is IShieldable shieldable)
                 {
                     shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
-                    shieldable.OnDeath -= Shieldable_OnDeath;
+                    shieldable.OnDestroyed -= Shieldable_OnDestroyed;
                 }
             }
         }

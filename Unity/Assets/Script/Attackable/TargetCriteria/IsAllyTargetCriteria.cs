@@ -7,7 +7,7 @@ namespace Game
     {
         public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
         {
-            return targeteable.IsAlly(owner);
+            return targeteable.Faction == targeteable.Faction;
         }
     }
 }

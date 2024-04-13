@@ -168,15 +168,15 @@ namespace Game
             return true;
         }
 
-        public IAttackable GetTarget(TargetCriteria criteria, object caller)
+        public ITargeteable GetTarget(TargetCriteria criteria, object caller)
         {
             return GetTargets(criteria, caller).FirstOrDefault();
         }
 
-        public List<IAttackable> GetTargets(TargetCriteria criteria, object caller)
+        public List<ITargeteable> GetTargets(TargetCriteria criteria, object caller)
         {
-            List<IAttackable> potentialTargets = new List<IAttackable>();
-            foreach (IAttackable attackable in AgentObject.All.OfType<IAttackable>())
+            List<ITargeteable> potentialTargets = new List<ITargeteable>();
+            foreach (ITargeteable attackable in AgentObject.All.OfType<ITargeteable>())
             {
                 if (!attackable.IsActive)
                     continue;

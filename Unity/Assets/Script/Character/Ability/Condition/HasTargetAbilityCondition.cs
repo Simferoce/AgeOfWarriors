@@ -10,7 +10,7 @@ namespace Game
         [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private int count = 1;
 
-        public List<IAttackable> Targets = new List<IAttackable>();
+        public List<ITargeteable> Targets = new List<ITargeteable>();
 
         public override bool Execute()
         {

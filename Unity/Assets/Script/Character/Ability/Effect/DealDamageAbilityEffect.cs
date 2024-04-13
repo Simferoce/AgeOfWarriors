@@ -16,7 +16,7 @@ namespace Game
             if (Ability.Targets.Count == 0)
                 return;
 
-            IAttackable target = Ability.Targets[0];
+            IAttackable target = Ability.Targets[0] as IAttackable;
             target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { Ability.Character, this }), damage.GetValueOrDefault(Ability), armorPenetration.GetValueOrDefault(Ability), leach.GetValueOrDefault(Ability)));
         }
     }

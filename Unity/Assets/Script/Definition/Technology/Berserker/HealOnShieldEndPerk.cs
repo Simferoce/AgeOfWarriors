@@ -13,7 +13,7 @@ namespace Game
             {
                 if (modifiable is IShieldable shieldable)
                 {
-                    shieldable.OnDeath += Shieldable_OnDeath;
+                    shieldable.OnDestroyed += Shieldable_OnDestroyed;
                     shieldable.OnShieldBroken += Shieldable_OnShieldBroken;
                 }
 
@@ -32,13 +32,10 @@ namespace Game
                 character.Heal(heal);
             }
 
-            private void Shieldable_OnDeath(ITargeteable targeteable)
+            private void Shieldable_OnDestroyed(IShieldable shieldable)
             {
-                if (modifiable is IShieldable shieldable)
-                {
-                    shieldable.OnDeath -= Shieldable_OnDeath;
-                    shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
-                }
+                shieldable.OnDestroyed -= Shieldable_OnDestroyed;
+                shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
             }
 
             public override void Dispose()
@@ -48,7 +45,7 @@ namespace Game
                 if (modifiable is IShieldable shieldable)
                 {
                     shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
-                    shieldable.OnDeath -= Shieldable_OnDeath;
+                    shieldable.OnDestroyed -= Shieldable_OnDestroyed;
                 }
             }
         }

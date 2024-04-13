@@ -2,8 +2,9 @@
 
 namespace Game
 {
-    public interface IAttackable : ITargeteable
+    public interface IAttackable
     {
+        delegate void DeathHandler(IAttackable attackable);
         public event Action<Attack, IAttackable> OnDamageTaken;
 
         public void TakeAttack(Attack attack);

@@ -365,21 +365,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocking:
-    rid: 4528059671764533255
+    rid: 4528059671764533273
   collider: {fileID: 8271833102721241429}
   owner: {fileID: 270189467573928427}
   references:
     version: 2
     RefIds:
-    - rid: 4528059671764533255
+    - rid: 4528059671764533273
+      type: {class: OrTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        criterias:
+        - rid: 4528059671764533277
+        - rid: 4528059671764533276
+    - rid: 4528059671764533276
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         criterias:
-        - rid: 4528059671764533256
-        - rid: 4528059671764533257
-    - rid: 4528059671764533256
+        - rid: 4528059671764533278
+        - rid: 4528059671764533279
+    - rid: 4528059671764533277
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059671764533278
       type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059671764533257
+    - rid: 4528059671764533279
       type: {class: PriorityTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         comparaison: 1

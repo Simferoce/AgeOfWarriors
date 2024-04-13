@@ -1,7 +1,8 @@
 ﻿namespace Game
 {
-    public interface IShieldable : ITargeteable
+    public interface IShieldable
     {
+        public event System.Action<IShieldable> OnDestroyed;
         delegate void ShieldBroken(Shield shield);
 
         public event ShieldBroken OnShieldBroken;

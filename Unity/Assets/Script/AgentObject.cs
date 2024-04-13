@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static Game.ITargeteable;
 
 namespace Game
 {
@@ -24,6 +23,8 @@ namespace Game
 
         [SerializeField] private List<Type> types = new List<Type>();
         [SerializeField] private Collider2D hitbox;
+
+        public event System.Action<IShieldable> OnDestroyed;
 
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
@@ -91,8 +92,6 @@ namespace Game
         public virtual bool IsEngaged() => false;
         public bool IsInjured() => !IsDead && Health < MaxHealth;
         public bool IsDisplaceable() => this is IDisplaceable;
-        public bool IsAlly(ITargeteable targeteable) => targeteable.Faction == Faction;
-        public bool IsEnemy(ITargeteable targeteable) => targeteable.Faction != Faction;
 
         public virtual bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
         {
@@ -129,7 +128,6 @@ namespace Game
         #region Attackable
         [SerializeField] private Transform targetPosition;
 
-        public event DeathHandler OnDeath;
         public event Action<Attack, IAttackable> OnDamageTaken;
         public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
         public event AttackedLanded OnAttackLanded;
@@ -194,7 +192,7 @@ namespace Game
 
         public void Death()
         {
-            OnDeath?.Invoke(this);
+            OnDestroyed?.Invoke(this);
             EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
             InternalDeath();
         }

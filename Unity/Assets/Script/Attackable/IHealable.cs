@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public interface IHealable : ITargeteable
+    public interface IHealable
     {
         public float MaxHealth { get; }
         public float Health { get; set; }

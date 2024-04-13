@@ -22,7 +22,7 @@ namespace Game
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (evt.AgentObject.IsAlly(modifiable as ITargeteable) && (IModifiable)evt.AgentObject != modifiable)
+                if (evt.AgentObject.Faction == (modifiable as ITargeteable).Faction && (IModifiable)evt.AgentObject != modifiable)
                 {
                     modifiable.AddModifier(new AttackPowerModifierDefinition.AttackPowerBuff(modifiable, attackPowerModifier, amount).With(new CharacterModifierTimeElement(duration)));
                 }

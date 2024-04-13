@@ -7,7 +7,7 @@ namespace Game
     {
         public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
         {
-            return targeteable.IsEnemy(owner);
+            return targeteable.Faction != owner.Faction;
         }
     }
 }

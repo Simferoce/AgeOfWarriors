@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -14,8 +13,7 @@ namespace Game
 
         public override void Apply()
         {
-            List<IAttackable> attackable = Ability.Targets;
-            IModifiable modifiable = attackable.FirstOrDefault(x => x is IModifiable) as IModifiable;
+            IModifiable modifiable = Ability.Targets.OfType<IModifiable>().FirstOrDefault();
 
             if (modifiable != null)
             {

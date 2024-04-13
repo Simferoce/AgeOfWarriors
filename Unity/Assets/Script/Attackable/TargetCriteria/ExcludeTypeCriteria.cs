@@ -12,7 +12,7 @@ namespace Game
 
         public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
         {
-            return targeteable.Types.All(x => !types.Contains(x));
+            return (targeteable is AgentObject agentObject) && agentObject.Types.All(x => !types.Contains(x));
         }
     }
 }
