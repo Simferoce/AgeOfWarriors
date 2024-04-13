@@ -26,7 +26,7 @@ namespace Game
             if (Mathf.Sign(this.transform.lossyScale.x) == -1)
                 this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
 
-            float shieldPercentage = character.Attackable.ShieldHandler.Shields.Sum(x => x.Remaining) / character.MaxHealth;
+            float shieldPercentage = character.Shields.Sum(x => x.Remaining) / character.MaxHealth;
             float healthPercentage = character.Health / character.MaxHealth;
 
             List<Modifier> modifiers = character.GetModifiers();

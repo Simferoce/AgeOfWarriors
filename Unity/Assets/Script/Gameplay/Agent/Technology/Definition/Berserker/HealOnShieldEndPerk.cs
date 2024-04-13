@@ -13,7 +13,7 @@ namespace Game
             {
                 if (modifiable is IShieldable shieldable)
                 {
-                    shieldable.OnDestroyed += Shieldable_OnDestroyed;
+                    shieldable.OnShieldableDestroyed += Shieldable_OnDestroyed;
                     shieldable.OnShieldBroken += Shieldable_OnShieldBroken;
                 }
 
@@ -34,7 +34,7 @@ namespace Game
 
             private void Shieldable_OnDestroyed(IShieldable shieldable)
             {
-                shieldable.OnDestroyed -= Shieldable_OnDestroyed;
+                shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
                 shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
             }
 
@@ -45,7 +45,7 @@ namespace Game
                 if (modifiable is IShieldable shieldable)
                 {
                     shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
-                    shieldable.OnDestroyed -= Shieldable_OnDestroyed;
+                    shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
                 }
             }
         }
