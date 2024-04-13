@@ -16,6 +16,7 @@ namespace Game
 
         public void Add(Modifier modifier)
         {
+            modifier.Initialize();
             modifiers.Add(modifier);
         }
 

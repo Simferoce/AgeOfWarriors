@@ -39,6 +39,7 @@ namespace Game
         protected virtual void Awake()
         {
             All.Add(this);
+            Attackable.Initialize(this);
         }
 
         protected virtual void OnDestroy()
@@ -50,7 +51,7 @@ namespace Game
 
         public void Update()
         {
-            UpdateShields();
+            Attackable.Update();
             modifierHandler.Update();
         }
 
@@ -89,7 +90,7 @@ namespace Game
 
         public void Death()
         {
-            OnDestroyed?.Invoke(this);
+            Attackable.OnDestroy();
             EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
             InternalDeath();
         }
@@ -113,7 +114,7 @@ namespace Game
         public virtual float Speed { get; }
         public virtual float AttackSpeed { get; }
         public virtual float TechnologyGainPerSecond { get => 0f; }
-        public float Health { get; private set; }
+        public float Health { get; set; }
 
         public virtual bool IsDead { get => this.Health <= 0; }
         public virtual bool IsInvulnerable { get => false; }
@@ -134,7 +135,6 @@ namespace Game
 
         public void AddModifier(Modifier modifier)
         {
-            modifier.Initialize();
             modifierHandler.Add(modifier);
         }
 
@@ -155,75 +155,22 @@ namespace Game
         #endregion
 
         #region Attackable
-        #region Shield
-        public event IShieldable.ShieldBroken OnShieldBroken;
-        public event Action<IShieldable> OnDestroyed;
+        public event IShieldable.ShieldBroken OnShieldBroken { add { Attackable.ShieldHandler.OnShieldBroken += value; } remove { Attackable.ShieldHandler.OnShieldBroken -= value; } }
+        public event Action<IShieldable> OnDestroyed { add { Attackable.ShieldHandler.OnDestroyed += value; } remove { Attackable.ShieldHandler.OnDestroyed -= value; } }
+        public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
+        public event AttackedLanded OnAttackLanded;
+        public event Action<Attack, IAttackable> OnDamageTaken { add { Attackable.OnDamageTaken += value; } remove { Attackable.OnDamageTaken -= value; } }
 
-        private List<Shield> shields = new List<Shield>();
-        public List<Shield> Shields { get => shields; set => shields = value; }
+        public Attackable Attackable { get; set; } = new Attackable();
 
         public void AddShield(Shield shield)
         {
-            shields.Add(shield);
+            Attackable.AddShield(shield);
         }
-
-        public void UpdateShields()
-        {
-            for (int i = shields.Count - 1; i >= 0; i--)
-            {
-                Shield shield = shields[i];
-                if (shield.Update())
-                {
-                    shields.Remove(shield);
-                    OnShieldBroken?.Invoke(shield);
-                }
-            }
-        }
-        #endregion
-
-        public event Action<Attack, IAttackable> OnDamageTaken;
-        public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
-        public event AttackedLanded OnAttackLanded;
 
         public void TakeAttack(Attack attack)
         {
-            if (IsDead)
-                return;
-
-            if (IsInvulnerable)
-                return;
-
-            float damageRemaining = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
-            for (int i = shields.Count - 1; i >= 0; i--)
-            {
-                Shield shield = shields[i];
-                if (!shield.Absorb(damageRemaining, out damageRemaining))
-                {
-                    OnShieldBroken?.Invoke(shield);
-                    shields.RemoveAt(i);
-                }
-            }
-
-            this.Health -= damageRemaining;
-
-            if (this.Health <= 0)
-            {
-                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
-                if (modifier != null)
-                {
-                    modifier.ResistKillingBlow();
-                    this.Health = 0.001f;
-                }
-            }
-
-            foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attack, damageRemaining, this.Health <= 0);
-
-            Debug.Log($"{this.name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
-            OnDamageTaken?.Invoke(attack, this);
-
-            if (Health <= 0 && !IsDead)
-                Death();
+            Attackable.TakeAttack(attack);
         }
 
         #endregion
