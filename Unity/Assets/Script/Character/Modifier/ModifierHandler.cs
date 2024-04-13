@@ -8,13 +8,10 @@ namespace Game
         public float? SpeedPercentage => modifiers.Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value);
         public float? Defense => modifiers.Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value);
         public float? MaxHealth => modifiers.Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value);
-
-        public List<Modifier> Modifiers { get => modifiers; set => modifiers = value; }
-
         public float? AttackPower => modifiers.Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value);
-
         public bool? Invulnerable => modifiers.Where(x => x.Invulnerable.HasValue).Any(x => x.Invulnerable.Value);
 
+        public List<Modifier> Modifiers { get => modifiers; set => modifiers = value; }
         private List<Modifier> modifiers = new List<Modifier>();
 
         public void Add(Modifier modifier)

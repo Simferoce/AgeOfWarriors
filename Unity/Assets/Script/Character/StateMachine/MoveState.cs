@@ -51,7 +51,7 @@ namespace Game
                 if (character.abilities.Any(x => x.IsCasting))
                     return false;
 
-                foreach (IBlocker blocker in AgentObject.All.OfType<IBlocker>())
+                foreach (Blocker blocker in Blocker.All)
                 {
                     if (!blocker.IsActive)
                         continue;

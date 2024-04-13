@@ -7,7 +7,7 @@ using static Game.ITargeteable;
 
 namespace Game
 {
-    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IBlocker, IAttackSource, ITargeteable, IHealable, IShieldable
+    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IAttackSource, ITargeteable, IHealable, IShieldable
     {
         public enum Type
         {
@@ -23,22 +23,17 @@ namespace Game
         public static List<AgentObject> All { get; private set; }
 
         [SerializeField] private List<Type> types = new List<Type>();
+        [SerializeField] private Collider2D hitbox;
 
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
         public int SpawnNumber { get; private set; }
-        public virtual float TechnologyGainPerSecond { get => 0f; }
         public virtual bool IsActive { get => true; }
         public virtual int Priority { get => SpawnNumber; }
         public virtual Faction Faction { get => Agent.Faction; }
         public Vector3 CenterPosition { get => transform.position; }
+        public Collider2D Collider { get => hitbox; }
 
-        public virtual float MaxHealth { get; }
-        public virtual float Defense { get; }
-        public virtual float AttackPower { get; }
-        public virtual float Reach { get; }
-        public virtual float Speed { get; }
-        public virtual float AttackSpeed { get; }
         public virtual List<Type> Types { get => types; }
 
         protected virtual void Awake()
@@ -81,11 +76,30 @@ namespace Game
             SpawnAttackable();
         }
 
+        #region Statistic
+        public virtual float MaxHealth { get; }
+        public virtual float Defense { get; }
+        public virtual float AttackPower { get; }
+        public virtual float Reach { get; }
+        public virtual float Speed { get; }
+        public virtual float AttackSpeed { get; }
+        public virtual float TechnologyGainPerSecond { get => 0f; }
+        public float Health { get; set; }
+
+        public virtual bool IsDead { get => this.Health <= 0; }
+        public virtual bool IsInvulnerable => false;
+        public virtual bool IsEngaged() => false;
+        public bool IsInjured() => !IsDead && Health < MaxHealth;
+        public bool IsDisplaceable() => this is IDisplaceable;
+        public bool IsAlly(ITargeteable targeteable) => targeteable.Faction == Faction;
+        public bool IsEnemy(ITargeteable targeteable) => targeteable.Faction != Faction;
+
         public virtual bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
         {
             value = default;
             return false;
         }
+        #endregion
 
         #region Modifiable
         protected ModifierHandler modifierHandler = new ModifierHandler();
@@ -113,18 +127,11 @@ namespace Game
         #endregion
 
         #region Attackable
-        [SerializeField] private Collider2D hitbox;
         [SerializeField] private Transform targetPosition;
 
-
-        public float Health { get; set; }
-        public virtual bool IsDead { get => this.Health <= 0; }
-        public bool IsInjured() => !IsDead && Health < MaxHealth;
         public event DeathHandler OnDeath;
-        public virtual bool IsEngaged() => false;
         public event Action<Attack, IAttackable> OnDamageTaken;
         public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
-        public virtual bool IsInvulnerable => false;
         public event AttackedLanded OnAttackLanded;
 
         public Vector3 TargetPosition => targetPosition.position;
@@ -208,43 +215,12 @@ namespace Game
 
         }
 
-        #region AttackSource
         public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
         {
             Heal(damageDealt * attack.Leach);
             OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
         }
-        #endregion
 
-        #endregion
-
-        #region Blocker
-        [SerializeReference, SubclassSelector] private TargetCriteria blocking;
-
-        public Collider2D Collider => hitbox;
-
-        public bool IsBlocking(AgentObject agentObject)
-        {
-            if (blocking == null)
-                return false;
-
-            return blocking.Execute(this, agentObject, this);
-        }
-
-        public bool IsDisplaceable()
-        {
-            return this is IDisplaceable;
-        }
-
-        public bool IsAlly(ITargeteable targeteable)
-        {
-            return targeteable.Faction == Faction;
-        }
-
-        public bool IsEnemy(ITargeteable targeteable)
-        {
-            return targeteable.Faction != Faction;
-        }
         #endregion
 
         #region Shield
