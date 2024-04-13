@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
-  m_Name: Leader
+  m_Name: FerociousArcher
   m_EditorClassIdentifier: 
-  id: e3785274f87475045bce6f63977d63fc
-  icon: {fileID: 171242972, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  title: Shieldbearer - Leader
+  id: a0a3e2c88b079f4458c331514474afcc
+  icon: {fileID: 21300000, guid: 7bb7c31bac410c845b972990d3a7f7e1, type: 3}
+  title: Archer - Ferocious
   productionDuration: 2
-  cost: 15
+  cost: 10
   technologyGainPerSecond: 0
-  baseDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-  reach: 0.5
-  speed: 0.5
-  attackSpeed: 2
-  attackPower: 1
+  baseDefinition: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+  reach: 2
+  speed: 1
+  attackSpeed: 1
+  attackPower: 2.5
   maxHealth: 10
-  defense: 15
-  prefab: {fileID: 5111183424940805414, guid: 3fc4e53abe9501446a663f9d4bd9368d, type: 3}
+  defense: 5
+  prefab: {fileID: 1944176523159487312, guid: 5509c985b0fa0804ca7e90bfc4939ff8, type: 3}

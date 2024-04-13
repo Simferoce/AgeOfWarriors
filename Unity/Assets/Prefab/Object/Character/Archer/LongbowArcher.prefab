@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2052824185280715649, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 63beaec0f0a7f0f4a86aab5b80000498, type: 3}
     - target: {fileID: 2550577148835460639, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -102,19 +106,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3518596727268906827, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: 1.0099999
+      value: -0.0029243045
       objectReference: {fileID: 0}
     - target: {fileID: 3518596727268906827, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: 1.5244799
+      value: 0.0120357275
       objectReference: {fileID: 0}
     - target: {fileID: 3518596727268906827, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.05000004
+      value: 0.050000064
       objectReference: {fileID: 0}
     - target: {fileID: 3518596727268906827, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.97947985
+      value: 0.97948
       objectReference: {fileID: 0}
     - target: {fileID: 4164559628645103521, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_AnchorMax.y
@@ -166,7 +170,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6705402225686340843, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_Name
-      value: Longbow
+      value: LongbowArcher
       objectReference: {fileID: 0}
     - target: {fileID: 6902808674781587786, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_AnchorMax.y
