@@ -3,7 +3,7 @@
     public interface IHealable
     {
         public float MaxHealth { get; }
-        public float Health { get; set; }
+        public float Health { get; }
         public void Heal(float amount);
     }
 }

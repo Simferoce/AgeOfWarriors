@@ -4,13 +4,89 @@ using UnityEngine;
 
 namespace Game
 {
-    public partial class Character : AgentObject<CharacterDefinition>, IDisplaceable
+    public partial class Character : AgentObject<CharacterDefinition>, IDisplaceable, IStaggerable
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
 
-        [Header("Abilities")]
-        [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
+        public CharacterAnimator CharacterAnimator { get; set; }
+
+        private StateMachine stateMachine = new StateMachine();
+
+        public override void Spawn(Agent agent, int spawnNumber, int direction)
+        {
+            base.Spawn(agent, spawnNumber, direction);
+
+            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
+
+            stateMachine.Initialize(new MoveState(this));
+            InitializeAbilities();
+        }
+
+        public void FixedUpdate()
+        {
+            if (IsDead)
+                return;
+
+            UpdateAbilities();
+
+            stateMachine.Update();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            DisposeAbilities();
+        }
+
+        public ITargeteable GetTarget(TargetCriteria criteria, object caller)
+        {
+            return GetTargets(criteria, caller).FirstOrDefault();
+        }
+
+        public List<ITargeteable> GetTargets(TargetCriteria criteria, object caller)
+        {
+            List<ITargeteable> potentialTargets = new List<ITargeteable>();
+            foreach (ITargeteable attackable in AgentObject.All.OfType<ITargeteable>())
+            {
+                if (!attackable.IsActive)
+                    continue;
+
+                if (!criteria.Execute(this, attackable, caller))
+                    continue;
+
+                potentialTargets.Add(attackable);
+            }
+
+            return potentialTargets
+                .OrderBy(x => x.Priority)
+                .ToList();
+        }
+
+        protected override void InternalDeath()
+        {
+            stateMachine.SetState(new DeathState(this));
+        }
+
+        public void Displace(Vector2 displacement)
+        {
+            rigidbody.MovePosition(this.rigidbody.position + displacement);
+        }
+
+        public void Stagger(float duration)
+        {
+            foreach (Ability ability in abilities)
+            {
+                if (ability.IsActive)
+                    ability.Interrupt();
+            }
+
+            stateMachine.SetState(new StaggerState(this, duration));
+        }
+
+        #region Statistic
+        private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
         public override float MaxHealth { get => Definition.MaxHealth + modifierHandler.MaxHealth ?? 0; }
         public override float Defense { get => Definition.Defense + modifierHandler.Defense ?? 0f; }
@@ -18,18 +94,10 @@ namespace Game
         public override float AttackPower { get => Definition.AttackPower + modifierHandler.AttackPower ?? 0f; }
         public override float Speed { get => Definition.Speed * (1 + modifierHandler.SpeedPercentage ?? 0f); }
         public override float Reach { get => Definition.Reach; }
-
-        public override bool IsDead { get => stateMachine.Current is DeathState; }
-        public CharacterAnimator CharacterAnimator { get; set; }
-        public float LastAbilityUsed { get; set; }
         public override bool IsActive { get => !IsDead; }
-        public override bool IsEngaged() => GetTarget(engagedCriteria, this) != null;
+        public override bool IsEngaged => GetTarget(engagedCriteria, this) != null;
         public override bool IsInvulnerable => modifierHandler.Invulnerable ?? false;
-        public List<Ability> Abilities { get => abilities; set => abilities = value; }
-
-        private StateMachine stateMachine = new StateMachine();
-        private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
-        private List<Ability> abilities = new List<Ability>();
+        public override bool IsDead { get => stateMachine.Current is DeathState; }
 
         public override bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
         {
@@ -103,13 +171,19 @@ namespace Game
             return base.TryGetStatisticValue<T>(statisticDefinition, statisticType, out value);
         }
 
-        public override void Spawn(Agent agent, int spawnNumber, int direction)
+        #endregion
+
+        #region Ability
+        [Header("Abilities")]
+        [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
+
+        private List<Ability> abilities = new List<Ability>();
+
+        public List<Ability> Abilities { get => abilities; set => abilities = value; }
+        public float LastAbilityUsed { get; set; }
+
+        private void InitializeAbilities()
         {
-            base.Spawn(agent, spawnNumber, direction);
-
-            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
-
-            stateMachine.Initialize(new MoveState(this));
             GameObject abilitiesParent = new GameObject("Abilities");
             abilitiesParent.transform.parent = transform;
 
@@ -123,26 +197,13 @@ namespace Game
             }
         }
 
-        public void FixedUpdate()
+        private void UpdateAbilities()
         {
-            if (IsDead)
-                return;
-
             foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)
                     ability.Tick();
             }
-
-            stateMachine.Update();
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            foreach (Ability ability in abilities)
-                ability.Dispose();
         }
 
         public Ability GetCurrentAbility()
@@ -168,49 +229,12 @@ namespace Game
             return true;
         }
 
-        public ITargeteable GetTarget(TargetCriteria criteria, object caller)
-        {
-            return GetTargets(criteria, caller).FirstOrDefault();
-        }
-
-        public List<ITargeteable> GetTargets(TargetCriteria criteria, object caller)
-        {
-            List<ITargeteable> potentialTargets = new List<ITargeteable>();
-            foreach (ITargeteable attackable in AgentObject.All.OfType<ITargeteable>())
-            {
-                if (!attackable.IsActive)
-                    continue;
-
-                if (!criteria.Execute(this, attackable, caller))
-                    continue;
-
-                potentialTargets.Add(attackable);
-            }
-
-            return potentialTargets
-                .OrderBy(x => x.Priority)
-                .ToList();
-        }
-
-        protected override void InternalDeath()
-        {
-            stateMachine.SetState(new DeathState(this));
-        }
-
-        public void Displace(Vector2 displacement)
-        {
-            rigidbody.MovePosition(this.rigidbody.position + displacement);
-        }
-
-        public override void Stagger(float duration)
+        private void DisposeAbilities()
         {
             foreach (Ability ability in abilities)
-            {
-                if (ability.IsActive)
-                    ability.Interrupt();
-            }
-
-            stateMachine.SetState(new StaggerState(this, duration));
+                ability.Dispose();
         }
+
+        #endregion
     }
 }

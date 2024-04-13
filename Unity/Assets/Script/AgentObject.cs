@@ -23,8 +23,7 @@ namespace Game
 
         [SerializeField] private List<Type> types = new List<Type>();
         [SerializeField] private Collider2D hitbox;
-
-        public event System.Action<IShieldable> OnDestroyed;
+        [SerializeField] private Transform targetPosition;
 
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
@@ -33,8 +32,8 @@ namespace Game
         public virtual int Priority { get => SpawnNumber; }
         public virtual Faction Faction { get => Agent.Faction; }
         public Vector3 CenterPosition { get => transform.position; }
+        public Vector3 TargetPosition { get => targetPosition.position; }
         public Collider2D Collider { get => hitbox; }
-
         public virtual List<Type> Types { get => types; }
 
         protected virtual void Awake()
@@ -74,7 +73,36 @@ namespace Game
                     this.AddModifier(modifier.GetModifier(this));
             }
 
-            SpawnAttackable();
+            this.Health = MaxHealth;
+        }
+
+        public Vector3 ClosestPoint(Vector3 point)
+        {
+            return hitbox.ClosestPoint(point);
+        }
+
+        public void Heal(float amount)
+        {
+            this.Health += amount;
+            this.Health = Mathf.Clamp(Health, 0, MaxHealth);
+        }
+
+        public void Death()
+        {
+            OnDestroyed?.Invoke(this);
+            EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
+            InternalDeath();
+        }
+
+        protected virtual void InternalDeath()
+        {
+            Destroy(this.gameObject);
+        }
+
+        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
+        {
+            Heal(damageDealt * attack.Leach);
+            OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
         }
 
         #region Statistic
@@ -85,13 +113,14 @@ namespace Game
         public virtual float Speed { get; }
         public virtual float AttackSpeed { get; }
         public virtual float TechnologyGainPerSecond { get => 0f; }
-        public float Health { get; set; }
+        public float Health { get; private set; }
 
         public virtual bool IsDead { get => this.Health <= 0; }
-        public virtual bool IsInvulnerable => false;
-        public virtual bool IsEngaged() => false;
-        public bool IsInjured() => !IsDead && Health < MaxHealth;
-        public bool IsDisplaceable() => this is IDisplaceable;
+        public virtual bool IsInvulnerable { get => false; }
+        public virtual bool IsEngaged { get => false; }
+        public bool IsInjured { get => !IsDead && Health < MaxHealth; }
+        public bool IsDisplaceable { get => this is IDisplaceable; }
+        public bool IsAttackable { get => this.Health > 0; }
 
         public virtual bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
         {
@@ -126,23 +155,35 @@ namespace Game
         #endregion
 
         #region Attackable
-        [SerializeField] private Transform targetPosition;
+        #region Shield
+        public event IShieldable.ShieldBroken OnShieldBroken;
+        public event Action<IShieldable> OnDestroyed;
+
+        private List<Shield> shields = new List<Shield>();
+        public List<Shield> Shields { get => shields; set => shields = value; }
+
+        public void AddShield(Shield shield)
+        {
+            shields.Add(shield);
+        }
+
+        public void UpdateShields()
+        {
+            for (int i = shields.Count - 1; i >= 0; i--)
+            {
+                Shield shield = shields[i];
+                if (shield.Update())
+                {
+                    shields.Remove(shield);
+                    OnShieldBroken?.Invoke(shield);
+                }
+            }
+        }
+        #endregion
 
         public event Action<Attack, IAttackable> OnDamageTaken;
         public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
         public event AttackedLanded OnAttackLanded;
-
-        public Vector3 TargetPosition => targetPosition.position;
-
-        public void SpawnAttackable()
-        {
-            this.Health = MaxHealth;
-        }
-
-        public bool IsAttackable()
-        {
-            return this.Health > 0;
-        }
 
         public void TakeAttack(Attack attack)
         {
@@ -167,7 +208,7 @@ namespace Game
 
             if (this.Health <= 0)
             {
-                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)modifierHandler.Modifiers.FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
+                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
                 if (modifier != null)
                 {
                     modifier.ResistKillingBlow();
@@ -185,65 +226,6 @@ namespace Game
                 Death();
         }
 
-        public Vector3 ClosestPoint(Vector3 point)
-        {
-            return hitbox.ClosestPoint(point);
-        }
-
-        public void Death()
-        {
-            OnDestroyed?.Invoke(this);
-            EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
-            InternalDeath();
-        }
-
-        protected virtual void InternalDeath()
-        {
-            Destroy(this.gameObject);
-        }
-
-        public void Heal(float amount)
-        {
-            this.Health += amount;
-            this.Health = Mathf.Clamp(Health, 0, MaxHealth);
-        }
-
-        public virtual void Stagger(float duration)
-        {
-
-        }
-
-        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
-        {
-            Heal(damageDealt * attack.Leach);
-            OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
-        }
-
-        #endregion
-
-        #region Shield
-        public event IShieldable.ShieldBroken OnShieldBroken;
-
-        private List<Shield> shields = new List<Shield>();
-        public List<Shield> Shields { get => shields; set => shields = value; }
-
-        public void AddShield(Shield shield)
-        {
-            shields.Add(shield);
-        }
-
-        public void UpdateShields()
-        {
-            for (int i = shields.Count - 1; i >= 0; i--)
-            {
-                Shield shield = shields[i];
-                if (shield.Update())
-                {
-                    shields.Remove(shield);
-                    OnShieldBroken?.Invoke(shield);
-                }
-            }
-        }
         #endregion
     }
 

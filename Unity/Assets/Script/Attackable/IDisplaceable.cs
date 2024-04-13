@@ -8,7 +8,7 @@ namespace Game
         public int Priority { get; }
         public Vector3 CenterPosition { get; }
         public Faction Faction { get; }
-        public bool IsDisplaceable();
+        public bool IsDisplaceable { get; }
 
         public void Displace(Vector2 displacement);
     }

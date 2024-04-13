@@ -18,8 +18,8 @@ namespace Game
         {
             foreach (IDisplaceable target in Ability.Targets.Cast<IDisplaceable>().ToList())
             {
-                if (target is IAttackable attackable)
-                    attackable.Stagger(staggerDuration);
+                if (target is IStaggerable staggerable)
+                    staggerable.Stagger(staggerDuration);
             }
 
             startedAt = Time.time;
