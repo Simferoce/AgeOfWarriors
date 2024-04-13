@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 52510551592376476}
   - component: {fileID: 4894327152861980531}
   m_Layer: 0
-  m_Name: Basic
+  m_Name: ShieldbearerBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

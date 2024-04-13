@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &95085129432284298
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1571936392799876666}
+  - component: {fileID: 6022684939216170340}
+  m_Layer: 0
+  m_Name: SeerBasic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1571936392799876666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95085129432284298}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6022684939216170340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 95085129432284298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be16aabdaf49824ab3fc3d80b0975fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  conditions:
+  - rid: 4528059661052542999
+  - rid: 4528059661052543000
+  parameter: 1
+  effects:
+  - rid: 4528059661052543005
+  references:
+    version: 2
+    RefIds:
+    - rid: 4528059661052542999
+      type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059661052543000
+      type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        criteria:
+          rid: 4528059661052543001
+        count: 1
+    - rid: 4528059661052543001
+      type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        criterias:
+        - rid: 4528059661052543002
+        - rid: 4528059661052543003
+    - rid: 4528059661052543002
+      type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        reference:
+          definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+          mapper:
+            rid: 4528059661052543004
+    - rid: 4528059661052543003
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059661052543004
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059661052543005
+      type: {class: ProjectileAbilityEffect, ns: Game, asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 6675190562695518451, guid: a1525bb3bf8a49f4f963d86f5e9cd819, type: 3}
+        origin:
+          rid: 4528059661052543006
+        datas:
+        - rid: 4528059661052543007
+        - rid: 4528059661052543008
+    - rid: 4528059661052543006
+      type: {class: ProjectileAbilityEffectTransformOrigin, ns: Game, asm: Assembly-CSharp}
+      data:
+        origin: ProjectileOrigin
+    - rid: 4528059661052543007
+      type: {class: ProjectileAttackData, ns: Game, asm: Assembly-CSharp}
+      data:
+        attackPowerPercentage: 1
+        armorPenetration: 0
+    - rid: 4528059661052543008
+      type: {class: ProjectileFactoryImpactContext, ns: Game, asm: Assembly-CSharp}
+      data:
+        criteria:
+          rid: 4528059661052543009
+    - rid: 4528059661052543009
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}

@@ -49,11 +49,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.292
+      value: 0.296
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.37
+      value: 1.17
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
       propertyPath: m_LocalPosition.z
@@ -89,19 +89,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6198074522587456496, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
       propertyPath: m_Bounds.m_Center.x
-      value: 0.000000033527613
+      value: -0.0029243045
       objectReference: {fileID: 0}
     - target: {fileID: -6198074522587456496, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
       propertyPath: m_Bounds.m_Center.y
-      value: -0.015520334
+      value: 0.0120357275
       objectReference: {fileID: 0}
     - target: {fileID: -6198074522587456496, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
       propertyPath: m_Bounds.m_Extent.x
-      value: 0.05000006
+      value: 0.050000064
       objectReference: {fileID: 0}
     - target: {fileID: -6198074522587456496, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
       propertyPath: m_Bounds.m_Extent.y
-      value: 0.9794799
+      value: 0.97948
+      objectReference: {fileID: 0}
+    - target: {fileID: 4257508509235537429, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.22411883
+      objectReference: {fileID: 0}
+    - target: {fileID: 4257508509235537429, guid: 3ade56135cf7fe247b9c384631002468, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.13725269
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []
@@ -127,6 +135,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 6e79b9e866ec46b4f818a471ac60b196, type: 2}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 403e6a5681908f94dbcb8f4dd075a7f4, type: 2}
     - target: {fileID: 427610621448729964, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: m_IsActive
       value: 1

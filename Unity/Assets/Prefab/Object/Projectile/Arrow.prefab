@@ -194,6 +194,7 @@ MonoBehaviour:
     rid: 3490450885554995228
   projectileMovements:
   - rid: 3656781118043062284
+  - rid: 4528059661052542998
   impacts:
   - rid: 3656781095385956404
   references:
@@ -209,6 +210,8 @@ MonoBehaviour:
       type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
       data:
         angle: 30
+    - rid: 4528059661052542998
+      type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

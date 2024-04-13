@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
-  m_Name: Basic
+  m_Name: BerserkerBasic
   m_EditorClassIdentifier: 
-  id: bef61e67e44b5944bb0a2a95304474d1
-  color: {r: 0.9019608, g: 0.9019608, b: 0.09019608, a: 1}
+  id: dfa0ecdf3974904439b3c578bc907282
   title: Basic
   description: Deals {damage} damage to a target at {range} meters.
   statistics:
   - rid: 3656781299071320075
   - rid: 3656781299071320102
-  prefab: {fileID: 234122527794856266, guid: b33d5e147315fe146b590de2182850ec, type: 3}
+  prefab: {fileID: 234122527794856266, guid: a23b4828f80fc3e4c9fc2e5afafabe9d, type: 3}
   references:
     version: 2
     RefIds:
