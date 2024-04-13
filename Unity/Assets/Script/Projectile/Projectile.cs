@@ -17,18 +17,21 @@ namespace Game
         [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
 
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
-        public List<ProjectileContext> Contexts { get => contexts; set => contexts = value; }
         public Character Character { get => character; set => character = value; }
         public State StateValue { get => state; set => state = value; }
+        public Ability Ability { get => ability; set => ability = value; }
+        public ITargeteable Target { get => target; set => target = value; }
 
-        private List<ProjectileContext> contexts;
         private Character character;
+        private Ability ability;
+        private ITargeteable target;
         private State state = State.Alive;
 
-        public void Initialize(Character character, List<ProjectileContext> contexts)
+        public void Initialize(Character character, Ability ability, ITargeteable target)
         {
             this.character = character;
-            this.contexts = contexts;
+            this.ability = ability;
+            this.target = target;
 
             foreach (ProjectileMovement context in projectileMovements)
                 context.Initialize(this);

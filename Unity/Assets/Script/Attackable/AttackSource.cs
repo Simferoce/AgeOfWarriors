@@ -7,9 +7,9 @@ namespace Game
     {
         public List<IAttackSource> Sources { get; set; } = new List<IAttackSource>();
 
-        public AttackSource(IAttackSource source)
+        public AttackSource(params IAttackSource[] source)
         {
-            Sources.Add(source);
+            Sources.AddRange(source);
         }
 
         public AttackSource(List<IAttackSource> sources)

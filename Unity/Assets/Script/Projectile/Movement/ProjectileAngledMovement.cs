@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -13,9 +12,7 @@ namespace Game
         {
             base.Initialize(projectile);
 
-            ProjectileTargetContext context = (ProjectileTargetContext)projectile.Contexts.FirstOrDefault(x => x is ProjectileTargetContext);
-
-            SolveForVelocity(projectile.transform.position, context.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, angle, out Vector3 velocity);
+            SolveForVelocity(projectile.transform.position, projectile.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, angle, out Vector3 velocity);
             projectile.Rigidbody.velocity = velocity;
         }
 

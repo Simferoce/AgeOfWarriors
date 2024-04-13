@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -13,10 +12,8 @@ namespace Game
         {
             base.Initialize(projectile);
 
-            ProjectileTargetContext context = (ProjectileTargetContext)projectile.Contexts.FirstOrDefault(x => x is ProjectileTargetContext);
-
-            SolveForAngle(projectile.transform.position, context.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, velocity, out float angle);
-            projectile.Rigidbody.velocity = new Vector2(Mathf.Sign(context.Target.TargetPosition.x - projectile.transform.position.x) * Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * velocity;
+            SolveForAngle(projectile.transform.position, projectile.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, velocity, out float angle);
+            projectile.Rigidbody.velocity = new Vector2(Mathf.Sign(projectile.Target.TargetPosition.x - projectile.transform.position.x) * Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * velocity;
         }
 
         public override void Update()

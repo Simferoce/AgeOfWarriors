@@ -58,6 +58,9 @@ namespace Game
         {
             Ability ability = context as Ability;
             if (ability == null)
+                ability = (context as Projectile)?.Ability;
+
+            if (ability == null)
             {
                 value = default(T);
                 return false;

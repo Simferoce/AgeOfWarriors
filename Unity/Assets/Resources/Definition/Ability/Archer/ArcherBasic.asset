@@ -17,6 +17,7 @@ MonoBehaviour:
   description: 
   statistics:
   - rid: 4528059661052542985
+  - rid: 4528059661052543020
   prefab: {fileID: 2238036748726012354, guid: 7fbe8b94e506e9242a9c7bd84158bd56, type: 3}
   references:
     version: 2
@@ -32,4 +33,16 @@ MonoBehaviour:
             rid: 4528059661052542986
         percentage: 1
     - rid: 4528059661052542986
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059661052543020
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Damage - (100 % of Attack Power)
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+          mapper:
+            rid: 4528059661052543021
+        percentage: 1
+    - rid: 4528059661052543021
       type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}

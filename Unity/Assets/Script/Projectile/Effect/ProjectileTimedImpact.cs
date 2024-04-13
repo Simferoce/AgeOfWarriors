@@ -1,7 +1,6 @@
 ﻿using Extension;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -9,25 +8,23 @@ namespace Game
     [Serializable]
     public class ProjectileTimedImpact : ProjectileImpact
     {
+        [SerializeReference, SerializeReferenceDropdown] private TargetCriteria criteria;
+        [SerializeField] private StatisticReference<float> damage;
+        [SerializeField] private StatisticReference<float> duration;
+
         private float startedAt;
-        private float duration;
-        private TargetCriteria criteria;
         private List<IAttackable> targets = new List<IAttackable>();
         private Attack attack;
+        private float currentDuration;
 
         public override void Initialize(Projectile projectile)
         {
             base.Initialize(projectile);
             startedAt = Time.time;
 
-            ProjectileFactoryDurationContext.Context durationContext = (ProjectileFactoryDurationContext.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileFactoryDurationContext.Context);
-            ProjectileFactoryImpactContext.Context targetContext = (ProjectileFactoryImpactContext.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileFactoryImpactContext.Context);
-            ProjectileAttackData.Context attackContext = (ProjectileAttackData.Context)projectile.Contexts.FirstOrDefault(x => x is ProjectileAttackData.Context);
-
-            attack = attackContext.Attack;
+            currentDuration = duration.GetValueOrThrow(projectile);
+            attack = new Attack(new AttackSource(projectile.Character, projectile), damage.GetValueOrThrow(projectile), 0, 0);
             attack.AttackSource.Sources.Add(projectile);
-            duration = durationContext.Duration;
-            criteria = targetContext.Criteria;
         }
 
         public override bool Impact(GameObject collision)
@@ -58,7 +55,7 @@ namespace Game
             if (projectile.StateValue == Projectile.State.Dead)
                 return false;
 
-            if (Time.time - startedAt > duration)
+            if (Time.time - startedAt > currentDuration)
             {
                 foreach (IAttackable target in targets)
                 {
