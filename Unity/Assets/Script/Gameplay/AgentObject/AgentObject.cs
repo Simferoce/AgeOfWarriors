@@ -8,6 +8,8 @@ namespace Game
 {
     public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IAttackSource, ITargeteable, IHealable, IShieldable
     {
+        public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
+
         public enum Type
         {
             Building
@@ -24,6 +26,8 @@ namespace Game
         [SerializeField] private List<Type> types = new List<Type>();
         [SerializeField] private Collider2D hitbox;
         [SerializeField] private Transform targetPosition;
+
+        public event AttackedLanded OnAttackLanded;
 
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
@@ -45,17 +49,14 @@ namespace Game
         protected virtual void OnDestroy()
         {
             All.Remove(this);
-
-            OnDestroyModifiable();
+            DisposeModifiers();
         }
 
         public void Update()
         {
             Attackable.Update();
-            modifierHandler.Update();
+            UpdateModifiers();
         }
-
-        public virtual AgentObjectDefinition GetDefinition() { return null; }
 
         public virtual void Spawn(Agent agent, int spawnNumber, int direction)
         {
@@ -76,6 +77,14 @@ namespace Game
 
             this.Health = MaxHealth;
         }
+
+        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
+        {
+            Heal(damageDealt * attack.Leach);
+            OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
+        }
+
+        public virtual AgentObjectDefinition GetDefinition() { return null; }
 
         public Vector3 ClosestPoint(Vector3 point)
         {
@@ -98,12 +107,6 @@ namespace Game
         protected virtual void InternalDeath()
         {
             Destroy(this.gameObject);
-        }
-
-        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
-        {
-            Heal(damageDealt * attack.Leach);
-            OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
         }
 
         #region Statistic
@@ -131,34 +134,43 @@ namespace Game
         #endregion
 
         #region Modifiable
-        protected ModifierHandler modifierHandler = new ModifierHandler();
+        private List<Modifier> modifiers = new List<Modifier>();
 
         public void AddModifier(Modifier modifier)
         {
-            modifierHandler.Add(modifier);
-        }
-
-        public void RemoveModifier(Modifier modifier)
-        {
-            modifierHandler.Remove(modifier);
+            modifier.Initialize();
+            modifiers.Add(modifier);
         }
 
         public List<Modifier> GetModifiers()
         {
-            return modifierHandler.Modifiers;
+            return modifiers;
         }
 
-        private void OnDestroyModifiable()
+        public void UpdateModifiers()
         {
-            modifierHandler.Dispose();
+            foreach (Modifier modifier in modifiers.ToList())
+            {
+                modifier.Update();
+            }
+        }
+
+        public void RemoveModifier(Modifier modifier)
+        {
+            modifier.Dispose();
+            modifiers.Remove(modifier);
+        }
+
+        public void DisposeModifiers()
+        {
+            foreach (Modifier modifier in modifiers)
+                modifier.Dispose();
         }
         #endregion
 
         #region Attackable
         public event IShieldable.ShieldBroken OnShieldBroken { add { Attackable.ShieldHandler.OnShieldBroken += value; } remove { Attackable.ShieldHandler.OnShieldBroken -= value; } }
         public event Action<IShieldable> OnDestroyed { add { Attackable.ShieldHandler.OnDestroyed += value; } remove { Attackable.ShieldHandler.OnDestroyed -= value; } }
-        public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
-        public event AttackedLanded OnAttackLanded;
         public event Action<Attack, IAttackable> OnDamageTaken { add { Attackable.OnDamageTaken += value; } remove { Attackable.OnDamageTaken -= value; } }
 
         public Attackable Attackable { get; set; } = new Attackable();
@@ -172,7 +184,6 @@ namespace Game
         {
             Attackable.TakeAttack(attack);
         }
-
         #endregion
     }
 

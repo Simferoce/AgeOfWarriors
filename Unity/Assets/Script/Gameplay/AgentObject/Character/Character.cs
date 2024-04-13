@@ -88,15 +88,15 @@ namespace Game
         #region Statistic
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
-        public override float MaxHealth { get => Definition.MaxHealth + modifierHandler.MaxHealth ?? 0; }
-        public override float Defense { get => Definition.Defense + modifierHandler.Defense ?? 0f; }
+        public override float MaxHealth { get => Definition.MaxHealth + GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
+        public override float Defense { get => Definition.Defense + GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
         public override float AttackSpeed { get => Definition.AttackSpeed; }
-        public override float AttackPower { get => Definition.AttackPower + modifierHandler.AttackPower ?? 0f; }
-        public override float Speed { get => Definition.Speed * (1 + modifierHandler.SpeedPercentage ?? 0f); }
+        public override float AttackPower { get => Definition.AttackPower + GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
+        public override float Speed { get => Definition.Speed * (1 + GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
         public override float Reach { get => Definition.Reach; }
         public override bool IsActive { get => !IsDead; }
         public override bool IsEngaged => GetTarget(engagedCriteria, this) != null;
-        public override bool IsInvulnerable => modifierHandler.Invulnerable ?? false;
+        public override bool IsInvulnerable => GetModifiers().Where(x => x.Invulnerable.HasValue).Any(x => x.Invulnerable.Value);
         public override bool IsDead { get => stateMachine.Current is DeathState; }
 
         public override bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
