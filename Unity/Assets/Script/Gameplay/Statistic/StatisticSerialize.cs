@@ -9,15 +9,22 @@ namespace Game
     public class StatisticSerialize<T> : Statistic<T>
     {
         [SerializeField] private T value;
+        [SerializeField] private bool percentage;
 
         public override string GetDescriptionFormatted(object caller)
         {
-            return GetValue(caller).ToString();
+            if (percentage == true)
+                return $"{(float)(object)GetValue(caller) * 100}%";
+            else
+                return GetValue(caller).ToString();
         }
 
         public override string GetDescription()
         {
-            return value.ToString();
+            if (percentage == true)
+                return $"{(float)(object)value * 100}%";
+            else
+                return value.ToString();
         }
 
         public override T GetValue(object caller)

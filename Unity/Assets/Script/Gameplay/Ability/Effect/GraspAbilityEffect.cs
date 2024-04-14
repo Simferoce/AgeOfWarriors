@@ -9,17 +9,18 @@ namespace Game
     {
         [SerializeField] private float destinationDistance;
         [SerializeField] private float duration = 0.3f;
-        [SerializeField] private float staggerDuration = 0.5f;
+        [SerializeField] private StatisticReference<float> staggerDuration;
         [SerializeField, Range(0, 1)] private float damping = 0.05f;
 
         private float startedAt;
 
         public override void Apply()
         {
+            float duration = staggerDuration.GetValueOrThrow(Ability);
             foreach (IDisplaceable target in Ability.Targets.Cast<IDisplaceable>().ToList())
             {
                 if (target is IStaggerable staggerable)
-                    staggerable.Stagger(staggerDuration);
+                    staggerable.Stagger(duration);
             }
 
             startedAt = Time.time;

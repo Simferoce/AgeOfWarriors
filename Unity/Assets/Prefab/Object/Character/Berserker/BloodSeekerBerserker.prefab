@@ -80,6 +80,18 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.y
       value: 0.7164701
       objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 8123c5d3258092b4b87d0395fcd38f99, type: 2}
+    - target: {fileID: 5217243639580789687, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: dfa0ecdf3974904439b3c578bc907282, type: 2}
     - target: {fileID: 5477393054522080936, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: m_Bounds.m_Center.x
       value: 0.012594715
@@ -98,7 +110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6705402225686340843, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: m_Name
-      value: BloodSeeker
+      value: BloodSeekerBerserker
       objectReference: {fileID: 0}
     - target: {fileID: 7655198288676488885, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
       propertyPath: m_Bounds.m_Center.x

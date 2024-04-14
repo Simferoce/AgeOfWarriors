@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Name: Grasp
+  m_EditorClassIdentifier: 
+  id: 96bcb15ffca68c647bcecca181aee9c2
+  title: Grasp
+  description: Pull all enemies in {range} meters. Staggers the affected enemies
+    for {buff_duration}. Trigger only if there is at least 2 enemies in range.
+  statistics:
+  - rid: 4528059700692647970
+  - rid: 4528059700692647972
+  - rid: 4528059700692647977
+  prefab: {fileID: 5897430954624599547, guid: 18ad5626a0432ca47aad335c827312a3, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4528059700692647970
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Range - (200 % of Reach)
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+          mapper:
+            rid: 4528059700692647971
+        percentage: 2
+    - rid: 4528059700692647971
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059700692647972
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Cooldown - 7,5
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        value: 7.5
+        percentage: 0
+    - rid: 4528059700692647977
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Buff Duration - 2
+        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
+        value: 2
+        percentage: 0
