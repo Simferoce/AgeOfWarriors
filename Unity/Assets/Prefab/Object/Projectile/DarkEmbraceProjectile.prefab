@@ -93,11 +93,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8633233943157110530}
-  - component: {fileID: -7442373754077631548}
+  - component: {fileID: 6481308355172389788}
   - component: {fileID: -9219538325602513416}
   - component: {fileID: 519887707098718041}
   m_Layer: 0
-  m_Name: ShamanSpell
+  m_Name: DarkEmbraceProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -120,7 +120,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7442373754077631548
+--- !u!114 &6481308355172389788
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,21 +134,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
-    rid: 3490450885554995206
+    rid: 4528059696114040840
   projectileMovements: []
   impacts:
-  - rid: 3656781118043062344
+  - rid: 4528059696114040836
   references:
     version: 2
     RefIds:
-    - rid: 3490450885554995206
+    - rid: 4528059696114040836
+      type: {class: ProjectileTimedImpact, ns: Game, asm: Assembly-CSharp}
+      data:
+        criteria:
+          rid: 4528059696114040837
+        damage:
+          definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+          mapper:
+            rid: 4528059696114040838
+        duration:
+          definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+          mapper:
+            rid: 4528059696114040839
+    - rid: 4528059696114040837
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059696114040838
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059696114040839
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059696114040840
       type: {class: ProjectileBubbleUpDeath, ns: Game, asm: Assembly-CSharp}
       data:
-        duration: 0.25
-        scale: 1.25
-        stopSimulatedDelay: 0.05
-    - rid: 3656781118043062344
-      type: {class: ProjectileTimedImpact, ns: Game, asm: Assembly-CSharp}
+        duration: 1
+        scale: 2
+        stopSimulatedDelay: 0.1
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

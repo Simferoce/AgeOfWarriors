@@ -144,6 +144,18 @@ PrefabInstance:
       propertyPath: m_Bounds.m_Extent.y
       value: 0.7164701
       objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 156a5e5d2b7389c458935a45ae3476d7, type: 2}
+    - target: {fileID: 5217243639580789687, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 583f27f933430694893ccbf3929fa8cf, type: 2}
     - target: {fileID: 5477393054522080936, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
       propertyPath: m_Bounds.m_Center.x
       value: 0.012594745
@@ -186,7 +198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6705402225686340843, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
       propertyPath: m_Name
-      value: Shaman
+      value: ShamanSeer
       objectReference: {fileID: 0}
     - target: {fileID: 6902808674781587786, guid: 295abc8b27af3fd4a810104a6b90c9fc, type: 3}
       propertyPath: m_AnchorMax.y
