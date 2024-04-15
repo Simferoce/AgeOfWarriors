@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 270189467573928427}
   - component: {fileID: 9215057588866617565}
   - component: {fileID: 3263700911198353021}
+  - component: {fileID: 6606204373776900685}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -316,33 +317,8 @@ MonoBehaviour:
   types: 
   hitbox: {fileID: 8271833102721241429}
   targetPosition: {fileID: 7840795603293673896}
-  blocking:
-    rid: 3656781343263817756
   rigidbody: {fileID: 9215057588866617565}
   abilitiesDefinition: []
-  references:
-    version: 2
-    RefIds:
-    - rid: 3656781343263817756
-      type: {class: OrTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data:
-        criterias:
-        - rid: 3656781343263817757
-        - rid: 3656781343263817758
-    - rid: 3656781343263817757
-      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781343263817758
-      type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data:
-        criterias:
-        - rid: 3656781343263817759
-        - rid: 3656781343263817760
-    - rid: 3656781343263817759
-      type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781343263817760
-      type: {class: PriorityTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data:
-        comparaison: 1
 --- !u!50 &9215057588866617565
 Rigidbody2D:
   serializedVersion: 4
@@ -376,6 +352,45 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_SortAtRoot: 0
+--- !u!114 &6606204373776900685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645757101492874935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 780bbf78c3b2ba248a0b85867699f2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blocking:
+    rid: 4528059671764533273
+  collider: {fileID: 8271833102721241429}
+  owner: {fileID: 270189467573928427}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4528059671764533273
+      type: {class: OrTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        criterias:
+        - rid: 4528059671764533277
+        - rid: 4528059671764533276
+    - rid: 4528059671764533276
+      type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        criterias:
+        - rid: 4528059671764533278
+        - rid: 4528059671764533279
+    - rid: 4528059671764533277
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059671764533278
+      type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059671764533279
+      type: {class: PriorityTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        comparaison: 1
 --- !u!1 &4568683806961424362
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,8 +887,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 3.802}
-  m_SizeDelta: {x: 0.45, y: 0.3029}
+  m_AnchoredPosition: {x: 0, y: 2.217}
+  m_SizeDelta: {x: 0.45, y: 1.095}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &3711021001455401194
 Canvas:

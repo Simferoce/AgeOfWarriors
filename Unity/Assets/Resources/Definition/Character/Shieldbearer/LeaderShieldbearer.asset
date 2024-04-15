@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
+  m_Name: LeaderShieldbearer
+  m_EditorClassIdentifier: 
+  id: e3785274f87475045bce6f63977d63fc
+  icon: {fileID: 171242972, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  title: Shieldbearer - Leader
+  productionDuration: 2
+  cost: 15
+  technologyGainPerSecond: 0
+  baseDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  reach: 0.5
+  speed: 0.5
+  attackSpeed: 2
+  attackPower: 1
+  maxHealth: 10
+  defense: 15
+  prefab: {fileID: 5111183424940805414, guid: 3fc4e53abe9501446a663f9d4bd9368d, type: 3}

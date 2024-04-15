@@ -138,7 +138,7 @@ MonoBehaviour:
   - rid: 3656781118043062280
   - rid: 3656781118043062299
   impacts:
-  - rid: 3656781118043062276
+  - rid: 4528059695970910221
   references:
     version: 2
     RefIds:
@@ -148,8 +148,6 @@ MonoBehaviour:
         duration: 0.25
         scale: 1.25
         stopSimulatedDelay: 0.05
-    - rid: 3656781118043062276
-      type: {class: ProjectileHealImpact, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781118043062280
       type: {class: ProjectileSelfRotateMovement, ns: Game, asm: Assembly-CSharp}
       data:
@@ -159,6 +157,19 @@ MonoBehaviour:
       type: {class: ProjectileFixVelocityMovement, ns: Game, asm: Assembly-CSharp}
       data:
         velocity: 3
+    - rid: 4528059695970910221
+      type: {class: ProjectileHealImpact, ns: Game, asm: Assembly-CSharp}
+      data:
+        criteria:
+          rid: 4528059695970910222
+        heal:
+          definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
+          mapper:
+            rid: 4528059695970910223
+    - rid: 4528059695970910222
+      type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059695970910223
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

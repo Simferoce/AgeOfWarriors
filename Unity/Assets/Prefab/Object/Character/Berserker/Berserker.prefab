@@ -104,6 +104,14 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 09b7c9b8ea28a9440b6cc6ceee4293c8, type: 2}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: dfa0ecdf3974904439b3c578bc907282, type: 2}
     - target: {fileID: 453863716851728237, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: m_IsActive
       value: 1
