@@ -196,7 +196,7 @@ MonoBehaviour:
   - rid: 3656781118043062282
   - rid: 3656781118043062283
   impacts:
-  - rid: 3656781095385956448
+  - rid: 3656781412477173801
   references:
     version: 2
     RefIds:
@@ -204,14 +204,31 @@ MonoBehaviour:
       type: {class: ProjectileStickDeath, ns: Game, asm: Assembly-CSharp}
       data:
         stopSimulatedDelay: 0.01
-    - rid: 3656781095385956448
-      type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781118043062282
       type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781118043062283
       type: {class: ProjectileStraightMovement, ns: Game, asm: Assembly-CSharp}
       data:
         speed: 6
+    - rid: 3656781412477173801
+      type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
+      data:
+        criteria:
+          rid: 3656781412477173802
+        damage:
+          definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+          mapper:
+            rid: 3656781412477173803
+        armorPenetration:
+          definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
+          mapper:
+            rid: 3656781412477173808
+    - rid: 3656781412477173802
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781412477173803
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781412477173808
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

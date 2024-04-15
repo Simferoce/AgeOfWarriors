@@ -10,10 +10,10 @@ namespace Game
 
         public override Vector3 GetPosition(ProjectileAbilityEffect ability)
         {
-            foreach (Transform transform in ability.Ability.Character.transform)
+            foreach (TransformTag tag in ability.Ability.Character.TransformTags)
             {
-                if (transform.name == origin)
-                    return transform.position;
+                if (tag.Id == origin)
+                    return tag.transform.position;
             }
 
             return Vector3.zero;

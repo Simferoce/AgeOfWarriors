@@ -9,6 +9,7 @@ namespace Game
     {
         [SerializeReference, SerializeReferenceDropdown] private TargetCriteria criteria;
         [SerializeField] private StatisticReference<float> damage;
+        [SerializeField] private StatisticReference<float> armorPenetration;
 
         private Attack attack;
 
@@ -16,7 +17,7 @@ namespace Game
         {
             base.Initialize(projectile);
 
-            attack = new Attack(new AttackSource(projectile.Character, projectile), damage.GetValueOrThrow(projectile), 0, 0);
+            attack = new Attack(new AttackSource(projectile.Character, projectile), damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0);
         }
 
         public override bool Impact(GameObject collision)

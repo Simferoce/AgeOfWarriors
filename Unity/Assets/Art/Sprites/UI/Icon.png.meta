@@ -127,7 +127,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ShieldbearerIcon
+      name: HuntersMark
       rect:
         serializedVersion: 2
         x: 128
@@ -147,48 +147,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: LeaderIcon
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 1920
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0e8623783294344991b18ae82305153
-      internalID: 171242972
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OnslaughtIcon
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 1920
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0a75b362b56421c4bb5ba28224fcec97
-      internalID: -1403394186
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -200,8 +158,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      HuntersMark: -412835066
       OnslaughtIcon: -1403394186
-      ShieldbearerIcon: -412835066
       LeaderIcon: 171242972
       DefenseUp: -1676996386
       Icon_1: 800693428

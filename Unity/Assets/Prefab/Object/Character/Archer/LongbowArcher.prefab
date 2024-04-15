@@ -144,6 +144,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 94bc3887fe1aaad468e21f5c79064f4f, type: 2}
+    - target: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+      propertyPath: abilitiesDefinition.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 403e6a5681908f94dbcb8f4dd075a7f4, type: 2}
     - target: {fileID: 6156041511092438241, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

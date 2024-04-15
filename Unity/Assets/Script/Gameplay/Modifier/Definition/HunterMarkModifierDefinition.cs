@@ -35,6 +35,17 @@ namespace Game
 
                 attackable.OnDamageTaken -= OnAttackableDamageTaken;
             }
+
+            public override bool TryGetStatistic<T>(StatisticDefinition definition, out T value)
+            {
+                if (definition == StatisticDefinition.Damage)
+                {
+                    value = (T)(object)damage;
+                    return true;
+                }
+
+                return base.TryGetStatistic(definition, out value);
+            }
         }
     }
 }

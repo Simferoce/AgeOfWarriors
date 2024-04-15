@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Name: PiercingShot
+  m_EditorClassIdentifier: 
+  id: e519c0b256b8cd84890c6167acfc1c87
+  title: Piercing Shot
+  description: Deals {damage} damage with {armor_penetration} armor penetration.
+  statistics:
+  - rid: 3656781412477173785
+  - rid: 3656781412477173787
+  - rid: 3656781412477173788
+  - rid: 3656781412477173790
+  prefab: {fileID: 2354011339543092937, guid: 63ecacc2a71926c4db7262d713872a14, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781412477173785
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Damage - (100 % of Attack Power)
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+          mapper:
+            rid: 3656781412477173786
+        percentage: 1
+    - rid: 3656781412477173786
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781412477173787
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Cooldown - 5
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        value: 5
+        percentage: 0
+    - rid: 3656781412477173788
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Range - (100 % of Reach)
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+          mapper:
+            rid: 3656781412477173789
+        percentage: 1
+    - rid: 3656781412477173789
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781412477173790
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: ' - 15'
+        definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
+        value: 15
+        percentage: 0

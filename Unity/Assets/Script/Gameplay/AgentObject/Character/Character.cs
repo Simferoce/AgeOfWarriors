@@ -10,8 +10,15 @@ namespace Game
         [SerializeField] private new Rigidbody2D rigidbody;
 
         public CharacterAnimator CharacterAnimator { get; set; }
+        public List<TransformTag> TransformTags { get; set; }
 
         private StateMachine stateMachine = new StateMachine();
+
+        protected override void Awake()
+        {
+            base.Awake();
+            TransformTags = GetComponentsInChildren<TransformTag>().ToList();
+        }
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {

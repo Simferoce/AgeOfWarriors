@@ -24,6 +24,9 @@ namespace Game
         private static StatisticDefinition speed;
         public static StatisticDefinition Speed => speed ??= speed = Resources.Load<StatisticDefinition>("Definition/Statistic/SpeedStatisticDefinition");
 
+        private static StatisticDefinition damage;
+        public static StatisticDefinition Damage => damage ??= damage = Resources.Load<StatisticDefinition>("Definition/Statistic/DamageStatisticDefinition");
+
         [SerializeField] private Sprite icon;
         [SerializeField] private string title;
         [SerializeField] private Color color;
