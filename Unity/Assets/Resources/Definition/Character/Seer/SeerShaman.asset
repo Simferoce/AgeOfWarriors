@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
-  m_Name: OnslaughtShieldbearer
+  m_Name: SeerShaman
   m_EditorClassIdentifier: 
-  id: 3ddf776ed1310c04f9b4c5200636d2a3
-  icon: {fileID: -1403394186, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  title: Shieldbearer - Onslaught
+  id: 71ef5a81b0132e0478a2cc1b244d3357
+  icon: {fileID: 647811372, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  title: Seer - Shaman
   productionDuration: 2
-  cost: 15
+  cost: 10
   technologyGainPerSecond: 0
-  baseDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-  reach: 0.5
+  baseDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+  reach: 1.5
   speed: 0.5
-  attackSpeed: 2
-  attackPower: 1
+  attackSpeed: 1
+  attackPower: 2.5
   maxHealth: 10
-  defense: 15
-  prefab: {fileID: 7767413754373852290, guid: 00d8961f7d26e1a44ad58fcddff974d5, type: 3}
+  defense: 10
+  prefab: {fileID: 6553268074382411418, guid: 08eeee740a94f3c4994069918c5e038d, type: 3}
