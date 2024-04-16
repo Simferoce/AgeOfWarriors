@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    [SerializeField] private new CameraDrag camera;
+    [SerializeField] private new CameraBehaviour camera;
     [SerializeField] private float percentage = 1f;
 
     private Vector3 origin;
