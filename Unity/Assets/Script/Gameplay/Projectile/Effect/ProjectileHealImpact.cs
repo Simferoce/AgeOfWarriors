@@ -27,10 +27,10 @@ namespace Game
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
                 && targeteable.IsActive
-                && criteria.Execute(projectile.Character, targeteable, projectile)
-                && targeteable is IHealable healable)
+                && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
+                && targeteable.TryGetCachedComponent<Character>(out Character character))
             {
-                healable.Heal(currentHeal);
+                character.Heal(currentHeal);
 
                 return true;
             }

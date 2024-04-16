@@ -22,7 +22,7 @@ namespace Game
 
             private void Shieldable_OnShieldBroken(Shield shield)
             {
-                if (modifiable is not Character character)
+                if (!modifiable.TryGetCachedComponent<Character>(out Character character))
                     return;
 
                 float heal = healPerShieldPoint * shield.Remaining;

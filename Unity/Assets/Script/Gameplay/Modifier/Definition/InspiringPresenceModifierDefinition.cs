@@ -13,7 +13,7 @@ namespace Game
             private float defense;
 
             public Modifier(Character character, ModifierDefinition modifierDefinition, float defense, InspiringPresenceAbilityEffect source)
-                : base(character, modifierDefinition)
+                : base(character.GetCachedComponent<IModifiable>(), modifierDefinition)
             {
                 this.defense = defense;
                 this.Source = source;

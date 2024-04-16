@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -14,7 +15,7 @@ namespace Game
 
             public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float damagePerPointRemaining, float percentageReach) : base(modifiable, modifierDefinition)
             {
-                if (modifiable is IShieldable shieldable)
+                if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
                     shieldable.OnShieldableDestroyed += Shieldable_OnDestroyed;
                     shieldable.OnShieldBroken += Shieldable_OnShieldBroken;
@@ -26,14 +27,14 @@ namespace Game
 
             private void Shieldable_OnShieldBroken(Shield shield)
             {
-                if (modifiable is not Character character)
+                if (!modifiable.TryGetCachedComponent<Character>(out Character character))
                     return;
 
                 float damage = damagePerPointAbsorbed * (shield.Initial - shield.Remaining);
                 if (damage <= 0)
                     return;
 
-                foreach (AgentObject agent in AgentObject.All)
+                foreach (AgentObject agent in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
                 {
                     if (agent == character)
                         continue;
@@ -41,10 +42,13 @@ namespace Game
                     if (!agent.IsActive)
                         continue;
 
+                    if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                        continue;
+
                     if (!agent.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
                         continue;
 
-                    if (Mathf.Abs((agent.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * percentageReach)
+                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * percentageReach)
                         continue;
 
                     Attack attack = new Attack(new AttackSource(new List<IAttackSource>() { character, this }), damage, 0, 0);
@@ -62,7 +66,7 @@ namespace Game
             {
                 base.Dispose();
 
-                if (modifiable is IShieldable shieldable)
+                if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
                     shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
                     shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;

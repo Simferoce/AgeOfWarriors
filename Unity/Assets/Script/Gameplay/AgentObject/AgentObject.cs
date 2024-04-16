@@ -1,12 +1,10 @@
-﻿using Assets.Script.Agent.Technology;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Attackable))]
-    public abstract class AgentObject : Entity, IModifiable, IAttackSource, ITargeteable, IHealable
+    [RequireComponent(typeof(ModifierHandler))]
+    public abstract class AgentObject : Entity
     {
         public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
 
@@ -24,21 +22,14 @@ namespace Game
         public static List<AgentObject> All { get; private set; }
 
         [SerializeField] private List<Type> types = new List<Type>();
-        [SerializeField] private Collider2D hitbox;
-        [SerializeField] private Transform targetPosition;
 
-        public event AttackedLanded OnAttackLanded;
-
+        public virtual bool IsActive { get => true; }
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
         public int SpawnNumber { get; private set; }
-        public virtual bool IsActive { get => true; }
-        public virtual int Priority { get => SpawnNumber; }
-        public virtual Faction Faction { get => Agent.Faction; }
-        public Vector3 CenterPosition { get => transform.position; }
-        public Vector3 TargetPosition { get => targetPosition.position; }
-        public Collider2D Collider { get => hitbox; }
-        public virtual List<Type> Types { get => types; }
+        public int Priority { get => SpawnNumber; }
+        public Faction Faction { get => Agent.Faction; }
+        public List<Type> Types { get => types; }
 
         protected virtual void Awake()
         {
@@ -48,12 +39,6 @@ namespace Game
         protected virtual void OnDestroy()
         {
             All.Remove(this);
-            DisposeModifiers();
-        }
-
-        public void Update()
-        {
-            UpdateModifiers();
         }
 
         public virtual void Spawn(Agent agent, int spawnNumber, int direction)
@@ -64,113 +49,14 @@ namespace Game
 
             if (direction < 0)
                 transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-
-            AgentObjectDefinition agentObjectDefinition = GetDefinition();
-            List<ITechnologyModify> modifiers = agent.Technology.PerksUnlocked.OfType<ITechnologyModify>().ToList();
-            foreach (ITechnologyModify modifier in modifiers)
-            {
-                if (modifier.Affect(agentObjectDefinition))
-                    this.AddModifier(modifier.GetModifier(this));
-            }
-
-            this.Health = MaxHealth;
-        }
-
-        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
-        {
-            Heal(damageDealt * attack.Leach);
-            OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
         }
 
         public virtual AgentObjectDefinition GetDefinition() { return null; }
-
-        public Vector3 ClosestPoint(Vector3 point)
-        {
-            return hitbox.ClosestPoint(point);
-        }
-
-        public void Heal(float amount)
-        {
-            this.Health += amount;
-            this.Health = Mathf.Clamp(Health, 0, MaxHealth);
-        }
-
-        public void Death()
-        {
-            EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
-            InternalDeath();
-        }
-
-        protected virtual void InternalDeath()
-        {
-            Destroy(this.gameObject);
-        }
-
-        #region Statistic
-        public virtual float MaxHealth { get; }
-        public virtual float Defense { get; }
-        public virtual float AttackPower { get; }
-        public virtual float Reach { get; }
-        public virtual float Speed { get; }
-        public virtual float AttackSpeed { get; }
-        public virtual float TechnologyGainPerSecond { get => 0f; }
-        public float Health { get; set; }
-
-        public virtual bool IsDead { get => this.Health <= 0; }
-        public virtual bool IsInvulnerable { get => false; }
-        public virtual bool IsEngaged { get => false; }
-        public bool IsInjured { get => !IsDead && Health < MaxHealth; }
-        public bool IsDisplaceable { get => this is IDisplaceable; }
-        public bool IsAttackable { get => this.Health > 0; }
-
-        public virtual bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
-        {
-            value = default;
-            return false;
-        }
-        #endregion
-
-        #region Modifiable
-        private List<Modifier> modifiers = new List<Modifier>();
-
-        public void AddModifier(Modifier modifier)
-        {
-            modifier.Initialize();
-            modifiers.Add(modifier);
-        }
-
-        public List<Modifier> GetModifiers()
-        {
-            return modifiers;
-        }
-
-        public void UpdateModifiers()
-        {
-            foreach (Modifier modifier in modifiers.ToList())
-            {
-                modifier.Update();
-            }
-        }
-
-        public void RemoveModifier(Modifier modifier)
-        {
-            modifier.Dispose();
-            modifiers.Remove(modifier);
-        }
-
-        public void DisposeModifiers()
-        {
-            foreach (Modifier modifier in modifiers)
-                modifier.Dispose();
-        }
-        #endregion
     }
 
     public abstract class AgentObject<T> : AgentObject
         where T : AgentObjectDefinition
     {
-        public override float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
-
         public T Definition { get; set; }
 
         public override AgentObjectDefinition GetDefinition()

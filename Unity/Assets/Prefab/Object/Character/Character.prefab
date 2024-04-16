@@ -276,6 +276,8 @@ GameObject:
   - component: {fileID: 3263700911198353021}
   - component: {fileID: 6606204373776900685}
   - component: {fileID: 8090293872940012884}
+  - component: {fileID: 6663662174080843966}
+  - component: {fileID: 3771901920774352687}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -316,8 +318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   types: 
-  hitbox: {fileID: 8271833102721241429}
-  targetPosition: {fileID: 7840795603293673896}
   rigidbody: {fileID: 9215057588866617565}
   abilitiesDefinition: []
 --- !u!50 &9215057588866617565
@@ -404,7 +404,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c6a931233fa9d46996b0a57f0d6519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 270189467573928427}
+--- !u!114 &6663662174080843966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645757101492874935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0847c3c86ed4f1d4092690ba02e64498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3771901920774352687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645757101492874935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ccae3e1abf37542b53378969537e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {fileID: 7840795603293673896}
+  hitbox: {fileID: 8271833102721241429}
 --- !u!1 &4568683806961424362
 GameObject:
   m_ObjectHideFlags: 0
@@ -685,7 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efccf6b1eff936c4584a488721a3b31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentObject: {fileID: 270189467573928427}
+  character: {fileID: 0}
 --- !u!1 &5858067548828292335
 GameObject:
   m_ObjectHideFlags: 0
@@ -863,7 +888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efccf6b1eff936c4584a488721a3b31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentObject: {fileID: 270189467573928427}
+  character: {fileID: 270189467573928427}
 --- !u!1 &7826961925465763492
 GameObject:
   m_ObjectHideFlags: 0

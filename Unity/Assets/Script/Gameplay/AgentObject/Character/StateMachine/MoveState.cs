@@ -56,7 +56,7 @@ namespace Game
                     if (!blocker.IsActive)
                         continue;
 
-                    if (!blocker.Collider.IsTouching(character.Collider))
+                    if (!blocker.Collider.IsTouching(character.GetCachedComponent<Blocker>().Collider))
                         continue;
 
                     if (blocker.IsBlocking(character))

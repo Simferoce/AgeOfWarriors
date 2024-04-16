@@ -13,7 +13,7 @@ namespace Game
 
         public override void Apply()
         {
-            IModifiable modifiable = Ability.Targets.OfType<IModifiable>().FirstOrDefault();
+            IModifiable modifiable = Ability.Targets.Select(x => x.GetCachedComponent<IModifiable>()).Where(x => x != null).FirstOrDefault();
 
             if (modifiable != null)
             {

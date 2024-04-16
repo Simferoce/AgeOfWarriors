@@ -1,18 +1,38 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Script.Agent.Technology;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public partial class Character : AgentObject<CharacterDefinition>, IDisplaceable, IStaggerable
+    [RequireComponent(typeof(Attackable))]
+    [RequireComponent(typeof(Target))]
+    public partial class Character : AgentObject<CharacterDefinition>, IDisplaceable, IStaggerable, IAttackSource, IAttackableOwner, ITargetOwner
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
 
         public CharacterAnimator CharacterAnimator { get; set; }
         public List<TransformTag> TransformTags { get; set; }
+        public event AttackedLanded OnAttackLanded;
+        public override bool IsActive { get => !IsDead; }
+        public Vector3 CenterPosition { get => this.GetCachedComponent<ITargeteable>().CenterPosition; }
+
+        public float Health { get; set; }
+        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
+        public float Defense { get => Definition.Defense + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
+        public float AttackSpeed { get => Definition.AttackSpeed; }
+        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
+        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
+        public float Reach { get => Definition.Reach; }
+        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
+        public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
+        public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Invulnerable.HasValue).Any(x => x.Invulnerable.Value);
+        public bool IsDead { get => stateMachine.Current is DeathState; }
+        public bool IsInjured { get => Health < MaxHealth; }
 
         private StateMachine stateMachine = new StateMachine();
+        private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
         protected override void Awake()
         {
@@ -26,8 +46,17 @@ namespace Game
 
             CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
 
+            AgentObjectDefinition agentObjectDefinition = GetDefinition();
+            List<ITechnologyModify> modifiers = agent.Technology.PerksUnlocked.OfType<ITechnologyModify>().ToList();
+            foreach (ITechnologyModify modifier in modifiers)
+            {
+                if (modifier.Affect(agentObjectDefinition))
+                    this.GetCachedComponent<IModifiable>().AddModifier(modifier.GetModifier(this.GetCachedComponent<IModifiable>()));
+            }
+
             stateMachine.Initialize(new MoveState(this));
             InitializeAbilities();
+            this.Health = MaxHealth;
         }
 
         public void FixedUpdate()
@@ -55,12 +84,12 @@ namespace Game
         public List<ITargeteable> GetTargets(TargetCriteria criteria, object caller)
         {
             List<ITargeteable> potentialTargets = new List<ITargeteable>();
-            foreach (ITargeteable attackable in AgentObject.All.OfType<ITargeteable>())
+            foreach (ITargeteable attackable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
             {
                 if (!attackable.IsActive)
                     continue;
 
-                if (!criteria.Execute(this, attackable, caller))
+                if (!criteria.Execute(this.GetCachedComponent<ITargeteable>(), attackable, caller))
                     continue;
 
                 potentialTargets.Add(attackable);
@@ -71,8 +100,9 @@ namespace Game
                 .ToList();
         }
 
-        protected override void InternalDeath()
+        public void Death()
         {
+            EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
             stateMachine.SetState(new DeathState(this));
         }
 
@@ -92,21 +122,19 @@ namespace Game
             stateMachine.SetState(new StaggerState(this, duration));
         }
 
-        #region Statistic
-        private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
+        public void Heal(float amount)
+        {
+            this.Health += amount;
+            this.Health = Mathf.Clamp(Health, 0, MaxHealth);
+        }
 
-        public override float MaxHealth { get => Definition.MaxHealth + GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
-        public override float Defense { get => Definition.Defense + GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
-        public override float AttackSpeed { get => Definition.AttackSpeed; }
-        public override float AttackPower { get => Definition.AttackPower + GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
-        public override float Speed { get => Definition.Speed * (1 + GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
-        public override float Reach { get => Definition.Reach; }
-        public override bool IsActive { get => !IsDead; }
-        public override bool IsEngaged => GetTarget(engagedCriteria, this) != null;
-        public override bool IsInvulnerable => GetModifiers().Where(x => x.Invulnerable.HasValue).Any(x => x.Invulnerable.Value);
-        public override bool IsDead { get => stateMachine.Current is DeathState; }
+        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
+        {
+            Heal(damageDealt * attack.Leach);
+            OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
+        }
 
-        public override bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
+        public bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
         {
             if (statisticDefinition == StatisticDefinition.MaxHealth)
             {
@@ -175,10 +203,9 @@ namespace Game
                 return true;
             }
 
-            return base.TryGetStatisticValue<T>(statisticDefinition, statisticType, out value);
+            value = default(T);
+            return false;
         }
-
-        #endregion
 
         #region Ability
         [Header("Abilities")]

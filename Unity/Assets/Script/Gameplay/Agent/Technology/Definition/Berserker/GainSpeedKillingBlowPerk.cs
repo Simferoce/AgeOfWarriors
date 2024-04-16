@@ -16,8 +16,8 @@ namespace Game
                 this.speed = speed;
                 this.duration = duration;
 
-                if (modifiable is AgentObject agentObject)
-                    agentObject.OnAttackLanded += AgentObject_OnAttackLanded;
+                if (modifiable.TryGetCachedComponent<Character>(out Character character))
+                    character.OnAttackLanded += AgentObject_OnAttackLanded;
                 this.speedModifierDefinition = speedModifierDefinition;
             }
 
@@ -30,8 +30,8 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                if (modifiable is AgentObject agentObject)
-                    agentObject.OnAttackLanded -= AgentObject_OnAttackLanded;
+                if (modifiable.TryGetCachedComponent<Character>(out Character character))
+                    character.OnAttackLanded -= AgentObject_OnAttackLanded;
             }
         }
 

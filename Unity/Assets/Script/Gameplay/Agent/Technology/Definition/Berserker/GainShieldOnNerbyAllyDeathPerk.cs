@@ -23,9 +23,9 @@ namespace Game
                 if (evt.AgentObject.Faction == (modifiable as ITargeteable).Faction
                     && modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable)
                     && (IModifiable)evt.AgentObject != modifiable
-                    && modifiable.TryGetCachedComponent<AgentObject>(out AgentObject agentObject))
+                    && modifiable.TryGetCachedComponent<Character>(out Character character))
                 {
-                    shieldable.AddShield(new Shield(amount * agentObject.MaxHealth, duration));
+                    shieldable.AddShield(new Shield(amount * character.MaxHealth, duration));
                 }
             }
 

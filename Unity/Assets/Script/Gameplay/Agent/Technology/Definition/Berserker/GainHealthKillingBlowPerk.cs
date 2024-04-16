@@ -13,21 +13,21 @@ namespace Game
             public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float amount) : base(modifiable, modifierDefinition)
             {
                 this.amount = amount;
-                if (modifiable is AgentObject agentObject)
-                    agentObject.OnAttackLanded += AgentObject_OnAttackLanded;
+                if (modifiable.TryGetCachedComponent<Character>(out Character character))
+                    character.OnAttackLanded += AgentObject_OnAttackLanded;
             }
 
             private void AgentObject_OnAttackLanded(Attack attack, float damageDealt, bool killingBlow)
             {
-                if (killingBlow && modifiable is IHealable healable)
-                    healable.Heal(amount * healable.MaxHealth);
+                if (killingBlow && modifiable.TryGetCachedComponent<Character>(out Character character))
+                    character.Heal(amount * character.MaxHealth);
             }
 
             public override void Dispose()
             {
                 base.Dispose();
-                if (modifiable is AgentObject agentObject)
-                    agentObject.OnAttackLanded -= AgentObject_OnAttackLanded;
+                if (modifiable.TryGetCachedComponent<Character>(out Character character))
+                    character.OnAttackLanded -= AgentObject_OnAttackLanded;
             }
         }
 

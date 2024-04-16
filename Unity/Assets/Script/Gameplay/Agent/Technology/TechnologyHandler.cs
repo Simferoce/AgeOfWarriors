@@ -29,9 +29,9 @@ namespace Game
         {
             foreach (AgentObject agentObject in AgentObject.All)
             {
-                if (agentObject.Agent == agent)
+                if (agentObject is Character character && agentObject.Agent == agent)
                 {
-                    CurrentTechnology += Level.Instance.TechnologyGainMultiplier * agentObject.TechnologyGainPerSecond * Time.deltaTime;
+                    CurrentTechnology += Level.Instance.TechnologyGainMultiplier * character.TechnologyGainPerSecond * Time.deltaTime;
                 }
             }
 

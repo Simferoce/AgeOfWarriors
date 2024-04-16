@@ -16,36 +16,32 @@ namespace Game
         [SerializeField] private List<ModifierDetailUI> modifierDetailUIs = new List<ModifierDetailUI>();
         [SerializeField] private List<AbilityDetailUI> abilityDetailUIs = new List<AbilityDetailUI>();
 
-        private AgentObject agentObject;
-
-        public static DetailWindow Open(AgentObject agentObject)
+        public static DetailWindow Open(Character character)
         {
             DetailWindow statisticDetailWindow = WindowManager.Instance.GetWindow<DetailWindow>();
             statisticDetailWindow.Show();
-            statisticDetailWindow.Refresh(agentObject);
+            statisticDetailWindow.Refresh(character);
 
             return statisticDetailWindow;
         }
 
-        public void Refresh(AgentObject agentObject)
+        public void Refresh(Character character)
         {
             Time.timeScale = 0.0f;
 
-            this.agentObject = agentObject;
+            unitName.text = character.GetDefinition().Title;
+            unitIcon.sprite = character.GetDefinition().Icon;
 
-            unitName.text = agentObject.GetDefinition().Title;
-            unitIcon.sprite = agentObject.GetDefinition().Icon;
-
-            healthImage.fillAmount = agentObject.Health / agentObject.MaxHealth;
-            healthText.text = agentObject.Health.ToString();
-            maxHealthText.text = agentObject.MaxHealth.ToString();
+            healthImage.fillAmount = character.Health / character.MaxHealth;
+            healthText.text = character.Health.ToString();
+            maxHealthText.text = character.MaxHealth.ToString();
 
             StatisticDetailUI[] statisticDetailUIs = GetComponentsInChildren<StatisticDetailUI>();
 
             foreach (StatisticDetailUI statisticDetailUI in statisticDetailUIs)
-                statisticDetailUI.Refresh(agentObject);
+                statisticDetailUI.Refresh(character);
 
-            List<Modifier> modifiers = agentObject.GetModifiers();
+            List<Modifier> modifiers = character.GetCachedComponent<IModifiable>().GetModifiers();
 
             int i = 0;
             for (; i < modifiers.Count && i < modifierDetailUIs.Count; ++i)
@@ -57,26 +53,19 @@ namespace Game
             for (; i < modifierDetailUIs.Count; ++i)
                 modifierDetailUIs[i].gameObject.SetActive(false);
 
-            if (agentObject as Character is Character character)
-            {
-                List<Ability> abilities = character.Abilities.ToList();
-                abilities.Reverse();
+            List<Ability> abilities = character.Abilities.ToList();
+            abilities.Reverse();
 
-                int j = 0;
-                for (; j < abilities.Count && j < abilityDetailUIs.Count; ++j)
-                {
-                    abilityDetailUIs[j].gameObject.SetActive(true);
-                    abilityDetailUIs[j].Refresh(abilities[j]);
-                }
-
-                for (; j < abilityDetailUIs.Count; ++j)
-                    abilityDetailUIs[j].gameObject.SetActive(false);
-            }
-            else
+            int j = 0;
+            for (; j < abilities.Count && j < abilityDetailUIs.Count; ++j)
             {
-                for (int j = 0; j < abilityDetailUIs.Count; ++j)
-                    abilityDetailUIs[j].gameObject.SetActive(false);
+                abilityDetailUIs[j].gameObject.SetActive(true);
+                abilityDetailUIs[j].Refresh(abilities[j]);
             }
+
+            for (; j < abilityDetailUIs.Count; ++j)
+                abilityDetailUIs[j].gameObject.SetActive(false);
+
         }
 
         public override void Hide(Result result)

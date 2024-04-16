@@ -24,7 +24,7 @@ namespace Game
             {
                 base.Update();
 
-                if (modifiable is Character character && character.IsActive && character.IsEngaged
+                if (modifiable.TryGetCachedComponent<Character>(out Character character) && character.IsActive && character.IsEngaged
                     && modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
                     if ((int)((accumulatedTime + Time.deltaTime) / period) != (int)(accumulatedTime / period))

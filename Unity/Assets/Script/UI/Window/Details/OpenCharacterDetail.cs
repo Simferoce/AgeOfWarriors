@@ -2,9 +2,9 @@
 
 namespace Game
 {
-    public class OpenDetailAgentObject : MonoBehaviour
+    public class OpenCharacterDetail : MonoBehaviour
     {
-        [SerializeField] private AgentObject agentObject;
+        [SerializeField] private Character character;
 
         private void Awake()
         {
@@ -13,7 +13,7 @@ namespace Game
 
         public void OpenDetail()
         {
-            DetailWindow.Open(agentObject);
+            DetailWindow.Open(character);
         }
     }
 }

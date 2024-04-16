@@ -11,15 +11,19 @@ namespace Game
         public event IShieldable.ShieldBroken OnShieldBroken;
         public event Action<IShieldable> OnShieldableDestroyed;
 
-        [SerializeField] private AgentObject owner;
-
         public List<Shield> Shields { get => shields; }
 
         private List<Shield> shields = new List<Shield>();
+        private IAttackableOwner owner;
+
+        private void Awake()
+        {
+            owner = GetCachedComponent<IAttackableOwner>();
+        }
 
         public void TakeAttack(Attack attack)
         {
-            if (owner.IsDead)
+            if (!owner.IsActive)
                 return;
 
             if (owner.IsInvulnerable)
@@ -32,7 +36,7 @@ namespace Game
 
             if (owner.Health <= 0)
             {
-                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)owner.GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
+                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)owner.GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
                 if (modifier != null)
                 {
                     modifier.ResistKillingBlow();
@@ -43,7 +47,7 @@ namespace Game
             foreach (IAttackSource source in attack.AttackSource.Sources)
                 source.AttackLanded(attack, damageRemaining, owner.Health <= 0);
 
-            Debug.Log($"{owner.name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
+            Debug.Log($"{this.name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
             OnDamageTaken?.Invoke(attack, this);
 
             if (owner.Health <= 0 && !owner.IsDead)

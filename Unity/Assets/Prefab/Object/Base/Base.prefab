@@ -315,6 +315,8 @@ GameObject:
   - component: {fileID: 7617356873761771249}
   - component: {fileID: 8724693220913565563}
   - component: {fileID: 1325686514024479478}
+  - component: {fileID: 1280484157528620212}
+  - component: {fileID: 5121012784434507531}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -355,8 +357,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   types: 00000000
-  hitbox: {fileID: 5105175081674111919}
-  targetPosition: {fileID: 3026845125957121751}
   maxHealth: 100
   defense: 0
   spawnPoint: {fileID: 7750424142232137661}
@@ -414,4 +414,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35c6a931233fa9d46996b0a57f0d6519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 4385928984012920248}
+--- !u!114 &1280484157528620212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599345966726902995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ccae3e1abf37542b53378969537e4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {fileID: 3026845125957121751}
+  hitbox: {fileID: 5105175081674111919}
+--- !u!114 &5121012784434507531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599345966726902995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0847c3c86ed4f1d4092690ba02e64498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
