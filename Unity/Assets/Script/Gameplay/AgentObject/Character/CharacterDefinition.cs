@@ -16,6 +16,7 @@ namespace Game
         [SerializeField] private float attackPower = 1f;
         [SerializeField] private float maxHealth = 10f;
         [SerializeField] private float defense = 5f;
+        [SerializeField] private float technologyGainPerSecond;
 
         [Header("Prefab")]
         [SerializeField] private GameObject prefab;
@@ -26,6 +27,8 @@ namespace Game
         public float AttackPower { get => attackPower; }
         public float MaxHealth { get => maxHealth; }
         public float Defense { get => defense; }
+        public float TechnologyGainPerSecond { get => technologyGainPerSecond; set => technologyGainPerSecond = value; }
+
         public override bool IsSpecialization(AgentObjectDefinition agentObjectDefinition)
         {
             return baseDefinition == agentObjectDefinition || (baseDefinition?.IsSpecialization(agentObjectDefinition) ?? false);

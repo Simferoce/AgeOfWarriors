@@ -11,12 +11,10 @@ namespace Game
         [Header("General - Statistics")]
         [SerializeField] private float productionDuration;
         [SerializeField] private float cost;
-        [SerializeField] private float technologyGainPerSecond;
 
         public Sprite Icon { get => icon; }
         public float ProductionDuration { get => productionDuration; set => productionDuration = value; }
         public float Cost { get => cost; set => cost = value; }
-        public float TechnologyGainPerSecond { get => technologyGainPerSecond; set => technologyGainPerSecond = value; }
         public string Title { get => title; set => title = value; }
 
         public virtual bool IsSpecialization(AgentObjectDefinition agentObjectDefinition) { return false; }

@@ -31,6 +31,9 @@ public class CameraBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale <= 0)
+            return;
+
         if (Input.GetMouseButtonDown(0))
         {
             lastMousePosition = Input.mousePosition;
@@ -42,8 +45,10 @@ public class CameraBehaviour : MonoBehaviour
             Vector3 ratio = new Vector3(Screen.width / (camera.aspect * camera.orthographicSize), Screen.height / camera.orthographicSize, 1);
             Vector3 scaledMousePosition = Vector3.Scale(new Vector3(1f / (ratio.x / 2f), 1f / (ratio.y / 2f), 1), deltaMousePosition);
 
-            if (deltaMousePosition.magnitude > 0.01f)
-                this.transform.position += -scaledMousePosition;
+            if (camera.orthographicSize == maxZoom)
+                scaledMousePosition.y = 0f;
+
+            this.transform.position += -scaledMousePosition;
 
             RestrictCamera();
 

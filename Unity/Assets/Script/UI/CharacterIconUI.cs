@@ -1,4 +1,5 @@
 ﻿using Game;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ namespace UI
     {
         [SerializeField] private int index = 0;
         [SerializeField] private Image icon;
+        [SerializeField] private TextMeshProUGUI costText;
 
         private void Start()
         {
@@ -19,6 +21,7 @@ namespace UI
                 return;
             }
 
+            costText.text = agentObjectDefinition.Cost.ToString();
             icon.sprite = agentObjectDefinition.Icon;
         }
 

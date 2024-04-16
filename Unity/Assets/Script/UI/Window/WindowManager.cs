@@ -23,6 +23,8 @@ namespace Game
 
             foreach (Window window in windows)
                 window.Hide(null);
+
+            GetWindow<HudWindow>().Show();
         }
 
         public T GetWindow<T>()
