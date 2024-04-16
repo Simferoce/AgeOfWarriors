@@ -40,7 +40,6 @@ namespace Game
 
         private void Start()
         {
-            agentBase.transform.position = Lane.Instance.Project(agentBase.transform.position);
             agentBase.Spawn(this, 0, direction);
         }
 
