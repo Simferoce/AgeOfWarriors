@@ -1,12 +1,12 @@
 ﻿using Assets.Script.Agent.Technology;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public abstract class AgentObject : MonoBehaviour, IModifiable, IAttackable, IAttackSource, ITargeteable, IHealable, IShieldable
+    [RequireComponent(typeof(Attackable))]
+    public abstract class AgentObject : Entity, IModifiable, IAttackSource, ITargeteable, IHealable
     {
         public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
 
@@ -49,12 +49,10 @@ namespace Game
         {
             All.Remove(this);
             DisposeModifiers();
-            OnShieldableDestroyed?.Invoke(this);
         }
 
         public void Update()
         {
-            UpdateShields();
             UpdateModifiers();
         }
 
@@ -165,86 +163,6 @@ namespace Game
             foreach (Modifier modifier in modifiers)
                 modifier.Dispose();
         }
-        #endregion
-
-        #region Shield
-        public event IShieldable.ShieldBroken OnShieldBroken;
-        public event Action<IShieldable> OnShieldableDestroyed;
-
-        private List<Shield> shields = new List<Shield>();
-        public List<Shield> Shields { get => shields; set => shields = value; }
-
-        public void AddShield(Shield shield)
-        {
-            shields.Add(shield);
-        }
-
-        public void UpdateShields()
-        {
-            for (int i = shields.Count - 1; i >= 0; i--)
-            {
-                Shield shield = shields[i];
-                if (shield.Update())
-                {
-                    shields.Remove(shield);
-                    OnShieldBroken?.Invoke(shield);
-                }
-            }
-        }
-
-        public float TryAbsorb(float damageRemaining)
-        {
-            for (int i = shields.Count - 1; i >= 0; i--)
-            {
-                Shield shield = shields[i];
-                if (!shield.Absorb(damageRemaining, out damageRemaining))
-                {
-                    OnShieldBroken?.Invoke(shield);
-                    shields.RemoveAt(i);
-                }
-            }
-
-            return damageRemaining;
-        }
-        #endregion
-
-        #region Attackable
-
-        public event Action<Attack, IAttackable> OnDamageTaken;
-
-        public void TakeAttack(Attack attack)
-        {
-            if (IsDead)
-                return;
-
-            if (IsInvulnerable)
-                return;
-
-            float damageRemaining = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, Defense - attack.ArmorPenetration));
-            damageRemaining = TryAbsorb(damageRemaining);
-
-            Health -= damageRemaining;
-
-            if (Health <= 0)
-            {
-                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
-                if (modifier != null)
-                {
-                    modifier.ResistKillingBlow();
-                    Health = 0.001f;
-                }
-            }
-
-            foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attack, damageRemaining, Health <= 0);
-
-            Debug.Log($"{name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
-            OnDamageTaken?.Invoke(attack, this);
-
-            if (Health <= 0 && !IsDead)
-                Death();
-        }
-
         #endregion
     }
 

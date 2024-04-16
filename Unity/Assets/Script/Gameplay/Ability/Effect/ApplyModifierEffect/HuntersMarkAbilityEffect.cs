@@ -25,7 +25,7 @@ namespace Game
                 }
                 else
                 {
-                    huntersMark = new HunterMarkModifierDefinition.Modifier(modifiable, hunterMarkModifierDefinition, this, damage.GetValueOrThrow(Ability), modifiable as IAttackable)
+                    huntersMark = new HunterMarkModifierDefinition.Modifier(modifiable, hunterMarkModifierDefinition, this, damage.GetValueOrThrow(Ability), modifiable.GetCachedComponent<IAttackable>())
                         .With(new CharacterModifierTimeElement(duration.GetValueOrThrow(Ability)));
 
                     modifiable.AddModifier(huntersMark);

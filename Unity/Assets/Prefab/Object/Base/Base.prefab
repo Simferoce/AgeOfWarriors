@@ -314,6 +314,7 @@ GameObject:
   - component: {fileID: 4385928984012920248}
   - component: {fileID: 7617356873761771249}
   - component: {fileID: 8724693220913565563}
+  - component: {fileID: 1325686514024479478}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -401,3 +402,16 @@ MonoBehaviour:
     RefIds:
     - rid: 4528059671764533258
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+--- !u!114 &1325686514024479478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8599345966726902995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c6a931233fa9d46996b0a57f0d6519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 4385928984012920248}

@@ -1,22 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class Attackable
+    public class Attackable : Entity, IAttackable, IShieldable
     {
         public event Action<Attack, IAttackable> OnDamageTaken;
+        public event IShieldable.ShieldBroken OnShieldBroken;
+        public event Action<IShieldable> OnShieldableDestroyed;
 
-        private AgentObject owner;
+        [SerializeField] private AgentObject owner;
 
-        public ShieldHandler ShieldHandler { get; } = new ShieldHandler();
+        public List<Shield> Shields { get => shields; }
 
-        public void Initialize(AgentObject owner)
-        {
-            this.owner = owner;
-            ShieldHandler.Initialize(owner);
-        }
+        private List<Shield> shields = new List<Shield>();
 
         public void TakeAttack(Attack attack)
         {
@@ -27,7 +26,7 @@ namespace Game
                 return;
 
             float damageRemaining = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, owner.Defense - attack.ArmorPenetration));
-            ShieldHandler.Absorb(damageRemaining);
+            damageRemaining = Absorb(damageRemaining);
 
             owner.Health -= damageRemaining;
 
@@ -45,7 +44,7 @@ namespace Game
                 source.AttackLanded(attack, damageRemaining, owner.Health <= 0);
 
             Debug.Log($"{owner.name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
-            OnDamageTaken?.Invoke(attack, owner);
+            OnDamageTaken?.Invoke(attack, this);
 
             if (owner.Health <= 0 && !owner.IsDead)
                 owner.Death();
@@ -53,17 +52,40 @@ namespace Game
 
         public void AddShield(Shield shield)
         {
-            ShieldHandler.AddShield(shield);
+            shields.Add(shield);
         }
 
         public void Update()
         {
-            ShieldHandler.Update();
+            for (int i = shields.Count - 1; i >= 0; i--)
+            {
+                Shield shield = shields[i];
+                if (shield.Update())
+                {
+                    shields.Remove(shield);
+                    OnShieldBroken?.Invoke(shield);
+                }
+            }
+        }
+
+        public float Absorb(float damageRemaining)
+        {
+            for (int i = shields.Count - 1; i >= 0; i--)
+            {
+                Shield shield = shields[i];
+                if (!shield.Absorb(damageRemaining, out damageRemaining))
+                {
+                    OnShieldBroken?.Invoke(shield);
+                    shields.RemoveAt(i);
+                }
+            }
+
+            return damageRemaining;
         }
 
         public void OnDestroy()
         {
-            ShieldHandler.OnDestroy();
+            OnShieldableDestroyed?.Invoke(this);
         }
     }
 }

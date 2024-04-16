@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 9215057588866617565}
   - component: {fileID: 3263700911198353021}
   - component: {fileID: 6606204373776900685}
+  - component: {fileID: 8090293872940012884}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -391,6 +392,19 @@ MonoBehaviour:
       type: {class: PriorityTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         comparaison: 1
+--- !u!114 &8090293872940012884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645757101492874935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35c6a931233fa9d46996b0a57f0d6519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 270189467573928427}
 --- !u!1 &4568683806961424362
 GameObject:
   m_ObjectHideFlags: 0

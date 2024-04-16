@@ -20,9 +20,12 @@ namespace Game
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (evt.AgentObject.Faction == (modifiable as ITargeteable).Faction && modifiable is Character shieldable && (IModifiable)evt.AgentObject != modifiable)
+                if (evt.AgentObject.Faction == (modifiable as ITargeteable).Faction
+                    && modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable)
+                    && (IModifiable)evt.AgentObject != modifiable
+                    && modifiable.TryGetCachedComponent<AgentObject>(out AgentObject agentObject))
                 {
-                    shieldable.AddShield(new Shield(amount * shieldable.MaxHealth, duration));
+                    shieldable.AddShield(new Shield(amount * agentObject.MaxHealth, duration));
                 }
             }
 

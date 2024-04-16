@@ -11,7 +11,7 @@ namespace Game
 
             public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float healPerShieldPoint) : base(modifiable, modifierDefinition)
             {
-                if (modifiable is IShieldable shieldable)
+                if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
                     shieldable.OnShieldableDestroyed += Shieldable_OnDestroyed;
                     shieldable.OnShieldBroken += Shieldable_OnShieldBroken;
@@ -42,7 +42,7 @@ namespace Game
             {
                 base.Dispose();
 
-                if (modifiable is IShieldable shieldable)
+                if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
                     shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
                     shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;

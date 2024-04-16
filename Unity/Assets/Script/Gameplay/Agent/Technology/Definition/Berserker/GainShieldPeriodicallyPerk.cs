@@ -24,11 +24,12 @@ namespace Game
             {
                 base.Update();
 
-                if (modifiable is Character shieldable && shieldable.IsActive && shieldable.IsEngaged)
+                if (modifiable is Character character && character.IsActive && character.IsEngaged
+                    && modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
                     if ((int)((accumulatedTime + Time.deltaTime) / period) != (int)(accumulatedTime / period))
                     {
-                        shieldable.AddShield(new Shield(amount * shieldable.MaxHealth, duration));
+                        shieldable.AddShield(new Shield(amount * character.MaxHealth, duration));
                     }
 
                     accumulatedTime += Time.deltaTime;

@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public interface ITargeteable
+    public interface ITargeteable : IComponent
     {
         public bool IsActive { get; }
         public int Priority { get; }
