@@ -16,7 +16,7 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description: Gain a shield each {cooldown} seconds for {buff_duration} seconds
-    that absorbs {shield} damage.
+    that absorbs for a total of {shield} damage.
   statistics:
   - rid: 3656781458035441745
   - rid: 3656781458035441746
