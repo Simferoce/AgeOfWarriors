@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game
@@ -6,6 +7,7 @@ namespace Game
     public class TechnologyChoicePerkUI : MonoBehaviour
     {
         [SerializeField] private Image icon;
+        [SerializeField] private TextMeshProUGUI title;
 
         private TechnologyPerkDefinition technologyPerkDefinition;
 
@@ -13,6 +15,7 @@ namespace Game
         {
             this.technologyPerkDefinition = technologyPerkDefinition;
             icon.sprite = technologyPerkDefinition.Icon;
+            title.text = technologyPerkDefinition.Title;
         }
 
         public void Choose()

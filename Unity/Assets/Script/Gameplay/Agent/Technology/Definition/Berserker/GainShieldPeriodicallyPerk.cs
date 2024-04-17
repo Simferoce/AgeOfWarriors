@@ -7,13 +7,13 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier>
         {
-            private float amount;
-            private float duration;
-            private float period;
+            private StatisticReference<float> amount;
+            private StatisticReference<float> duration;
+            private StatisticReference<float> period;
 
             private float accumulatedTime = 0.0f;
 
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float amount, float duration, float period) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, StatisticReference<float> amount, StatisticReference<float> duration, StatisticReference<float> period) : base(modifiable, modifierDefinition)
             {
                 this.amount = amount;
                 this.duration = duration;
@@ -27,9 +27,9 @@ namespace Game
                 if (modifiable.TryGetCachedComponent<Character>(out Character character) && character.IsActive && character.IsEngaged
                     && modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
-                    if ((int)((accumulatedTime + Time.deltaTime) / period) != (int)(accumulatedTime / period))
+                    if ((int)((accumulatedTime + Time.deltaTime) / period.GetValueOrThrow(this)) != (int)(accumulatedTime / period.GetValueOrThrow(this)))
                     {
-                        shieldable.AddShield(new Shield(amount * character.MaxHealth, duration));
+                        shieldable.AddShield(new Shield(amount.GetValueOrThrow(this), duration.GetValueOrThrow(this)));
                     }
 
                     accumulatedTime += Time.deltaTime;
@@ -37,9 +37,9 @@ namespace Game
             }
         }
 
-        [SerializeField, Range(0, 1)] private float amount;
-        [SerializeField] private float duration;
-        [SerializeField] private float period;
+        [SerializeField] private StatisticReference<float> amount;
+        [SerializeField] private StatisticReference<float> duration;
+        [SerializeField] private StatisticReference<float> period;
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

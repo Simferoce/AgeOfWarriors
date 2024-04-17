@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb88c53bf25cd0844958a686e9b1e465, type: 3}
+  m_Name: IncreaseAttackPowerBaseOnRemainingHealthPerk
+  m_EditorClassIdentifier: 
+  id: 315352d0b0308b14bbbbaab67289cac1
+  title: 
+  icon: {fileID: 0}
+  descriptionParameters: []
+  description: 
+  requirementsPerk:
+  - rid: 3656781458035441713
+  affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+  threshold: 0.5
+  amount: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781458035441713
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 4f07279f125b9e44193e5a3a085d9282, type: 2}

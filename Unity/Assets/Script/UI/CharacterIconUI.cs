@@ -14,6 +14,23 @@ namespace UI
 
         private void Start()
         {
+            Agent.Player.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
+            Refresh();
+        }
+
+        private void OnDestroy()
+        {
+            if (Agent.Player != null)
+                Agent.Player.Technology.OnPerkAcquired -= Technology_OnPerkAcquired;
+        }
+
+        private void Technology_OnPerkAcquired(TechnologyPerkDefinition technologyPerkDefinition)
+        {
+            Refresh();
+        }
+
+        private void Refresh()
+        {
             AgentObjectDefinition agentObjectDefinition = Agent.Player.Factory.GetAgentObjectDefinitionAtIndex(index);
             if (agentObjectDefinition == null)
             {

@@ -1,39 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     public abstract class ModifierDefinition : Definition
     {
-        [Serializable]
-        private class StatisticDescriptionReference
-        {
-            [SerializeField] private string key;
-            [SerializeField] private StatisticDefinition definition;
-
-            public string Key => key;
-            public StatisticDefinition Definition => definition;
-        }
-
         [SerializeField] private string title;
         [SerializeField] private Sprite icon;
-        [SerializeField] private List<StatisticDescriptionReference> definitions;
         [SerializeField] private string description;
+        [SerializeReference, SerializeReferenceDropdown] private List<Statistic> statistics;
 
         public Sprite Icon { get => icon; }
         public string Title { get => title; }
         public string Description { get => description; }
 
-        public string ParseDescription(Modifier modifier)
+        public bool TryGetValue<T>(object context, StatisticDefinition definition, out T value)
+        {
+            Statistic<T> statistic = statistics.FirstOrDefault(x => x.Definition == definition) as Statistic<T>;
+            if (statistic == null)
+            {
+                value = default(T);
+                return false;
+            }
+            else
+            {
+                value = statistic.GetValue(context);
+                return true;
+            }
+        }
+
+        public string ParseDescription(object caller)
         {
             string description = this.description;
-            foreach (StatisticDescriptionReference definition in definitions)
+            foreach (Statistic statistic in statistics)
             {
-                if (!modifier.TryGetStatistic<object>(definition.Definition, out object value))
-                    throw new System.Exception($"Could not find the statistic {definition.Definition.Name} for {modifier.ToString()}");
-
-                description = description.Replace($"{{{definition.Key.ToLower()}}}", $"{value}");
+                description = description.Replace($"{{{statistic.Definition.Title.Replace(" ", "_").ToLower()}}}", $"{statistic.GetDescriptionFormatted(caller)}");
             }
 
             return description;

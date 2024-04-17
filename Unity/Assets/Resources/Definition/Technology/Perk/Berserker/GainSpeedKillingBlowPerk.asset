@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec3a43048c819c5409b515c579f4038d, type: 3}
+  m_Name: GainSpeedKillingBlowPerk
+  m_EditorClassIdentifier: 
+  id: 352faaf1fb49b6e4c93d5a205efe8d97
+  title: 
+  icon: {fileID: 0}
+  descriptionParameters: []
+  description: 
+  requirementsPerk:
+  - rid: 3656781458035441717
+  affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+  speed: 0.75
+  duration: 3
+  speedModifierDefinition: {fileID: 3359846645476499934}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781458035441717
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: ec0c8ec4bc9c4c440b7b29ce7f0167d9, type: 2}
+--- !u!114 &3359846645476499934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c2558554da2e54ebdece3669c40aed, type: 3}
+  m_Name: SpeedModifierDefinition
+  m_EditorClassIdentifier: 
+  id: a1ae0d2c1684a904d8b94040eb64e521
+  title: 
+  icon: {fileID: 0}
+  descriptionParameters: []
+  description: 

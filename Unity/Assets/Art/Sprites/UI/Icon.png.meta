@@ -408,7 +408,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -416,6 +416,48 @@ TextureImporter:
       bones: []
       spriteID: 7c9cd1121b5be384cb451db7e5789427
       internalID: -2141823656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeOverlay
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f48c6cf6baff09c42bb72c17d3994ac8
+      internalID: 1628775759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BookIcon
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 1920
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ff2ea21793fdaa4daa964e05aa14f19
+      internalID: 1809554327
       vertices: []
       indices: 
       edges: []
@@ -433,6 +475,7 @@ TextureImporter:
     nameFileIdTable:
       SeerIcon: 178313875
       SeerShamanIcon: 647811372
+      BookIcon: 1809554327
       CoinIcon: -2141823656
       ArcherLongbowIcon: -1104553669
       HuntersMark: -412835066
@@ -445,6 +488,7 @@ TextureImporter:
       ShieldbearerOnslaught: 750281812
       ShieldbearerLeaderIcon: -1562900050
       DefenseUp: -1676996386
+      UpgradeOverlay: 1628775759
       Icon_1: 800693428
       BerserkerWarbringerIcon: 322066553
       ArcherFerociousIcon: 2082272876

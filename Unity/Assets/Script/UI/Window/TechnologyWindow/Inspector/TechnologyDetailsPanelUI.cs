@@ -28,8 +28,8 @@ namespace Game
             TechnologyDetailsPanelUI technologyDetailsPanelUI = WindowManager.Instance.GetWindow<TechnologyDetailsPanelUI>();
             technologyDetailsPanelUI.technologyPerkDefinition = technologyPerkDefinition;
             technologyDetailsPanelUI.icon.sprite = technologyPerkDefinition.Icon;
-            technologyDetailsPanelUI.title.text = technologyPerkDefinition.Name;
-            technologyDetailsPanelUI.description.text = "A Description";
+            technologyDetailsPanelUI.title.text = technologyPerkDefinition.Title;
+            technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription(null);
 
             technologyDetailsPanelUI.Show();
             return technologyDetailsPanelUI;

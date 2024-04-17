@@ -17,6 +17,9 @@ namespace Game
 
     [Serializable]
     public class CharacterMapperFloat : CharacterMapper<float>, MapperFloat { }
+
+    [Serializable]
+    public class ModifierMapperFloat : ModifierMapper<float>, MapperFloat { }
     #endregion
 
     #region Mapper
@@ -40,6 +43,8 @@ namespace Game
             Character character = context as Character;
             if (character == null)
                 character = (context as Ability)?.Character;
+            if (character == null && context is Modifier modifier)
+                character = modifier.Modifiable.GetCachedComponent<Character>();
 
             if (character == null)
             {
@@ -69,6 +74,24 @@ namespace Game
             return ability.TryGetValue(definition, out value);
         }
     }
+
+    [Serializable]
+    public class ModifierMapper<T> : Mapper<T>
+    {
+        public override bool TryGetValue(object context, StatisticDefinition definition, StatisticType type, out T value)
+        {
+            Modifier modifier = context as Modifier;
+
+            if (modifier == null)
+            {
+                value = default(T);
+                return false;
+            }
+
+            return modifier.TryGetValue(definition, out value);
+        }
+    }
+
     #endregion
 
     public enum StatisticType

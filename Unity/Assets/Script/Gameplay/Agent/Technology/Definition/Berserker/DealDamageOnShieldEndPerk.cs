@@ -10,10 +10,10 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier>, IAttackSource
         {
-            private float damagePerPointAbsorbed;
-            private float percentageReach;
+            private StatisticReference<float> damagePerPointAbsorbed;
+            private StatisticReference<float> distance;
 
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float damagePerPointRemaining, float percentageReach) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, StatisticReference<float> damagePerPointRemaining, StatisticReference<float> distance) : base(modifiable, modifierDefinition)
             {
                 if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
@@ -22,7 +22,7 @@ namespace Game
                 }
 
                 this.damagePerPointAbsorbed = damagePerPointRemaining;
-                this.percentageReach = percentageReach;
+                this.distance = distance;
             }
 
             private void Shieldable_OnShieldBroken(Shield shield)
@@ -30,7 +30,7 @@ namespace Game
                 if (!modifiable.TryGetCachedComponent<Character>(out Character character))
                     return;
 
-                float damage = damagePerPointAbsorbed * (shield.Initial - shield.Remaining);
+                float damage = damagePerPointAbsorbed.GetValueOrThrow(this) * (shield.Initial - shield.Remaining);
                 if (damage <= 0)
                     return;
 
@@ -48,7 +48,7 @@ namespace Game
                     if (!agent.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
                         continue;
 
-                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * percentageReach)
+                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * distance.GetValueOrThrow(this))
                         continue;
 
                     Attack attack = new Attack(new AttackSource(new List<IAttackSource>() { character, this }), damage, 0, 0);
@@ -74,12 +74,12 @@ namespace Game
             }
         }
 
-        [SerializeField] private float damagePerPointAbsorbed;
-        [SerializeField, Range(0, 3)] private float percentageReach;
+        [SerializeField] private StatisticReference<float> damagePerPointAbsorbed;
+        [SerializeField, Range(0, 3)] private StatisticReference<float> distance;
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, damagePerPointAbsorbed, percentageReach);
+            return new Modifier(modifiable, this, damagePerPointAbsorbed, distance);
         }
     }
 }

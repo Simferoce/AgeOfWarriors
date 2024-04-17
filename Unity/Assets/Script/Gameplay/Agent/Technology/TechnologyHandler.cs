@@ -7,7 +7,11 @@ namespace Game
     [Serializable]
     public class TechnologyHandler
     {
+        public delegate void PerkAcquired(TechnologyPerkDefinition technologyPerkDefinition);
+
         [SerializeField] private float maxTechnology;
+
+        public event PerkAcquired OnPerkAcquired;
 
         public float CurrentTechnology { get; set; }
         public float CurrentLevel { get; set; }
@@ -23,6 +27,12 @@ namespace Game
         public void Initialize(Agent agent)
         {
             this.agent = agent;
+
+            StartTechnologyPerkDefinition[] startTechnologyPerkDefinitions = Resources.LoadAll<StartTechnologyPerkDefinition>("Definition/Technology/Perk");
+            foreach (StartTechnologyPerkDefinition startTechnologyPerkDefinition in startTechnologyPerkDefinitions)
+            {
+                Acquire(startTechnologyPerkDefinition);
+            }
         }
 
         public void Update()
@@ -45,6 +55,7 @@ namespace Game
         public void Acquire(TechnologyPerkDefinition definition)
         {
             PerksUnlocked.Add(definition);
+            OnPerkAcquired?.Invoke(definition);
         }
 
         private void LevelUp()

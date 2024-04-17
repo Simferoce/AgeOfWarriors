@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ce57dcf26b96848b67a6b973833feb, type: 3}
+  m_Name: HealOnShieldEndPerk
+  m_EditorClassIdentifier: 
+  id: a2d75a5e957afc344a9e58a918e123c6
+  title: 
+  icon: {fileID: 0}
+  descriptionParameters: []
+  description: 
+  requirementsPerk:
+  - rid: 3656781458035441707
+  - rid: 3656781458035441706
+  affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+  healPerShieldPoint: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781458035441706
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 4f6a6288a9e3fb044a956bb2a323e9a7, type: 2}
+    - rid: 3656781458035441707
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: a4f2a989b0db5664d9855e274b49e6af, type: 2}

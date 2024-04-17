@@ -12,29 +12,37 @@ namespace Game
             Locked,
             Unlockable,
             UnlockedA,
-            UnlockedB
+            UnlockedB,
         }
 
-        [SerializeField] private TechnologyPerkDefinition choiceA;
-        [SerializeField] private TechnologyPerkDefinition choiceB;
-
-        [SerializeField] private Image iconA;
-        [SerializeField] private Image iconB;
+        [SerializeField] private Image icon;
         [SerializeField] private Animator animator;
+        [SerializeField] private ChoiceTechnologyDefinition choiceTechnologyPerkDefinition;
+        [SerializeField] private List<TechnologyLinkUI> links;
 
         private State state;
 
         private void OnEnable()
         {
-            iconA.sprite = choiceA.Icon;
-            iconB.sprite = choiceB.Icon;
-
+            animator.keepAnimatorControllerStateOnDisable = true;
+            Agent.Player.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
             Refresh();
+        }
+
+        private void Technology_OnPerkAcquired(TechnologyPerkDefinition technologyPerkDefinition)
+        {
+            Refresh();
+        }
+
+        private void OnDisable()
+        {
+            if (Agent.Player != null)
+                Agent.Player.Technology.OnPerkAcquired -= Technology_OnPerkAcquired;
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            TechnologyChoicePanelUI technologyChoicePanelUI = TechnologyChoicePanelUI.Open(new List<TechnologyPerkDefinition>() { choiceA, choiceB });
+            TechnologyChoicePanelUI technologyChoicePanelUI = TechnologyChoicePanelUI.Open(choiceTechnologyPerkDefinition.Choices);
             technologyChoicePanelUI.OnHidden += TechnologyChoicePanelUI_OnHidden;
         }
 
@@ -46,12 +54,32 @@ namespace Game
 
         public void Refresh()
         {
-            if (Agent.Player.Technology.PerksUnlocked.Contains(choiceA))
+            if (Agent.Player.Technology.PerksUnlocked.Contains(choiceTechnologyPerkDefinition.Choices[0]))
                 SetState(State.UnlockedA);
-            else if (Agent.Player.Technology.PerksUnlocked.Contains(choiceB))
+            else if (Agent.Player.Technology.PerksUnlocked.Contains(choiceTechnologyPerkDefinition.Choices[1]))
                 SetState(State.UnlockedB);
-            else
+            else if (choiceTechnologyPerkDefinition.IsUnlockable(Agent.Player))
                 SetState(State.Unlockable);
+            else
+                SetState(State.Locked);
+
+            for (int i = 0; i < links.Count; ++i)
+            {
+                bool hasRequirement = choiceTechnologyPerkDefinition.RequirementsPerk[i].Execute(Agent.Player);
+                bool hasPerk = choiceTechnologyPerkDefinition.IsUnlocked(Agent.Player);
+                if (hasRequirement && !hasPerk)
+                {
+                    links[i].Refresh(TechnologyLinkUI.State.Unlockable);
+                }
+                else if (hasRequirement && hasPerk)
+                {
+                    links[i].Refresh(TechnologyLinkUI.State.Unlocked);
+                }
+                else
+                {
+                    links[i].Refresh(TechnologyLinkUI.State.Locked);
+                }
+            }
         }
 
         public void SetState(State state)
@@ -67,10 +95,10 @@ namespace Game
                     animator.SetTrigger("Unlockable");
                     break;
                 case State.UnlockedA:
-                    animator.SetTrigger("UnlockedA");
+                    animator.SetTrigger("Unlock");
                     break;
                 case State.UnlockedB:
-                    animator.SetTrigger("UnlockedB");
+                    animator.SetTrigger("Unlock");
                     break;
             }
         }

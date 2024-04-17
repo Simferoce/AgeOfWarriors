@@ -15,6 +15,7 @@ namespace Game
         public virtual float? MaxHealth => null;
         public virtual float? AttackPower => null;
         public virtual bool? Invulnerable => null;
+        public IModifiable Modifiable { get => modifiable; set => modifiable = value; }
 
         protected IModifiable modifiable;
 
@@ -52,7 +53,7 @@ namespace Game
             return Mathf.Clamp01(modifierElement.RemaingDuration / modifierElement.Duration);
         }
 
-        public virtual bool TryGetStatistic<T>(StatisticDefinition definition, out T value)
+        public virtual bool TryGetValue<T>(StatisticDefinition definition, out T value)
         {
             if (definition == StatisticDefinition.AttackPower)
             {
@@ -62,11 +63,8 @@ namespace Game
                     value = (T)(object)stat.Value;
                     return true;
                 }
-                else
-                {
-                    value = default(T);
-                    return false;
-                }
+
+                return Definition.TryGetValue(this, definition, out value);
             }
             else if (definition == StatisticDefinition.Defense)
             {
@@ -76,11 +74,8 @@ namespace Game
                     value = (T)(object)stat.Value;
                     return true;
                 }
-                else
-                {
-                    value = default(T);
-                    return false;
-                }
+
+                return Definition.TryGetValue(this, definition, out value);
             }
             else if (definition == StatisticDefinition.Speed)
             {
@@ -90,11 +85,8 @@ namespace Game
                     value = (T)(object)stat.Value;
                     return true;
                 }
-                else
-                {
-                    value = default(T);
-                    return false;
-                }
+
+                return Definition.TryGetValue(this, definition, out value);
             }
             else if (definition == StatisticDefinition.MaxHealth)
             {
@@ -104,15 +96,11 @@ namespace Game
                     value = (T)(object)stat.Value;
                     return true;
                 }
-                else
-                {
-                    value = default(T);
-                    return false;
-                }
+
+                return Definition.TryGetValue(this, definition, out value);
             }
 
-            value = default(T);
-            return false;
+            return Definition.TryGetValue(this, definition, out value);
         }
 
         public virtual void Refresh()

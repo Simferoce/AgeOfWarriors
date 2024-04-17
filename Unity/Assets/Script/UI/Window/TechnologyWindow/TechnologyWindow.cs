@@ -13,12 +13,6 @@ namespace Game
             return technologyWindow;
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-                Hide(null);
-        }
-
         public override void Hide(Result result)
         {
             base.Hide(result);
