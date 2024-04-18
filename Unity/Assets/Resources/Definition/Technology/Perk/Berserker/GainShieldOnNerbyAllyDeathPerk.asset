@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: GainShieldOnNerbyAllyDeathPerk
   m_EditorClassIdentifier: 
   id: 4f6a6288a9e3fb044a956bb2a323e9a7
-  title: 
+  title: Martyr's Bulwark
   icon: {fileID: 0}
-  descriptionParameters: []
-  description: 
+  description: Gain a shield that absorb {val:shield} damages for {val:buff_duration}
+    seconds whenever an ally dies.
+  statistics:
+  - rid: 3656781479875969052
+  - rid: 3656781479875969054
   requirementsPerk:
   - rid: 3656781458035441710
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  amount: 0.25
-  duration: 5
   references:
     version: 2
     RefIds:
@@ -29,3 +30,22 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 124214902e069a84bbead87df45fb3b1, type: 2}
+    - rid: 3656781479875969052
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Shield - (50 % of Max Health)
+        definition: {fileID: 11400000, guid: fea2174c2cf5cb64583f67647a744a60, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+          mapper:
+            rid: 3656781479875969053
+        percentage: 0.5
+    - rid: 3656781479875969053
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781479875969054
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Buff Duration - 5
+        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
+        value: 5
+        percentage: 0

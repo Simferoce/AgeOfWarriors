@@ -17,9 +17,13 @@ namespace Game
             public ResultValue Value { get; set; }
         }
 
-        [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI description;
+        [SerializeField] private Image buttonImage;
+        [SerializeField] private Button button;
+        [SerializeField] private Color unlockableColor;
+        [SerializeField] private Color unlockedColor;
+        [SerializeField] private Color lockedColor;
 
         private TechnologyPerkDefinition technologyPerkDefinition;
 
@@ -27,9 +31,26 @@ namespace Game
         {
             TechnologyDetailsPanelUI technologyDetailsPanelUI = WindowManager.Instance.GetWindow<TechnologyDetailsPanelUI>();
             technologyDetailsPanelUI.technologyPerkDefinition = technologyPerkDefinition;
-            technologyDetailsPanelUI.icon.sprite = technologyPerkDefinition.Icon;
             technologyDetailsPanelUI.title.text = technologyPerkDefinition.Title;
             technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription(null);
+
+            bool isUnlockable = technologyPerkDefinition.IsUnlockable(Agent.Player);
+            bool isUnlocked = technologyPerkDefinition.IsUnlocked(Agent.Player);
+            if (isUnlockable && !isUnlocked)
+            {
+                technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.unlockableColor;
+                technologyDetailsPanelUI.button.interactable = true;
+            }
+            else if (isUnlocked)
+            {
+                technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.unlockedColor;
+                technologyDetailsPanelUI.button.interactable = false;
+            }
+            else
+            {
+                technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.lockedColor;
+                technologyDetailsPanelUI.button.interactable = false;
+            }
 
             technologyDetailsPanelUI.Show();
             return technologyDetailsPanelUI;

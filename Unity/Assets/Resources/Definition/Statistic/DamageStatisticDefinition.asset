@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 00df8ac314188b945945353a3fbb705b
   icon: {fileID: -197075369, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  humanReadableId: damage
   title: Damage
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: ace6cadc457dd1b4e90c5edc491000f1
   icon: {fileID: -219786527, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  humanReadableId: reach
   title: Reach
   color: {r: 0.1882353, g: 0.6588235, b: 0.7529412, a: 1}

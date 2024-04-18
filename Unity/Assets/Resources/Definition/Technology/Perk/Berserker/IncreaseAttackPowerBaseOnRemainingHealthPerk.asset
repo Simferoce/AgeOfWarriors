@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: IncreaseAttackPowerBaseOnRemainingHealthPerk
   m_EditorClassIdentifier: 
   id: 315352d0b0308b14bbbbaab67289cac1
-  title: 
+  title: Feral Rage
   icon: {fileID: 0}
-  descriptionParameters: []
-  description: 
+  description: Increase attack power by {val:attack_power} whenever the percentage
+    of health is under {val:threshold}.
+  statistics:
+  - rid: 3656781479875969071
+  - rid: 3656781479875969072
   requirementsPerk:
   - rid: 3656781458035441713
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  threshold: 0.5
-  amount: 1
   references:
     version: 2
     RefIds:
@@ -29,3 +30,17 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 4f07279f125b9e44193e5a3a085d9282, type: 2}
+    - rid: 3656781479875969071
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Threshold - 50%
+        definition: {fileID: 11400000, guid: 09492c31878ad1b4d9f17b48fd1c583c, type: 2}
+        value: 0.5
+        percentage: 1
+    - rid: 3656781479875969072
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Attack Power - 5
+        definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        value: 5
+        percentage: 0

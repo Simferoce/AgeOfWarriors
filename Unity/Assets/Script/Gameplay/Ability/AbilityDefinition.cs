@@ -34,8 +34,10 @@ namespace Game
             string description = this.description;
             foreach (Statistic statistic in statistics)
             {
-                description = description.Replace($"{{{statistic.Definition.Title.Replace(" ", "_").ToLower()}}}", $"{statistic.GetDescriptionFormatted(caller)}");
+                description = description.Replace($"{{val:{statistic.Definition.HumanReadableId}}}", $"{statistic.GetDescriptionFormatted(caller)}");
             }
+
+            description = StatisticDefinition.ParseText(description);
 
             return description;
         }

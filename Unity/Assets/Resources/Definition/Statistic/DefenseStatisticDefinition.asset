@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 7f97419c07cf32d49ae612434c1fb6b8
   icon: {fileID: -1540707902, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  humanReadableId: defense
   title: Defense
   color: {r: 0.90099996, g: 0.90099996, b: 0.08919903, a: 1}

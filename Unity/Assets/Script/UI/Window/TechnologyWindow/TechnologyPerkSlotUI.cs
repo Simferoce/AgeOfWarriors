@@ -17,14 +17,15 @@ namespace Game
         [SerializeField] private TechnologyPerkDefinition technologyPerkDefinition;
         [SerializeField] private List<TechnologyLinkUI> links;
         [SerializeField] private Image icon;
-        [SerializeField] private Animator animator;
+
+        [SerializeField] private Color lockColor;
+        [SerializeField] private Color unlockableColor;
+        [SerializeField] private Color unlockColor;
 
         private State state = State.Locked;
 
         private void OnEnable()
         {
-            animator.keepAnimatorControllerStateOnDisable = true;
-            icon.sprite = technologyPerkDefinition.Icon;
             Agent.Player.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
             Refresh();
         }
@@ -59,12 +60,13 @@ namespace Game
             switch (state)
             {
                 case State.Locked:
+                    icon.color = lockColor;
                     break;
                 case State.Unlockable:
-                    animator.SetTrigger("Unlockable");
+                    icon.color = unlockableColor;
                     break;
                 case State.Unlocked:
-                    animator.SetTrigger("Unlock");
+                    icon.color = unlockColor;
                     break;
             }
         }

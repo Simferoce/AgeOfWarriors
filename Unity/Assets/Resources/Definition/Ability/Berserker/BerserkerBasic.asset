@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: dfa0ecdf3974904439b3c578bc907282
   title: Basic
-  description: Deals {damage} damage to a target at {range} meters.
+  description: Deals {val:damage} damage to a target at {val:range} meters.
   statistics:
   - rid: 3656781299071320075
   - rid: 3656781299071320102

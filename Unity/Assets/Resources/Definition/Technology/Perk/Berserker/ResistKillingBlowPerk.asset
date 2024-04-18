@@ -15,8 +15,11 @@ MonoBehaviour:
   id: 2eca3ad84988d4d4a944200dd4e2cad6
   title: 
   icon: {fileID: 0}
-  descriptionParameters: []
   description: 
+  statistics: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,15 +33,16 @@ MonoBehaviour:
   m_Name: ResistKillingBlowPerk
   m_EditorClassIdentifier: 
   id: ec0c8ec4bc9c4c440b7b29ce7f0167d9
-  title: 
+  title: Death Resilience
   icon: {fileID: 0}
-  descriptionParameters: []
-  description: 
+  description: The first time health points would be reduced to 0, gain invulnerability
+    for {val:buff_duration} seconds.
+  statistics:
+  - rid: 3656781479875969074
   requirementsPerk:
   - rid: 3656781458035441719
   - rid: 3656781458035441718
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  invulnerabilityPeriod: 0.5
   resistDeathModifierDefinition: {fileID: -4384760990984150086}
   references:
     version: 2
@@ -51,3 +55,10 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: e2b24009f395ebe4d87baed0497b6870, type: 2}
+    - rid: 3656781479875969074
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Buff Duration - 0.5
+        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
+        value: 0.5
+        percentage: 0

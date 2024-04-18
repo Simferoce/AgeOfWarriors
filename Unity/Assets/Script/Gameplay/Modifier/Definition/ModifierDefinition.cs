@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -9,11 +10,16 @@ namespace Game
         [SerializeField] private string title;
         [SerializeField] private Sprite icon;
         [SerializeField] private string description;
-        [SerializeReference, SerializeReferenceDropdown] private List<Statistic> statistics;
+        [SerializeReference] private List<Statistic> statistics;
 
         public Sprite Icon { get => icon; }
         public string Title { get => title; }
         public string Description { get => description; }
+
+        public T GetValueOrThrow<T>(object context, StatisticDefinition definition)
+        {
+            return TryGetValue<T>(context, definition, out T value) == true ? value : throw new Exception($"Could not resolve the statistic {definition}");
+        }
 
         public bool TryGetValue<T>(object context, StatisticDefinition definition, out T value)
         {
@@ -35,8 +41,10 @@ namespace Game
             string description = this.description;
             foreach (Statistic statistic in statistics)
             {
-                description = description.Replace($"{{{statistic.Definition.Title.Replace(" ", "_").ToLower()}}}", $"{statistic.GetDescriptionFormatted(caller)}");
+                description = description.Replace($"{{val:{statistic.Definition.HumanReadableId}}}", $"{statistic.GetDescriptionFormatted(caller)}");
             }
+
+            description = StatisticDefinition.ParseText(description);
 
             return description;
         }

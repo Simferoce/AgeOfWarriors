@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: GainSpeedKillingBlowPerk
   m_EditorClassIdentifier: 
   id: 352faaf1fb49b6e4c93d5a205efe8d97
-  title: 
+  title: Battles Craving
   icon: {fileID: 0}
-  descriptionParameters: []
-  description: 
+  description: Gain {val:speed} increase movement speed whenever landing a killing
+    blow on a unit.
+  statistics:
+  - rid: 3656781479875969058
+  - rid: 3656781479875969059
   requirementsPerk:
   - rid: 3656781458035441717
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  speed: 0.75
-  duration: 3
   speedModifierDefinition: {fileID: 3359846645476499934}
   references:
     version: 2
@@ -30,6 +31,20 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: ec0c8ec4bc9c4c440b7b29ce7f0167d9, type: 2}
+    - rid: 3656781479875969058
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Speed - 75%
+        definition: {fileID: 11400000, guid: b6e7acc220a4175489e13715c3932744, type: 2}
+        value: 0.75
+        percentage: 1
+    - rid: 3656781479875969059
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Buff Duration - 3
+        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
+        value: 3
+        percentage: 0
 --- !u!114 &3359846645476499934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45,5 +60,8 @@ MonoBehaviour:
   id: a1ae0d2c1684a904d8b94040eb64e521
   title: 
   icon: {fileID: 0}
-  descriptionParameters: []
   description: 
+  statistics: []
+  references:
+    version: 2
+    RefIds: []

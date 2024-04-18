@@ -2,19 +2,13 @@
 
 namespace Game
 {
-    [CreateAssetMenu(fileName = "GainShieldOnNerbyAllyDeathPerk", menuName = "Definition/Technology/Berserker/GainShieldOnNerbyAllyDeathPerk")]
-    public class GainShieldOnNerbyAllyDeathPerk : CharacterTechnologyPerkDefinition
+    [CreateAssetMenu(fileName = "GainShieldOnNearbyAllyDeathPerk", menuName = "Definition/Technology/Berserker/GainShieldOnNearbyAllyDeathPerk")]
+    public class GainShieldOnNearbyAllyDeathPerk : CharacterTechnologyPerkDefinition
     {
         public class Modifier : Modifier<Modifier>
         {
-            private float amount;
-            private float duration;
-
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float amount, float duration) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
             {
-                this.amount = amount;
-                this.duration = duration;
-
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
 
@@ -25,7 +19,7 @@ namespace Game
                     && (IModifiable)evt.AgentObject != modifiable
                     && modifiable.TryGetCachedComponent<Character>(out Character character))
                 {
-                    shieldable.AddShield(new Shield(amount * character.MaxHealth, duration));
+                    shieldable.AddShield(new Shield(Definition.GetValueOrThrow<float>(this, StatisticDefinition.Shield), Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration)));
                 }
             }
 
@@ -37,12 +31,9 @@ namespace Game
             }
         }
 
-        [SerializeField, Range(0, 1)] private float amount;
-        [SerializeField] private float duration;
-
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, amount, duration);
+            return new Modifier(modifiable, this);
         }
     }
 }

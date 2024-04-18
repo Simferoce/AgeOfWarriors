@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: ShieldbearerBasic
   m_EditorClassIdentifier: 
   id: bef61e67e44b5944bb0a2a95304474d1
-  color: {r: 0.9019608, g: 0.9019608, b: 0.09019608, a: 1}
   title: Basic
-  description: Deals {damage} damage to a target at {range} meters.
+  description: Deals {val:damage} damage to a target at {val:range} meters.
   statistics:
   - rid: 3656781299071320075
   - rid: 3656781299071320102

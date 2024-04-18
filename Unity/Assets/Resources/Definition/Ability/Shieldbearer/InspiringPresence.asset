@@ -46,8 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2fe57550d51a64f4897979212d8ac68d
   title: Inspiring Presence
-  description: Increase defense by {defense} of any ally in {range} meters for {buff_duration}
-    seconds.
+  description: Increase defense by {val:defense} of any ally in {val:range} meters
+    for {val:buff_duration} seconds.
   statistics:
   - rid: 3656781299071320139
   - rid: 3656781299071320140

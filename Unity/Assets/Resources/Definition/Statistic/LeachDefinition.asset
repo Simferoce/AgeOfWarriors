@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e864fc16d0f0def478387446a9b41863
   icon: {fileID: 0}
+  humanReadableId: leach
   title: Leach
   color: {r: 0, g: 0, b: 0, a: 0}

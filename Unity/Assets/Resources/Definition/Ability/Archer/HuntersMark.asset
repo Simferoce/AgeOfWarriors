@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 94bc3887fe1aaad468e21f5c79064f4f
   title: Hunter's Mark
-  description: Mark a target in {range} meters for {buff_duration} seconds which
-    receive an additionnal {damage} damage per hit taken.
+  description: Mark a target in {val:range} meters for {val:buff_duration} seconds
+    which receive an additionnal {val:damage} damage per hit taken.
   statistics:
   - rid: 3656781412477173775
   - rid: 3656781412477173777

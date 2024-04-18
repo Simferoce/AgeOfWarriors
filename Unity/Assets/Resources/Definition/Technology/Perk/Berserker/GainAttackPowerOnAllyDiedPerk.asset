@@ -15,8 +15,11 @@ MonoBehaviour:
   id: 5167ae87aecf81e43b26323ec9d133d1
   title: 
   icon: {fileID: 0}
-  descriptionParameters: []
   description: 
+  statistics: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,15 +33,16 @@ MonoBehaviour:
   m_Name: GainAttackPowerOnAllyDiedPerk
   m_EditorClassIdentifier: 
   id: e2b24009f395ebe4d87baed0497b6870
-  title: 
+  title: Vengeful Reprisal
   icon: {fileID: 0}
-  descriptionParameters: []
-  description: 
+  description: Gain {val:attack_power} Attack Power for {val:buff_duration} seconds
+    whenever an ally dies.
+  statistics:
+  - rid: 3656781479875969043
+  - rid: 3656781479875969044
   requirementsPerk:
   - rid: 3656781458035441716
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  amount: 10
-  duration: 5
   attackPowerModifier: {fileID: -7163629422414245094}
   references:
     version: 2
@@ -47,3 +51,17 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 4f07279f125b9e44193e5a3a085d9282, type: 2}
+    - rid: 3656781479875969043
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Attack Power - 10
+        definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        value: 10
+        percentage: 0
+    - rid: 3656781479875969044
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Buff Duration - 5
+        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
+        value: 5
+        percentage: 0

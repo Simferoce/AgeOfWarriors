@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 96bcb15ffca68c647bcecca181aee9c2
   title: Grasp
-  description: Pull all enemies in {range} meters. Staggers the affected enemies
-    for {buff_duration}. Trigger only if there is at least 2 enemies in range.
+  description: Pull all enemies in {val:range} meters. Staggers the affected enemies
+    for {val:buff_duration}. Trigger only if there is at least 2 enemies in range.
   statistics:
   - rid: 4528059700692647970
   - rid: 4528059700692647972
@@ -39,7 +39,7 @@ MonoBehaviour:
     - rid: 4528059700692647972
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: Cooldown - 7,5
+        description: Cooldown - 7.5
         definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
         value: 7.5
         percentage: 0

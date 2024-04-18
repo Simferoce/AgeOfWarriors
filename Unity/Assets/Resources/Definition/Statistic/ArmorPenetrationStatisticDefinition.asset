@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1687044977f8da6489e79d61a4fa60b9
   icon: {fileID: 0}
+  humanReadableId: armor_penetration
   title: Armor Penetration
   color: {r: 0, g: 0, b: 0, a: 0}

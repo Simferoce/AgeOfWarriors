@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: GainHealthKillingBlowPerk
   m_EditorClassIdentifier: 
   id: 50956d197d5038442a5c5337de78eef3
-  title: 
+  title: Rejuvenative Victory
   icon: {fileID: 0}
-  descriptionParameters: []
-  description: 
+  description: Regain {val:heal} health points whenever landing a killing blow on
+    a unit.
+  statistics:
+  - rid: 3656781479875969048
   requirementsPerk:
   - rid: 3656781458035441703
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  amount: 0.25
   references:
     version: 2
     RefIds:
@@ -28,3 +29,15 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: a2d75a5e957afc344a9e58a918e123c6, type: 2}
+    - rid: 3656781479875969048
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Heal - (25 % of Max Health)
+        definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+          mapper:
+            rid: 3656781479875969049
+        percentage: 0.25
+    - rid: 3656781479875969049
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2825126f3d8ee3941b6ea8c4d91818b8
   icon: {fileID: 1266053628, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  humanReadableId: cooldown
   title: Cooldown
   color: {r: 0, g: 0.4, b: 0.8, a: 1}

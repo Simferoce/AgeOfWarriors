@@ -7,17 +7,13 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier>
         {
-            private float healPerShieldPoint;
-
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float healPerShieldPoint) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
             {
                 if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
                     shieldable.OnShieldableDestroyed += Shieldable_OnDestroyed;
                     shieldable.OnShieldBroken += Shieldable_OnShieldBroken;
                 }
-
-                this.healPerShieldPoint = healPerShieldPoint;
             }
 
             private void Shieldable_OnShieldBroken(Shield shield)
@@ -25,7 +21,7 @@ namespace Game
                 if (!modifiable.TryGetCachedComponent<Character>(out Character character))
                     return;
 
-                float heal = healPerShieldPoint * shield.Remaining;
+                float heal = Definition.GetValueOrThrow<float>(this, StatisticDefinition.Heal) * shield.Remaining;
                 if (heal <= 0)
                     return;
 
@@ -50,11 +46,9 @@ namespace Game
             }
         }
 
-        [SerializeField] private float healPerShieldPoint;
-
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, healPerShieldPoint);
+            return new Modifier(modifiable, this);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Unity.VisualScripting;
+﻿using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
@@ -7,27 +8,56 @@ namespace Game
     public class StatisticDefinition : Definition
     {
         private static StatisticDefinition attackPower;
-        public static StatisticDefinition AttackPower => attackPower ??= Resources.Load<StatisticDefinition>("Definition/Statistic/AttackPowerStatisticDefinition");
-
         private static StatisticDefinition reach;
-        public static StatisticDefinition Reach => reach ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ReachStatisticDefinition");
-
         private static StatisticDefinition maxHealth;
-        public static StatisticDefinition MaxHealth => maxHealth ??= maxHealth = Resources.Load<StatisticDefinition>("Definition/Statistic/MaxHealthStatisticDefinition");
-
         private static StatisticDefinition defense;
-        public static StatisticDefinition Defense => defense ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DefenseStatisticDefinition");
-
         private static StatisticDefinition attackSpeed;
-        public static StatisticDefinition AttackSpeed => attackSpeed ??= attackSpeed = Resources.Load<StatisticDefinition>("Definition/Statistic/AttackSpeedStatisticDefinition");
-
         private static StatisticDefinition speed;
-        public static StatisticDefinition Speed => speed ??= speed = Resources.Load<StatisticDefinition>("Definition/Statistic/SpeedStatisticDefinition");
-
         private static StatisticDefinition damage;
-        public static StatisticDefinition Damage => damage ??= damage = Resources.Load<StatisticDefinition>("Definition/Statistic/DamageStatisticDefinition");
+        private static StatisticDefinition range;
+        private static StatisticDefinition buffDuration;
+        private static StatisticDefinition duration;
+        private static StatisticDefinition cooldown;
+        private static StatisticDefinition threshold;
+        private static StatisticDefinition heal;
+        private static StatisticDefinition shield;
+
+        public static StatisticDefinition AttackPower => attackPower ??= Resources.Load<StatisticDefinition>("Definition/Statistic/AttackPowerStatisticDefinition");
+        public static StatisticDefinition Reach => reach ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ReachStatisticDefinition");
+        public static StatisticDefinition MaxHealth => maxHealth ??= Resources.Load<StatisticDefinition>("Definition/Statistic/MaxHealthStatisticDefinition");
+        public static StatisticDefinition Defense => defense ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DefenseStatisticDefinition");
+        public static StatisticDefinition AttackSpeed => attackSpeed ??= Resources.Load<StatisticDefinition>("Definition/Statistic/AttackSpeedStatisticDefinition");
+        public static StatisticDefinition Speed => speed ??= Resources.Load<StatisticDefinition>("Definition/Statistic/SpeedStatisticDefinition");
+        public static StatisticDefinition Damage => damage ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageStatisticDefinition");
+        public static StatisticDefinition Range => range ??= Resources.Load<StatisticDefinition>("Definition/Statistic/RangeStatisticDefinition");
+        public static StatisticDefinition BuffDuration => buffDuration ??= Resources.Load<StatisticDefinition>("Definition/Statistic/BuffDurationStatisticDefinition");
+        public static StatisticDefinition Duration => duration ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DurationStatisticDefinition");
+        public static StatisticDefinition Cooldown => cooldown ??= Resources.Load<StatisticDefinition>("Definition/Statistic/CooldownStatisticDefinition");
+        public static StatisticDefinition Threshold => threshold ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ThresholdStatisticDefinition");
+        public static StatisticDefinition Heal => heal ??= Resources.Load<StatisticDefinition>("Definition/Statistic/HealStatisticDefinition");
+        public static StatisticDefinition Shield => shield ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ShieldStatisticDefinition");
+
+        private static List<StatisticDefinition> all = null;
+        public static List<StatisticDefinition> All => all ??= new List<StatisticDefinition>()
+        {
+            AttackPower,
+            Reach,
+            MaxHealth,
+            Defense,
+            AttackSpeed,
+            Speed,
+            Damage,
+            Range,
+            BuffDuration,
+            Duration,
+            Cooldown,
+            Threshold,
+            Heal,
+            Shield
+        };
 
         [SerializeField] private Sprite icon;
+        [SerializeField] private string humanReadableId;
         [SerializeField] private string title;
         [SerializeField] private Color color;
 
@@ -37,5 +67,17 @@ namespace Game
         public string ColorHex => color.ToHexString();
         public Color Color => color;
         public string GetTextIcon => $"<sprite name=\"{Icon.name.Trim()}\" color=#{ColorHex}>";
+        public string HumanReadableId => humanReadableId;
+
+        public static string ParseText(string text)
+        {
+            string modifiedText = text;
+            foreach (StatisticDefinition statisticDefinition in All)
+            {
+                modifiedText = modifiedText.Replace($"{{stat:{statisticDefinition.humanReadableId}}}", statisticDefinition.Title);
+            }
+
+            return modifiedText;
+        }
     }
 }

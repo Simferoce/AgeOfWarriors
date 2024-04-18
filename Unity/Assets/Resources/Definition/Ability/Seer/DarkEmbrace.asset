@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 156a5e5d2b7389c458935a45ae3476d7
   title: Dark Embrace
-  description: Invoke a medium size dark fissure behind the first enemy in {range}
-    meters that deals {damage} damage to all enemy in range.
+  description: Invoke a medium size dark fissure behind the first enemy in {val:range}
+    meters that deals {val:damage} damage to all enemy in range.
   statistics:
   - rid: 4528059696114040841
   - rid: 4528059696114040843
@@ -43,12 +43,14 @@ MonoBehaviour:
         description: Cooldown - 5
         definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
         value: 5
+        percentage: 0
     - rid: 4528059696114040844
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: Duration - 0,2
+        description: Duration - 0.2
         definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
         value: 0.2
+        percentage: 0
     - rid: 4528059696114040855
       type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
       data:

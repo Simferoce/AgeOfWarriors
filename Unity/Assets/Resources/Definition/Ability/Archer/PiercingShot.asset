@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e519c0b256b8cd84890c6167acfc1c87
   title: Piercing Shot
-  description: Deals {damage} damage with {armor_penetration} armor penetration.
+  description: Deals {val:damage} damage with {val:armor_penetration} armor_penetration.
   statistics:
   - rid: 3656781412477173785
   - rid: 3656781412477173787
@@ -58,7 +58,7 @@ MonoBehaviour:
     - rid: 3656781412477173790
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: ' - 15'
+        description: Armor Penetration - 15
         definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
         value: 15
         percentage: 0

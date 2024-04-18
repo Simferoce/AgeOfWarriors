@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: fea2174c2cf5cb64583f67647a744a60
   icon: {fileID: 0}
+  humanReadableId: shield
   title: Shield
   color: {r: 0, g: 0.4, b: 0.8, a: 1}

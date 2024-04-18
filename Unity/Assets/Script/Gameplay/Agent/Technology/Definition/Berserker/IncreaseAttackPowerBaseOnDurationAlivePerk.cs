@@ -7,23 +7,19 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier>
         {
-            private float attackPowerPerSecondAlive;
             private float startedAt;
 
-            public override float? AttackPower => attackPowerPerSecondAlive * (Time.time - startedAt);
+            public override float? AttackPower => Definition.GetValueOrThrow<float>(this, StatisticDefinition.AttackPower) * (Time.time - startedAt);
 
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, float attackPowerPerSecondAlive) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
             {
-                this.attackPowerPerSecondAlive = attackPowerPerSecondAlive;
                 startedAt = Time.time;
             }
         }
 
-        [SerializeField] private float attackPowerPerSecondAlive;
-
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, attackPowerPerSecondAlive);
+            return new Modifier(modifiable, this);
         }
     }
 }
