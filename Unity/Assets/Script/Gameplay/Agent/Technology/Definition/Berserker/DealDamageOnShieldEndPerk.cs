@@ -13,12 +13,16 @@ namespace Game
                 if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
                     shieldable.OnShieldableDestroyed += Shieldable_OnDestroyed;
-                    shieldable.OnShieldBroken += Shieldable_OnShieldBroken;
                 }
+
+                modifiable.ModifierRemoved += Modifiable_ModifierRemoved;
             }
 
-            private void Shieldable_OnShieldBroken(Shield shield)
+            private void Modifiable_ModifierRemoved(Game.Modifier obj)
             {
+                if (obj is not ShieldModifierDefinition.Shield shield)
+                    return;
+
                 if (!modifiable.TryGetCachedComponent<Character>(out Character character))
                     return;
 
@@ -51,7 +55,7 @@ namespace Game
             private void Shieldable_OnDestroyed(IShieldable shieldable)
             {
                 shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
-                shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
+                modifiable.ModifierRemoved -= Modifiable_ModifierRemoved;
             }
 
             public override void Dispose()
@@ -60,9 +64,10 @@ namespace Game
 
                 if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
-                    shieldable.OnShieldBroken -= Shieldable_OnShieldBroken;
                     shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
                 }
+
+                modifiable.ModifierRemoved -= Modifiable_ModifierRemoved;
             }
         }
 

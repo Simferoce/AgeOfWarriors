@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Game
 {
     public class ModifierHandler : Entity, IModifiable
     {
+        public event Action<Modifier> ModifierRemoved;
+
         private List<Modifier> modifiers = new List<Modifier>();
 
         public void AddModifier(Modifier modifier)
@@ -30,6 +33,7 @@ namespace Game
         {
             modifier.Dispose();
             modifiers.Remove(modifier);
+            ModifierRemoved?.Invoke(modifier);
         }
 
         private void OnDestroy()

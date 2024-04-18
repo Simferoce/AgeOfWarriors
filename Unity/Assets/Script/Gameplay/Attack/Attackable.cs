@@ -8,17 +8,15 @@ namespace Game
     public class Attackable : Entity, IAttackable, IShieldable
     {
         public event Action<Attack, IAttackable> OnDamageTaken;
-        public event IShieldable.ShieldBroken OnShieldBroken;
         public event Action<IShieldable> OnShieldableDestroyed;
 
-        public List<Shield> Shields { get => shields; }
-
-        private List<Shield> shields = new List<Shield>();
         private IAttackableOwner owner;
+        private IModifiable modifiable;
 
         private void Awake()
         {
             owner = GetCachedComponent<IAttackableOwner>();
+            modifiable = owner.GetCachedComponent<IModifiable>();
         }
 
         public void TakeAttack(Attack attack)
@@ -54,34 +52,15 @@ namespace Game
                 owner.Death();
         }
 
-        public void AddShield(Shield shield)
-        {
-            shields.Add(shield);
-        }
-
-        public void Update()
-        {
-            for (int i = shields.Count - 1; i >= 0; i--)
-            {
-                Shield shield = shields[i];
-                if (shield.Update())
-                {
-                    shields.Remove(shield);
-                    OnShieldBroken?.Invoke(shield);
-                }
-            }
-        }
 
         public float Absorb(float damageRemaining)
         {
+            List<ShieldModifierDefinition.Shield> shields = modifiable.GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();
             for (int i = shields.Count - 1; i >= 0; i--)
             {
-                Shield shield = shields[i];
+                ShieldModifierDefinition.Shield shield = shields[i];
                 if (!shield.Absorb(damageRemaining, out damageRemaining))
-                {
-                    OnShieldBroken?.Invoke(shield);
-                    shields.RemoveAt(i);
-                }
+                    modifiable.RemoveModifier(shield);
             }
 
             return damageRemaining;

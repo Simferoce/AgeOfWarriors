@@ -7,19 +7,20 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier>
         {
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
+            private ShieldModifierDefinition shieldModifierDefinition;
+
+            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, ShieldModifierDefinition shieldModifierDefinition) : base(modifiable, modifierDefinition)
             {
+                this.shieldModifierDefinition = shieldModifierDefinition;
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
                 if (evt.AgentObject.Faction == (modifiable as ITargeteable).Faction
-                    && modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable)
-                    && (IModifiable)evt.AgentObject != modifiable
-                    && modifiable.TryGetCachedComponent<Character>(out Character character))
+                    && (IModifiable)evt.AgentObject != modifiable)
                 {
-                    shieldable.AddShield(new Shield(Definition.GetValueOrThrow<float>(this, StatisticDefinition.Shield), Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration)));
+                    modifiable.AddModifier(shieldModifierDefinition.CreateShield(modifiable, Definition.GetValueOrThrow<float>(this, StatisticDefinition.Shield), Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration)));
                 }
             }
 
@@ -31,9 +32,11 @@ namespace Game
             }
         }
 
+        [SerializeField] private ShieldModifierDefinition shieldModifierDefinition;
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, shieldModifierDefinition);
         }
     }
 }

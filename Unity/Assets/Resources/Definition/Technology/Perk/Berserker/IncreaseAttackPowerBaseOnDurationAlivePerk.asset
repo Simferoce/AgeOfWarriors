@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4f07279f125b9e44193e5a3a085d9282
   title: Relentless Push
-  icon: {fileID: 0}
+  icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Increase attack power by {val:attack_power} for each seconds alive.
   statistics:
   - rid: 3656781479875969066
