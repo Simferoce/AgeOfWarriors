@@ -17,12 +17,12 @@ MonoBehaviour:
   title: Archer - Ferocious
   productionDuration: 2
   cost: 10
-  technologyGainPerSecond: 0
   baseDefinition: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   reach: 2
   speed: 1
   attackSpeed: 1
-  attackPower: 2.5
-  maxHealth: 10
+  attackPower: 25
+  maxHealth: 100
   defense: 5
+  technologyGainPerSecond: 0
   prefab: {fileID: 1944176523159487312, guid: 5509c985b0fa0804ca7e90bfc4939ff8, type: 3}

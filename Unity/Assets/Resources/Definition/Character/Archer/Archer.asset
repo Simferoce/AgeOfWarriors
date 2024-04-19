@@ -17,12 +17,12 @@ MonoBehaviour:
   title: Archer
   productionDuration: 2
   cost: 10
-  technologyGainPerSecond: 0
   baseDefinition: {fileID: 0}
   reach: 2
   speed: 1
   attackSpeed: 1
-  attackPower: 2.5
-  maxHealth: 10
+  attackPower: 25
+  maxHealth: 100
   defense: 5
+  technologyGainPerSecond: 0
   prefab: {fileID: 6705402225686340843, guid: 2807a4706479e3e438658b9041c7d804, type: 3}

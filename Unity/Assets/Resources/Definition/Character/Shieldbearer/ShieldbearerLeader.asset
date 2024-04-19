@@ -17,12 +17,12 @@ MonoBehaviour:
   title: Shieldbearer - Leader
   productionDuration: 2
   cost: 15
-  technologyGainPerSecond: 0
   baseDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   reach: 0.5
   speed: 0.5
   attackSpeed: 2
-  attackPower: 1
-  maxHealth: 10
+  attackPower: 10
+  maxHealth: 100
   defense: 15
+  technologyGainPerSecond: 0
   prefab: {fileID: 5111183424940805414, guid: 3fc4e53abe9501446a663f9d4bd9368d, type: 3}

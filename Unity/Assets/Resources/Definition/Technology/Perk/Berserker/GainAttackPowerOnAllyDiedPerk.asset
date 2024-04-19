@@ -54,9 +54,9 @@ MonoBehaviour:
     - rid: 3656781479875969043
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
       data:
-        description: Attack Power - 10
+        description: Attack Power - 100
         definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-        value: 10
+        value: 100
         percentage: 0
     - rid: 3656781479875969044
       type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}

@@ -17,12 +17,12 @@ MonoBehaviour:
   title: Archer - Longbow
   productionDuration: 2
   cost: 10
-  technologyGainPerSecond: 0
   baseDefinition: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   reach: 2.5
   speed: 1
   attackSpeed: 1
-  attackPower: 2.5
-  maxHealth: 10
+  attackPower: 25
+  maxHealth: 100
   defense: 5
+  technologyGainPerSecond: 0
   prefab: {fileID: 8903759599332399965, guid: 4ee256903f107aa46965214b33fb183f, type: 3}

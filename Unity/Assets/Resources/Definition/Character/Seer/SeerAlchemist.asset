@@ -17,12 +17,12 @@ MonoBehaviour:
   title: Seer - Alchemist
   productionDuration: 2
   cost: 10
-  technologyGainPerSecond: 0
   baseDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   reach: 1.5
   speed: 0.5
   attackSpeed: 1
-  attackPower: 2.5
-  maxHealth: 10
+  attackPower: 25
+  maxHealth: 100
   defense: 10
+  technologyGainPerSecond: 0
   prefab: {fileID: 9096269795089485194, guid: 0724d7646876db9418ff9330fe610e15, type: 3}

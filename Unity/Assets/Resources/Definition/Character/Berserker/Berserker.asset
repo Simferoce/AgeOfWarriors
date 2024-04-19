@@ -17,12 +17,12 @@ MonoBehaviour:
   title: Berserker
   productionDuration: 2
   cost: 15
-  technologyGainPerSecond: 1
   baseDefinition: {fileID: 0}
   reach: 0.5
   speed: 0.5
   attackSpeed: 0.5
-  attackPower: 5
-  maxHealth: 10
+  attackPower: 50
+  maxHealth: 100
   defense: 5
+  technologyGainPerSecond: 1
   prefab: {fileID: 6705402225686340843, guid: f91e529d849d3dd4d8238a4fd1a2eeed, type: 3}
