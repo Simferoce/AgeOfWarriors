@@ -89,6 +89,9 @@ namespace Game
                 empowered = true;
             }
 
+            float damageDealtReduction = GetCachedComponent<IModifiable>().GetModifiers().Max(x => x.GetValueOrDefault<float>(StatisticDefinition.DamageDealtReduction));
+            damage *= (1 - damageDealtReduction);
+
             if (target.GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
             {
                 damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.GetValueOrDefault<float>(StatisticDefinition.DamageDealtAgainstWeakTarget));
