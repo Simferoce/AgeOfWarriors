@@ -9,11 +9,12 @@ namespace Game
         [SerializeField] private Image icon;
         [SerializeField] private GameObject stack;
         [SerializeField] private TextMeshProUGUI stackText;
+        [SerializeField] private Image overlay;
 
         public void Refresh(Modifier modifier)
         {
             icon.sprite = modifier.Definition.Icon;
-            icon.fillAmount = modifier.GetPercentageRemainingDuration() ?? 1;
+            overlay.fillAmount = modifier.GetPercentageRemainingDuration() ?? 0;
 
             float? stackValue = modifier.GetStack();
             if (stackValue == null)

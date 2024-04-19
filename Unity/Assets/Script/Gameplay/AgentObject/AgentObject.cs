@@ -6,7 +6,7 @@ namespace Game
     [RequireComponent(typeof(ModifierHandler))]
     public abstract class AgentObject : Entity
     {
-        public delegate void AttackedLanded(Attack attack, float damageDealt, bool killingBlow);
+        public delegate void AttackedLanded(AttackResult attack);
 
         public enum Type
         {

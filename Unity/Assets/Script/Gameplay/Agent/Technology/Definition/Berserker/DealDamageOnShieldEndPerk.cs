@@ -46,7 +46,7 @@ namespace Game
                     if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > Definition.GetValueOrThrow<float>(this, StatisticDefinition.Range))
                         continue;
 
-                    attackable.TakeAttack(character.GenerateAttack(damage, 0, 0, this));
+                    attackable.TakeAttack(character.GenerateAttack(damage, 0, 0, attackable, this));
                 }
             }
 

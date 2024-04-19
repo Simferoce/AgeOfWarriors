@@ -23,8 +23,6 @@ namespace Game
             startedAt = Time.time;
 
             currentDuration = duration.GetValueOrThrow(projectile);
-            attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, projectile);
-            attack.AttackSource.Sources.Add(projectile);
         }
 
         public override bool Impact(GameObject collision)
@@ -34,6 +32,8 @@ namespace Game
                 && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
                 && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
             {
+                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, attackable, projectile);
+                attack.AttackSource.Sources.Add(projectile);
                 targets.Add(attackable);
             }
 

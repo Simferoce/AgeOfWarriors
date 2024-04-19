@@ -16,8 +16,6 @@ namespace Game
         public override void Initialize(Projectile projectile)
         {
             base.Initialize(projectile);
-
-            attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, projectile);
         }
 
         public override bool Impact(GameObject collision)
@@ -28,6 +26,7 @@ namespace Game
                 && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
                 && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
             {
+                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, attackable, projectile);
                 attackable.TakeAttack(attack);
 
                 return true;

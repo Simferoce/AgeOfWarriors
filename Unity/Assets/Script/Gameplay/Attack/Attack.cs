@@ -6,18 +6,20 @@
         public float Damage { get; set; }
         public float ArmorPenetration { get; set; }
         public float Leach { get; set; }
+        public bool Empowered { get; set; }
 
-        public Attack(AttackSource attackSource, float damage, float armorPenetration, float leach)
+        public Attack(AttackSource attackSource, float damage, float armorPenetration, float leach, bool empowered)
         {
             Leach = leach;
             AttackSource = attackSource;
             Damage = damage;
             ArmorPenetration = armorPenetration;
+            Empowered = empowered;
         }
 
         public Attack Clone()
         {
-            return new Attack(AttackSource.Clone(), Damage, ArmorPenetration, Leach);
+            return new Attack(AttackSource.Clone(), Damage, ArmorPenetration, Leach, Empowered);
         }
     }
 }

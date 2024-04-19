@@ -24,6 +24,7 @@ namespace Game
         private static StatisticDefinition rangedDamageReduction;
         private static StatisticDefinition stack;
         private static StatisticDefinition damageIncrease;
+        private static StatisticDefinition damageDealtAgainstWeakTarget;
 
         public static StatisticDefinition AttackPower => attackPower ??= Resources.Load<StatisticDefinition>("Definition/Statistic/AttackPowerStatisticDefinition");
         public static StatisticDefinition Reach => reach ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ReachStatisticDefinition");
@@ -42,6 +43,7 @@ namespace Game
         public static StatisticDefinition RangedDamageReduction => rangedDamageReduction ??= Resources.Load<StatisticDefinition>("Definition/Statistic/RangedDamageReductionStatisticDefinition");
         public static StatisticDefinition Stack => stack ??= Resources.Load<StatisticDefinition>("Definition/Statistic/StackStatisticDefinition");
         public static StatisticDefinition DamageIncrease => damageIncrease ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageIncreaseStatisticDefinition");
+        public static StatisticDefinition DamageDealtAgainstWeakTarget => damageDealtAgainstWeakTarget ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageDealtAgainstWeakStatisticDefinition");
 
         private static List<StatisticDefinition> all = null;
         public static List<StatisticDefinition> All => all ??= new List<StatisticDefinition>()

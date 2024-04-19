@@ -546,6 +546,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: DamageDealtReductionIcon
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47052853bcb225b40a926bae2c068ba3
+      internalID: -1375556571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -571,6 +592,7 @@ TextureImporter:
       SeerAlchemistIcon: -587586574
       ArcherIcon: -497218264
       ShieldbearerOnslaught: 750281812
+      DamageDealtReductionIcon: -1375556571
       EmpowermentIcon: -1546621079
       ShieldbearerLeaderIcon: -1562900050
       DefenseUp: -1676996386

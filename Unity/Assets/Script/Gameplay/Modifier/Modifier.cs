@@ -64,6 +64,11 @@ namespace Game
             return TryGetValue(definition, out T value) == true ? value : throw new Exception($"Could not resolve the statistic {definition}");
         }
 
+        public T GetValueOrDefault<T>(StatisticDefinition definition)
+        {
+            return TryGetValue(definition, out T value) == true ? value : default(T);
+        }
+
         public virtual bool TryGetValue<T>(StatisticDefinition definition, out T value)
         {
             if (definition == StatisticDefinition.AttackPower)

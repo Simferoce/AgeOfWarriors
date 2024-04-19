@@ -13,9 +13,9 @@ namespace Game
                     character.OnAttackLanded += AgentObject_OnAttackLanded;
             }
 
-            private void AgentObject_OnAttackLanded(Attack attack, float damageDealt, bool killingBlow)
+            private void AgentObject_OnAttackLanded(AttackResult attackResult)
             {
-                if (killingBlow && modifiable.TryGetCachedComponent<Character>(out Character character))
+                if (attackResult.KillingBlow && modifiable.TryGetCachedComponent<Character>(out Character character))
                     character.Heal(Definition.GetValueOrThrow<float>(this, StatisticDefinition.Heal));
             }
 

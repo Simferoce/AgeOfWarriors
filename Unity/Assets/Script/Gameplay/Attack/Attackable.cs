@@ -48,12 +48,12 @@ namespace Game
                 }
             }
 
+            AttackResult attackResult = new AttackResult(attack, damageRemaining, defenseDamagePrevented, owner.Health <= 0, GetCachedComponent<Attackable>());
             foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attack, damageRemaining, owner.Health <= 0);
+                source.AttackLanded(attackResult);
 
             Debug.Log($"{this.name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
 
-            AttackResult attackResult = new AttackResult(attack, damageRemaining, defenseDamagePrevented);
             OnDamageTaken?.Invoke(attackResult, this);
 
             if (owner.Health <= 0 && !owner.IsDead)

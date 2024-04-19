@@ -2,6 +2,6 @@
 {
     public interface IAttackSource
     {
-        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow) { }
+        public void AttackLanded(AttackResult attackResult) { }
     }
 }

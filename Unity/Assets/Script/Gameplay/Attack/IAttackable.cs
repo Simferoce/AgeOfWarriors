@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public interface IAttackable
+    public interface IAttackable : IComponent
     {
         public event Action<AttackResult, IAttackable> OnDamageTaken;
 

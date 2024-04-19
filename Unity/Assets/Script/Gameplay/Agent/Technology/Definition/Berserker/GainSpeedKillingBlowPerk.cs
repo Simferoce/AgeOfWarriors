@@ -16,9 +16,9 @@ namespace Game
                 this.speedModifierDefinition = speedModifierDefinition;
             }
 
-            private void AgentObject_OnAttackLanded(Attack attack, float damageDealt, bool killingBlow)
+            private void AgentObject_OnAttackLanded(AttackResult attackResult)
             {
-                if (killingBlow)
+                if (attackResult.KillingBlow)
                     modifiable.AddModifier(new SpeedModifierDefinition.SpeedBuff(modifiable, speedModifierDefinition, Definition.GetValueOrThrow<float>(this, StatisticDefinition.Speed)).With(new CharacterModifierTimeElement(Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration))));
             }
 

@@ -28,7 +28,7 @@ namespace Game
                 modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
 
-            private void Modifier_OnAttackLanded(Attack attack, float damageDealt, bool killingBlow)
+            private void Modifier_OnAttackLanded(AttackResult attackResult)
             {
                 Game.Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == modifierToGain);
                 if (modifier != null)

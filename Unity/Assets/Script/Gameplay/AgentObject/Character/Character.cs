@@ -76,16 +76,25 @@ namespace Game
             DisposeAbilities();
         }
 
-        public Attack GenerateAttack(float damage, float armorPenetration, float leach, params IAttackSource[] source)
+        public Attack GenerateAttack(float damage, float armorPenetration, float leach, IAttackable target, params IAttackSource[] source)
         {
+            bool empowered = false;
+
             EmpoweredModifierDefinition.Modifier empowerment = GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
             if (empowerment != null)
             {
                 damage *= 1 + empowerment.GetValueOrThrow<float>(StatisticDefinition.DamageIncrease);
                 empowerment.Consume();
+
+                empowered = true;
             }
 
-            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach);
+            if (target.GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
+            {
+                damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.GetValueOrDefault<float>(StatisticDefinition.DamageDealtAgainstWeakTarget));
+            }
+
+            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, empowered);
         }
 
         public ITargeteable GetTarget(TargetCriteria criteria, object caller)
@@ -140,10 +149,10 @@ namespace Game
             this.Health = Mathf.Clamp(Health, 0, MaxHealth);
         }
 
-        public void AttackLanded(Attack attack, float damageDealt, bool killingBlow)
+        public void AttackLanded(AttackResult attackResult)
         {
-            Heal(damageDealt * attack.Leach);
-            OnAttackLanded?.Invoke(attack, damageDealt, killingBlow);
+            Heal(attackResult.DamageTaken * attackResult.Attack.Leach);
+            OnAttackLanded?.Invoke(attackResult);
         }
 
         public bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
