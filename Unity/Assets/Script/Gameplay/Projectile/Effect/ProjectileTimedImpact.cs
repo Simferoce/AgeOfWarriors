@@ -23,7 +23,7 @@ namespace Game
             startedAt = Time.time;
 
             currentDuration = duration.GetValueOrThrow(projectile);
-            attack = new Attack(new AttackSource(projectile.Character, projectile), damage.GetValueOrThrow(projectile), 0, 0);
+            attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, projectile);
             attack.AttackSource.Sources.Add(projectile);
         }
 

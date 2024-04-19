@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -47,8 +46,7 @@ namespace Game
                     if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > Definition.GetValueOrThrow<float>(this, StatisticDefinition.Range))
                         continue;
 
-                    Attack attack = new Attack(new AttackSource(new List<IAttackSource>() { character, this }), damage, 0, 0);
-                    attackable.TakeAttack(attack);
+                    attackable.TakeAttack(character.GenerateAttack(damage, 0, 0, this));
                 }
             }
 

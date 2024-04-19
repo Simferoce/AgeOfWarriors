@@ -17,7 +17,7 @@ namespace Game
         {
             base.Initialize(projectile);
 
-            attack = new Attack(new AttackSource(projectile.Character, projectile), damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0);
+            attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, projectile);
         }
 
         public override bool Impact(GameObject collision)

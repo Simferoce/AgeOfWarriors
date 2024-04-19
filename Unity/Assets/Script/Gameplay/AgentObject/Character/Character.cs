@@ -76,6 +76,18 @@ namespace Game
             DisposeAbilities();
         }
 
+        public Attack GenerateAttack(float damage, float armorPenetration, float leach, params IAttackSource[] source)
+        {
+            EmpoweredModifierDefinition.Modifier empowerment = GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
+            if (empowerment != null)
+            {
+                damage *= 1 + empowerment.GetValueOrThrow<float>(StatisticDefinition.DamageIncrease);
+                empowerment.Consume();
+            }
+
+            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach);
+        }
+
         public ITargeteable GetTarget(TargetCriteria criteria, object caller)
         {
             return GetTargets(criteria, caller).FirstOrDefault();

@@ -27,7 +27,11 @@ namespace Game
             if (owner.IsInvulnerable)
                 return;
 
-            float damageRemaining = DefenseFormulaDefinition.Instance.ParseDamage(attack.Damage, Mathf.Max(0, owner.Defense - attack.ArmorPenetration));
+            float damage = attack.Damage;
+            float defense = owner.Defense - attack.ArmorPenetration;
+            damage *= Mathf.Clamp(1 - modifiable.GetModifiers().Sum(x => x.TryGetValue(StatisticDefinition.RangedDamageReduction, out float value) ? value : 0), 0.35f, 1f);
+
+            float damageRemaining = damage * (1 / (1 + (defense) * 0.1f));
             damageRemaining = Absorb(damageRemaining);
 
             owner.Health -= damageRemaining;

@@ -3,7 +3,11 @@ using UnityEngine;
 
 namespace Game
 {
-    [Serializable] public class StatisticSerializeFloat : StatisticSerialize<float> { }
+    [Serializable]
+    public class StatisticSerializeInt : StatisticSerialize<int> { }
+
+    [Serializable]
+    public class StatisticSerializeFloat : StatisticSerialize<float> { }
 
     [Serializable]
     public class StatisticSerialize<T> : Statistic<T>

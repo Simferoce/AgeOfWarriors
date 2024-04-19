@@ -32,7 +32,7 @@ namespace Game
             TechnologyDetailsPanelUI technologyDetailsPanelUI = WindowManager.Instance.GetWindow<TechnologyDetailsPanelUI>();
             technologyDetailsPanelUI.technologyPerkDefinition = technologyPerkDefinition;
             technologyDetailsPanelUI.title.text = technologyPerkDefinition.Title;
-            technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription(null);
+            technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription(technologyPerkDefinition);
 
             bool isUnlockable = technologyPerkDefinition.IsUnlockable(Agent.Player);
             bool isUnlocked = technologyPerkDefinition.IsUnlocked(Agent.Player);

@@ -21,6 +21,9 @@ namespace Game
         private static StatisticDefinition threshold;
         private static StatisticDefinition heal;
         private static StatisticDefinition shield;
+        private static StatisticDefinition rangedDamageReduction;
+        private static StatisticDefinition stack;
+        private static StatisticDefinition damageIncrease;
 
         public static StatisticDefinition AttackPower => attackPower ??= Resources.Load<StatisticDefinition>("Definition/Statistic/AttackPowerStatisticDefinition");
         public static StatisticDefinition Reach => reach ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ReachStatisticDefinition");
@@ -36,6 +39,9 @@ namespace Game
         public static StatisticDefinition Threshold => threshold ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ThresholdStatisticDefinition");
         public static StatisticDefinition Heal => heal ??= Resources.Load<StatisticDefinition>("Definition/Statistic/HealStatisticDefinition");
         public static StatisticDefinition Shield => shield ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ShieldStatisticDefinition");
+        public static StatisticDefinition RangedDamageReduction => rangedDamageReduction ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageReductionStatisticDefinition");
+        public static StatisticDefinition Stack => stack ??= Resources.Load<StatisticDefinition>("Definition/Statistic/StackStatisticDefinition");
+        public static StatisticDefinition DamageIncrease => damageIncrease ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageIncreaseStatisticDefinition");
 
         private static List<StatisticDefinition> all = null;
         public static List<StatisticDefinition> All => all ??= new List<StatisticDefinition>()

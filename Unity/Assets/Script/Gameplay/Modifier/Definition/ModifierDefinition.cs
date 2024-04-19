@@ -36,12 +36,12 @@ namespace Game
             }
         }
 
-        public string ParseDescription(object caller)
+        public virtual string ParseDescription(object caller)
         {
             string description = this.description;
             foreach (Statistic statistic in statistics)
             {
-                description = description.Replace($"{{val:{statistic.Definition.HumanReadableId}}}", $"{statistic.GetDescriptionFormatted(caller)}");
+                description = description.Replace($"{{val:{statistic.Definition.HumanReadableId}}}", statistic.GetDescriptionFormatted(caller));
             }
 
             description = StatisticDefinition.ParseText(description);

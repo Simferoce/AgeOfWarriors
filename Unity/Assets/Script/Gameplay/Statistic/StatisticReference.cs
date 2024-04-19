@@ -9,6 +9,11 @@ namespace Game
 
     }
 
+    public interface MapperInt
+    {
+
+    }
+
     [Serializable]
     public class StatisticReference<T> : StatisticReference<T, MapperFloat> { }
 
@@ -20,6 +25,15 @@ namespace Game
 
     [Serializable]
     public class ModifierMapperFloat : ModifierMapper<float>, MapperFloat { }
+
+    [Serializable]
+    public class ModifierMapperInt : ModifierMapper<int>, MapperInt { }
+
+    [Serializable]
+    public class ModifierDefinitionMapperInt : ModifierDefinitionMapper<int>, MapperInt { }
+
+    [Serializable]
+    public class ModifierDefinitionMapperFloat : ModifierDefinitionMapper<float>, MapperFloat { }
     #endregion
 
     #region Mapper
@@ -89,6 +103,17 @@ namespace Game
             }
 
             return modifier.TryGetValue(definition, out value);
+        }
+    }
+
+    [Serializable]
+    public class ModifierDefinitionMapper<T> : Mapper<T>
+    {
+        [SerializeField] private ModifierDefinition modifierDefinition;
+
+        public override bool TryGetValue(object context, StatisticDefinition definition, StatisticType type, out T value)
+        {
+            return modifierDefinition.TryGetValue<T>(context, definition, out value);
         }
     }
 

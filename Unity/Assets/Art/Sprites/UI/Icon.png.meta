@@ -471,7 +471,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -479,6 +479,48 @@ TextureImporter:
       bones: []
       spriteID: 7f344eb819fff934091b5a87614ffce1
       internalID: 2113729612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EmpowermentIcon
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8c5ddf7d08057e041ad9d763cf6efc3d
+      internalID: -1546621079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProgressiveEmpowermentIcon
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bcfc76b87c650945a6fd5b5cc8bf3bb
+      internalID: 855844591
       vertices: []
       indices: 
       edges: []
@@ -504,9 +546,11 @@ TextureImporter:
       BerserkerIcon: 1091542803
       LeaderIcon: 171242972
       ShieldbearerIcon: 1097212789
+      ProgressiveEmpowermentIcon: 855844591
       SeerAlchemistIcon: -587586574
       ArcherIcon: -497218264
       ShieldbearerOnslaught: 750281812
+      EmpowermentIcon: -1546621079
       ShieldbearerLeaderIcon: -1562900050
       DefenseUp: -1676996386
       ShieldIcon: 2113729612

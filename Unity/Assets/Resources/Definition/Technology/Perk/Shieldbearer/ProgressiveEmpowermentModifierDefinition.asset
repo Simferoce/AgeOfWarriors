@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2722414497821263076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035cdbbd397dd5e41a29c16717f7b4f2, type: 3}
+  m_Name: EmpoweredModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 26b803b75004c1843a2c1c5e4b2a1956
+  title: Empowerment
+  icon: {fileID: -1546621079, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: Increase the damage dealt of the next attack by {val:damage_increase}.
+  statistics:
+  - rid: 3656781502793121848
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781502793121848
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Damage Increase - 150%
+        definition: {fileID: 11400000, guid: c35787cee84dd9c4281252d460508353, type: 2}
+        value: 1.5
+        percentage: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8d0e5deaae3904abd6a79b89839a46, type: 3}
+  m_Name: ProgressiveEmpowermentModifierDefinition
+  m_EditorClassIdentifier: 
+  id: d06f2f9a0802ee94e98bf9e6bd9b9a15
+  title: Progressive Empowerment
+  icon: {fileID: 855844591, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: At {stack} stacks, apply Empowered which increase the damage dealt
+    of the next attack by {val:damage_increase}.
+  statistics:
+  - rid: 3656781502793121808
+  - rid: 3656781502793121845
+  empoweredModifierDefinition: {fileID: -2722414497821263076}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781502793121808
+      type: {class: StatisticSerializeInt, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Stack - 3
+        definition: {fileID: 11400000, guid: 0a3fabeb99841d2469145f5592256cba, type: 2}
+        value: 3
+        percentage: 0
+    - rid: 3656781502793121845
+      type: {class: StatisticDynamicFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: 'Damage Increase - '
+        definition: {fileID: 11400000, guid: c35787cee84dd9c4281252d460508353, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: c35787cee84dd9c4281252d460508353, type: 2}
+          mapper:
+            rid: 3656781502793121846
+        isPercentage: 1
+    - rid: 3656781502793121846
+      type: {class: ModifierDefinitionMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        modifierDefinition: {fileID: -2722414497821263076}

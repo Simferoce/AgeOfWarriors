@@ -53,6 +53,17 @@ namespace Game
             return Mathf.Clamp01(modifierElement.RemaingDuration / modifierElement.Duration);
         }
 
+        public virtual int? GetStack()
+        {
+            StackModifierElement stackModifierElement = (StackModifierElement)modifierElements.FirstOrDefault(x => x is StackModifierElement);
+            return stackModifierElement?.CurrentStack;
+        }
+
+        public virtual T GetValueOrThrow<T>(StatisticDefinition definition)
+        {
+            return TryGetValue(definition, out T value) == true ? value : throw new Exception($"Could not resolve the statistic {definition}");
+        }
+
         public virtual bool TryGetValue<T>(StatisticDefinition definition, out T value)
         {
             if (definition == StatisticDefinition.AttackPower)

@@ -17,6 +17,12 @@ namespace Game
             Sources.AddRange(sources);
         }
 
+        public AttackSource Add(params IAttackSource[] source)
+        {
+            Sources.AddRange(source);
+            return this;
+        }
+
         public AttackSource Clone()
         {
             return new AttackSource(Sources.ToList());

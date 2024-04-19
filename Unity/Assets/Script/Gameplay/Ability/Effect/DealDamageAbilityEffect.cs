@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -17,7 +16,9 @@ namespace Game
                 return;
 
             IAttackable target = Ability.Targets[0].GetCachedComponent<IAttackable>();
-            target.TakeAttack(new Attack(new AttackSource(new List<IAttackSource>() { Ability.Character, this }), damage.GetValueOrDefault(Ability), armorPenetration.GetValueOrDefault(Ability), leach.GetValueOrDefault(Ability)));
+
+            Attack attack = Ability.Character.GenerateAttack(damage.GetValueOrDefault(Ability), armorPenetration.GetValueOrDefault(Ability), leach.GetValueOrDefault(Ability), this);
+            target.TakeAttack(attack);
         }
     }
 }
