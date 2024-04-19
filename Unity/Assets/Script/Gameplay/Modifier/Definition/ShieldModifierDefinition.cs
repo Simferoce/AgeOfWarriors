@@ -10,6 +10,16 @@ namespace Game
             public float Remaining { get; set; }
             public float Initial { get; set; }
 
+            public override bool TryGetValue<T>(StatisticDefinition definition, out T value)
+            {
+                if (definition == StatisticDefinition.Shield)
+                {
+                    value = (T)(object)Remaining;
+                    return true;
+                }
+
+                return base.TryGetValue(definition, out value);
+            }
 
             public Shield(IModifiable modifiable, ModifierDefinition modifierDefinition, float initial) : base(modifiable, modifierDefinition)
             {

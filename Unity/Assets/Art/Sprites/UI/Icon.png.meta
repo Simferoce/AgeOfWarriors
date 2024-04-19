@@ -450,7 +450,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -458,6 +458,27 @@ TextureImporter:
       bones: []
       spriteID: 4ff2ea21793fdaa4daa964e05aa14f19
       internalID: 1809554327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ShieldIcon
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f344eb819fff934091b5a87614ffce1
+      internalID: 2113729612
       vertices: []
       indices: 
       edges: []
@@ -488,6 +509,7 @@ TextureImporter:
       ShieldbearerOnslaught: 750281812
       ShieldbearerLeaderIcon: -1562900050
       DefenseUp: -1676996386
+      ShieldIcon: 2113729612
       UpgradeOverlay: 1628775759
       Icon_1: 800693428
       BerserkerWarbringerIcon: 322066553
