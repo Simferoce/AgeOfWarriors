@@ -18,9 +18,8 @@ MonoBehaviour:
   description: For each attack landed, add a stack of Progressive Empowerment. Whenever
     the amount of stack accumulated is equal to {val:stack}, gain a stack of Empowerment
     which increase the damage dealt by {val:damage_increase}.
-  statistics:
-  - rid: 3656781502793121822
-  - rid: 3656781502793121841
+  showOnHealthBar: 0
+  statistics: []
   requirementsPerk:
   - rid: 3656781502793121826
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
@@ -28,35 +27,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3656781502793121822
-      type: {class: StatisticDynamicInt, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: 'Stack - '
-        definition: {fileID: 11400000, guid: 0a3fabeb99841d2469145f5592256cba, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: 0a3fabeb99841d2469145f5592256cba, type: 2}
-          mapper:
-            rid: 3656781502793121823
-        isPercentage: 0
-    - rid: 3656781502793121823
-      type: {class: ModifierDefinitionMapperInt, ns: Game, asm: Assembly-CSharp}
-      data:
-        modifierDefinition: {fileID: 11400000, guid: d06f2f9a0802ee94e98bf9e6bd9b9a15, type: 2}
     - rid: 3656781502793121826
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
-    - rid: 3656781502793121841
-      type: {class: StatisticDynamicFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: 'Damage Increase - '
-        definition: {fileID: 11400000, guid: c35787cee84dd9c4281252d460508353, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: c35787cee84dd9c4281252d460508353, type: 2}
-          mapper:
-            rid: 3656781502793121844
-        isPercentage: 1
-    - rid: 3656781502793121844
-      type: {class: ModifierDefinitionMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        modifierDefinition: {fileID: 11400000, guid: d06f2f9a0802ee94e98bf9e6bd9b9a15, type: 2}

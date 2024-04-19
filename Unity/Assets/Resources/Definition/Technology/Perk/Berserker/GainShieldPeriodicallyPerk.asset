@@ -17,6 +17,7 @@ MonoBehaviour:
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Gain a shield each {val:cooldown} seconds for {val:buff_duration}
     seconds that absorbs for a total of {val:shield} damage.
+  showOnHealthBar: 0
   statistics:
   - rid: 3656781458035441745
   - rid: 3656781458035441746
@@ -74,6 +75,7 @@ MonoBehaviour:
   title: Recurring Relief - Shield
   icon: {fileID: 2113729612, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Absorb {val:shield} amount of damage.
+  showOnHealthBar: 1
   statistics:
   - rid: 3656781479875969113
   references:
@@ -88,5 +90,6 @@ MonoBehaviour:
           definition: {fileID: 11400000, guid: fea2174c2cf5cb64583f67647a744a60, type: 2}
           mapper:
             rid: 3656781479875969114
+        isPercentage: 0
     - rid: 3656781479875969114
       type: {class: ModifierMapperFloat, ns: Game, asm: Assembly-CSharp}

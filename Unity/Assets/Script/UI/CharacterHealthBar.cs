@@ -29,7 +29,7 @@ namespace Game
             float shieldPercentage = character.GetCachedComponent<IModifiable>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().Sum(x => x.Remaining) / character.MaxHealth;
             float healthPercentage = character.Health / character.MaxHealth;
 
-            List<Modifier> modifiers = character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Definition is not TechnologyPerkDefinition).ToList();
+            List<Modifier> modifiers = character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Definition.ShowOnHealthBar).ToList();
 
             int i = 0;
             for (; i < modifiers.Count && i < modifiersUI.Count; ++i)

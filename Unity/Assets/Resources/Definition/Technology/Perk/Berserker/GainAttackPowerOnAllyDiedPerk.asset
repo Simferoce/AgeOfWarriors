@@ -16,6 +16,7 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description: 
+  showOnHealthBar: 1
   statistics: []
   references:
     version: 2
@@ -37,6 +38,7 @@ MonoBehaviour:
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Gain {val:attack_power} Attack Power for {val:buff_duration} seconds
     whenever an ally dies.
+  showOnHealthBar: 0
   statistics:
   - rid: 3656781479875969043
   - rid: 3656781479875969044

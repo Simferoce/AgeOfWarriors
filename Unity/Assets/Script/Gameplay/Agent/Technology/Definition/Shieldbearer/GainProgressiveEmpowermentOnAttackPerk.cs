@@ -50,6 +50,14 @@ namespace Game
 
         [SerializeField] private ProgressiveEmpowermentModifierDefinition modifierToGain;
 
+        public override string ParseDescription(object caller, string description)
+        {
+            description = base.ParseDescription(caller, description);
+            description = modifierToGain.ParseDescription(caller, description);
+
+            return description;
+        }
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this, modifierToGain);

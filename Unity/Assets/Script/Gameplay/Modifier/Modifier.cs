@@ -53,7 +53,7 @@ namespace Game
             return Mathf.Clamp01(modifierElement.RemaingDuration / modifierElement.Duration);
         }
 
-        public virtual int? GetStack()
+        public virtual float? GetStack()
         {
             StackModifierElement stackModifierElement = (StackModifierElement)modifierElements.FirstOrDefault(x => x is StackModifierElement);
             return stackModifierElement?.CurrentStack;

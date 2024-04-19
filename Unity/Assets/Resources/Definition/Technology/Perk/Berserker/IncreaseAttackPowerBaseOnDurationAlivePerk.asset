@@ -16,6 +16,7 @@ MonoBehaviour:
   title: Relentless Push
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Increase attack power by {val:attack_power} for each seconds alive.
+  showOnHealthBar: 0
   statistics:
   - rid: 3656781479875969066
   requirementsPerk:

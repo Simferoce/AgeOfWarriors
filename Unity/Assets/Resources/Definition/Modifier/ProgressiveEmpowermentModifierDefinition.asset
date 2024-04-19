@@ -16,6 +16,7 @@ MonoBehaviour:
   title: Empowerment
   icon: {fileID: -1546621079, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Increase the damage dealt of the next attack by {val:damage_increase}.
+  showOnHealthBar: 1
   statistics:
   - rid: 3656781502793121848
   references:
@@ -45,9 +46,9 @@ MonoBehaviour:
   icon: {fileID: 855844591, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: At {stack} stacks, apply Empowered which increase the damage dealt
     of the next attack by {val:damage_increase}.
+  showOnHealthBar: 1
   statistics:
   - rid: 3656781502793121808
-  - rid: 3656781502793121845
   empoweredModifierDefinition: {fileID: -2722414497821263076}
   references:
     version: 2
@@ -59,17 +60,3 @@ MonoBehaviour:
         definition: {fileID: 11400000, guid: 0a3fabeb99841d2469145f5592256cba, type: 2}
         value: 3
         percentage: 0
-    - rid: 3656781502793121845
-      type: {class: StatisticDynamicFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: 'Damage Increase - '
-        definition: {fileID: 11400000, guid: c35787cee84dd9c4281252d460508353, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: c35787cee84dd9c4281252d460508353, type: 2}
-          mapper:
-            rid: 3656781502793121846
-        isPercentage: 1
-    - rid: 3656781502793121846
-      type: {class: ModifierDefinitionMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        modifierDefinition: {fileID: -2722414497821263076}

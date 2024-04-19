@@ -17,6 +17,7 @@ MonoBehaviour:
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Regain {val:heal} health points per shield points non absorbed whenever
     a shield ends.
+  showOnHealthBar: 0
   statistics:
   - rid: 3656781479875969063
   requirementsPerk:

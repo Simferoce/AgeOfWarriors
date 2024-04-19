@@ -10,11 +10,13 @@ namespace Game
         [SerializeField] private string title;
         [SerializeField] private Sprite icon;
         [SerializeField] private string description;
+        [SerializeField] private bool showOnHealthBar = true;
         [SerializeReference] private List<Statistic> statistics;
 
         public Sprite Icon { get => icon; }
         public string Title { get => title; }
         public string Description { get => description; }
+        public bool ShowOnHealthBar { get => showOnHealthBar; set => showOnHealthBar = value; }
 
         public T GetValueOrThrow<T>(object context, StatisticDefinition definition)
         {
@@ -36,9 +38,13 @@ namespace Game
             }
         }
 
-        public virtual string ParseDescription(object caller)
+        public string ParseDescription(object caller)
         {
-            string description = this.description;
+            return ParseDescription(caller, this.description);
+        }
+
+        public virtual string ParseDescription(object caller, string description)
+        {
             foreach (Statistic statistic in statistics)
             {
                 description = description.Replace($"{{val:{statistic.Definition.HumanReadableId}}}", statistic.GetDescriptionFormatted(caller));

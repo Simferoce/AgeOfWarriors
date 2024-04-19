@@ -7,7 +7,7 @@ namespace Game
 {
     public class Attackable : Entity, IAttackable, IShieldable
     {
-        public event Action<Attack, IAttackable> OnDamageTaken;
+        public event Action<AttackResult, IAttackable> OnDamageTaken;
         public event Action<IShieldable> OnShieldableDestroyed;
 
         private IAttackableOwner owner;
@@ -32,6 +32,8 @@ namespace Game
             damage *= Mathf.Clamp(1 - modifiable.GetModifiers().Sum(x => x.TryGetValue(StatisticDefinition.RangedDamageReduction, out float value) ? value : 0), 0.35f, 1f);
 
             float damageRemaining = damage * (1 / (1 + (defense) * 0.1f));
+            float defenseDamagePrevented = damage - damageRemaining;
+
             damageRemaining = Absorb(damageRemaining);
 
             owner.Health -= damageRemaining;
@@ -50,7 +52,9 @@ namespace Game
                 source.AttackLanded(attack, damageRemaining, owner.Health <= 0);
 
             Debug.Log($"{this.name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
-            OnDamageTaken?.Invoke(attack, this);
+
+            AttackResult attackResult = new AttackResult(attack, damageRemaining, defenseDamagePrevented);
+            OnDamageTaken?.Invoke(attackResult, this);
 
             if (owner.Health <= 0 && !owner.IsDead)
                 owner.Death();

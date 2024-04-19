@@ -17,6 +17,7 @@ MonoBehaviour:
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Gain {val:speed} increase movement speed whenever landing a killing
     blow on a unit.
+  showOnHealthBar: 0
   statistics:
   - rid: 3656781479875969058
   - rid: 3656781479875969059
@@ -61,6 +62,7 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description: 
+  showOnHealthBar: 1
   statistics: []
   references:
     version: 2

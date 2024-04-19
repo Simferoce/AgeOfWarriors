@@ -16,6 +16,7 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description: 
+  showOnHealthBar: 0
   statistics:
   - rid: 3656781502793121857
   requirementsPerk:

@@ -16,6 +16,7 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description: 
+  showOnHealthBar: 1
   statistics: []
   references:
     version: 2
@@ -37,6 +38,7 @@ MonoBehaviour:
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: The first time health points would be reduced to 0, gain invulnerability
     for {val:buff_duration} seconds.
+  showOnHealthBar: 0
   statistics:
   - rid: 3656781479875969074
   requirementsPerk:

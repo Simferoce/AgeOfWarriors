@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4dbcfad4c78d004aa807b31539de099, type: 3}
+  m_Name: GainEmpoweredOnDamagePreventedByDefensePerk
+  m_EditorClassIdentifier: 
+  id: a8705c5f35226a34ea1a8fcc246bb78e
+  title: 
+  icon: {fileID: -1767486148, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: Whenever {val:damage_to_prevent} damage has been prevented by defense,
+    apply empowerment on the next attack which increase damage dealt by {val:damage_increase}.
+  showOnHealthBar: 1
+  statistics: []
+  requirementsPerk:
+  - rid: 3656781502793121869
+  affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  damageToPrevent: 50
+  empoweredModifierDefinition: {fileID: -2722414497821263076, guid: d06f2f9a0802ee94e98bf9e6bd9b9a15, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781502793121869
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}

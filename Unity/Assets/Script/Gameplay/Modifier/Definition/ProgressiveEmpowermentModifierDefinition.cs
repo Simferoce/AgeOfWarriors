@@ -45,5 +45,13 @@ namespace Game
         }
 
         [SerializeField] private EmpoweredModifierDefinition empoweredModifierDefinition;
+
+        public override string ParseDescription(object caller, string description)
+        {
+            description = base.ParseDescription(caller, description);
+            description = empoweredModifierDefinition.ParseDescription(caller, description);
+
+            return description;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace Game
             icon.sprite = modifier.Definition.Icon;
             icon.fillAmount = modifier.GetPercentageRemainingDuration() ?? 1;
 
-            int? stackValue = modifier.GetStack();
+            float? stackValue = modifier.GetStack();
             if (stackValue == null)
             {
                 stack.SetActive(false);

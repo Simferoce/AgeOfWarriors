@@ -15,5 +15,10 @@ MonoBehaviour:
   id: e8e3fadc8bdf3c543a7886471eb4f8c7
   title: Berserker
   icon: {fileID: 1091542803, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  descriptionParameters: []
   description: 
+  showOnHealthBar: 0
+  statistics: []
+  requirementsPerk: []
+  references:
+    version: 2
+    RefIds: []

@@ -492,7 +492,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -513,7 +513,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -521,6 +521,27 @@ TextureImporter:
       bones: []
       spriteID: 2bcfc76b87c650945a6fd5b5cc8bf3bb
       internalID: 855844591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DefenseEmpowermentIcon
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80ad2fd2fff996b4fbbd51828bc67af7
+      internalID: -1767486148
       vertices: []
       indices: 
       edges: []
@@ -557,6 +578,7 @@ TextureImporter:
       UpgradeOverlay: 1628775759
       Icon_1: 800693428
       BerserkerWarbringerIcon: 322066553
+      DefenseEmpowermentIcon: -1767486148
       ArcherFerociousIcon: 2082272876
       BerserkerBloodseekerIcon: -1661990737
   spritePackingTag: 

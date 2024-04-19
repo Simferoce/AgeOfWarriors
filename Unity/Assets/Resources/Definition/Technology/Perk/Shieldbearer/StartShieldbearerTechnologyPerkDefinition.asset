@@ -16,6 +16,7 @@ MonoBehaviour:
   title: Empowerment
   icon: {fileID: 0}
   description: 
+  showOnHealthBar: 0
   statistics: []
   requirementsPerk: []
   references:

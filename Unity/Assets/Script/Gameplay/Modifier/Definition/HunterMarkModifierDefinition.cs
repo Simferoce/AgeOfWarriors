@@ -19,12 +19,12 @@ namespace Game
                 attackable.OnDamageTaken += OnAttackableDamageTaken; ;
             }
 
-            private void OnAttackableDamageTaken(Attack attack, IAttackable attackable)
+            private void OnAttackableDamageTaken(AttackResult attack, IAttackable attackable)
             {
-                if (attack.AttackSource.Sources.Contains(this))
+                if (attack.Attack.AttackSource.Sources.Contains(this))
                     return;
 
-                AttackSource source = attack.AttackSource.Clone();
+                AttackSource source = attack.Attack.AttackSource.Clone();
                 source.Sources.Add(this);
                 attackable.TakeAttack(new Attack(source, damage, 0f, 0f));
             }
