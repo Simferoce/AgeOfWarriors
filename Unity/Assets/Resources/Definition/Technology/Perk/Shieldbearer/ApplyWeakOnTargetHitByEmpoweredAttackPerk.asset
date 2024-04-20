@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 74e84fbb5e5e1054fa6924437b023719
   title: 
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Whenever an empowered attack lands, apply a damage dealt reduction
-    on the target for {val:buff_duration} seconds of {val:damage_dealt_reduction}.
+  description: Whenever an empowered attack lands, apply weak on the target for {val:buff_duration}
+    seconds which reduce the damage dealt of {val:damage_dealt_reduction}.
   showOnHealthBar: 0
   statistics:
   - rid: 3656781502793121875

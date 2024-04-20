@@ -57,7 +57,7 @@ namespace Game
             description = base.ParseDescription(caller, description);
             if (caller is Modifier modifier)
             {
-                description = description.Replace("{val:damage_to_prevent}", modifier.CurrentDamagePrevented.ToString());
+                description = description.Replace("{val:damage_to_prevent}", (damageToPrevent - modifier.CurrentDamagePrevented).ToString());
             }
             else
             {

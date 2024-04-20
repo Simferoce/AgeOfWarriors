@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566b2ca18437f20499684b36c3ddc096, type: 3}
+  m_Name: ApplyWeakOnNearbyEnemiesWhenOneIsDefeated
+  m_EditorClassIdentifier: 
+  id: 35afdbbda7ba57545a62b2cbe980f4b1
+  title: 
+  icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: Whenever an enemy unit die, apply weak which reduce the damage dealt
+    by {val:damage_dealt_reduction} of every enemy unit in {val:range} meters for
+    {val:buff_duration} seconds.
+  showOnHealthBar: 0
+  statistics:
+  - rid: 4528059815764426756
+  - rid: 4528059815764426759
+  requirementsPerk:
+  - rid: 4528059815764426758
+  affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  damageDealtReductionModifierDefinition: {fileID: 2714545886143392768}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4528059815764426756
+      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Range - (500 % of Reach)
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        reference:
+          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+          mapper:
+            rid: 4528059815764426757
+        percentage: 5
+    - rid: 4528059815764426757
+      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+    - rid: 4528059815764426758
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
+    - rid: 4528059815764426759
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Buff Duration - 5
+        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
+        value: 5
+        percentage: 0
+--- !u!114 &2714545886143392768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1130ab5ca9db4054f870bc740c646a79, type: 3}
+  m_Name: DamageDealtReductionModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 9e034dbe678c2694aa7dd6129664967f
+  title: 
+  icon: {fileID: 0}
+  description: 
+  showOnHealthBar: 1
+  statistics:
+  - rid: 4528059815764426766
+  references:
+    version: 2
+    RefIds:
+    - rid: 4528059815764426766
+      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        description: Damage Dealt Reduction - 25%
+        definition: {fileID: 11400000, guid: 5f02395ac1a9d664c8074cace506fa10, type: 2}
+        value: 0.25
+        percentage: 1

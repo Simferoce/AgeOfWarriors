@@ -16,7 +16,7 @@ namespace Game
         public Sprite Icon { get => icon; }
         public string Title { get => title; }
         public string Description { get => description; }
-        public bool ShowOnHealthBar { get => showOnHealthBar; set => showOnHealthBar = value; }
+        public bool Show { get => showOnHealthBar; set => showOnHealthBar = value; }
 
         public T GetValueOrThrow<T>(object context, StatisticDefinition definition)
         {

@@ -80,7 +80,9 @@ namespace Game
         {
             bool empowered = false;
 
-            EmpoweredModifierDefinition.Modifier empowerment = GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
+            List<Modifier> modifiers = GetCachedComponent<IModifiable>().GetModifiers();
+
+            EmpoweredModifierDefinition.Modifier empowerment = modifiers.FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
             if (empowerment != null)
             {
                 damage *= 1 + empowerment.GetValueOrThrow<float>(StatisticDefinition.DamageIncrease);
@@ -89,8 +91,11 @@ namespace Game
                 empowered = true;
             }
 
-            float damageDealtReduction = GetCachedComponent<IModifiable>().GetModifiers().Max(x => x.GetValueOrDefault<float>(StatisticDefinition.DamageDealtReduction));
-            damage *= (1 - damageDealtReduction);
+            if (modifiers.Count > 0)
+            {
+                float damageDealtReduction = modifiers.Max(x => x.GetValueOrDefault<float>(StatisticDefinition.DamageDealtReduction));
+                damage *= (1 - damageDealtReduction);
+            }
 
             if (target.GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
             {

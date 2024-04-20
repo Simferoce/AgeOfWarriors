@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 06d847f75400868408459a0345d91d65
   title: Inspiring Presence - Defense
   icon: {fileID: -1676996386, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Increase defense by {defense}.
+  description: Increase defense by {val:defense}.
+  showOnHealthBar: 1
   statistics:
   - rid: 3656781458035441735
   references:
@@ -30,6 +31,7 @@ MonoBehaviour:
           definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
           mapper:
             rid: 3656781458035441740
+        isPercentage: 0
     - rid: 3656781458035441740
       type: {class: ModifierMapperFloat, ns: Game, asm: Assembly-CSharp}
 --- !u!114 &11400000

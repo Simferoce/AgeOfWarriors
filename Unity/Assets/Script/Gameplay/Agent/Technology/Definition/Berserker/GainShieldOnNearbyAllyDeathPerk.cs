@@ -17,7 +17,7 @@ namespace Game
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (evt.AgentObject.Faction == (modifiable as ITargeteable).Faction
+                if (evt.AgentObject.Faction == modifiable.GetCachedComponent<ITargeteable>().Faction
                     && (IModifiable)evt.AgentObject != modifiable)
                 {
                     modifiable.AddModifier(shieldModifierDefinition.CreateShield(modifiable, Definition.GetValueOrThrow<float>(this, StatisticDefinition.Shield), Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration)));

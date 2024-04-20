@@ -23,13 +23,19 @@ namespace Game
 
         public void Update()
         {
+            if (character.IsDead)
+            {
+                this.gameObject.SetActive(false);
+                return;
+            }
+
             if (Mathf.Sign(this.transform.lossyScale.x) == -1)
                 this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
 
             float shieldPercentage = character.GetCachedComponent<IModifiable>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().Sum(x => x.Remaining) / character.MaxHealth;
             float healthPercentage = character.Health / character.MaxHealth;
 
-            List<Modifier> modifiers = character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Definition.ShowOnHealthBar).ToList();
+            List<Modifier> modifiers = character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Definition.Show).ToList();
 
             int i = 0;
             for (; i < modifiers.Count && i < modifiersUI.Count; ++i)
