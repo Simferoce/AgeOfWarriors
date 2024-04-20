@@ -6,14 +6,11 @@ namespace Game
     [CreateAssetMenu(fileName = "ApplyWeakOnTargetHitByEmpoweredAttackPerk", menuName = "Definition/Technology/Shieldbearer/ApplyWeakOnTargetHitByEmpoweredAttackPerk")]
     public class ApplyWeakOnTargetHitByEmpoweredAttackPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier>
+        public class Modifier : Modifier<Modifier, ApplyWeakOnTargetHitByEmpoweredAttackPerk>
         {
-            private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
-
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ApplyWeakOnTargetHitByEmpoweredAttackPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
                 modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
-                this.damageDealtReductionModifierDefinition = damageDealtReductionModifierDefinition;
             }
 
             private void Modifier_OnAttackLanded(AttackResult attack)
@@ -21,7 +18,7 @@ namespace Game
                 if (attack.Attack.Empowered)
                 {
                     IModifiable targetModifiable = attack.Target.GetCachedComponent<IModifiable>();
-                    Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x.Definition == damageDealtReductionModifierDefinition);
+                    Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x.Definition == definition.damageDealtReductionModifierDefinition);
                     if (modifier != null)
                     {
                         modifier.Refresh();
@@ -29,8 +26,8 @@ namespace Game
                     else
                     {
                         targetModifiable.AddModifier(
-                            new DamageDealtReductionModifierDefinition.Modifier(targetModifiable, damageDealtReductionModifierDefinition)
-                            .With(new CharacterModifierTimeElement(Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration))));
+                            new DamageDealtReductionModifierDefinition.Modifier(targetModifiable, definition.damageDealtReductionModifierDefinition, definition.damageReduction)
+                            .With(new CharacterModifierTimeElement(definition.duration)));
                     }
                 }
 
@@ -44,19 +41,13 @@ namespace Game
             }
         }
 
+        [SerializeField, Range(0, 5)] private float damageReduction;
+        [SerializeField] private float duration;
         [SerializeField] private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
-
-        public override string ParseDescription(object caller, string description)
-        {
-            description = base.ParseDescription(caller, description);
-            description = damageDealtReductionModifierDefinition.ParseDescription(caller, description);
-
-            return description;
-        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, damageDealtReductionModifierDefinition);
+            return new Modifier(modifiable, this);
         }
     }
 }

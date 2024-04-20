@@ -19,39 +19,20 @@ MonoBehaviour:
     by {val:damage_dealt_reduction} of every enemy unit in {val:range} meters for
     {val:buff_duration} seconds.
   showOnHealthBar: 0
-  statistics:
-  - rid: 4528059815764426756
-  - rid: 4528059815764426759
   requirementsPerk:
   - rid: 4528059815764426758
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  duration: 0
+  percentageReachAffect: 5
+  reductionAmount: 0.25
   damageDealtReductionModifierDefinition: {fileID: 2714545886143392768}
   references:
     version: 2
     RefIds:
-    - rid: 4528059815764426756
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Range - (500 % of Reach)
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-          mapper:
-            rid: 4528059815764426757
-        percentage: 5
-    - rid: 4528059815764426757
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
     - rid: 4528059815764426758
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
-    - rid: 4528059815764426759
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Buff Duration - 5
-        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
-        value: 5
-        percentage: 0
 --- !u!114 &2714545886143392768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,15 +50,3 @@ MonoBehaviour:
   icon: {fileID: 0}
   description: 
   showOnHealthBar: 1
-  statistics:
-  - rid: 4528059815764426766
-  references:
-    version: 2
-    RefIds:
-    - rid: 4528059815764426766
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Damage Dealt Reduction - 25%
-        definition: {fileID: 11400000, guid: 5f02395ac1a9d664c8074cace506fa10, type: 2}
-        value: 0.25
-        percentage: 1

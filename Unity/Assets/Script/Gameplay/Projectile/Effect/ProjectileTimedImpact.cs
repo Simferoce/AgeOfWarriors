@@ -32,7 +32,7 @@ namespace Game
                 && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
                 && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
             {
-                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, attackable, projectile);
+                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, true, attackable, projectile);
                 attack.AttackSource.Sources.Add(projectile);
                 targets.Add(attackable);
             }

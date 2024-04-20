@@ -18,12 +18,11 @@ MonoBehaviour:
   description: Deals {val:damage} damage per absorbed damage to all enemies in {val:range}
     meters whenever a shield end.
   showOnHealthBar: 0
-  statistics:
-  - rid: 3656781479875969034
-  - rid: 3656781479875969037
   requirementsPerk:
   - rid: 3656781458035441708
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+  damagePerShieldPointAbsorbed: 1
+  percentageReachExplosionRadius: 3
   references:
     version: 2
     RefIds:
@@ -31,27 +30,3 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 124214902e069a84bbead87df45fb3b1, type: 2}
-    - rid: 3656781479875969034
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Damage - (100 % of Attack Power)
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-          mapper:
-            rid: 3656781479875969035
-        percentage: 1
-    - rid: 3656781479875969035
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781479875969037
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Range - (100 % of Reach)
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-          mapper:
-            rid: 3656781479875969038
-        percentage: 1
-    - rid: 3656781479875969038
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}

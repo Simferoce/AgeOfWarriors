@@ -5,9 +5,9 @@ namespace Game
     [CreateAssetMenu(fileName = "GainHealthKillingBlowPerk", menuName = "Definition/Technology/Berserker/GainHealthKillingBlowPerk")]
     public class GainHealthKillingBlowPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier>
+        public class Modifier : Modifier<Modifier, GainHealthKillingBlowPerk>
         {
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainHealthKillingBlowPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
                 if (modifiable.TryGetCachedComponent<Character>(out Character character))
                     character.OnAttackLanded += AgentObject_OnAttackLanded;
@@ -16,7 +16,7 @@ namespace Game
             private void AgentObject_OnAttackLanded(AttackResult attackResult)
             {
                 if (attackResult.KillingBlow && modifiable.TryGetCachedComponent<Character>(out Character character))
-                    character.Heal(Definition.GetValueOrThrow<float>(this, StatisticDefinition.Heal));
+                    character.Heal(definition.percentageHealMaxHealth * character.MaxHealth);
             }
 
             public override void Dispose()
@@ -26,6 +26,8 @@ namespace Game
                     character.OnAttackLanded -= AgentObject_OnAttackLanded;
             }
         }
+
+        [SerializeField, Range(0, 1)] private float percentageHealMaxHealth;
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

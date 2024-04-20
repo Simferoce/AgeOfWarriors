@@ -18,12 +18,11 @@ MonoBehaviour:
   description: Increase attack power by {val:attack_power} whenever the percentage
     of health is under {val:threshold}.
   showOnHealthBar: 0
-  statistics:
-  - rid: 3656781479875969071
-  - rid: 3656781479875969072
   requirementsPerk:
   - rid: 3656781458035441713
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+  attackpower: 25
+  threshold: 0.5
   references:
     version: 2
     RefIds:
@@ -31,17 +30,3 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 4f07279f125b9e44193e5a3a085d9282, type: 2}
-    - rid: 3656781479875969071
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Threshold - 50%
-        definition: {fileID: 11400000, guid: 09492c31878ad1b4d9f17b48fd1c583c, type: 2}
-        value: 0.5
-        percentage: 1
-    - rid: 3656781479875969072
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Attack Power - 50
-        definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-        value: 50
-        percentage: 0

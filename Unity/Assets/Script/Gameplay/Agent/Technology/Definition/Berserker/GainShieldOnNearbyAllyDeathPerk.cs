@@ -5,13 +5,10 @@ namespace Game
     [CreateAssetMenu(fileName = "GainShieldOnNearbyAllyDeathPerk", menuName = "Definition/Technology/Berserker/GainShieldOnNearbyAllyDeathPerk")]
     public class GainShieldOnNearbyAllyDeathPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier>
+        public class Modifier : Modifier<Modifier, GainShieldOnNearbyAllyDeathPerk>
         {
-            private ShieldModifierDefinition shieldModifierDefinition;
-
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, ShieldModifierDefinition shieldModifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainShieldOnNearbyAllyDeathPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
-                this.shieldModifierDefinition = shieldModifierDefinition;
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
 
@@ -20,7 +17,8 @@ namespace Game
                 if (evt.AgentObject.Faction == modifiable.GetCachedComponent<ITargeteable>().Faction
                     && (IModifiable)evt.AgentObject != modifiable)
                 {
-                    modifiable.AddModifier(shieldModifierDefinition.CreateShield(modifiable, Definition.GetValueOrThrow<float>(this, StatisticDefinition.Shield), Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration)));
+
+                    modifiable.AddModifier(definition.shieldModifierDefinition.CreateShield(modifiable, definition.amount, definition.duration));
                 }
             }
 
@@ -32,11 +30,13 @@ namespace Game
             }
         }
 
+        [SerializeField] private float duration;
+        [SerializeField] private float amount;
         [SerializeField] private ShieldModifierDefinition shieldModifierDefinition;
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, shieldModifierDefinition);
+            return new Modifier(modifiable, this);
         }
     }
 }

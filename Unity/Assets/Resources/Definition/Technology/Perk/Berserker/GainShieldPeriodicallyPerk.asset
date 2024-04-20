@@ -18,13 +18,12 @@ MonoBehaviour:
   description: Gain a shield each {val:cooldown} seconds for {val:buff_duration}
     seconds that absorbs for a total of {val:shield} damage.
   showOnHealthBar: 0
-  statistics:
-  - rid: 3656781458035441745
-  - rid: 3656781458035441746
-  - rid: 3656781458035441751
   requirementsPerk:
   - rid: 3656781458035441711
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+  amount: 25
+  duration: 3
+  cooldown: 5
   shieldModifierDefinition: {fileID: 8750004034786285152}
   references:
     version: 2
@@ -33,32 +32,6 @@ MonoBehaviour:
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: e8e3fadc8bdf3c543a7886471eb4f8c7, type: 2}
-    - rid: 3656781458035441745
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Cooldown - 5
-        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
-        value: 5
-        percentage: 0
-    - rid: 3656781458035441746
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Buff Duration - 3
-        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
-        value: 3
-        percentage: 0
-    - rid: 3656781458035441751
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Shield - (75 % of Max Health)
-        definition: {fileID: 11400000, guid: fea2174c2cf5cb64583f67647a744a60, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
-          mapper:
-            rid: 3656781458035441752
-        percentage: 0.75
-    - rid: 3656781458035441752
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
 --- !u!114 &8750004034786285152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,20 +49,3 @@ MonoBehaviour:
   icon: {fileID: 2113729612, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Absorb {val:shield} amount of damage.
   showOnHealthBar: 1
-  statistics:
-  - rid: 3656781479875969113
-  references:
-    version: 2
-    RefIds:
-    - rid: 3656781479875969113
-      type: {class: StatisticDynamicFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: 'Shield - '
-        definition: {fileID: 11400000, guid: fea2174c2cf5cb64583f67647a744a60, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: fea2174c2cf5cb64583f67647a744a60, type: 2}
-          mapper:
-            rid: 3656781479875969114
-        isPercentage: 0
-    - rid: 3656781479875969114
-      type: {class: ModifierMapperFloat, ns: Game, asm: Assembly-CSharp}

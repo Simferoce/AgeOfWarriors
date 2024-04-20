@@ -76,7 +76,7 @@ namespace Game
             DisposeAbilities();
         }
 
-        public Attack GenerateAttack(float damage, float armorPenetration, float leach, IAttackable target, params IAttackSource[] source)
+        public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, IAttackable target, params IAttackSource[] source)
         {
             bool empowered = false;
 
@@ -85,7 +85,7 @@ namespace Game
             EmpoweredModifierDefinition.Modifier empowerment = modifiers.FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
             if (empowerment != null)
             {
-                damage *= 1 + empowerment.GetValueOrThrow<float>(StatisticDefinition.DamageIncrease);
+                damage *= 1 + empowerment.PercentageDamageIncrease;
                 empowerment.Consume();
 
                 empowered = true;
@@ -93,16 +93,16 @@ namespace Game
 
             if (modifiers.Count > 0)
             {
-                float damageDealtReduction = modifiers.Max(x => x.GetValueOrDefault<float>(StatisticDefinition.DamageDealtReduction));
+                float damageDealtReduction = modifiers.Max(x => x.DamageDealtReduction ?? 0);
                 damage *= (1 - damageDealtReduction);
             }
 
             if (target.GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
             {
-                damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.GetValueOrDefault<float>(StatisticDefinition.DamageDealtAgainstWeakTarget));
+                damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
             }
 
-            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, empowered);
+            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered);
         }
 
         public ITargeteable GetTarget(TargetCriteria criteria, object caller)

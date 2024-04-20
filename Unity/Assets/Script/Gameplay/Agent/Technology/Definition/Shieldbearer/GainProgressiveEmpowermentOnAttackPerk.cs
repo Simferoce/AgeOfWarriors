@@ -6,38 +6,26 @@ namespace Game
     [CreateAssetMenu(fileName = "GainProgressiveEmpowermentOnAttackPerk", menuName = "Definition/Technology/Shieldbearer/GainProgressiveEmpowermentOnAttackPerk")]
     public class GainProgressiveEmpowermentOnAttackPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier>
+        public class Modifier : Modifier<Modifier, GainProgressiveEmpowermentOnAttackPerk>
         {
-            private ProgressiveEmpowermentModifierDefinition modifierToGain;
-
-            public override bool TryGetValue<T>(StatisticDefinition definition, out T value)
+            public Modifier(IModifiable modifiable, GainProgressiveEmpowermentOnAttackPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
-                if (definition == StatisticDefinition.Stack)
-                {
-                    value = modifierToGain.GetValueOrThrow<T>(this, definition);
-                    return true;
-                }
-
-                return base.TryGetValue(definition, out value);
-            }
-
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, ProgressiveEmpowermentModifierDefinition modifierToGain) : base(modifiable, modifierDefinition)
-            {
-                this.modifierToGain = modifierToGain;
-
                 modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
 
             private void Modifier_OnAttackLanded(AttackResult attackResult)
             {
-                Game.Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == modifierToGain);
+                if (attackResult.Attack.Empowered)
+                    return;
+
+                Game.Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == definition.modifierToGain);
                 if (modifier != null)
                 {
                     modifier.Refresh();
                 }
                 else
                 {
-                    modifiable.AddModifier(new ProgressiveEmpowermentModifierDefinition.Modifier(modifiable, modifierToGain));
+                    modifiable.AddModifier(new ProgressiveEmpowermentModifierDefinition.Modifier(modifiable, definition.modifierToGain));
                 }
             }
 
@@ -50,17 +38,9 @@ namespace Game
 
         [SerializeField] private ProgressiveEmpowermentModifierDefinition modifierToGain;
 
-        public override string ParseDescription(object caller, string description)
-        {
-            description = base.ParseDescription(caller, description);
-            description = modifierToGain.ParseDescription(caller, description);
-
-            return description;
-        }
-
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, modifierToGain);
+            return new Modifier(modifiable, this);
         }
     }
 }

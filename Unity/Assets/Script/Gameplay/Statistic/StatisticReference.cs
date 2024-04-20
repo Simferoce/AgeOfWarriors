@@ -9,11 +9,6 @@ namespace Game
 
     }
 
-    public interface MapperInt
-    {
-
-    }
-
     [Serializable]
     public class StatisticReference<T> : StatisticReference<T, MapperFloat> { }
 
@@ -23,17 +18,6 @@ namespace Game
     [Serializable]
     public class CharacterMapperFloat : CharacterMapper<float>, MapperFloat { }
 
-    [Serializable]
-    public class ModifierMapperFloat : ModifierMapper<float>, MapperFloat { }
-
-    [Serializable]
-    public class ModifierMapperInt : ModifierMapper<int>, MapperInt { }
-
-    [Serializable]
-    public class ModifierDefinitionMapperInt : ModifierDefinitionMapper<int>, MapperInt { }
-
-    [Serializable]
-    public class ModifierDefinitionMapperFloat : ModifierDefinitionMapper<float>, MapperFloat { }
     #endregion
 
     #region Mapper
@@ -86,34 +70,6 @@ namespace Game
             }
 
             return ability.TryGetValue(definition, out value);
-        }
-    }
-
-    [Serializable]
-    public class ModifierMapper<T> : Mapper<T>
-    {
-        public override bool TryGetValue(object context, StatisticDefinition definition, StatisticType type, out T value)
-        {
-            Modifier modifier = context as Modifier;
-
-            if (modifier == null)
-            {
-                value = default(T);
-                return false;
-            }
-
-            return modifier.TryGetValue(definition, out value);
-        }
-    }
-
-    [Serializable]
-    public class ModifierDefinitionMapper<T> : Mapper<T>
-    {
-        [SerializeField] private ModifierDefinition modifierDefinition;
-
-        public override bool TryGetValue(object context, StatisticDefinition definition, StatisticType type, out T value)
-        {
-            return modifierDefinition.TryGetValue<T>(context, definition, out value);
         }
     }
 

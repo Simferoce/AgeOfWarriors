@@ -5,11 +5,13 @@ namespace Game
     [CreateAssetMenu(fileName = "EmpoweredModifierDefinition", menuName = "Definition/Modifier/EmpoweredModifierDefinition")]
     public class EmpoweredModifierDefinition : ModifierDefinition
     {
-        public class Modifier : Modifier<Modifier>
+        public class Modifier : Modifier<Modifier, EmpoweredModifierDefinition>
         {
             private StackModifierElement stackModifierElement;
 
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
+            public float PercentageDamageIncrease => definition.percentageDamageIncrease;
+
+            public Modifier(IModifiable modifiable, EmpoweredModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
             {
                 stackModifierElement = new StackModifierElement();
                 stackModifierElement.IncreaseStack();
@@ -25,5 +27,7 @@ namespace Game
                     modifiable.RemoveModifier(this);
             }
         }
+
+        [SerializeField, Range(0, 5)] private float percentageDamageIncrease;
     }
 }

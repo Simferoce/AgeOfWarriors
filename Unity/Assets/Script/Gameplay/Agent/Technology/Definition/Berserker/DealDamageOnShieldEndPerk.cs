@@ -5,9 +5,9 @@ namespace Game
     [CreateAssetMenu(fileName = "DealDamageOnShieldEndPerk", menuName = "Definition/Technology/Berserker/DealDamageOnShieldEndPerk")]
     public class DealDamageOnShieldEndPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier>, IAttackSource
+        public class Modifier : Modifier<Modifier, DealDamageOnShieldEndPerk>, IAttackSource
         {
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, DealDamageOnShieldEndPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
                 if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
@@ -25,7 +25,7 @@ namespace Game
                 if (!modifiable.TryGetCachedComponent<Character>(out Character character))
                     return;
 
-                float damage = Definition.GetValueOrThrow<float>(this, StatisticDefinition.Damage) * (shield.Initial - shield.Remaining);
+                float damage = definition.DamagePerShieldPointAbsorbed * (shield.Initial - shield.Remaining);
                 if (damage <= 0)
                     return;
 
@@ -43,10 +43,10 @@ namespace Game
                     if (!agent.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
                         continue;
 
-                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > Definition.GetValueOrThrow<float>(this, StatisticDefinition.Range))
+                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * (Definition as DealDamageOnShieldEndPerk).PercentageReachExplosionRadius)
                         continue;
 
-                    attackable.TakeAttack(character.GenerateAttack(damage, 0, 0, attackable, this));
+                    attackable.TakeAttack(character.GenerateAttack(damage, 0, 0, false, attackable, this));
                 }
             }
 
@@ -68,6 +68,12 @@ namespace Game
                 modifiable.ModifierRemoved -= Modifiable_ModifierRemoved;
             }
         }
+
+        [SerializeField] private float damagePerShieldPointAbsorbed;
+        [SerializeField, Range(0, 5)] private float percentageReachExplosionRadius;
+
+        public float DamagePerShieldPointAbsorbed => damagePerShieldPointAbsorbed;
+        public float PercentageReachExplosionRadius => percentageReachExplosionRadius;
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

@@ -4,9 +4,6 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class StatisticDynamicInt : StatisticDynamic<int, MapperInt> { }
-
-    [Serializable]
     public class StatisticDynamicFloat : StatisticDynamic<float, MapperFloat> { }
 
     [Serializable]

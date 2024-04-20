@@ -6,14 +6,11 @@ namespace Game
     [CreateAssetMenu(fileName = "ApplyWeakOnNearbyEnemiesWhenOneIsDefeated", menuName = "Definition/Technology/Shieldbearer/ApplyWeakOnNearbyEnemiesWhenOneIsDefeated")]
     public class ApplyWeakOnNearbyEnemiesWhenOneIsDefeated : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier>
+        public class Modifier : Modifier<Modifier, ApplyWeakOnNearbyEnemiesWhenOneIsDefeated>
         {
-            private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
-
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ApplyWeakOnNearbyEnemiesWhenOneIsDefeated modifierDefinition) : base(modifiable, modifierDefinition)
             {
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
-                this.damageDealtReductionModifierDefinition = damageDealtReductionModifierDefinition;
             }
 
             public override void Dispose()
@@ -45,10 +42,10 @@ namespace Game
                         if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
                             continue;
 
-                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > Definition.GetValueOrThrow<float>(this, StatisticDefinition.Range))
+                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * definition.percentageReachAffect)
                             continue;
 
-                        Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x.Definition == damageDealtReductionModifierDefinition);
+                        Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x.Definition == definition.damageDealtReductionModifierDefinition);
                         if (modifier != null)
                         {
                             modifier.Refresh();
@@ -56,8 +53,8 @@ namespace Game
                         else
                         {
                             targetModifiable.AddModifier(
-                                new DamageDealtReductionModifierDefinition.Modifier(targetModifiable, damageDealtReductionModifierDefinition)
-                                    .With(new CharacterModifierTimeElement(Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration)))
+                                new DamageDealtReductionModifierDefinition.Modifier(targetModifiable, definition.damageDealtReductionModifierDefinition, definition.reductionAmount)
+                                    .With(new CharacterModifierTimeElement(definition.duration))
                             );
                         }
                     }
@@ -65,6 +62,9 @@ namespace Game
             }
         }
 
+        [SerializeField] private float duration;
+        [SerializeField, Range(0, 5)] private float percentageReachAffect;
+        [SerializeField, Range(0, 5)] private float reductionAmount;
         [SerializeField] private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
 
         public override string ParseDescription(object caller, string description)
@@ -77,7 +77,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, damageDealtReductionModifierDefinition);
+            return new Modifier(modifiable, this);
         }
     }
 }

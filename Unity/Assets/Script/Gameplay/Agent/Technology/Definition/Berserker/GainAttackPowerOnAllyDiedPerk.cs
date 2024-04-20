@@ -5,14 +5,10 @@ namespace Game
     [CreateAssetMenu(fileName = "GainAttackPowerOnAllyDiedPerk", menuName = "Definition/Technology/Berserker/GainAttackPowerOnAllyDiedPerk")]
     public class GainAttackPowerOnAllyDiedPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier>
+        public class Modifier : Modifier<Modifier, GainAttackPowerOnAllyDiedPerk>
         {
-            private AttackPowerModifierDefinition attackPowerModifier;
-
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition, AttackPowerModifierDefinition attackPowerModifier) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainAttackPowerOnAllyDiedPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
-                this.attackPowerModifier = attackPowerModifier;
-
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
 
@@ -20,7 +16,11 @@ namespace Game
             {
                 if (evt.AgentObject.Faction == modifiable.GetCachedComponent<ITargeteable>().Faction && (IModifiable)evt.AgentObject != modifiable)
                 {
-                    modifiable.AddModifier(new AttackPowerModifierDefinition.AttackPowerBuff(modifiable, attackPowerModifier, Definition.GetValueOrThrow<float>(this, StatisticDefinition.AttackPower)).With(new CharacterModifierTimeElement(Definition.GetValueOrThrow<float>(this, StatisticDefinition.BuffDuration))));
+                    modifiable.AddModifier(
+                        new AttackPowerModifierDefinition.AttackPowerBuff(modifiable,
+                            definition.attackPowerModifier,
+                            definition.attackPowerGain)
+                        .With(new CharacterModifierTimeElement(definition.buffDuration)));
                 }
             }
 
@@ -32,11 +32,13 @@ namespace Game
             }
         }
 
+        [SerializeField] private float attackPowerGain;
+        [SerializeField] private float buffDuration;
         [SerializeField] private AttackPowerModifierDefinition attackPowerModifier;
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this, attackPowerModifier);
+            return new Modifier(modifiable, this);
         }
     }
 }

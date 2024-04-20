@@ -5,11 +5,11 @@ namespace Game
     [CreateAssetMenu(fileName = "ResistDeathModifierDefinition", menuName = "Definition/Modifier/ResistDeathModifierDefinition")]
     public class ResistDeathModifierDefinition : ModifierDefinition
     {
-        public class ResistDeath : Modifier<ResistDeath>
+        public class ResistDeath : Modifier<ResistDeath, ResistDeathModifierDefinition>
         {
             public override bool? Invulnerable => true;
 
-            public ResistDeath(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
+            public ResistDeath(IModifiable modifiable, ResistDeathModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
             {
             }
         }

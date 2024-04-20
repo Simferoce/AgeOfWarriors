@@ -29,7 +29,11 @@ namespace Game
 
             float damage = attack.Damage;
             float defense = owner.Defense - attack.ArmorPenetration;
-            damage *= Mathf.Clamp(1 - modifiable.GetModifiers().Sum(x => x.TryGetValue(StatisticDefinition.RangedDamageReduction, out float value) ? value : 0), 0.35f, 1f);
+
+            if (attack.Ranged)
+            {
+                damage *= Mathf.Clamp(1 - modifiable.GetModifiers().Sum(x => x.RangedDamageReduction ?? 0), 0.35f, 1f);
+            }
 
             float damageRemaining = damage * (1 / (1 + (defense) * 0.1f));
             float defenseDamagePrevented = damage - damageRemaining;

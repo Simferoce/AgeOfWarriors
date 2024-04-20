@@ -5,9 +5,9 @@ namespace Game
     [CreateAssetMenu(fileName = "HealOnShieldEndPerk", menuName = "Definition/Technology/Berserker/HealOnShieldEndPerk")]
     public class HealOnShieldEndPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier>
+        public class Modifier : Modifier<Modifier, HealOnShieldEndPerk>
         {
-            public Modifier(IModifiable modifiable, ModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, HealOnShieldEndPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
                 if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
@@ -25,7 +25,7 @@ namespace Game
                 if (!modifiable.TryGetCachedComponent<Character>(out Character character))
                     return;
 
-                float heal = Definition.GetValueOrThrow<float>(this, StatisticDefinition.Heal) * shield.Remaining;
+                float heal = definition.healPerShieldPointRemaining * shield.Remaining;
                 if (heal <= 0)
                     return;
 
@@ -50,6 +50,8 @@ namespace Game
                 modifiable.ModifierRemoved -= Modifiable_ModifierRemoved;
             }
         }
+
+        [SerializeField] private float healPerShieldPointRemaining;
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

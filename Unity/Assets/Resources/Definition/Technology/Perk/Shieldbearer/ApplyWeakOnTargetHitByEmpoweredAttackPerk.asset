@@ -18,22 +18,15 @@ MonoBehaviour:
   description: Whenever an empowered attack lands, apply weak on the target for {val:buff_duration}
     seconds which reduce the damage dealt of {val:damage_dealt_reduction}.
   showOnHealthBar: 0
-  statistics:
-  - rid: 3656781502793121875
   requirementsPerk:
   - rid: 3656781502793121876
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  damageReduction: 0.25
+  duration: 3
   damageDealtReductionModifierDefinition: {fileID: 144047090231248653}
   references:
     version: 2
     RefIds:
-    - rid: 3656781502793121875
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Buff Duration - 3
-        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
-        value: 3
-        percentage: 0
     - rid: 3656781502793121876
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
@@ -55,15 +48,3 @@ MonoBehaviour:
   icon: {fileID: -1375556571, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Reduce the damage dealt by {val:damage_dealt_reduction}.
   showOnHealthBar: 1
-  statistics:
-  - rid: 3656781502793121874
-  references:
-    version: 2
-    RefIds:
-    - rid: 3656781502793121874
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Damage Dealt Reduction - 25%
-        definition: {fileID: 11400000, guid: 5f02395ac1a9d664c8074cace506fa10, type: 2}
-        value: 0.25
-        percentage: 1

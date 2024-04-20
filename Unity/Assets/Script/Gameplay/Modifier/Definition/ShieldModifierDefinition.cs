@@ -5,23 +5,12 @@ namespace Game
     [CreateAssetMenu(fileName = "ShieldModifierDefinition", menuName = "Definition/Modifier/ShieldModifierDefinition")]
     public class ShieldModifierDefinition : ModifierDefinition
     {
-        public class Shield : Modifier<Shield>
+        public class Shield : Modifier<Shield, ShieldModifierDefinition>
         {
             public float Remaining { get; set; }
             public float Initial { get; set; }
 
-            public override bool TryGetValue<T>(StatisticDefinition definition, out T value)
-            {
-                if (definition == StatisticDefinition.Shield)
-                {
-                    value = (T)(object)Remaining;
-                    return true;
-                }
-
-                return base.TryGetValue(definition, out value);
-            }
-
-            public Shield(IModifiable modifiable, ModifierDefinition modifierDefinition, float initial) : base(modifiable, modifierDefinition)
+            public Shield(IModifiable modifiable, ShieldModifierDefinition modifierDefinition, float initial) : base(modifiable, modifierDefinition)
             {
                 Initial = initial;
 
