@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277d568220343ea4c889bda5576d5e42, type: 3}
+  m_Name: RangedReductionDamagePerk
+  m_EditorClassIdentifier: 
+  id: 06fdf97ed5cca244fa96f398725abfd9
+  title: 
+  icon: {fileID: 0}
+  description: 
+  showOnHealthBar: 1
+  requirementsPerk:
+  - rid: 4528059830243164174
+  affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  rangedDamageReduction: 0.15
+  references:
+    version: 2
+    RefIds:
+    - rid: 4528059830243164174
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
