@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    public class AnimationBaseCharacterAbility : Ability
+    public abstract class AnimationBaseCharacterAbility<T> : Ability<T>
+        where T : AbilityDefinition
     {
         [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeField] private CharacterAnimatorParameter.Parameter parameter = CharacterAnimatorParameter.Parameter.Ability;

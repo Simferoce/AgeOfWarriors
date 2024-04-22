@@ -15,7 +15,11 @@ namespace Game
             {
                 this.speed = speed;
             }
-        }
 
+            public override string ParseDescription()
+            {
+                return $"Increase movement speed by {speed:0.0%}.";
+            }
+        }
     }
 }

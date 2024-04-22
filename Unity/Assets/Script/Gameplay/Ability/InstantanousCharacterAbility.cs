@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    public class InstantanousCharacterAbility : Ability
+    public abstract class InstantanousCharacterAbility<T> : Ability<T>
+        where T : AbilityDefinition
     {
         [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();

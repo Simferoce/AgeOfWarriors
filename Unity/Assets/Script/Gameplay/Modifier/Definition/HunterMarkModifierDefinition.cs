@@ -19,6 +19,11 @@ namespace Game
                 attackable.OnDamageTaken += OnAttackableDamageTaken; ;
             }
 
+            public override string ParseDescription()
+            {
+                return $"Receive an additional {damage} damage per hit taken.";
+            }
+
             private void OnAttackableDamageTaken(AttackResult attack, IAttackable attackable)
             {
                 if (attack.Attack.AttackSource.Sources.Contains(this))

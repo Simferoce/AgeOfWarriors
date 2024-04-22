@@ -17,9 +17,9 @@ namespace Game
         [Header("Leach")]
         [SerializeField, Range(0, 5)] private float leach;
 
-        [Statistic("damage")] public float Damage(Ability ability) => ability.Character.AttackPower * damagePercentage;
-        [Statistic("range")] public float Range(Ability ability) => ability.Character.Reach * reachPercentage;
-        [Statistic("cooldown")] public float Cooldown(Ability ability) => cooldown;
-        [Statistic("leach")] public float Leach(Ability ability) => leach;
+        public float ReachPercentage { get => reachPercentage; set => reachPercentage = value; }
+        public float DamagePercentage { get => damagePercentage; set => damagePercentage = value; }
+        public float Cooldown { get => cooldown; set => cooldown = value; }
+        public float Leach { get => leach; set => leach = value; }
     }
 }

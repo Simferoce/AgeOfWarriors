@@ -12,6 +12,11 @@ namespace Game
             public ResistDeath(IModifiable modifiable, ResistDeathModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
             {
             }
+
+            public override string ParseDescription()
+            {
+                return "Recently cheated death.";
+            }
         }
     }
 }

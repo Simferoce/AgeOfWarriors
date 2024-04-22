@@ -15,6 +15,11 @@ namespace Game
             {
                 this.amount = amount;
             }
+
+            public override string ParseDescription()
+            {
+                return $"Increase attack power by {amount}.";
+            }
         }
     }
 }

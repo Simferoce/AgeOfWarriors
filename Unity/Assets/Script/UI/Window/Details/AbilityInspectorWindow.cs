@@ -17,10 +17,10 @@ namespace Game
             abilityInspectorWindow.title.text = ability.Definition.Title;
             abilityInspectorWindow.description.text = ability.ParseDescription();
 
-            if (abilityInspectorWindow.cooldown.TryGetValue(ability, out float value))
+            if (ability.Cooldown > 0f)
             {
                 abilityInspectorWindow.cooldownText.alpha = 1f;
-                abilityInspectorWindow.cooldownText.text = $"{value}{StatisticDefinition.Cooldown.TextIcon}";
+                abilityInspectorWindow.cooldownText.text = $"{ability.Cooldown}{StatisticDefinition.Cooldown.TextIcon}";
             }
             else
             {

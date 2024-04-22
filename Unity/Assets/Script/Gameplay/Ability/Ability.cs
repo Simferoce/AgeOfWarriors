@@ -6,13 +6,13 @@ namespace Game
     public abstract class Ability : MonoBehaviour
     {
         public Character Character { get; set; }
-        public AbilityDefinition Definition { get; set; }
+        [Statistic("cooldown")] public abstract float Cooldown { get; }
 
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
         public virtual List<ITargeteable> Targets => new List<ITargeteable>();
-
-        public virtual string ParseDescription() => Definition.ParseDescription();
+        public AbilityDefinition Definition { get; set; }
+        public abstract string ParseDescription();
 
         public virtual void Initialize(Character character)
         {
@@ -28,5 +28,12 @@ namespace Game
         public abstract void Use();
 
         public abstract void Interrupt();
+    }
+
+    public abstract class Ability<T> : Ability
+        where T : AbilityDefinition
+    {
+        protected T definition { get => Definition as T; set => Definition = value; }
+        public override string ParseDescription() => Definition.ParseDescription();
     }
 }

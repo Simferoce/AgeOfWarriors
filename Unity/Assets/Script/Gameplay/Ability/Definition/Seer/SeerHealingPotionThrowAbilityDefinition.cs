@@ -14,8 +14,8 @@ namespace Game
         [Header("Cooldown")]
         [SerializeField] private float cooldown;
 
-        [Statistic("heal")] public float Heal(Ability ability) => heal;
-        [Statistic("range")] public float Range(Ability ability) => ability.Character.Reach * reachPercentage;
-        [Statistic("cooldown")] public float Cooldown(Ability ability) => cooldown;
+        public float ReachPercentage => reachPercentage;
+        public float Heal => heal;
+        public float Cooldown => cooldown;
     }
 }

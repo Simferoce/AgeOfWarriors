@@ -17,9 +17,9 @@ namespace Game
         [Header("Buff Duration")]
         [SerializeField] private float buffDuration;
 
-        [Statistic("damage")] public float Damage(Ability ability) => ability.Character.AttackPower * damagePercentage;
-        [Statistic("range")] public float Range(Ability ability) => ability.Character.Reach * reachPercentage;
-        [Statistic("cooldown")] public float Cooldown(Ability ability) => cooldown;
-        [Statistic("buff_duration")] public float BuffDuration(Ability ability) => buffDuration;
+        public float ReachPercentage { get => reachPercentage; set => reachPercentage = value; }
+        public float DamagePercentage { get => damagePercentage; set => damagePercentage = value; }
+        public float Cooldown { get => cooldown; set => cooldown = value; }
+        public float BuffDuration { get => buffDuration; set => buffDuration = value; }
     }
 }

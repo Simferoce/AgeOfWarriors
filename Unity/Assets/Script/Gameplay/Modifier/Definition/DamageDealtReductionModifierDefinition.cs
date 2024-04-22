@@ -7,8 +7,18 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, DamageDealtReductionModifierDefinition>
         {
+            public override float? DamageDealtReduction => amount;
+
+            private float amount;
+
             public Modifier(IModifiable modifiable, DamageDealtReductionModifierDefinition modifierDefinition, float amount) : base(modifiable, modifierDefinition)
             {
+                this.amount = amount;
+            }
+
+            public override string ParseDescription()
+            {
+                return $"Weak. Reduce the damage dealt by {amount:0.0%}";
             }
         }
     }

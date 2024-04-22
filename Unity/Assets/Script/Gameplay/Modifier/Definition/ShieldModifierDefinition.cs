@@ -17,6 +17,11 @@ namespace Game
                 Remaining = Initial;
             }
 
+            public override string ParseDescription()
+            {
+                return $"Absorb {Remaining} amount of damage.";
+            }
+
             public bool Absorb(float amount, out float amountNotAbsorbed)
             {
                 float absortion = Remaining - amount;

@@ -26,6 +26,7 @@ namespace Game
         public float Speed { get => Definition.Speed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
         public float Reach { get => Definition.Reach; }
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
+
         public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
         public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Invulnerable.HasValue).Any(x => x.Invulnerable.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }

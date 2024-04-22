@@ -18,6 +18,11 @@ namespace Game
                 this.defense = defense;
                 this.Source = source;
             }
+
+            public override string ParseDescription()
+            {
+                return $"Increase defense by {defense}.";
+            }
         }
     }
 }

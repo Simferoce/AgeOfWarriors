@@ -15,10 +15,6 @@ namespace Game
 
     [Serializable]
     public class AbilityMapperFloat : AbilityMapper<float>, MapperFloat { }
-
-    [Serializable]
-    public class CharacterMapperFloat : CharacterMapper<float>, MapperFloat { }
-
     #endregion
 
     #region Mapper
@@ -32,30 +28,6 @@ namespace Game
     public abstract class Mapper<T> : Mapper
     {
         public abstract bool TryGetValue(object context, StatisticType type, out T value);
-    }
-
-    [Serializable]
-    public class CharacterMapper<T> : Mapper<T>
-    {
-        [SerializeField] private StatisticDefinition definition;
-
-        public override bool TryGetValue(object context, StatisticType type, out T value)
-        {
-            Character character = context as Character;
-            if (character == null)
-                character = (context as Ability)?.Character;
-            if (character == null && context is Modifier modifier)
-                character = modifier.Modifiable.GetCachedComponent<Character>();
-
-            if (character == null)
-            {
-                value = default(T);
-                return false;
-            }
-
-            value = default(T);
-            return false;
-        }
     }
 
     [Serializable]
@@ -73,17 +45,17 @@ namespace Game
                 return false;
             }
 
-            MethodInfo[] methodInfos = ability.Definition.GetType().GetMethods();
-            foreach (MethodInfo methodInfo in methodInfos)
+            PropertyInfo[] propertyInfos = ability.GetType().GetProperties();
+            foreach (PropertyInfo propertyInfo in propertyInfos)
             {
-                StatisticAttribute statisticAttribute = methodInfo.GetCustomAttribute<StatisticAttribute>(true);
+                StatisticAttribute statisticAttribute = propertyInfo.GetCustomAttribute<StatisticAttribute>(true);
                 if (statisticAttribute == null)
                     continue;
 
                 if (statisticAttribute.Name != statistic)
                     continue;
 
-                value = (T)methodInfo.Invoke(ability.Definition, new object[] { ability });
+                value = (T)propertyInfo.GetValue(ability);
                 return true;
             }
 

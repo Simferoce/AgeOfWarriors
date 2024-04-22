@@ -5,12 +5,11 @@ namespace Game
     public abstract class AbilityDefinition : Definition
     {
         [SerializeField] private string title;
-        [SerializeField] private string description;
         [SerializeField] private GameObject prefab;
 
         public string Title { get => title; }
 
-        public string ParseDescription()
+        public virtual string ParseDescription()
         {
             return "";
         }
