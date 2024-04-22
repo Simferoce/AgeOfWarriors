@@ -19,13 +19,13 @@ namespace Game
         public Vector3 CenterPosition { get => this.GetCachedComponent<ITargeteable>().CenterPosition; }
 
         public float Health { get; set; }
-        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
-        public float Defense { get => Definition.Defense + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
-        public float AttackSpeed { get => Definition.AttackSpeed; }
-        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
-        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
-        public float Reach { get => Definition.Reach; }
-        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
+        public float MaxHealth { get => Definition.MaxHealth(this) + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
+        public float Defense { get => Definition.Defense(this) + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
+        public float AttackSpeed { get => Definition.AttackSpeed(this); }
+        public float AttackPower { get => Definition.AttackPower(this) + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
+        public float Speed { get => Definition.Speed(this) * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
+        public float Reach { get => Definition.Reach(this); }
+        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond(this);
         public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
         public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Invulnerable.HasValue).Any(x => x.Invulnerable.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }
@@ -161,79 +161,6 @@ namespace Game
         {
             Heal(attackResult.DamageTaken * attackResult.Attack.Leach);
             OnAttackLanded?.Invoke(attackResult);
-        }
-
-        public bool TryGetStatisticValue<T>(StatisticDefinition statisticDefinition, StatisticType statisticType, out T value)
-        {
-            if (statisticDefinition == StatisticDefinition.MaxHealth)
-            {
-                if (statisticType == StatisticType.Base)
-                    value = (T)(object)Definition.MaxHealth;
-                else if (statisticType == StatisticType.Modified)
-                    value = (T)(object)(MaxHealth - Definition.MaxHealth);
-                else
-                    value = (T)(object)MaxHealth;
-
-                return true;
-            }
-            else if (statisticDefinition == StatisticDefinition.Defense)
-            {
-                if (statisticType == StatisticType.Base)
-                    value = (T)(object)Definition.Defense;
-                else if (statisticType == StatisticType.Modified)
-                    value = (T)(object)(Defense - Definition.Defense);
-                else
-                    value = (T)(object)Defense;
-
-                return true;
-            }
-            else if (statisticDefinition == StatisticDefinition.AttackPower)
-            {
-                if (statisticType == StatisticType.Base)
-                    value = (T)(object)Definition.AttackPower;
-                else if (statisticType == StatisticType.Modified)
-                    value = (T)(object)(AttackPower - Definition.AttackPower);
-                else
-                    value = (T)(object)AttackPower;
-
-                return true;
-            }
-            else if (statisticDefinition == StatisticDefinition.AttackSpeed)
-            {
-                if (statisticType == StatisticType.Base)
-                    value = (T)(object)Definition.AttackSpeed;
-                else if (statisticType == StatisticType.Modified)
-                    value = (T)(object)(AttackSpeed - Definition.AttackSpeed);
-                else
-                    value = (T)(object)AttackSpeed;
-
-                return true;
-            }
-            else if (statisticDefinition == StatisticDefinition.Speed)
-            {
-                if (statisticType == StatisticType.Base)
-                    value = (T)(object)Definition.Speed;
-                else if (statisticType == StatisticType.Modified)
-                    value = (T)(object)(Speed - Definition.Speed);
-                else
-                    value = (T)(object)Speed;
-
-                return true;
-            }
-            else if (statisticDefinition == StatisticDefinition.Reach)
-            {
-                if (statisticType == StatisticType.Base)
-                    value = (T)(object)Definition.Reach;
-                else if (statisticType == StatisticType.Modified)
-                    value = (T)(object)(Reach - Definition.Reach);
-                else
-                    value = (T)(object)Reach;
-
-                return true;
-            }
-
-            value = default(T);
-            return false;
         }
 
         #region Ability
