@@ -42,7 +42,7 @@ namespace Game
                         if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
                             continue;
 
-                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.Range(this))
+                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.percentageReachAffect * character.Reach)
                             continue;
 
                         Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x.Definition == definition.damageDealtReductionModifierDefinition);
@@ -67,12 +67,11 @@ namespace Game
         [SerializeField, Range(0, 5)] private float reductionAmount;
         [SerializeField] private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
 
-        [Statistic("buff_duration")] public float Duration(Modifier modifier) => duration;
-        [Statistic("range", nameof(RangeFormat))] public float Range(Modifier modifier) => (modifier.Modifiable as Character).Reach * percentageReachAffect;
-        [Statistic("damage_dealt_reduction", nameof(DamageDealtReductionFormat))] public float DamageDealtReduction(Modifier modifier) => reductionAmount;
-
-        public string RangeFormat(Modifier modifier) => StatisticFormatter.Percentage<Modifier>(Range, percentageReachAffect, StatisticDefinition.Reach, modifier);
-        public string DamageDealtReductionFormat(Modifier modifier) => reductionAmount.ToString("0.0%");
+        public override string ParseDescription()
+        {
+            return $"Whenever an enemy unit die, apply weak which reduce the damage dealt by " +
+                $"{reductionAmount:0.0%} of every enemy unit in {StatisticFormatter.Percentage(percentageReachAffect, StatisticDefinition.Reach)} meters for {duration} seconds.";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

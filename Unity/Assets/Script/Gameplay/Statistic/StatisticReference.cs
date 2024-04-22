@@ -53,7 +53,8 @@ namespace Game
                 return false;
             }
 
-            return character.TryGetStatisticValue<T>(definition, type, out value);
+            value = default(T);
+            return false;
         }
     }
 

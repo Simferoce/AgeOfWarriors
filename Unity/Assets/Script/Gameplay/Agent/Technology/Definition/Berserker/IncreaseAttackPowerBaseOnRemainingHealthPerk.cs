@@ -20,8 +20,10 @@ namespace Game
         [SerializeField] private float attackpower;
         [SerializeField] private float threshold;
 
-        [Statistic("attack_power")] public float AttackPower(Modifier modifier) => attackpower;
-        [Statistic("threshold")] public float Threshold(Modifier modifier) => threshold;
+        public override string ParseDescription()
+        {
+            return $"Increase attack power by {attackpower} whenever the percentage of health is under {threshold}.";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

@@ -36,8 +36,10 @@ namespace Game
         [SerializeField] private float buffDuration;
         [SerializeField] private AttackPowerModifierDefinition attackPowerModifier;
 
-        [Statistic("attack_power")] public float AttackPowerGain(Modifier modifier) => attackPowerGain;
-        [Statistic("buff_duration")] public float BuffDuration(Modifier modifier) => buffDuration;
+        public override string ParseDescription()
+        {
+            return $"Gain {attackPowerGain} Attack Power for {buffDuration} seconds whenever an ally dies.";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

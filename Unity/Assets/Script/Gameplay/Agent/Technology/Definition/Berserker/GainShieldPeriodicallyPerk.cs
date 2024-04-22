@@ -34,9 +34,10 @@ namespace Game
         [SerializeField] private float cooldown;
         [SerializeField] private ShieldModifierDefinition shieldModifierDefinition;
 
-        [Statistic("cooldown")] public float Cooldown(Modifier modifier) => cooldown;
-        [Statistic("buff_duration")] public float Duration(Modifier modifier) => duration;
-        [Statistic("shield")] public float Amount(Modifier modifier) => amount;
+        public override string ParseDescription()
+        {
+            return $"Gain a shield each {cooldown} seconds for {duration} seconds that absorbs for a total of {amount} damage.";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

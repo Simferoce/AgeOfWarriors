@@ -15,7 +15,7 @@ namespace Game
             AbilityInspectorWindow abilityInspectorWindow = WindowManager.Instance.GetWindow<AbilityInspectorWindow>();
             abilityInspectorWindow.Show();
             abilityInspectorWindow.title.text = ability.Definition.Title;
-            abilityInspectorWindow.description.text = ability.Definition.ParseDescription(ability);
+            abilityInspectorWindow.description.text = ability.ParseDescription();
 
             if (abilityInspectorWindow.cooldown.TryGetValue(ability, out float value))
             {

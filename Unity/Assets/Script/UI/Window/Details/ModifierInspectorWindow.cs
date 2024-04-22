@@ -22,7 +22,7 @@ namespace Game
         public void Refresh(Modifier modifier)
         {
             modifierName.text = modifier.Definition.Title;
-            description.text = modifier.Definition.ParseDescription(modifier);
+            description.text = modifier.Definition.ParseDescription();
             icon.sprite = modifier.Definition.Icon;
         }
 

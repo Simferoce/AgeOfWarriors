@@ -38,12 +38,11 @@ namespace Game
 
         [SerializeField] private ProgressiveEmpowermentModifierDefinition modifierToGain;
 
-        public override string ParseDescription(object caller, string description)
+        public override string ParseDescription()
         {
-            description = base.ParseDescription(caller, description);
-            description = modifierToGain.ParseDescription(caller, description);
-
-            return description;
+            return $"For each attack landed, add a stack of Progressive Empowerment. " +
+                $"Whenever the amount of stack accumulated is equal to {modifierToGain.MaxStack}, " +
+                $"gain a stack of Empowerment which increase the damage dealt by {modifierToGain.EmpoweredModifierDefinition.PercentageDamageIncrease:0.0%}.";
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

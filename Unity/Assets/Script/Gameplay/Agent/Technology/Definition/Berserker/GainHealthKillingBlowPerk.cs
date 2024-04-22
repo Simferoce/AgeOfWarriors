@@ -16,7 +16,7 @@ namespace Game
             private void AgentObject_OnAttackLanded(AttackResult attackResult)
             {
                 if (attackResult.KillingBlow && modifiable.TryGetCachedComponent<Character>(out Character character))
-                    character.Heal(definition.Heal(this));
+                    character.Heal(definition.percentageHealMaxHealth * character.MaxHealth);
             }
 
             public override void Dispose()
@@ -29,9 +29,10 @@ namespace Game
 
         [SerializeField, Range(0, 1)] private float percentageHealMaxHealth;
 
-        [Statistic("heal", nameof(HealFormat))] public float Heal(Modifier modifier) => (modifier.Modifiable as Character).MaxHealth * percentageHealMaxHealth;
-
-        public string HealFormat(Modifier modifier) => StatisticFormatter.Percentage<Modifier>(Heal, percentageHealMaxHealth, StatisticDefinition.MaxHealth, modifier);
+        public override string ParseDescription()
+        {
+            return $"Regain {StatisticFormatter.Percentage(percentageHealMaxHealth, StatisticDefinition.MaxHealth)} health points whenever landing a killing blow on a unit.";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

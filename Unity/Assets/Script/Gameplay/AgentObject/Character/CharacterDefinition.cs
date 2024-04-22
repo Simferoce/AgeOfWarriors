@@ -21,13 +21,13 @@ namespace Game
         [Header("Prefab")]
         [SerializeField] private GameObject prefab;
 
-        [Statistic("reach")] public float Reach(Character character) => reach;
-        [Statistic("speed")] public float Speed(Character character) => speed;
-        [Statistic("attack_speed")] public float AttackSpeed(Character character) => attackSpeed;
-        [Statistic("attack_power")] public float AttackPower(Character character) => attackPower;
-        [Statistic("max_health")] public float MaxHealth(Character character) => maxHealth;
-        [Statistic("defense")] public float Defense(Character character) => defense;
-        [Statistic("technology")] public float TechnologyGainPerSecond(Character character) => technologyGainPerSecond;
+        public float Reach => reach;
+        public float Speed => speed;
+        public float AttackSpeed => attackSpeed;
+        public float AttackPower => attackPower;
+        public float MaxHealth => maxHealth;
+        public float Defense => defense;
+        public float TechnologyGainPerSecond => technologyGainPerSecond;
 
         public override bool IsSpecialization(AgentObjectDefinition agentObjectDefinition)
         {

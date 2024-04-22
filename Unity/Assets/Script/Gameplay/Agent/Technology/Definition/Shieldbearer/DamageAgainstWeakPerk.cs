@@ -16,7 +16,10 @@ namespace Game
 
         [SerializeField] private float damageDealtAgainstWeak;
 
-        [Statistic("damage")] public float DamageDealtAgainstWeak(Modifier modifier) => damageDealtAgainstWeak;
+        public override string ParseDescription()
+        {
+            return $"Increase damage dealt increase weak target by {damageDealtAgainstWeak}.";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

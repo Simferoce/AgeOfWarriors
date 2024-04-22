@@ -19,7 +19,12 @@ namespace Game
 
         [SerializeField] private float attackpowerPerSeconds;
 
-        [Statistic("attack_power")] public float AttackPower(Modifier modifier) => attackpowerPerSeconds;
+        public float AttackPower(Modifier modifier) => attackpowerPerSeconds;
+
+        public override string ParseDescription()
+        {
+            return $"Increase attack power by {attackpowerPerSeconds} for each seconds alive.";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

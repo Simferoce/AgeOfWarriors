@@ -19,13 +19,13 @@ namespace Game
         public Vector3 CenterPosition { get => this.GetCachedComponent<ITargeteable>().CenterPosition; }
 
         public float Health { get; set; }
-        public float MaxHealth { get => Definition.MaxHealth(this) + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
-        public float Defense { get => Definition.Defense(this) + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
-        public float AttackSpeed { get => Definition.AttackSpeed(this); }
-        public float AttackPower { get => Definition.AttackPower(this) + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
-        public float Speed { get => Definition.Speed(this) * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
-        public float Reach { get => Definition.Reach(this); }
-        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond(this);
+        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
+        public float Defense { get => Definition.Defense + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
+        public float AttackSpeed { get => Definition.AttackSpeed; }
+        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
+        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
+        public float Reach { get => Definition.Reach; }
+        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
         public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
         public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Invulnerable.HasValue).Any(x => x.Invulnerable.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }

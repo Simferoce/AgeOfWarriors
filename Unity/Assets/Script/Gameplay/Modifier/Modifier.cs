@@ -33,6 +33,8 @@ namespace Game
                 element.Initialize();
         }
 
+        public virtual string ParseDescription() { return Definition.ParseDescription(); }
+
         public virtual void Update()
         {
             bool end = false;

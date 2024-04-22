@@ -12,6 +12,8 @@ namespace Game
         public virtual bool IsActive => IsCasting;
         public virtual List<ITargeteable> Targets => new List<ITargeteable>();
 
+        public virtual string ParseDescription() => Definition.ParseDescription();
+
         public virtual void Initialize(Character character)
         {
             this.Character = character;

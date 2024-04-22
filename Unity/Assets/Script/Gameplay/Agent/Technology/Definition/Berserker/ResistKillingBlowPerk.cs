@@ -27,10 +27,13 @@ namespace Game
             }
         }
 
-        [SerializeField] private ResistDeathModifierDefinition resistDeathModifierDefinition;
         [SerializeField] private float duration;
+        [SerializeField] private ResistDeathModifierDefinition resistDeathModifierDefinition;
 
-        [Statistic("buff_duration")] public float Duration(Modifier modifier) => duration;
+        public override string ParseDescription()
+        {
+            return $"The first time health points would be reduced to 0, gain invulnerability for {duration} seconds.";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

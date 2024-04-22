@@ -44,14 +44,7 @@ namespace Game
         [SerializeField] private int maxStack;
         [SerializeField] private EmpoweredModifierDefinition empoweredModifierDefinition;
 
-        [Statistic("stack")] public int MaxStack(Modifier modifier) => maxStack;
-
-        public override string ParseDescription(object caller, string description)
-        {
-            description = base.ParseDescription(caller, description);
-            description = empoweredModifierDefinition.ParseDescription(caller, description);
-
-            return description;
-        }
+        public int MaxStack => maxStack;
+        public EmpoweredModifierDefinition EmpoweredModifierDefinition => empoweredModifierDefinition;
     }
 }

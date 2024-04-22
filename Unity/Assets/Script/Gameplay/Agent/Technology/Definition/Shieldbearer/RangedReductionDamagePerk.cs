@@ -16,9 +16,10 @@ namespace Game
 
         [SerializeField, Range(0, 1)] private float rangedDamageReduction;
 
-        [Statistic("ranged_damage_reduction")] public float RangedDamageReduction(Modifier modifier) => rangedDamageReduction;
-
-        public string RangedDamageReductionFormat(Modifier modifier) => rangedDamageReduction.ToString("0.0%");
+        public override string ParseDescription()
+        {
+            return $"Reduce the damage taken by ranged attack by {rangedDamageReduction:0.0%}";
+        }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
