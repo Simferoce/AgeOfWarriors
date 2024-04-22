@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3778139702907859018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d42117e43fbf042bc11500dc17cc45, type: 3}
+  m_Name: DefenseModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 7d0164ac3086de34cbe80f76fbbde6e9
+  title: 
+  icon: {fileID: 0}
+  description: 
+  showOnHealthBar: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b204c59c3e54ca45b984eab12309c09, type: 3}
+  m_Name: GainDefenseOnEmpowermentAttack
+  m_EditorClassIdentifier: 
+  id: 8e51aec4b11ed2346b15ff254304f7de
+  title: 
+  icon: {fileID: 0}
+  description: 
+  showOnHealthBar: 0
+  requirementsPerk:
+  - rid: 3656781580603752461
+  affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  buffDuration: 5
+  defense: 10
+  defenseModifierDefinition: {fileID: -3778139702907859018}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781580603752461
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}

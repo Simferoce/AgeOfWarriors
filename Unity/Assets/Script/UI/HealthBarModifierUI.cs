@@ -24,7 +24,7 @@ namespace Game
             else
             {
                 stack.SetActive(true);
-                stackText.text = stackValue.ToString();
+                stackText.text = stackValue.Value.ToString("N0");
             }
         }
     }

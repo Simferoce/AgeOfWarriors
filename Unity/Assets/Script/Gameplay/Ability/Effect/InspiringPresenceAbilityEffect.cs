@@ -11,7 +11,7 @@ namespace Game
         [SerializeField] private StatisticReference<float> area;
         [SerializeField] private StatisticReference<float> buffDuration;
         [SerializeField] private StatisticReference<float> defense;
-        [SerializeField] private InspiringPresenceModifierDefinition inspiringPresenceModifierDefinition;
+        [SerializeField] private DefenseModifierDefinition inspiringPresenceModifierDefinition;
 
         private float? startedAt = null;
 
@@ -26,8 +26,8 @@ namespace Game
 
             foreach (Character characterToBuff in characters)
             {
-                InspiringPresenceModifierDefinition.Modifier inspiringPresenceBuff = (InspiringPresenceModifierDefinition.Modifier)characterToBuff
-                    .GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is InspiringPresenceModifierDefinition.Modifier);
+                DefenseModifierDefinition.Modifier inspiringPresenceBuff = (DefenseModifierDefinition.Modifier)characterToBuff
+                    .GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is DefenseModifierDefinition.Modifier);
 
                 if (inspiringPresenceBuff != null)
                 {
@@ -38,7 +38,7 @@ namespace Game
                 }
                 else
                 {
-                    inspiringPresenceBuff = new InspiringPresenceModifierDefinition.Modifier(Ability.Character, inspiringPresenceModifierDefinition, defense.GetValueOrThrow(Ability), this)
+                    inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(Ability.Character, inspiringPresenceModifierDefinition, defense.GetValueOrThrow(Ability), this)
                         .With(new CharacterModifierTimeElement(buffDuration.GetValueOrThrow(Ability)));
 
                     characterToBuff.GetCachedComponent<IModifiable>().AddModifier(inspiringPresenceBuff);

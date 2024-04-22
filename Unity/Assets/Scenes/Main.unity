@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   cheatCost: 1
-  maxCharacter: 1
+  maxCharacter: 2
   technologyGainMultiplier: 0
 --- !u!4 &97917530
 Transform:
