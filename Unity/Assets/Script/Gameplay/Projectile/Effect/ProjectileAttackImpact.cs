@@ -26,7 +26,7 @@ namespace Game
                 && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
                 && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
             {
-                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, true, attackable, projectile);
+                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile.Ability), armorPenetration.GetValueOrDefault(projectile.Ability), 0, true, attackable, projectile);
                 attackable.TakeAttack(attack);
 
                 return true;

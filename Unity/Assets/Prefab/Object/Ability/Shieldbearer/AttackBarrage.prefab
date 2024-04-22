@@ -68,19 +68,14 @@ MonoBehaviour:
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach:
-          definition: {fileID: 0}
           mapper:
             rid: -2
         damage:
-          definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
           mapper:
-            rid: 3656781301283291223
+            rid: 3656781571772645438
         armorPenetration:
-          definition: {fileID: 0}
           mapper:
             rid: -2
-    - rid: 3656781301283291223
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781301283291224
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
@@ -91,19 +86,25 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
           mapper:
-            rid: 3656781301283291226
-    - rid: 3656781301283291226
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+            rid: 3656781571772645437
     - rid: 3656781301283291227
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781343263817734
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
-          definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
           mapper:
-            rid: 3656781343263817736
-    - rid: 3656781343263817736
+            rid: 3656781571772645439
+    - rid: 3656781571772645437
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: range
+    - rid: 3656781571772645438
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: damage
+    - rid: 3656781571772645439
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: cooldown

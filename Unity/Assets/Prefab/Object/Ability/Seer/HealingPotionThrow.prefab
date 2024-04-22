@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4840469097770244859}
-  - component: {fileID: 8288720297431372824}
+  - component: {fileID: 6693598414658598059}
   m_Layer: 0
   m_Name: HealingPotionThrow
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8288720297431372824
+--- !u!114 &6693598414658598059
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,49 +45,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditions:
-  - rid: 4528059695970910208
-  - rid: 4528059695970910209
-  - rid: 4528059695970910210
+  - rid: 3656781574257508373
+  - rid: 3656781574257508374
+  - rid: 3656781574257508376
   parameter: 1
   effects:
-  - rid: 4528059695970910215
+  - rid: 3656781574257508382
   references:
     version: 2
     RefIds:
-    - rid: 4528059695970910208
+    - rid: 3656781574257508373
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059695970910209
+    - rid: 3656781574257508374
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
-          definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
           mapper:
-            rid: 4528059695970910214
-    - rid: 4528059695970910210
+            rid: 3656781574257508375
+    - rid: 3656781574257508375
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: cooldown
+    - rid: 3656781574257508376
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
-          rid: 4528059695970910211
+          rid: 3656781574257508377
         count: 1
-    - rid: 4528059695970910211
+    - rid: 3656781574257508377
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         criterias:
-        - rid: 4528059695970910212
-        - rid: 4528059695970910213
-    - rid: 4528059695970910212
+        - rid: 3656781574257508378
+        - rid: 3656781574257508379
+        - rid: 3656781574257508380
+    - rid: 3656781574257508378
       type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059695970910213
+    - rid: 3656781574257508379
       type: {class: IsInjuredTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059695970910214
+    - rid: 3656781574257508380
+      type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        reference:
+          mapper:
+            rid: 3656781574257508381
+    - rid: 3656781574257508381
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059695970910215
+      data:
+        statistic: range
+    - rid: 3656781574257508382
       type: {class: ProjectileAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         projectilePrefab: {fileID: 6675190562695518451, guid: c315967ff12cba145a66a8eb3684b796, type: 3}
         origin:
-          rid: 4528059695970910216
-    - rid: 4528059695970910216
+          rid: 3656781574257508383
+    - rid: 3656781574257508383
       type: {class: ProjectileAbilityEffectTransformOrigin, ns: Game, asm: Assembly-CSharp}
       data:
         origin: ProjectileOrigin

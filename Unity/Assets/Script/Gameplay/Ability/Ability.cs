@@ -12,11 +12,6 @@ namespace Game
         public virtual bool IsActive => IsCasting;
         public virtual List<ITargeteable> Targets => new List<ITargeteable>();
 
-        public bool TryGetValue<T>(StatisticDefinition definition, out T value)
-        {
-            return Definition.TryGetValue<T>(this, definition, out value);
-        }
-
         public virtual void Initialize(Character character)
         {
             this.Character = character;

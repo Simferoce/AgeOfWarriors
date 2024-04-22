@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8633233943157110530}
-  - component: {fileID: 6481308355172389788}
+  - component: {fileID: 5729013674840644481}
   - component: {fileID: -9219538325602513416}
   - component: {fileID: 519887707098718041}
   m_Layer: 0
@@ -120,7 +120,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6481308355172389788
+--- !u!114 &5729013674840644481
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,38 +134,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
-    rid: 4528059696114040840
+    rid: 3656781574126698506
   projectileMovements: []
   impacts:
-  - rid: 4528059696114040836
+  - rid: 3656781574126698507
   references:
     version: 2
     RefIds:
-    - rid: 4528059696114040836
-      type: {class: ProjectileTimedImpact, ns: Game, asm: Assembly-CSharp}
-      data:
-        criteria:
-          rid: 4528059696114040837
-        damage:
-          definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-          mapper:
-            rid: 4528059696114040838
-        duration:
-          definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
-          mapper:
-            rid: 4528059696114040839
-    - rid: 4528059696114040837
-      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059696114040838
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059696114040839
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059696114040840
+    - rid: 3656781574126698506
       type: {class: ProjectileBubbleUpDeath, ns: Game, asm: Assembly-CSharp}
       data:
         duration: 1
         scale: 2
         stopSimulatedDelay: 0.1
+    - rid: 3656781574126698507
+      type: {class: ProjectileTimedImpact, ns: Game, asm: Assembly-CSharp}
+      data:
+        criteria:
+          rid: 3656781574126698508
+        damage:
+          mapper:
+            rid: 3656781574126698509
+        duration:
+          mapper:
+            rid: 3656781574126698510
+    - rid: 3656781574126698508
+      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781574126698509
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: damage
+    - rid: 3656781574126698510
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: duration
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

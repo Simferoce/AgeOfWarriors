@@ -8,6 +8,7 @@ namespace Game
         [SerializeField] private TextMeshProUGUI label;
         [SerializeField] private TextMeshProUGUI value;
         [SerializeField] private TextMeshProUGUI modifierValue;
+        [SerializeField] private StatisticDefinition definition;
         [SerializeField] private StatisticReference<float> reference;
 
         public void Refresh(AgentObject agentObject)
@@ -16,10 +17,8 @@ namespace Game
             float total = reference.GetValueOrThrow(agentObject, StatisticType.Total);
             float difference = total - baseValue;
 
-            StatisticDefinition definition = reference.Definition;
-
             label.text = definition.Title;
-            value.text = total.ToString() + reference.Definition.TextIcon;
+            value.text = total.ToString() + definition.TextIcon;
 
             ColorUtility.TryParseHtmlString("#00BF50", out Color positive);
             ColorUtility.TryParseHtmlString("#BF1D1D", out Color negative);

@@ -2378,6 +2378,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 228414745713789303}
     m_Modifications:
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: definition
+      value: 
+      objectReference: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: reference.mapper
       value: 3656781299071320108
       objectReference: {fileID: 0}
@@ -2389,6 +2393,10 @@ PrefabInstance:
       propertyPath: managedReferences[3656781299071320108]
       value: Assembly-CSharp Game.CharacterMapperFloat
       objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[3656781299071320108].definition
+      value: 
+      objectReference: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
     - target: {fileID: 6105187567612328222, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2840,6 +2848,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 228414745713789303}
     m_Modifications:
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: definition
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: reference.mapper
       value: 3656781299071320106
       objectReference: {fileID: 0}
@@ -2851,6 +2863,10 @@ PrefabInstance:
       propertyPath: managedReferences[3656781299071320106]
       value: Assembly-CSharp Game.CharacterMapperFloat
       objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[3656781299071320106].definition
+      value: 
+      objectReference: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
     - target: {fileID: 6105187567612328222, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2956,6 +2972,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 228414745713789303}
     m_Modifications:
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: definition
+      value: 
+      objectReference: {fileID: 11400000, guid: b6e7acc220a4175489e13715c3932744, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: reference.mapper
       value: 3656781299071320109
       objectReference: {fileID: 0}
@@ -2967,6 +2987,10 @@ PrefabInstance:
       propertyPath: managedReferences[3656781299071320109]
       value: Assembly-CSharp Game.CharacterMapperFloat
       objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[3656781299071320109].definition
+      value: 
+      objectReference: {fileID: 11400000, guid: b6e7acc220a4175489e13715c3932744, type: 2}
     - target: {fileID: 6105187567612328222, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3302,6 +3326,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 228414745713789303}
     m_Modifications:
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: definition
+      value: 
+      objectReference: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: reference.mapper
       value: 3656781299071320110
       objectReference: {fileID: 0}
@@ -3313,6 +3341,10 @@ PrefabInstance:
       propertyPath: managedReferences[3656781299071320110]
       value: Assembly-CSharp Game.CharacterMapperFloat
       objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[3656781299071320110].definition
+      value: 
+      objectReference: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
     - target: {fileID: 6105187567612328222, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3648,6 +3680,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 228414745713789303}
     m_Modifications:
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: definition
+      value: 
+      objectReference: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: reference.mapper
       value: 3656781299071320105
       objectReference: {fileID: 0}
@@ -3659,6 +3695,10 @@ PrefabInstance:
       propertyPath: managedReferences[3656781299071320105]
       value: Assembly-CSharp Game.CharacterMapperFloat
       objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[3656781299071320105].definition
+      value: 
+      objectReference: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
     - target: {fileID: 6105187567612328222, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3879,6 +3919,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 228414745713789303}
     m_Modifications:
     - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: definition
+      value: 
+      objectReference: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: reference.mapper
       value: 3656781299071320107
       objectReference: {fileID: 0}
@@ -3890,6 +3934,10 @@ PrefabInstance:
       propertyPath: managedReferences[3656781299071320107]
       value: Assembly-CSharp Game.CharacterMapperFloat
       objectReference: {fileID: 0}
+    - target: {fileID: 3330026347499677774, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
+      propertyPath: managedReferences[3656781299071320107].definition
+      value: 
+      objectReference: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
     - target: {fileID: 6105187567612328222, guid: b4b277e02505d884da5b6258cd72d1eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

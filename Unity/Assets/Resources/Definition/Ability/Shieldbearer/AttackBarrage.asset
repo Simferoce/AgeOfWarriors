@@ -9,49 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Script: {fileID: 11500000, guid: 81312e989fe00344cb8aae2c298bc288, type: 3}
   m_Name: AttackBarrage
   m_EditorClassIdentifier: 
   id: 2ab37e8c507d5354b8c42977274cd9f3
   title: Attack Barrage
   description: Execute 3 attacks dealing {val:damage} damage in a burst on a target
     at {val:range} meters.
-  statistics:
-  - rid: 3656781343263817732
-  - rid: 3656781343263817737
-  - rid: 3656781343263817738
   prefab: {fileID: 234122527794856266, guid: 6a679bb1f288ed742952ac06cf3653ed, type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 3656781343263817732
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Damage - (100 % of Attack Power)
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-          mapper:
-            rid: 3656781343263817733
-        percentage: 1
-    - rid: 3656781343263817733
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781343263817737
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Cooldown - 5
-        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
-        value: 5
-        percentage: 0
-    - rid: 3656781343263817738
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Range - (100 % of Reach)
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-          mapper:
-            rid: 3656781343263817739
-        percentage: 1
-    - rid: 3656781343263817739
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+  reachPercentage: 1
+  damagePercentage: 1
+  cooldown: 5

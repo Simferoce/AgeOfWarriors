@@ -17,23 +17,6 @@ MonoBehaviour:
   icon: {fileID: -1676996386, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Increase defense by {val:defense}.
   showOnHealthBar: 1
-  statistics:
-  - rid: 3656781458035441735
-  references:
-    version: 2
-    RefIds:
-    - rid: 3656781458035441735
-      type: {class: StatisticDynamicFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: 
-        definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
-          mapper:
-            rid: 3656781458035441740
-        isPercentage: 0
-    - rid: 3656781458035441740
-      type: {class: ModifierMapperFloat, ns: Game, asm: Assembly-CSharp}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,52 +26,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bd5e90b56fed4144a2394c995f52f36, type: 3}
   m_Name: InspiringPresence
   m_EditorClassIdentifier: 
   id: 2fe57550d51a64f4897979212d8ac68d
   title: Inspiring Presence
   description: Increase defense by {val:defense} of any ally in {val:range} meters
     for {val:buff_duration} seconds.
-  statistics:
-  - rid: 3656781299071320139
-  - rid: 3656781299071320140
-  - rid: 3656781299071320142
-  - rid: 3656781301283291175
   prefab: {fileID: 4759011807880347097, guid: 11db9b6c5b59ecc418da60fe709596c6, type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 3656781299071320139
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Buff Duration - 7
-        definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
-        value: 7
-        percentage: 0
-    - rid: 3656781299071320140
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Range - (100 % of Reach)
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-          mapper:
-            rid: 3656781299071320141
-        percentage: 1
-    - rid: 3656781299071320141
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781299071320142
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Defense - 25
-        definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
-        value: 25
-        percentage: 0
-    - rid: 3656781301283291175
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Cooldown - 5
-        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
-        value: 5
-        percentage: 0
+  reachPercentage: 1
+  defense: 25
+  cooldown: 5
+  buffDuration: 7

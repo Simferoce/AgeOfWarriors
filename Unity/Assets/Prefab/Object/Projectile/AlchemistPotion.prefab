@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8633233943157110530}
-  - component: {fileID: -7442373754077631548}
+  - component: {fileID: 884327743734410240}
   - component: {fileID: -9219538325602513416}
   m_Layer: 0
   m_Name: AlchemistPotion
@@ -119,7 +119,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7442373754077631548
+--- !u!114 &884327743734410240
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,43 +133,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
-    rid: 3490450885554995206
+    rid: 3656781574126698497
   projectileMovements:
-  - rid: 3656781118043062280
-  - rid: 3656781118043062299
+  - rid: 3656781574126698498
+  - rid: 3656781574126698499
   impacts:
-  - rid: 4528059695970910221
+  - rid: 3656781574126698500
   references:
     version: 2
     RefIds:
-    - rid: 3490450885554995206
+    - rid: 3656781574126698497
       type: {class: ProjectileBubbleUpDeath, ns: Game, asm: Assembly-CSharp}
       data:
         duration: 0.25
         scale: 1.25
         stopSimulatedDelay: 0.05
-    - rid: 3656781118043062280
+    - rid: 3656781574126698498
       type: {class: ProjectileSelfRotateMovement, ns: Game, asm: Assembly-CSharp}
       data:
         speed: 360
         clockwise: 0
-    - rid: 3656781118043062299
+    - rid: 3656781574126698499
       type: {class: ProjectileFixVelocityMovement, ns: Game, asm: Assembly-CSharp}
       data:
         velocity: 3
-    - rid: 4528059695970910221
+    - rid: 3656781574126698500
       type: {class: ProjectileHealImpact, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
-          rid: 4528059695970910222
+          rid: 3656781574126698502
         heal:
-          definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
           mapper:
-            rid: 4528059695970910223
-    - rid: 4528059695970910222
+            rid: 3656781574126698504
+    - rid: 3656781574126698502
       type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059695970910223
+    - rid: 3656781574126698504
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: heal
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

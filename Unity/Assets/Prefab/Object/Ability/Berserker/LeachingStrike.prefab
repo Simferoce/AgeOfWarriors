@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8892924003226445137}
-  - component: {fileID: 8627836519159470834}
+  - component: {fileID: 1929082328996050694}
   m_Layer: 0
   m_Name: LeachingStrike
   m_TagString: Untagged
@@ -30,9 +30,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8627836519159470834
+--- !u!114 &1929082328996050694
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,67 +45,70 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditions:
-  - rid: 4528059700692647946
-  - rid: 4528059700692647947
-  - rid: 4528059700692647948
-  parameter: 2
+  - rid: 3656781574257508352
+  - rid: 3656781574257508353
+  - rid: 3656781574257508355
+  parameter: 1
   effects:
-  - rid: 4528059700692647955
+  - rid: 3656781574257508360
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 4528059700692647946
+    - rid: 3656781574257508352
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647947
+    - rid: 3656781574257508353
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
-          definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
           mapper:
-            rid: 4528059700692647954
-    - rid: 4528059700692647948
+            rid: 3656781574257508354
+    - rid: 3656781574257508354
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: cooldown
+    - rid: 3656781574257508355
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
-          rid: 4528059700692647949
+          rid: 3656781574257508356
         count: 1
-    - rid: 4528059700692647949
+    - rid: 3656781574257508356
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         criterias:
-        - rid: 4528059700692647950
-        - rid: 4528059700692647951
-    - rid: 4528059700692647950
+        - rid: 3656781574257508357
+        - rid: 3656781574257508358
+    - rid: 3656781574257508357
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647951
+    - rid: 3656781574257508358
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
           mapper:
-            rid: 4528059700692647953
-    - rid: 4528059700692647953
+            rid: 3656781574257508359
+    - rid: 3656781574257508359
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647954
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647955
+      data:
+        statistic: range
+    - rid: 3656781574257508360
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach:
-          definition: {fileID: 11400000, guid: e864fc16d0f0def478387446a9b41863, type: 2}
           mapper:
-            rid: 4528059700692647957
+            rid: 3656781574257508362
         damage:
-          definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
           mapper:
-            rid: 4528059700692647956
+            rid: 3656781574257508361
         armorPenetration:
-          definition: {fileID: 0}
           mapper:
             rid: -2
-    - rid: 4528059700692647956
+    - rid: 3656781574257508361
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647957
+      data:
+        statistic: damage
+    - rid: 3656781574257508362
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: leach

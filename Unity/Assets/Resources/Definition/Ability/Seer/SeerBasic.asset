@@ -9,40 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a5f3ee59030f67409b4a9e75190a077, type: 3}
   m_Name: SeerBasic
   m_EditorClassIdentifier: 
   id: 583f27f933430694893ccbf3929fa8cf
   title: Basic
   description: Throw a dark sphere that deals {val:damage} damage.
-  statistics:
-  - rid: 4528059661052543010
-  - rid: 4528059661052543022
   prefab: {fileID: 95085129432284298, guid: eb9b88921ce2598438363f68dc3259e1, type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 4528059661052543010
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Range - (100 % of Reach)
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-          mapper:
-            rid: 4528059661052543011
-        percentage: 1
-    - rid: 4528059661052543011
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059661052543022
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Damage - (100 % of Attack Power)
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-          mapper:
-            rid: 4528059661052543023
-        percentage: 1
-    - rid: 4528059661052543023
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+  reachPercentage: 1
+  damagePercentage: 1

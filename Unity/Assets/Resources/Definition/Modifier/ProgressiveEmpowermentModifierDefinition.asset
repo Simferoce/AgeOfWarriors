@@ -17,7 +17,7 @@ MonoBehaviour:
   icon: {fileID: -1546621079, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Increase the damage dealt of the next attack by {val:damage_increase}.
   showOnHealthBar: 1
-  percentageDamageIncrease: 0
+  percentageDamageIncrease: 2.5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0

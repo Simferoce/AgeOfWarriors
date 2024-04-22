@@ -26,10 +26,10 @@ namespace Game
             DescriptorFunction = descriptorFunction;
         }
 
-        public string Description(ModifierDefinition modifierDefinition, Modifier modifier)
+        public string Description(object definition, object instance)
         {
-            MethodInfo methodInfo = modifierDefinition.GetType().GetMethod(DescriptorFunction);
-            return (string)methodInfo.Invoke(modifierDefinition, new object[] { modifier });
+            MethodInfo methodInfo = definition.GetType().GetMethod(DescriptorFunction);
+            return (string)methodInfo.Invoke(definition, new object[] { instance });
         }
     }
 }

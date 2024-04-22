@@ -53,6 +53,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 3656781571772645446
+      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: range
     - rid: 4528059661052542987
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
     - rid: 4528059661052542988
@@ -71,34 +75,16 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
           mapper:
-            rid: 4528059661052542992
+            rid: 3656781571772645446
     - rid: 4528059661052542991
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059661052542992
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
     - rid: 4528059661052542993
       type: {class: ProjectileAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         projectilePrefab: {fileID: 6675190562695518451, guid: 9a33a33555180bf4690eff9ada726b89, type: 3}
         origin:
           rid: 4528059661052542997
-        datas:
-        - rid: 4528059661052542994
-        - rid: 4528059661052542995
-    - rid: 4528059661052542994
-      type: {class: ProjectileAttackData, ns: Game, asm: Assembly-CSharp}
-      data:
-        attackPowerPercentage: 1
-        armorPenetration: 0
-    - rid: 4528059661052542995
-      type: {class: ProjectileFactoryImpactContext, ns: Game, asm: Assembly-CSharp}
-      data:
-        criteria:
-          rid: 4528059661052542996
-    - rid: 4528059661052542996
-      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
     - rid: 4528059661052542997
       type: {class: ProjectileAbilityEffectTransformOrigin, ns: Game, asm: Assembly-CSharp}
       data:

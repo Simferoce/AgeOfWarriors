@@ -151,7 +151,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8633233943157110530}
-  - component: {fileID: -7442373754077631548}
+  - component: {fileID: 191775915381539296}
   - component: {fileID: -9219538325602513416}
   m_Layer: 0
   m_Name: PiercingArrow
@@ -177,7 +177,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7442373754077631548
+--- !u!114 &191775915381539296
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,44 +191,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
-    rid: 3490450885554995228
+    rid: 3656781574126698511
   projectileMovements:
-  - rid: 3656781118043062282
-  - rid: 3656781118043062283
+  - rid: 3656781574126698512
+  - rid: 3656781574126698513
   impacts:
-  - rid: 3656781412477173801
+  - rid: 3656781574126698514
   references:
     version: 2
     RefIds:
-    - rid: 3490450885554995228
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3656781574126698511
       type: {class: ProjectileStickDeath, ns: Game, asm: Assembly-CSharp}
       data:
         stopSimulatedDelay: 0.01
-    - rid: 3656781118043062282
+    - rid: 3656781574126698512
       type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781118043062283
+    - rid: 3656781574126698513
       type: {class: ProjectileStraightMovement, ns: Game, asm: Assembly-CSharp}
       data:
         speed: 6
-    - rid: 3656781412477173801
+    - rid: 3656781574126698514
       type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
-          rid: 3656781412477173802
+          rid: -2
         damage:
-          definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
           mapper:
-            rid: 3656781412477173803
+            rid: 3656781574126698515
         armorPenetration:
-          definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
           mapper:
-            rid: 3656781412477173808
-    - rid: 3656781412477173802
-      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781412477173803
+            rid: 3656781574126698516
+    - rid: 3656781574126698515
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781412477173808
+      data:
+        statistic: damage
+    - rid: 3656781574126698516
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: armor_penetration
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

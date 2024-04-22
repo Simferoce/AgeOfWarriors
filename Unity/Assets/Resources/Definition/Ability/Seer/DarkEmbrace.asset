@@ -9,57 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Script: {fileID: 11500000, guid: ad56b4d0e37bbe24083b69816ebc8122, type: 3}
   m_Name: DarkEmbrace
   m_EditorClassIdentifier: 
   id: 156a5e5d2b7389c458935a45ae3476d7
   title: Dark Embrace
   description: Invoke a medium size dark fissure behind the first enemy in {val:range}
     meters that deals {val:damage} damage to all enemy in range.
-  statistics:
-  - rid: 4528059696114040841
-  - rid: 4528059696114040843
-  - rid: 4528059696114040844
-  - rid: 4528059696114040855
   prefab: {fileID: 1262703249881643635, guid: fc6a4b62da811034d98dbfc0f4757caf, type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 4528059696114040841
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Damage - (200 % of Attack Power)
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-          mapper:
-            rid: 4528059696114040842
-        percentage: 2
-    - rid: 4528059696114040842
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059696114040843
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Cooldown - 5
-        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
-        value: 5
-        percentage: 0
-    - rid: 4528059696114040844
-      type: {class: StatisticSerializeFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Duration - 0.2
-        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
-        value: 0.2
-        percentage: 0
-    - rid: 4528059696114040855
-      type: {class: StatisticPercentage, ns: Game, asm: Assembly-CSharp}
-      data:
-        description: Range - (100 % of Reach)
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        reference:
-          definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-          mapper:
-            rid: 4528059696114040856
-        percentage: 1
-    - rid: 4528059696114040856
-      type: {class: CharacterMapperFloat, ns: Game, asm: Assembly-CSharp}
+  reachPercentage: 1
+  damagePercentage: 2
+  cooldown: 5
+  duration: 0.2

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2119269182076450541}
-  - component: {fileID: 8666988451777292377}
+  - component: {fileID: 6530518113689755040}
   m_Layer: 0
   m_Name: Grasp
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8666988451777292377
+--- !u!114 &6530518113689755040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,61 +45,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   conditions:
-  - rid: 4528059700692647959
-  - rid: 4528059700692647960
-  - rid: 4528059700692647963
-  parameter: 3
+  - rid: 3656781574226575360
+  - rid: 3656781574226575361
+  - rid: 3656781574226575363
+  parameter: 1
   effects:
-  - rid: 4528059700692647969
+  - rid: 3656781574226575369
   references:
     version: 2
     RefIds:
-    - rid: 4528059700692647959
+    - rid: 3656781574226575360
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647960
+    - rid: 3656781574226575361
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
-          definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
           mapper:
-            rid: 4528059700692647962
-    - rid: 4528059700692647962
+            rid: 3656781574226575362
+    - rid: 3656781574226575362
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647963
+      data:
+        statistic: cooldown
+    - rid: 3656781574226575363
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
-          rid: 4528059700692647964
+          rid: 3656781574226575364
         count: 2
-    - rid: 4528059700692647964
+    - rid: 3656781574226575364
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         criterias:
-        - rid: 4528059700692647965
-        - rid: 4528059700692647966
-        - rid: 4528059700692647967
-    - rid: 4528059700692647965
+        - rid: 3656781574226575365
+        - rid: 3656781574226575366
+        - rid: 3656781574226575367
+    - rid: 3656781574226575365
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647966
-      type: {class: IsDisplaceableTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647967
+    - rid: 3656781574226575366
+      type: {class: ExcludeTypeCriteria, ns: Game, asm: Assembly-CSharp}
+      data:
+        types: 00000000
+    - rid: 3656781574226575367
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
           mapper:
-            rid: 4528059700692647968
-    - rid: 4528059700692647968
+            rid: 3656781574226575368
+    - rid: 3656781574226575368
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059700692647969
+      data:
+        statistic: range
+    - rid: 3656781574226575369
       type: {class: GraspAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         destinationDistance: 0.4
         duration: 0.5
         staggerDuration:
-          definition: {fileID: 11400000, guid: cbdb2f244b5bcc947aa217190b37b0f5, type: 2}
           mapper:
-            rid: 4528059700692647975
+            rid: 3656781574226575370
         damping: 0.5
-    - rid: 4528059700692647975
+    - rid: 3656781574226575370
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: duration

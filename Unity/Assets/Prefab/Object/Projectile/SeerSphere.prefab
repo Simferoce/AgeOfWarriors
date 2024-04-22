@@ -93,7 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8633233943157110530}
-  - component: {fileID: -7442373754077631548}
+  - component: {fileID: 2588519069082530218}
   - component: {fileID: -9219538325602513416}
   m_Layer: 0
   m_Name: SeerSphere
@@ -119,7 +119,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7442373754077631548
+--- !u!114 &2588519069082530218
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,40 +133,46 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
-    rid: 3490450885554995206
+    rid: 3656781574126698518
   projectileMovements:
-  - rid: 3656781118043062285
-  - rid: 3656781118043062286
+  - rid: 3656781574126698519
+  - rid: 3656781574126698520
   impacts:
-  - rid: 4528059661052543017
+  - rid: 3656781574126698521
   references:
     version: 2
     RefIds:
-    - rid: 3490450885554995206
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3656781574126698518
       type: {class: ProjectileBubbleUpDeath, ns: Game, asm: Assembly-CSharp}
       data:
         duration: 0.25
         scale: 1.25
         stopSimulatedDelay: 0.05
-    - rid: 3656781118043062285
+    - rid: 3656781574126698519
+      type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
+    - rid: 3656781574126698520
       type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
       data:
         angle: 45
-    - rid: 3656781118043062286
-      type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059661052543017
+    - rid: 3656781574126698521
       type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
-          rid: 4528059661052543018
+          rid: 3656781574126698522
         damage:
-          definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
           mapper:
-            rid: 4528059661052543019
-    - rid: 4528059661052543018
+            rid: 3656781574126698523
+        armorPenetration:
+          mapper:
+            rid: -2
+    - rid: 3656781574126698522
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 4528059661052543019
+    - rid: 3656781574126698523
       type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        statistic: damage
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

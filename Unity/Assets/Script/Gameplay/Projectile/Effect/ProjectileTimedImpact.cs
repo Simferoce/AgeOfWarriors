@@ -22,7 +22,7 @@ namespace Game
             base.Initialize(projectile);
             startedAt = Time.time;
 
-            currentDuration = duration.GetValueOrThrow(projectile);
+            currentDuration = duration.GetValueOrThrow(projectile.Ability);
         }
 
         public override bool Impact(GameObject collision)

@@ -20,7 +20,7 @@ namespace Game
             if (abilityInspectorWindow.cooldown.TryGetValue(ability, out float value))
             {
                 abilityInspectorWindow.cooldownText.alpha = 1f;
-                abilityInspectorWindow.cooldownText.text = $"{value}{abilityInspectorWindow.cooldown.Definition.TextIcon}";
+                abilityInspectorWindow.cooldownText.text = $"{value}{StatisticDefinition.Cooldown.TextIcon}";
             }
             else
             {
