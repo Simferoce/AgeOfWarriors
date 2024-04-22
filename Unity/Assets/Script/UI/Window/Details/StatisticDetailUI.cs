@@ -19,7 +19,7 @@ namespace Game
             StatisticDefinition definition = reference.Definition;
 
             label.text = definition.Title;
-            value.text = total.ToString() + reference.Definition.GetTextIcon;
+            value.text = total.ToString() + reference.Definition.TextIcon;
 
             ColorUtility.TryParseHtmlString("#00BF50", out Color positive);
             ColorUtility.TryParseHtmlString("#BF1D1D", out Color negative);

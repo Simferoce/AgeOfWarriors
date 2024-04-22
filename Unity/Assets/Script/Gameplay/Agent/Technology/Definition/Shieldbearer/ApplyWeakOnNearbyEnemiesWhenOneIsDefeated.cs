@@ -42,7 +42,7 @@ namespace Game
                         if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
                             continue;
 
-                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * definition.percentageReachAffect)
+                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.Range(this))
                             continue;
 
                         Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x.Definition == definition.damageDealtReductionModifierDefinition);
@@ -67,13 +67,12 @@ namespace Game
         [SerializeField, Range(0, 5)] private float reductionAmount;
         [SerializeField] private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
 
-        public override string ParseDescription(object caller, string description)
-        {
-            description = base.ParseDescription(caller, description);
-            description = damageDealtReductionModifierDefinition.ParseDescription(caller, description);
+        [Statistic("buff_duration")] public float Duration(Modifier modifier) => duration;
+        [Statistic("range", nameof(RangeFormat))] public float Range(Modifier modifier) => (modifier.Modifiable as Character).Reach * percentageReachAffect;
+        [Statistic("damage_dealt_reduction", nameof(DamageDealtReductionFormat))] public float DamageDealtReduction(Modifier modifier) => reductionAmount;
 
-            return description;
-        }
+        public string RangeFormat(Modifier modifier) => StatisticFormatter.Percentage<Modifier>(Range, percentageReachAffect, StatisticDefinition.Reach, modifier);
+        public string DamageDealtReductionFormat(Modifier modifier) => reductionAmount.ToString("0.0%");
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

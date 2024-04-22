@@ -25,7 +25,7 @@ namespace Game
                 if (!modifiable.TryGetCachedComponent<Character>(out Character character))
                     return;
 
-                float damage = definition.DamagePerShieldPointAbsorbed * (shield.Initial - shield.Remaining);
+                float damage = definition.DamagePerShieldPointAbsorbed(this) * (shield.Initial - shield.Remaining);
                 if (damage <= 0)
                     return;
 
@@ -43,7 +43,7 @@ namespace Game
                     if (!agent.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
                         continue;
 
-                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > character.Reach * (Definition as DealDamageOnShieldEndPerk).PercentageReachExplosionRadius)
+                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.Range(this))
                         continue;
 
                     attackable.TakeAttack(character.GenerateAttack(damage, 0, 0, false, attackable, this));
@@ -72,8 +72,10 @@ namespace Game
         [SerializeField] private float damagePerShieldPointAbsorbed;
         [SerializeField, Range(0, 5)] private float percentageReachExplosionRadius;
 
-        public float DamagePerShieldPointAbsorbed => damagePerShieldPointAbsorbed;
-        public float PercentageReachExplosionRadius => percentageReachExplosionRadius;
+        [Statistic("damage")] public float DamagePerShieldPointAbsorbed(Modifier modifier) => damagePerShieldPointAbsorbed;
+        [Statistic("range", nameof(RangeFormat))] public float Range(Modifier modifier) => (modifier.Modifiable as Character).Reach * percentageReachExplosionRadius;
+
+        public string RangeFormat(Modifier modifier) => StatisticFormatter.Percentage<Modifier>(this.Range, percentageReachExplosionRadius, StatisticDefinition.Reach, modifier);
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {

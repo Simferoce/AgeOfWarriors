@@ -34,6 +34,9 @@ namespace Game
         [SerializeField] private float amount;
         [SerializeField] private ShieldModifierDefinition shieldModifierDefinition;
 
+        [Statistic("shield")] public float Amount(Modifier modifier) => amount;
+        [Statistic("buff_duration")] public float Duration(Modifier modifier) => duration;
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

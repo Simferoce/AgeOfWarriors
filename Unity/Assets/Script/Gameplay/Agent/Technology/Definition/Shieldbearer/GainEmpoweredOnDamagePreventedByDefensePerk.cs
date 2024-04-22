@@ -49,6 +49,16 @@ namespace Game
         [SerializeField] private float damageToPrevent = 50.0f;
         [SerializeField] private EmpoweredModifierDefinition empoweredModifierDefinition;
 
+        [Statistic("damage_to_prevent")] public float DamageToPrevent(Modifier modifier) => damageToPrevent;
+
+        public override string ParseDescription(object caller, string description)
+        {
+            description = base.ParseDescription(caller, description);
+            description = empoweredModifierDefinition.ParseDescription(caller, description);
+
+            return description;
+        }
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

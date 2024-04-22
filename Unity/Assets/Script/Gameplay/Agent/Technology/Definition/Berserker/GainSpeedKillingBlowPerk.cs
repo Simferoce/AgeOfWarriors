@@ -34,6 +34,10 @@ namespace Game
         [SerializeField] private float duration;
         [SerializeField] private SpeedModifierDefinition speedModifierDefinition;
 
+        [Statistic("speed", nameof(SpeedFormat))] public float Speed(Modifier modifier) => speed;
+
+        public string SpeedFormat(Modifier modifier) => speed.ToString("0.0%");
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

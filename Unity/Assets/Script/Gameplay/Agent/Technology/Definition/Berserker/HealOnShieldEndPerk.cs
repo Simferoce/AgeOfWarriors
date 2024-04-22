@@ -53,6 +53,8 @@ namespace Game
 
         [SerializeField] private float healPerShieldPointRemaining;
 
+        [Statistic("heal")] public float Heal(Modifier modifier) => healPerShieldPointRemaining;
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

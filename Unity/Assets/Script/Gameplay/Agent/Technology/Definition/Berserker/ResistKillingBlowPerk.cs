@@ -30,6 +30,8 @@ namespace Game
         [SerializeField] private ResistDeathModifierDefinition resistDeathModifierDefinition;
         [SerializeField] private float duration;
 
+        [Statistic("buff_duration")] public float Duration(Modifier modifier) => duration;
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

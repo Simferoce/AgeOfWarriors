@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Reflection;
+using UnityEngine;
 
 namespace Game
 {
@@ -21,7 +22,28 @@ namespace Game
 
         public virtual string ParseDescription(object caller, string description)
         {
-            return this.description;
+            MethodInfo[] methodInfos = this.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (MethodInfo methodInfo in methodInfos)
+            {
+                StatisticAttribute attribute = methodInfo.GetCustomAttribute<StatisticAttribute>(true);
+                if (attribute == null)
+                    continue;
+
+                ParameterInfo[] parameterInfos = methodInfo.GetParameters();
+                if (parameterInfos.Length != 1)
+                    continue;
+
+                if (!typeof(Modifier).IsAssignableFrom(parameterInfos[0].ParameterType))
+                    continue;
+
+                description = description.Replace($"{{val:{attribute.Name}}}",
+                    attribute.HasDescriptor ?
+                    attribute.Description(this, caller as Modifier) :
+                    methodInfo.Invoke(this, new object[] { (caller as Modifier) }).ToString());
+            }
+
+            return description;
         }
     }
 }

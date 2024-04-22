@@ -29,5 +29,9 @@ namespace Game
         }
 
         [SerializeField, Range(0, 5)] private float percentageDamageIncrease;
+
+        [Statistic("damage_increase", nameof(DamageIncreaseFormat))] public float DamageIncrease(Modifier modifier) => percentageDamageIncrease;
+
+        public string DamageIncreaseFormat(Modifier modifier) => percentageDamageIncrease.ToString("0.0%");
     }
 }

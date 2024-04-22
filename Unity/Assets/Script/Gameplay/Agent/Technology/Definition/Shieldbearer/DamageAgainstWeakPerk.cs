@@ -16,6 +16,8 @@ namespace Game
 
         [SerializeField] private float damageDealtAgainstWeak;
 
+        [Statistic("damage")] public float DamageDealtAgainstWeak(Modifier modifier) => damageDealtAgainstWeak;
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

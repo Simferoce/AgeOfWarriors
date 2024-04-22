@@ -20,6 +20,9 @@ namespace Game
         [SerializeField] private float attackpower;
         [SerializeField] private float threshold;
 
+        [Statistic("attack_power")] public float AttackPower(Modifier modifier) => attackpower;
+        [Statistic("threshold")] public float Threshold(Modifier modifier) => threshold;
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

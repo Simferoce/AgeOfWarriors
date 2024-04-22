@@ -45,6 +45,11 @@ namespace Game
         [SerializeField] private float duration;
         [SerializeField] private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
 
+        [Statistic("buff_duration")] public float Duration(Modifier modifier) => duration;
+        [Statistic("damage_dealt_reduction", nameof(DamageDealtReductionFormat))] public float DamageDealtReduction(Modifier modifier) => damageReduction;
+
+        public string DamageDealtReductionFormat(Modifier modifier) => damageReduction.ToString("0.0%");
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

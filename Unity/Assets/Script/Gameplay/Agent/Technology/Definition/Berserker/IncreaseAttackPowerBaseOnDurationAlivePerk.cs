@@ -19,6 +19,8 @@ namespace Game
 
         [SerializeField] private float attackpowerPerSeconds;
 
+        [Statistic("attack_power")] public float AttackPower(Modifier modifier) => attackpowerPerSeconds;
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

@@ -76,7 +76,7 @@ namespace Game
         public string TitleFormatted => $"<color=#{ColorHex}>{Title}</color>";
         public string ColorHex => color.ToHexString();
         public Color Color => color;
-        public string GetTextIcon => $"<sprite name=\"{Icon.name.Trim()}\" color=#{ColorHex}>";
+        public string TextIcon => $"<sprite name=\"{Icon.name.Trim()}\" color=#{ColorHex}>";
         public string HumanReadableId => humanReadableId;
 
         public static string ParseText(string text)
