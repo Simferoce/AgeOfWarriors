@@ -13,12 +13,14 @@ namespace Game
         public virtual float? SpeedPercentage => null;
         public virtual float? Defense => null;
         public virtual float? MaxHealth => null;
+        public virtual float? AttackSpeedPercentage => null;
         public virtual float? AttackPower => null;
         public virtual bool? Invulnerable => null;
         public virtual float? RangedDamageReduction => null;
         public virtual float? DamageDealtReduction => null;
         public virtual float? DamageDealtAgainstWeak => null;
         public IModifiable Modifiable { get => modifiable; set => modifiable = value; }
+        public virtual bool Show => Definition.Show;
 
         protected IModifiable modifiable;
 

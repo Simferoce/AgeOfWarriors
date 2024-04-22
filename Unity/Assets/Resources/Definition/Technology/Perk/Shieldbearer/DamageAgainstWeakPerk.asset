@@ -16,7 +16,7 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description: 
-  showOnHealthBar: 1
+  showOnHealthBar: 0
   requirementsPerk:
   - rid: 4528059830243164173
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
