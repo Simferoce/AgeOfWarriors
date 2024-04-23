@@ -21,7 +21,7 @@ namespace Game
 
             public override string ParseDescription()
             {
-                return $"Increase defense by {defense}.";
+                return string.Format(definition.Description, defense);
             }
         }
     }

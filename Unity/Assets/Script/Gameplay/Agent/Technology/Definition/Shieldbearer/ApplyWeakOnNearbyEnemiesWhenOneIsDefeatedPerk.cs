@@ -69,8 +69,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Whenever an enemy unit die, apply weak which reduce the damage dealt by " +
-                $"{reductionAmount:0.0%} of every enemy unit in {StatisticFormatter.Percentage(percentageReachAffect, StatisticDefinition.Reach)} meters for {duration} seconds.";
+            return string.Format(Description, reductionAmount, StatisticFormatter.Percentage(percentageReachAffect, StatisticDefinition.Reach), duration);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

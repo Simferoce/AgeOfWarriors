@@ -10,8 +10,9 @@
 
         public override string ParseDescription()
         {
-            return $"Mark a target in {Range}{StatisticFormatter.Percentage(definition.ReachPercentage, StatisticDefinition.Reach)} meters " +
-                $"for {BuffDuration} seconds which receive an additional {Damage}{StatisticFormatter.Percentage(definition.DamagePercentage, StatisticDefinition.AttackPower)} damage per hit taken.";
+            return string.Format(definition.Description, $"{Range}{StatisticFormatter.Percentage(definition.ReachPercentage, StatisticDefinition.Reach)}",
+                BuffDuration,
+                $"{Damage}{StatisticFormatter.Percentage(definition.DamagePercentage, StatisticDefinition.AttackPower)}");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Game
 
             public override string ParseDescription()
             {
-                return $"Receive an additional {damage} damage per hit taken.";
+                return string.Format(definition.Description, damage);
             }
 
             private void OnAttackableDamageTaken(AttackResult attack, IAttackable attackable)

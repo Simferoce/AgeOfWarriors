@@ -19,7 +19,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Increase Defense by {defenseIncrease} for each {attackPowerRequired}";
+            return string.Format(Description, defenseIncrease, attackPowerRequired);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

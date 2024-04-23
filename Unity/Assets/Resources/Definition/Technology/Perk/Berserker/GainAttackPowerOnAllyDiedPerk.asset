@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 5167ae87aecf81e43b26323ec9d133d1
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase attack power by {0}.
   showOnHealthBar: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -32,8 +32,7 @@ MonoBehaviour:
   id: e2b24009f395ebe4d87baed0497b6870
   title: Vengeful Reprisal
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Gain {val:attack_power} Attack Power for {val:buff_duration} seconds
-    whenever an ally dies.
+  description: Gain {0} Attack Power for {1} seconds whenever an ally dies.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781458035441716

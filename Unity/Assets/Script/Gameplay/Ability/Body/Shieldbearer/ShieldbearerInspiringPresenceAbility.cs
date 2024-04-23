@@ -10,7 +10,10 @@
 
         public override string ParseDescription()
         {
-            return $"Increase defense by {Defense} of any ally in {Range}{StatisticFormatter.Percentage(definition.ReachPercentage, StatisticDefinition.Reach)} meters for {BuffDuration} seconds.";
+            return string.Format(definition.Description,
+                Defense,
+                $"{Range}{StatisticFormatter.Percentage(definition.ReachPercentage, StatisticDefinition.Reach)}",
+                BuffDuration);
         }
     }
 }

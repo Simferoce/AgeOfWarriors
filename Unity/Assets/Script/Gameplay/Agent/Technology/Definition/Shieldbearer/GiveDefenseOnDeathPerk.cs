@@ -55,7 +55,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Increase defense by {defense} for every allies in {StatisticFormatter.Percentage(reachPercentage, StatisticDefinition.Reach)} meters whenever the unit dies.";
+            return string.Format(Description, defense, StatisticFormatter.Percentage(reachPercentage, StatisticDefinition.Reach));
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

@@ -23,7 +23,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Increase attack power by {attackpowerPerSeconds} for each seconds alive.";
+            return string.Format(Description, attackpowerPerSeconds);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

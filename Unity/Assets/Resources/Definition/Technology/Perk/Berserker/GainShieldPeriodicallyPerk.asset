@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 124214902e069a84bbead87df45fb3b1
   title: Recurring Relief
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Gain a shield each {val:cooldown} seconds for {val:buff_duration}
-    seconds that absorbs for a total of {val:shield} damage.
+  description: Gain a shield each {0} seconds for {1} seconds that absorbs for a
+    total of {2} damage.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781458035441711
@@ -47,5 +47,5 @@ MonoBehaviour:
   id: aaf13480fd2318b47b34bc53f23eb45a
   title: Recurring Relief - Shield
   icon: {fileID: 2113729612, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Absorb {val:shield} amount of damage.
+  description: Absorb {0} amount of damage.
   showOnHealthBar: 1

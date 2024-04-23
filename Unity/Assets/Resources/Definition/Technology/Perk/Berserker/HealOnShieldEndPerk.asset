@@ -15,8 +15,8 @@ MonoBehaviour:
   id: a2d75a5e957afc344a9e58a918e123c6
   title: Wasteless Shielding
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Regain {val:heal} health points per shield points non absorbed whenever
-    a shield ends.
+  description: Regain {0} health points per shield points non absorbed whenever a
+    shield ends.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781458035441707

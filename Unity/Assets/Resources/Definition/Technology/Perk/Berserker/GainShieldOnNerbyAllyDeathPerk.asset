@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 4f6a6288a9e3fb044a956bb2a323e9a7
   title: Martyr's Bulwark
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Gain a shield that absorb {val:shield} damages for {val:buff_duration}
-    seconds whenever an ally dies.
+  description: Gain a shield that absorb {0} damages for {1} seconds whenever an
+    ally dies.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781458035441710
@@ -46,5 +46,5 @@ MonoBehaviour:
   id: aaf13480fd2318b47b34bc53f23eb45a
   title: Martyr's Bulwark - Shield
   icon: {fileID: 2113729612, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Absorb {val:shield} amount of damage.
+  description: Absorb {0} amount of damage.
   showOnHealthBar: 1

@@ -38,7 +38,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Gain {attackPowerGain} Attack Power for {buffDuration} seconds whenever an ally dies.";
+            return string.Format(Description, attackPowerGain, buffDuration);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

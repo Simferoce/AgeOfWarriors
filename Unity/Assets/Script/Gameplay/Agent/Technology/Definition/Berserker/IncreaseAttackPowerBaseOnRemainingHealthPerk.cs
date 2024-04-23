@@ -22,7 +22,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Increase attack power by {attackpower} whenever the percentage of health is under {threshold}.";
+            return string.Format(Description, attackpower, threshold);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

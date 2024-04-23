@@ -18,7 +18,7 @@ namespace Game
 
             public override string ParseDescription()
             {
-                return $"Increase movement speed by {speed:0.0%}.";
+                return string.Format(definition.Description, speed);
             }
         }
     }

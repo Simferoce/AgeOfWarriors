@@ -74,7 +74,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Deals {damagePerShieldPointAbsorbed} damage per absorbed damage to all enemies in {StatisticFormatter.Percentage(percentageReachExplosionRadius, StatisticDefinition.Reach)}meters whenever a shield end."; ;
+            return string.Format(Description, damagePerShieldPointAbsorbed, StatisticFormatter.Percentage(percentageReachExplosionRadius, StatisticDefinition.Reach));
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

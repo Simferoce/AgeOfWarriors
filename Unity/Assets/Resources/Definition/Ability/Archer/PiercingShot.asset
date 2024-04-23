@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e519c0b256b8cd84890c6167acfc1c87
   title: Piercing Shot
-  description: Deals {val:damage} damage with {val:armor_penetration} armor_penetration.
+  description: Deals {0} damage with {1} armor penetration.
   prefab: {fileID: 2354011339543092937, guid: 63ecacc2a71926c4db7262d713872a14, type: 3}
   reachPercentage: 1
   damagePercentage: 1

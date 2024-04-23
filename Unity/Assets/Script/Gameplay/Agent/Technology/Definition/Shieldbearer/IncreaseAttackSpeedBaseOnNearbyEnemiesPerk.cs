@@ -18,7 +18,7 @@ namespace Game
 
             public override string ParseDescription()
             {
-                return $"Increase attack speed by {definition.attackSpeedIncreasePerEnemies:0.0%} for each enemy in {StatisticFormatter.Percentage(definition.percentageReach, StatisticDefinition.Reach)} meters. {AttackSpeedPercentage:0.0%}({numberOfNearbyEnemies}x{definition.attackSpeedIncreasePerEnemies:0.0%})";
+                return string.Format(Definition.Description, definition.attackSpeedIncreasePerEnemies, StatisticFormatter.Percentage(definition.percentageReach, StatisticDefinition.Reach), $"{AttackSpeedPercentage:0.0%}({numberOfNearbyEnemies}x{definition.attackSpeedIncreasePerEnemies:0.0%})");
             }
 
             public override void Update()
@@ -59,7 +59,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Increase attack speed by {attackSpeedIncreasePerEnemies:0.0%} for each enemy in {StatisticFormatter.Percentage(percentageReach, StatisticDefinition.Reach)} meters.";
+            return string.Format(Description, attackSpeedIncreasePerEnemies, StatisticFormatter.Percentage(percentageReach, StatisticDefinition.Reach), "");
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

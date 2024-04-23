@@ -18,7 +18,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Reduce the damage taken by ranged attack by {rangedDamageReduction:0.0%}";
+            return string.Format(Description, rangedDamageReduction);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

@@ -10,7 +10,9 @@
 
         public override string ParseDescription()
         {
-            return $"Deals {Damage}{StatisticFormatter.Percentage(definition.DamagePercentage, StatisticDefinition.AttackPower)} damage with {ArmorPenetration} armor penetration.";
+            return string.Format(definition.Description,
+                $"{Damage}{StatisticFormatter.Percentage(definition.DamagePercentage, StatisticDefinition.AttackPower)}",
+                ArmorPenetration);
         }
     }
 }

@@ -9,7 +9,9 @@
 
         public override string ParseDescription()
         {
-            return $"Throw a dark sphere that deals {Damage}{StatisticFormatter.Percentage(definition.DamagePercentage, StatisticDefinition.Damage)} damage to an enemy in {Range}{StatisticFormatter.Percentage(definition.ReachPercentage, StatisticDefinition.Reach)} meters.";
+            return string.Format(definition.Description,
+                $"{Damage}{StatisticFormatter.Percentage(definition.DamagePercentage, StatisticDefinition.Damage)}",
+                $"{Range}{StatisticFormatter.Percentage(definition.ReachPercentage, StatisticDefinition.Reach)}");
         }
     }
 }

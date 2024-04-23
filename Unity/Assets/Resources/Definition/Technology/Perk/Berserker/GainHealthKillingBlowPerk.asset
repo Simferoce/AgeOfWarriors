@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 50956d197d5038442a5c5337de78eef3
   title: Rejuvenative Victory
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Regain {val:heal} health points whenever landing a killing blow on
-    a unit.
+  description: Regain {0} health points whenever landing a killing blow on a unit.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781458035441703

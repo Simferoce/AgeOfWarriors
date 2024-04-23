@@ -36,7 +36,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Gain {speed:0.0%} increase movement speed for {duration} seconds whenever landing a killing blow on a unit.";
+            return string.Format(Description, speed, duration);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

@@ -55,7 +55,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Regain {healPerShieldPointRemaining} health points per shield points non absorbed whenever a shield ends.";
+            return string.Format(Description, healPerShieldPointRemaining);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

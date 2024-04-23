@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 2eca3ad84988d4d4a944200dd4e2cad6
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Recently cheated death.
   showOnHealthBar: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -33,14 +33,14 @@ MonoBehaviour:
   title: Death Resilience
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: The first time health points would be reduced to 0, gain invulnerability
-    for {val:buff_duration} seconds.
+    for {0} seconds.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781458035441719
   - rid: 3656781458035441718
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  resistDeathModifierDefinition: {fileID: -4384760990984150086}
   duration: 0.5
+  resistDeathModifierDefinition: {fileID: -4384760990984150086}
   references:
     version: 2
     RefIds:

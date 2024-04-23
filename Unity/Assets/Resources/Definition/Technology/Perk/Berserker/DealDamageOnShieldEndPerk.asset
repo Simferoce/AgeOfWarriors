@@ -15,8 +15,8 @@ MonoBehaviour:
   id: a4f2a989b0db5664d9855e274b49e6af
   title: Vengeance Shield
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Deals {val:damage} damage per absorbed damage to all enemies in {val:range}
-    meters whenever a shield end.
+  description: Deals {0} damage per absorbed damage to all enemies in {1} meters
+    whenever a shield end.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781458035441708

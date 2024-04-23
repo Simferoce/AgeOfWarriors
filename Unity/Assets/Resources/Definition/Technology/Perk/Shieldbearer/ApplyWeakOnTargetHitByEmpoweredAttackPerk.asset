@@ -15,11 +15,12 @@ MonoBehaviour:
   id: 74e84fbb5e5e1054fa6924437b023719
   title: 
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Whenever an empowered attack lands, apply weak on the target for {val:buff_duration}
-    seconds which reduce the damage dealt of {val:damage_dealt_reduction}.
+  description: Whenever an empowered attack lands, apply weak on the target for {0}
+    seconds which reduce the damage dealt of {1:0.0%}.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781502793121876
+  - rid: 3656781580603752478
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   damageReduction: 0.25
   duration: 3
@@ -30,7 +31,11 @@ MonoBehaviour:
     - rid: 3656781502793121876
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
+        technologyPerkDefinition: {fileID: 11400000, guid: 5a6bbed2ca32df2499f8bb0c3f1ef5a4, type: 2}
+    - rid: 3656781580603752478
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 06fdf97ed5cca244fa96f398725abfd9, type: 2}
 --- !u!114 &144047090231248653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46,5 +51,5 @@ MonoBehaviour:
   id: 1882c67d3d8950240871ce8f1c9febbd
   title: 
   icon: {fileID: -1375556571, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Reduce the damage dealt by {val:damage_dealt_reduction}.
+  description: Weak. Reduce the damage dealt by {0:0.0%}
   showOnHealthBar: 1

@@ -32,7 +32,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"The first time health points would be reduced to 0, gain invulnerability for {duration} seconds.";
+            return string.Format(Description, duration);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

@@ -45,7 +45,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Increase defense by {defense} for {buffDuration} seconds each time an empowerment attack lands";
+            return string.Format(Description, defense, buffDuration);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

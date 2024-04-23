@@ -10,7 +10,9 @@
 
         public override string ParseDescription()
         {
-            return $"Invoke a medium size dark fissure behind the first enemy in {Range}{StatisticFormatter.Percentage(definition.ReachPercentage, StatisticDefinition.Reach)} meters that deals {Damage}{StatisticFormatter.Percentage(definition.DamagePercentage, StatisticDefinition.AttackPower)} damage to all enemy in range.";
+            return string.Format(definition.Description,
+                $"{Range}{StatisticFormatter.Percentage(definition.ReachPercentage, StatisticDefinition.Reach)}",
+                $"{Damage}{StatisticFormatter.Percentage(definition.DamagePercentage, StatisticDefinition.AttackPower)}");
         }
     }
 }

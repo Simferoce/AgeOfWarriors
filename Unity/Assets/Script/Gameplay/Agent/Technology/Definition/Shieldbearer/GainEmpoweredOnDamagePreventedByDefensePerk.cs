@@ -51,8 +51,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Whenever {damageToPrevent} damage has been prevented by defense, apply empowerment on the next attack which " +
-                $"increase damage dealt by {empoweredModifierDefinition.PercentageDamageIncrease:0.0%}.";
+            return string.Format(Description, damageToPrevent, empoweredModifierDefinition.PercentageDamageIncrease);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

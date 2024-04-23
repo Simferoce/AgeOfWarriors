@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 139c80b9c4685104080a4185aff5289d
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase Defense by {0} for each {1}
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781580603752469
@@ -28,4 +28,4 @@ MonoBehaviour:
     - rid: 3656781580603752469
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
+        technologyPerkDefinition: {fileID: 11400000, guid: a8705c5f35226a34ea1a8fcc246bb78e, type: 2}

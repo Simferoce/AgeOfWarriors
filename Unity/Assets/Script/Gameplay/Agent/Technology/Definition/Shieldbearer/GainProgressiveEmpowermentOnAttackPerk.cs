@@ -40,9 +40,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"For each attack landed, add a stack of Progressive Empowerment. " +
-                $"Whenever the amount of stack accumulated is equal to {modifierToGain.MaxStack}, " +
-                $"gain a stack of Empowerment which increase the damage dealt by {modifierToGain.EmpoweredModifierDefinition.PercentageDamageIncrease:0.0%}.";
+            return string.Format(Description, modifierToGain.MaxStack, modifierToGain.EmpoweredModifierDefinition.PercentageDamageIncrease);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

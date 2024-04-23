@@ -18,7 +18,7 @@ namespace Game
 
             public override string ParseDescription()
             {
-                return $"Weak. Reduce the damage dealt by {amount:0.0%}";
+                return string.Format(definition.Description, amount);
             }
         }
     }

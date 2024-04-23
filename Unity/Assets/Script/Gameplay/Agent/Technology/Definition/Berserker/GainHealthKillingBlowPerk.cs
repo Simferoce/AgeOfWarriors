@@ -31,7 +31,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Regain {StatisticFormatter.Percentage(percentageHealMaxHealth, StatisticDefinition.MaxHealth)} health points whenever landing a killing blow on a unit.";
+            return string.Format(this.Description, StatisticFormatter.Percentage(percentageHealMaxHealth, StatisticDefinition.MaxHealth));
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

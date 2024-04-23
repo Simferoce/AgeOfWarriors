@@ -16,11 +16,11 @@ MonoBehaviour:
   title: 
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Whenever an enemy unit die, apply weak which reduce the damage dealt
-    by {val:damage_dealt_reduction} of every enemy unit in {val:range} meters for
-    {val:buff_duration} seconds.
+    by {0:0.0%} of every enemy unit in {1} meters for {2} seconds.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 4528059815764426758
+  - rid: 3656781580603752479
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   duration: 3
   percentageReachAffect: 5
@@ -29,10 +29,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 3656781580603752479
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 06fdf97ed5cca244fa96f398725abfd9, type: 2}
     - rid: 4528059815764426758
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
+        technologyPerkDefinition: {fileID: 11400000, guid: 139c80b9c4685104080a4185aff5289d, type: 2}
 --- !u!114 &2714545886143392768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,6 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 9e034dbe678c2694aa7dd6129664967f
   title: 
-  icon: {fileID: 0}
-  description: 
+  icon: {fileID: -1375556571, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: Weak. Reduce the damage dealt by {0:0.0%}
   showOnHealthBar: 1

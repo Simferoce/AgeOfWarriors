@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa0d562119631a4c8f48cf58d3811fb, type: 3}
   m_Name: IncreaseAttackSpeedBaseOnNearbyEnemiesPerk
   m_EditorClassIdentifier: 
-  id: 
+  id: 7159f275e7e0f134bb1a06889b550337
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase attack speed by {0:0.0%} for each enemy in {1} meters. {2}
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781580603752448
@@ -28,4 +28,4 @@ MonoBehaviour:
     - rid: 3656781580603752448
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
+        technologyPerkDefinition: {fileID: 11400000, guid: 74e84fbb5e5e1054fa6924437b023719, type: 2}

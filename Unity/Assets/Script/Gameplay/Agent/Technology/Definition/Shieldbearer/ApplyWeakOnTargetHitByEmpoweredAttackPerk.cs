@@ -47,8 +47,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Whenever an empowered attack lands, apply weak on the target for {duration} " +
-                $"seconds which reduce the damage dealt of {damageReduction}.";
+            return string.Format(Description, duration, damageReduction);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

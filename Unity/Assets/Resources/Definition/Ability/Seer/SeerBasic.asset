@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 583f27f933430694893ccbf3929fa8cf
   title: Basic
-  description: Throw a dark sphere that deals {val:damage} damage.
+  description: Throw a dark sphere that deals {0} damage to an enemy in {1} meters.
   prefab: {fileID: 95085129432284298, guid: eb9b88921ce2598438363f68dc3259e1, type: 3}
   reachPercentage: 1
   damagePercentage: 1

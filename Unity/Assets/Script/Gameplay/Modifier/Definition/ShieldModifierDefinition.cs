@@ -19,7 +19,7 @@ namespace Game
 
             public override string ParseDescription()
             {
-                return $"Absorb {Remaining} amount of damage.";
+                return string.Format(Definition.Description, Remaining);
             }
 
             public bool Absorb(float amount, out float amountNotAbsorbed)

@@ -15,16 +15,21 @@ MonoBehaviour:
   id: e0908637b6579c8499217ea20b352950
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase damage dealt increase weak target by {0}.
   showOnHealthBar: 0
   requirementsPerk:
-  - rid: 4528059830243164173
+  - rid: 3656781580603752481
+  - rid: 3656781580603752480
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   damageDealtAgainstWeak: 10
   references:
     version: 2
     RefIds:
-    - rid: 4528059830243164173
+    - rid: 3656781580603752480
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
+        technologyPerkDefinition: {fileID: 11400000, guid: 35afdbbda7ba57545a62b2cbe980f4b1, type: 2}
+    - rid: 3656781580603752481
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 74e84fbb5e5e1054fa6924437b023719, type: 2}

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 156a5e5d2b7389c458935a45ae3476d7
   title: Dark Embrace
-  description: Invoke a medium size dark fissure behind the first enemy in {val:range}
-    meters that deals {val:damage} damage to all enemy in range.
+  description: Invoke a medium size dark fissure behind the first enemy in {0} meters
+    that deals {1} damage to all enemy in range.
   prefab: {fileID: 1262703249881643635, guid: fc6a4b62da811034d98dbfc0f4757caf, type: 3}
   reachPercentage: 1
   damagePercentage: 2

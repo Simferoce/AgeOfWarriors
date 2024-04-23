@@ -15,10 +15,9 @@ MonoBehaviour:
   id: a8705c5f35226a34ea1a8fcc246bb78e
   title: 
   icon: {fileID: -1767486148, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Whenever {val:damage_to_prevent} damage has been prevented by defense,
-    apply empowerment on the next attack which increase damage dealt by {val:damage_increase}.
+  description: Whenever {0} damage has been prevented by defense, apply empowerment
+    on the next attack which increase damage dealt by {1:0.0%}.
   showOnHealthBar: 1
-  statistics: []
   requirementsPerk:
   - rid: 3656781502793121869
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}

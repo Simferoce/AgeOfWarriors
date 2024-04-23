@@ -18,7 +18,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Increase damage dealt increase weak target by {damageDealtAgainstWeak}.";
+            return string.Format(Description, damageDealtAgainstWeak);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

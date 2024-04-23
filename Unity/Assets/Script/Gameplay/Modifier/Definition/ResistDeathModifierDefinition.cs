@@ -15,7 +15,7 @@ namespace Game
 
             public override string ParseDescription()
             {
-                return "Recently cheated death.";
+                return definition.Description;
             }
         }
     }

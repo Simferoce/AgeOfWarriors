@@ -36,7 +36,7 @@ namespace Game
 
         public override string ParseDescription()
         {
-            return $"Gain a shield each {cooldown} seconds for {duration} seconds that absorbs for a total of {amount} damage.";
+            return string.Format(Description, cooldown, duration, amount);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: dfa0ecdf3974904439b3c578bc907282
   title: Basic
-  description: Deals {val:damage} damage to a target at {val:range} meters.
+  description: Deals {0} damage to a target at {1} meters.
   prefab: {fileID: 234122527794856266, guid: a23b4828f80fc3e4c9fc2e5afafabe9d, type: 3}
   reachPercentage: 1
   damagePercentage: 1

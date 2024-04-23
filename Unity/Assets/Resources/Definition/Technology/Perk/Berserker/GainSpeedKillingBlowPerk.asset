@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 352faaf1fb49b6e4c93d5a205efe8d97
   title: Battles Craving
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Gain {val:speed} increase movement speed whenever landing a killing
-    blow on a unit.
+  description: Gain {0:0.0%} increase movement speed for {1} seconds whenever landing
+    a killing blow on a unit.
   showOnHealthBar: 0
   requirementsPerk:
   - rid: 3656781458035441717

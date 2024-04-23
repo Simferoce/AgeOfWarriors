@@ -9,7 +9,7 @@
 
         public override string ParseDescription()
         {
-            return $"Throw a potion that heals an ally on contact by {Heal}.";
+            return string.Format(definition.Description, Heal);
         }
     }
 }
