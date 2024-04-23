@@ -64,10 +64,17 @@ namespace Game
                 End();
         }
 
-        protected void OnAnimatorEventAbilityUsed()
+        public override void Apply()
         {
             foreach (AbilityEffect effect in effects)
                 effect.Apply();
+
+            PublishEffectApplied();
+        }
+
+        protected void OnAnimatorEventAbilityUsed()
+        {
+            Apply();
         }
 
         private void OnCastEnded()

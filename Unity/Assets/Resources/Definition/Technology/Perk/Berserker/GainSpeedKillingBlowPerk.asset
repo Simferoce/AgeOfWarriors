@@ -46,5 +46,5 @@ MonoBehaviour:
   id: a1ae0d2c1684a904d8b94040eb64e521
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase movement speed by {0:0.0%}.
   showOnHealthBar: 1

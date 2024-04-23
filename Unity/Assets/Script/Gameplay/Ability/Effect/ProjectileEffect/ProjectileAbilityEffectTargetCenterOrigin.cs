@@ -9,11 +9,11 @@ namespace Game
     {
         [SerializeField] private Vector3 offset = Vector3.zero;
 
-        public override Vector3 GetPosition(ProjectileAbilityEffect ability)
+        public override Vector3 GetPosition(Ability ability)
         {
-            Vector3 closest = ability.Ability.Targets.OrderBy(x => Mathf.Abs(x.TargetPosition.x - ability.Ability.Character.CenterPosition.x)).FirstOrDefault().TargetPosition;
+            Vector3 closest = ability.Targets.OrderBy(x => Mathf.Abs(x.TargetPosition.x - ability.Character.CenterPosition.x)).FirstOrDefault().TargetPosition;
 
-            return closest + new Vector3(offset.x * ability.Ability.Character.Direction, offset.y);
+            return closest + new Vector3(offset.x * ability.Character.Direction, offset.y);
         }
     }
 }

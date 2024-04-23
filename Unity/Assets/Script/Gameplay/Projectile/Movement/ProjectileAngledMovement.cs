@@ -8,6 +8,8 @@ namespace Game
     {
         [SerializeField] private float angle;
 
+        public float Angle { get => angle; set => angle = value; }
+
         public override void Initialize(Projectile projectile)
         {
             base.Initialize(projectile);

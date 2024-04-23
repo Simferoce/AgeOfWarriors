@@ -11,10 +11,10 @@ namespace Game
 
         public override void Apply()
         {
-            GameObject gameObject = GameObject.Instantiate(projectilePrefab, origin.GetPosition(this), Quaternion.identity);
+            GameObject gameObject = GameObject.Instantiate(projectilePrefab, origin.GetPosition(Ability), Quaternion.identity);
             Projectile projectile = gameObject.GetComponent<Projectile>();
 
-            projectile.Initialize(Ability.Character, Ability, Ability.Targets[0] as ITargeteable);
+            projectile.Initialize(Ability.Character, Ability, Ability.Targets[0]);
         }
     }
 }

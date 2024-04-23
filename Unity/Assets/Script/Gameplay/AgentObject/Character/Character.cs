@@ -48,6 +48,7 @@ namespace Game
 
             CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
 
+            InitializeAbilities();
             AgentObjectDefinition agentObjectDefinition = GetDefinition();
             List<ITechnologyModify> modifiers = agent.Technology.PerksUnlocked.OfType<ITechnologyModify>().ToList();
             foreach (ITechnologyModify modifier in modifiers)
@@ -57,7 +58,6 @@ namespace Game
             }
 
             stateMachine.Initialize(new MoveState(this));
-            InitializeAbilities();
             this.Health = MaxHealth;
         }
 

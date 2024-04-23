@@ -209,7 +209,7 @@ MonoBehaviour:
     - rid: 3656781574100221953
       type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
       data:
-        angle: 30
+        angle: 40
     - rid: 3656781574100221954
       type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781574100221955

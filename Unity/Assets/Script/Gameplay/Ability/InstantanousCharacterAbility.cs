@@ -37,6 +37,14 @@ namespace Game
         {
         }
 
+        public override void Apply()
+        {
+            foreach (AbilityEffect effect in effects)
+                effect.Apply();
+
+            PublishEffectApplied();
+        }
+
         public override void Use()
         {
             IsCasting = true;
@@ -46,8 +54,7 @@ namespace Game
             foreach (AbilityEffect effect in effects)
                 effect.OnAbilityStarted();
 
-            foreach (AbilityEffect effect in effects)
-                effect.Apply();
+            Apply();
 
             End();
         }

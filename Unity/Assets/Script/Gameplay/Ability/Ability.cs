@@ -8,6 +8,7 @@ namespace Game
         public Character Character { get; set; }
         [Statistic("cooldown")] public abstract float Cooldown { get; }
 
+        public event System.Action OnAbilityEffectApplied;
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
         public virtual List<ITargeteable> Targets => new List<ITargeteable>();
@@ -27,7 +28,14 @@ namespace Game
 
         public abstract void Use();
 
+        public abstract void Apply();
+
         public abstract void Interrupt();
+
+        protected void PublishEffectApplied()
+        {
+            OnAbilityEffectApplied?.Invoke();
+        }
     }
 
     public abstract class Ability<T> : Ability

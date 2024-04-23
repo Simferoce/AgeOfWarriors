@@ -254,6 +254,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1538077633979358667, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: m_Size.x
+      value: 2.0032554
+      objectReference: {fileID: 0}
+    - target: {fileID: 1538077633979358667, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.20675063
+      objectReference: {fileID: 0}
     - target: {fileID: 1645757101492874935, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: m_Name
       value: Archer

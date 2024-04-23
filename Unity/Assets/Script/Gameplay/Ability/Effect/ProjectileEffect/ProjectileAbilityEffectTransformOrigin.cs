@@ -8,9 +8,9 @@ namespace Game
     {
         [SerializeField] private string origin;
 
-        public override Vector3 GetPosition(ProjectileAbilityEffect ability)
+        public override Vector3 GetPosition(Ability ability)
         {
-            foreach (TransformTag tag in ability.Ability.Character.TransformTags)
+            foreach (TransformTag tag in ability.Character.TransformTags)
             {
                 if (tag.Id == origin)
                     return tag.transform.position;

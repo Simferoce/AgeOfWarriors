@@ -21,6 +21,8 @@ namespace Game
         public State StateValue { get => state; set => state = value; }
         public Ability Ability { get => ability; set => ability = value; }
         public ITargeteable Target { get => target; set => target = value; }
+        public ITargeteable Ignore { get; set; }
+        public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
 
         private Character character;
         private Ability ability;
