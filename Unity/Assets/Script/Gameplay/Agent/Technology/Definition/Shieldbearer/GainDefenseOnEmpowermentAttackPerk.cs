@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace Game
 {
-    [CreateAssetMenu(fileName = "GainDefenseOnEmpowermentAttack", menuName = "Definition/Technology/Shieldbearer/GainDefenseOnEmpowermentAttack")]
-    public class GainDefenseOnEmpowermentAttack : CharacterTechnologyPerkDefinition
+    [CreateAssetMenu(fileName = "GainDefenseOnEmpowermentAttackPerk", menuName = "Definition/Technology/Shieldbearer/GainDefenseOnEmpowermentAttackPerk")]
+    public class GainDefenseOnEmpowermentAttackPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier, GainDefenseOnEmpowermentAttack>
+        public class Modifier : Modifier<Modifier, GainDefenseOnEmpowermentAttackPerk>
         {
-            public Modifier(IModifiable modifiable, GainDefenseOnEmpowermentAttack modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainDefenseOnEmpowermentAttackPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
                 modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }

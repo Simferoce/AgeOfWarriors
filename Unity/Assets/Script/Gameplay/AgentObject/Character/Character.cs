@@ -15,6 +15,7 @@ namespace Game
         public CharacterAnimator CharacterAnimator { get; set; }
         public List<TransformTag> TransformTags { get; set; }
         public event AttackedLanded OnAttackLanded;
+        public event System.Action OnDeath;
         public override bool IsActive { get => !IsDead; }
         public Vector3 CenterPosition { get => this.GetCachedComponent<ITargeteable>().CenterPosition; }
 
@@ -133,6 +134,7 @@ namespace Game
         public void Death()
         {
             EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
+            OnDeath?.Invoke();
             stateMachine.SetState(new DeathState(this));
         }
 

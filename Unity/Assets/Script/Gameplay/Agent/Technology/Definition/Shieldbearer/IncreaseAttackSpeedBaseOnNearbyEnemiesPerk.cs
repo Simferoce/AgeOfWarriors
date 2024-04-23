@@ -2,17 +2,17 @@
 
 namespace Game
 {
-    [CreateAssetMenu(fileName = "IncreaseAttackSpeedBaseOnNearbyEnemies", menuName = "Definition/Technology/Shieldbearer/IncreaseAttackSpeedBaseOnNearbyEnemies")]
-    public class IncreaseAttackSpeedBaseOnNearbyEnemies : CharacterTechnologyPerkDefinition
+    [CreateAssetMenu(fileName = "IncreaseAttackSpeedBaseOnNearbyEnemiesPerk", menuName = "Definition/Technology/Shieldbearer/IncreaseAttackSpeedBaseOnNearbyEnemiesPerk")]
+    public class IncreaseAttackSpeedBaseOnNearbyEnemiesPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier, IncreaseAttackSpeedBaseOnNearbyEnemies>
+        public class Modifier : Modifier<Modifier, IncreaseAttackSpeedBaseOnNearbyEnemiesPerk>
         {
             private int numberOfNearbyEnemies;
 
             public override float? AttackSpeedPercentage => numberOfNearbyEnemies * definition.attackSpeedIncreasePerEnemies;
             public override bool Show => numberOfNearbyEnemies > 0;
 
-            public Modifier(IModifiable modifiable, IncreaseAttackSpeedBaseOnNearbyEnemies modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, IncreaseAttackSpeedBaseOnNearbyEnemiesPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
             }
 

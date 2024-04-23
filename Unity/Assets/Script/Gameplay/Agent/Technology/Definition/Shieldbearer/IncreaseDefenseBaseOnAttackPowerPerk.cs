@@ -2,14 +2,14 @@
 
 namespace Game
 {
-    [CreateAssetMenu(fileName = "IncreaseDefenseBaseOnAttackPower", menuName = "Definition/Technology/Shieldbearer/IncreaseDefenseBaseOnAttackPower")]
-    public class IncreaseDefenseBaseOnAttackPower : CharacterTechnologyPerkDefinition
+    [CreateAssetMenu(fileName = "IncreaseDefenseBaseOnAttackPowerPerk", menuName = "Definition/Technology/Shieldbearer/IncreaseDefenseBaseOnAttackPowerPerk")]
+    public class IncreaseDefenseBaseOnAttackPowerPerk : CharacterTechnologyPerkDefinition
     {
-        public class Modifier : Modifier<Modifier, IncreaseDefenseBaseOnAttackPower>
+        public class Modifier : Modifier<Modifier, IncreaseDefenseBaseOnAttackPowerPerk>
         {
             public override float? Defense => Mathf.Floor(modifiable.GetCachedComponent<Character>().AttackPower / definition.attackPowerRequired) * definition.defenseIncrease;
 
-            public Modifier(IModifiable modifiable, IncreaseDefenseBaseOnAttackPower modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, IncreaseDefenseBaseOnAttackPowerPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
             }
         }

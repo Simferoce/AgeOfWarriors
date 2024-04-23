@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 566b2ca18437f20499684b36c3ddc096, type: 3}
-  m_Name: ApplyWeakOnNearbyEnemiesWhenOneIsDefeated
+  m_Name: ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk
   m_EditorClassIdentifier: 
   id: 35afdbbda7ba57545a62b2cbe980f4b1
   title: 
