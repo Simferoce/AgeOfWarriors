@@ -19,10 +19,10 @@ namespace Game
             currentHeal = heal.GetValueOrThrow(projectile.Ability);
         }
 
-        public override bool Impact(GameObject collision)
+        public override ImpactReport Impact(GameObject collision)
         {
             if (projectile.Rigidbody.velocity.y > 0)
-                return false;
+                return new ImpactReport(ImpactStatus.NotImpacted);
 
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
@@ -32,14 +32,14 @@ namespace Game
             {
                 character.Heal(currentHeal);
 
-                return true;
+                return new ImpactReport(ImpactStatus.Impacted, targeteable);
             }
             else if (collision.gameObject.CompareTag(GameTag.GROUND))
             {
-                return true;
+                return new ImpactReport(ImpactStatus.Impacted);
             }
 
-            return false;
+            return new ImpactReport(ImpactStatus.NotImpacted);
         }
     }
 }

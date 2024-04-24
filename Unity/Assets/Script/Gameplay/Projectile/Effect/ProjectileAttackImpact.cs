@@ -18,7 +18,7 @@ namespace Game
             base.Initialize(projectile);
         }
 
-        public override bool Impact(GameObject collision)
+        public override ImpactReport Impact(GameObject collision)
         {
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
@@ -27,17 +27,17 @@ namespace Game
                 && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
                 && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
             {
-                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile.Ability), armorPenetration.GetValueOrDefault(projectile.Ability), 0, true, attackable, projectile);
+                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile.Ability), armorPenetration.GetValueOrDefault(projectile.Ability), 0, true, false, attackable, projectile);
                 attackable.TakeAttack(attack);
 
-                return true;
+                return new ImpactReport(ImpactStatus.Impacted, targeteable);
             }
             else if (collision.gameObject.CompareTag(GameTag.GROUND))
             {
-                return true;
+                return new ImpactReport(ImpactStatus.Impacted);
             }
 
-            return false;
+            return new ImpactReport(ImpactStatus.NotImpacted);
         }
     }
 }

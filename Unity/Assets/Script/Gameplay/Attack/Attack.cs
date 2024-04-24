@@ -8,19 +8,22 @@
         public float Leach { get; set; }
         public bool Ranged { get; set; }
         public bool Empowered { get; set; }
+        public bool OverTime { get; set; }
 
-        public Attack(AttackSource attackSource, float damage, float armorPenetration, float leach, bool ranged, bool empowered)
+        public Attack(AttackSource attackSource, float damage, float armorPenetration, float leach, bool ranged, bool empowered, bool overTime)
         {
             Leach = leach;
             AttackSource = attackSource;
             Damage = damage;
             ArmorPenetration = armorPenetration;
             Empowered = empowered;
+            OverTime = overTime;
+            Ranged = ranged;
         }
 
         public Attack Clone()
         {
-            return new Attack(AttackSource.Clone(), Damage, ArmorPenetration, Leach, Ranged, Empowered);
+            return new Attack(AttackSource.Clone(), Damage, ArmorPenetration, Leach, Ranged, Empowered, OverTime);
         }
     }
 }

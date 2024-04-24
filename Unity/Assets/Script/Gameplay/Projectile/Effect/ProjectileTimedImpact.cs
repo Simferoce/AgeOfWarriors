@@ -1,6 +1,7 @@
 ﻿using Extension;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -25,19 +26,19 @@ namespace Game
             currentDuration = duration.GetValueOrThrow(projectile.Ability);
         }
 
-        public override bool Impact(GameObject collision)
+        public override ImpactReport Impact(GameObject collision)
         {
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
                 && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
                 && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
             {
-                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, true, attackable, projectile);
+                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, true, false, attackable, projectile);
                 attack.AttackSource.Sources.Add(projectile);
                 targets.Add(attackable);
             }
 
-            return false;
+            return new ImpactReport(ImpactStatus.NotImpacted);
         }
 
         public override void LeaveZone(GameObject collision)
@@ -51,10 +52,10 @@ namespace Game
             }
         }
 
-        public override bool Update()
+        public override ImpactReport Update()
         {
             if (projectile.StateValue == Projectile.State.Dead)
-                return false;
+                return new ImpactReport(ImpactStatus.NotImpacted);
 
             if (Time.time - startedAt > currentDuration)
             {
@@ -63,10 +64,10 @@ namespace Game
                     target.TakeAttack(attack);
                 }
 
-                return true;
+                return new ImpactReport(ImpactStatus.Impacted, targets.Select(x => x.GetCachedComponent<ITargeteable>()).ToList());
             }
 
-            return false;
+            return new ImpactReport(ImpactStatus.NotImpacted);
         }
     }
 }

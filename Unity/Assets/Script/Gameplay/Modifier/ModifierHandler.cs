@@ -41,5 +41,11 @@ namespace Game
             foreach (Modifier modifier in modifiers)
                 modifier.Dispose();
         }
+
+        public bool TryGetModifier(ModifierDefinition definition, out Modifier modifier)
+        {
+            modifier = modifiers.FirstOrDefault(x => x.Definition == definition);
+            return modifier != null;
+        }
     }
 }

@@ -78,7 +78,7 @@ namespace Game
             DisposeAbilities();
         }
 
-        public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, IAttackable target, params IAttackSource[] source)
+        public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, bool overtime, IAttackable target, params IAttackSource[] source)
         {
             bool empowered = false;
 
@@ -104,7 +104,7 @@ namespace Game
                 damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
             }
 
-            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered);
+            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered, overtime);
         }
 
         public ITargeteable GetTarget(TargetCriteria criteria, object caller)

@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class Projectile : MonoBehaviour, IAttackSource
+    [RequireComponent(typeof(ModifierHandler))]
+    public class Projectile : Entity, IAttackSource
     {
+        public delegate void Impacted(List<ITargeteable> targeteables);
+
         public enum State
         {
             Alive,
@@ -23,6 +27,7 @@ namespace Game
         public ITargeteable Target { get => target; set => target = value; }
         public ITargeteable Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
+        public event Impacted OnImpacted;
 
         private Character character;
         private Ability ability;
@@ -40,6 +45,11 @@ namespace Game
 
             foreach (ProjectileImpact effect in impacts)
                 effect.Initialize(this);
+
+            foreach (IProjectileModifier projectileModifier in character.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>())
+            {
+                this.GetCachedComponent<IModifiable>().AddModifier(projectileModifier.GetModifier(this));
+            }
         }
 
         private void Update()
@@ -51,7 +61,14 @@ namespace Game
             {
                 bool impacted = false;
                 foreach (ProjectileImpact effect in impacts)
-                    impacted |= effect.Update();
+                {
+                    ProjectileImpact.ImpactReport impactReport = effect.Update();
+                    if (impactReport.ImpactStatus == ProjectileImpact.ImpactStatus.Impacted)
+                    {
+                        impacted = true;
+                        OnImpacted?.Invoke(impactReport.ImpactedTargeteables);
+                    }
+                }
 
                 if (impacted)
                     Kill(null);
@@ -69,7 +86,14 @@ namespace Game
 
             bool impacted = false;
             foreach (ProjectileImpact effect in impacts)
-                impacted |= effect.Impact(collision.gameObject);
+            {
+                ProjectileImpact.ImpactReport impactReport = effect.Impact(collision.gameObject);
+                if (impactReport.ImpactStatus == ProjectileImpact.ImpactStatus.Impacted)
+                {
+                    impacted = true;
+                    OnImpacted?.Invoke(impactReport.ImpactedTargeteables);
+                }
+            }
 
             if (impacted)
                 Kill(collision.gameObject);

@@ -35,7 +35,12 @@ namespace Game
                 damage *= Mathf.Clamp(1 - modifiable.GetModifiers().Sum(x => x.RangedDamageReduction ?? 0), 0.35f, 1f);
             }
 
-            float damageRemaining = damage * (1 / (1 + (defense) * 0.1f));
+            float damageRemaining = damage;
+            if (!attack.OverTime)
+            {
+                damageRemaining *= (1 / (1 + (defense) * 0.1f));
+            }
+
             float defenseDamagePrevented = damage - damageRemaining;
 
             damageRemaining = Absorb(damageRemaining);
