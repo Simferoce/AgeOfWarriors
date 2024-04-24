@@ -21,6 +21,7 @@
                     Current = Next;
                     Current.Enter();
 
+                    //Debug.Log($"{Current.Character.name}:{Current.Character.GetInstanceID()} Switch State: {Current.GetType().Name}");
                     Next = null;
                 }
 
@@ -30,7 +31,10 @@
 
             public void SetState(State state)
             {
-                Next = state;
+                if (Current.CanExit)
+                    Next = state;
+
+                //Debug.Log($"{state.Character.name}:{state.Character.GetInstanceID()} Set Next State: {state.GetType().Name}");
             }
         }
     }

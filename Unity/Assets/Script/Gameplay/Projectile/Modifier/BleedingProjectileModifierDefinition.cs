@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    [CreateAssetMenu(fileName = "BleedingProjectileModifierDefinition", menuName = "Definition/Modifier/BleedingProjectileModifierDefinition")]
+    [CreateAssetMenu(fileName = "BleedingProjectileModifierDefinition", menuName = "Definition/Modifier/Projectile/BleedingProjectileModifierDefinition")]
     public class BleedingProjectileModifierDefinition : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, BleedingProjectileModifierDefinition>
@@ -42,7 +42,8 @@ namespace Game
                         }
                         else
                         {
-                            modifier.Increase(damagePerSeconds);
+                            SpreadBleedingPerk.Modifier spreadModifier = projectile.Character.GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is SpreadBleedingPerk.Modifier) as SpreadBleedingPerk.Modifier;
+                            modifier.Increase(damagePerSeconds, duration, spreadModifier != null, spreadModifier?.SpreadDistance ?? 0f, projectile.Character);
                         }
                     }
                 }

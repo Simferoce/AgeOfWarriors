@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Game
 {
@@ -7,6 +8,8 @@ namespace Game
         public abstract class State
         {
             public virtual bool CanExit => true;
+
+            public Character Character { get => character; }
 
             protected Character character;
             protected float enteredAt;
@@ -35,6 +38,14 @@ namespace Game
             protected abstract void InternalEnter();
             protected abstract void InternalUpdate();
             protected abstract void InternalExit();
+
+            public void CheckStagger()
+            {
+                if (character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsStagger != null).Any(x => x.IsStagger.Value))
+                {
+                    character.stateMachine.SetState(new StaggerState(character));
+                }
+            }
         }
     }
 }

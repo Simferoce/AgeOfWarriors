@@ -11,6 +11,7 @@ namespace Game
         [SerializeField] private float duration = 0.3f;
         [SerializeField] private StatisticReference<float> staggerDuration;
         [SerializeField, Range(0, 1)] private float damping = 0.05f;
+        [SerializeField] private StaggerModifierDefinition staggerModifierDefinition;
 
         private float startedAt;
 
@@ -19,8 +20,8 @@ namespace Game
             float duration = staggerDuration.GetValueOrThrow(Ability);
             foreach (IDisplaceable target in Ability.Targets.Cast<IDisplaceable>().ToList())
             {
-                if (target is IStaggerable staggerable)
-                    staggerable.Stagger(duration);
+                if (target.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
+                    targetModifiable.AddModifier(new StaggerModifierDefinition.Modifier(targetModifiable, staggerModifierDefinition, duration));
             }
 
             startedAt = Time.time;

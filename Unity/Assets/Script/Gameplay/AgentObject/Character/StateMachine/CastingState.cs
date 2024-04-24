@@ -20,7 +20,7 @@
 
             protected override void InternalUpdate()
             {
-
+                CheckStagger();
             }
         }
     }

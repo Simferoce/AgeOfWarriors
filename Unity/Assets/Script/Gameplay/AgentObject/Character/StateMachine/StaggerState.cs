@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿using System.Linq;
 
 namespace Game
 {
@@ -6,27 +6,34 @@ namespace Game
     {
         public class StaggerState : State
         {
-            private float duration;
-
-            public StaggerState(Character character, float duration) : base(character)
+            public StaggerState(Character character) : base(character)
             {
-                this.duration = duration;
             }
 
             protected override void InternalEnter()
             {
+                character.CharacterAnimator.ClearTrigger(CharacterAnimatorParameter.Parameter.EndStagger);
                 character.CharacterAnimator.SetTrigger(CharacterAnimatorParameter.Parameter.Stagger);
+
+                foreach (Ability ability in character.abilities)
+                {
+                    if (ability.IsActive)
+                        ability.Interrupt();
+                }
             }
 
             protected override void InternalExit()
             {
-                character.CharacterAnimator.SetTrigger(CharacterAnimatorParameter.Parameter.EndStagger);
+                character.CharacterAnimator.ClearTrigger(CharacterAnimatorParameter.Parameter.Stagger);
             }
 
             protected override void InternalUpdate()
             {
-                if (Time.time - enteredAt > duration)
+                if (!character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsStagger != null).Any(x => x.IsStagger.Value))
+                {
                     character.stateMachine.SetState(new MoveState(character));
+                    character.CharacterAnimator.SetTrigger(CharacterAnimatorParameter.Parameter.EndStagger);
+                }
             }
         }
     }

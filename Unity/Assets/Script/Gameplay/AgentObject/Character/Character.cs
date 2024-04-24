@@ -7,7 +7,7 @@ namespace Game
 {
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(Target))]
-    public partial class Character : AgentObject<CharacterDefinition>, IDisplaceable, IStaggerable, IAttackSource, IAttackableOwner, ITargetOwner
+    public partial class Character : AgentObject<CharacterDefinition>, IDisplaceable, IAttackSource, IAttackableOwner, ITargetOwner
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -143,17 +143,6 @@ namespace Game
             rigidbody.MovePosition(this.rigidbody.position + displacement);
         }
 
-        public void Stagger(float duration)
-        {
-            foreach (Ability ability in abilities)
-            {
-                if (ability.IsActive)
-                    ability.Interrupt();
-            }
-
-            stateMachine.SetState(new StaggerState(this, duration));
-        }
-
         public void Heal(float amount)
         {
             this.Health += amount;
@@ -211,7 +200,8 @@ namespace Game
 
         public void EndCast()
         {
-            stateMachine.SetState(new MoveState(this));
+            if (stateMachine.Next == null)
+                stateMachine.SetState(new MoveState(this));
         }
 
         public bool CanUseAbility()

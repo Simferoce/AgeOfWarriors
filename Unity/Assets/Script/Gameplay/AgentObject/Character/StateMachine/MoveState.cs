@@ -44,6 +44,8 @@ namespace Game
                 {
                     character.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 0f, 0.25f);
                 }
+
+                CheckStagger();
             }
 
             private bool CanMove()

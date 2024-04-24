@@ -46,7 +46,7 @@ namespace Game
             foreach (ProjectileImpact effect in impacts)
                 effect.Initialize(this);
 
-            foreach (IProjectileModifier projectileModifier in character.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>())
+            foreach (IProjectileModifier projectileModifier in character.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
             {
                 this.GetCachedComponent<IModifiable>().AddModifier(projectileModifier.GetModifier(this));
             }

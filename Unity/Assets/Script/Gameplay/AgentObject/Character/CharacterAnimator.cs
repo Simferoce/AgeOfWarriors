@@ -7,8 +7,6 @@ namespace Game
     [RequireComponent(typeof(Animator))]
     public class CharacterAnimator : MonoBehaviour
     {
-
-
         private class Damping
         {
             public float DampTime;
@@ -17,6 +15,7 @@ namespace Game
 
         private Animator animator;
         private Dictionary<int, Damping> dampings = new Dictionary<int, Damping>();
+        private Character character;
 
         public Animator Animator => animator;
         public event Action OnAbilityUsed;
@@ -24,6 +23,7 @@ namespace Game
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            character = GetComponentInParent<Character>();
         }
 
         private void Update()
@@ -34,9 +34,21 @@ namespace Game
             }
         }
 
+        public void ClearTrigger(CharacterAnimatorParameter.Parameter trigger)
+        {
+            animator.ResetTrigger(trigger.Convert());
+            //Debug.Log($"{character.name}:{character.GetInstanceID()} Clear Trigger for {trigger}");
+        }
+
         public void SetTrigger(CharacterAnimatorParameter.Parameter trigger)
         {
             animator.SetTrigger(trigger.Convert());
+            //Debug.Log($"{character.name}:{character.GetInstanceID()} Set Trigger for {trigger}");
+        }
+
+        public void SetBool(CharacterAnimatorParameter.Parameter parameter, bool value)
+        {
+            animator.SetBool(parameter.Convert(), value);
         }
 
         public void SetFloat(CharacterAnimatorParameter.Parameter trigger, float value)

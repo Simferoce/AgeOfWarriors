@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public interface IDisplaceable
+    public interface IDisplaceable : IComponent
     {
         public bool IsActive { get; }
         public int Priority { get; }

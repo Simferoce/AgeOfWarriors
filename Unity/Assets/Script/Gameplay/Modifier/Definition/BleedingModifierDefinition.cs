@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Game
 {
@@ -32,12 +33,57 @@ namespace Game
                 return Stacks;
             }
 
-            public void Increase(float damagePerSeconds)
+            public void Increase(float damagePerSeconds, float duration, bool spread, float spreadDistance, object source)
             {
                 if (!IsMaxed)
                 {
                     Stacks++;
                     DamagePerSeconds = damagePerSeconds;
+                }
+                else if (spread)
+                {
+                    Character character = modifiable.GetCachedComponent<Character>();
+
+                    foreach (AgentObject agent in AgentObject.All)
+                    {
+                        if (agent == character)
+                            continue;
+
+                        if (!agent.IsActive)
+                            continue;
+
+                        if (agent.Faction != character.Faction)
+                            continue;
+
+                        if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                            continue;
+
+                        if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+                            continue;
+
+                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > spreadDistance)
+                            continue;
+
+                        BleedingModifierDefinition.Modifier modifier = modifiable.GetModifiers()
+                            .FirstOrDefault(x => x is BleedingModifierDefinition.Modifier bleedingModifier
+                                && bleedingModifier.Source == source)
+                            as BleedingModifierDefinition.Modifier;
+
+                        if (modifier == null)
+                        {
+                            modifier = new BleedingModifierDefinition.Modifier(modifiable, definition, source, duration);
+                            modifier.DamagePerSeconds += damagePerSeconds;
+
+                            modifiable.AddModifier(modifier);
+                        }
+                        else
+                        {
+                            SpreadBleedingPerk.Modifier spreadModifier = modifiable.GetModifiers().FirstOrDefault(x => x is SpreadBleedingPerk.Modifier) as SpreadBleedingPerk.Modifier;
+                            modifier.Increase(damagePerSeconds, duration, spreadModifier != null, spreadModifier?.SpreadDistance ?? 0f, source);
+                        }
+
+                        break;
+                    }
                 }
 
                 Refresh();
