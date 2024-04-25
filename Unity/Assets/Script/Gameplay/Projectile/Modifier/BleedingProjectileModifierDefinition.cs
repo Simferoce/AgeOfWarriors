@@ -35,7 +35,7 @@ namespace Game
 
                         if (modifier == null)
                         {
-                            modifier = new BleedingModifierDefinition.Modifier(modifiable, definition.bleedingModifierDefinition, projectile.Character, duration);
+                            modifier = new BleedingModifierDefinition.Modifier(modifiable, definition.bleedingModifierDefinition, duration, projectile.Character);
                             modifier.DamagePerSeconds += damagePerSeconds;
 
                             modifiable.AddModifier(modifier);

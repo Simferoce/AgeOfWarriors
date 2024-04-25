@@ -10,5 +10,6 @@ namespace Game
         public void RemoveModifier(Modifier modifier);
         public List<Modifier> GetModifiers();
         public bool TryGetModifier(ModifierDefinition definition, out Modifier modifier);
+        public void Clear();
     }
 }

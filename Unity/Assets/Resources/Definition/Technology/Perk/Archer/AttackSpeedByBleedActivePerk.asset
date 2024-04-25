@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 025f43f4898fda54383085dddaba6eeb, type: 3}
+  m_Name: AttackSpeedByBleedActivePerk
+  m_EditorClassIdentifier: 
+  id: 72b9f6fc65309a847b2c86f7d12c29ac
+  title: 
+  icon: {fileID: 0}
+  description: 
+  showOnHealthBar: 1
+  requirementsPerk:
+  - rid: 3656781615733145657
+  affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+  attackSpeedPerBleedApplied: 0.1
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781615733145657
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 52c0b1885f55def44b9c2be0eff4d589, type: 2}

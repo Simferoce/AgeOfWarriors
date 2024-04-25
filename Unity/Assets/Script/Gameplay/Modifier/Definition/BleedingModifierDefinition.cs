@@ -10,7 +10,6 @@ namespace Game
         {
             public float DamagePerSeconds { get; set; }
             public int Stacks { get; set; }
-            public object Source { get; set; }
 
             public bool IsMaxed => Stacks >= definition.maxStack;
 
@@ -18,9 +17,8 @@ namespace Game
             private float lastDamageDealt;
             private float startTime;
 
-            public Modifier(IModifiable modifiable, BleedingModifierDefinition modifierDefinition, object source, float duration) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, BleedingModifierDefinition modifierDefinition, float duration, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                Source = source;
                 durationEffect = duration;
                 this.With(new CharacterModifierTimeElement(duration));
                 Stacks++;
@@ -33,7 +31,7 @@ namespace Game
                 return Stacks;
             }
 
-            public void Increase(float damagePerSeconds, float duration, bool spread, float spreadDistance, object source)
+            public void Increase(float damagePerSeconds, float duration, bool spread, float spreadDistance, IModifierSource source)
             {
                 if (!IsMaxed)
                 {
@@ -71,7 +69,7 @@ namespace Game
 
                         if (modifier == null)
                         {
-                            modifier = new BleedingModifierDefinition.Modifier(modifiable, definition, source, duration);
+                            modifier = new BleedingModifierDefinition.Modifier(modifiable, definition, duration, Source);
                             modifier.DamagePerSeconds += damagePerSeconds;
 
                             modifiable.AddModifier(modifier);

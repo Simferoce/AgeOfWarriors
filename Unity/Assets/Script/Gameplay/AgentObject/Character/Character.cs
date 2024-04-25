@@ -7,7 +7,7 @@ namespace Game
 {
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(Target))]
-    public partial class Character : AgentObject<CharacterDefinition>, IDisplaceable, IAttackSource, IAttackableOwner, ITargetOwner
+    public partial class Character : AgentObject<CharacterDefinition>, IDisplaceable, IAttackSource, IAttackableOwner, ITargetOwner, IModifierSource
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -18,6 +18,7 @@ namespace Game
         public event System.Action OnDeath;
         public override bool IsActive { get => !IsDead; }
         public Vector3 CenterPosition { get => this.GetCachedComponent<ITargeteable>().CenterPosition; }
+        public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
 
         public float Health { get; set; }
         public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
@@ -136,6 +137,8 @@ namespace Game
             EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
             OnDeath?.Invoke();
             stateMachine.SetState(new DeathState(this));
+
+            GetCachedComponent<IModifiable>().Clear();
         }
 
         public void Displace(Vector2 displacement)

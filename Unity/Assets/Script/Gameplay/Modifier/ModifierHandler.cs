@@ -38,14 +38,21 @@ namespace Game
 
         private void OnDestroy()
         {
-            foreach (Modifier modifier in modifiers)
-                modifier.Dispose();
+            Clear();
         }
 
         public bool TryGetModifier(ModifierDefinition definition, out Modifier modifier)
         {
             modifier = modifiers.FirstOrDefault(x => x.Definition == definition);
             return modifier != null;
+        }
+
+        public void Clear()
+        {
+            foreach (Modifier modifier in modifiers.ToList())
+            {
+                RemoveModifier(modifier);
+            }
         }
     }
 }

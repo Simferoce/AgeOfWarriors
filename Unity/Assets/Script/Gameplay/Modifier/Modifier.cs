@@ -21,13 +21,18 @@ namespace Game
         public virtual float? DamageDealtReduction => null;
         public virtual float? DamageDealtAgainstWeak => null;
         public IModifiable Modifiable { get => modifiable; set => modifiable = value; }
+        public IModifierSource Source { get; }
         public virtual bool Show => Definition.Show;
 
         protected IModifiable modifiable;
 
-        protected Modifier(IModifiable modifiable)
+        protected Modifier(IModifiable modifiable, IModifierSource source = null)
         {
+            this.Source = source;
             this.modifiable = modifiable;
+
+            if (Source != null)
+                Source.AppliedModifiers.Add(this);
         }
 
         public void Initialize()
@@ -74,7 +79,11 @@ namespace Game
             }
         }
 
-        public virtual void Dispose() { }
+        public virtual void Dispose()
+        {
+            if (Source != null)
+                Source.AppliedModifiers.Remove(this);
+        }
     }
 
     public abstract class Modifier<T, U> : Modifier
@@ -85,7 +94,7 @@ namespace Game
 
         public override ModifierDefinition Definition => definition;
 
-        protected Modifier(IModifiable modifiable, U modifierDefinition) : base(modifiable)
+        protected Modifier(IModifiable modifiable, U modifierDefinition, IModifierSource source = null) : base(modifiable, source)
         {
             definition = modifierDefinition;
         }
