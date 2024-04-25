@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Game
 {
@@ -8,6 +9,14 @@ namespace Game
         public class Modifier : Modifier<Modifier, StaggerModifierDefinition>
         {
             public override bool? IsStagger => true;
+            public override float? IncreaseDamageTaken
+            {
+                get
+                {
+                    IncreaseDamageTakenWhenStaggerPerk.Modifier modifier = (Source.GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is IncreaseDamageTakenWhenStaggerPerk.Modifier) as IncreaseDamageTakenWhenStaggerPerk.Modifier);
+                    return modifier?.IncreaseDamageTakenOfStaggered ?? 0f;
+                }
+            }
 
             public Modifier(IModifiable modifiable, StaggerModifierDefinition modifierDefinition, float duration, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {

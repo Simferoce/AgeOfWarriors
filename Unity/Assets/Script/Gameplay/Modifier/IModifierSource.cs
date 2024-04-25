@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public interface IModifierSource
+    public interface IModifierSource : IComponent
     {
         public event System.Action<Modifier> OnModifierAdded;
 

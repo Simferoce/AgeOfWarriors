@@ -30,10 +30,14 @@ namespace Game
             float damage = attack.Damage;
             float defense = owner.Defense - attack.ArmorPenetration;
 
+            float damageTakenModifier = -modifiable.GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0);
             if (attack.Ranged)
             {
-                damage *= Mathf.Clamp(1 - modifiable.GetModifiers().Sum(x => x.RangedDamageReduction ?? 0), 0.35f, 1f);
+                damageTakenModifier += modifiable.GetModifiers().Sum(x => x.RangedDamageReduction ?? 0);
             }
+
+            damageTakenModifier = Mathf.Clamp(1 - damageTakenModifier, 0.35f, 1.65f);
+            damage *= damageTakenModifier;
 
             float damageRemaining = damage;
             if (!attack.OverTime)
@@ -61,7 +65,7 @@ namespace Game
             foreach (IAttackSource source in attack.AttackSource.Sources)
                 source.AttackLanded(attackResult);
 
-            Debug.Log($"{this.name} took {damageRemaining} (reduced by {attack.Damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
+            Debug.Log($"{this.name} took {damageRemaining} (reduced by {damage - damageRemaining}) from {attack.AttackSource.Sources[^1]}");
 
             OnDamageTaken?.Invoke(attackResult, this);
 

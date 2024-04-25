@@ -9,24 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c877b3ab9485754e93363a907711500, type: 3}
-  m_Name: StaggerOnTakeDownPerk
+  m_Script: {fileID: 11500000, guid: ca4b101bc0b9598408b23a6fdbd3849e, type: 3}
+  m_Name: IncreaseDamageTakenWhenStaggerPerk
   m_EditorClassIdentifier: 
-  id: c2dd1dbf4a672de48ae4d85ad72a226c
+  id: d11c1a111d825e84f99372a1c5e99801
   title: 
   icon: {fileID: 0}
   description: 
   showOnHealthBar: 1
   requirementsPerk:
-  - rid: 3656781615733145672
+  - rid: 3656781615733145684
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
-  staggerModifierDefinition: {fileID: 11400000, guid: 506feb15e0d8774429d06990cbe46186, type: 2}
-  duration: 3
-  distanceEffect: 2
+  increaseDamageTakenOfStaggered: 0.5
   references:
     version: 2
     RefIds:
-    - rid: 3656781615733145672
+    - rid: 3656781615733145684
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 52c0b1885f55def44b9c2be0eff4d589, type: 2}
