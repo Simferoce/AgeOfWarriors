@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 062f64423cad1914b9013515db7d98b5, type: 3}
+  m_Name: IncreaseAttackPowerPerAlliesPerk
+  m_EditorClassIdentifier: 
+  id: 531722f763d66594ca33b731ca8d0237
+  title: 
+  icon: {fileID: 0}
+  description: 
+  showOnHealthBar: 1
+  requirementsPerk:
+  - rid: 3656781615733145698
+  affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+  attackPowerPerAlliesPresent: 5
+  references:
+    version: 2
+    RefIds:
+    - rid: 3656781615733145698
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 52c0b1885f55def44b9c2be0eff4d589, type: 2}
