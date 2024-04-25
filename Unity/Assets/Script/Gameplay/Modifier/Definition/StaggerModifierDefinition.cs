@@ -9,7 +9,7 @@ namespace Game
         {
             public override bool? IsStagger => true;
 
-            public Modifier(IModifiable modifiable, StaggerModifierDefinition modifierDefinition, float duration) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, StaggerModifierDefinition modifierDefinition, float duration, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 With(new CharacterModifierTimeElement(duration));
             }

@@ -6,7 +6,8 @@ namespace Game
 {
     public class ModifierHandler : Entity, IModifiable
     {
-        public event Action<Modifier> ModifierRemoved;
+        public event Action<Modifier> OnModifierRemoved;
+        public event Action<Modifier> OnModifierAdded;
 
         private List<Modifier> modifiers = new List<Modifier>();
 
@@ -14,6 +15,7 @@ namespace Game
         {
             modifier.Initialize();
             modifiers.Add(modifier);
+            OnModifierAdded?.Invoke(modifier);
         }
 
         public List<Modifier> GetModifiers()
@@ -33,7 +35,7 @@ namespace Game
         {
             modifier.Dispose();
             modifiers.Remove(modifier);
-            ModifierRemoved?.Invoke(modifier);
+            OnModifierRemoved?.Invoke(modifier);
         }
 
         private void OnDestroy()

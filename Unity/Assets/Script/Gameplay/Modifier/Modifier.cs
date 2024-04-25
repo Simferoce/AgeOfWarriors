@@ -32,7 +32,7 @@ namespace Game
             this.modifiable = modifiable;
 
             if (Source != null)
-                Source.AppliedModifiers.Add(this);
+                Source.AddModifier(this);
         }
 
         public void Initialize()

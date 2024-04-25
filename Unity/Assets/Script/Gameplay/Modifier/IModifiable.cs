@@ -4,7 +4,8 @@ namespace Game
 {
     public interface IModifiable : IComponent
     {
-        public event System.Action<Modifier> ModifierRemoved;
+        public event System.Action<Modifier> OnModifierRemoved;
+        public event System.Action<Modifier> OnModifierAdded;
 
         public void AddModifier(Modifier modifier);
         public void RemoveModifier(Modifier modifier);

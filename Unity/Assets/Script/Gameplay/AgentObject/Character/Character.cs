@@ -1,4 +1,5 @@
 ﻿using Assets.Script.Agent.Technology;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -12,13 +13,15 @@ namespace Game
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
 
+        public event AttackedLanded OnAttackLanded;
+        public event Action OnDeath;
+        public event Action<Modifier> OnModifierAdded;
+
         public CharacterAnimator CharacterAnimator { get; set; }
         public List<TransformTag> TransformTags { get; set; }
-        public event AttackedLanded OnAttackLanded;
-        public event System.Action OnDeath;
+        public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
         public override bool IsActive { get => !IsDead; }
         public Vector3 CenterPosition { get => this.GetCachedComponent<ITargeteable>().CenterPosition; }
-        public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
 
         public float Health { get; set; }
         public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
@@ -77,6 +80,12 @@ namespace Game
             base.OnDestroy();
 
             DisposeAbilities();
+        }
+
+        public void AddModifier(Modifier modifier)
+        {
+            AppliedModifiers.Add(modifier);
+            OnModifierAdded?.Invoke(modifier);
         }
 
         public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, bool overtime, IAttackable target, params IAttackSource[] source)

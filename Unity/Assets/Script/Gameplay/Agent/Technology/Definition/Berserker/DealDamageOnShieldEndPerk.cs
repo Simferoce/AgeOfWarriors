@@ -14,7 +14,7 @@ namespace Game
                     shieldable.OnShieldableDestroyed += Shieldable_OnDestroyed;
                 }
 
-                modifiable.ModifierRemoved += Modifiable_ModifierRemoved;
+                modifiable.OnModifierRemoved += Modifiable_ModifierRemoved;
             }
 
             private void Modifiable_ModifierRemoved(Game.Modifier obj)
@@ -53,7 +53,7 @@ namespace Game
             private void Shieldable_OnDestroyed(IShieldable shieldable)
             {
                 shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
-                modifiable.ModifierRemoved -= Modifiable_ModifierRemoved;
+                modifiable.OnModifierRemoved -= Modifiable_ModifierRemoved;
             }
 
             public override void Dispose()
@@ -65,7 +65,7 @@ namespace Game
                     shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
                 }
 
-                modifiable.ModifierRemoved -= Modifiable_ModifierRemoved;
+                modifiable.OnModifierRemoved -= Modifiable_ModifierRemoved;
             }
         }
 

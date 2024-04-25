@@ -21,7 +21,7 @@ namespace Game
             foreach (IDisplaceable target in Ability.Targets.Cast<IDisplaceable>().ToList())
             {
                 if (target.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
-                    targetModifiable.AddModifier(new StaggerModifierDefinition.Modifier(targetModifiable, staggerModifierDefinition, duration));
+                    targetModifiable.AddModifier(new StaggerModifierDefinition.Modifier(targetModifiable, staggerModifierDefinition, duration, Ability.Character));
             }
 
             startedAt = Time.time;

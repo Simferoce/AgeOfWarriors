@@ -25,7 +25,7 @@ namespace Game
                 {
                     if (targeteable.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
                     {
-                        modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, duration));
+                        modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, duration, projectile.Character));
                     }
                 }
             }
