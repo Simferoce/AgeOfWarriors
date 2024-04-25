@@ -21,6 +21,7 @@ namespace Game
         public virtual float? DamageDealtReduction => null;
         public virtual float? DamageDealtAgainstWeak => null;
         public virtual float? IncreaseDamageTaken => null;
+        public virtual float? DefenseReduction => null;
 
         public IModifiable Modifiable { get => modifiable; set => modifiable = value; }
         public IModifierSource Source { get; }
