@@ -183,10 +183,12 @@ namespace Game
         [Header("Abilities")]
         [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
 
-        private List<Ability> abilities = new List<Ability>();
+        public event Action<Ability> OnAbilityUsed;
 
         public List<Ability> Abilities { get => abilities; set => abilities = value; }
         public float LastAbilityUsed { get; set; }
+
+        private List<Ability> abilities = new List<Ability>();
 
         private void InitializeAbilities()
         {

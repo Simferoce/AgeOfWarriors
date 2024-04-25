@@ -19,7 +19,7 @@ MonoBehaviour:
   cost: 10
   baseDefinition: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   reach: 2
-  speed: 1
+  speed: 0.5
   attackSpeed: 1
   attackPower: 25
   maxHealth: 100

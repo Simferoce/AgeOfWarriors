@@ -30,6 +30,7 @@ namespace Game
                         if (ability.CanUse())
                         {
                             ability.Use();
+                            character.OnAbilityUsed?.Invoke(ability);
                             break;
                         }
                     }
