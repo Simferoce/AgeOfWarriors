@@ -20,6 +20,7 @@ namespace Game
         public CharacterAnimator CharacterAnimator { get; set; }
         public List<TransformTag> TransformTags { get; set; }
         public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
+        public HashSet<IAttackable> RecentlyAttackedAttackeables { get; set; } = new HashSet<IAttackable>();
         public override bool IsActive { get => !IsDead; }
         public Vector3 CenterPosition { get => this.GetCachedComponent<ITargeteable>().CenterPosition; }
 
@@ -63,6 +64,11 @@ namespace Game
 
             stateMachine.Initialize(new MoveState(this));
             this.Health = MaxHealth;
+        }
+
+        public void Update()
+        {
+            RecentlyAttackedAttackeables.RemoveWhere(x => x is UnityEngine.Object o && o == null);
         }
 
         public void FixedUpdate()
@@ -163,8 +169,14 @@ namespace Game
 
         public void AttackLanded(AttackResult attackResult)
         {
+            RecentlyAttackedAttackeables.Add(attackResult.Target);
             Heal(attackResult.DamageTaken * attackResult.Attack.Leach);
             OnAttackLanded?.Invoke(attackResult);
+        }
+
+        public bool RecentlyAttacked(IAttackable attackable)
+        {
+            return RecentlyAttackedAttackeables.Contains(attackable);
         }
 
         #region Ability
