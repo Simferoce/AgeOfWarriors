@@ -36,6 +36,11 @@ namespace Game
 
         [SerializeField, Range(0, 5)] private float attackSpeedByStaggerApplied;
 
+        public override string ParseDescription()
+        {
+            return string.Format(Description, attackSpeedByStaggerApplied);
+        }
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

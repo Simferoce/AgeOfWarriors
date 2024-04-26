@@ -54,6 +54,11 @@ namespace Game
         [SerializeField] private float duration;
         [SerializeField] private float distanceEffect;
 
+        public override string ParseDescription()
+        {
+            return string.Format(Description, duration, distanceEffect);
+        }
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

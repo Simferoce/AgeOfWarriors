@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 72b9f6fc65309a847b2c86f7d12c29ac
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase attack speed by {0:0.0%} for each bleed effect active.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145657

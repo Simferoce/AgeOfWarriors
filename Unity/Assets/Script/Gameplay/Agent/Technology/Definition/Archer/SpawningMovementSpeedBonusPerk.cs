@@ -35,13 +35,12 @@ namespace Game
                     return;
                 }
 
-                modifiable.AddModifier(new SpawningMovementSpeedBonusPerkEffect.Modifier(modifiable, definition.effect, definition.movementSpeedIncrease, definition.duration));
+                modifiable.AddModifier(new SpawningMovementSpeedBonusPerkEffect.Modifier(modifiable, definition.effect, definition.movementSpeedIncrease));
             }
         }
 
         [SerializeField] private float distance;
         [SerializeField, Range(0, 5)] private float movementSpeedIncrease;
-        [SerializeField] private float duration;
         [SerializeField] private SpawningMovementSpeedBonusPerkEffect effect;
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

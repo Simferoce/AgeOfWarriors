@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 5256fa2eb0202b14c85362aa40a8bc81
   title: 
   icon: {fileID: 0}
-  description: 
+  description: 'Each 5 attacks, shoot an additional arrow if there is another target
+    in range. '
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781580603752519

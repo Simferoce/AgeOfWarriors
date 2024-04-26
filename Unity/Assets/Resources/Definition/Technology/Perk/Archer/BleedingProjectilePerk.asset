@@ -15,7 +15,8 @@ MonoBehaviour:
   id: fa6d6d4cecabd914a989c32fa2cd9ba8
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Each attack applies a stack of bleeding, dealing {0} damage each second
+    for {1} seconds. Each target can only have {2} stacks.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145606

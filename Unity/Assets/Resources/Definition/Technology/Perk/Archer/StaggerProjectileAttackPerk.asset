@@ -33,7 +33,7 @@ MonoBehaviour:
   id: 0907425ab4a14f045bc3691ca07f0fbd
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Each {0} attacks stagger the target for {1} seconds.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145635

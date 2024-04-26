@@ -15,7 +15,7 @@ MonoBehaviour:
   id: d11c1a111d825e84f99372a1c5e99801
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase damage taken by {0:0.0%} on enemies that are staggered.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145684

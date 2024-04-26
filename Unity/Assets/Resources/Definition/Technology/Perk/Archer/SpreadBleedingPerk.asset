@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 71abc6a5eccc687418c42cb0e746fea0
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Whenever bleeding is applied to a target that has the maximum stacks,
+    apply the effect on another target in {0} meter of the original target.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145624

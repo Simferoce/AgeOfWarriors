@@ -57,5 +57,7 @@ namespace Game
         }
 
         [SerializeField] private BleedingModifierDefinition bleedingModifierDefinition;
+
+        public BleedingModifierDefinition BleedingModifierDefinition { get => bleedingModifierDefinition; set => bleedingModifierDefinition = value; }
     }
 }

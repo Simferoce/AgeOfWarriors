@@ -39,6 +39,11 @@ namespace Game
 
         [SerializeField, Range(0, 5)] private float attackSpeedPerBleedApplied;
 
+        public override string ParseDescription()
+        {
+            return string.Format(Description, attackSpeedPerBleedApplied);
+        }
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

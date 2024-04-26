@@ -11,10 +11,8 @@ namespace Game
 
             private float movementSpeedIncrease;
 
-            public Modifier(IModifiable modifiable, SpawningMovementSpeedBonusPerkEffect modifierDefinition, float movementSpeedIncrease, float duration) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, SpawningMovementSpeedBonusPerkEffect modifierDefinition, float movementSpeedIncrease) : base(modifiable, modifierDefinition)
             {
-                With(new CharacterModifierTimeElement(duration));
-
                 this.movementSpeedIncrease = movementSpeedIncrease;
                 modifiable.GetCachedComponent<Character>().OnAbilityUsed += Modifier_OnAbilityUsed;
             }

@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Threading;
 using UnityEngine;
 
 namespace Game
@@ -24,6 +26,9 @@ namespace Game
         private void Awake()
         {
             Instance = this;
+
+            CultureInfo ci = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = ci;
         }
 
         [ContextMenu("LevelUp")]

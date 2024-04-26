@@ -22,6 +22,7 @@ namespace Game
 
         public override string ParseDescription()
         {
+
             return string.Format(Description, attackpower, threshold);
         }
 

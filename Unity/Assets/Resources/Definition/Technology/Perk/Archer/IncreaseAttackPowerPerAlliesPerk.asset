@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 531722f763d66594ca33b731ca8d0237
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase attack power by {0} for each allies that are present on the
+    battlefield.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145698

@@ -119,5 +119,7 @@ namespace Game
         }
 
         [SerializeField] private int maxStack;
+
+        public int MaxStack { get => maxStack; set => maxStack = value; }
     }
 }

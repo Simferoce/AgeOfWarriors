@@ -46,6 +46,11 @@ namespace Game
 
         [SerializeField] private float attackPowerPerAlliesPresent;
 
+        public override string ParseDescription()
+        {
+            return string.Format(Description, attackPowerPerAlliesPresent);
+        }
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

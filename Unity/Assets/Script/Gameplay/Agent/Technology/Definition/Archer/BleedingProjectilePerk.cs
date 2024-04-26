@@ -22,6 +22,11 @@ namespace Game
         [SerializeField, Range(0, 5)] private float percentageAttackPower;
         [SerializeField] private BleedingProjectileModifierDefinition bleedingProjectileModifierDefinition;
 
+        public override string ParseDescription()
+        {
+            return string.Format(this.Description, StatisticFormatter.Percentage(percentageAttackPower, StatisticDefinition.AttackPower), duration, bleedingProjectileModifierDefinition.BleedingModifierDefinition.MaxStack);
+        }
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

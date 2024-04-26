@@ -16,6 +16,11 @@ namespace Game
 
         [SerializeField] private float spreadDistance;
 
+        public override string ParseDescription()
+        {
+            return string.Format(Description, spreadDistance);
+        }
+
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
             return new Modifier(modifiable, this);

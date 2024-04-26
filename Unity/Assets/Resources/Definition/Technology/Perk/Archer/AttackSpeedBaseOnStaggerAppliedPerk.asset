@@ -15,7 +15,8 @@ MonoBehaviour:
   id: 948addeca3dffbf46a20c64ae9d410d2
   title: 
   icon: {fileID: 0}
-  description: 
+  description: Increase attack speed by {0:0.0%} each time a target is staggered
+    by the archer.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145667
