@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GainEmpoweredOnDamagePreventedByDefensePerk
   m_EditorClassIdentifier: 
   id: a8705c5f35226a34ea1a8fcc246bb78e
-  title: 
+  title: Iron Skin
   icon: {fileID: -1767486148, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Whenever {0} damage has been prevented by defense, apply empowerment
     on the next attack which increase damage dealt by {1:0.0%}.

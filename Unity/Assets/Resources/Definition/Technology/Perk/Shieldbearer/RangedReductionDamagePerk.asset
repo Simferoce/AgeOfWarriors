@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RangedReductionDamagePerk
   m_EditorClassIdentifier: 
   id: 06fdf97ed5cca244fa96f398725abfd9
-  title: 
+  title: Tempered Leather
   icon: {fileID: 0}
   description: Reduce the damage taken by ranged attack by {0:0.0%}
   showOnHealthBar: 0

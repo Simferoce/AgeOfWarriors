@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Name: SpawningMovementSpeedBonusPerk
   m_EditorClassIdentifier: 
   id: d5cf616949a64074d830fa7b45ea706b
-  title: 
+  title: Never Late For Battle
   icon: {fileID: 0}
   description: Whenever an archer is created, if there are no enemies in {0} meters
     then increase movement speed by {0:0.0%}. Stopping on the first ability cast.

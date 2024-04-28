@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShootAdditionalArrowPerk
   m_EditorClassIdentifier: 
   id: 5256fa2eb0202b14c85362aa40a8bc81
-  title: 
+  title: One More Time
   icon: {fileID: 0}
   description: 'Each 5 attacks, shoot an additional arrow if there is another target
     in range. '

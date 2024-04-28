@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IncreaseAttackSpeedBaseOnNearbyEnemiesPerk
   m_EditorClassIdentifier: 
   id: 7159f275e7e0f134bb1a06889b550337
-  title: 
+  title: Adrenaline Rush
   icon: {fileID: 0}
   description: Increase attack speed by {0:0.0%} for each enemy in {1} meters. {2}
   showOnHealthBar: 1

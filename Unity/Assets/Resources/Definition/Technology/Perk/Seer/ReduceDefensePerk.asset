@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ReduceDefensePerk
   m_EditorClassIdentifier: 
   id: 2aa6af8681bfded408cf696dcb7143c9
-  title: 
+  title: Dark Whisper
   icon: {fileID: 0}
-  description: 
+  description: Reduce defense of enemies that are hit by the seer abilities by {0}
+    for {1} seconds.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145704

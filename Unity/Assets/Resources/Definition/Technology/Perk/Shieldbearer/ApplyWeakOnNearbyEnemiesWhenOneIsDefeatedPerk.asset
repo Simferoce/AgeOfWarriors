@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk
   m_EditorClassIdentifier: 
   id: 35afdbbda7ba57545a62b2cbe980f4b1
-  title: 
+  title: Crushing Fear
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Whenever an enemy unit die, apply weak which reduce the damage dealt
     by {0:0.0%} of every enemy unit in {1} meters for {2} seconds.

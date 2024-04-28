@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackSpeedByBleedActivePerk
   m_EditorClassIdentifier: 
   id: 72b9f6fc65309a847b2c86f7d12c29ac
-  title: 
+  title: Blood Rage
   icon: {fileID: 0}
   description: Increase attack speed by {0:0.0%} for each bleed effect active.
   showOnHealthBar: 1

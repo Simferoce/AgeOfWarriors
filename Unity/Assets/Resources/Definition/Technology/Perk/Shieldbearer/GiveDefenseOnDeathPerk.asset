@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Name: GiveDefenseOnDeathPerk
   m_EditorClassIdentifier: 
   id: 5a6bbed2ca32df2499f8bb0c3f1ef5a4
-  title: 
+  title: Pass Baton
   icon: {fileID: 0}
   description: Increase defense by {0} for every allies in {1} meters whenever the
     unit dies.

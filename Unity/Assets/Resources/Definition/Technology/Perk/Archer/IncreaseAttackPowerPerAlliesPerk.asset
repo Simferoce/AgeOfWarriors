@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: IncreaseAttackPowerPerAlliesPerk
   m_EditorClassIdentifier: 
   id: 531722f763d66594ca33b731ca8d0237
-  title: 
-  icon: {fileID: 0}
+  title: Strength In Number
+  icon: {fileID: 121213460, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Increase attack power by {0} for each allies that are present on the
     battlefield.
   showOnHealthBar: 1

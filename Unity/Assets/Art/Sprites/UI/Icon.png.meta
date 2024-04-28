@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -555,7 +555,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -563,6 +563,69 @@ TextureImporter:
       bones: []
       spriteID: 47052853bcb225b40a926bae2c068ba3
       internalID: -1375556571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BleedingIcon
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f599c5c3b869ab6478eaf33eed1f74f7
+      internalID: 1477859117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AttackPowerIncrease Icon
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdcf4a969fbcf874abbedebf098c76d0
+      internalID: 121213460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StaggerIcon
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1792
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ccd4886765f1524f9b9f85bc252e24e
+      internalID: 1113892152
       vertices: []
       indices: 
       edges: []
@@ -585,10 +648,12 @@ TextureImporter:
       ArcherLongbowIcon: -1104553669
       HuntersMark: -412835066
       OnslaughtIcon: -1403394186
+      AttackPowerIncrease Icon: 121213460
       BerserkerIcon: 1091542803
       LeaderIcon: 171242972
       ShieldbearerIcon: 1097212789
       ProgressiveEmpowermentIcon: 855844591
+      StaggerIcon: 1113892152
       SeerAlchemistIcon: -587586574
       ArcherIcon: -497218264
       ShieldbearerOnslaught: 750281812
@@ -601,6 +666,7 @@ TextureImporter:
       Icon_1: 800693428
       BerserkerWarbringerIcon: 322066553
       DefenseEmpowermentIcon: -1767486148
+      BleedingIcon: 1477859117
       ArcherFerociousIcon: 2082272876
       BerserkerBloodseekerIcon: -1661990737
   spritePackingTag: 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GainProgressiveEmpowermentOnAttackPerk
   m_EditorClassIdentifier: 
   id: 246adf60fd9bed74e8c0a010f28737a3
-  title: 
+  title: Precise Attack
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: For each attack landed, add a stack of Progressive Empowerment. Whenever
     the amount of stack accumulated is equal to {0}, gain a stack of Empowerment

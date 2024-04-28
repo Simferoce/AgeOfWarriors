@@ -31,9 +31,10 @@ MonoBehaviour:
   m_Name: CreateDamagePoolPerk
   m_EditorClassIdentifier: 
   id: 5f1514b2670ecda46b990e98d29de0e0
-  title: 
+  title: The Abyss Bellow
   icon: {fileID: 0}
-  description: 
+  description: Each {0} attacks made creates a pool of darkness dealing {1} damage
+    to any enemies standing on it for {2} seconds.
   showOnHealthBar: 1
   requirementsPerk:
   - rid: 3656781615733145708

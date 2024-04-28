@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IncreaseDamageTakenWhenStaggerPerk
   m_EditorClassIdentifier: 
   id: d11c1a111d825e84f99372a1c5e99801
-  title: 
+  title: Press The Attack
   icon: {fileID: 0}
   description: Increase damage taken by {0:0.0%} on enemies that are staggered.
   showOnHealthBar: 1

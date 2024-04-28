@@ -7,19 +7,19 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseDefenseBaseOnAttackPowerPerk>
         {
-            public override float? Defense => Mathf.Floor(modifiable.GetCachedComponent<Character>().AttackPower / definition.attackPowerRequired) * definition.defenseIncrease;
+            public override float? AttackPower => Mathf.Floor(modifiable.GetCachedComponent<Character>().Defense / definition.defenseRequired) * definition.attackPowerIncrease;
 
             public Modifier(IModifiable modifiable, IncreaseDefenseBaseOnAttackPowerPerk modifierDefinition) : base(modifiable, modifierDefinition)
             {
             }
         }
 
-        [SerializeField] private float defenseIncrease;
-        [SerializeField] private float attackPowerRequired;
+        [SerializeField] private float attackPowerIncrease;
+        [SerializeField] private float defenseRequired;
 
         public override string ParseDescription()
         {
-            return string.Format(Description, defenseIncrease, attackPowerRequired);
+            return string.Format(Description, attackPowerIncrease, defenseRequired);
         }
 
         public override Game.Modifier GetModifier(IModifiable modifiable)

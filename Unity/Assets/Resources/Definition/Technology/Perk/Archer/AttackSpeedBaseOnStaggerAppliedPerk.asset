@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AttackSpeedBaseOnStaggerAppliedPerk
   m_EditorClassIdentifier: 
   id: 948addeca3dffbf46a20c64ae9d410d2
-  title: 
+  title: Exploit Weakness
   icon: {fileID: 0}
   description: Increase attack speed by {0:0.0%} each time a target is staggered
     by the archer.

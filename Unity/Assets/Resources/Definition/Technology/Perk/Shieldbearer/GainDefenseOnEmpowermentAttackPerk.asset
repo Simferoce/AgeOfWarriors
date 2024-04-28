@@ -30,7 +30,7 @@ MonoBehaviour:
   m_Name: GainDefenseOnEmpowermentAttackPerk
   m_EditorClassIdentifier: 
   id: 8e51aec4b11ed2346b15ff254304f7de
-  title: 
+  title: Fortify Strike
   icon: {fileID: 0}
   description: Increase defense by {0} for {1} seconds each time an empowerment attack
     lands
