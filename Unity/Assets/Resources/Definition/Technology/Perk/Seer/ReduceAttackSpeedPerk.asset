@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Fear aura
   icon: {fileID: 0}
   description: Reduce attack speed by {0:0.0%} of any enemies in {1} meters.
-  showOnHealthBar: 1
+  showOnHealthBar: 0
   requirementsPerk:
   - rid: 8118057652579991575
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
