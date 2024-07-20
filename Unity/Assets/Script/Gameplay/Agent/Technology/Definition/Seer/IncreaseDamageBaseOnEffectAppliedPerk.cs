@@ -9,10 +9,7 @@ namespace Game
         public class Modifier : Modifier<Modifier, IncreaseDamageBaseOnEffectAppliedPerk>
         {
             public override float? AttackPower => definition.attackPowerPerEffectApplied * Source.AppliedModifiers.Count(x =>
-                x.Definition is not CharacterTechnologyPerkDefinition
-                && x.Modifiable.TryGetCachedComponent<ITargeteable>(out ITargeteable target)
-                && Source.TryGetCachedComponent<ITargeteable>(out ITargeteable sourceTarget)
-                && target.Faction != sourceTarget.Faction);
+                x.Definition is not CharacterTechnologyPerkDefinition);
 
             public Modifier(IModifiable modifiable, IncreaseDamageBaseOnEffectAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
