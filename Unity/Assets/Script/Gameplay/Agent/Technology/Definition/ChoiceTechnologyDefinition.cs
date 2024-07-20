@@ -11,7 +11,7 @@ namespace Game
         [Space]
         [SerializeField] private List<TechnologyPerkDefinition> choices;
         [Space]
-        [SerializeReference, SerializeReferenceDropdown] private List<Requirement> requirementsPerk = new List<Requirement>();
+        [SerializeReference, SubclassSelector] private List<Requirement> requirementsPerk = new List<Requirement>();
 
         public List<TechnologyPerkDefinition> Choices { get => choices; set => choices = value; }
         public List<Requirement> RequirementsPerk { get => requirementsPerk; set => requirementsPerk = value; }

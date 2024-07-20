@@ -1,7 +1,6 @@
 ﻿using Extension;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -9,14 +8,15 @@ namespace Game
     [Serializable]
     public class ProjectileTimedImpact : ProjectileImpact
     {
-        [SerializeReference, SerializeReferenceDropdown] private TargetCriteria criteria;
+        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private StatisticReference<float> duration;
+        [SerializeField] private float delay;
 
         private float startedAt;
-        private List<IAttackable> targets = new List<IAttackable>();
-        private Attack attack;
+        private List<IAttackable> targetsHit = new List<IAttackable>();
         private float currentDuration;
+        private List<ITargeteable> targeteablesInEffect = new List<ITargeteable>();
 
         public override void Initialize(Projectile projectile)
         {
@@ -28,14 +28,11 @@ namespace Game
 
         public override ImpactReport Impact(GameObject collision)
         {
-            if (collision.CompareTag(GameTag.HIT_BOX) &&
-                collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
-                && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
-                && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+            if (collision.CompareTag(GameTag.HIT_BOX)
+                && collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
+                && !targeteablesInEffect.Contains(targeteable))
             {
-                attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, true, false, attackable, projectile);
-                attack.AttackSource.Sources.Add(projectile);
-                targets.Add(attackable);
+                targeteablesInEffect.Add(targeteable);
             }
 
             return new ImpactReport(ImpactStatus.NotImpacted);
@@ -45,10 +42,11 @@ namespace Game
         {
             base.LeaveZone(collision);
 
-            if (collision.CompareTag(GameTag.HIT_BOX) &&
-                collision.gameObject.TryGetComponentInParent<IAttackable>(out IAttackable attackable))
+            if (collision.CompareTag(GameTag.HIT_BOX)
+                && collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
+                && targeteablesInEffect.Contains(targeteable))
             {
-                targets.Remove(attackable);
+                targeteablesInEffect.Remove(targeteable);
             }
         }
 
@@ -59,13 +57,28 @@ namespace Game
 
             if (Time.time - startedAt > currentDuration)
             {
-                foreach (IAttackable target in targets)
-                {
-                    target.TakeAttack(attack);
-                }
-
-                return new ImpactReport(ImpactStatus.Impacted, targets.Select(x => x.GetCachedComponent<ITargeteable>()).ToList());
+                projectile.Kill(null);
             }
+
+            List<ITargeteable> targeteablesHitThisFrame = new List<ITargeteable>();
+            foreach (ITargeteable targeteable in targeteablesInEffect)
+            {
+                if (Time.time - startedAt > delay
+                    && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
+                    && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable)
+                    && !targetsHit.Contains(attackable))
+                {
+                    Attack attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, true, false, attackable, projectile);
+                    attack.AttackSource.Sources.Add(projectile);
+                    attackable.TakeAttack(attack);
+                    targetsHit.Add(attackable);
+
+                    targeteablesHitThisFrame.Add(targeteable);
+                }
+            }
+
+            if (targeteablesHitThisFrame.Count > 0)
+                return new ImpactReport(ImpactStatus.Impacted, targeteablesHitThisFrame);
 
             return new ImpactReport(ImpactStatus.NotImpacted);
         }

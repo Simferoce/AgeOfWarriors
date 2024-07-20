@@ -84,19 +84,14 @@ namespace Game
             if (StateValue != State.Alive)
                 return;
 
-            bool impacted = false;
             foreach (ProjectileImpact effect in impacts)
             {
                 ProjectileImpact.ImpactReport impactReport = effect.Impact(collision.gameObject);
                 if (impactReport.ImpactStatus == ProjectileImpact.ImpactStatus.Impacted)
                 {
-                    impacted = true;
                     OnImpacted?.Invoke(impactReport.ImpactedTargeteables);
                 }
             }
-
-            if (impacted)
-                Kill(collision.gameObject);
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -105,7 +100,7 @@ namespace Game
                 effect.LeaveZone(collision.gameObject);
         }
 
-        private void Kill(GameObject collision)
+        public void Kill(GameObject collision)
         {
             StateValue = State.Dead;
 

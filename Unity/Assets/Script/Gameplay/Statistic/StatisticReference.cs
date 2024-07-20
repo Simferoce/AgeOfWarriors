@@ -40,6 +40,9 @@ namespace Game
             Ability ability = context as Ability;
 
             if (ability == null)
+                ability = (context as Projectile).Ability;
+
+            if (ability == null)
             {
                 value = default(T);
                 return false;
@@ -82,7 +85,7 @@ namespace Game
     [Serializable]
     public class StatisticReference<T, M>
     {
-        [SerializeReference, SerializeReferenceDropdown] private M mapper;
+        [SerializeReference, SubclassSelector] private M mapper;
 
         public bool TryGetValue(object caller, out T value, StatisticType type = StatisticType.Total)
         {
@@ -102,7 +105,10 @@ namespace Game
 
         public T GetValueOrThrow(object caller, StatisticType type = StatisticType.Total)
         {
-            return TryGetValue(caller, out T value, type) == true ? value : throw new Exception($"Could not resolve the statistic for {mapper.ToString()} with {caller.ToString()}");
+            if (TryGetValue(caller, out T value, type))
+                return value;
+
+            throw new Exception($"Could not resolve the statistic for {mapper.ToString()} with {caller.ToString()}");
         }
     }
 }

@@ -1,18 +1,11 @@
 {
   "dependencies": {
-    "com.alexeytaranov.serializereferencedropdown": {
-      "version": "https://github.com/AlexeyTaranov/SerializeReferenceDropdown.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "635dba02c808e2b4881c689a57c43b60e627698f"
-    },
     "com.mackysoft.serializereference-extensions": {
       "version": "https://github.com/mackysoft/Unity-SerializeReferenceExtensions.git?path=Assets/MackySoft/MackySoft.SerializeReferenceExtensions",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "301cb4b12cf419c60509836d23d2bd482c131368"
+      "hash": "69f6e31cf1482afc03685dd71d63daecbc37a565"
     },
     "com.unity.2d.animation": {
       "version": "8.0.2",

@@ -7,7 +7,7 @@ namespace Game
     public abstract class TechnologyPerkDefinition : ModifierDefinition
     {
         [Space]
-        [SerializeReference, SerializeReferenceDropdown] private List<Requirement> requirementsPerk = new List<Requirement>();
+        [SerializeReference, SubclassSelector] private List<Requirement> requirementsPerk = new List<Requirement>();
 
         public List<Requirement> RequirementsPerk { get => requirementsPerk; set => requirementsPerk = value; }
 

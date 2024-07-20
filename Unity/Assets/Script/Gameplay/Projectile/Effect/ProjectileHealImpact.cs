@@ -7,7 +7,7 @@ namespace Game
     [Serializable]
     public class ProjectileHealImpact : ProjectileImpact
     {
-        [SerializeReference, SerializeReferenceDropdown] private TargetCriteria criteria;
+        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private StatisticReference<float> heal;
 
         private float currentHeal;
@@ -32,10 +32,12 @@ namespace Game
             {
                 character.Heal(currentHeal);
 
+                projectile.Kill(collision.gameObject);
                 return new ImpactReport(ImpactStatus.Impacted, targeteable);
             }
             else if (collision.gameObject.CompareTag(GameTag.GROUND))
             {
+                projectile.Kill(collision.gameObject);
                 return new ImpactReport(ImpactStatus.Impacted);
             }
 

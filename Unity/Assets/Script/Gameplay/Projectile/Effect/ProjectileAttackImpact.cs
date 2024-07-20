@@ -7,7 +7,7 @@ namespace Game
     [Serializable]
     public class ProjectileAttackImpact : ProjectileImpact
     {
-        [SerializeReference, SerializeReferenceDropdown] private TargetCriteria criteria;
+        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private StatisticReference<float> armorPenetration;
 
@@ -30,10 +30,12 @@ namespace Game
                 attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile.Ability), armorPenetration.GetValueOrDefault(projectile.Ability), 0, true, false, attackable, projectile);
                 attackable.TakeAttack(attack);
 
+                projectile.Kill(collision.gameObject);
                 return new ImpactReport(ImpactStatus.Impacted, targeteable);
             }
             else if (collision.gameObject.CompareTag(GameTag.GROUND))
             {
+                projectile.Kill(collision.gameObject);
                 return new ImpactReport(ImpactStatus.Impacted);
             }
 
