@@ -17,7 +17,7 @@ namespace Game
                 if (evt.AgentObject.Faction == modifiable.GetCachedComponent<ITargeteable>().Faction && (IModifiable)evt.AgentObject != modifiable)
                 {
                     modifiable.AddModifier(
-                        new AttackPowerModifierDefinition.AttackPowerBuff(modifiable,
+                        new AttackPowerModifierDefinition.AttackPowerModifier(modifiable,
                             definition.attackPowerModifier,
                             definition.attackPowerGain)
                         .With(new CharacterModifierTimeElement(definition.buffDuration)));

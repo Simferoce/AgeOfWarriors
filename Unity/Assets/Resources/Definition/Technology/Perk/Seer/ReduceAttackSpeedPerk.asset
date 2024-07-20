@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b46c5f38c37cc64ea2f867300a817ec, type: 3}
+  m_Name: ReduceAttackSpeedPerk
+  m_EditorClassIdentifier: 
+  id: cf43ec4bdc041494ca0008ef1247a889
+  title: Fear aura
+  icon: {fileID: 0}
+  description: Reduce attack speed by {0:0.0%} of any enemies in {1} meters.
+  showOnHealthBar: 1
+  requirementsPerk:
+  - rid: 8118057652579991575
+  affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+  attackSpeedReductionModifierDefinition: {fileID: 8234926359891738501}
+  percentageReach: 0.5
+  amount: 0.35
+  references:
+    version: 2
+    RefIds:
+    - rid: 8118057652579991575
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 14eb634f26441f3419e8d6c26ba328d9, type: 2}
+--- !u!114 &8234926359891738501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02cc853712f3e9438b724802289375d, type: 3}
+  m_Name: AttackSpeedModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 5a05c412e6155454c8669b4779423b61
+  title: Reduced Attack Speeed
+  icon: {fileID: 1748120172, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  description: Reduce attack speed by {0:0.0%}.
+  showOnHealthBar: 1
