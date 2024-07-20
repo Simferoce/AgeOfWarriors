@@ -8,7 +8,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, ReduceDefensePerk>
         {
-            public Modifier(IModifiable modifiable, ReduceDefensePerk modifierDefinition, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(IModifiable modifiable, ReduceDefensePerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
@@ -47,7 +47,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

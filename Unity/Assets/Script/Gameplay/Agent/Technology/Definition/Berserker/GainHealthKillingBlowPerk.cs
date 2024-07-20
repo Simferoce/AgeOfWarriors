@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GainHealthKillingBlowPerk>
         {
-            public Modifier(IModifiable modifiable, GainHealthKillingBlowPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainHealthKillingBlowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 if (modifiable.TryGetCachedComponent<Character>(out Character character))
                     character.OnAttackLanded += AgentObject_OnAttackLanded;
@@ -36,7 +36,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Game
         {
             private StackModifierElement stackModifierElement;
 
-            public Modifier(IModifiable modifiable, ProgressiveEmpowermentModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ProgressiveEmpowermentModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 stackModifierElement = new StackModifierElement();
                 this.With(stackModifierElement);
@@ -29,7 +29,10 @@ namespace Game
                     Game.Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == empoweredModifierDefinition);
                     if (modifier == null)
                     {
-                        modifiable.AddModifier(new EmpoweredModifierDefinition.Modifier(modifiable, empoweredModifierDefinition));
+                        modifiable.AddModifier(new EmpoweredModifierDefinition.Modifier(
+                            modifiable,
+                            empoweredModifierDefinition,
+                            Source));
                     }
                     else
                     {

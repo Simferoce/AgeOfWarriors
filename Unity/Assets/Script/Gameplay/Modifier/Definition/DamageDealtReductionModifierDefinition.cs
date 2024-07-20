@@ -11,7 +11,7 @@ namespace Game
 
             private float amount;
 
-            public Modifier(IModifiable modifiable, DamageDealtReductionModifierDefinition modifierDefinition, float amount) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, DamageDealtReductionModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.amount = amount;
             }

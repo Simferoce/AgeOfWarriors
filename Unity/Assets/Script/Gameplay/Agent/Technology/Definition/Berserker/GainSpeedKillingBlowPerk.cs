@@ -9,7 +9,7 @@ namespace Game
         {
             private SpeedModifierDefinition speedModifierDefinition;
 
-            public Modifier(IModifiable modifiable, GainSpeedKillingBlowPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainSpeedKillingBlowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 if (modifiable.TryGetCachedComponent<Character>(out Character character))
                     character.OnAttackLanded += AgentObject_OnAttackLanded;
@@ -18,8 +18,12 @@ namespace Game
             private void AgentObject_OnAttackLanded(AttackResult attackResult)
             {
                 if (attackResult.KillingBlow)
-                    modifiable.AddModifier(new SpeedModifierDefinition.SpeedBuff(modifiable, speedModifierDefinition, definition.speed)
-                        .With(new CharacterModifierTimeElement(definition.duration)));
+                    modifiable.AddModifier(new SpeedModifierDefinition.SpeedBuff(
+                        modifiable,
+                        speedModifierDefinition,
+                        definition.speed,
+                        Source)
+                            .With(new CharacterModifierTimeElement(definition.duration)));
             }
 
             public override void Dispose()
@@ -41,7 +45,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

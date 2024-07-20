@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GainShieldOnNearbyAllyDeathPerk>
         {
-            public Modifier(IModifiable modifiable, GainShieldOnNearbyAllyDeathPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainShieldOnNearbyAllyDeathPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
@@ -41,7 +41,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

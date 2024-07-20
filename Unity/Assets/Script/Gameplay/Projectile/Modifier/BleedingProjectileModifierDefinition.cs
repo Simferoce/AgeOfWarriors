@@ -13,7 +13,7 @@ namespace Game
             private float damagePerSeconds;
             private float duration;
 
-            public Modifier(IModifiable modifiable, BleedingProjectileModifierDefinition modifierDefinition, float damagePerSeconds, float duration) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, BleedingProjectileModifierDefinition modifierDefinition, float damagePerSeconds, float duration, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.damagePerSeconds = damagePerSeconds;
                 this.duration = duration;

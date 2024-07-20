@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GainAttackPowerOnAllyDiedPerk>
         {
-            public Modifier(IModifiable modifiable, GainAttackPowerOnAllyDiedPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainAttackPowerOnAllyDiedPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
@@ -19,7 +19,8 @@ namespace Game
                     modifiable.AddModifier(
                         new AttackPowerModifierDefinition.AttackPowerModifier(modifiable,
                             definition.attackPowerModifier,
-                            definition.attackPowerGain)
+                            definition.attackPowerGain,
+                            Source)
                         .With(new CharacterModifierTimeElement(definition.buffDuration)));
                 }
             }
@@ -43,7 +44,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

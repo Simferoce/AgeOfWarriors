@@ -11,7 +11,7 @@ namespace Game
             private Projectile projectile;
             private float duration;
 
-            public Modifier(IModifiable modifiable, StaggerProjectileModifierDefinition modifierDefinition, float duration) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, StaggerProjectileModifierDefinition modifierDefinition, float duration, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.duration = duration;
 

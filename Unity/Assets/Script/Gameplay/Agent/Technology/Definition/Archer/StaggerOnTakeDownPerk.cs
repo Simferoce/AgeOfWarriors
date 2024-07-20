@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, StaggerOnTakeDownPerk>
         {
-            public Modifier(IModifiable modifiable, StaggerOnTakeDownPerk modifierDefinition, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(IModifiable modifiable, StaggerOnTakeDownPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
@@ -61,7 +61,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

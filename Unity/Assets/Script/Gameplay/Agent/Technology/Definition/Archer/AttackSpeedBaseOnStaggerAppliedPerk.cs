@@ -11,7 +11,7 @@ namespace Game
 
             public override float? AttackSpeedPercentage => amountOfStaggerApplied * definition.attackSpeedByStaggerApplied;
 
-            public Modifier(IModifiable modifiable, AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(IModifiable modifiable, AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 modifiable.GetCachedComponent<IModifierSource>().OnModifierAdded += Modifier_OnModifierAdded;
             }
@@ -43,7 +43,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Game
 
             public float CurrentDamagePrevented { get => currentDamagePrevented; set => currentDamagePrevented = value; }
 
-            public Modifier(IModifiable modifiable, GainEmpoweredOnDamagePreventedByDefensePerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainEmpoweredOnDamagePreventedByDefensePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 modifiable.GetCachedComponent<IAttackable>().OnDamageTaken += Modifier_OnDamageTaken;
             }
@@ -30,7 +30,10 @@ namespace Game
                     if (modifier != null)
                         modifier.Refresh();
                     else
-                        modifiable.AddModifier(new EmpoweredModifierDefinition.Modifier(modifiable, definition.empoweredModifierDefinition));
+                        modifiable.AddModifier(new EmpoweredModifierDefinition.Modifier(
+                            modifiable,
+                            definition.empoweredModifierDefinition,
+                            Source));
                 }
             }
 
@@ -56,7 +59,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

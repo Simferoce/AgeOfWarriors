@@ -8,7 +8,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GainDefenseOnEmpowermentAttackPerk>
         {
-            public Modifier(IModifiable modifiable, GainDefenseOnEmpowermentAttackPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainDefenseOnEmpowermentAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
@@ -25,7 +25,11 @@ namespace Game
                     else
                     {
                         modifiable.AddModifier(
-                            new DefenseModifierDefinition.Modifier(modifiable.GetCachedComponent<Character>(), definition.defenseModifierDefinition, definition.defense, this)
+                            new DefenseModifierDefinition.Modifier(
+                                modifiable.GetCachedComponent<Character>(),
+                                definition.defenseModifierDefinition,
+                                definition.defense,
+                                Source)
                             .With(new CharacterModifierTimeElement(definition.buffDuration)));
                     }
                 }
@@ -50,7 +54,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

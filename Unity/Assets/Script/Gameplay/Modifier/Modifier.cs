@@ -97,7 +97,7 @@ namespace Game
 
         public override ModifierDefinition Definition => definition;
 
-        protected Modifier(IModifiable modifiable, U modifierDefinition, IModifierSource source = null) : base(modifiable, source)
+        protected Modifier(IModifiable modifiable, U modifierDefinition, IModifierSource source) : base(modifiable, source)
         {
             definition = modifierDefinition;
         }

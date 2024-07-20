@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, HealOnShieldEndPerk>
         {
-            public Modifier(IModifiable modifiable, HealOnShieldEndPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, HealOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
                 {
@@ -60,7 +60,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

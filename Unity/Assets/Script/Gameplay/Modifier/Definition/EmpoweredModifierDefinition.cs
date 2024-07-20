@@ -11,7 +11,7 @@ namespace Game
 
             public float PercentageDamageIncrease => definition.percentageDamageIncrease;
 
-            public Modifier(IModifiable modifiable, EmpoweredModifierDefinition modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, EmpoweredModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 stackModifierElement = new StackModifierElement();
                 stackModifierElement.IncreaseStack();

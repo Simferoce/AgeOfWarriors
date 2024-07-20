@@ -8,7 +8,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GainProgressiveEmpowermentOnAttackPerk>
         {
-            public Modifier(IModifiable modifiable, GainProgressiveEmpowermentOnAttackPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GainProgressiveEmpowermentOnAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
@@ -25,7 +25,10 @@ namespace Game
                 }
                 else
                 {
-                    modifiable.AddModifier(new ProgressiveEmpowermentModifierDefinition.Modifier(modifiable, definition.modifierToGain));
+                    modifiable.AddModifier(new ProgressiveEmpowermentModifierDefinition.Modifier(
+                        modifiable,
+                        definition.modifierToGain,
+                        Source));
                 }
             }
 
@@ -45,7 +48,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

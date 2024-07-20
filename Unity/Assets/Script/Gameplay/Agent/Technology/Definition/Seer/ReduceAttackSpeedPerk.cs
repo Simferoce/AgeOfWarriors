@@ -11,7 +11,7 @@ namespace Game
         {
             private List<AttackSpeedReductionModifierDefinition.Modifier> currents = new List<AttackSpeedReductionModifierDefinition.Modifier>();
 
-            public Modifier(IModifiable modifiable, ReduceAttackSpeedPerk modifierDefinition, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(IModifiable modifiable, ReduceAttackSpeedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
             }
 
@@ -53,7 +53,11 @@ namespace Game
                         continue;
                     }
 
-                    AttackSpeedReductionModifierDefinition.Modifier modifier = new AttackSpeedReductionModifierDefinition.Modifier(modifiable, definition.attackSpeedReductionModifierDefinition, definition.amount);
+                    AttackSpeedReductionModifierDefinition.Modifier modifier = new AttackSpeedReductionModifierDefinition.Modifier(
+                        modifiable,
+                        definition.attackSpeedReductionModifierDefinition,
+                        definition.amount,
+                        Source);
                     modifiable.AddModifier(modifier);
                     currents.Add(modifier);
                 }
@@ -66,7 +70,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
 
         public override string ParseDescription()

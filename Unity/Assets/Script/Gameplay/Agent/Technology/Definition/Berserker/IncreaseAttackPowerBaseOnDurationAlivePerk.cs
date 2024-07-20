@@ -11,7 +11,7 @@ namespace Game
 
             public override float? AttackPower => definition.attackpowerPerSeconds * (Time.time - startedAt);
 
-            public Modifier(IModifiable modifiable, IncreaseAttackPowerBaseOnDurationAlivePerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, IncreaseAttackPowerBaseOnDurationAlivePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 startedAt = Time.time;
             }
@@ -28,7 +28,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

@@ -31,14 +31,18 @@ namespace Game
 
                 if (inspiringPresenceBuff != null)
                 {
-                    if (inspiringPresenceBuff.Source == this)
+                    if (inspiringPresenceBuff.Source == Ability.Character.GetCachedComponent<IModifierSource>())
                     {
                         inspiringPresenceBuff.Refresh();
                     }
                 }
                 else
                 {
-                    inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(Ability.Character, inspiringPresenceModifierDefinition, defense.GetValueOrThrow(Ability), this)
+                    inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(
+                            Ability.Character,
+                            inspiringPresenceModifierDefinition,
+                            defense.GetValueOrThrow(Ability),
+                            Ability.Character.GetCachedComponent<IModifierSource>())
                         .With(new CharacterModifierTimeElement(buffDuration.GetValueOrThrow(Ability)));
 
                     characterToBuff.GetCachedComponent<IModifiable>().AddModifier(inspiringPresenceBuff);

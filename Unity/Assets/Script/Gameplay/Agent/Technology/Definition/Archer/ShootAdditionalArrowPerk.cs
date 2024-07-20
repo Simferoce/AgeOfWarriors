@@ -11,7 +11,7 @@ namespace Game
             private int currentAttackApplied = 0;
             private Ability affectedAbility;
 
-            public Modifier(IModifiable modifiable, ShootAdditionalArrowPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ShootAdditionalArrowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 affectedAbility = modifiable.GetCachedComponent<Character>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
@@ -58,7 +58,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

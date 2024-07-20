@@ -8,7 +8,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, ApplyWeakOnTargetHitByEmpoweredAttackPerk>
         {
-            public Modifier(IModifiable modifiable, ApplyWeakOnTargetHitByEmpoweredAttackPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ApplyWeakOnTargetHitByEmpoweredAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
@@ -26,7 +26,11 @@ namespace Game
                     else
                     {
                         targetModifiable.AddModifier(
-                            new DamageDealtReductionModifierDefinition.Modifier(targetModifiable, definition.damageDealtReductionModifierDefinition, definition.damageReduction)
+                            new DamageDealtReductionModifierDefinition.Modifier(
+                                targetModifiable,
+                                definition.damageDealtReductionModifierDefinition,
+                                definition.damageReduction,
+                                Source)
                             .With(new CharacterModifierTimeElement(definition.duration)));
                     }
                 }
@@ -52,7 +56,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

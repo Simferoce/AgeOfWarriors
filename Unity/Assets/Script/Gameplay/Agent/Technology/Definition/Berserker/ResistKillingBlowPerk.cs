@@ -9,7 +9,7 @@ namespace Game
         {
             private bool hasResists = false;
 
-            public Modifier(IModifiable modifiable, ResistKillingBlowPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, ResistKillingBlowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
             }
 
@@ -22,7 +22,10 @@ namespace Game
             {
                 if (!hasResists)
                     modifiable.AddModifier(
-                        new ResistDeathModifierDefinition.ResistDeath(modifiable, definition.resistDeathModifierDefinition)
+                        new ResistDeathModifierDefinition.ResistDeath(
+                            modifiable,
+                            definition.resistDeathModifierDefinition,
+                            Source)
                         .With(new CharacterModifierTimeElement(definition.duration)));
             }
         }
@@ -37,7 +40,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

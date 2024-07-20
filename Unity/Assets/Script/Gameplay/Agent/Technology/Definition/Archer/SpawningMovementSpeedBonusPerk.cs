@@ -8,7 +8,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, SpawningMovementSpeedBonusPerk>
         {
-            public Modifier(IModifiable modifiable, SpawningMovementSpeedBonusPerk modifierDefinition, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(IModifiable modifiable, SpawningMovementSpeedBonusPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 Character character = modifiable.GetCachedComponent<Character>();
 
@@ -35,7 +35,7 @@ namespace Game
                     return;
                 }
 
-                modifiable.AddModifier(new SpawningMovementSpeedBonusPerkEffect.Modifier(modifiable, definition.effect, definition.movementSpeedIncrease));
+                modifiable.AddModifier(new SpawningMovementSpeedBonusPerkEffect.Modifier(modifiable, definition.effect, source, definition.movementSpeedIncrease));
             }
         }
 
@@ -45,7 +45,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

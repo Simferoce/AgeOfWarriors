@@ -9,7 +9,7 @@ namespace Game
         {
             public override float? AttackPower => Mathf.Floor(modifiable.GetCachedComponent<Character>().Defense / definition.defenseRequired) * definition.attackPowerIncrease;
 
-            public Modifier(IModifiable modifiable, IncreaseDefenseBaseOnAttackPowerPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, IncreaseDefenseBaseOnAttackPowerPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
             }
         }
@@ -24,7 +24,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

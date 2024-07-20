@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GiveDefenseOnDeathPerk>
         {
-            public Modifier(IModifiable modifiable, GiveDefenseOnDeathPerk modifierDefinition) : base(modifiable, modifierDefinition)
+            public Modifier(IModifiable modifiable, GiveDefenseOnDeathPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 modifiable.GetCachedComponent<Character>().OnDeath += Modifier_OnDeath;
             }
@@ -38,7 +38,10 @@ namespace Game
                     if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.reachPercentage * character.Reach)
                         continue;
 
-                    modifiable.AddModifier(new DefenseModifierDefinition.Modifier(character, definition.defenseModifierDefinition, definition.defense, this));
+                    modifiable.AddModifier(new DefenseModifierDefinition.Modifier(character,
+                        definition.defenseModifierDefinition,
+                        definition.defense,
+                        Source));
                 }
             }
 
@@ -60,7 +63,7 @@ namespace Game
 
         public override Game.Modifier GetModifier(IModifiable modifiable)
         {
-            return new Modifier(modifiable, this);
+            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
         }
     }
 }

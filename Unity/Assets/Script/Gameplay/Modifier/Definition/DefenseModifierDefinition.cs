@@ -7,16 +7,14 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, DefenseModifierDefinition>
         {
-            public object Source { get; set; }
             public override float? Defense => defense;
 
             private float defense;
 
-            public Modifier(Character character, DefenseModifierDefinition modifierDefinition, float defense, object source)
-                : base(character.GetCachedComponent<IModifiable>(), modifierDefinition)
+            public Modifier(Character character, DefenseModifierDefinition modifierDefinition, float defense, IModifierSource source)
+                : base(character.GetCachedComponent<IModifiable>(), modifierDefinition, source)
             {
                 this.defense = defense;
-                this.Source = source;
             }
 
             public override string ParseDescription()
