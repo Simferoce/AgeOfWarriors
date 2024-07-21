@@ -25,8 +25,9 @@ namespace Game
                 Vector3 position = Lane.Instance.Project(projectile.transform.position);
                 Pool pool = GameObject.Instantiate(definition.prefab, position, Quaternion.identity).GetComponent<Pool>();
                 pool.Duration = duration;
-                pool.Damage = damage;
+                pool.GetEffect<PeriodicDamagePoolEffect>().Damage = damage;
                 pool.Spawn(projectile.Character.Agent, 0, projectile.Character.Agent.Direction);
+                pool.Initialize(modifiable.GetCachedComponent<AgentObject>());
             }
         }
 

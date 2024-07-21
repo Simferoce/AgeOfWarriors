@@ -16,6 +16,7 @@ namespace Game
         public event AttackedLanded OnAttackLanded;
         public event Action OnDeath;
         public event Action<Modifier> OnModifierAdded;
+        public event Action<Entity> OnChildEntitySpawned;
 
         public CharacterAnimator CharacterAnimator { get; set; }
         public List<TransformTag> TransformTags { get; set; }
@@ -40,6 +41,7 @@ namespace Game
 
         private StateMachine stateMachine = new StateMachine();
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
+        private List<Entity> childEntities = new List<Entity>();
 
         protected override void Awake()
         {
@@ -177,6 +179,17 @@ namespace Game
         public bool RecentlyAttacked(IAttackable attackable)
         {
             return RecentlyAttackedAttackeables.Contains(attackable);
+        }
+
+        public void AddChildEntity(Entity entity)
+        {
+            childEntities.Add(entity);
+            OnChildEntitySpawned?.Invoke(entity);
+        }
+
+        public void RemoveChildEntity(Entity entity)
+        {
+            childEntities.Remove(entity);
         }
 
         #region Ability

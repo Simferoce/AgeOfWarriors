@@ -61,6 +61,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   types: 
   hitbox: {fileID: 9180770476010773123}
+  poolEffects:
+  - rid: 8118057684521451527
+  references:
+    version: 2
+    RefIds:
+    - rid: 8118057684521451527
+      type: {class: PeriodicDamagePoolEffect, ns: Game, asm: Assembly-CSharp}
 --- !u!1 &4436947716902145556
 GameObject:
   m_ObjectHideFlags: 0
