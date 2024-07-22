@@ -11,6 +11,8 @@ namespace Game
         {
             public abstract ModifierDefinition ModifierDefinition { get; }
 
+            public abstract bool Applicable(Pool pool, ITargeteable targeteable);
+
             public abstract Modifier Instanciate(IModifiable modifiable, IModifierSource modifierSource);
         }
 
@@ -22,7 +24,7 @@ namespace Game
         {
             base.Apply(pool, targeteable);
 
-            if (targeteable.Faction != pool.Faction)
+            if (!ModifierInstancier.Applicable(pool, targeteable))
                 return;
 
             if (!targeteable.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))

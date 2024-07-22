@@ -2,19 +2,27 @@
 
 namespace Game
 {
-    [CreateAssetMenu(fileName = "CreateAttackBuffingPoolOnDeath", menuName = "Definition/Technology/Seer/CreateAttackBuffingPoolOnDeath")]
-    public class CreateAttackBuffingPoolOnDeath : CharacterTechnologyPerkDefinition
+    [CreateAssetMenu(fileName = "CreateAttackBuffingPoolOnDeathPerk", menuName = "Definition/Technology/Seer/CreateAttackBuffingPoolOnDeathPerk")]
+    public class CreateAttackBuffingPoolOnDeathPerk : CharacterTechnologyPerkDefinition
     {
         private class ModifierInstancier : ApplyPeriodicBuffPoolEffect.Instancier
         {
-            private CreateAttackBuffingPoolOnDeath createAttackBuffingPoolOnDeath;
+            private CreateAttackBuffingPoolOnDeathPerk createAttackBuffingPoolOnDeath;
 
-            public ModifierInstancier(CreateAttackBuffingPoolOnDeath createAttackBuffingPoolOnDeath)
+            public ModifierInstancier(CreateAttackBuffingPoolOnDeathPerk createAttackBuffingPoolOnDeath)
             {
                 this.createAttackBuffingPoolOnDeath = createAttackBuffingPoolOnDeath;
             }
 
             public override ModifierDefinition ModifierDefinition => createAttackBuffingPoolOnDeath.modifierDefinition;
+
+            public override bool Applicable(Pool pool, ITargeteable targeteable)
+            {
+                if (targeteable.Faction != pool.Faction)
+                    return false;
+
+                return true;
+            }
 
             public override Game.Modifier Instanciate(IModifiable modifiable, IModifierSource modifierSource)
             {
@@ -22,11 +30,11 @@ namespace Game
             }
         }
 
-        private class Modifier : Modifier<Modifier, CreateAttackBuffingPoolOnDeath>
+        private class Modifier : Modifier<Modifier, CreateAttackBuffingPoolOnDeathPerk>
         {
             private Character character;
 
-            public Modifier(IModifiable modifiable, CreateAttackBuffingPoolOnDeath modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(IModifiable modifiable, CreateAttackBuffingPoolOnDeathPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 character = modifiable.GetCachedComponent<Character>();
                 character.OnDeath += Modifier_OnDeath;

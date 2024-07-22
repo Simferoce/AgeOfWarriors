@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdae9bcc8d1d9a74daab2bcc226bc5fd, type: 3}
+  m_Name: SlowEnemiesInPoolPerk
+  m_EditorClassIdentifier: 
+  id: b2ebb43c0cc3c7f4db2a6f1028936800
+  title: Stagnant Veil
+  icon: {fileID: 0}
+  description: Pool effects reduce the movement speed of all enemies by {0:0.0%}.
+  showOnHealthBar: 0
+  requirementsPerk:
+  - rid: 8118057706569072646
+  affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+  speedModifierDefinition: {fileID: 1371673261063317552}
+  amount: 0.25
+  references:
+    version: 2
+    RefIds:
+    - rid: 8118057706569072646
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 14eb634f26441f3419e8d6c26ba328d9, type: 2}
+--- !u!114 &1371673261063317552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c2558554da2e54ebdece3669c40aed, type: 3}
+  m_Name: SpeedModifierDefinition
+  m_EditorClassIdentifier: 
+  id: b53ba69740c63464f98a2a26bad374d3
+  title: Stagnant Veil - Speed
+  icon: {fileID: 0}
+  description: Reduce speed by {0:0.0%}.
+  showOnHealthBar: 1

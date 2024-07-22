@@ -18,7 +18,7 @@ namespace Game
             private void AgentObject_OnAttackLanded(AttackResult attackResult)
             {
                 if (attackResult.KillingBlow)
-                    modifiable.AddModifier(new SpeedModifierDefinition.SpeedBuff(
+                    modifiable.AddModifier(new SpeedModifierDefinition.Modifier(
                         modifiable,
                         speedModifierDefinition,
                         definition.speed,

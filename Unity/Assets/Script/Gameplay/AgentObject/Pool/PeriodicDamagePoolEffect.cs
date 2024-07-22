@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Game
 {
@@ -7,8 +8,14 @@ namespace Game
     {
         public float Damage { get; set; }
 
+        private float lastTimeApplied = float.MinValue;
+
         public override void Apply(Pool pool, ITargeteable targeteable)
         {
+            if (Time.time - lastTimeApplied < 1f)
+                return;
+
+            lastTimeApplied = Time.time;
             base.Apply(pool, targeteable);
 
             if (targeteable.Faction == pool.Faction)

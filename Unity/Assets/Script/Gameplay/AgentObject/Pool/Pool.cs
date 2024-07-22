@@ -8,20 +8,17 @@ namespace Game
     public class Pool : AgentObject, IAttackSource
     {
         [SerializeField] private Collider2D hitbox;
-        [SerializeField, Tooltip("The interval should be higher than the PhysicUpdate")] private float updateInterval = 1f;
         [SerializeReference, SubclassSelector] private List<PoolEffect> poolEffects;
 
         public float Duration { get; set; }
         public AgentObject Owner { get => owner; set => owner = value; }
 
-        private float lastEffectApplied;
         private float startTime;
         private AgentObject owner;
 
         public void Initialize(AgentObject owner)
         {
             this.Owner = owner;
-            lastEffectApplied = Time.time;
             startTime = Time.time;
 
             foreach (PoolEffect poolEffect in poolEffects)
@@ -33,24 +30,19 @@ namespace Game
 
         private void FixedUpdate()
         {
-            if (Time.time - lastEffectApplied > updateInterval)
+            foreach (AgentObject agent in AgentObject.All)
             {
-                foreach (AgentObject agent in AgentObject.All)
-                {
-                    if (!agent.IsActive)
-                        continue;
+                if (!agent.IsActive)
+                    continue;
 
-                    if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
-                        continue;
+                if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                    continue;
 
-                    if (!hitbox.OverlapPoint(targeteable.CenterPosition))
-                        continue;
+                if (!hitbox.OverlapPoint(targeteable.CenterPosition))
+                    continue;
 
-                    foreach (PoolEffect poolEffect in poolEffects)
-                        poolEffect.Apply(this, targeteable);
-                }
-
-                lastEffectApplied = Time.time;
+                foreach (PoolEffect poolEffect in poolEffects)
+                    poolEffect.Apply(this, targeteable);
             }
 
             if (Time.time - startTime > Duration)
@@ -66,6 +58,9 @@ namespace Game
 
             if (Owner is Character character)
                 character.RemoveChildEntity(this);
+
+            foreach (PoolEffect poolEffect in poolEffects)
+                poolEffect.Dispose();
         }
 
         public T GetEffect<T>()
@@ -74,6 +69,12 @@ namespace Game
             PoolEffect poolEffect = poolEffects.FirstOrDefault(x => x is T);
             Assert.IsNotNull(poolEffect, "Attempting to get an effect that does not exists in the pool.");
             return (T)poolEffect;
+        }
+
+        public void AddPoolEffect(PoolEffect poolEffect)
+        {
+            poolEffect.Initialize(this);
+            poolEffects.Add(poolEffect);
         }
     }
 }
