@@ -7,5 +7,6 @@ namespace Game
     {
         public virtual void Initialize(Pool pool) { }
         public virtual void Apply(Pool pool, ITargeteable targeteable) { }
+        public virtual void Dispose() { }
     }
 }

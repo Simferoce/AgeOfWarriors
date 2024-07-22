@@ -96,6 +96,11 @@ namespace Game
             OnModifierAdded?.Invoke(modifier);
         }
 
+        public void RemoveModifier(Modifier modifier)
+        {
+            AppliedModifiers.Remove(modifier);
+        }
+
         public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, bool overtime, IAttackable target, params IAttackSource[] source)
         {
             bool empowered = false;

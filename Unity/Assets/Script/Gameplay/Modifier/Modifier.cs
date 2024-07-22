@@ -85,7 +85,7 @@ namespace Game
         public virtual void Dispose()
         {
             if (Source != null)
-                Source.AppliedModifiers.Remove(this);
+                Source.RemoveModifier(this);
         }
     }
 

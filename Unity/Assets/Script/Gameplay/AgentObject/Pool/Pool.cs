@@ -8,9 +8,11 @@ namespace Game
     public class Pool : AgentObject, IAttackSource
     {
         [SerializeField] private Collider2D hitbox;
+        [SerializeField, Tooltip("The interval should be higher than the PhysicUpdate")] private float updateInterval = 1f;
         [SerializeReference, SubclassSelector] private List<PoolEffect> poolEffects;
 
         public float Duration { get; set; }
+        public AgentObject Owner { get => owner; set => owner = value; }
 
         private float lastEffectApplied;
         private float startTime;
@@ -18,7 +20,7 @@ namespace Game
 
         public void Initialize(AgentObject owner)
         {
-            this.owner = owner;
+            this.Owner = owner;
             lastEffectApplied = Time.time;
             startTime = Time.time;
 
@@ -31,7 +33,7 @@ namespace Game
 
         private void FixedUpdate()
         {
-            if (Time.time - lastEffectApplied > 1)
+            if (Time.time - lastEffectApplied > updateInterval)
             {
                 foreach (AgentObject agent in AgentObject.All)
                 {
@@ -62,7 +64,7 @@ namespace Game
         {
             base.OnDestroy();
 
-            if (owner is Character character)
+            if (Owner is Character character)
                 character.RemoveChildEntity(this);
         }
 

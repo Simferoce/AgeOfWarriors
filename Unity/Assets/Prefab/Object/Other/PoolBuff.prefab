@@ -211,6 +211,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   types: 
   hitbox: {fileID: 9180770476010773123}
+  updateInterval: 0.1
+  poolEffects:
+  - rid: 8118057684521451531
+  references:
+    version: 2
+    RefIds:
+    - rid: 8118057684521451531
+      type: {class: ApplyPeriodicBuffPoolEffect, ns: Game, asm: Assembly-CSharp}
 --- !u!1 &3247185677141968731
 GameObject:
   m_ObjectHideFlags: 0

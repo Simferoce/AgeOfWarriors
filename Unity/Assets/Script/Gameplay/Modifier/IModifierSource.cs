@@ -9,5 +9,6 @@ namespace Game
         public List<Modifier> AppliedModifiers { get; }
 
         public void AddModifier(Modifier modifier);
+        public void RemoveModifier(Modifier modifier);
     }
 }
