@@ -26,5 +26,18 @@ namespace Game
                 return (T)cached[typeof(T)];
             }
         }
+
+        public T AddOrGetCachedComponent<T>()
+            where T : Component
+        {
+            T component = GetCachedComponent<T>();
+            if (component != null)
+                return component;
+
+            component = gameObject.AddComponent<T>();
+            cached[typeof(T)] = component;
+
+            return component;
+        }
     }
 }

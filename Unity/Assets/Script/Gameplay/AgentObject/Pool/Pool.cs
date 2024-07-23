@@ -11,21 +11,15 @@ namespace Game
         [SerializeReference, SubclassSelector] private List<PoolEffect> poolEffects;
 
         public float Duration { get; set; }
-        public AgentObject Owner { get => owner; set => owner = value; }
 
         private float startTime;
-        private AgentObject owner;
 
-        public void Initialize(AgentObject owner)
+        public void Initialize()
         {
-            this.Owner = owner;
             startTime = Time.time;
 
             foreach (PoolEffect poolEffect in poolEffects)
                 poolEffect.Initialize(this);
-
-            if (owner is Character character)
-                character.AddChildEntity(this);
         }
 
         private void FixedUpdate()
@@ -55,9 +49,6 @@ namespace Game
         protected override void OnDestroy()
         {
             base.OnDestroy();
-
-            if (Owner is Character character)
-                character.RemoveChildEntity(this);
 
             foreach (PoolEffect poolEffect in poolEffects)
                 poolEffect.Dispose();

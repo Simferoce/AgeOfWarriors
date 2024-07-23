@@ -24,7 +24,7 @@ namespace Game
             if (!targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
                 return;
 
-            attackable.TakeAttack(new Attack(new AttackSource(pool), Damage, 0, 0, false, false, false));
+            attackable.TakeAttack(new Attack(new AttackSource(pool), Damage, 0, 0, false, false, false, false));
         }
     }
 }

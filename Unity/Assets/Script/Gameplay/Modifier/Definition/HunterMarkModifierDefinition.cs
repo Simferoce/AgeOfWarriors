@@ -31,7 +31,7 @@ namespace Game
 
                 AttackSource source = attack.Attack.AttackSource.Clone();
                 source.Sources.Add(this);
-                attackable.TakeAttack(new Attack(source, damage, 0f, 0f, false, false, false));
+                attackable.TakeAttack(new Attack(source, damage, 0f, 0f, false, false, false, false));
             }
 
             public override void Dispose()

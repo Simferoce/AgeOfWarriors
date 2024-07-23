@@ -47,7 +47,9 @@ namespace Game
                 pool.Duration = definition.duration;
                 pool.GetEffect<ApplyPeriodicBuffPoolEffect>().ModifierInstancier = new ModifierInstancier(this.definition);
                 pool.Spawn(character.Agent, 0, character.Agent.Direction);
-                pool.Initialize(modifiable.GetCachedComponent<AgentObject>());
+                Ownership.SetOwner(pool, character);
+
+                pool.Initialize();
             }
 
             public override void Dispose()

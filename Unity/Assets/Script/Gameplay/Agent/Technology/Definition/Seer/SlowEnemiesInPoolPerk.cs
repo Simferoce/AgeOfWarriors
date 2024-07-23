@@ -37,12 +37,12 @@ namespace Game
             public Modifier(IModifiable modifiable, SlowEnemiesInPoolPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 character = modifiable.GetCachedComponent<Character>();
-                character.OnChildEntitySpawned += Character_OnChildEntitySpawned;
+                character.AddOrGetCachedComponent<Ownership>().OnChildAdded += Character_OnChildEntitySpawned;
             }
 
             private void Character_OnChildEntitySpawned(Entity entity)
             {
-                if (entity is Pool pool)
+                if (entity.TryGetCachedComponent<Pool>(out Pool pool))
                 {
                     pool.AddPoolEffect(new ApplyPeriodicBuffPoolEffect()
                     {
@@ -54,7 +54,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                character.OnChildEntitySpawned -= Character_OnChildEntitySpawned;
+                character.AddOrGetCachedComponent<Ownership>().OnChildAdded -= Character_OnChildEntitySpawned;
             }
         }
 

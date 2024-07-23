@@ -16,7 +16,6 @@ namespace Game
         public event AttackedLanded OnAttackLanded;
         public event Action OnDeath;
         public event Action<Modifier> OnModifierAdded;
-        public event Action<Entity> OnChildEntitySpawned;
 
         public CharacterAnimator CharacterAnimator { get; set; }
         public List<TransformTag> TransformTags { get; set; }
@@ -101,7 +100,7 @@ namespace Game
             AppliedModifiers.Remove(modifier);
         }
 
-        public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, bool overtime, IAttackable target, params IAttackSource[] source)
+        public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, bool overtime, bool reflectable, IAttackable target, params IAttackSource[] source)
         {
             bool empowered = false;
 
@@ -127,7 +126,7 @@ namespace Game
                 damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
             }
 
-            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered, overtime);
+            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered, reflectable, overtime);
         }
 
         public ITargeteable GetTarget(TargetCriteria criteria, object caller)
@@ -184,17 +183,6 @@ namespace Game
         public bool RecentlyAttacked(IAttackable attackable)
         {
             return RecentlyAttackedAttackeables.Contains(attackable);
-        }
-
-        public void AddChildEntity(Entity entity)
-        {
-            childEntities.Add(entity);
-            OnChildEntitySpawned?.Invoke(entity);
-        }
-
-        public void RemoveChildEntity(Entity entity)
-        {
-            childEntities.Remove(entity);
         }
 
         #region Ability

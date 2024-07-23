@@ -40,7 +40,7 @@ namespace Game
                     Character character = modifiable.GetCachedComponent<Character>();
                     if (character.Health > 0)
                     {
-                        Attack attack = character.GenerateAttack(DamagePerSeconds * duration, 0, 0, false, true, attackable, this);
+                        Attack attack = character.GenerateAttack(DamagePerSeconds * duration, 0, 0, false, true, false, attackable, this);
                         attackable.TakeAttack(attack);
                     }
                 }

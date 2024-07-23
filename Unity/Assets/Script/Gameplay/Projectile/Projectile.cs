@@ -40,7 +40,7 @@ namespace Game
             this.ability = ability;
             this.target = target;
 
-            character.AddChildEntity(this);
+            Ownership.SetOwner(this, character);
 
             foreach (ProjectileMovement context in projectileMovements)
                 context.Initialize(this);
@@ -100,11 +100,6 @@ namespace Game
         {
             foreach (ProjectileImpact effect in impacts)
                 effect.LeaveZone(collision.gameObject);
-        }
-
-        private void OnDestroy()
-        {
-            character.RemoveChildEntity(this);
         }
 
         public void Kill(GameObject collision)

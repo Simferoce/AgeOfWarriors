@@ -68,7 +68,7 @@ namespace Game
                     && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable)
                     && !targetsHit.Contains(attackable))
                 {
-                    Attack attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, true, false, attackable, projectile);
+                    Attack attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, true, false, true, attackable, projectile);
                     attack.AttackSource.Sources.Add(projectile);
                     attackable.TakeAttack(attack);
                     targetsHit.Add(attackable);

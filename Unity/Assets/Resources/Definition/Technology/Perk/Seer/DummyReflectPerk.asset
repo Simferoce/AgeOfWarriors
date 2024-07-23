@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dd649e3710c9c54bb518cee8bb047ac, type: 3}
+  m_Name: DummyReflectPerk
+  m_EditorClassIdentifier: 
+  id: dd60cea75383fb445bc6f1228993af76
+  title: Spiked Dummy
+  icon: {fileID: 0}
+  description: Dummy spawn reflects {0} damage each time it is attacked.
+  showOnHealthBar: 0
+  requirementsPerk:
+  - rid: 8118057729630404614
+  affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+  reflectDamageModifierDefinition: {fileID: 7151859202093906464}
+  damage: 5
+  references:
+    version: 2
+    RefIds:
+    - rid: 8118057729630404614
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 14eb634f26441f3419e8d6c26ba328d9, type: 2}
+--- !u!114 &7151859202093906464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29dae1c802f236443852dda20f047ce6, type: 3}
+  m_Name: ReflectDamageModifierDefinition
+  m_EditorClassIdentifier: 
+  id: d7084896c2473ec45a12a424b845dd0b
+  title: 
+  icon: {fileID: 0}
+  description: 
+  showOnHealthBar: 1

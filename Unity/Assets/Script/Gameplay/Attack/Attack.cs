@@ -9,9 +9,11 @@
         public bool Ranged { get; set; }
         public bool Empowered { get; set; }
         public bool OverTime { get; set; }
+        public bool Reflectable { get; set; }
 
-        public Attack(AttackSource attackSource, float damage, float armorPenetration, float leach, bool ranged, bool empowered, bool overTime)
+        public Attack(AttackSource attackSource, float damage, float armorPenetration, float leach, bool ranged, bool empowered, bool reflectable, bool overTime)
         {
+            Reflectable = reflectable;
             Leach = leach;
             AttackSource = attackSource;
             Damage = damage;
@@ -23,7 +25,7 @@
 
         public Attack Clone()
         {
-            return new Attack(AttackSource.Clone(), Damage, ArmorPenetration, Leach, Ranged, Empowered, OverTime);
+            return new Attack(AttackSource.Clone(), Damage, ArmorPenetration, Leach, Ranged, Empowered, Reflectable, OverTime);
         }
     }
 }

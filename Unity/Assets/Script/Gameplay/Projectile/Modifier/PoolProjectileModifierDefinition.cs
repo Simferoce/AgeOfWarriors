@@ -27,7 +27,7 @@ namespace Game
                 pool.Duration = duration;
                 pool.GetEffect<PeriodicDamagePoolEffect>().Damage = damage;
                 pool.Spawn(projectile.Character.Agent, 0, projectile.Character.Agent.Direction);
-                pool.Initialize(projectile.Character);
+                pool.Initialize();
             }
         }
 

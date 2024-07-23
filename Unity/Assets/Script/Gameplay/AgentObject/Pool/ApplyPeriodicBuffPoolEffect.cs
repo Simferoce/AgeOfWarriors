@@ -34,7 +34,7 @@ namespace Game
             if (modifier != null)
                 return;
 
-            modifier = ModifierInstancier.Instanciate(modifiable, pool.Owner.GetCachedComponent<IModifierSource>());
+            modifier = ModifierInstancier.Instanciate(modifiable, pool.AddOrGetCachedComponent<Ownership>().Owner.GetCachedComponent<IModifierSource>());
             modifiable.AddModifier(modifier);
             appliedModifiers.Add(modifier);
         }

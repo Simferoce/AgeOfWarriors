@@ -19,6 +19,7 @@ namespace Game
             {
                 CharacterDefinition characterDefinition = Resources.Load<CharacterDefinition>("Definition/Character/Dummy/Dummy");
                 AgentObject agentObject = characterDefinition.Spawn(character.Agent, character.transform.position, character.SpawnNumber, character.Direction);
+                Ownership.SetOwner(agentObject, character);
                 IModifiable dummyModifiable = agentObject.GetCachedComponent<IModifiable>();
 
                 float maxHealth = (agentObject as Character).MaxHealth;
