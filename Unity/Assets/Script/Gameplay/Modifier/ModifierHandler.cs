@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Game
 {
     public class ModifierHandler : Entity, IModifiable
     {
+        [SerializeReference, SubclassSelector] private List<ModifierDefinition.Instancier> onInitializedModifier;
+
         public event Action<Modifier> OnModifierRemoved;
         public event Action<Modifier> OnModifierAdded;
 
@@ -21,6 +24,14 @@ namespace Game
         public List<Modifier> GetModifiers()
         {
             return modifiers;
+        }
+
+        private void Start()
+        {
+            foreach (ModifierDefinition.Instancier instancier in onInitializedModifier)
+            {
+                this.AddModifier(instancier.Instantiate(this));
+            }
         }
 
         private void Update()

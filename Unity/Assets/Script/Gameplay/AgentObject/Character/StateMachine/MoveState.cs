@@ -51,6 +51,9 @@ namespace Game
 
             private bool CanMove()
             {
+                if (character.Speed <= 0)
+                    return false;
+
                 if (character.abilities.Any(x => x.IsCasting))
                     return false;
 

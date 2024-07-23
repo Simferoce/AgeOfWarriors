@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5609975018426045943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe51ab4604c3d14e881107298352627, type: 3}
+  m_Name: DummyDamageOverTimeModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 9b8dd3dd396c5344eb853e2017015212
+  title: 
+  icon: {fileID: 0}
+  description: 
+  showOnHealthBar: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e683e0ec9df17694c95194e6294e55cb, type: 3}
+  m_Name: CreateDummyOnDeathPerk
+  m_EditorClassIdentifier: 
+  id: 3aadda4e64152ee49b8053cfeff27fa2
+  title: One last Effort
+  icon: {fileID: 0}
+  description: When killed, spawn a dummy that loses {0:0.0%} of health per seconds.
+  showOnHealthBar: 0
+  requirementsPerk:
+  - rid: 8118057726027759627
+  affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+  damageOverTimeModifierDefinition: {fileID: -5609975018426045943}
+  percentageHealth: 0.1
+  references:
+    version: 2
+    RefIds:
+    - rid: 8118057726027759627
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 14eb634f26441f3419e8d6c26ba328d9, type: 2}

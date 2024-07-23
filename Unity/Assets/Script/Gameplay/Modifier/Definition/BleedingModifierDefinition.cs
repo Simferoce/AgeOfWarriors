@@ -4,26 +4,17 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "BleedingModifierDefinition", menuName = "Definition/Modifier/BleedingModifierDefinition")]
-    public class BleedingModifierDefinition : ModifierDefinition
+    public class BleedingModifierDefinition : DamageOverTimeModifierDefinition
     {
-        public class Modifier : Modifier<Modifier, BleedingModifierDefinition>, IAttackSource
+        public class BleedingModifier : Modifier, IAttackSource
         {
-            public float DamagePerSeconds { get; set; }
             public int Stacks { get; set; }
 
-            public bool IsMaxed => Stacks >= definition.maxStack;
+            public bool IsMaxed => Stacks >= (definition as BleedingModifierDefinition).maxStack;
 
-            private float durationEffect;
-            private float lastDamageDealt;
-            private float startTime;
-
-            public Modifier(IModifiable modifiable, BleedingModifierDefinition modifierDefinition, float duration, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public BleedingModifier(IModifiable modifiable, BleedingModifierDefinition modifierDefinition, float duration, float damageOverTime, IModifierSource source) : base(modifiable, modifierDefinition, source, duration, damageOverTime)
             {
-                durationEffect = duration;
-                this.With(new CharacterModifierTimeElement(duration));
                 Stacks++;
-                lastDamageDealt = Time.time;
-                startTime = Time.time;
             }
 
             public override float? GetStack()
@@ -62,15 +53,14 @@ namespace Game
                         if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > spreadDistance)
                             continue;
 
-                        BleedingModifierDefinition.Modifier modifier = modifiable.GetModifiers()
-                            .FirstOrDefault(x => x is BleedingModifierDefinition.Modifier bleedingModifier
+                        BleedingModifier modifier = modifiable.GetModifiers()
+                            .FirstOrDefault(x => x is BleedingModifier bleedingModifier
                                 && bleedingModifier.Source == source)
-                            as BleedingModifierDefinition.Modifier;
+                            as BleedingModifier;
 
                         if (modifier == null)
                         {
-                            modifier = new BleedingModifierDefinition.Modifier(modifiable, definition, duration, Source);
-                            modifier.DamagePerSeconds += damagePerSeconds;
+                            modifier = new BleedingModifier(modifiable, definition as BleedingModifierDefinition, duration, damagePerSeconds, Source);
 
                             modifiable.AddModifier(modifier);
                         }
@@ -85,36 +75,6 @@ namespace Game
                 }
 
                 Refresh();
-            }
-
-            public override void Update()
-            {
-                base.Update();
-
-                if (Time.time - lastDamageDealt > 1)
-                {
-                    DealDamage(Time.time - lastDamageDealt);
-                }
-            }
-
-            private void DealDamage(float duration)
-            {
-                if (modifiable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
-                {
-                    Attack attack = modifiable.GetCachedComponent<Character>().GenerateAttack(DamagePerSeconds * duration, 0, 0, false, true, attackable, this);
-                    attackable.TakeAttack(attack);
-                }
-
-                lastDamageDealt = Time.time;
-            }
-
-            public override void Dispose()
-            {
-                base.Dispose();
-
-                float duration = durationEffect - (lastDamageDealt - startTime);
-                if (duration > 0)
-                    DealDamage(duration);
             }
         }
 

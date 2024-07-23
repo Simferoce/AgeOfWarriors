@@ -28,15 +28,14 @@ namespace Game
                 {
                     if (targeteable.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
                     {
-                        BleedingModifierDefinition.Modifier modifier = modifiable.GetModifiers()
-                            .FirstOrDefault(x => x is BleedingModifierDefinition.Modifier bleedingModifier
+                        BleedingModifierDefinition.BleedingModifier modifier = modifiable.GetModifiers()
+                            .FirstOrDefault(x => x is BleedingModifierDefinition.BleedingModifier bleedingModifier
                                 && bleedingModifier.Source == (object)projectile.Character)
-                            as BleedingModifierDefinition.Modifier;
+                            as BleedingModifierDefinition.BleedingModifier;
 
                         if (modifier == null)
                         {
-                            modifier = new BleedingModifierDefinition.Modifier(modifiable, definition.bleedingModifierDefinition, duration, projectile.Character);
-                            modifier.DamagePerSeconds += damagePerSeconds;
+                            modifier = new BleedingModifierDefinition.BleedingModifier(modifiable, definition.bleedingModifierDefinition, duration, damagePerSeconds, projectile.Character);
 
                             modifiable.AddModifier(modifier);
                         }
