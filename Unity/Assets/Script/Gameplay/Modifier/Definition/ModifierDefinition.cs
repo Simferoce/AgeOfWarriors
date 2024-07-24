@@ -8,7 +8,8 @@ namespace Game
         [Serializable]
         public abstract class Instancier
         {
-            public abstract Modifier Instantiate(IModifiable modifiable);
+            public abstract ModifierDefinition Definition { get; set; }
+            public abstract Modifier Instantiate(IModifiable modifiable, IModifierSource source);
         }
 
         [Serializable]
@@ -16,6 +17,8 @@ namespace Game
             where T : ModifierDefinition
         {
             [SerializeField] protected T definition;
+
+            public override ModifierDefinition Definition { get => definition; set => definition = (T)value; }
         }
 
         [SerializeField] private string title;

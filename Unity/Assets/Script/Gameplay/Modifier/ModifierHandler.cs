@@ -30,7 +30,7 @@ namespace Game
         {
             foreach (ModifierDefinition.Instancier instancier in onInitializedModifier)
             {
-                this.AddModifier(instancier.Instantiate(this));
+                this.AddModifier(instancier.Instantiate(this, this.GetCachedComponent<IModifierSource>()));
             }
         }
 

@@ -64,9 +64,9 @@ namespace Game
             [SerializeField] private float damage;
             [SerializeField] private float duration;
 
-            public override Game.Modifier Instantiate(IModifiable modifiable)
+            public override Game.Modifier Instantiate(IModifiable modifiable, IModifierSource source)
             {
-                Modifier modifier = new DamageOverTimeModifierDefinition.Modifier(modifiable, definition, modifiable.GetCachedComponent<IModifierSource>(), duration, damage);
+                Modifier modifier = new DamageOverTimeModifierDefinition.Modifier(modifiable, definition, source, duration, damage);
                 return modifier;
             }
         }
