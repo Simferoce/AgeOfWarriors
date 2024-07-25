@@ -10,6 +10,7 @@ namespace Game
             technologyWindow.Show();
 
             Time.timeScale = 0f;
+
             return technologyWindow;
         }
 

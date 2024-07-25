@@ -6,10 +6,11 @@ namespace Game
     {
         float? SpeedPercentage { get => null; }
         float? AttackSpeedPercentage => null;
+        float? ReachPercentage => null;
         float? Defense { get => null; }
         float? MaxHealth { get => null; }
-        float? AttackPower { get; }
-        bool? IsInvulnerable { get; }
+        float? AttackPower { get => null; }
+        bool? IsInvulnerable { get => null; }
         bool? IsConfused => null;
     }
 }

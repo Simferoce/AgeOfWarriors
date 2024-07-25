@@ -8,6 +8,8 @@ namespace Game
     {
         [SerializeField] private TechnologyPerkDefinition technologyPerkDefinition;
 
+        public TechnologyPerkDefinition TechnologyPerkDefinition { get => technologyPerkDefinition; set => technologyPerkDefinition = value; }
+
         public override bool Execute(Agent agent)
         {
             return technologyPerkDefinition.IsUnlocked(agent);

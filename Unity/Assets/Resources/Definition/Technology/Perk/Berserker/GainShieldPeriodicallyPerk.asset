@@ -18,8 +18,7 @@ MonoBehaviour:
   description: Gain a shield each {0} seconds for {1} seconds that absorbs for a
     total of {2} damage.
   showOnHealthBar: 0
-  requirementsPerk:
-  - rid: 3656781458035441711
+  requirementsPerk: []
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   amount: 25
   duration: 3
@@ -27,11 +26,7 @@ MonoBehaviour:
   shieldModifierDefinition: {fileID: 8750004034786285152}
   references:
     version: 2
-    RefIds:
-    - rid: 3656781458035441711
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: e8e3fadc8bdf3c543a7886471eb4f8c7, type: 2}
+    RefIds: []
 --- !u!114 &8750004034786285152
 MonoBehaviour:
   m_ObjectHideFlags: 0

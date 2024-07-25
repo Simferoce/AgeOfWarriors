@@ -18,19 +18,9 @@ MonoBehaviour:
   description: Regain {0} health points per shield points non absorbed whenever a
     shield ends.
   showOnHealthBar: 0
-  requirementsPerk:
-  - rid: 3656781458035441707
-  - rid: 3656781458035441706
+  requirementsPerk: []
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   healPerShieldPointRemaining: 1
   references:
     version: 2
-    RefIds:
-    - rid: 3656781458035441706
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 4f6a6288a9e3fb044a956bb2a323e9a7, type: 2}
-    - rid: 3656781458035441707
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: a4f2a989b0db5664d9855e274b49e6af, type: 2}
+    RefIds: []

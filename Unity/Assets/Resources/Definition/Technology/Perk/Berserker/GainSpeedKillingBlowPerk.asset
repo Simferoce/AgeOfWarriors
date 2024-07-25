@@ -18,19 +18,14 @@ MonoBehaviour:
   description: Gain {0:0.0%} increase movement speed for {1} seconds whenever landing
     a killing blow on a unit.
   showOnHealthBar: 0
-  requirementsPerk:
-  - rid: 3656781458035441717
+  requirementsPerk: []
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   speed: 1
   duration: 3
   speedModifierDefinition: {fileID: 3359846645476499934}
   references:
     version: 2
-    RefIds:
-    - rid: 3656781458035441717
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: ec0c8ec4bc9c4c440b7b29ce7f0167d9, type: 2}
+    RefIds: []
 --- !u!114 &3359846645476499934
 MonoBehaviour:
   m_ObjectHideFlags: 0

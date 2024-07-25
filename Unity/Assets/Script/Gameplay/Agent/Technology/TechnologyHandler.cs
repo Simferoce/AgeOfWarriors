@@ -10,6 +10,7 @@ namespace Game
         public delegate void PerkAcquired(TechnologyPerkDefinition technologyPerkDefinition);
 
         [SerializeField] private float maxTechnology;
+        [SerializeField] private TechnologyTreeDefinition technologyTreeDefinition;
 
         public event PerkAcquired OnPerkAcquired;
 
@@ -18,6 +19,7 @@ namespace Game
         public float CurrentTechnologyNormalized { get => CurrentTechnology / maxTechnology; }
         public List<TechnologyPerkDefinition> PerksUnlocked { get => perksUnlocked; }
         public float MaxTechnology { get => maxTechnology; set => maxTechnology = value; }
+        public TechnologyTreeDefinition TechnologyTreeDefinition { get => technologyTreeDefinition; set => technologyTreeDefinition = value; }
 
         private Agent agent;
         private List<TechnologyPerkDefinition> perksUnlocked = new List<TechnologyPerkDefinition>();

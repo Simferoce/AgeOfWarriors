@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -15,7 +17,6 @@ namespace Game
         }
 
         [SerializeField] private TechnologyPerkDefinition technologyPerkDefinition;
-        [SerializeField] private List<TechnologyLinkUI> links;
         [SerializeField] private Image icon;
 
         [SerializeField] private Color lockColor;
@@ -79,24 +80,11 @@ namespace Game
                 SetState(State.Unlockable);
             else
                 SetState(State.Locked);
+        }
 
-            for (int i = 0; i < links.Count; ++i)
-            {
-                bool hasRequirement = technologyPerkDefinition.RequirementsPerk[i].Execute(Agent.Player);
-                bool hasPerk = technologyPerkDefinition.IsUnlocked(Agent.Player);
-                if (hasRequirement && !hasPerk)
-                {
-                    links[i].Refresh(TechnologyLinkUI.State.Unlockable);
-                }
-                else if (hasRequirement && hasPerk)
-                {
-                    links[i].Refresh(TechnologyLinkUI.State.Unlocked);
-                }
-                else
-                {
-                    links[i].Refresh(TechnologyLinkUI.State.Locked);
-                }
-            }
+        private void OnDrawGizmos()
+        {
+            Handles.Label(this.transform.position, new GUIContent(technologyPerkDefinition != null ? technologyPerkDefinition.name : "Unassigned"));
         }
     }
 }

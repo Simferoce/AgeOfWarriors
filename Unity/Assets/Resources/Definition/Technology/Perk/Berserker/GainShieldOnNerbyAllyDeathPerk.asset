@@ -18,19 +18,14 @@ MonoBehaviour:
   description: Gain a shield that absorb {0} damages for {1} seconds whenever an
     ally dies.
   showOnHealthBar: 0
-  requirementsPerk:
-  - rid: 3656781458035441710
+  requirementsPerk: []
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   duration: 3
   amount: 25
   shieldModifierDefinition: {fileID: 742517763650448377}
   references:
     version: 2
-    RefIds:
-    - rid: 3656781458035441710
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 124214902e069a84bbead87df45fb3b1, type: 2}
+    RefIds: []
 --- !u!114 &742517763650448377
 MonoBehaviour:
   m_ObjectHideFlags: 0

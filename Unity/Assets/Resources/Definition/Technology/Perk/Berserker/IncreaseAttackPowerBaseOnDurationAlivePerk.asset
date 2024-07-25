@@ -17,14 +17,9 @@ MonoBehaviour:
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Increase attack power by {0} for each seconds alive.
   showOnHealthBar: 0
-  requirementsPerk:
-  - rid: 3656781458035441712
+  requirementsPerk: []
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   attackpowerPerSeconds: 1
   references:
     version: 2
-    RefIds:
-    - rid: 3656781458035441712
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: e8e3fadc8bdf3c543a7886471eb4f8c7, type: 2}
+    RefIds: []
