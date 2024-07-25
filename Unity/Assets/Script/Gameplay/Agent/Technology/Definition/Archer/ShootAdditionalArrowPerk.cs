@@ -32,7 +32,8 @@ namespace Game
                         ProjectileAngledMovement projectileAngledMovement = projectile.ProjectileMovements.FirstOrDefault(x => x is ProjectileAngledMovement) as ProjectileAngledMovement;
                         projectileAngledMovement.Angle = 50;
 
-                        projectile.Initialize(modifiable.GetCachedComponent<Character>(), affectedAbility, affectedAbility.Targets[1]);
+                        Character character = modifiable.GetCachedComponent<Character>();
+                        projectile.Initialize(character, affectedAbility, affectedAbility.Targets[1], affectedAbility.FactionWhenUsed);
 
                         currentAttackApplied = 0;
                     }

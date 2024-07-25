@@ -28,7 +28,8 @@ namespace Game
         public Agent Agent { get; protected set; }
         public int SpawnNumber { get; private set; }
         public int Priority { get => SpawnNumber; }
-        public Faction Faction { get => Agent.Faction; }
+        public virtual Faction Faction { get => Agent.Faction; }
+        public virtual Faction OriginalFaction { get => Agent.Faction; }
         public List<Type> Types { get => types; }
 
         protected virtual void Awake()
@@ -47,8 +48,7 @@ namespace Game
             this.SpawnNumber = spawnNumber;
             this.Agent = agent;
 
-            if (direction < 0)
-                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            transform.localScale = new Vector3(Mathf.Sign(direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
         public virtual AgentObjectDefinition GetDefinition() { return null; }

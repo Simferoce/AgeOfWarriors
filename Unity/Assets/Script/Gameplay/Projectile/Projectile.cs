@@ -28,14 +28,16 @@ namespace Game
         public ITargeteable Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
         public event Impacted OnImpacted;
+        public Faction Faction { get; set; }
 
         private Character character;
         private Ability ability;
         private ITargeteable target;
         private State state = State.Alive;
 
-        public void Initialize(Character character, Ability ability, ITargeteable target)
+        public void Initialize(Character character, Ability ability, ITargeteable target, Faction faction)
         {
+            this.Faction = faction;
             this.character = character;
             this.ability = ability;
             this.target = target;

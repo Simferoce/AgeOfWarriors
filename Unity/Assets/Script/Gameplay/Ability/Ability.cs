@@ -14,6 +14,7 @@ namespace Game
         public virtual List<ITargeteable> Targets => new List<ITargeteable>();
         public AbilityDefinition Definition { get; set; }
         public abstract string ParseDescription();
+        public Faction FactionWhenUsed { get; set; }
 
         public virtual void Initialize(Character character)
         {

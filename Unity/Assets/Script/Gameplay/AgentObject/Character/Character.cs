@@ -1,4 +1,5 @@
 ﻿using Assets.Script.Agent.Technology;
+using Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,8 @@ namespace Game
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
-        public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Invulnerable.HasValue).Any(x => x.Invulnerable.Value);
+        public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
+        public bool IsConfused => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }
         public bool IsInjured { get => Health < MaxHealth; }
 
@@ -89,6 +91,11 @@ namespace Game
             DisposeAbilities();
         }
 
+        public void SetDirection()
+        {
+            transform.localScale = new Vector3(Mathf.Sign(IsConfused ? -Direction : Direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+
         public void AddModifier(Modifier modifier)
         {
             AppliedModifiers.Add(modifier);
@@ -137,15 +144,18 @@ namespace Game
         public List<ITargeteable> GetTargets(TargetCriteria criteria, object caller)
         {
             List<ITargeteable> potentialTargets = new List<ITargeteable>();
-            foreach (ITargeteable attackable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
+            foreach (ITargeteable targetteable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
             {
-                if (!attackable.IsActive)
+                if (!targetteable.IsActive)
                     continue;
 
-                if (!criteria.Execute(this.GetCachedComponent<ITargeteable>(), attackable, caller))
+                if (targetteable == this.GetCachedComponent<ITargeteable>())
                     continue;
 
-                potentialTargets.Add(attackable);
+                if (!criteria.Execute(this.GetCachedComponent<ITargeteable>(), targetteable, caller, Faction, IsConfused ? targetteable.Faction.GetConfusedFaction() : targetteable.Faction))
+                    continue;
+
+                potentialTargets.Add(targetteable);
             }
 
             return potentialTargets

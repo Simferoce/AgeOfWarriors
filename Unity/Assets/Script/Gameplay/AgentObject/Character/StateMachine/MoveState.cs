@@ -23,6 +23,8 @@ namespace Game
 
             protected override void InternalUpdate()
             {
+                character.SetDirection();
+
                 if (character.CanUseAbility())
                 {
                     foreach (Ability ability in character.abilities)
@@ -51,6 +53,9 @@ namespace Game
 
             private bool CanMove()
             {
+                if (character.IsConfused)
+                    return false;
+
                 if (character.Speed <= 0)
                     return false;
 

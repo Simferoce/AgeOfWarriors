@@ -5,9 +5,9 @@ namespace Game
     [Serializable]
     public class IsEnemyTargetCriteria : TargetCriteria
     {
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, object caller, Faction ownerFaction, Faction targetFaction)
         {
-            return targeteable.Faction != owner.Faction;
+            return targetFaction != ownerFaction;
         }
     }
 }

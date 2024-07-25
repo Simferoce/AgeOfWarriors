@@ -64,7 +64,7 @@ namespace Game
             foreach (ITargeteable targeteable in targeteablesInEffect)
             {
                 if (Time.time - startedAt > delay
-                    && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile)
+                    && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
                     && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable)
                     && !targetsHit.Contains(attackable))
                 {

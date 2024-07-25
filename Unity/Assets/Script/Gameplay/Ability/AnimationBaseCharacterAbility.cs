@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Extension;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -34,6 +35,8 @@ namespace Game
 
         public override void Use()
         {
+            FactionWhenUsed = Character.IsConfused ? Character.Faction.GetConfusedFaction() : Character.Faction;
+
             Character.Cast();
             Character.CharacterAnimator.SetTrigger(parameter);
             Character.LastAbilityUsed = Time.time;
