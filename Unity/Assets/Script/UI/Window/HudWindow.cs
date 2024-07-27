@@ -4,7 +4,7 @@
     {
         public void OpenTechnology()
         {
-            TechnologyWindow.Open();
+            TechnologyWindow.Open(Agent.Player);
         }
     }
 }

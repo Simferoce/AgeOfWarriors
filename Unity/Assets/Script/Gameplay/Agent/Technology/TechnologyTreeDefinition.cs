@@ -17,8 +17,17 @@ namespace Game
             public int Level { get => level; set => level = value; }
         }
 
+        [SerializeField] private GameObject treeEditPanelPrefab;
+        [SerializeField] private Sprite icon;
         [SerializeField] private List<Row> rows;
 
         public List<Row> Rows { get => rows; set => rows = value; }
+        public GameObject TreeEditPanelPrefab { get => treeEditPanelPrefab; set => treeEditPanelPrefab = value; }
+        public Sprite Icon { get => icon; set => icon = value; }
+
+        public TechnologyTree Instantiate(Agent agent)
+        {
+            return new TechnologyTree(agent, this);
+        }
     }
 }

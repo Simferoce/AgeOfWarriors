@@ -37,7 +37,7 @@ namespace Game
                 return null;
 
             AgentObjectDefinition agentObjectDefinition = agentObjectsDefinition[index];
-            SpecializationTechnologyPerkDefinition specializationTechnologyPerkDefinition = agent.Technology.PerksUnlocked.FirstOrDefault(x => x is SpecializationTechnologyPerkDefinition s && s.Specialization.IsSpecialization(agentObjectDefinition)) as SpecializationTechnologyPerkDefinition;
+            SpecializationTechnologyPerkDefinition specializationTechnologyPerkDefinition = agent.Technology.GetFirst(x => x is SpecializationTechnologyPerkDefinition s && s.Specialization.IsSpecialization(agentObjectDefinition)) as SpecializationTechnologyPerkDefinition;
             if (specializationTechnologyPerkDefinition != null)
                 return specializationTechnologyPerkDefinition.Specialization;
 

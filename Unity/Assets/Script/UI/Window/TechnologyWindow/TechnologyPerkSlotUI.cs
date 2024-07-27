@@ -16,16 +16,20 @@ namespace Game
         [SerializeField] private Color unlockableColor;
         [SerializeField] private Color unlockColor;
 
-        private void OnEnable()
+        private TechnologyTree technologyTree;
+
+        private void OnDestroy()
         {
-            Agent.Player.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
-            Refresh();
+            if (technologyTree.Agent?.Technology != null)
+                technologyTree.Agent.Technology.OnPerkAcquired -= Technology_OnPerkAcquired;
         }
 
-        private void OnDisable()
+        public void Initialize(TechnologyTree technologyTree)
         {
-            if (Agent.Player != null)
-                Agent.Player.Technology.OnPerkAcquired -= Technology_OnPerkAcquired;
+            this.technologyTree = technologyTree;
+
+            technologyTree.Agent.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
+            Refresh();
         }
 
         private void Technology_OnPerkAcquired(TechnologyPerkDefinition technologyPerkDefinition)
@@ -35,7 +39,7 @@ namespace Game
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            TechnologyDetailsPanelUI technologyDetailsPanelUI = TechnologyDetailsPanelUI.Open(technologyPerkDefinition);
+            TechnologyDetailsPanelUI technologyDetailsPanelUI = TechnologyDetailsPanelUI.Open(technologyTree, technologyPerkDefinition);
             technologyDetailsPanelUI.OnHidden += TechnologyDetailsPanelUI_OnHidden;
         }
 
@@ -47,7 +51,7 @@ namespace Game
 
         public void Refresh()
         {
-            TechnologyHandler.TechnologyPerkStatus technologyPerkStatus = Agent.Player.Technology.GetStatus(technologyPerkDefinition);
+            TechnologyHandler.TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
             if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusLocked)
                 icon.color = lockColor;
             else if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusUnlockable)

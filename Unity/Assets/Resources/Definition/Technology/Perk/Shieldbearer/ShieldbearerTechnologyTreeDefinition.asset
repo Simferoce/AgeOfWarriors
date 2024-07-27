@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ffc60288a9e8a141bf59d31ac5116a5, type: 3}
-  m_Name: BerserkerTechnologyTreeDefinition
+  m_Name: ShieldbearerTechnologyTreeDefinition
   m_EditorClassIdentifier: 
-  id: 05f2265648f06204c8b3e35d378d6c67
-  treeEditPanelPrefab: {fileID: 7604085960318588379, guid: e9ee6d80397f98d4abd20011b4cb077f, type: 3}
-  icon: {fileID: 1091542803, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  id: 493c9b5672c57964cae45e7167a0b422
+  treeEditPanelPrefab: {fileID: 7604085960318588379, guid: a2c7b4d0c02e9b34393aef75d7244ce7, type: 3}
+  icon: {fileID: 1097212789, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   rows:
   - nodes:
     - {fileID: 11400000, guid: e2b24009f395ebe4d87baed0497b6870, type: 2}

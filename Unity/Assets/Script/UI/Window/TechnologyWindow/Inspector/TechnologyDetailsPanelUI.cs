@@ -27,15 +27,16 @@ namespace Game
         [SerializeField] private Color lockedColor;
 
         private TechnologyPerkDefinition technologyPerkDefinition;
+        private TechnologyTree technologyTree;
 
-        public static TechnologyDetailsPanelUI Open(TechnologyPerkDefinition technologyPerkDefinition)
+        public static TechnologyDetailsPanelUI Open(TechnologyTree technologyTree, TechnologyPerkDefinition technologyPerkDefinition)
         {
             TechnologyDetailsPanelUI technologyDetailsPanelUI = WindowManager.Instance.GetWindow<TechnologyDetailsPanelUI>();
             technologyDetailsPanelUI.technologyPerkDefinition = technologyPerkDefinition;
             technologyDetailsPanelUI.title.text = technologyPerkDefinition.Title;
             technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription();
 
-            TechnologyHandler.TechnologyPerkStatus technologyPerkStatus = Agent.Player.Technology.GetStatus(technologyPerkDefinition);
+            TechnologyHandler.TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
 
             if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusUnlockable)
             {
@@ -68,7 +69,7 @@ namespace Game
 
         public void Research()
         {
-            Agent.Player.Technology.Acquire(technologyPerkDefinition);
+            technologyTree.Acquire(technologyPerkDefinition);
             Hide(new DetailsResult() { Value = DetailsResult.ResultValue.Acquired });
         }
 

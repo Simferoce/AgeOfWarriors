@@ -2,12 +2,12 @@ using Game;
 using TMPro;
 using UnityEngine;
 
-public class TechnologyLevel : MonoBehaviour
+public class TechnologyLevelUI : MonoBehaviour
 {
     [SerializeField]
     private TextMeshProUGUI textMeshProUGUI;
 
-    private void Update()
+    public void Refresh(Agent agent)
     {
         textMeshProUGUI.text = Agent.Player.Technology.CurrentLevel.ToString();
     }

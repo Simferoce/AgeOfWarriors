@@ -57,7 +57,7 @@ namespace Game
 
             InitializeAbilities();
             AgentObjectDefinition agentObjectDefinition = GetDefinition();
-            List<ITechnologyModify> modifiers = agent.Technology.PerksUnlocked.OfType<ITechnologyModify>().ToList();
+            List<ITechnologyModify> modifiers = agent.Technology.UnlockedPerks().OfType<ITechnologyModify>().ToList();
             foreach (ITechnologyModify modifier in modifiers)
             {
                 if (modifier.Affect(agentObjectDefinition))

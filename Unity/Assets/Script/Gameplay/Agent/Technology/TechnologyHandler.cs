@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Game
 {
@@ -42,28 +42,37 @@ namespace Game
             }
         }
 
+        public class TechnologyPerkStatusNotInTree : TechnologyPerkStatus
+        {
+
+        }
+
         public delegate void PerkAcquired(TechnologyPerkDefinition technologyPerkDefinition);
 
         [SerializeField] private float maxTechnology;
-        [SerializeField] private TechnologyTreeDefinition technologyTreeDefinition;
+        [SerializeField] private List<TechnologyTreeDefinition> technologyTreeDefinitions;
 
         public event PerkAcquired OnPerkAcquired;
 
         public float CurrentTechnology { get; set; }
         public float CurrentLevel { get; set; }
         public float CurrentTechnologyNormalized { get => CurrentTechnology / maxTechnology; }
-        public List<TechnologyPerkDefinition> PerksUnlocked { get => perksUnlocked; }
         public float MaxTechnology { get => maxTechnology; set => maxTechnology = value; }
-        public TechnologyTreeDefinition TechnologyTreeDefinition { get => technologyTreeDefinition; set => technologyTreeDefinition = value; }
+        public List<TechnologyTree> TechnologyTrees { get => technologyTrees; set => technologyTrees = value; }
 
         private Agent agent;
-        private List<TechnologyPerkDefinition> perksUnlocked = new List<TechnologyPerkDefinition>();
+        private List<TechnologyTree> technologyTrees = new List<TechnologyTree>();
 
         public event Action OnLeveledUp;
 
         public void Initialize(Agent agent)
         {
             this.agent = agent;
+
+            foreach (TechnologyTreeDefinition technologyTreeDefinition in technologyTreeDefinitions)
+            {
+                technologyTrees.Add(technologyTreeDefinition.Instantiate(agent));
+            }
         }
 
         public void Update()
@@ -83,82 +92,52 @@ namespace Game
             }
         }
 
-        public void Acquire(TechnologyPerkDefinition definition)
-        {
-            PerksUnlocked.Add(definition);
-            OnPerkAcquired?.Invoke(definition);
-        }
-
-        public TechnologyPerkStatus GetStatus(TechnologyPerkDefinition definition)
-        {
-            if (perksUnlocked.Contains(definition))
-                return new TechnologyPerkStatusUnlocked();
-
-            int currentRow = UnlockableRow();
-            if (currentRow == -1)
-                return new TechnologyPerkStatusLocked(TechnologyPerkStatusLocked.LockedReason.TreeCompleted);
-
-            int perkRow = GetRow(definition);
-            Assert.IsTrue(perkRow != -1, $"The element {definition} is not in the technology tree of {technologyTreeDefinition}");
-
-            if (perkRow < currentRow)
-                return new TechnologyPerkStatusLocked(TechnologyPerkStatusLocked.LockedReason.AlreadyChoosePerkForRow);
-
-            if (technologyTreeDefinition.Rows[perkRow].Level > CurrentLevel)
-                return new TechnologyPerkStatusLocked(TechnologyPerkStatusLocked.LockedReason.LevelRequirementNotSatisfied);
-
-            if (perkRow > currentRow)
-                return new TechnologyPerkStatusLocked(TechnologyPerkStatusLocked.LockedReason.PerkRowHasNotBeenUnlocked);
-
-            if (!definition.IsUnlockable(agent))
-                return new TechnologyPerkStatusLocked(TechnologyPerkStatusLocked.LockedReason.PerkDoesNotMeetRequirement);
-
-            return new TechnologyPerkStatusUnlockable();
-        }
-
-        public int GetRow(TechnologyPerkDefinition definition)
-        {
-            for (int i = 0; i < technologyTreeDefinition.Rows.Count; i++)
-            {
-                TechnologyTreeDefinition.Row row = technologyTreeDefinition.Rows[i];
-                foreach (TechnologyPerkDefinition rowElement in row.Nodes)
-                {
-                    if (definition == rowElement)
-                        return i;
-                }
-            }
-
-            return -1;
-        }
-
-        public int UnlockableRow()
-        {
-            if (perksUnlocked.Count == 0)
-                return 0;
-
-            for (int i = technologyTreeDefinition.Rows.Count - 1; i >= 0; --i)
-            {
-                bool isUnlocked = false;
-                foreach (TechnologyPerkDefinition technologyPerkDefinition in technologyTreeDefinition.Rows[i].Nodes)
-                {
-                    if (perksUnlocked.Contains(technologyPerkDefinition))
-                    {
-                        isUnlocked = true;
-                        continue;
-                    }
-                }
-
-                if (isUnlocked)
-                    return i + 1;
-            }
-
-            return -1;
-        }
-
         private void LevelUp()
         {
             CurrentLevel++;
             OnLeveledUp?.Invoke();
         }
+
+
+        public bool Has(TechnologyPerkDefinition technologyPerkDefinition)
+        {
+            foreach (TechnologyTree technologyTree in technologyTrees)
+            {
+                if (technologyTree.Has(technologyPerkDefinition))
+                    return true;
+            }
+
+            return false;
+        }
+
+        public TechnologyPerkStatus GetStatus(TechnologyPerkDefinition technologyPerkDefinition)
+        {
+            foreach (TechnologyTree technologyTree in technologyTrees)
+            {
+                if (technologyTree.Has(technologyPerkDefinition))
+                    return technologyTree.GetStatus(technologyPerkDefinition);
+            }
+
+            return new TechnologyPerkStatusNotInTree();
+        }
+
+        public TechnologyPerkDefinition GetFirst(System.Func<TechnologyPerkDefinition, bool> selector)
+        {
+            foreach (TechnologyTree technologyTree in technologyTrees)
+            {
+                TechnologyPerkDefinition technologyPerkDefinition = technologyTree.GetFirst(selector);
+                if (technologyPerkDefinition != null)
+                    return technologyPerkDefinition;
+            }
+
+            return null;
+        }
+
+        public IEnumerable UnlockedPerks()
+        {
+            foreach (TechnologyTree technologyTree in technologyTrees)
+                yield return technologyTree.PerksUnlocked;
+        }
+
     }
 }

@@ -7,7 +7,7 @@ namespace Game
     {
         public override void OnLevelUp()
         {
-            TechnologyWindow.Open();
+            TechnologyWindow.Open(Agent.Player);
         }
     }
 }

@@ -164,7 +164,6 @@ GameObject:
   - component: {fileID: 1570184581086091514}
   - component: {fileID: 1570184581086091517}
   - component: {fileID: 1570184581086091516}
-  - component: {fileID: 1570184581086091515}
   m_Layer: 5
   m_Name: Level
   m_TagString: Untagged
@@ -289,19 +288,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1570184581086091515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1570184581086091513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdfdc3c982fba534b9fa7904ebade36b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textMeshProUGUI: {fileID: 1570184581086091516}
 --- !u!1 &1570184581314784168
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,8 +426,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1570184582040794959}
   - component: {fileID: 1570184582040794945}
+  - component: {fileID: 5513577189555416918}
   m_Layer: 5
-  m_Name: Level
+  m_Name: TechnologyLevel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,6 +464,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1570184582040794958}
   m_CullTransparentMesh: 1
+--- !u!114 &5513577189555416918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570184582040794958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac5a27ffce234a4c988d0505632235b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textMeshProUGUI: {fileID: 1570184581086091516}
 --- !u!1 &2416349448590663403
 GameObject:
   m_ObjectHideFlags: 0

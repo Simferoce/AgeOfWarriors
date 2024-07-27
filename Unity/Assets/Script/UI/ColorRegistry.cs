@@ -12,7 +12,11 @@ namespace Game
         public enum Identifiant
         {
             RequirementMet,
-            RequirementNotMet
+            RequirementNotMet,
+            NotActiveAdditive,
+            ActiveAdditive,
+            Active,
+            NotActive
         }
 
         [Serializable]
