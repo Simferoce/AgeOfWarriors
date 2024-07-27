@@ -1,4 +1,5 @@
 ﻿using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Game
@@ -13,6 +14,14 @@ namespace Game
         public override bool Execute(Agent agent)
         {
             return agent.Technology.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked;
+        }
+
+        public override string Format(Agent agent)
+        {
+            if (agent.Technology.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked)
+                return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.RequirementMet).ToHexString()}>{technologyPerkDefinition.Title}</color>";
+
+            return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.RequirementNotMet).ToHexString()}>{technologyPerkDefinition.Title}</color>";
         }
     }
 }

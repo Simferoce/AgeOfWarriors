@@ -18,10 +18,25 @@ MonoBehaviour:
   description: Deals {0} damage per absorbed damage to all enemies in {1} meters
     whenever a shield end.
   showOnHealthBar: 0
-  requirementsPerk: []
+  requirementsPerk:
+  - rid: 8118057799326367770
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   damagePerShieldPointAbsorbed: 1
   percentageReachExplosionRadius: 3
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8118057799326367770
+      type: {class: RequirementOr, ns: Game, asm: Assembly-CSharp}
+      data:
+        requirements:
+        - rid: 8118057799326367771
+        - rid: 8118057799326367772
+    - rid: 8118057799326367771
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 4f6a6288a9e3fb044a956bb2a323e9a7, type: 2}
+    - rid: 8118057799326367772
+      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 124214902e069a84bbead87df45fb3b1, type: 2}

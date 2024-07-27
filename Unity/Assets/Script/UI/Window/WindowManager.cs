@@ -14,6 +14,8 @@ namespace Game
             Instance = null;
         }
 
+        [SerializeField] private ColorRegistry colorRegistry;
+
         private List<Window> windows = new List<Window>();
 
         private void Awake()
@@ -33,6 +35,11 @@ namespace Game
             T window = windows.OfType<T>().FirstOrDefault();
 
             return window;
+        }
+
+        public Color GetColor(ColorRegistry.Identifiant identifiant)
+        {
+            return colorRegistry.GetColor(identifiant);
         }
     }
 }

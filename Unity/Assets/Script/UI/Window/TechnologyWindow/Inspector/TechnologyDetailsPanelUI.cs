@@ -21,6 +21,7 @@ namespace Game
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private Image buttonImage;
         [SerializeField] private Button button;
+        [SerializeField] private TextMeshProUGUI requirements;
         [SerializeField] private Color unlockableColor;
         [SerializeField] private Color unlockedColor;
         [SerializeField] private Color lockedColor;
@@ -50,6 +51,15 @@ namespace Game
             {
                 technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.lockedColor;
                 technologyDetailsPanelUI.button.interactable = false;
+            }
+
+            if (technologyPerkDefinition.HasRequirements())
+            {
+                technologyDetailsPanelUI.requirements.text = $"REQUIRE - {technologyPerkDefinition.FormatRequirements(Agent.Player)}";
+            }
+            else
+            {
+                technologyDetailsPanelUI.requirements.text = "";
             }
 
             technologyDetailsPanelUI.Show();

@@ -6,5 +6,7 @@ namespace Game
     public abstract class Requirement
     {
         public abstract bool Execute(Agent agent);
+
+        public abstract string Format(Agent agent);
     }
 }
