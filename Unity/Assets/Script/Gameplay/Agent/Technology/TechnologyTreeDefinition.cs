@@ -11,8 +11,10 @@ namespace Game
         public class Row
         {
             [SerializeField] private List<TechnologyPerkDefinition> nodes;
+            [SerializeField] private int level;
 
             public List<TechnologyPerkDefinition> Nodes { get => nodes; set => nodes = value; }
+            public int Level { get => level; set => level = value; }
         }
 
         [SerializeField] private List<Row> rows;

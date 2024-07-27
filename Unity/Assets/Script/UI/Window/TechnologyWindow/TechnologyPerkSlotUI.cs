@@ -9,21 +9,12 @@ namespace Game
 {
     public class TechnologyPerkSlotUI : MonoBehaviour, IPointerClickHandler
     {
-        public enum State
-        {
-            Locked,
-            Unlockable,
-            Unlocked
-        }
-
         [SerializeField] private TechnologyPerkDefinition technologyPerkDefinition;
         [SerializeField] private Image icon;
 
         [SerializeField] private Color lockColor;
         [SerializeField] private Color unlockableColor;
         [SerializeField] private Color unlockColor;
-
-        private State state = State.Locked;
 
         private void OnEnable()
         {
@@ -54,32 +45,15 @@ namespace Game
             Refresh();
         }
 
-        public void SetState(State state)
-        {
-            this.state = state;
-
-            switch (state)
-            {
-                case State.Locked:
-                    icon.color = lockColor;
-                    break;
-                case State.Unlockable:
-                    icon.color = unlockableColor;
-                    break;
-                case State.Unlocked:
-                    icon.color = unlockColor;
-                    break;
-            }
-        }
-
         public void Refresh()
         {
-            if (technologyPerkDefinition.IsUnlocked(Agent.Player))
-                SetState(State.Unlocked);
-            else if (technologyPerkDefinition.IsUnlockable(Agent.Player))
-                SetState(State.Unlockable);
+            TechnologyHandler.TechnologyPerkStatus technologyPerkStatus = Agent.Player.Technology.GetStatus(technologyPerkDefinition);
+            if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusLocked)
+                icon.color = lockColor;
+            else if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusUnlockable)
+                icon.color = unlockableColor;
             else
-                SetState(State.Locked);
+                icon.color = unlockColor;
         }
 
         private void OnDrawGizmos()

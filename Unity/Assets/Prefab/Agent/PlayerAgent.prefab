@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1278113342030530679
 MonoBehaviour:
@@ -47,7 +47,17 @@ MonoBehaviour:
   faction: 0
   agentBase: {fileID: 0}
   direction: 1
-  infiniteCurrency: 0
   currencyGainRate: 1
   technology:
     maxTechnology: 100
+    technologyTreeDefinition: {fileID: 11400000, guid: 05f2265648f06204c8b3e35d378d6c67, type: 2}
+  factory:
+    commandSlot: 1
+    agentObjectsDefinition: []
+  agentBehaviour:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

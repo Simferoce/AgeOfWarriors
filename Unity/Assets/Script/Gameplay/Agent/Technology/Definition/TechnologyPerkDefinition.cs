@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -11,14 +10,15 @@ namespace Game
 
         public List<Requirement> RequirementsPerk { get => requirementsPerk; set => requirementsPerk = value; }
 
-        public virtual bool IsUnlocked(Agent agent)
+        public bool IsUnlockable(Agent agent)
         {
-            return agent.Technology.PerksUnlocked.Contains(this);
-        }
+            foreach (Requirement requirement in requirementsPerk)
+            {
+                if (!requirement.Execute(agent))
+                    return false;
+            }
 
-        public virtual bool IsUnlockable(Agent agent)
-        {
-            return requirementsPerk.Any(x => x.Execute(agent));
+            return true;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Game
 
         public override bool Execute(Agent agent)
         {
-            return technologyPerkDefinition.IsUnlocked(agent);
+            return agent.Technology.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked;
         }
     }
 }

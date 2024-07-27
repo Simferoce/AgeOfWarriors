@@ -36,5 +36,11 @@ namespace Game
         {
             Agent.Player.Technology.CurrentTechnology += Agent.Player.Technology.MaxTechnology;
         }
+
+        [ContextMenu("LevelToMaxLevel")]
+        public void LevelToMaxLevel()
+        {
+            Agent.Player.Technology.CurrentTechnology += Agent.Player.Technology.MaxTechnology * 20;
+        }
     }
 }
