@@ -19,9 +19,9 @@ namespace Game
         public override string Format(Agent agent)
         {
             if (agent.Technology.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked)
-                return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.RequirementMet).ToHexString()}>{technologyPerkDefinition.Title}</color>";
+                return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red).ToHexString()}>{technologyPerkDefinition.Title}</color>";
 
-            return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.RequirementNotMet).ToHexString()}>{technologyPerkDefinition.Title}</color>";
+            return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Green).ToHexString()}>{technologyPerkDefinition.Title}</color>";
         }
     }
 }

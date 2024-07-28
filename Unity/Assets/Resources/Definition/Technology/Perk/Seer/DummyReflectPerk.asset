@@ -17,7 +17,8 @@ MonoBehaviour:
   icon: {fileID: 0}
   description: Dummy spawn reflects {0} damage each time it is attacked.
   showOnHealthBar: 0
-  requirementsPerk:
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements:
   - rid: 8118057729630404614
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   reflectDamageModifierDefinition: {fileID: 7151859202093906464}

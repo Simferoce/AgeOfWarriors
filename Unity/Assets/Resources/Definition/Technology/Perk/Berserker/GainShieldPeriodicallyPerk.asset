@@ -18,7 +18,8 @@ MonoBehaviour:
   description: Gain a shield each {0} seconds for {1} seconds that absorbs for a
     total of {2} damage.
   showOnHealthBar: 0
-  requirementsPerk: []
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements: []
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   amount: 25
   duration: 3

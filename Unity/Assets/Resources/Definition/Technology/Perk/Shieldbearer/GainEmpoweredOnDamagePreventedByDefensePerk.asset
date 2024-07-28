@@ -18,7 +18,8 @@ MonoBehaviour:
   description: Whenever {0} damage has been prevented by defense, apply empowerment
     on the next attack which increase damage dealt by {1:0.0%}.
   showOnHealthBar: 1
-  requirementsPerk:
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements:
   - rid: 3656781502793121869
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   damageToPrevent: 50

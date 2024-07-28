@@ -6,6 +6,8 @@ namespace Game
 {
     public class TechnologyTree
     {
+        public event System.Action<TechnologyPerkDefinition> OnPerkAcquired;
+
         public List<TechnologyPerkDefinition> PerksUnlocked { get => perksUnlocked; }
         public TechnologyTreeDefinition TechnologyTreeDefinition { get => technologyTreeDefinition; set => technologyTreeDefinition = value; }
         public Agent Agent { get => agent; set => agent = value; }
@@ -23,6 +25,7 @@ namespace Game
         public void Acquire(TechnologyPerkDefinition definition)
         {
             PerksUnlocked.Add(definition);
+            OnPerkAcquired?.Invoke(definition);
         }
 
         public TechnologyPerkDefinition GetFirst(System.Func<TechnologyPerkDefinition, bool> selector)

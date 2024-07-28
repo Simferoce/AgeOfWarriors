@@ -18,7 +18,8 @@ MonoBehaviour:
   description: Whenever an enemy is taken down by the archer, stagger all enemies
     for {0} seconds if they are within {1} meters.
   showOnHealthBar: 1
-  requirementsPerk:
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements:
   - rid: 3656781615733145672
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   staggerModifierDefinition: {fileID: 11400000, guid: 506feb15e0d8774429d06990cbe46186, type: 2}

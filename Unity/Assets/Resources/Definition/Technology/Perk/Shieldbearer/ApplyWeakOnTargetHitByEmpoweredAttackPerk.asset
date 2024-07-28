@@ -18,7 +18,8 @@ MonoBehaviour:
   description: Whenever an empowered attack lands, apply weak on the target for {0}
     seconds which reduce the damage dealt of {1:0.0%}.
   showOnHealthBar: 0
-  requirementsPerk:
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements:
   - rid: 3656781502793121876
   - rid: 3656781580603752478
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}

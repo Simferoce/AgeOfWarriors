@@ -11,12 +11,13 @@ namespace Game
     {
         public enum Identifiant
         {
-            RequirementMet,
-            RequirementNotMet,
-            NotActiveAdditive,
-            ActiveAdditive,
-            Active,
-            NotActive
+            Red,
+            Green,
+            Gray,
+            White,
+            Yellow,
+            LightGrayPurple,
+            DarkGrayPurple
         }
 
         [Serializable]

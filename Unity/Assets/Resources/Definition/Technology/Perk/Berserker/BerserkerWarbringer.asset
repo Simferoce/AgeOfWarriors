@@ -18,7 +18,8 @@ MonoBehaviour:
   description: 'The Wargringer is a robust fighter that can absord considerable amount
     of damage while also being able to deal damage to multiple enemies at once. '
   showOnHealthBar: 1
-  requirementsPerk: []
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements: []
   specializations: {fileID: 11400000, guid: f8eb9f76999cb8547bc4379eb8f6d09a, type: 2}
   references:
     version: 2
