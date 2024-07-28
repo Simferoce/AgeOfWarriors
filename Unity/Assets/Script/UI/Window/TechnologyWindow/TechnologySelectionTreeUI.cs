@@ -23,13 +23,13 @@ namespace Game
 
         public void Select()
         {
-            image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.ActiveAdditive);
+            image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.White);
             OnSelect?.Invoke(this);
         }
 
         public void Deselect()
         {
-            image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.NotActiveAdditive);
+            image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Gray);
         }
     }
 }

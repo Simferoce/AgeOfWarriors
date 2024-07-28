@@ -18,7 +18,8 @@ MonoBehaviour:
   description: Reduce defense of enemies that are hit by the seer abilities by {0}
     for {1} seconds.
   showOnHealthBar: 1
-  requirementsPerk:
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements:
   - rid: 3656781615733145704
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   defenseReductionModifierDefinition: {fileID: 11400000, guid: 81ab1481671efd943a535aa260745f9d, type: 2}

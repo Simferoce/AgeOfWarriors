@@ -18,7 +18,8 @@ MonoBehaviour:
   description: The leader is a specialist that boost nearby allies while being an
     extremely robust unit.
   showOnHealthBar: 1
-  requirementsPerk: []
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements: []
   specializations: {fileID: 11400000, guid: e3785274f87475045bce6f63977d63fc, type: 2}
   references:
     version: 2
@@ -76,7 +77,8 @@ MonoBehaviour:
   description: The onslaught specialist focus on dealing damage on single target
     with a high quantity of attacks.
   showOnHealthBar: 1
-  requirementsPerk: []
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements: []
   specializations: {fileID: 11400000, guid: 3ddf776ed1310c04f9b4c5200636d2a3, type: 2}
   references:
     version: 2

@@ -8,10 +8,13 @@ namespace Game
     public abstract class TechnologyPerkDefinition : ModifierDefinition
     {
         [Space]
+        [SerializeField] private Sprite technologyTreeIcon;
+
         [FormerlySerializedAs("requirementsPerk")]
         [SerializeReference, SubclassSelector] private List<Requirement> requirements = new List<Requirement>();
 
         public List<Requirement> Requirements { get => requirements; set => requirements = value; }
+        public Sprite TechnologyTreeIcon { get => technologyTreeIcon; set => technologyTreeIcon = value; }
 
         public bool IsUnlockable(Agent agent)
         {

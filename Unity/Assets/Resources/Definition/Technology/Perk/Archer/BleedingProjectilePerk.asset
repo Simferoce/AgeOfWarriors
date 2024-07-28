@@ -36,7 +36,8 @@ MonoBehaviour:
   description: Each attack applies a stack of bleeding, dealing {0} damage each second
     for {1} seconds. Each target can only have {2} stacks.
   showOnHealthBar: 0
-  requirementsPerk:
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements:
   - rid: 3656781615733145606
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   duration: 5

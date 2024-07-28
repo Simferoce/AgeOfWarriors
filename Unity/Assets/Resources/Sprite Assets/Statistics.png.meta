@@ -261,7 +261,7 @@ TextureImporter:
         width: 128
         height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -269,6 +269,27 @@ TextureImporter:
       bones: []
       spriteID: 820d643e9fae69b40994bc195343ae30
       internalID: 1266053628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Upgrade
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7ad5d6091209ee4391819d857773976
+      internalID: 2012587823
       vertices: []
       indices: 
       edges: []
@@ -290,6 +311,7 @@ TextureImporter:
       Damage: -197075369
       MaxHealth: -1294603066
       Defense: -1540707902
+      Upgrade: 2012587823
       Cooldown: 1266053628
       Reach: -219786527
   spritePackingTag: 

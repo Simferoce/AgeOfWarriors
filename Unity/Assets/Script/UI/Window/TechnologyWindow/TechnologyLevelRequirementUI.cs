@@ -11,9 +11,9 @@ namespace Game
         public void Refresh(Agent agent)
         {
             if (agent.Technology.CurrentLevel >= level)
-                image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Active);
+                image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Yellow);
             else
-                image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.NotActive);
+                image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.LightGrayPurple);
         }
     }
 }

@@ -17,7 +17,8 @@ MonoBehaviour:
   icon: {fileID: 0}
   description: 
   showOnHealthBar: 1
-  requirementsPerk: []
+  technologyTreeIcon: {fileID: -1540707902, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements: []
   affected: {fileID: 0}
   amount: 0
   references:

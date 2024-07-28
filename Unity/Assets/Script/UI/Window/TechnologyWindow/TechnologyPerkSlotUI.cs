@@ -10,19 +10,10 @@ namespace Game
     public class TechnologyPerkSlotUI : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private TechnologyPerkDefinition technologyPerkDefinition;
+        [SerializeField] private Image background;
         [SerializeField] private Image icon;
 
-        [SerializeField] private Color lockColor;
-        [SerializeField] private Color unlockableColor;
-        [SerializeField] private Color unlockColor;
-
         private TechnologyTree technologyTree;
-
-        private void OnDestroy()
-        {
-            if (technologyTree.Agent?.Technology != null)
-                technologyTree.Agent.Technology.OnPerkAcquired -= Technology_OnPerkAcquired;
-        }
 
         public void Initialize(TechnologyTree technologyTree)
         {
@@ -30,6 +21,12 @@ namespace Game
 
             technologyTree.Agent.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
             Refresh();
+        }
+
+        private void OnDestroy()
+        {
+            if (technologyTree.Agent?.Technology != null)
+                technologyTree.Agent.Technology.OnPerkAcquired -= Technology_OnPerkAcquired;
         }
 
         private void Technology_OnPerkAcquired(TechnologyPerkDefinition technologyPerkDefinition)
@@ -53,11 +50,13 @@ namespace Game
         {
             TechnologyHandler.TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
             if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusLocked)
-                icon.color = lockColor;
+                background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.LightGrayPurple);
             else if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusUnlockable)
-                icon.color = unlockableColor;
+                background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red);
             else
-                icon.color = unlockColor;
+                background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Yellow);
+
+            icon.sprite = technologyPerkDefinition.TechnologyTreeIcon;
         }
 
         private void OnDrawGizmos()

@@ -34,7 +34,8 @@ MonoBehaviour:
   icon: {fileID: 1809554327, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Gain {0} Attack Power for {1} seconds whenever an ally dies.
   showOnHealthBar: 0
-  requirementsPerk: []
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements: []
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   attackPowerGain: 50
   buffDuration: 3

@@ -35,7 +35,8 @@ MonoBehaviour:
   description: Whenever an archer is created, if there are no enemies in {0} meters
     then increase movement speed by {0:0.0%}. Stopping on the first ability cast.
   showOnHealthBar: 1
-  requirementsPerk:
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements:
   - rid: 3656781615733145694
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   distance: 0

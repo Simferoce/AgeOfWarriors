@@ -18,7 +18,8 @@ MonoBehaviour:
   description: Whenever an enemy unit die, apply weak which reduce the damage dealt
     by {0:0.0%} of every enemy unit in {1} meters for {2} seconds.
   showOnHealthBar: 0
-  requirementsPerk:
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements:
   - rid: 4528059815764426758
   - rid: 3656781580603752479
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}

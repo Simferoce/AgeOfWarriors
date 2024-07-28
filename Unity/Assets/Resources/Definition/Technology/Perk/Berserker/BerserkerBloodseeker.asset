@@ -19,7 +19,8 @@ MonoBehaviour:
     has an extensive toolkit that enable him to regain vitality base on the amount
     of damage dealt.
   showOnHealthBar: 1
-  requirementsPerk: []
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements: []
   specializations: {fileID: 11400000, guid: 60c536792737d9e4f836dc60987db4c4, type: 2}
   references:
     version: 2
