@@ -19,9 +19,7 @@ MonoBehaviour:
     by {0:0.0%} of every enemy unit in {1} meters for {2} seconds.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements:
-  - rid: 4528059815764426758
-  - rid: 3656781580603752479
+  requirements: []
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   duration: 3
   percentageReachAffect: 5
@@ -29,15 +27,7 @@ MonoBehaviour:
   damageDealtReductionModifierDefinition: {fileID: 2714545886143392768}
   references:
     version: 2
-    RefIds:
-    - rid: 3656781580603752479
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 06fdf97ed5cca244fa96f398725abfd9, type: 2}
-    - rid: 4528059815764426758
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 139c80b9c4685104080a4185aff5289d, type: 2}
+    RefIds: []
 --- !u!114 &2714545886143392768
 MonoBehaviour:
   m_ObjectHideFlags: 0

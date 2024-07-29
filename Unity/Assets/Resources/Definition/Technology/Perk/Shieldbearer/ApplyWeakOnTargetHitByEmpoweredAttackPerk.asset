@@ -20,8 +20,7 @@ MonoBehaviour:
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements:
-  - rid: 3656781502793121876
-  - rid: 3656781580603752478
+  - rid: 8118057865217310723
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   damageReduction: 0.25
   duration: 3
@@ -29,14 +28,20 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3656781502793121876
+    - rid: 8118057865217310723
+      type: {class: RequirementOr, ns: Game, asm: Assembly-CSharp}
+      data:
+        requirements:
+        - rid: 8118057865217310724
+        - rid: 8118057865217310725
+    - rid: 8118057865217310724
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 5a6bbed2ca32df2499f8bb0c3f1ef5a4, type: 2}
-    - rid: 3656781580603752478
+        technologyPerkDefinition: {fileID: 11400000, guid: a8705c5f35226a34ea1a8fcc246bb78e, type: 2}
+    - rid: 8118057865217310725
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 06fdf97ed5cca244fa96f398725abfd9, type: 2}
+        technologyPerkDefinition: {fileID: 11400000, guid: 246adf60fd9bed74e8c0a010f28737a3, type: 2}
 --- !u!114 &144047090231248653
 MonoBehaviour:
   m_ObjectHideFlags: 0

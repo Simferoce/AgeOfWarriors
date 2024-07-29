@@ -9,19 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fa0d562119631a4c8f48cf58d3811fb, type: 3}
-  m_Name: IncreaseAttackSpeedBaseOnNearbyEnemiesPerk
+  m_Script: {fileID: 11500000, guid: 64f22efefc3abaf4b96d0fbde7e1d7ac, type: 3}
+  m_Name: ShieldbearerLeader
   m_EditorClassIdentifier: 
-  id: 7159f275e7e0f134bb1a06889b550337
-  title: Adrenaline Rush
-  icon: {fileID: 0}
-  description: Increase attack speed by {0:0.0%} for each enemy in {1} meters. {2}
+  id: 40fdf8aa0e17c9d4c84a3e7a39e8f051
+  title: Leader
+  icon: {fileID: -1562900050, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: The leader is a specialist that boost nearby allies while being an
+    extremely robust unit.
   showOnHealthBar: 1
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements: []
-  affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-  percentageReach: 3
-  attackSpeedIncreasePerEnemies: 0.1
+  specializations: {fileID: 11400000, guid: e3785274f87475045bce6f63977d63fc, type: 2}
   references:
     version: 2
     RefIds: []

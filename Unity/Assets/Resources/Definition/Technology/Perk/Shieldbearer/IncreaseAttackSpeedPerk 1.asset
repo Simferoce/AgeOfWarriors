@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277d568220343ea4c889bda5576d5e42, type: 3}
-  m_Name: RangedReductionDamagePerk
+  m_Script: {fileID: 11500000, guid: 9cd4fefbad0da1145bcab527528384cd, type: 3}
+  m_Name: IncreaseAttackSpeedPerk 1
   m_EditorClassIdentifier: 
-  id: 06fdf97ed5cca244fa96f398725abfd9
-  title: Tempered Leather
+  id: 85002f5022f7f7f429544afb5fde5dda
+  title: 
   icon: {fileID: 0}
-  description: Reduce the damage taken by ranged attack by {0:0.0%}
+  description: 
   showOnHealthBar: 0
-  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  technologyTreeIcon: {fileID: 1748120172, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements: []
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-  rangedDamageReduction: 0.15
+  amount: 0
   references:
     version: 2
     RefIds: []

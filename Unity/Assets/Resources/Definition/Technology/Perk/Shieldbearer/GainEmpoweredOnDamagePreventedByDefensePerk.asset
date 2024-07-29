@@ -19,15 +19,10 @@ MonoBehaviour:
     on the next attack which increase damage dealt by {1:0.0%}.
   showOnHealthBar: 1
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements:
-  - rid: 3656781502793121869
+  requirements: []
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   damageToPrevent: 50
   empoweredModifierDefinition: {fileID: -2722414497821263076, guid: d06f2f9a0802ee94e98bf9e6bd9b9a15, type: 2}
   references:
     version: 2
-    RefIds:
-    - rid: 3656781502793121869
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 7166f3976915a8f40b11ab1538d380a6, type: 2}
+    RefIds: []

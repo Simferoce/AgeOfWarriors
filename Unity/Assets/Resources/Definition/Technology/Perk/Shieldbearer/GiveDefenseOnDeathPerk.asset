@@ -36,16 +36,11 @@ MonoBehaviour:
     unit dies.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements:
-  - rid: 3656781580603752476
+  requirements: []
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   reachPercentage: 3
   defense: 15
   defenseModifierDefinition: {fileID: -7262290648762530833}
   references:
     version: 2
-    RefIds:
-    - rid: 3656781580603752476
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 246adf60fd9bed74e8c0a010f28737a3, type: 2}
+    RefIds: []

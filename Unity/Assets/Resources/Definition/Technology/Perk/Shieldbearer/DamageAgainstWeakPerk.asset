@@ -19,18 +19,23 @@ MonoBehaviour:
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements:
-  - rid: 3656781580603752481
-  - rid: 3656781580603752480
+  - rid: 8118057865217310726
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   damageDealtAgainstWeak: 10
   references:
     version: 2
     RefIds:
-    - rid: 3656781580603752480
+    - rid: 8118057865217310726
+      type: {class: RequirementOr, ns: Game, asm: Assembly-CSharp}
+      data:
+        requirements:
+        - rid: 8118057865217310728
+        - rid: 8118057865217310729
+    - rid: 8118057865217310728
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 35afdbbda7ba57545a62b2cbe980f4b1, type: 2}
-    - rid: 3656781580603752481
+    - rid: 8118057865217310729
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 74e84fbb5e5e1054fa6924437b023719, type: 2}
