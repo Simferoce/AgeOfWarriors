@@ -35,15 +35,10 @@ MonoBehaviour:
   description: When killed, spawn a dummy that loses {0:0.0%} of health per seconds.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements:
-  - rid: 8118057726027759627
+  requirements: []
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   damageOverTimeModifierDefinition: {fileID: -5609975018426045943}
   percentageHealth: 0.1
   references:
     version: 2
-    RefIds:
-    - rid: 8118057726027759627
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 14eb634f26441f3419e8d6c26ba328d9, type: 2}
+    RefIds: []

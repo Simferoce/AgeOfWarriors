@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2270415d76109a446b0058a8397a8817, type: 3}
-  m_Name: IncreaseDamageBaseOnEffectAppliedPerk
+  m_Script: {fileID: 11500000, guid: 7a9522230a9e17b498c7e73ee73895ee, type: 3}
+  m_Name: IncreaseReachPerk 2
   m_EditorClassIdentifier: 
-  id: 21204cd2bf7500a4292b8d0441803e4f
-  title: Effect Amplification
+  id: 031a5d32d09ead142a69c7851890543c
+  title: 
   icon: {fileID: 0}
-  description: Increase attack power by {0} for each effect applied.
+  description: 
   showOnHealthBar: 0
-  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  technologyTreeIcon: {fileID: -219786527, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements: []
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
-  attackPowerPerEffectApplied: 5
+  amount: 0
   references:
     version: 2
     RefIds: []

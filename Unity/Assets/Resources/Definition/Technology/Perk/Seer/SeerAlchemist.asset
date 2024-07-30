@@ -9,18 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2270415d76109a446b0058a8397a8817, type: 3}
-  m_Name: IncreaseDamageBaseOnEffectAppliedPerk
+  m_Script: {fileID: 11500000, guid: 64f22efefc3abaf4b96d0fbde7e1d7ac, type: 3}
+  m_Name: SeerAlchemist
   m_EditorClassIdentifier: 
-  id: 21204cd2bf7500a4292b8d0441803e4f
-  title: Effect Amplification
-  icon: {fileID: 0}
-  description: Increase attack power by {0} for each effect applied.
+  id: 26e18e417e96b3f4aa8e7641a919d8d9
+  title: Alchemist
+  icon: {fileID: -587586574, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: Alchemists are excellent at brewing potions. They are mostly known
+    for their regenerative potions.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements: []
-  affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
-  attackPowerPerEffectApplied: 5
+  specializations: {fileID: 11400000, guid: 74a688cb15379f34dae1112a4198926c, type: 2}
   references:
     version: 2
     RefIds: []

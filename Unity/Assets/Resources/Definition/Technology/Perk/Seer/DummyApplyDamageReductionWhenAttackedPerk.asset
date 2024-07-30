@@ -54,7 +54,7 @@ MonoBehaviour:
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements:
-  - rid: 8118057752601821189
+  - rid: 8118057867474370574
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   applyEffectWhenHitModifierDefinition: {fileID: -3990842623714953195}
   damageDealtReductionDefinition: {fileID: -8024098697106122505}
@@ -63,7 +63,7 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 8118057752601821189
+    - rid: 8118057867474370574
       type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 14eb634f26441f3419e8d6c26ba328d9, type: 2}
+        technologyPerkDefinition: {fileID: 11400000, guid: 3aadda4e64152ee49b8053cfeff27fa2, type: 2}

@@ -36,8 +36,7 @@ MonoBehaviour:
     {2}.
   showOnHealthBar: 1
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements:
-  - rid: 8118057752601821197
+  requirements: []
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   stack: 5
   duration: 3
@@ -46,8 +45,4 @@ MonoBehaviour:
   affectedAbility: {fileID: 11400000, guid: 583f27f933430694893ccbf3929fa8cf, type: 2}
   references:
     version: 2
-    RefIds:
-    - rid: 8118057752601821197
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 14eb634f26441f3419e8d6c26ba328d9, type: 2}
+    RefIds: []

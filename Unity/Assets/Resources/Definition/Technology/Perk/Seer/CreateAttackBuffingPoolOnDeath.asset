@@ -19,8 +19,7 @@ MonoBehaviour:
     power of allies standing in it by {1}.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements:
-  - rid: 8118057684521451532
+  requirements: []
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   modifierDefinition: {fileID: 1596887540337709893}
   poolPrefab: {fileID: 2871873907386341064, guid: f74c67f9149591d48bbbd98b457d3532, type: 3}
@@ -28,11 +27,7 @@ MonoBehaviour:
   amount: 10
   references:
     version: 2
-    RefIds:
-    - rid: 8118057684521451532
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 14eb634f26441f3419e8d6c26ba328d9, type: 2}
+    RefIds: []
 --- !u!114 &1596887540337709893
 MonoBehaviour:
   m_ObjectHideFlags: 0
