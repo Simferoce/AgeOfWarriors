@@ -36,8 +36,7 @@ MonoBehaviour:
   description: Each {0} attacks stagger the target for {1} seconds.
   showOnHealthBar: 1
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements:
-  - rid: 3656781615733145635
+  requirements: []
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   stack: 5
   duration: 3
@@ -45,8 +44,4 @@ MonoBehaviour:
   staggerProjectileAttackPerk: {fileID: -886172774654417057}
   references:
     version: 2
-    RefIds:
-    - rid: 3656781615733145635
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 52c0b1885f55def44b9c2be0eff4d589, type: 2}
+    RefIds: []

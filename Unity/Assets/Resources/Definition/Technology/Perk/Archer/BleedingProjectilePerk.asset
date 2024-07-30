@@ -37,16 +37,11 @@ MonoBehaviour:
     for {1} seconds. Each target can only have {2} stacks.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements:
-  - rid: 3656781615733145606
+  requirements: []
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   duration: 5
   percentageAttackPower: 0.1
   bleedingProjectileModifierDefinition: {fileID: -80446889163730460}
   references:
     version: 2
-    RefIds:
-    - rid: 3656781615733145606
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 52c0b1885f55def44b9c2be0eff4d589, type: 2}
+    RefIds: []

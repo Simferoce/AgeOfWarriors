@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f22efefc3abaf4b96d0fbde7e1d7ac, type: 3}
+  m_Name: ArcherLongbow
+  m_EditorClassIdentifier: 
+  id: 50b244cdf35d5b74f9bc8e573f3ac3d1
+  title: Longbow
+  icon: {fileID: -1104553669, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: The longbow specialization of the archer is designed for engaging
+    from afar and supporting their allies.
+  showOnHealthBar: 0
+  technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  requirements: []
+  specializations: {fileID: 11400000, guid: 2a683f36d1e23b348a11b9d7031ddcc0, type: 2}
+  references:
+    version: 2
+    RefIds: []
