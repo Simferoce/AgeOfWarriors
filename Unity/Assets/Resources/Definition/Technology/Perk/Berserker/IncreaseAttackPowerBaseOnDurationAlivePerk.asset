@@ -18,9 +18,12 @@ MonoBehaviour:
   description: Increase attack power by {0} for each seconds alive.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements: []
+  requirements:
+  - rid: 2969736949095464993
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   attackpowerPerSeconds: 1
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2969736949095464993
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}

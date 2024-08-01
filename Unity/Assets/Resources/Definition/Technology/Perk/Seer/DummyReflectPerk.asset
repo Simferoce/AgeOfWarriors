@@ -20,14 +20,17 @@ MonoBehaviour:
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements:
   - rid: 8118057867474370575
+  - rid: 2969736949095464982
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   reflectDamageModifierDefinition: {fileID: 7151859202093906464}
   damage: 5
   references:
     version: 2
     RefIds:
+    - rid: 2969736949095464982
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}
     - rid: 8118057867474370575
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyPerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 3aadda4e64152ee49b8053cfeff27fa2, type: 2}
 --- !u!114 &7151859202093906464

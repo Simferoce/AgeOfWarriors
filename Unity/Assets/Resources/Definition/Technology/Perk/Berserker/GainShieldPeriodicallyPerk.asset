@@ -19,7 +19,8 @@ MonoBehaviour:
     total of {2} damage.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements: []
+  requirements:
+  - rid: 2969736949095464989
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   amount: 25
   duration: 3
@@ -27,7 +28,9 @@ MonoBehaviour:
   shieldModifierDefinition: {fileID: 8750004034786285152}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2969736949095464989
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}
 --- !u!114 &8750004034786285152
 MonoBehaviour:
   m_ObjectHideFlags: 0

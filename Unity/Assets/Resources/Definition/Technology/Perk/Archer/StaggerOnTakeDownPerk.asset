@@ -19,11 +19,14 @@ MonoBehaviour:
     for {0} seconds if they are within {1} meters.
   showOnHealthBar: 1
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements: []
+  requirements:
+  - rid: 2969736949095465054
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   staggerModifierDefinition: {fileID: 11400000, guid: 506feb15e0d8774429d06990cbe46186, type: 2}
   duration: 3
   distanceEffect: 2
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2969736949095465054
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}

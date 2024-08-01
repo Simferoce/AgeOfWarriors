@@ -1,24 +1,26 @@
 ﻿using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 namespace Game
 {
     [Serializable]
-    public class PerkRequirement : Requirement
+    [MovedFrom(false, "Game", null, "PerkRequirement")]
+    public class TechnologyPerkRequirement : TechnologyRequirement
     {
         [SerializeField] private TechnologyPerkDefinition technologyPerkDefinition;
 
         public TechnologyPerkDefinition TechnologyPerkDefinition { get => technologyPerkDefinition; set => technologyPerkDefinition = value; }
 
-        public override bool Execute(Agent agent)
+        public override bool Execute(TechnologyPerkDefinition technologyPerkDefinition, TechnologyTree technologyTree)
         {
-            return agent.Technology.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked;
+            return technologyTree.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked;
         }
 
-        public override string Format(Agent agent)
+        public override string Format(TechnologyPerkDefinition technologyPerkDefinition, TechnologyTree technologyTree)
         {
-            if (agent.Technology.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked)
+            if (technologyTree.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked)
                 return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Green).ToHexString()}>{technologyPerkDefinition.Title}</color>";
 
             return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red).ToHexString()}>{technologyPerkDefinition.Title}</color>";

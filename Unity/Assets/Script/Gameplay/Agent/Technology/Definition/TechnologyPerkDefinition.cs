@@ -11,16 +11,16 @@ namespace Game
         [SerializeField] private Sprite technologyTreeIcon;
 
         [FormerlySerializedAs("requirementsPerk")]
-        [SerializeReference, SubclassSelector] private List<Requirement> requirements = new List<Requirement>();
+        [SerializeReference, SubclassSelector] private List<TechnologyRequirement> requirements = new List<TechnologyRequirement>();
 
-        public List<Requirement> Requirements { get => requirements; set => requirements = value; }
+        public List<TechnologyRequirement> Requirements { get => requirements; set => requirements = value; }
         public Sprite TechnologyTreeIcon { get => technologyTreeIcon; set => technologyTreeIcon = value; }
 
-        public bool IsUnlockable(Agent agent)
+        public bool IsUnlockable(TechnologyTree technologyTree)
         {
-            foreach (Requirement requirement in requirements)
+            foreach (TechnologyRequirement requirement in requirements)
             {
-                if (!requirement.Execute(agent))
+                if (!requirement.Execute(this, technologyTree))
                     return false;
             }
 
@@ -32,9 +32,9 @@ namespace Game
             return requirements.Count > 0;
         }
 
-        public string FormatRequirements(Agent agent)
+        public string FormatRequirements(TechnologyTree technologyTree)
         {
-            return string.Join(" AND ", requirements.Select(x => x.Format(agent)));
+            return string.Join(" AND ", requirements.Select(x => x.Format(this, technologyTree)).Where(x => !string.IsNullOrEmpty(x)));
         }
     }
 }

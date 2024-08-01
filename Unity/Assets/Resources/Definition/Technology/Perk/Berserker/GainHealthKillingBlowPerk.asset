@@ -18,9 +18,12 @@ MonoBehaviour:
   description: Regain {0} health points whenever landing a killing blow on a unit.
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements: []
+  requirements:
+  - rid: 2969736949095464986
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   percentageHealMaxHealth: 0.25
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2969736949095464986
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}

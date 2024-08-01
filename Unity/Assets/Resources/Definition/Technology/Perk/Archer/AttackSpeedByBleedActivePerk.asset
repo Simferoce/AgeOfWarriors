@@ -20,12 +20,15 @@ MonoBehaviour:
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements:
   - rid: 8118057867474370566
+  - rid: 2969736949095464974
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   attackSpeedPerBleedApplied: 0.1
   references:
     version: 2
     RefIds:
+    - rid: 2969736949095464974
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}
     - rid: 8118057867474370566
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyPerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: fa6d6d4cecabd914a989c32fa2cd9ba8, type: 2}

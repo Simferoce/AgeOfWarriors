@@ -98,7 +98,6 @@ namespace Game
             OnLeveledUp?.Invoke();
         }
 
-
         public bool Has(TechnologyPerkDefinition technologyPerkDefinition)
         {
             foreach (TechnologyTree technologyTree in technologyTrees)
@@ -136,8 +135,12 @@ namespace Game
         public IEnumerable UnlockedPerks()
         {
             foreach (TechnologyTree technologyTree in technologyTrees)
-                yield return technologyTree.PerksUnlocked;
+            {
+                foreach (TechnologyPerkDefinition technologyPerkDefinition in technologyTree.PerksUnlocked)
+                {
+                    yield return technologyPerkDefinition;
+                }
+            }
         }
-
     }
 }

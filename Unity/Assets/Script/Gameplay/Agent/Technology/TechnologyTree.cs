@@ -46,7 +46,7 @@ namespace Game
 
         public TechnologyPerkStatus GetStatus(TechnologyPerkDefinition definition)
         {
-            if (perksUnlocked.Contains(definition))
+            if (IsUnlocked(definition))
                 return new TechnologyPerkStatusUnlocked();
 
             int currentRow = UnlockableRow();
@@ -65,13 +65,13 @@ namespace Game
             if (perkRow > currentRow)
                 return new TechnologyPerkStatusLocked(TechnologyPerkStatusLocked.LockedReason.PerkRowHasNotBeenUnlocked);
 
-            if (!definition.IsUnlockable(agent))
+            if (!definition.IsUnlockable(this))
                 return new TechnologyPerkStatusLocked(TechnologyPerkStatusLocked.LockedReason.PerkDoesNotMeetRequirement);
 
             return new TechnologyPerkStatusUnlockable();
         }
 
-        private int GetRow(TechnologyPerkDefinition definition)
+        public int GetRow(TechnologyPerkDefinition definition)
         {
             for (int i = 0; i < technologyTreeDefinition.Rows.Count; i++)
             {
@@ -84,6 +84,18 @@ namespace Game
             }
 
             return -1;
+        }
+
+        public bool IsUnlocked(TechnologyPerkDefinition definition)
+        {
+            return perksUnlocked.Contains(definition);
+        }
+
+        public List<TechnologyPerkDefinition> GetTechnologyPerkOfRow(int row)
+        {
+            Assert.IsTrue(row >= 0, "The row index must be higher than 0.");
+            Assert.IsTrue(row < technologyTreeDefinition.Rows.Count, $"The row index is higher than the number of row in {technologyTreeDefinition}");
+            return technologyTreeDefinition.Rows[row].Nodes;
         }
 
         private int UnlockableRow()

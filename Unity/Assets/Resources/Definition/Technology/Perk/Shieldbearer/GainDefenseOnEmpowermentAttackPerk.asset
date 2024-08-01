@@ -38,6 +38,7 @@ MonoBehaviour:
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements:
   - rid: 8118057865217310720
+  - rid: 2969736949095464984
   affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   buffDuration: 5
   defense: 10
@@ -45,17 +46,19 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 2969736949095464984
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}
     - rid: 8118057865217310720
-      type: {class: RequirementOr, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyRequirementOr, ns: Game, asm: Assembly-CSharp}
       data:
         requirements:
         - rid: 8118057865217310721
         - rid: 8118057865217310722
     - rid: 8118057865217310721
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyPerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: a8705c5f35226a34ea1a8fcc246bb78e, type: 2}
+        technologyPerkDefinition: {fileID: 0}
     - rid: 8118057865217310722
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyPerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 246adf60fd9bed74e8c0a010f28737a3, type: 2}
+        technologyPerkDefinition: {fileID: 0}

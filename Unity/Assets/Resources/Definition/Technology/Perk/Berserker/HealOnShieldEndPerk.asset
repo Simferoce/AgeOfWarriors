@@ -21,22 +21,25 @@ MonoBehaviour:
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements:
   - rid: 8118057799326367773
+  - rid: 2969736949095464992
   affected: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   healPerShieldPointRemaining: 1
   references:
     version: 2
     RefIds:
+    - rid: 2969736949095464992
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}
     - rid: 8118057799326367773
-      type: {class: RequirementOr, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyRequirementOr, ns: Game, asm: Assembly-CSharp}
       data:
         requirements:
         - rid: 8118057799326367774
         - rid: 8118057799326367775
     - rid: 8118057799326367774
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 4f6a6288a9e3fb044a956bb2a323e9a7, type: 2}
-    - rid: 8118057799326367775
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyPerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: 124214902e069a84bbead87df45fb3b1, type: 2}
+    - rid: 8118057799326367775
+      type: {class: TechnologyPerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 352faaf1fb49b6e4c93d5a205efe8d97, type: 2}

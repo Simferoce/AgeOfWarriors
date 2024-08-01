@@ -18,9 +18,12 @@ MonoBehaviour:
   description: 
   showOnHealthBar: 0
   technologyTreeIcon: {fileID: 1776116179, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  requirements: []
+  requirements:
+  - rid: 2969736949095465001
   affected: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   amount: 0
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 2969736949095465001
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}

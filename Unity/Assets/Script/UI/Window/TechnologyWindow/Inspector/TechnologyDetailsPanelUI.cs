@@ -57,7 +57,7 @@ namespace Game
 
             if (technologyPerkDefinition.HasRequirements())
             {
-                technologyDetailsPanelUI.requirements.text = $"REQUIRE - {technologyPerkDefinition.FormatRequirements(Agent.Player)}";
+                technologyDetailsPanelUI.requirements.text = $"REQUIRE - {technologyPerkDefinition.FormatRequirements(technologyTree)}";
             }
             else
             {

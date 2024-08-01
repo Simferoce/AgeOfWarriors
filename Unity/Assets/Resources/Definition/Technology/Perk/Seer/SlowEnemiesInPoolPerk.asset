@@ -20,26 +20,29 @@ MonoBehaviour:
   technologyTreeIcon: {fileID: 2012587823, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
   requirements:
   - rid: 8118057867474370571
+  - rid: 2969736949095465050
   affected: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   speedModifierDefinition: {fileID: 1371673261063317552}
   amount: 0.25
   references:
     version: 2
     RefIds:
+    - rid: 2969736949095465050
+      type: {class: TechnologyRowRequirement, ns: Game, asm: Assembly-CSharp}
     - rid: 8118057867474370571
-      type: {class: RequirementOr, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyRequirementOr, ns: Game, asm: Assembly-CSharp}
       data:
         requirements:
         - rid: 8118057867474370572
         - rid: 8118057867474370573
     - rid: 8118057867474370572
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
-      data:
-        technologyPerkDefinition: {fileID: 11400000, guid: 5f1514b2670ecda46b990e98d29de0e0, type: 2}
-    - rid: 8118057867474370573
-      type: {class: PerkRequirement, ns: Game, asm: Assembly-CSharp}
+      type: {class: TechnologyPerkRequirement, ns: Game, asm: Assembly-CSharp}
       data:
         technologyPerkDefinition: {fileID: 11400000, guid: ae2637bb601a4f841ae4333bc7199df5, type: 2}
+    - rid: 8118057867474370573
+      type: {class: TechnologyPerkRequirement, ns: Game, asm: Assembly-CSharp}
+      data:
+        technologyPerkDefinition: {fileID: 11400000, guid: 5f1514b2670ecda46b990e98d29de0e0, type: 2}
 --- !u!114 &1371673261063317552
 MonoBehaviour:
   m_ObjectHideFlags: 0
