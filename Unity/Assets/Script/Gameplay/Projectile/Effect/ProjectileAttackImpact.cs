@@ -24,7 +24,7 @@ namespace Game
                 collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
                 && targeteable.IsActive
                 && projectile.Ignore != targeteable
-                && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
+                && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, new Context(), projectile.Faction, targeteable.Faction)
                 && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
             {
                 attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile.Ability), armorPenetration.GetValueOrDefault(projectile.Ability), 0, true, false, true, attackable, projectile);

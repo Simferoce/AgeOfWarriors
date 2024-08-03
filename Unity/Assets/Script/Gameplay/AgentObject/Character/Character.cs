@@ -34,7 +34,7 @@ namespace Game
         public float Reach { get => Definition.Reach * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
-        public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
+        public bool IsEngaged => GetTarget(engagedCriteria, new Context()) != null;
         public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
         public bool IsConfused => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }
@@ -135,12 +135,12 @@ namespace Game
             return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered, reflectable, overtime);
         }
 
-        public ITargeteable GetTarget(TargetCriteria criteria, object caller)
+        public ITargeteable GetTarget(TargetCriteria criteria, Context context)
         {
-            return GetTargets(criteria, caller).FirstOrDefault();
+            return GetTargets(criteria, context).FirstOrDefault();
         }
 
-        public List<ITargeteable> GetTargets(TargetCriteria criteria, object caller)
+        public List<ITargeteable> GetTargets(TargetCriteria criteria, Context context)
         {
             List<ITargeteable> potentialTargets = new List<ITargeteable>();
             foreach (ITargeteable targetteable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
@@ -151,7 +151,7 @@ namespace Game
                 if (targetteable == this.GetCachedComponent<ITargeteable>())
                     continue;
 
-                if (!criteria.Execute(this.GetCachedComponent<ITargeteable>(), targetteable, caller, Faction, IsConfused ? targetteable.Faction.GetConfusedFaction() : targetteable.Faction))
+                if (!criteria.Execute(this.GetCachedComponent<ITargeteable>(), targetteable, context, Faction, IsConfused ? targetteable.Faction.GetConfusedFaction() : targetteable.Faction))
                     continue;
 
                 potentialTargets.Add(targetteable);
