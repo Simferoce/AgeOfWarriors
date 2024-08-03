@@ -18,7 +18,7 @@ namespace Game
         public override void Apply()
         {
             float duration = staggerDuration.GetValueOrThrow(Ability);
-            foreach (IDisplaceable target in Ability.Targets.Cast<IDisplaceable>().ToList())
+            foreach (Character target in Ability.Targets.Cast<Character>().ToList())
             {
                 if (target.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
                     targetModifiable.AddModifier(new StaggerModifierDefinition.Modifier(targetModifiable, staggerModifierDefinition, duration, Ability.Character));
@@ -31,7 +31,7 @@ namespace Game
         {
             Vector3 destination = character.transform.position + character.transform.right * destinationDistance;
 
-            foreach (IDisplaceable target in Ability.Targets.Cast<IDisplaceable>().ToList())
+            foreach (Character target in Ability.Targets.Cast<Character>().ToList())
                 target.Displace(Vector3.Lerp(target.CenterPosition, destination, damping) - target.CenterPosition);
 
             return Time.time - startedAt > duration;
