@@ -17,7 +17,7 @@ namespace Game
 
             IAttackable target = Ability.Targets[0].GetCachedComponent<IAttackable>();
 
-            Attack attack = Ability.Character.GenerateAttack(damage.GetValueOrDefault(Ability), armorPenetration.GetValueOrDefault(Ability), leach.GetValueOrDefault(Ability), false, false, true, target, this);
+            Attack attack = Ability.Character.GenerateAttack(damage.GetValueOrDefault(new Context() { { "ability", Ability } }), armorPenetration.GetValueOrDefault(new Context() { { "ability", Ability } }), leach.GetValueOrDefault(new Context() { { "ability", Ability } }), false, false, true, target, this);
             target.TakeAttack(attack);
         }
     }

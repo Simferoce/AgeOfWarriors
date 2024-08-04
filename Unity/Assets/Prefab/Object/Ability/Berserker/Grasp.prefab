@@ -60,12 +60,6 @@ MonoBehaviour:
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
-          mapper:
-            rid: 3656781574226575362
-    - rid: 3656781574226575362
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: cooldown
     - rid: 3656781574226575363
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
@@ -89,22 +83,10 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          mapper:
-            rid: 3656781574226575368
-    - rid: 3656781574226575368
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: range
     - rid: 3656781574226575369
       type: {class: GraspAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         destinationDistance: 0.4
         duration: 0.5
         staggerDuration:
-          mapper:
-            rid: 3656781574226575370
         damping: 0.5
-    - rid: 3656781574226575370
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: duration

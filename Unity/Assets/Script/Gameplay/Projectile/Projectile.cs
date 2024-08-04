@@ -23,7 +23,7 @@ namespace Game
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public Character Character { get => character; set => character = value; }
         public State StateValue { get => state; set => state = value; }
-        public Ability Ability { get => ability; set => ability = value; }
+        public Context Context { get => context; set => context = value; }
         public ITargeteable Target { get => target; set => target = value; }
         public ITargeteable Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
@@ -31,21 +31,21 @@ namespace Game
         public Faction Faction { get; set; }
 
         private Character character;
-        private Ability ability;
+        private Context context;
         private ITargeteable target;
         private State state = State.Alive;
 
-        public void Initialize(Character character, Ability ability, ITargeteable target, Faction faction)
+        public void Initialize(Character character, Context context, ITargeteable target, Faction faction)
         {
             this.Faction = faction;
             this.character = character;
-            this.ability = ability;
+            this.context = context;
             this.target = target;
 
             Ownership.SetOwner(this, character);
 
-            foreach (ProjectileMovement context in projectileMovements)
-                context.Initialize(this);
+            foreach (ProjectileMovement movement in projectileMovements)
+                movement.Initialize(this);
 
             foreach (ProjectileImpact effect in impacts)
                 effect.Initialize(this);

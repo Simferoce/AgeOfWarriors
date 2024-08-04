@@ -153,6 +153,7 @@ GameObject:
   - component: {fileID: 8633233943157110530}
   - component: {fileID: 7770511149304238003}
   - component: {fileID: -9219538325602513416}
+  - component: {fileID: 4713138217991281389}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -200,8 +201,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 3656781574100221952
       type: {class: ProjectileStickDeath, ns: Game, asm: Assembly-CSharp}
       data:
@@ -218,17 +217,11 @@ MonoBehaviour:
         criteria:
           rid: 3656781574100221956
         damage:
-          mapper:
-            rid: 3656781574100221957
+          path: ability.damage
         armorPenetration:
-          mapper:
-            rid: -2
+          path: 
     - rid: 3656781574100221956
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781574100221957
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: damage
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4
@@ -250,3 +243,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4713138217991281389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675190562695518451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0847c3c86ed4f1d4092690ba02e64498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onInitializedModifier: []
+  references:
+    version: 2
+    RefIds: []

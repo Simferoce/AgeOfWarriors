@@ -14,7 +14,7 @@ namespace Game
             GameObject gameObject = GameObject.Instantiate(projectilePrefab, origin.GetPosition(Ability), Quaternion.identity);
             Projectile projectile = gameObject.GetComponent<Projectile>();
 
-            projectile.Initialize(Ability.Character, Ability, Ability.Targets[0], Ability.FactionWhenUsed);
+            projectile.Initialize(Ability.Character, new Context() { { "ability", Ability } }, Ability.Targets[0], Ability.FactionWhenUsed);
         }
     }
 }

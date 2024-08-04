@@ -218,19 +218,7 @@ MonoBehaviour:
         criteria:
           rid: -2
         damage:
-          mapper:
-            rid: 3656781574126698515
         armorPenetration:
-          mapper:
-            rid: 3656781574126698516
-    - rid: 3656781574126698515
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: damage
-    - rid: 3656781574126698516
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: armor_penetration
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

@@ -73,12 +73,6 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          mapper:
-            rid: 3656781574257508389
-    - rid: 3656781574257508389
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: range
     - rid: 3656781574257508390
       type: {class: ProjectileAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:

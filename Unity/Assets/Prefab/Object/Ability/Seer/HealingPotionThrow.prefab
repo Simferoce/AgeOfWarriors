@@ -60,12 +60,6 @@ MonoBehaviour:
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
-          mapper:
-            rid: 3656781574257508375
-    - rid: 3656781574257508375
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: cooldown
     - rid: 3656781574257508376
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
@@ -87,12 +81,6 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          mapper:
-            rid: 3656781574257508381
-    - rid: 3656781574257508381
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: range
     - rid: 3656781574257508382
       type: {class: ProjectileAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:

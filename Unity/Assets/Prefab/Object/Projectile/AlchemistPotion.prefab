@@ -163,14 +163,8 @@ MonoBehaviour:
         criteria:
           rid: 3656781574126698502
         heal:
-          mapper:
-            rid: 3656781574126698504
     - rid: 3656781574126698502
       type: {class: IsAllyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781574126698504
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: heal
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

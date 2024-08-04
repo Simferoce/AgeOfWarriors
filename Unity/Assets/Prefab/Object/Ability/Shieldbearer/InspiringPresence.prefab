@@ -59,34 +59,10 @@ MonoBehaviour:
       type: {class: InspiringPresenceAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         area:
-          mapper:
-            rid: 3656781571772645441
         buffDuration:
-          mapper:
-            rid: 3656781571772645442
         defense:
-          mapper:
-            rid: 3656781571772645443
         inspiringPresenceModifierDefinition: {fileID: -1722971267097484216, guid: 2fe57550d51a64f4897979212d8ac68d, type: 2}
     - rid: 3656781301283291177
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
-          mapper:
-            rid: 3656781571772645440
-    - rid: 3656781571772645440
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: cooldown
-    - rid: 3656781571772645441
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: range
-    - rid: 3656781571772645442
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: buff_duration
-    - rid: 3656781571772645443
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: defense

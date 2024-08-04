@@ -10,11 +10,7 @@ namespace Game
 
         public override bool Execute(ITargeteable owner, ITargeteable targeteable, Context context, Faction ownerFaction, Faction targetFaction)
         {
-            if (!context.TryGetContextElement<AbilityCastingContextElement>(out AbilityCastingContextElement abilityCastingContext))
-                throw new Exception($"Expecting the context of the call to be done with {nameof(AbilityCastingContextElement)}");
-
-            if (!reference.TryGetValue(abilityCastingContext.Ability, out float value))
-                throw new Exception($"Could not resolve the reference {reference} from {abilityCastingContext.Ability.Definition.Name}");
+            float value = reference.GetValueOrThrow(context);
 
             return Mathf.Abs((targeteable.ClosestPoint(owner.CenterPosition) - owner.CenterPosition).x) < value;
         }

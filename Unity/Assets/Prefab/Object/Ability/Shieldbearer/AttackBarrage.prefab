@@ -54,8 +54,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 3656781301283291220
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781301283291221
@@ -68,14 +66,8 @@ MonoBehaviour:
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach:
-          mapper:
-            rid: -2
         damage:
-          mapper:
-            rid: 3656781571772645438
         armorPenetration:
-          mapper:
-            rid: -2
     - rid: 3656781301283291224
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
@@ -86,25 +78,9 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          mapper:
-            rid: 3656781571772645437
     - rid: 3656781301283291227
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781343263817734
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
-          mapper:
-            rid: 3656781571772645439
-    - rid: 3656781571772645437
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: range
-    - rid: 3656781571772645438
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: damage
-    - rid: 3656781571772645439
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: cooldown

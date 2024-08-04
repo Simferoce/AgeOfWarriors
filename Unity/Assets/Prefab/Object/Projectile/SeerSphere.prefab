@@ -142,8 +142,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 3656781574126698518
       type: {class: ProjectileBubbleUpDeath, ns: Game, asm: Assembly-CSharp}
       data:
@@ -162,17 +160,9 @@ MonoBehaviour:
         criteria:
           rid: 3656781574126698522
         damage:
-          mapper:
-            rid: 3656781574126698523
         armorPenetration:
-          mapper:
-            rid: -2
     - rid: 3656781574126698522
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781574126698523
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: damage
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 4

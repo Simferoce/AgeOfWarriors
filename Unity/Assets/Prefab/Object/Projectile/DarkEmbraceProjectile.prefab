@@ -555,22 +555,10 @@ MonoBehaviour:
         criteria:
           rid: 3656781574126698508
         damage:
-          mapper:
-            rid: 3656781574126698509
         duration:
-          mapper:
-            rid: 3656781574126698510
         delay: 0.5
     - rid: 3656781574126698508
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781574126698509
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: damage
-    - rid: 3656781574126698510
-      type: {class: AbilityMapperFloat, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic: duration
     - rid: 8118057652579991560
       type: {class: ProjectileAnimationDeath, ns: , asm: Assembly-CSharp}
       data:
