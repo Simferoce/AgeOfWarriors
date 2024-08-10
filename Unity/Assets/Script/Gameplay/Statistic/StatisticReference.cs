@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Reflection;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace Game
 {
@@ -32,6 +30,22 @@ namespace Game
 
         public object Resolve(object current, string path)
         {
+            if (current is IContext context)
+            {
+                foreach (var pair in context)
+                {
+                    string statisticName = pair.Key;
+                    if (!path.StartsWith(statisticName))
+                        continue;
+
+                    path = path.Substring(statisticName.Length + 1);
+
+                    object result = Resolve(pair.Value, path);
+                    if (result != null)
+                        return result;
+                }
+            }
+
             PropertyInfo[] propertyInfos = current.GetType().GetProperties();
             foreach (PropertyInfo propertyInfo in propertyInfos)
             {
@@ -41,25 +55,6 @@ namespace Game
                     current = propertyInfo.GetValue(current);
                     if (path == statisticAttribute.Name)
                         return current;
-
-                    path = path.Substring(statisticAttribute.Name.Length);
-                    if (current is IDictionary children)
-                    {
-                        foreach (object key in children.Keys)
-                        {
-                            Assert.IsTrue(key is string, $"Expecting the key of the dictionnary {current.ToString()} to be a string. Remaining Path: {path}");
-                            string statisticName = (string)key;
-                            if (!path.StartsWith(statisticName))
-                                continue;
-
-                            path = path.Substring(statisticName.Length + 1);
-
-                            object value = children[key];
-                            object result = Resolve(value, path);
-                            if (result != null)
-                                return result;
-                        }
-                    }
                 }
             }
 

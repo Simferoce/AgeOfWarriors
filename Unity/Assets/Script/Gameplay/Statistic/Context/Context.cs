@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Game
 {
-    public class Context : IEnumerable<KeyValuePair<string, object>>
+    public class Context : IContext
     {
-        [Statistic("")] public Dictionary<string, object> Elements { get; } = new Dictionary<string, object>();
+        public Dictionary<string, object> Elements { get; } = new Dictionary<string, object>();
 
         public object this[string key]
         {
