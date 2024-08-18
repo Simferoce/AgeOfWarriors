@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ModifierHandler : Entity, IModifiable
+    public class ModifierHandler : CachedMonobehaviour, IModifiable
     {
         [SerializeReference, SubclassSelector] private List<ModifierDefinition.Instancier> onInitializedModifier;
 

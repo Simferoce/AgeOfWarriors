@@ -40,7 +40,7 @@ namespace Game
                 character.AddOrGetCachedComponent<Ownership>().OnChildAdded += Character_OnChildEntitySpawned;
             }
 
-            private void Character_OnChildEntitySpawned(Entity entity)
+            private void Character_OnChildEntitySpawned(CachedMonobehaviour entity)
             {
                 if (entity.TryGetCachedComponent<Pool>(out Pool pool))
                 {

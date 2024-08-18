@@ -6,7 +6,7 @@ namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
     [StatisticObject("projectile")]
-    public class Projectile : Entity, IAttackSource, IContext
+    public class Projectile : CachedMonobehaviour, IAttackSource, IContext
     {
         public delegate void Impacted(List<ITargeteable> targeteables);
 

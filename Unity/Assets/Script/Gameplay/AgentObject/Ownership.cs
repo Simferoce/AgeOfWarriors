@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace Game
 {
-    public class Ownership : Entity
+    public class Ownership : CachedMonobehaviour
     {
         public List<Ownership> Children { get; } = new List<Ownership>();
 
         public event Action<Ownership> OnChildAdded;
         public Ownership Owner { get; private set; }
 
-        public static void SetOwner(Entity of, Entity owner)
+        public static void SetOwner(CachedMonobehaviour of, CachedMonobehaviour owner)
         {
             of.AddOrGetCachedComponent<Ownership>().SetOwner(owner.AddOrGetCachedComponent<Ownership>());
         }

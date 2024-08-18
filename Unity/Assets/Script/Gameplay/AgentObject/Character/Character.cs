@@ -8,15 +8,18 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(Attackable))]
-    [RequireComponent(typeof(Target))]
     [StatisticObject("character")]
-    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackableOwner, ITargetOwner, IModifierSource, IContext
+    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackableOwner, ITargeteable, IModifierSource, IContext, IBlock
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
+        [SerializeField] private Collider2D hitbox;
 
-        public event AttackedLanded OnAttackLanded;
+        [Header("Target")]
+        [SerializeField] private Transform targetPosition;
+
         public event Action OnDeath;
+        public event AttackedLanded OnAttackLanded;
         public event Action<Modifier> OnModifierAdded;
 
         public CharacterAnimator CharacterAnimator { get; set; }
@@ -24,7 +27,9 @@ namespace Game
         public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
         public HashSet<IAttackable> RecentlyAttackedAttackeables { get; set; } = new HashSet<IAttackable>();
         public override bool IsActive { get => !IsDead; }
-        public Vector3 CenterPosition { get => this.GetCachedComponent<ITargeteable>().CenterPosition; }
+        public Vector3 CenterPosition { get => transform.position; }
+        public Vector3 TargetPosition => targetPosition.position;
+        public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
 
         public float Health { get; set; }
         public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
@@ -161,6 +166,18 @@ namespace Game
             return potentialTargets
                 .OrderBy(x => x.Priority)
                 .ToList();
+        }
+
+        public Vector3 ClosestPoint(Vector3 point)
+        {
+            return Hitbox.ClosestPoint(point);
+        }
+
+        public bool IsBlocking(Character character)
+        {
+            return character.Hitbox.IsTouching(hitbox)
+                && (character.OriginalFaction != this.OriginalFaction
+                || character.Priority > this.Priority);
         }
 
         public void Death()

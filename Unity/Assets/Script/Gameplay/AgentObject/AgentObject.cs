@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public abstract class AgentObject : Entity
+    public abstract class AgentObject : CachedMonobehaviour
     {
         public delegate void AttackedLanded(AttackResult attack);
 

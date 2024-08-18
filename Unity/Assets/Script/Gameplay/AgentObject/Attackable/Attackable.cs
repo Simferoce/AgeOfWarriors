@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Attackable : Entity, IAttackable, IShieldable
+    public class Attackable : CachedMonobehaviour, IAttackable, IShieldable
     {
         public event Action<AttackResult, IAttackable> OnDamageTaken;
         public event Action<IShieldable> OnShieldableDestroyed;
