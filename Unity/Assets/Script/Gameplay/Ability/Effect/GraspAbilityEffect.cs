@@ -17,7 +17,7 @@ namespace Game
 
         public override void Apply()
         {
-            float duration = staggerDuration.GetValueOrThrow(new Context() { { "ability", Ability } });
+            float duration = staggerDuration.GetValueOrThrow(Ability);
             foreach (Character target in Ability.Targets.Cast<Character>().ToList())
             {
                 if (target.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))

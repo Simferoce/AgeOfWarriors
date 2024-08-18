@@ -8,7 +8,7 @@ namespace Game
     {
         [SerializeField] private StatisticReference<float> reference;
 
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable, Context context, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, IContext context, Faction ownerFaction, Faction targetFaction)
         {
             float value = reference.GetValueOrThrow(context);
 

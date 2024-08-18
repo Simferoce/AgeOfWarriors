@@ -23,7 +23,7 @@ namespace Game
             base.Initialize(projectile);
             startedAt = Time.time;
 
-            currentDuration = duration.GetValueOrThrow(projectile.Context);
+            currentDuration = duration.GetValueOrThrow(projectile);
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -64,11 +64,11 @@ namespace Game
             foreach (ITargeteable targeteable in targeteablesInEffect)
             {
                 if (Time.time - startedAt > delay
-                    && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, new Context(), projectile.Faction, targeteable.Faction)
+                    && criteria.Execute(projectile.Character.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
                     && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable)
                     && !targetsHit.Contains(attackable))
                 {
-                    Attack attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile.Context), 0, 0, true, false, true, attackable, projectile);
+                    Attack attack = projectile.Character.GenerateAttack(damage.GetValueOrThrow(projectile), 0, 0, true, false, true, attackable, projectile);
                     attack.AttackSource.Sources.Add(projectile);
                     attackable.TakeAttack(attack);
                     targetsHit.Add(attackable);

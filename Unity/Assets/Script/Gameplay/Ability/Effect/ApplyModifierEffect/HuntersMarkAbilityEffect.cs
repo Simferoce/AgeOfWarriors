@@ -29,10 +29,10 @@ namespace Game
                             modifiable,
                             hunterMarkModifierDefinition,
                             this,
-                            damage.GetValueOrThrow(new Context() { { "ability", Ability } }),
+                            damage.GetValueOrThrow(Ability),
                             modifiable.GetCachedComponent<IAttackable>(),
                             Ability.Character)
-                        .With(new CharacterModifierTimeElement(duration.GetValueOrThrow(new Context() { { "ability", Ability } })));
+                        .With(new CharacterModifierTimeElement(duration.GetValueOrThrow(Ability)));
 
                     modifiable.AddModifier(huntersMark);
                 }

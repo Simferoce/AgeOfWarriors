@@ -35,7 +35,7 @@ namespace Game
             if (blocking == null)
                 return false;
 
-            return blocking.Execute(owner.GetCachedComponent<ITargeteable>(), agentObject.GetCachedComponent<ITargeteable>(), new Context(), owner.GetCachedComponent<ITargeteable>().Faction, agentObject.GetCachedComponent<ITargeteable>().Faction);
+            return blocking.Execute(owner.GetCachedComponent<ITargeteable>(), agentObject.GetCachedComponent<ITargeteable>(), agentObject.GetComponent<IContext>(), owner.GetCachedComponent<ITargeteable>().Faction, agentObject.GetCachedComponent<ITargeteable>().Faction);
         }
     }
 }

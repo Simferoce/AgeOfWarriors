@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Reflection;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -9,7 +9,30 @@ namespace Game
     {
         [SerializeField] private string path;
 
-        public bool TryGetValue(Context context, out T value)
+        public T GetValueOrDefault(IEnumerable<IContext> context)
+        {
+            return TryGetValue(context, out T value) == true ? value : default(T);
+        }
+
+        public T GetValueOrThrow(IEnumerable<IContext> context)
+        {
+            if (TryGetValue(context, out T value))
+                return value;
+
+            throw new Exception($"Could not resolve the statistic of {path} for {context}");
+        }
+
+        public T GetValueOrThrow(IContext context)
+        {
+            return GetValueOrThrow(new List<IContext>() { context });
+        }
+
+        public T GetValueOrDefault(IContext context)
+        {
+            return GetValueOrDefault(new List<IContext>() { context });
+        }
+
+        private bool TryGetValue(IEnumerable<IContext> context, out T value)
         {
             if (string.IsNullOrEmpty(path))
             {
@@ -17,7 +40,7 @@ namespace Game
                 return false;
             }
 
-            object result = Resolve(context, path);
+            object result = StatisticResolverService.Resolve(context, path);
             if (result is not T)
             {
                 value = default;
@@ -26,52 +49,6 @@ namespace Game
 
             value = (T)result;
             return true;
-        }
-
-        public object Resolve(object current, string path)
-        {
-            if (current is IContext context)
-            {
-                foreach (var pair in context)
-                {
-                    string statisticName = pair.Key;
-                    if (!path.StartsWith(statisticName))
-                        continue;
-
-                    path = path.Substring(statisticName.Length + 1);
-
-                    object result = Resolve(pair.Value, path);
-                    if (result != null)
-                        return result;
-                }
-            }
-
-            PropertyInfo[] propertyInfos = current.GetType().GetProperties();
-            foreach (PropertyInfo propertyInfo in propertyInfos)
-            {
-                StatisticAttribute statisticAttribute = propertyInfo.GetCustomAttribute<StatisticAttribute>();
-                if (path.StartsWith(statisticAttribute.Name))
-                {
-                    current = propertyInfo.GetValue(current);
-                    if (path == statisticAttribute.Name)
-                        return current;
-                }
-            }
-
-            return null;
-        }
-
-        public T GetValueOrDefault(Context context)
-        {
-            return TryGetValue(context, out T value) == true ? value : default(T);
-        }
-
-        public T GetValueOrThrow(Context context)
-        {
-            if (TryGetValue(context, out T value))
-                return value;
-
-            throw new Exception($"Could not resolve the statistic of {value}");
         }
     }
 }

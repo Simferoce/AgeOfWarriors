@@ -9,7 +9,8 @@ namespace Game
 {
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(Target))]
-    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackableOwner, ITargetOwner, IModifierSource
+    [StatisticObject("character")]
+    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackableOwner, ITargetOwner, IModifierSource, IContext
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -34,7 +35,7 @@ namespace Game
         public float Reach { get => Definition.Reach * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
-        public bool IsEngaged => GetTarget(engagedCriteria, new Context()) != null;
+        public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
         public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
         public bool IsConfused => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }
@@ -135,12 +136,12 @@ namespace Game
             return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered, reflectable, overtime);
         }
 
-        public ITargeteable GetTarget(TargetCriteria criteria, Context context)
+        public ITargeteable GetTarget(TargetCriteria criteria, IContext context)
         {
             return GetTargets(criteria, context).FirstOrDefault();
         }
 
-        public List<ITargeteable> GetTargets(TargetCriteria criteria, Context context)
+        public List<ITargeteable> GetTargets(TargetCriteria criteria, IContext context)
         {
             List<ITargeteable> potentialTargets = new List<ITargeteable>();
             foreach (ITargeteable targetteable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))

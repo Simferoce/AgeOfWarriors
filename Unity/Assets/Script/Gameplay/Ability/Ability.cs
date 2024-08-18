@@ -3,9 +3,10 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class Ability : MonoBehaviour
+    [StatisticObject("ability")]
+    public abstract class Ability : MonoBehaviour, IContext
     {
-        public Character Character { get; set; }
+        [Statistic("caster")] public Character Character { get; set; }
         [Statistic("cooldown")] public abstract float Cooldown { get; }
 
         public event System.Action OnAbilityEffectApplied;

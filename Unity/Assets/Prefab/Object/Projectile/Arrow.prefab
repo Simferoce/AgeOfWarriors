@@ -217,7 +217,7 @@ MonoBehaviour:
         criteria:
           rid: 3656781574100221956
         damage:
-          path: ability.damage
+          path: projectile.ability.damage
         armorPenetration:
           path: 
     - rid: 3656781574100221956

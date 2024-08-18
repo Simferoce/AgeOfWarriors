@@ -33,7 +33,7 @@ namespace Game
                         projectileAngledMovement.Angle = 50;
 
                         Character character = modifiable.GetCachedComponent<Character>();
-                        projectile.Initialize(character, projectile.Context, affectedAbility.Targets[1], affectedAbility.FactionWhenUsed);
+                        projectile.Initialize(character, affectedAbility.Targets[1], affectedAbility.FactionWhenUsed, projectile.Context);
 
                         currentAttackApplied = 0;
                     }

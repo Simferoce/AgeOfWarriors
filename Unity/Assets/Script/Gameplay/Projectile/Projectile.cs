@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public class Projectile : Entity, IAttackSource
+    [StatisticObject("projectile")]
+    public class Projectile : Entity, IAttackSource, IContext
     {
         public delegate void Impacted(List<ITargeteable> targeteables);
 
@@ -20,10 +21,10 @@ namespace Game
         [SerializeReference, SubclassSelector] private List<ProjectileMovement> projectileMovements = new List<ProjectileMovement>();
         [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
 
+        [Statistic()] public List<IContext> Context { get => context; set => context = value; }
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public Character Character { get => character; set => character = value; }
         public State StateValue { get => state; set => state = value; }
-        public Context Context { get => context; set => context = value; }
         public ITargeteable Target { get => target; set => target = value; }
         public ITargeteable Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
@@ -31,11 +32,16 @@ namespace Game
         public Faction Faction { get; set; }
 
         private Character character;
-        private Context context;
+        private List<IContext> context;
         private ITargeteable target;
         private State state = State.Alive;
 
-        public void Initialize(Character character, Context context, ITargeteable target, Faction faction)
+        public void Initialize(Character character, ITargeteable target, Faction faction, params IContext[] context)
+        {
+            this.Initialize(character, target, faction, context.ToList());
+        }
+
+        public void Initialize(Character character, ITargeteable target, Faction faction, List<IContext> context)
         {
             this.Faction = faction;
             this.character = character;

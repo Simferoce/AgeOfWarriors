@@ -18,7 +18,7 @@ namespace Game
 
         public override bool Execute()
         {
-            return Time.time - lastUsed > cooldown.GetValueOrThrow(new Context() { { "ability", ability } });
+            return Time.time - lastUsed > cooldown.GetValueOrThrow(ability);
         }
 
         public override void OnAbilityEnded()
