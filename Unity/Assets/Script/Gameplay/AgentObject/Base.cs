@@ -20,7 +20,6 @@ namespace Game
         public float MaxHealth => maxHealth;
         public float Defense => defense;
         public bool IsDead => Health <= 0;
-        public bool IsInvulnerable => false;
 
         public event Action<AttackResult, IAttackable> OnDamageTaken;
 
