@@ -4,7 +4,7 @@ using static Game.ShieldModifierDefinition;
 
 namespace Game
 {
-    public class AttackHandler
+    public static class AttackHandler
     {
         public struct Input
         {
@@ -38,7 +38,7 @@ namespace Game
             public bool ResistedDeath { get; set; }
         }
 
-        public Result TakeAttack(Attack attack, Input input)
+        public static Result TakeAttack(Attack attack, Input input)
         {
             float damage = attack.Damage;
             float resultingDefense = input.Defense - attack.ArmorPenetration;
@@ -72,7 +72,7 @@ namespace Game
             };
         }
 
-        public float Absorb(float damageRemaining, List<Shield> shields)
+        public static float Absorb(float damageRemaining, List<Shield> shields)
         {
             for (int i = 0; i < shields.Count; i++)
                 shields[i].Absorb(damageRemaining, out damageRemaining);

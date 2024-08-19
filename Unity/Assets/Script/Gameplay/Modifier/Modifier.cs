@@ -37,7 +37,7 @@ namespace Game
             this.modifiable = modifiable;
 
             if (Source != null)
-                Source.AddModifier(this);
+                Source.AddAppliedModifier(this);
         }
 
         public void Initialize()
@@ -87,7 +87,7 @@ namespace Game
         public virtual void Dispose()
         {
             if (Source != null)
-                Source.RemoveModifier(this);
+                Source.RemoveAppliedModifier(this);
         }
     }
 

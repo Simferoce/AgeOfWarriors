@@ -47,7 +47,6 @@ namespace Game
         public bool IsInjured { get => Health < MaxHealth; }
 
         private StateMachine stateMachine = new StateMachine();
-        private AttackHandler attackHandler = new AttackHandler();
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
         protected override void Awake()
@@ -102,44 +101,15 @@ namespace Game
             transform.localScale = new Vector3(Mathf.Sign(IsConfused ? -Direction : Direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
-        public void AddModifier(Modifier modifier)
+        public void AddAppliedModifier(Modifier modifier)
         {
             AppliedModifiers.Add(modifier);
             OnModifierAdded?.Invoke(modifier);
         }
 
-        public void RemoveModifier(Modifier modifier)
+        public void RemoveAppliedModifier(Modifier modifier)
         {
             AppliedModifiers.Remove(modifier);
-        }
-
-        public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, bool overtime, bool reflectable, IAttackable target, params IAttackSource[] source)
-        {
-            bool empowered = false;
-
-            List<Modifier> modifiers = GetCachedComponent<IModifiable>().GetModifiers();
-
-            EmpoweredModifierDefinition.Modifier empowerment = modifiers.FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
-            if (empowerment != null)
-            {
-                damage *= 1 + empowerment.PercentageDamageIncrease;
-                empowerment.Consume();
-
-                empowered = true;
-            }
-
-            if (modifiers.Count > 0)
-            {
-                float damageDealtReduction = modifiers.Max(x => x.DamageDealtReduction ?? 0);
-                damage *= (1 - damageDealtReduction);
-            }
-
-            if (target.GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
-            {
-                damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
-            }
-
-            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered, reflectable, overtime);
         }
 
         public ITargeteable GetTarget(TargetCriteria criteria, IContext context)
@@ -213,6 +183,68 @@ namespace Game
             return RecentlyAttackedAttackeables.Contains(attackable);
         }
 
+        public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, bool overtime, bool reflectable, IAttackable target, params IAttackSource[] source)
+        {
+            bool empowered = false;
+
+            List<Modifier> modifiers = GetCachedComponent<IModifiable>().GetModifiers();
+
+            EmpoweredModifierDefinition.Modifier empowerment = modifiers.FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
+            if (empowerment != null)
+            {
+                damage *= 1 + empowerment.PercentageDamageIncrease;
+                empowerment.Consume();
+
+                empowered = true;
+            }
+
+            if (modifiers.Count > 0)
+            {
+                float damageDealtReduction = modifiers.Max(x => x.DamageDealtReduction ?? 0);
+                damage *= (1 - damageDealtReduction);
+            }
+
+            if (target.GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
+            {
+                damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
+            }
+
+            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered, reflectable, overtime);
+        }
+
+        public void TakeAttack(Attack attack)
+        {
+            AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
+                    this,
+                    currentHealth: Health,
+                    defense: Defense,
+                    increaseDamageTaken: GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0),
+                    rangedDamageReduction: GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0),
+                    shields: GetCachedComponent<IModifiable>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList(),
+                    canResistDeath: GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow())));
+
+            Health -= result.DamageToTake;
+
+            if (result.ResistedDeath)
+            {
+                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
+                if (modifier != null)
+                {
+                    modifier.ResistKillingBlow();
+                    Health = 0.001f;
+                }
+            }
+
+            AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, this);
+            foreach (IAttackSource source in attack.AttackSource.Sources)
+                source.AttackLanded(attackResult);
+
+            OnDamageTaken?.Invoke(attackResult, this);
+
+            if (Health <= 0 && !IsDead)
+                Death();
+        }
+
         #region Ability
         [Header("Abilities")]
         [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
@@ -278,38 +310,6 @@ namespace Game
                 ability.Dispose();
         }
 
-        public void TakeAttack(Attack attack)
-        {
-            AttackHandler.Result result = attackHandler.TakeAttack(attack, new AttackHandler.Input(
-                    this,
-                    currentHealth: Health,
-                    defense: Defense,
-                    increaseDamageTaken: GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0),
-                    rangedDamageReduction: GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0),
-                    shields: GetCachedComponent<IModifiable>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList(),
-                    canResistDeath: GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow())));
-
-            Health -= result.DamageToTake;
-
-            if (result.ResistedDeath)
-            {
-                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
-                if (modifier != null)
-                {
-                    modifier.ResistKillingBlow();
-                    Health = 0.001f;
-                }
-            }
-
-            AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, this);
-            foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attackResult);
-
-            OnDamageTaken?.Invoke(attackResult, this);
-
-            if (Health <= 0 && !IsDead)
-                Death();
-        }
 
         #endregion
     }

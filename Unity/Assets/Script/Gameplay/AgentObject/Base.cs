@@ -23,8 +23,6 @@ namespace Game
 
         public event Action<AttackResult, IAttackable> OnDamageTaken;
 
-        private AttackHandler attackHandler = new AttackHandler();
-
         public Vector3 ClosestPoint(Vector3 point)
         {
             return hitbox.ClosestPoint(point);
@@ -51,7 +49,7 @@ namespace Game
 
         public void TakeAttack(Attack attack)
         {
-            AttackHandler.Result result = attackHandler.TakeAttack(attack, new AttackHandler.Input(
+            AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
                     this,
                     currentHealth: Health,
                     defense: Defense));
