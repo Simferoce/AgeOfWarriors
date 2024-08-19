@@ -9,11 +9,6 @@ namespace Game
         {
             public Modifier(IModifiable modifiable, HealOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
-                {
-                    shieldable.OnShieldableDestroyed += Shieldable_OnDestroyed;
-                }
-
                 modifiable.OnModifierRemoved += Modifiable_ModifierRemoved;
             }
 
@@ -32,20 +27,9 @@ namespace Game
                 character.Heal(heal);
             }
 
-            private void Shieldable_OnDestroyed(IShieldable shieldable)
-            {
-                shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
-                modifiable.OnModifierRemoved -= Modifiable_ModifierRemoved;
-            }
-
             public override void Dispose()
             {
                 base.Dispose();
-
-                if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
-                {
-                    shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
-                }
 
                 modifiable.OnModifierRemoved -= Modifiable_ModifierRemoved;
             }

@@ -23,6 +23,8 @@ namespace Game
 
         [SerializeField] private List<Type> types = new List<Type>();
 
+        public event System.Action<AgentObject> OnDestroyed;
+
         public virtual bool IsActive { get => true; }
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
@@ -31,6 +33,7 @@ namespace Game
         public virtual Faction Faction { get => Agent.Faction; }
         public virtual Faction OriginalFaction { get => Agent.Faction; }
         public List<Type> Types { get => types; }
+        public string Name => name;
 
         protected virtual void Awake()
         {
@@ -40,6 +43,7 @@ namespace Game
         protected virtual void OnDestroy()
         {
             All.Remove(this);
+            OnDestroyed?.Invoke(this);
         }
 
         public virtual void Spawn(Agent agent, int spawnNumber, int direction)

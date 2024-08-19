@@ -1,4 +1,6 @@
-﻿namespace Game
+﻿using UnityEngine;
+
+namespace Game
 {
     public class AttackResult
     {
@@ -15,6 +17,8 @@
             DefenseDamagePrevented = defenseDamagePrevented;
             KillingBlow = killingBlow;
             Target = target;
+
+            Debug.Log($"{target} is taking {damageTaken} (reduced by {defenseDamagePrevented}) from {attack.AttackSource.Sources[^1]}");
         }
     }
 }

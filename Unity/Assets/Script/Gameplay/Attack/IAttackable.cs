@@ -6,6 +6,8 @@ namespace Game
     {
         public event Action<AttackResult, IAttackable> OnDamageTaken;
 
+        public string Name { get; }
+
         public void TakeAttack(Attack attack);
     }
 }

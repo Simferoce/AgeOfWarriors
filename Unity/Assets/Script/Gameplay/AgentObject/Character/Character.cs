@@ -7,9 +7,8 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(Attackable))]
     [StatisticObject("character")]
-    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackableOwner, ITargeteable, IModifierSource, IContext, IBlock
+    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackable, ITargeteable, IModifierSource, IContext, IBlock
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -21,6 +20,7 @@ namespace Game
         public event Action OnDeath;
         public event AttackedLanded OnAttackLanded;
         public event Action<Modifier> OnModifierAdded;
+        public event Action<AttackResult, IAttackable> OnDamageTaken;
 
         public CharacterAnimator CharacterAnimator { get; set; }
         public List<TransformTag> TransformTags { get; set; }
@@ -47,6 +47,7 @@ namespace Game
         public bool IsInjured { get => Health < MaxHealth; }
 
         private StateMachine stateMachine = new StateMachine();
+        private AttackHandler attackHandler = new AttackHandler();
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
         protected override void Awake()
@@ -275,6 +276,39 @@ namespace Game
         {
             foreach (Ability ability in abilities)
                 ability.Dispose();
+        }
+
+        public void TakeAttack(Attack attack)
+        {
+            AttackHandler.Result result = attackHandler.TakeAttack(attack, new AttackHandler.Input(
+                    this,
+                    currentHealth: Health,
+                    defense: Defense,
+                    increaseDamageTaken: GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0),
+                    rangedDamageReduction: GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0),
+                    shields: GetCachedComponent<IModifiable>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList(),
+                    canResistDeath: GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow())));
+
+            Health -= result.DamageToTake;
+
+            if (result.ResistedDeath)
+            {
+                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
+                if (modifier != null)
+                {
+                    modifier.ResistKillingBlow();
+                    Health = 0.001f;
+                }
+            }
+
+            AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, this);
+            foreach (IAttackSource source in attack.AttackSource.Sources)
+                source.AttackLanded(attackResult);
+
+            OnDamageTaken?.Invoke(attackResult, this);
+
+            if (Health <= 0 && !IsDead)
+                Death();
         }
 
         #endregion

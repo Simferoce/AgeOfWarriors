@@ -9,12 +9,7 @@ namespace Game
         {
             public Modifier(IModifiable modifiable, DealDamageOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
-                {
-                    shieldable.OnShieldableDestroyed += Shieldable_OnDestroyed;
-                }
-
-                modifiable.OnModifierRemoved += Modifiable_ModifierRemoved;
+                modifiable.OnModifierAdded += Modifiable_ModifierRemoved;
             }
 
             private void Modifiable_ModifierRemoved(Game.Modifier obj)
@@ -50,20 +45,10 @@ namespace Game
                 }
             }
 
-            private void Shieldable_OnDestroyed(IShieldable shieldable)
-            {
-                shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
-                modifiable.OnModifierRemoved -= Modifiable_ModifierRemoved;
-            }
 
             public override void Dispose()
             {
                 base.Dispose();
-
-                if (modifiable.TryGetCachedComponent<IShieldable>(out IShieldable shieldable))
-                {
-                    shieldable.OnShieldableDestroyed -= Shieldable_OnDestroyed;
-                }
 
                 modifiable.OnModifierRemoved -= Modifiable_ModifierRemoved;
             }
