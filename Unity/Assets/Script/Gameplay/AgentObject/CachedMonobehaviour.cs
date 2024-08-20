@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class CachedMonobehaviour : MonoBehaviour
+    public class CachedMonobehaviour : MonoBehaviour, IComponent
     {
         private Dictionary<Type, object> cached = new Dictionary<Type, object>();
 

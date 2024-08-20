@@ -21,15 +21,15 @@ namespace Game
             foreach (Character target in Ability.Targets.Cast<Character>().ToList())
             {
                 if (target.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
-                    targetModifiable.AddModifier(new StaggerModifierDefinition.Modifier(targetModifiable, staggerModifierDefinition, duration, Ability.Character));
+                    targetModifiable.AddModifier(new StaggerModifierDefinition.Modifier(targetModifiable, staggerModifierDefinition, duration, Ability.Caster as IModifierSource));
             }
 
             startedAt = Time.time;
         }
 
-        public bool Update(Character character)
+        public bool Update(ICaster caster)
         {
-            Vector3 destination = character.transform.position + character.transform.right * destinationDistance;
+            Vector3 destination = caster.CenterPosition + caster.Direction * destinationDistance * Vector3.right;
 
             foreach (Character target in Ability.Targets.Cast<Character>().ToList())
                 target.Displace(Vector3.Lerp(target.CenterPosition, destination, damping) - target.CenterPosition);

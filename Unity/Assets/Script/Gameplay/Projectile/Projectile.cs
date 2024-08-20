@@ -23,7 +23,7 @@ namespace Game
 
         [Statistic()] public List<IContext> Context { get => context; set => context = value; }
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
-        public Character Character { get => character; set => character = value; }
+        public ICaster Caster { get => caster; set => caster = value; }
         public State StateValue { get => state; set => state = value; }
         public ITargeteable Target { get => target; set => target = value; }
         public ITargeteable Ignore { get; set; }
@@ -31,24 +31,24 @@ namespace Game
         public event Impacted OnImpacted;
         public Faction Faction { get; set; }
 
-        private Character character;
+        private ICaster caster;
         private List<IContext> context;
         private ITargeteable target;
         private State state = State.Alive;
 
-        public void Initialize(Character character, ITargeteable target, Faction faction, params IContext[] context)
+        public void Initialize(ICaster caster, ITargeteable target, Faction faction, params IContext[] context)
         {
-            this.Initialize(character, target, faction, context.ToList());
+            this.Initialize(caster, target, faction, context.ToList());
         }
 
-        public void Initialize(Character character, ITargeteable target, Faction faction, List<IContext> context)
+        public void Initialize(ICaster caster, ITargeteable target, Faction faction, List<IContext> context)
         {
             this.Faction = faction;
-            this.character = character;
+            this.caster = caster;
             this.context = context;
             this.target = target;
 
-            Ownership.SetOwner(this, character);
+            Ownership.SetOwner(this, caster);
 
             foreach (ProjectileMovement movement in projectileMovements)
                 movement.Initialize(this);
@@ -56,7 +56,7 @@ namespace Game
             foreach (ProjectileImpact effect in impacts)
                 effect.Initialize(this);
 
-            foreach (IProjectileModifier projectileModifier in character.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
+            foreach (IProjectileModifier projectileModifier in caster.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
             {
                 this.GetCachedComponent<IModifiable>().AddModifier(projectileModifier.GetModifier(this));
             }

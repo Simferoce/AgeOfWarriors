@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Game
 {
     [StatisticObject("character")]
-    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackable, ITargeteable, IModifierSource, IContext, IBlock
+    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackable, ITargeteable, IModifierSource, IContext, IBlock, ICaster, IAnimated
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -22,7 +22,7 @@ namespace Game
         public event Action<Modifier> OnModifierAdded;
         public event Action<AttackResult, IAttackable> OnDamageTaken;
 
-        public CharacterAnimator CharacterAnimator { get; set; }
+        public Animated Animated { get; set; }
         public List<TransformTag> TransformTags { get; set; }
         public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
         public HashSet<IAttackable> RecentlyAttackedAttackeables { get; set; } = new HashSet<IAttackable>();
@@ -30,15 +30,16 @@ namespace Game
         public Vector3 CenterPosition { get => transform.position; }
         public Vector3 TargetPosition => targetPosition.position;
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
+        public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
 
-        public float Health { get; set; }
-        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
-        public float Defense { get => Definition.Defense + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
-        public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)); }
-        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
-        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
-        public float Reach { get => Definition.Reach * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
-        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
+        [Statistic("health")] public float Health { get; set; }
+        [Statistic("maxhealth")] public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
+        [Statistic("defense")] public float Defense { get => Definition.Defense + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
+        [Statistic("attackspeed")] public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)); }
+        [Statistic("attackpower")] public float AttackPower { get => Definition.AttackPower + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
+        [Statistic("speed")] public float Speed { get => Definition.Speed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
+        [Statistic("reach")] public float Reach { get => Definition.Reach * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
+        [Statistic("technology")] public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
         public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
@@ -59,7 +60,7 @@ namespace Game
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            CharacterAnimator = GetComponentInChildren<CharacterAnimator>();
+            Animated = GetComponentInChildren<Animated>();
 
             InitializeAbilities();
             AgentObjectDefinition agentObjectDefinition = GetDefinition();
@@ -183,35 +184,6 @@ namespace Game
             return RecentlyAttackedAttackeables.Contains(attackable);
         }
 
-        public Attack GenerateAttack(float damage, float armorPenetration, float leach, bool ranged, bool overtime, bool reflectable, IAttackable target, params IAttackSource[] source)
-        {
-            bool empowered = false;
-
-            List<Modifier> modifiers = GetCachedComponent<IModifiable>().GetModifiers();
-
-            EmpoweredModifierDefinition.Modifier empowerment = modifiers.FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
-            if (empowerment != null)
-            {
-                damage *= 1 + empowerment.PercentageDamageIncrease;
-                empowerment.Consume();
-
-                empowered = true;
-            }
-
-            if (modifiers.Count > 0)
-            {
-                float damageDealtReduction = modifiers.Max(x => x.DamageDealtReduction ?? 0);
-                damage *= (1 - damageDealtReduction);
-            }
-
-            if (target.GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
-            {
-                damage += GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
-            }
-
-            return new Attack(new AttackSource(this).Add(source), damage, armorPenetration, leach, ranged, empowered, reflectable, overtime);
-        }
-
         public void TakeAttack(Attack attack)
         {
             AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
@@ -285,7 +257,7 @@ namespace Game
             return abilities.FirstOrDefault(a => a.IsActive);
         }
 
-        public void Cast()
+        public void BeginCast()
         {
             stateMachine.SetState(new CastingState(this));
         }
@@ -309,7 +281,6 @@ namespace Game
             foreach (Ability ability in abilities)
                 ability.Dispose();
         }
-
 
         #endregion
     }

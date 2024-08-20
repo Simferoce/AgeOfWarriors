@@ -41,7 +41,7 @@ namespace Game
                     if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.percentageReachExplosionRadius * character.Reach)
                         continue;
 
-                    attackable.TakeAttack(character.GenerateAttack(damage, 0, 0, false, false, true, attackable, this));
+                    attackable.TakeAttack(AttackUtility.Generate(character, damage, 0, 0, false, false, true, attackable, this));
                 }
             }
 

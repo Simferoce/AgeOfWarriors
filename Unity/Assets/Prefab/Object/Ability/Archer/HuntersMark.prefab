@@ -44,22 +44,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeec37b93cbaaa942a0b81318b5c6f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: SpecialAbility2
   conditions:
-  - rid: 3656781412477173760
+  - rid: -2
   - rid: 3656781412477173761
   - rid: 3656781412477173762
-  parameter: 3
   effects:
   - rid: 3656781412477173768
   references:
     version: 2
     RefIds:
-    - rid: 3656781412477173760
-      type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 3656781412477173761
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
+          path: 
     - rid: 3656781412477173762
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
@@ -79,11 +80,14 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
+          path: 
     - rid: 3656781412477173768
       type: {class: HuntersMarkAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         damage:
+          path: 
         duration:
+          path: 
         hunterMarkModifierDefinition: {fileID: 4328000484182388948, guid: 94bc3887fe1aaad468e21f5c79064f4f, type: 2}
     - rid: 3656781412477173782
       type: {class: ExcludeTypeCriteria, ns: Game, asm: Assembly-CSharp}

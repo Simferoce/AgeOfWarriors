@@ -10,7 +10,7 @@ namespace Game
 
         public override Vector3 GetPosition(Ability ability)
         {
-            foreach (TransformTag tag in ability.Character.TransformTags)
+            foreach (TransformTag tag in ability.Caster.TransformTags)
             {
                 if (tag.Id == origin)
                     return tag.transform.position;

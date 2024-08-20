@@ -30,19 +30,19 @@ namespace Game
                     {
                         BleedingModifierDefinition.BleedingModifier modifier = modifiable.GetModifiers()
                             .FirstOrDefault(x => x is BleedingModifierDefinition.BleedingModifier bleedingModifier
-                                && bleedingModifier.Source == (object)projectile.Character)
+                                && bleedingModifier.Source == (object)projectile.Caster)
                             as BleedingModifierDefinition.BleedingModifier;
 
                         if (modifier == null)
                         {
-                            modifier = new BleedingModifierDefinition.BleedingModifier(modifiable, definition.bleedingModifierDefinition, duration, damagePerSeconds, projectile.Character);
+                            modifier = new BleedingModifierDefinition.BleedingModifier(modifiable, definition.bleedingModifierDefinition, duration, damagePerSeconds, projectile.Caster as Character);
 
                             modifiable.AddModifier(modifier);
                         }
                         else
                         {
-                            SpreadBleedingPerk.Modifier spreadModifier = projectile.Character.GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is SpreadBleedingPerk.Modifier) as SpreadBleedingPerk.Modifier;
-                            modifier.Increase(damagePerSeconds, duration, spreadModifier != null, spreadModifier?.SpreadDistance ?? 0f, projectile.Character);
+                            SpreadBleedingPerk.Modifier spreadModifier = projectile.Caster.GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is SpreadBleedingPerk.Modifier) as SpreadBleedingPerk.Modifier;
+                            modifier.Increase(damagePerSeconds, duration, spreadModifier != null, spreadModifier?.SpreadDistance ?? 0f, projectile.Caster as Character);
                         }
                     }
                 }

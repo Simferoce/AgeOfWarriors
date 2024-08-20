@@ -40,12 +40,12 @@ namespace Game
 
                 if (CanMove())
                 {
-                    character.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 1, 0.25f);
+                    character.Animated.SetFloat("SpeedRatio", 1, 0.25f);
                     character.rigidbody.MovePosition(character.rigidbody.position + Vector2.right * character.Direction * character.Speed * Time.deltaTime);
                 }
                 else
                 {
-                    character.CharacterAnimator.SetFloat(CharacterAnimatorParameter.Parameter.SpeedRatio, 0f, 0.25f);
+                    character.Animated.SetFloat("SpeedRatio", 0f, 0.25f);
                 }
 
                 CheckStagger();

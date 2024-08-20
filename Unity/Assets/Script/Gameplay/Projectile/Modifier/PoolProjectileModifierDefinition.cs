@@ -26,7 +26,7 @@ namespace Game
                 Pool pool = GameObject.Instantiate(definition.prefab, position, Quaternion.identity).GetComponent<Pool>();
                 pool.Duration = duration;
                 pool.GetEffect<PeriodicDamagePoolEffect>().Damage = damage;
-                pool.Spawn(projectile.Character.Agent, 0, projectile.Character.Agent.Direction);
+                pool.Spawn(projectile.Caster.Agent, 0, projectile.Caster.Direction);
                 pool.Initialize();
             }
         }

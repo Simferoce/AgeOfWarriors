@@ -2,8 +2,8 @@
 {
     public class ShieldbearerBasicAbility : AnimationBaseCharacterAbility<ShieldbearerBasicAbilityDefinition>
     {
-        [Statistic("damage")] public float Damage => Character.AttackPower * definition.DamagePercentage;
-        [Statistic("range")] public float Range => Character.Reach * definition.ReachPercentage;
+        [Statistic("damage")] public float Damage => (Caster as Character).AttackPower * definition.DamagePercentage;
+        [Statistic("range")] public float Range => (Caster as Character).Reach * definition.ReachPercentage;
 
         public override float Cooldown => 0f;
 

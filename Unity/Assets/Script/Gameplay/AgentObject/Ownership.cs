@@ -10,7 +10,7 @@ namespace Game
         public event Action<Ownership> OnChildAdded;
         public Ownership Owner { get; private set; }
 
-        public static void SetOwner(CachedMonobehaviour of, CachedMonobehaviour owner)
+        public static void SetOwner(IComponent of, IComponent owner)
         {
             of.AddOrGetCachedComponent<Ownership>().SetOwner(owner.AddOrGetCachedComponent<Ownership>());
         }

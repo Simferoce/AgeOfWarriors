@@ -23,7 +23,7 @@ namespace Game
                         return current;
 
                     if (statisticAttribute.Name.Length > 0)
-                        path = path.Substring(statisticAttribute.Name.Length);
+                        path = path.Substring(statisticAttribute.Name.Length + 1);
 
                     object result = StatisticResolverService.Resolve(current, path);
                     if (result != null)

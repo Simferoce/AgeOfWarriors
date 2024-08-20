@@ -14,7 +14,7 @@ namespace Game
 
             protected override void InternalEnter()
             {
-                character.CharacterAnimator.SetTrigger(CharacterAnimatorParameter.Parameter.Dead);
+                character.Animated.SetTrigger("Dead");
                 GameObject.Destroy(character.gameObject, 2);
             }
 

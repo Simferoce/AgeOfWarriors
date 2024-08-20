@@ -44,25 +44,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11252ce372610104eb516fcbc6c9ff55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: SpecialAbility2
   conditions:
-  - rid: 3656781299071320131
   - rid: 3656781301283291177
-  parameter: 3
+  - rid: 2969737379885613065
   effects:
   - rid: 3656781299071320134
   references:
     version: 2
     RefIds:
-    - rid: 3656781299071320131
+    - rid: 2969737379885613065
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        attackSpeed:
+          path: ability.caster.attackspeed
     - rid: 3656781299071320134
       type: {class: InspiringPresenceAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         area:
+          path: 
         buffDuration:
+          path: 
         defense:
+          path: 
         inspiringPresenceModifierDefinition: {fileID: -1722971267097484216, guid: 2fe57550d51a64f4897979212d8ac68d, type: 2}
     - rid: 3656781301283291177
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
+          path: 

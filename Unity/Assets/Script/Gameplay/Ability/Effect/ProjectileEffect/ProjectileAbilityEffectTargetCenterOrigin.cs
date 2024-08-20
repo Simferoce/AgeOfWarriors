@@ -11,9 +11,9 @@ namespace Game
 
         public override Vector3 GetPosition(Ability ability)
         {
-            Vector3 closest = ability.Targets.OrderBy(x => Mathf.Abs(x.TargetPosition.x - ability.Character.CenterPosition.x)).FirstOrDefault().TargetPosition;
+            Vector3 closest = ability.Targets.OrderBy(x => Mathf.Abs(x.TargetPosition.x - ability.Caster.CenterPosition.x)).FirstOrDefault().TargetPosition;
 
-            return closest + new Vector3(offset.x * ability.Character.Direction, offset.y);
+            return closest + new Vector3(offset.x * ability.Caster.Direction, offset.y);
         }
     }
 }

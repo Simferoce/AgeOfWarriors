@@ -14,7 +14,7 @@ namespace Game
 
         public override bool Execute()
         {
-            Targets = ability.Character.GetTargets(criteria, ability);
+            Targets = ability.Caster.GetTargets(criteria, ability);
             return Targets.Count >= count;
         }
     }

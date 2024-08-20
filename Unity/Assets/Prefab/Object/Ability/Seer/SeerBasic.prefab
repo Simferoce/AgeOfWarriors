@@ -44,17 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d30f092766f1a409d16796490ed544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: Ability
   conditions:
-  - rid: 3656781574257508384
   - rid: 3656781574257508385
-  parameter: 1
+  - rid: 2969737379885613063
   effects:
   - rid: 3656781574257508390
   references:
     version: 2
     RefIds:
-    - rid: 3656781574257508384
+    - rid: 2969737379885613063
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        attackSpeed:
+          path: ability.caster.attackspeed
     - rid: 3656781574257508385
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
@@ -73,6 +76,7 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
+          path: 
     - rid: 3656781574257508390
       type: {class: ProjectileAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:

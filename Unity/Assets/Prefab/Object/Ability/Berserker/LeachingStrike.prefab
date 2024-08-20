@@ -44,22 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26aa1cdaee204454da593c70e5d4b382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: SpecialAbility1
   conditions:
-  - rid: 3656781574257508352
   - rid: 3656781574257508353
   - rid: 3656781574257508355
-  parameter: 1
+  - rid: 2969737379885613060
   effects:
   - rid: 3656781574257508360
   references:
     version: 2
     RefIds:
-    - rid: 3656781574257508352
+    - rid: 2969737379885613060
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        attackSpeed:
+          path: ability.caster.attackspeed
     - rid: 3656781574257508353
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
+          path: 
     - rid: 3656781574257508355
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
@@ -78,9 +82,13 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
+          path: 
     - rid: 3656781574257508360
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach:
+          path: 
         damage:
+          path: 
         armorPenetration:
+          path: 

@@ -22,9 +22,9 @@ namespace Game
 
         }
 
-        public override void Initialize(Character character)
+        public override void Initialize(ICaster caster)
         {
-            base.Initialize(character);
+            base.Initialize(caster);
 
             foreach (AbilityCondition condition in conditions)
                 condition.Initialize(this);

@@ -3,7 +3,7 @@
     public class ShieldbearerInspiringPresenceAbility : AnimationBaseCharacterAbility<ShieldbearerInspiringPresenceAbilityDefinition>
     {
         [Statistic("defense")] public float Defense => definition.Defense;
-        [Statistic("range")] public float Range => Character.Reach * definition.ReachPercentage;
+        [Statistic("range")] public float Range => (Caster as Character).Reach * definition.ReachPercentage;
         [Statistic("buff_duration")] public float BuffDuration => definition.BuffDuration;
 
         public override float Cooldown => definition.Cooldown;

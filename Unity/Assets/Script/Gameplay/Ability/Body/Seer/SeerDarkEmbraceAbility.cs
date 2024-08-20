@@ -2,8 +2,8 @@
 {
     public class SeerDarkEmbraceAbility : AnimationBaseCharacterAbility<SeerDarkEmbraceAbilityDefinition>
     {
-        [Statistic("damage")] public float Damage => Character.AttackPower * definition.DamagePercentage;
-        [Statistic("range")] public float Range => Character.Reach * definition.ReachPercentage;
+        [Statistic("damage")] public float Damage => (Caster as Character).AttackPower * definition.DamagePercentage;
+        [Statistic("range")] public float Range => (Caster as Character).Reach * definition.ReachPercentage;
         [Statistic("duration")] public float BuffDuration => definition.Duration;
 
         public override float Cooldown => definition.Cooldown;

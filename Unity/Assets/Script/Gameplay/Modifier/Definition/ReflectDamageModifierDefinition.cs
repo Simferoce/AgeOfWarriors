@@ -28,7 +28,7 @@ namespace Game
                     IAttackSource source = attackResult.Attack.AttackSource.Sources.FirstOrDefault(x => x is IComponent component && component.TryGetCachedComponent(out target));
                     if (target != null)
                     {
-                        Attack attack = character.GenerateAttack(damage, 0, 0, false, false, false, target, this);
+                        Attack attack = AttackUtility.Generate(character, damage, 0, 0, false, false, false, target, this);
                         target.TakeAttack(attack);
                     }
                 }

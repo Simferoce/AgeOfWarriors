@@ -20,8 +20,8 @@ namespace Game
             startedAt = Time.time;
 
             List<Character> characters = AgentObject.All.OfType<Character>()
-               .Where(x => x.Faction == Ability.Character.Faction
-                   && Mathf.Abs(Ability.Character.transform.position.x - x.transform.position.x) < area.GetValueOrThrow(Ability))
+               .Where(x => x.Faction == Ability.Caster.Faction
+                   && Mathf.Abs(Ability.Caster.CenterPosition.x - x.transform.position.x) < area.GetValueOrThrow(Ability))
                .ToList();
 
             foreach (Character characterToBuff in characters)
@@ -31,7 +31,7 @@ namespace Game
 
                 if (inspiringPresenceBuff != null)
                 {
-                    if (inspiringPresenceBuff.Source == Ability.Character.GetCachedComponent<IModifierSource>())
+                    if (inspiringPresenceBuff.Source == Ability.Caster.GetCachedComponent<IModifierSource>())
                     {
                         inspiringPresenceBuff.Refresh();
                     }
@@ -39,10 +39,10 @@ namespace Game
                 else
                 {
                     inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(
-                            Ability.Character,
+                            Ability.Caster as Character,
                             inspiringPresenceModifierDefinition,
                             defense.GetValueOrThrow(Ability),
-                            Ability.Character.GetCachedComponent<IModifierSource>())
+                            Ability.Caster.GetCachedComponent<IModifierSource>())
                         .With(new CharacterModifierTimeElement(buffDuration.GetValueOrThrow(Ability)));
 
                     characterToBuff.GetCachedComponent<IModifiable>().AddModifier(inspiringPresenceBuff);

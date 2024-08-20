@@ -44,22 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 856fc4794e3848d4e90809a303b80de1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: SpecialAbility2
   conditions:
-  - rid: 3656781574226575360
   - rid: 3656781574226575361
   - rid: 3656781574226575363
-  parameter: 1
+  - rid: 2969737379885613059
   effects:
   - rid: 3656781574226575369
   references:
     version: 2
     RefIds:
-    - rid: 3656781574226575360
+    - rid: 2969737379885613059
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        attackSpeed:
+          path: ability.caster.attackspeed
     - rid: 3656781574226575361
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
       data:
         cooldown:
+          path: 
     - rid: 3656781574226575363
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
@@ -83,10 +87,13 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
+          path: 
     - rid: 3656781574226575369
       type: {class: GraspAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         destinationDistance: 0.4
         duration: 0.5
         staggerDuration:
+          path: 
         damping: 0.5
+        staggerModifierDefinition: {fileID: 0}

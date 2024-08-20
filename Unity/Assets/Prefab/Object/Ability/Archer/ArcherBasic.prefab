@@ -44,17 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d90174c6b8061a740a39e73e3fcb9635, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameter: Ability
   conditions:
-  - rid: 4528059661052542987
   - rid: 4528059661052542988
-  parameter: 1
+  - rid: 2969737379885613056
   effects:
   - rid: 4528059661052542993
   references:
     version: 2
     RefIds:
-    - rid: 4528059661052542987
+    - rid: 2969737379885613056
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
+      data:
+        attackSpeed:
+          path: ability.caster.attackspeed
     - rid: 4528059661052542988
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
