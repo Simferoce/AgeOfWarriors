@@ -15,7 +15,7 @@ namespace Game
 
             public Modifier(IModifiable modifiable, CreateDamagePoolPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                affectedAbility = modifiable.GetCachedComponent<Character>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
+                affectedAbility = modifiable.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
 

@@ -19,7 +19,7 @@ namespace Game
 
         private Animated animated;
 
-        public override void Initialize(ICaster caster)
+        public override void Initialize(Caster caster)
         {
             base.Initialize(caster);
 
@@ -38,9 +38,9 @@ namespace Game
             return conditions.All(x => x.Execute()) && effects.All(x => x.CanBeApplied()) && IsCasting == false && IsLingering == false;
         }
 
-        public override void Use()
+        public override void InternalUse()
         {
-            FactionWhenUsed = Caster.Faction;
+            FactionWhenUsed = Caster.AgentObject.Faction;
 
             Caster.BeginCast();
             animated.SetTrigger(parameter);

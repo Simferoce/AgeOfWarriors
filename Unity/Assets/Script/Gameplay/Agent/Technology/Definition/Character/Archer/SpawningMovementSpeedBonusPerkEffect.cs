@@ -14,7 +14,7 @@ namespace Game
             public Modifier(IModifiable modifiable, SpawningMovementSpeedBonusPerkEffect modifierDefinition, IModifierSource modifierSource, float movementSpeedIncrease) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.movementSpeedIncrease = movementSpeedIncrease;
-                modifiable.GetCachedComponent<Character>().OnAbilityUsed += Modifier_OnAbilityUsed;
+                modifiable.GetCachedComponent<Caster>().OnAbilityUsed += Modifier_OnAbilityUsed;
             }
 
             private void Modifier_OnAbilityUsed(Ability obj)
@@ -25,7 +25,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                modifiable.GetCachedComponent<Character>().OnAbilityUsed -= Modifier_OnAbilityUsed;
+                modifiable.GetCachedComponent<Caster>().OnAbilityUsed -= Modifier_OnAbilityUsed;
             }
         }
     }

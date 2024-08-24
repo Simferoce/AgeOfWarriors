@@ -9,14 +9,14 @@ namespace Game
     {
         [SerializeReference, SubclassSelector] private List<TargetCriteria> criterias = new List<TargetCriteria>();
 
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable, IContext context, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, IStatisticProvider statisticProvider, Faction ownerFaction, Faction targetFaction)
         {
             if (criterias.Count == 0)
                 return true;
 
             foreach (TargetCriteria criteria in criterias)
             {
-                if (criteria.Execute(owner, targeteable, context, ownerFaction, targetFaction))
+                if (criteria.Execute(owner, targeteable, statisticProvider, ownerFaction, targetFaction))
                     return true;
             }
 

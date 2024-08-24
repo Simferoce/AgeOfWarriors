@@ -2,6 +2,6 @@
 {
     public interface ILingeringAbilityEffect
     {
-        public bool Update(ICaster character);
+        public bool Update(Caster character);
     }
 }

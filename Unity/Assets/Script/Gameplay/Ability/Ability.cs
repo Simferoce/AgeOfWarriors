@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
-    [StatisticObject("ability")]
-    public abstract class Ability : MonoBehaviour, IContext
+    public abstract class Ability : MonoBehaviour, IStatisticProvider
     {
-        [Statistic("caster")] public ICaster Caster { get; set; }
-        [Statistic("cooldown")] public abstract float Cooldown { get; }
+        public Caster Caster { get; set; }
+        public abstract float Cooldown { get; }
 
         public event System.Action OnAbilityEffectApplied;
+        public event System.Action<Ability> OnAbilityUsed;
+
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
         public virtual List<ITargeteable> Targets => new List<ITargeteable>();
@@ -17,7 +19,9 @@ namespace Game
         public abstract string ParseDescription();
         public Faction FactionWhenUsed { get; set; }
 
-        public virtual void Initialize(ICaster caster)
+        public string StatisticProviderName => "ability";
+
+        public virtual void Initialize(Caster caster)
         {
             this.Caster = caster;
         }
@@ -28,7 +32,13 @@ namespace Game
 
         public abstract bool CanUse();
 
-        public abstract void Use();
+        public virtual void Use()
+        {
+            InternalUse();
+            OnAbilityUsed?.Invoke(this);
+        }
+
+        public abstract void InternalUse();
 
         public abstract void Apply();
 
@@ -37,6 +47,32 @@ namespace Game
         protected void PublishEffectApplied()
         {
             OnAbilityEffectApplied?.Invoke();
+        }
+
+        public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
+        {
+            if (path.StartsWith("caster"))
+            {
+                if (path.Length == "caster".Length)
+                {
+                    statistic = (T)(object)Caster;
+                    return true;
+                }
+
+                path = path.Slice("caster".Length + 1);
+                return Caster.GetCachedComponent<IStatisticProvider>().TryGetStatistic(path, out statistic);
+            }
+            else if (path.SequenceEqual("cooldown"))
+            {
+                float cooldownTemporary = Cooldown;
+                statistic = __refvalue(__makeref(cooldownTemporary), T);
+                return true;
+            }
+            else
+            {
+                statistic = default;
+                return false;
+            }
         }
     }
 

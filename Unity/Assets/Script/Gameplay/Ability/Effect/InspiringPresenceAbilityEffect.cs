@@ -20,8 +20,8 @@ namespace Game
             startedAt = Time.time;
 
             List<Character> characters = AgentObject.All.OfType<Character>()
-               .Where(x => x.Faction == Ability.Caster.Faction
-                   && Mathf.Abs(Ability.Caster.CenterPosition.x - x.transform.position.x) < area.GetValueOrThrow(Ability))
+               .Where(x => x.Faction == Ability.Caster.AgentObject.Faction
+                   && Mathf.Abs(Ability.Caster.AgentObject.transform.position.x - x.transform.position.x) < area.GetValueOrThrow(Ability))
                .ToList();
 
             foreach (Character characterToBuff in characters)
@@ -39,7 +39,7 @@ namespace Game
                 else
                 {
                     inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(
-                            Ability.Caster as Character,
+                            Ability.Caster.GetCachedComponent<Character>(),
                             inspiringPresenceModifierDefinition,
                             defense.GetValueOrThrow(Ability),
                             Ability.Caster.GetCachedComponent<IModifierSource>())

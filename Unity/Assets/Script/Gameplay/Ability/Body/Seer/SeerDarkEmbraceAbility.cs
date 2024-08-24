@@ -1,12 +1,43 @@
-﻿namespace Game
+﻿using System;
+
+namespace Game
 {
     public class SeerDarkEmbraceAbility : AnimationBaseCharacterAbility<SeerDarkEmbraceAbilityDefinition>
     {
-        [Statistic("damage")] public float Damage => (Caster as Character).AttackPower * definition.DamagePercentage;
-        [Statistic("range")] public float Range => (Caster as Character).Reach * definition.ReachPercentage;
-        [Statistic("duration")] public float BuffDuration => definition.Duration;
+        public float Damage => Caster.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
+        public float Range => Caster.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
+        public float Duration => definition.Duration;
 
         public override float Cooldown => definition.Cooldown;
+
+        public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
+        {
+            if (path.StartsWith(StatisticProviderName))
+                path = path.Slice(StatisticProviderName.Length + 1);
+
+            if (path.SequenceEqual("damage"))
+            {
+                float damageTemporary = Damage;
+                statistic = __refvalue(__makeref(damageTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("range"))
+            {
+                float rangeTemporary = Range;
+                statistic = __refvalue(__makeref(rangeTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("duration"))
+            {
+                float durationTemporary = Duration;
+                statistic = __refvalue(__makeref(durationTemporary), T);
+                return true;
+            }
+            else
+            {
+                return base.TryGetStatistic<T>(path, out statistic);
+            }
+        }
 
         public override string ParseDescription()
         {

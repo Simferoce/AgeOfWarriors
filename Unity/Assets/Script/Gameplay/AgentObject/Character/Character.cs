@@ -7,8 +7,7 @@ using UnityEngine;
 
 namespace Game
 {
-    [StatisticObject("character")]
-    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackable, ITargeteable, IModifierSource, IContext, IBlock, ICaster, IAnimated
+    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackable, ITargeteable, IModifierSource, IBlock, IAnimated
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -31,17 +30,18 @@ namespace Game
         public Vector3 TargetPosition => targetPosition.position;
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
+        public override string StatisticProviderName => "character";
 
-        [Statistic("health")] public float Health { get; set; }
-        [Statistic("maxhealth")] public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
-        [Statistic("defense")] public float Defense { get => Definition.Defense + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
-        [Statistic("attackspeed")] public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)); }
-        [Statistic("attackpower")] public float AttackPower { get => Definition.AttackPower + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
-        [Statistic("speed")] public float Speed { get => Definition.Speed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
-        [Statistic("reach")] public float Reach { get => Definition.Reach * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
-        [Statistic("technology")] public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
+        public float Health { get; set; }
+        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
+        public float Defense { get => Definition.Defense + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
+        public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)); }
+        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
+        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
+        public float Reach { get => Definition.Reach * (1 + GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
+        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
-        public bool IsEngaged => GetTarget(engagedCriteria, this) != null;
+        public bool IsEngaged => TargetUtility.GetTargets(this, engagedCriteria, this).FirstOrDefault() != null;
         public bool IsInvulnerable => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
         public bool IsConfused => GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }
@@ -56,13 +56,68 @@ namespace Game
             TransformTags = GetComponentsInChildren<TransformTag>().ToList();
         }
 
+        public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
+        {
+            if (path.SequenceEqual("isDead"))
+            {
+                bool isDeadTemporary = IsDead;
+                statistic = __refvalue(__makeref(isDeadTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("health"))
+            {
+                float healthTemporary = Health;
+                statistic = __refvalue(__makeref(healthTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("maxhealth"))
+            {
+                float maxHealthTemporary = MaxHealth;
+                statistic = __refvalue(__makeref(maxHealthTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("defense"))
+            {
+                float defenseTemporary = Defense;
+                statistic = __refvalue(__makeref(defenseTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("attackspeed"))
+            {
+                float attackSpeedTemporary = AttackSpeed;
+                statistic = __refvalue(__makeref(attackSpeedTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("attackpower"))
+            {
+                float attackPowerTemporary = AttackSpeed;
+                statistic = __refvalue(__makeref(attackPowerTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("speed"))
+            {
+                float speedTemporary = Speed;
+                statistic = __refvalue(__makeref(speedTemporary), T);
+                return true;
+            }
+            else if (path.SequenceEqual("reach"))
+            {
+                float reachTemporary = Reach;
+                statistic = __refvalue(__makeref(reachTemporary), T);
+                return true;
+            }
+            else
+            {
+                return base.TryGetStatistic<T>(name, out statistic);
+            }
+        }
+
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
             base.Spawn(agent, spawnNumber, direction);
 
             Animated = GetComponentInChildren<Animated>();
 
-            InitializeAbilities();
             AgentObjectDefinition agentObjectDefinition = GetDefinition();
             List<ITechnologyModify> modifiers = agent.Technology.UnlockedPerks().OfType<ITechnologyModify>().ToList();
             foreach (ITechnologyModify modifier in modifiers)
@@ -85,16 +140,12 @@ namespace Game
             if (IsDead)
                 return;
 
-            UpdateAbilities();
-
             stateMachine.Update();
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-
-            DisposeAbilities();
         }
 
         public void SetDirection()
@@ -111,33 +162,6 @@ namespace Game
         public void RemoveAppliedModifier(Modifier modifier)
         {
             AppliedModifiers.Remove(modifier);
-        }
-
-        public ITargeteable GetTarget(TargetCriteria criteria, IContext context)
-        {
-            return GetTargets(criteria, context).FirstOrDefault();
-        }
-
-        public List<ITargeteable> GetTargets(TargetCriteria criteria, IContext context)
-        {
-            List<ITargeteable> potentialTargets = new List<ITargeteable>();
-            foreach (ITargeteable targetteable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
-            {
-                if (!targetteable.IsActive)
-                    continue;
-
-                if (targetteable == this.GetCachedComponent<ITargeteable>())
-                    continue;
-
-                if (!criteria.Execute(this.GetCachedComponent<ITargeteable>(), targetteable, context, Faction, IsConfused ? targetteable.Faction.GetConfusedFaction() : targetteable.Faction))
-                    continue;
-
-                potentialTargets.Add(targetteable);
-            }
-
-            return potentialTargets
-                .OrderBy(x => x.Priority)
-                .ToList();
         }
 
         public Vector3 ClosestPoint(Vector3 point)
@@ -218,45 +242,6 @@ namespace Game
         }
 
         #region Ability
-        [Header("Abilities")]
-        [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
-
-        public event Action<Ability> OnAbilityUsed;
-
-        public List<Ability> Abilities { get => abilities; set => abilities = value; }
-        public float LastAbilityUsed { get; set; }
-
-        private List<Ability> abilities = new List<Ability>();
-
-        private void InitializeAbilities()
-        {
-            GameObject abilitiesParent = new GameObject("Abilities");
-            abilitiesParent.transform.parent = transform;
-
-            foreach (AbilityDefinition definition in abilitiesDefinition)
-            {
-                Ability ability = definition.GetAbility();
-                ability.transform.parent = abilitiesParent.transform;
-                ability.Initialize(this);
-
-                abilities.Add(ability);
-            }
-        }
-
-        private void UpdateAbilities()
-        {
-            foreach (Ability ability in abilities)
-            {
-                if (ability.IsActive)
-                    ability.Tick();
-            }
-        }
-
-        public Ability GetCurrentAbility()
-        {
-            return abilities.FirstOrDefault(a => a.IsActive);
-        }
-
         public void BeginCast()
         {
             stateMachine.SetState(new CastingState(this));
@@ -266,20 +251,6 @@ namespace Game
         {
             if (stateMachine.Next == null)
                 stateMachine.SetState(new MoveState(this));
-        }
-
-        public bool CanUseAbility()
-        {
-            if (Health <= 0 || IsDead)
-                return false;
-
-            return true;
-        }
-
-        private void DisposeAbilities()
-        {
-            foreach (Ability ability in abilities)
-                ability.Dispose();
         }
 
         #endregion

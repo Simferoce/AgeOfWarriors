@@ -53,7 +53,7 @@ namespace Game
             for (; i < modifierDetailUIs.Count; ++i)
                 modifierDetailUIs[i].gameObject.SetActive(false);
 
-            List<Ability> abilities = character.Abilities.ToList();
+            List<Ability> abilities = character.GetCachedComponent<Caster>().Abilities.ToList();
             abilities.Reverse();
 
             int j = 0;

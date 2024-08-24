@@ -17,7 +17,7 @@ namespace Game
             public Modifier(IModifiable modifiable, SeerMadnessPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 character = modifiable.GetCachedComponent<Character>();
-                affectedAbility = character.Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
+                affectedAbility = character.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9215057588866617565}
   - component: {fileID: 3263700911198353021}
   - component: {fileID: 6663662174080843966}
+  - component: {fileID: 8016283899549924346}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -57,7 +58,6 @@ MonoBehaviour:
   rigidbody: {fileID: 9215057588866617565}
   hitbox: {fileID: 8271833102721241429}
   targetPosition: {fileID: 7840795603293673896}
-  abilitiesDefinition: []
 --- !u!50 &9215057588866617565
 Rigidbody2D:
   serializedVersion: 4
@@ -103,6 +103,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0847c3c86ed4f1d4092690ba02e64498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8016283899549924346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645757101492874935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00cd0d2ce1adb774b9549282e0b2603b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilitiesDefinition: []
 --- !u!1 &4568683806961424362
 GameObject:
   m_ObjectHideFlags: 0

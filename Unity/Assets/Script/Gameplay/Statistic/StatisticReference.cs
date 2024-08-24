@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Unity.Profiling;
 using UnityEngine;
 
 namespace Game
@@ -7,48 +7,32 @@ namespace Game
     [Serializable]
     public class StatisticReference<T>
     {
+        static readonly ProfilerMarker resolveMarker = new ProfilerMarker("Statistic.Resolve");
+
         [SerializeField] private string path;
 
-        public T GetValueOrDefault(IEnumerable<IContext> context)
+        public T GetValueOrThrow(IStatisticProvider statisticProvider)
         {
-            return TryGetValue(context, out T value) == true ? value : default(T);
+            return TryGetValue(statisticProvider, out T value) ? value : throw new Exception($"Could not resolve the path \"{path}\" for \"{statisticProvider}\"");
         }
 
-        public T GetValueOrThrow(IEnumerable<IContext> context)
+        public T GetValueOrDefault(IStatisticProvider statisticProvider)
         {
-            if (TryGetValue(context, out T value))
-                return value;
-
-            throw new Exception($"Could not resolve the statistic of {path} for {context}");
+            return TryGetValue(statisticProvider, out T value) ? value : default;
         }
 
-        public T GetValueOrThrow(IContext context)
+        private bool TryGetValue(IStatisticProvider statisticProvider, out T value)
         {
-            return GetValueOrThrow(new List<IContext>() { context });
-        }
-
-        public T GetValueOrDefault(IContext context)
-        {
-            return GetValueOrDefault(new List<IContext>() { context });
-        }
-
-        private bool TryGetValue(IEnumerable<IContext> context, out T value)
-        {
-            if (string.IsNullOrEmpty(path))
+            using (resolveMarker.Auto())
             {
-                value = default(T);
-                return false;
-            }
+                if (string.IsNullOrEmpty(path))
+                {
+                    value = default(T);
+                    return false;
+                }
 
-            object result = StatisticResolverService.Resolve(context, path);
-            if (result is not T)
-            {
-                value = default;
-                return false;
+                return statisticProvider.TryGetStatistic<T>(path, out value);
             }
-
-            value = (T)result;
-            return true;
         }
     }
 }

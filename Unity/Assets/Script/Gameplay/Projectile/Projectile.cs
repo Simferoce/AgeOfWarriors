@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    [StatisticObject("projectile")]
-    public class Projectile : CachedMonobehaviour, IAttackSource, IContext
+    public class Projectile : CachedMonobehaviour, IAttackSource, IStatisticProvider
     {
         public delegate void Impacted(List<ITargeteable> targeteables);
 
@@ -21,34 +21,30 @@ namespace Game
         [SerializeReference, SubclassSelector] private List<ProjectileMovement> projectileMovements = new List<ProjectileMovement>();
         [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
 
-        [Statistic()] public List<IContext> Context { get => context; set => context = value; }
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
-        public ICaster Caster { get => caster; set => caster = value; }
+        public AgentObject AgentObject { get => agentObject; set => agentObject = value; }
         public State StateValue { get => state; set => state = value; }
         public ITargeteable Target { get => target; set => target = value; }
         public ITargeteable Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
         public event Impacted OnImpacted;
         public Faction Faction { get; set; }
+        public List<object> Parameters { get; set; }
 
-        private ICaster caster;
-        private List<IContext> context;
+        public string StatisticProviderName => "projectile";
+
+        private AgentObject agentObject;
         private ITargeteable target;
         private State state = State.Alive;
 
-        public void Initialize(ICaster caster, ITargeteable target, Faction faction, params IContext[] context)
-        {
-            this.Initialize(caster, target, faction, context.ToList());
-        }
-
-        public void Initialize(ICaster caster, ITargeteable target, Faction faction, List<IContext> context)
+        public void Initialize(AgentObject agentObject, ITargeteable target, Faction faction, params object[] paramters)
         {
             this.Faction = faction;
-            this.caster = caster;
-            this.context = context;
+            this.agentObject = agentObject;
             this.target = target;
+            this.Parameters = paramters.ToList();
 
-            Ownership.SetOwner(this, caster);
+            Ownership.SetOwner(this, agentObject);
 
             foreach (ProjectileMovement movement in projectileMovements)
                 movement.Initialize(this);
@@ -56,7 +52,7 @@ namespace Game
             foreach (ProjectileImpact effect in impacts)
                 effect.Initialize(this);
 
-            foreach (IProjectileModifier projectileModifier in caster.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
+            foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
             {
                 this.GetCachedComponent<IModifiable>().AddModifier(projectileModifier.GetModifier(this));
             }
@@ -115,6 +111,23 @@ namespace Game
             StateValue = State.Dead;
 
             projectileDeath.Start(this, collision);
+        }
+
+        public bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
+        {
+            if (path.StartsWith("projectile"))
+                path = path.Slice("projectile".Length + 1);
+
+            foreach (object parameter in Parameters)
+            {
+                if (parameter is IStatisticProvider statisticProvider && path.StartsWith(statisticProvider.StatisticProviderName))
+                {
+                    return statisticProvider.TryGetStatistic<T>(path.Slice(statisticProvider.StatisticProviderName.Length + 1), out statistic);
+                }
+            }
+
+            statistic = default;
+            return false;
         }
     }
 }

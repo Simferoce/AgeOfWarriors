@@ -31,7 +31,7 @@ namespace Game
                             this,
                             damage.GetValueOrThrow(Ability),
                             modifiable.GetCachedComponent<IAttackable>(),
-                            Ability.Caster as Character)
+                            Ability.Caster.GetCachedComponent<Character>())
                         .With(new CharacterModifierTimeElement(duration.GetValueOrThrow(Ability)));
 
                     modifiable.AddModifier(huntersMark);

@@ -64,11 +64,11 @@ namespace Game
             foreach (ITargeteable targeteable in targeteablesInEffect)
             {
                 if (Time.time - startedAt > delay
-                    && criteria.Execute(projectile.Caster.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
+                    && criteria.Execute(projectile.AgentObject.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
                     && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable)
                     && !targetsHit.Contains(attackable))
                 {
-                    Attack attack = AttackUtility.Generate(projectile.Caster as Character, damage.GetValueOrThrow(projectile), 0, 0, true, false, true, attackable, projectile);
+                    Attack attack = AttackUtility.Generate(projectile.AgentObject as Character, damage.GetValueOrThrow(projectile), 0, 0, true, false, true, attackable, projectile);
                     attack.AttackSource.Sources.Add(projectile);
                     attackable.TakeAttack(attack);
                     targetsHit.Add(attackable);

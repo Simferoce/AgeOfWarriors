@@ -12,7 +12,7 @@ namespace Game
         {
             base.Initialize(projectile);
 
-            Vector3 velocity = Vector3.right * projectile.Caster.Direction * speed;
+            Vector3 velocity = Vector3.right * projectile.AgentObject.Direction * speed;
             projectile.Rigidbody.velocity = velocity;
             projectile.transform.right = projectile.Rigidbody.velocity;
         }

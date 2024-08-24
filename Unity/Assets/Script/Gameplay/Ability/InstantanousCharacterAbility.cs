@@ -22,7 +22,7 @@ namespace Game
 
         }
 
-        public override void Initialize(ICaster caster)
+        public override void Initialize(Caster caster)
         {
             base.Initialize(caster);
 
@@ -45,7 +45,7 @@ namespace Game
             PublishEffectApplied();
         }
 
-        public override void Use()
+        public override void InternalUse()
         {
             IsCasting = true;
             foreach (AbilityCondition condition in conditions)

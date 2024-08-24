@@ -27,9 +27,9 @@ namespace Game
             startedAt = Time.time;
         }
 
-        public bool Update(ICaster caster)
+        public bool Update(Caster caster)
         {
-            Vector3 destination = caster.CenterPosition + caster.Direction * destinationDistance * Vector3.right;
+            Vector3 destination = caster.AgentObject.transform.position + caster.AgentObject.Direction * destinationDistance * Vector3.right;
 
             foreach (Character target in Ability.Targets.Cast<Character>().ToList())
                 target.Displace(Vector3.Lerp(target.CenterPosition, destination, damping) - target.CenterPosition);

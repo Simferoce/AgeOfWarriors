@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public abstract class AgentObject : CachedMonobehaviour
+    public abstract class AgentObject : CachedMonobehaviour, IStatisticProvider
     {
         public delegate void AttackedLanded(AttackResult attack);
 
@@ -34,16 +36,51 @@ namespace Game
         public virtual Faction OriginalFaction { get => Agent.Faction; }
         public List<Type> Types { get => types; }
         public string Name => name;
+        public virtual string StatisticProviderName => "agentobject";
+
+        private List<IStatisticProvider> statisticProviderChildren;
 
         protected virtual void Awake()
         {
             All.Add(this);
+            statisticProviderChildren = GetComponentsInChildren<IStatisticProvider>().Where(x => x != (IStatisticProvider)this).ToList();
         }
 
         protected virtual void OnDestroy()
         {
             All.Remove(this);
             OnDestroyed?.Invoke(this);
+        }
+
+        public T GetStatisticOrDefault<T>(string path)
+        {
+            return TryGetStatistic<T>(path, out T statistic) ? statistic : default;
+        }
+
+        public T GetStatisticOrDefault<T>(string path, T defaultValue)
+        {
+            return TryGetStatistic<T>(path, out T statistic) ? statistic : defaultValue;
+        }
+
+        public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
+        {
+            switch (path)
+            {
+                default:
+                    return TryGetStatisticInChildren(path, out statistic);
+            }
+        }
+
+        private bool TryGetStatisticInChildren<T>(ReadOnlySpan<char> path, out T statistic)
+        {
+            foreach (IStatisticProvider statisticProviderChild in statisticProviderChildren)
+            {
+                if (statisticProviderChild.TryGetStatistic<T>(path, out statistic))
+                    return true;
+            }
+
+            statistic = default;
+            return false;
         }
 
         public virtual void Spawn(Agent agent, int spawnNumber, int direction)

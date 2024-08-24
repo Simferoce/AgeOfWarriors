@@ -14,12 +14,7 @@ namespace Game
             {
                 character.Animated.ClearTrigger("EndStagger");
                 character.Animated.SetTrigger("Stagger");
-
-                foreach (Ability ability in character.abilities)
-                {
-                    if (ability.IsActive)
-                        ability.Interrupt();
-                }
+                character.GetCachedComponent<Caster>().Interupt();
             }
 
             protected override void InternalExit()

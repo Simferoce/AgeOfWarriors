@@ -13,7 +13,7 @@ namespace Game
 
             public Modifier(IModifiable modifiable, ShootAdditionalArrowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                affectedAbility = modifiable.GetCachedComponent<Character>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
+                affectedAbility = modifiable.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
 
@@ -33,7 +33,7 @@ namespace Game
                         projectileAngledMovement.Angle = 50;
 
                         Character character = modifiable.GetCachedComponent<Character>();
-                        projectile.Initialize(character, affectedAbility.Targets[1], affectedAbility.FactionWhenUsed, projectile.Context);
+                        projectile.Initialize(character, affectedAbility.Targets[1], affectedAbility.FactionWhenUsed, projectile.Parameters.ToArray());
 
                         currentAttackApplied = 0;
                     }
