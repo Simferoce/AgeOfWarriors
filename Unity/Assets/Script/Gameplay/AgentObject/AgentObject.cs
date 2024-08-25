@@ -64,11 +64,7 @@ namespace Game
 
         public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
         {
-            switch (path)
-            {
-                default:
-                    return TryGetStatisticInChildren(path, out statistic);
-            }
+            return TryGetStatisticInChildren(path, out statistic);
         }
 
         private bool TryGetStatisticInChildren<T>(ReadOnlySpan<char> path, out T statistic)

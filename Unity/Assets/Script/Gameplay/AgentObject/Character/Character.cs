@@ -60,56 +60,46 @@ namespace Game
         {
             if (path.SequenceEqual("isDead"))
             {
-                bool isDeadTemporary = IsDead;
-                statistic = __refvalue(__makeref(isDeadTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, bool>(IsDead);
                 return true;
             }
             else if (path.SequenceEqual("health"))
             {
-                float healthTemporary = Health;
-                statistic = __refvalue(__makeref(healthTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, float>(Health);
                 return true;
             }
             else if (path.SequenceEqual("maxhealth"))
             {
-                float maxHealthTemporary = MaxHealth;
-                statistic = __refvalue(__makeref(maxHealthTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, float>(MaxHealth);
                 return true;
             }
             else if (path.SequenceEqual("defense"))
             {
-                float defenseTemporary = Defense;
-                statistic = __refvalue(__makeref(defenseTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, float>(Defense);
                 return true;
             }
             else if (path.SequenceEqual("attackspeed"))
             {
-                float attackSpeedTemporary = AttackSpeed;
-                statistic = __refvalue(__makeref(attackSpeedTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, float>(AttackSpeed);
                 return true;
             }
             else if (path.SequenceEqual("attackpower"))
             {
-                float attackPowerTemporary = AttackSpeed;
-                statistic = __refvalue(__makeref(attackPowerTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, float>(AttackPower);
                 return true;
             }
             else if (path.SequenceEqual("speed"))
             {
-                float speedTemporary = Speed;
-                statistic = __refvalue(__makeref(speedTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, float>(Speed);
                 return true;
             }
             else if (path.SequenceEqual("reach"))
             {
-                float reachTemporary = Reach;
-                statistic = __refvalue(__makeref(reachTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, float>(Reach);
                 return true;
             }
-            else
-            {
-                return base.TryGetStatistic<T>(name, out statistic);
-            }
+
+            return base.TryGetStatistic<T>(name, out statistic);
         }
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)

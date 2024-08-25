@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace Game
 {
@@ -59,6 +60,11 @@ namespace Game
 
         private void Update()
         {
+            Profiler.BeginSample("Test");
+            int v = AgentObject.GetStatisticOrDefault<int>("attackpower", 1);
+            Profiler.EndSample();
+            Debug.Log(v);
+
             foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)

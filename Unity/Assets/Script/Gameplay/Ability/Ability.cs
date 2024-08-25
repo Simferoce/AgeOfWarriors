@@ -51,22 +51,20 @@ namespace Game
 
         public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
         {
-            if (path.StartsWith("caster"))
+            if (path.SequenceEqual("caster"))
             {
-                if (path.Length == "caster".Length)
-                {
-                    statistic = (T)(object)Caster;
-                    return true;
-                }
-
-                path = path.Slice("caster".Length + 1);
-                return Caster.GetCachedComponent<IStatisticProvider>().TryGetStatistic(path, out statistic);
+                statistic = StatisticUtility.ConvertGeneric<T, Caster>(Caster);
+                return true;
             }
             else if (path.SequenceEqual("cooldown"))
             {
-                float cooldownTemporary = Cooldown;
-                statistic = __refvalue(__makeref(cooldownTemporary), T);
+                statistic = StatisticUtility.ConvertGeneric<T, float>(Cooldown);
                 return true;
+            }
+            else if (path.StartsWith("caster"))
+            {
+                path = path.Slice("caster".Length + 1);
+                return Caster.AgentObject.TryGetStatistic(path, out statistic);
             }
             else
             {

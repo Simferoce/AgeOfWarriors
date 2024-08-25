@@ -7,8 +7,6 @@ namespace Game
     [Serializable]
     public class StatisticReference<T>
     {
-        static readonly ProfilerMarker resolveMarker = new ProfilerMarker("Statistic.Resolve");
-
         [SerializeField] private string path;
 
         public T GetValueOrThrow(IStatisticProvider statisticProvider)
@@ -23,7 +21,7 @@ namespace Game
 
         private bool TryGetValue(IStatisticProvider statisticProvider, out T value)
         {
-            using (resolveMarker.Auto())
+            using (new ProfilerMarker("Statistic.Resolve").Auto())
             {
                 if (string.IsNullOrEmpty(path))
                 {
