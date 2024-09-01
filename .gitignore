@@ -15,3 +15,6 @@
 /Unity/UserSettings
 /Unity/*.sln
 /Unity/debug.log
+/StatisticCodeGenerator/StatisticCodeGeneratorSolution/.vs
+/StatisticCodeGenerator/StatisticCodeGeneratorSolution/StatisticCodeGenerator/bin
+/StatisticCodeGenerator/StatisticCodeGeneratorSolution/StatisticCodeGenerator/obj
