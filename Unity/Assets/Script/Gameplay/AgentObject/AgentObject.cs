@@ -15,6 +15,7 @@ namespace Game
             Building
         }
 
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
         {
