@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public class Projectile : CachedMonobehaviour, IAttackSource, IStatisticProvider
+    public class Projectile : CachedMonobehaviour, IAttackSource, IStatisticProviderOld
     {
         public delegate void Impacted(List<ITargeteable> targeteables);
 
@@ -120,7 +120,7 @@ namespace Game
 
             foreach (object parameter in Parameters)
             {
-                if (parameter is IStatisticProvider statisticProvider && path.StartsWith(statisticProvider.StatisticProviderName))
+                if (parameter is IStatisticProviderOld statisticProvider && path.StartsWith(statisticProvider.StatisticProviderName))
                 {
                     return statisticProvider.TryGetStatistic<T>(path.Slice(statisticProvider.StatisticProviderName.Length + 1), out statistic);
                 }

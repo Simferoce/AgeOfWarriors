@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public abstract class AgentObject : CachedMonobehaviour, IStatisticProvider
+    public abstract class AgentObject : CachedMonobehaviour, IStatisticProviderOld
     {
         public delegate void AttackedLanded(AttackResult attack);
 
@@ -39,12 +39,12 @@ namespace Game
         public string Name => name;
         public virtual string StatisticProviderName => "agentobject";
 
-        private List<IStatisticProvider> statisticProviderChildren;
+        private List<IStatisticProviderOld> statisticProviderChildren;
 
         protected virtual void Awake()
         {
             All.Add(this);
-            statisticProviderChildren = GetComponentsInChildren<IStatisticProvider>().Where(x => x != (IStatisticProvider)this).ToList();
+            statisticProviderChildren = GetComponentsInChildren<IStatisticProviderOld>().Where(x => x != (IStatisticProviderOld)this).ToList();
         }
 
         protected virtual void OnDestroy()
@@ -70,7 +70,7 @@ namespace Game
 
         private bool TryGetStatisticInChildren<T>(ReadOnlySpan<char> path, out T statistic)
         {
-            foreach (IStatisticProvider statisticProviderChild in statisticProviderChildren)
+            foreach (IStatisticProviderOld statisticProviderChild in statisticProviderChildren)
             {
                 if (statisticProviderChild.TryGetStatistic<T>(path, out statistic))
                     return true;

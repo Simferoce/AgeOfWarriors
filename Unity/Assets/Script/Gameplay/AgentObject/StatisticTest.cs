@@ -1,11 +1,10 @@
 ﻿namespace Test
 {
-    [StatisticClass]
-    public partial class StatisticTest
+    [StatisticClass("child")]
+    public partial class StatisticTest : StatisticTestParent
     {
         public void Test()
         {
-
         }
     }
 }

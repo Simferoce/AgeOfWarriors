@@ -3,7 +3,6 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "HunterMarkModifierDefinition", menuName = "Definition/Modifier/HunterMarkModifierDefinition")]
-    [StatisticClass]
     public class HunterMarkModifierDefinition : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, HunterMarkModifierDefinition>, IAttackSource

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class Ability : MonoBehaviour, IStatisticProvider
+    public abstract class Ability : MonoBehaviour, IStatisticProviderOld
     {
         public Caster Caster { get; set; }
         public abstract float Cooldown { get; }

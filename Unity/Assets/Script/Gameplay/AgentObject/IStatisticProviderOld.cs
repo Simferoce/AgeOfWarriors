@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public interface IStatisticProvider
+    public interface IStatisticProviderOld
     {
         public string StatisticProviderName { get; }
 

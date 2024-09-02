@@ -9,17 +9,17 @@ namespace Game
     {
         [SerializeField] private string path;
 
-        public T GetValueOrThrow(IStatisticProvider statisticProvider)
+        public T GetValueOrThrow(IStatisticProviderOld statisticProvider)
         {
             return TryGetValue(statisticProvider, out T value) ? value : throw new Exception($"Could not resolve the path \"{path}\" for \"{statisticProvider}\"");
         }
 
-        public T GetValueOrDefault(IStatisticProvider statisticProvider)
+        public T GetValueOrDefault(IStatisticProviderOld statisticProvider)
         {
             return TryGetValue(statisticProvider, out T value) ? value : default;
         }
 
-        private bool TryGetValue(IStatisticProvider statisticProvider, out T value)
+        private bool TryGetValue(IStatisticProviderOld statisticProvider, out T value)
         {
             using (new ProfilerMarker("Statistic.Resolve").Auto())
             {

@@ -9,7 +9,7 @@ namespace Game
     {
         [SerializeReference, SubclassSelector] private List<TargetCriteria> criterias = new List<TargetCriteria>();
 
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable, IStatisticProvider statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(ITargeteable owner, ITargeteable targeteable, IStatisticProviderOld statisticProvider, Faction ownerFaction, Faction targetFaction)
         {
             foreach (TargetCriteria criteria in criterias)
             {

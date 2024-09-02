@@ -36,6 +36,7 @@ namespace StatisticCodeGenerator
     {
         public static string ClassAttributeName = "StatisticClass";
         public static string PropertyAttributeName = "Statistic";
+        public static string ProviderInterfaceName = "IStatisticProvider";
         private static string currentLoggingPath;
 
         public static readonly DiagnosticDescriptor NonPartialClassWarning = new DiagnosticDescriptor(
@@ -75,7 +76,7 @@ namespace StatisticCodeGenerator
         private void InitializeLogging(GeneratorExecutionContext context)
         {
             currentLoggingPath = Path.Combine(Path.GetTempPath(), $"StatisticGeneratorCodeLog_{context.Compilation.AssemblyName}.txt");
-            Logger.Initialize(currentLoggingPath, false);
+            Logger.Initialize(currentLoggingPath, true);
         }
 
         private void ProcessClassDeclaration(GeneratorExecutionContext context, ClassDeclarationSyntax classDeclaration)
@@ -95,42 +96,19 @@ namespace StatisticCodeGenerator
             string className = symbol.Name;
             string namespaceName = GetNamespaceName(symbol);
 
-            bool isChild = IsChildOfClassWithAttribute(classDeclaration, context);
-            string methodModifier = isChild ? "override" : "virtual";
+            bool isChild = IsChildOfClassWithAttribute(classDeclaration, semanticModel);
 
             StringBuilder stringBuilder = new StringBuilder();
             AppendHeader(stringBuilder);
             AppendNamespace(stringBuilder, namespaceName);
-            AppendClassDefinition(stringBuilder, className, methodModifier);
+            AppendClassDefinition(stringBuilder, className, isChild);
             AppendTryGetStatisticMethod(stringBuilder, classDeclaration, semanticModel, isChild);
+            AppendNameMethod(stringBuilder, classDeclaration, semanticModel, isChild);
             AppendFooter(stringBuilder, namespaceName);
 
             string newMethodCode = stringBuilder.ToString();
             Logger.Log($"Success: {className}_Generated.cs");
             context.AddSource($"{className}_Generated.cs", newMethodCode);
-        }
-
-        private bool IsPartial(ClassDeclarationSyntax classDeclaration)
-        {
-            return classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword);
-        }
-
-        private void ReportNonPartialClassWarning(GeneratorExecutionContext context, ClassDeclarationSyntax classDeclaration, INamedTypeSymbol symbol)
-        {
-            Diagnostic diagnostic = Diagnostic.Create(
-                NonPartialClassWarning,
-                classDeclaration.Identifier.GetLocation(),
-                new[] { symbol.Name, ClassAttributeName }
-            );
-
-            context.ReportDiagnostic(diagnostic);
-        }
-
-        private string GetNamespaceName(INamedTypeSymbol symbol)
-        {
-            return symbol.ContainingNamespace.IsGlobalNamespace
-                ? null
-                : symbol.ContainingNamespace.ToDisplayString();
         }
 
         private void AppendHeader(StringBuilder stringBuilder)
@@ -151,17 +129,22 @@ namespace StatisticCodeGenerator
             }
         }
 
-        private void AppendClassDefinition(StringBuilder stringBuilder, string className, string methodModifier)
+        private void AppendClassDefinition(StringBuilder stringBuilder, string className, bool isChild)
         {
-            stringBuilder.AppendLine($"    partial class {className}");
+            string classInterface = !isChild ? $" : {ProviderInterfaceName}" : "";
+
+            stringBuilder.AppendLine($"    public partial class {className}{classInterface}");
             stringBuilder.AppendLine("    {");
-            stringBuilder.AppendLine($"        public {methodModifier} bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)");
-            stringBuilder.AppendLine("        {");
         }
 
         private void AppendTryGetStatisticMethod(StringBuilder stringBuilder, ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel, bool isChild)
         {
             List<PropertyDeclarationSyntax> propertyDeclarations = GetAllStatisticProperties(classDeclaration, semanticModel);
+
+            string methodModifier = isChild ? "override" : "virtual";
+
+            stringBuilder.AppendLine($"        public {methodModifier} bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)");
+            stringBuilder.AppendLine("        {");
 
             for (int i = 0; i < propertyDeclarations.Count; i++)
             {
@@ -169,7 +152,8 @@ namespace StatisticCodeGenerator
                 AddStatistic(stringBuilder, propertyDeclaration, semanticModel, i == 0);
             }
 
-            stringBuilder.AppendLine();
+            if (propertyDeclarations.Count > 0)
+                stringBuilder.AppendLine();
 
             if (isChild)
             {
@@ -181,6 +165,29 @@ namespace StatisticCodeGenerator
                 stringBuilder.AppendLine("            return false;");
             }
 
+            stringBuilder.AppendLine("        }");
+        }
+
+        private void AppendNameMethod(StringBuilder stringBuilder, ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel, bool isChild)
+        {
+            AttributeSyntax attributeSyntax = classDeclaration.AttributeLists.SelectMany(x => x.Attributes).FirstOrDefault(x => x.Name.ToString() == ClassAttributeName);
+            INamedTypeSymbol classSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+            ImmutableArray<AttributeData> attributeDatas = classSymbol.GetAttributes();
+            AttributeData attributeData = attributeDatas.FirstOrDefault(x => x.ApplicationSyntaxReference.GetSyntax().Equals(attributeSyntax));
+
+            string methodModifier = isChild ? "override" : "virtual";
+
+            string attributeNameValue = GetConstructorArgumentValue(attributeData, 0);
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine($"        public {methodModifier} bool IsName(string name)");
+            stringBuilder.AppendLine("        {");
+            stringBuilder.AppendLine($"            if(name == \"{attributeNameValue}\")");
+            stringBuilder.AppendLine("                return true;");
+            stringBuilder.AppendLine();
+            if (isChild)
+                stringBuilder.AppendLine("            return base.IsName(name);");
+            else
+                stringBuilder.AppendLine("            return false;");
             stringBuilder.AppendLine("        }");
         }
 
@@ -213,6 +220,29 @@ namespace StatisticCodeGenerator
             stringBuilder.AppendLine("            }");
         }
 
+        private bool IsPartial(ClassDeclarationSyntax classDeclaration)
+        {
+            return classDeclaration.Modifiers.Any(SyntaxKind.PartialKeyword);
+        }
+
+        private void ReportNonPartialClassWarning(GeneratorExecutionContext context, ClassDeclarationSyntax classDeclaration, INamedTypeSymbol symbol)
+        {
+            Diagnostic diagnostic = Diagnostic.Create(
+                NonPartialClassWarning,
+                classDeclaration.Identifier.GetLocation(),
+                new[] { symbol.Name, ClassAttributeName }
+            );
+
+            context.ReportDiagnostic(diagnostic);
+        }
+
+        private string GetNamespaceName(INamedTypeSymbol symbol)
+        {
+            return symbol.ContainingNamespace.IsGlobalNamespace
+                ? null
+                : symbol.ContainingNamespace.ToDisplayString();
+        }
+
         private AttributeSyntax GetAttributeSyntax(PropertyDeclarationSyntax propertyDeclarationSyntax, string attributeName)
         {
             return propertyDeclarationSyntax.AttributeLists
@@ -231,19 +261,19 @@ namespace StatisticCodeGenerator
             return null;
         }
 
-        private bool IsChildOfClassWithAttribute(ClassDeclarationSyntax classDeclaration, GeneratorExecutionContext context)
+        private bool IsChildOfClassWithAttribute(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
         {
-            SyntaxNode parent = classDeclaration.Parent;
+            INamedTypeSymbol namedTypeSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+            INamedTypeSymbol parent = namedTypeSymbol.BaseType;
 
             while (parent != null)
             {
-                if (parent is ClassDeclarationSyntax classDeclarationSyntax &&
-                    HasAttribute(classDeclarationSyntax, ClassAttributeName))
+                if (parent.GetAttributes().Any(x => x.AttributeClass.Name == ClassAttributeName || x.AttributeClass.Name == ClassAttributeName + "Attribute"))
                 {
                     return true;
                 }
 
-                parent = parent.Parent;
+                parent = parent.BaseType;
             }
 
             return false;
