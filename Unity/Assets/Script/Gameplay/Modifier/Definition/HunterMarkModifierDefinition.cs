@@ -3,6 +3,7 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "HunterMarkModifierDefinition", menuName = "Definition/Modifier/HunterMarkModifierDefinition")]
+    [StatisticClass]
     public class HunterMarkModifierDefinition : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, HunterMarkModifierDefinition>, IAttackSource
@@ -16,7 +17,7 @@ namespace Game
                 this.Source = source;
                 this.attackable = attackable;
                 this.damage = damage;
-                attackable.OnDamageTaken += OnAttackableDamageTaken; ;
+                attackable.OnDamageTaken += OnAttackableDamageTaken;
             }
 
             public override string ParseDescription()

@@ -5,7 +5,7 @@
     {
         public void Test()
         {
-            this.GeneratedMethod();
+
         }
     }
 }
