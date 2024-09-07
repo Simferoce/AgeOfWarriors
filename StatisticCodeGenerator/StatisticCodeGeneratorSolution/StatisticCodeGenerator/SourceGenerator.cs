@@ -81,41 +81,51 @@ namespace StatisticCodeGenerator
 
         private void ProcessClassDeclaration(GeneratorExecutionContext context, ClassDeclarationSyntax classDeclaration)
         {
-            SemanticModel semanticModel = context.Compilation.GetSemanticModel(classDeclaration.SyntaxTree);
-            INamedTypeSymbol symbol = semanticModel.GetDeclaredSymbol(classDeclaration) as INamedTypeSymbol;
-
-            if (symbol == null)
-                return;
-
-            if (!IsPartial(classDeclaration))
+            try
             {
-                ReportNonPartialClassWarning(context, classDeclaration, symbol);
-                return;
+                SemanticModel semanticModel = context.Compilation.GetSemanticModel(classDeclaration.SyntaxTree);
+                INamedTypeSymbol symbol = semanticModel.GetDeclaredSymbol(classDeclaration) as INamedTypeSymbol;
+
+                if (symbol == null)
+                    return;
+
+                if (!IsPartial(classDeclaration))
+                {
+                    ReportNonPartialClassWarning(context, classDeclaration, symbol);
+                    return;
+                }
+
+                string className = symbol.Name;
+                string namespaceName = GetNamespaceName(symbol);
+
+                bool isChild = IsChildOfClassWithAttribute(classDeclaration, semanticModel);
+
+                StringBuilder stringBuilder = new StringBuilder();
+                AppendHeader(stringBuilder);
+                AppendNamespace(stringBuilder, namespaceName);
+                AppendClassDefinition(stringBuilder, className, isChild);
+                AppendTryGetStatisticMethod(stringBuilder, classDeclaration, semanticModel, isChild);
+                AppendNameMethod(stringBuilder, classDeclaration, semanticModel, isChild);
+                AppendFooter(stringBuilder, namespaceName);
+
+                string newMethodCode = stringBuilder.ToString();
+                Logger.Log($"Success: {className}_Generated.cs");
+                context.AddSource($"{className}_Generated.cs", newMethodCode);
+            }
+            catch (Exception e)
+            {
+                Logger.Log(e.ToString());
             }
 
-            string className = symbol.Name;
-            string namespaceName = GetNamespaceName(symbol);
-
-            bool isChild = IsChildOfClassWithAttribute(classDeclaration, semanticModel);
-
-            StringBuilder stringBuilder = new StringBuilder();
-            AppendHeader(stringBuilder);
-            AppendNamespace(stringBuilder, namespaceName);
-            AppendClassDefinition(stringBuilder, className, isChild);
-            AppendTryGetStatisticMethod(stringBuilder, classDeclaration, semanticModel, isChild);
-            AppendNameMethod(stringBuilder, classDeclaration, semanticModel, isChild);
-            AppendFooter(stringBuilder, namespaceName);
-
-            string newMethodCode = stringBuilder.ToString();
-            Logger.Log($"Success: {className}_Generated.cs");
-            context.AddSource($"{className}_Generated.cs", newMethodCode);
         }
 
         private void AppendHeader(StringBuilder stringBuilder)
         {
             stringBuilder.AppendLine($"// Generated at {DateTime.Now}");
             stringBuilder.AppendLine("using UnityEngine;");
+            stringBuilder.AppendLine("using UnityEngine.Pool;");
             stringBuilder.AppendLine("using System;");
+            stringBuilder.AppendLine("using System.Collections.Generic;");
             stringBuilder.AppendLine("using Game;");
             stringBuilder.AppendLine();
         }
@@ -143,28 +153,85 @@ namespace StatisticCodeGenerator
 
             string methodModifier = isChild ? "override" : "virtual";
 
-            stringBuilder.AppendLine($"        public {methodModifier} bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)");
+            stringBuilder.AppendLine($"        public {methodModifier} bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic, HashSet<object> visited = null)");
             stringBuilder.AppendLine("        {");
+            stringBuilder.AppendLine("            bool initialFunctionCall = false;");
+            stringBuilder.AppendLine("            if (visited == null)");
+            stringBuilder.AppendLine("            {");
+            stringBuilder.AppendLine("                visited = HashSetPool<object>.Get();");
+            stringBuilder.AppendLine("                initialFunctionCall = true;");
+            stringBuilder.AppendLine("            }");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("            visited.Add(this);");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("            bool found = false;");
+            stringBuilder.AppendLine("            statistic = default;");
 
+            bool addedAtLeastOneStatistic = false;
             for (int i = 0; i < propertyDeclarations.Count; i++)
             {
                 PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
-                AddStatistic(stringBuilder, propertyDeclaration, semanticModel, i == 0);
+                addedAtLeastOneStatistic |= AddStatistic(stringBuilder, propertyDeclaration, semanticModel, i == 0);
             }
-
-            if (propertyDeclarations.Count > 0)
-                stringBuilder.AppendLine();
 
             if (isChild)
             {
-                stringBuilder.AppendLine("            return base.TryGetStatistic<T>(path, out statistic);");
+                if (addedAtLeastOneStatistic)
+                {
+                    stringBuilder.AppendLine("            else");
+                    stringBuilder.AppendLine("            {");
+
+                    for (int i = 0; i < propertyDeclarations.Count; i++)
+                    {
+                        PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
+                        AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel);
+                    }
+
+                    stringBuilder.AppendLine("                found = base.TryGetStatistic<T>(path, out statistic, visited);");
+                    stringBuilder.AppendLine("            }");
+                }
+                else
+                {
+                    for (int i = 0; i < propertyDeclarations.Count; i++)
+                    {
+                        PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
+                        AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel);
+                    }
+
+                    stringBuilder.AppendLine();
+                    stringBuilder.AppendLine("            found = base.TryGetStatistic<T>(path, out statistic, visited);");
+                }
             }
             else
             {
-                stringBuilder.AppendLine("            statistic = default;");
-                stringBuilder.AppendLine("            return false;");
+                if (addedAtLeastOneStatistic)
+                {
+                    stringBuilder.AppendLine("            else");
+                    stringBuilder.AppendLine("            {");
+                    for (int i = 0; i < propertyDeclarations.Count; i++)
+                    {
+                        PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
+                        AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel);
+                    }
+
+                    stringBuilder.AppendLine("            }");
+                }
+                else
+                {
+                    for (int i = 0; i < propertyDeclarations.Count; i++)
+                    {
+                        PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
+                        AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel);
+                    }
+                    stringBuilder.AppendLine();
+                }
             }
 
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("            if (initialFunctionCall)");
+            stringBuilder.AppendLine("                HashSetPool<object>.Release(visited);");
+            stringBuilder.AppendLine();
+            stringBuilder.AppendLine("            return found;");
             stringBuilder.AppendLine("        }");
         }
 
@@ -201,7 +268,7 @@ namespace StatisticCodeGenerator
             }
         }
 
-        private void AddStatistic(StringBuilder stringBuilder, PropertyDeclarationSyntax propertyDeclarationSyntax, SemanticModel semanticModel, bool isFirst)
+        private bool AddStatistic(StringBuilder stringBuilder, PropertyDeclarationSyntax propertyDeclarationSyntax, SemanticModel semanticModel, bool isFirst)
         {
             AttributeSyntax attributeSyntax = GetAttributeSyntax(propertyDeclarationSyntax, PropertyAttributeName);
 
@@ -212,12 +279,50 @@ namespace StatisticCodeGenerator
             string statisticName = GetConstructorArgumentValue(attributeData, 0);
             string propertyName = propertyDeclarationSyntax.Identifier.Text;
 
+            if (statisticName == "")
+                return false;
+
             string conditionalToken = isFirst ? "if" : "else if";
             stringBuilder.AppendLine($"            {conditionalToken}(path.SequenceEqual(\"{statisticName}\"))");
             stringBuilder.AppendLine("            {");
             stringBuilder.AppendLine($"                statistic = StatisticUtility.ConvertGeneric<T, {propertySymbol.Type.ToDisplayString()}>({propertyName});");
-            stringBuilder.AppendLine("                return true;");
+            stringBuilder.AppendLine("                found = true;");
             stringBuilder.AppendLine("            }");
+
+            return true;
+        }
+
+        private void AddStatisticProvider(StringBuilder stringBuilder, PropertyDeclarationSyntax propertyDeclarationSyntax, SemanticModel semanticModel)
+        {
+            AttributeSyntax attributeSyntax = GetAttributeSyntax(propertyDeclarationSyntax, PropertyAttributeName);
+
+            IPropertySymbol propertySymbol = semanticModel.GetDeclaredSymbol(propertyDeclarationSyntax);
+            ImmutableArray<AttributeData> attributeDatas = propertySymbol.GetAttributes();
+            AttributeData attributeData = attributeDatas.FirstOrDefault(attr => attr.ApplicationSyntaxReference.GetSyntax().Equals(attributeSyntax));
+
+            string statisticName = GetConstructorArgumentValue(attributeData, 0);
+            string propertyName = propertyDeclarationSyntax.Identifier.Text;
+
+            bool statisticProviderProperty = propertySymbol.Type.Name == ProviderInterfaceName || HasAttribute(propertySymbol.Type) || IsChildOfClassWithAttribute(propertySymbol.Type);
+
+            if (statisticProviderProperty)
+            {
+                string extraCondition = statisticName == "" ? $" && !visited.Contains({propertyName})" : "";
+                stringBuilder.AppendLine($"                if(!found && path.StartsWith(\"{statisticName}\"){extraCondition})");
+                stringBuilder.AppendLine("                {");
+
+                if (statisticName != "")
+                {
+                    stringBuilder.AppendLine($"                    ReadOnlySpan<char> slicedPath = path.Slice(\"{statisticName}\".Length + 1);");
+                    stringBuilder.AppendLine($"                    visited.Clear();");
+                    stringBuilder.AppendLine();
+                }
+
+                string path = statisticName != "" ? "slicedPath" : "path";
+
+                stringBuilder.AppendLine($"                    found = {propertyName}.TryGetStatistic({path}, out statistic, visited);");
+                stringBuilder.AppendLine("                }");
+            }
         }
 
         private bool IsPartial(ClassDeclarationSyntax classDeclaration)
@@ -264,11 +369,17 @@ namespace StatisticCodeGenerator
         private bool IsChildOfClassWithAttribute(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
         {
             INamedTypeSymbol namedTypeSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
-            INamedTypeSymbol parent = namedTypeSymbol.BaseType;
+            return IsChildOfClassWithAttribute(namedTypeSymbol);
+        }
 
+        private bool IsChildOfClassWithAttribute(ITypeSymbol typeSymbol)
+        {
+            Logger.Log($"IsChildOfClassWithAttribute: {typeSymbol.Name}");
+            ITypeSymbol parent = typeSymbol.BaseType;
             while (parent != null)
             {
-                if (parent.GetAttributes().Any(x => x.AttributeClass.Name == ClassAttributeName || x.AttributeClass.Name == ClassAttributeName + "Attribute"))
+                Logger.Log($"Parent: {parent.Name} - {string.Join(", ", parent.GetAttributes().Select(x => x.AttributeClass.Name))}");
+                if (HasAttribute(parent))
                 {
                     return true;
                 }
@@ -277,6 +388,11 @@ namespace StatisticCodeGenerator
             }
 
             return false;
+        }
+
+        private bool HasAttribute(ITypeSymbol parent)
+        {
+            return parent.GetAttributes().Any(x => x.AttributeClass.Name == ClassAttributeName || x.AttributeClass.Name == ClassAttributeName + "Attribute");
         }
 
         private List<PropertyDeclarationSyntax> GetAllStatisticProperties(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
