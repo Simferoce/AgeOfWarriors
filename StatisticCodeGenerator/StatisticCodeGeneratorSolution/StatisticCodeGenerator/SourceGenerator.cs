@@ -155,14 +155,6 @@ namespace StatisticCodeGenerator
 
             stringBuilder.AppendLine($"        public {methodModifier} bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic, HashSet<object> visited = null)");
             stringBuilder.AppendLine("        {");
-            stringBuilder.AppendLine("            bool initialFunctionCall = false;");
-            stringBuilder.AppendLine("            if (visited == null)");
-            stringBuilder.AppendLine("            {");
-            stringBuilder.AppendLine("                visited = HashSetPool<object>.Get();");
-            stringBuilder.AppendLine("                initialFunctionCall = true;");
-            stringBuilder.AppendLine("            }");
-            stringBuilder.AppendLine();
-            stringBuilder.AppendLine("            visited.Add(this);");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("            bool found = false;");
             stringBuilder.AppendLine("            statistic = default;");
@@ -181,10 +173,13 @@ namespace StatisticCodeGenerator
                     stringBuilder.AppendLine("            else");
                     stringBuilder.AppendLine("            {");
 
+                    bool addedAtLeastOneElement = false;
                     for (int i = 0; i < propertyDeclarations.Count; i++)
                     {
                         PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
-                        AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel);
+
+                        if (AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel, !addedAtLeastOneElement))
+                            addedAtLeastOneElement = true;
                     }
 
                     stringBuilder.AppendLine("                found = base.TryGetStatistic<T>(path, out statistic, visited);");
@@ -192,14 +187,18 @@ namespace StatisticCodeGenerator
                 }
                 else
                 {
+                    bool addedAtLeastOneElement = false;
                     for (int i = 0; i < propertyDeclarations.Count; i++)
                     {
                         PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
-                        AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel);
+
+                        if (AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel, !addedAtLeastOneElement))
+                            addedAtLeastOneElement = true;
                     }
 
                     stringBuilder.AppendLine();
-                    stringBuilder.AppendLine("            found = base.TryGetStatistic<T>(path, out statistic, visited);");
+                    stringBuilder.AppendLine("            if(!found)");
+                    stringBuilder.AppendLine("                found = base.TryGetStatistic<T>(path, out statistic, visited);");
                 }
             }
             else
@@ -208,28 +207,33 @@ namespace StatisticCodeGenerator
                 {
                     stringBuilder.AppendLine("            else");
                     stringBuilder.AppendLine("            {");
+                    bool addedAtLeastOneElement = false;
                     for (int i = 0; i < propertyDeclarations.Count; i++)
                     {
                         PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
-                        AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel);
+
+                        if (AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel, !addedAtLeastOneElement))
+                            addedAtLeastOneElement = true;
                     }
 
                     stringBuilder.AppendLine("            }");
                 }
                 else
                 {
+                    bool addedAtLeastOneElement = false;
                     for (int i = 0; i < propertyDeclarations.Count; i++)
                     {
                         PropertyDeclarationSyntax propertyDeclaration = propertyDeclarations[i];
-                        AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel);
+
+                        if (AddStatisticProvider(stringBuilder, propertyDeclaration, semanticModel, !addedAtLeastOneElement))
+                            addedAtLeastOneElement = true;
                     }
+
                     stringBuilder.AppendLine();
                 }
             }
 
             stringBuilder.AppendLine();
-            stringBuilder.AppendLine("            if (initialFunctionCall)");
-            stringBuilder.AppendLine("                HashSetPool<object>.Release(visited);");
             stringBuilder.AppendLine();
             stringBuilder.AppendLine("            return found;");
             stringBuilder.AppendLine("        }");
@@ -292,7 +296,7 @@ namespace StatisticCodeGenerator
             return true;
         }
 
-        private void AddStatisticProvider(StringBuilder stringBuilder, PropertyDeclarationSyntax propertyDeclarationSyntax, SemanticModel semanticModel)
+        private bool AddStatisticProvider(StringBuilder stringBuilder, PropertyDeclarationSyntax propertyDeclarationSyntax, SemanticModel semanticModel, bool firstElement)
         {
             AttributeSyntax attributeSyntax = GetAttributeSyntax(propertyDeclarationSyntax, PropertyAttributeName);
 
@@ -304,26 +308,163 @@ namespace StatisticCodeGenerator
             string propertyName = propertyDeclarationSyntax.Identifier.Text;
 
             bool statisticProviderProperty = propertySymbol.Type.Name == ProviderInterfaceName || HasAttribute(propertySymbol.Type) || IsChildOfClassWithAttribute(propertySymbol.Type);
+            bool isEnumerableOfProvider = IsEnumerableOfProviderInterface(propertySymbol.Type, ProviderInterfaceName);
 
-            if (statisticProviderProperty)
+            if (isEnumerableOfProvider)
             {
-                string extraCondition = statisticName == "" ? $" && !visited.Contains({propertyName})" : "";
-                stringBuilder.AppendLine($"                if(!found && path.StartsWith(\"{statisticName}\"){extraCondition})");
+                if (!firstElement)
+                    stringBuilder.AppendLine();
+
+                string extraCondition = statisticName == "" ? $" && (!visited.Contains({propertyName}) || visited == null)" : $" && path.StartsWith(\"{statisticName}\")";
+                stringBuilder.AppendLine($"                if(!found{extraCondition})");
                 stringBuilder.AppendLine("                {");
+                if (statisticName == "")
+                {
+                    stringBuilder.AppendLine("                    bool ownsVisitedPool = false;");
+                    stringBuilder.AppendLine("                    if (visited == null)");
+                    stringBuilder.AppendLine("                    {");
+                    stringBuilder.AppendLine("                        visited = HashSetPool<object>.Get();");
+                    stringBuilder.AppendLine("                        ownsVisitedPool = true;");
+                    stringBuilder.AppendLine("                    }");
+                    stringBuilder.AppendLine();
+                    stringBuilder.AppendLine("                    visited.Add(this);");
+                }
+
+                stringBuilder.AppendLine();
 
                 if (statisticName != "")
                 {
                     stringBuilder.AppendLine($"                    ReadOnlySpan<char> slicedPath = path.Slice(\"{statisticName}\".Length + 1);");
-                    stringBuilder.AppendLine($"                    visited.Clear();");
                     stringBuilder.AppendLine();
                 }
 
                 string path = statisticName != "" ? "slicedPath" : "path";
+                string pool = statisticName != "" ? "null" : "visited";
 
-                stringBuilder.AppendLine($"                    found = {propertyName}.TryGetStatistic({path}, out statistic, visited);");
+                stringBuilder.AppendLine($"                    foreach (IStatisticProvider provider in {propertyName})");
+                stringBuilder.AppendLine("                    {");
+                stringBuilder.AppendLine($"                        found = provider.TryGetStatistic({path}, out statistic, {pool});");
+                stringBuilder.AppendLine();
+                stringBuilder.AppendLine("                        if(found)");
+                stringBuilder.AppendLine("                            break;");
+                stringBuilder.AppendLine("                    }");
+                if (statisticName == "")
+                {
+                    stringBuilder.AppendLine();
+                    stringBuilder.AppendLine("                    if (ownsVisitedPool)");
+                    stringBuilder.AppendLine("                        HashSetPool<object>.Release(visited);");
+                }
+
                 stringBuilder.AppendLine("                }");
+
+                return true;
             }
+            else if (statisticProviderProperty)
+            {
+                if (!firstElement)
+                    stringBuilder.AppendLine();
+
+                string extraCondition = statisticName == "" ? $" && (!visited.Contains({propertyName}) || visited == null)" : $" && path.StartsWith(\"{statisticName}\")";
+                stringBuilder.AppendLine($"                if(!found{extraCondition})");
+                stringBuilder.AppendLine("                {");
+                if (statisticName == "")
+                {
+                    stringBuilder.AppendLine("                    bool ownsVisitedPool = false;");
+                    stringBuilder.AppendLine("                    if (visited == null)");
+                    stringBuilder.AppendLine("                    {");
+                    stringBuilder.AppendLine("                        visited = HashSetPool<object>.Get();");
+                    stringBuilder.AppendLine("                        ownsVisitedPool = true;");
+                    stringBuilder.AppendLine("                    }");
+                    stringBuilder.AppendLine();
+                    stringBuilder.AppendLine("                    visited.Add(this);");
+                    stringBuilder.AppendLine();
+                }
+
+                if (statisticName != "")
+                {
+                    stringBuilder.AppendLine($"                    ReadOnlySpan<char> slicedPath = path.Slice(\"{statisticName}\".Length + 1);");
+                    stringBuilder.AppendLine();
+                }
+
+                string path = statisticName != "" ? "slicedPath" : "path";
+                string pool = statisticName != "" ? "null" : "visited";
+
+                stringBuilder.AppendLine($"                    found = {propertyName}.TryGetStatistic({path}, out statistic, {pool});");
+
+                if (statisticName == "")
+                {
+                    stringBuilder.AppendLine();
+                    stringBuilder.AppendLine("                    if (ownsVisitedPool)");
+                    stringBuilder.AppendLine("                        HashSetPool<object>.Release(visited);");
+                }
+
+                stringBuilder.AppendLine("                }");
+
+                return true;
+            }
+
+            return false;
         }
+
+        private bool IsEnumerableOfProviderInterface(ITypeSymbol typeSymbol, string providerInterfaceName)
+        {
+            return ImplementsIEnumerableOfProvider(typeSymbol, providerInterfaceName);
+        }
+
+        private bool ImplementsIEnumerableOfProvider(ITypeSymbol typeSymbol, string providerInterfaceName)
+        {
+            if (typeSymbol is INamedTypeSymbol namedTypeSymbol && namedTypeSymbol.IsGenericType)
+            {
+                foreach (var iface in namedTypeSymbol.AllInterfaces)
+                {
+                    if (iface.Name == "IEnumerable" && iface.TypeArguments.Length == 1)
+                    {
+                        var typeArgument = iface.TypeArguments[0];
+                        if (InheritsOrImplements(typeArgument, providerInterfaceName))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            var baseType = typeSymbol.BaseType;
+            while (baseType != null)
+            {
+                if (ImplementsIEnumerableOfProvider(baseType, providerInterfaceName))
+                {
+                    return true;
+                }
+
+                baseType = baseType.BaseType;
+            }
+
+            return false;
+        }
+
+        private bool InheritsOrImplements(ITypeSymbol typeSymbol, string interfaceName)
+        {
+            if (typeSymbol.Name == interfaceName)
+                return true;
+
+            foreach (var iface in typeSymbol.AllInterfaces)
+            {
+                if (iface.Name == interfaceName)
+                    return true;
+            }
+
+            var baseType = typeSymbol.BaseType;
+            while (baseType != null)
+            {
+                if (baseType.Name == interfaceName || baseType.AllInterfaces.Any(i => i.Name == interfaceName))
+                    return true;
+
+                baseType = baseType.BaseType;
+            }
+
+            return false;
+        }
+
 
         private bool IsPartial(ClassDeclarationSyntax classDeclaration)
         {
