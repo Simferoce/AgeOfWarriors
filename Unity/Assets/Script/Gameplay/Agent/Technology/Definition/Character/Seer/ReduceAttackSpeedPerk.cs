@@ -11,7 +11,7 @@ namespace Game
         {
             private List<AttackSpeedReductionModifierDefinition.Modifier> currents = new List<AttackSpeedReductionModifierDefinition.Modifier>();
 
-            public Modifier(IModifiable modifiable, ReduceAttackSpeedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, ReduceAttackSpeedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
             }
 
@@ -19,7 +19,7 @@ namespace Game
             {
                 base.Update();
 
-                Character character = modifiable.GetCachedComponent<Character>();
+                Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                 foreach (AgentObject agent in AgentObject.All)
                 {
@@ -29,19 +29,19 @@ namespace Game
                     if (!agent.IsActive)
                         continue;
 
-                    if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                    if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                         continue;
 
-                    if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+                    if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                         continue;
 
-                    if (character.Faction == targeteable.Faction)
+                    if (character.Faction == (targeteable.Entity as AgentObject).Faction)
                         continue;
 
                     if (modifiable.TryGetModifier(definition.attackSpeedReductionModifierDefinition, out _))
                         continue;
 
-                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.percentageReach * character.Reach)
+                    if (Mathf.Abs((targeteable.ClosestPoint(character.GetCachedComponent<Target>().CenterPosition) - character.GetCachedComponent<Target>().CenterPosition).x) > definition.percentageReach * character.Reach)
                     {
                         AttackSpeedReductionModifierDefinition.Modifier modifierOutOfRange = currents.FirstOrDefault(x => x.Modifiable == modifiable);
                         if (modifierOutOfRange != null)
@@ -68,9 +68,9 @@ namespace Game
         [SerializeField, Range(0, 5)] private float percentageReach;
         [SerializeField, Range(0, 1)] private float amount;
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
 
         public override string ParseDescription()

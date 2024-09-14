@@ -8,10 +8,10 @@ namespace Game
         public class Modifier : Modifier<Modifier, HunterMarkModifierDefinition>, IAttackSource
         {
             private float damage;
-            private IAttackable attackable;
+            private Attackable attackable;
             public HuntersMarkAbilityEffect Source { get; set; }
 
-            public Modifier(IModifiable modifiable, HunterMarkModifierDefinition modifierDefinition, HuntersMarkAbilityEffect source, float damage, IAttackable attackable, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, HunterMarkModifierDefinition modifierDefinition, HuntersMarkAbilityEffect source, float damage, Attackable attackable, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.Source = source;
                 this.attackable = attackable;
@@ -24,7 +24,7 @@ namespace Game
                 return string.Format(definition.Description, damage);
             }
 
-            private void OnAttackableDamageTaken(AttackResult attack, IAttackable attackable)
+            private void OnAttackableDamageTaken(AttackResult attack, Attackable attackable)
             {
                 if (attack.Attack.AttackSource.Sources.Contains(this))
                     return;

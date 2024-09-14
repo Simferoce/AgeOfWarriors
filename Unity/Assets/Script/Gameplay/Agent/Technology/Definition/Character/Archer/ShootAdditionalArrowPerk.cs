@@ -11,9 +11,9 @@ namespace Game
             private int currentAttackApplied = 0;
             private Ability affectedAbility;
 
-            public Modifier(IModifiable modifiable, ShootAdditionalArrowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, ShootAdditionalArrowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                affectedAbility = modifiable.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
+                affectedAbility = modifiable.Entity.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
 
@@ -32,7 +32,7 @@ namespace Game
                         ProjectileAngledMovement projectileAngledMovement = projectile.ProjectileMovements.FirstOrDefault(x => x is ProjectileAngledMovement) as ProjectileAngledMovement;
                         projectileAngledMovement.Angle = 50;
 
-                        Character character = modifiable.GetCachedComponent<Character>();
+                        Character character = modifiable.Entity.GetCachedComponent<Character>();
                         projectile.Initialize(character, affectedAbility.Targets[1], affectedAbility.FactionWhenUsed, projectile.Parameters.ToArray());
 
                         currentAttackApplied = 0;
@@ -57,9 +57,9 @@ namespace Game
         [SerializeField] private GameObject projectilePrefab;
         [SerializeReference, SubclassSelector] private ProjectileAbilityEffectOrigin origin;
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

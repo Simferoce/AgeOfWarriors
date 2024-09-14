@@ -11,7 +11,7 @@ namespace Game
 
             public override float? SpeedPercentage => speed;
 
-            public Modifier(IModifiable modifiable, SpeedModifierDefinition modifierDefinition, float speed, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, SpeedModifierDefinition modifierDefinition, float speed, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.speed = speed;
             }

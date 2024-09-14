@@ -9,7 +9,7 @@ namespace Game
         {
             public override bool? IsInvulnerable => true;
 
-            public ResistDeath(IModifiable modifiable, ResistDeathModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public ResistDeath(ModifierHandler modifiable, ResistDeathModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
             }
 

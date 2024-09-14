@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public interface IAnimated
+    public interface IAnimated : IComponent
     {
         public Animated Animated { get; }
     }

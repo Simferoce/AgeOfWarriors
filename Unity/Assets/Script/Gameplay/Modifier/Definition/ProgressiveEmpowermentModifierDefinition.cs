@@ -10,7 +10,7 @@ namespace Game
         {
             private StackModifierElement stackModifierElement;
 
-            public Modifier(IModifiable modifiable, ProgressiveEmpowermentModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, ProgressiveEmpowermentModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 stackModifierElement = new StackModifierElement();
                 this.With(stackModifierElement);

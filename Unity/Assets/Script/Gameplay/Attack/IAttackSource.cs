@@ -3,6 +3,6 @@
     public interface IAttackSource
     {
         public void AttackLanded(AttackResult attackResult) { }
-        public bool RecentlyAttacked(IAttackable attackable) { return false; }
+        public bool RecentlyAttacked(Attackable attackable) { return false; }
     }
 }

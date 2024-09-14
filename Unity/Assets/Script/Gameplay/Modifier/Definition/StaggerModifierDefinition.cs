@@ -13,12 +13,12 @@ namespace Game
             {
                 get
                 {
-                    IncreaseDamageTakenWhenStaggerPerk.Modifier modifier = (Source.GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is IncreaseDamageTakenWhenStaggerPerk.Modifier) as IncreaseDamageTakenWhenStaggerPerk.Modifier);
+                    IncreaseDamageTakenWhenStaggerPerk.Modifier modifier = (Source.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is IncreaseDamageTakenWhenStaggerPerk.Modifier) as IncreaseDamageTakenWhenStaggerPerk.Modifier);
                     return modifier?.IncreaseDamageTakenOfStaggered ?? 0f;
                 }
             }
 
-            public Modifier(IModifiable modifiable, StaggerModifierDefinition modifierDefinition, float duration, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, StaggerModifierDefinition modifierDefinition, float duration, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 With(new CharacterModifierTimeElement(duration));
             }

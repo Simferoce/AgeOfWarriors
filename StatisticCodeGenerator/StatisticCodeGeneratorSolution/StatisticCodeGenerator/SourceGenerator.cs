@@ -54,9 +54,16 @@ namespace StatisticCodeGenerator
                 if (!(context.SyntaxReceiver is AttributeSyntaxReceiver receiver))
                     return;
 
+                List<INamedTypeSymbol> seen = new List<INamedTypeSymbol>();
                 foreach (ClassDeclarationSyntax classDeclaration in receiver.AllClass)
                 {
                     SemanticModel semanticModel = context.Compilation.GetSemanticModel(classDeclaration.SyntaxTree);
+
+                    INamedTypeSymbol namedTypeSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
+                    if (seen.Contains(namedTypeSymbol))
+                        continue;
+
+                    seen.Add(namedTypeSymbol);
 
                     if (HasAttribute(classDeclaration, ClassAttributeName)
                         || IsChildOfClassWithAttribute(classDeclaration, semanticModel))

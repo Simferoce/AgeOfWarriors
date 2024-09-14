@@ -16,20 +16,20 @@ namespace Game
         public struct ImpactReport
         {
             public ImpactStatus ImpactStatus { get; set; }
-            public List<ITargeteable> ImpactedTargeteables { get; set; }
+            public List<Target> ImpactedTargeteables { get; set; }
 
             public ImpactReport(ImpactStatus impactStatus)
             {
                 ImpactStatus = impactStatus;
-                ImpactedTargeteables = new List<ITargeteable>();
+                ImpactedTargeteables = new List<Target>();
             }
 
-            public ImpactReport(ImpactStatus impactStatus, List<ITargeteable> impactedTargeteable) : this(impactStatus)
+            public ImpactReport(ImpactStatus impactStatus, List<Target> impactedTargeteable) : this(impactStatus)
             {
                 ImpactedTargeteables = impactedTargeteable;
             }
 
-            public ImpactReport(ImpactStatus impactStatus, ITargeteable impactedTargeteable) : this(impactStatus)
+            public ImpactReport(ImpactStatus impactStatus, Target impactedTargeteable) : this(impactStatus)
             {
                 ImpactedTargeteables.Add(impactedTargeteable);
             }

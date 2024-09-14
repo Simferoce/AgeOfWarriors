@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, DealDamageOnShieldEndPerk>, IAttackSource
         {
-            public Modifier(IModifiable modifiable, DealDamageOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, DealDamageOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 modifiable.OnModifierAdded += Modifiable_ModifierRemoved;
             }
@@ -17,7 +17,7 @@ namespace Game
                 if (obj is not ShieldModifierDefinition.Shield shield)
                     return;
 
-                if (!modifiable.TryGetCachedComponent<Character>(out Character character))
+                if (!modifiable.Entity.TryGetCachedComponent<Character>(out Character character))
                     return;
 
                 float damage = definition.damagePerShieldPointAbsorbed * (shield.Initial - shield.Remaining);
@@ -32,13 +32,13 @@ namespace Game
                     if (!agent.IsActive)
                         continue;
 
-                    if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                    if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                         continue;
 
-                    if (!agent.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+                    if (!agent.TryGetCachedComponent<Attackable>(out Attackable attackable))
                         continue;
 
-                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.percentageReachExplosionRadius * character.Reach)
+                    if (Mathf.Abs((targeteable.ClosestPoint(character.GetCachedComponent<Target>().CenterPosition) - character.GetCachedComponent<Target>().CenterPosition).x) > definition.percentageReachExplosionRadius * character.Reach)
                         continue;
 
                     attackable.TakeAttack(AttackUtility.Generate(character, damage, 0, 0, false, false, true, attackable, this));
@@ -62,9 +62,9 @@ namespace Game
             return string.Format(Description, damagePerShieldPointAbsorbed, StatisticFormatter.Percentage(percentageReachExplosionRadius, StatisticDefinition.Reach));
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

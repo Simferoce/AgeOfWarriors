@@ -41,7 +41,7 @@ namespace Game
             foreach (StatisticDetailUI statisticDetailUI in statisticDetailUIs)
                 statisticDetailUI.Refresh(character);
 
-            List<Modifier> modifiers = character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Show).ToList();
+            List<Modifier> modifiers = character.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Show).ToList();
 
             int i = 0;
             for (; i < modifiers.Count && i < modifierDetailUIs.Count; ++i)
@@ -53,7 +53,7 @@ namespace Game
             for (; i < modifierDetailUIs.Count; ++i)
                 modifierDetailUIs[i].gameObject.SetActive(false);
 
-            List<Ability> abilities = character.GetCachedComponent<Caster>().Abilities.ToList();
+            List<Ability> abilities = character.Entity.GetCachedComponent<Caster>().Abilities.ToList();
             abilities.Reverse();
 
             int j = 0;

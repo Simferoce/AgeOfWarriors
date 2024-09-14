@@ -20,18 +20,18 @@ namespace Game
             startedAt = Time.time;
 
             List<Character> characters = AgentObject.All.OfType<Character>()
-               .Where(x => x.Faction == Ability.Caster.AgentObject.Faction
-                   && Mathf.Abs(Ability.Caster.AgentObject.transform.position.x - x.transform.position.x) < area.GetValueOrThrow(Ability))
+               .Where(x => x.Faction == (x.Entity as AgentObject).Faction
+                   && Mathf.Abs((x.Entity as AgentObject).transform.position.x - x.transform.position.x) < area.GetValueOrThrow(Ability))
                .ToList();
 
             foreach (Character characterToBuff in characters)
             {
                 DefenseModifierDefinition.Modifier inspiringPresenceBuff = (DefenseModifierDefinition.Modifier)characterToBuff
-                    .GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is DefenseModifierDefinition.Modifier);
+                    .Entity.GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is DefenseModifierDefinition.Modifier);
 
                 if (inspiringPresenceBuff != null)
                 {
-                    if (inspiringPresenceBuff.Source == Ability.Caster.GetCachedComponent<IModifierSource>())
+                    if (inspiringPresenceBuff.Source == Ability.Caster.Entity.GetCachedComponent<IModifierSource>())
                     {
                         inspiringPresenceBuff.Refresh();
                     }
@@ -39,13 +39,13 @@ namespace Game
                 else
                 {
                     inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(
-                            Ability.Caster.GetCachedComponent<Character>(),
+                            Ability.Caster.Entity.GetCachedComponent<Character>(),
                             inspiringPresenceModifierDefinition,
                             defense.GetValueOrThrow(Ability),
-                            Ability.Caster.GetCachedComponent<IModifierSource>())
+                            Ability.Caster.Entity.GetCachedComponent<IModifierSource>())
                         .With(new CharacterModifierTimeElement(buffDuration.GetValueOrThrow(Ability)));
 
-                    characterToBuff.GetCachedComponent<IModifiable>().AddModifier(inspiringPresenceBuff);
+                    characterToBuff.Entity.GetCachedComponent<ModifierHandler>().AddModifier(inspiringPresenceBuff);
                 }
             }
         }

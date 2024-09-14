@@ -9,22 +9,22 @@ namespace Game
         public class Modifier : Modifier<Modifier, ApplyEffectWhenHitModifierDefinition>
         {
             private Instancier instancier;
-            private IAttackable attackable;
+            private Attackable attackable;
 
-            public Modifier(IModifiable modifiable, ApplyEffectWhenHitModifierDefinition modifierDefinition, IModifierSource source, Instancier instancier) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, ApplyEffectWhenHitModifierDefinition modifierDefinition, IModifierSource source, Instancier instancier) : base(modifiable, modifierDefinition, source)
             {
-                attackable = modifiable.GetCachedComponent<IAttackable>();
+                attackable = modifiable.Entity.GetCachedComponent<Attackable>();
                 attackable.OnDamageTaken += Attackable_OnDamageTaken;
                 this.instancier = instancier;
             }
 
-            private void Attackable_OnDamageTaken(AttackResult attackResult, IAttackable attackee)
+            private void Attackable_OnDamageTaken(AttackResult attackResult, Attackable attackee)
             {
                 if (attackResult.Attack.OverTime)
                     return;
 
-                IModifiable target = null;
-                IAttackSource source = attackResult.Attack.AttackSource.Sources.FirstOrDefault(x => x is IComponent component && component.TryGetCachedComponent(out target));
+                ModifierHandler target = null;
+                IAttackSource source = attackResult.Attack.AttackSource.Sources.FirstOrDefault(x => x is IComponent component && component.Entity.TryGetCachedComponent(out target));
                 if (target != null && target.TryGetModifier(instancier.Definition, out Game.Modifier modifier))
                 {
                     modifier.Refresh();

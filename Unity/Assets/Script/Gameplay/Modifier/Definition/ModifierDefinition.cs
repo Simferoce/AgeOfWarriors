@@ -9,7 +9,7 @@ namespace Game
         public abstract class Instancier
         {
             public abstract ModifierDefinition Definition { get; set; }
-            public abstract Modifier Instantiate(IModifiable modifiable, IModifierSource source);
+            public abstract Modifier Instantiate(ModifierHandler modifiable, IModifierSource source);
         }
 
         [Serializable]

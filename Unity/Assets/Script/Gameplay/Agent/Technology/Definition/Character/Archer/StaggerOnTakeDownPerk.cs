@@ -7,16 +7,16 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, StaggerOnTakeDownPerk>
         {
-            public Modifier(IModifiable modifiable, StaggerOnTakeDownPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, StaggerOnTakeDownPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (modifiable.GetCachedComponent<IAttackSource>().RecentlyAttacked(evt.AgentObject.GetCachedComponent<IAttackable>()))
+                if ((modifiable.Entity as IAttackSource).RecentlyAttacked(evt.AgentObject.GetCachedComponent<Attackable>()))
                 {
-                    Character character = modifiable.GetCachedComponent<Character>();
+                    Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                     foreach (AgentObject agent in AgentObject.All)
                     {
@@ -29,13 +29,13 @@ namespace Game
                         if (agent.Faction == character.Faction)
                             continue;
 
-                        if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                        if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                             continue;
 
-                        if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+                        if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                             continue;
 
-                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.distanceEffect)
+                        if (Mathf.Abs((targeteable.ClosestPoint(character.GetCachedComponent<Target>().CenterPosition) - character.GetCachedComponent<Target>().CenterPosition).x) > definition.distanceEffect)
                             continue;
 
                         modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, definition.duration, character));
@@ -59,9 +59,9 @@ namespace Game
             return string.Format(Description, duration, distanceEffect);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

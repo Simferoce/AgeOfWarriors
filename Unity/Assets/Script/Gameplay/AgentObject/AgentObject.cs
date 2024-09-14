@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public abstract class AgentObject : CachedMonobehaviour, IStatisticProviderOld
+    [StatisticClass("agent")]
+    public abstract partial class AgentObject : Entity
     {
         public delegate void AttackedLanded(AttackResult attack);
 
@@ -14,7 +13,6 @@ namespace Game
         {
             Building
         }
-
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         static void Init()
@@ -37,47 +35,16 @@ namespace Game
         public virtual Faction OriginalFaction { get => Agent.Faction; }
         public List<Type> Types { get => types; }
         public string Name => name;
-        public virtual string StatisticProviderName => "agentobject";
-
-        private List<IStatisticProviderOld> statisticProviderChildren;
 
         protected virtual void Awake()
         {
             All.Add(this);
-            statisticProviderChildren = GetComponentsInChildren<IStatisticProviderOld>().Where(x => x != (IStatisticProviderOld)this).ToList();
         }
 
         protected virtual void OnDestroy()
         {
             All.Remove(this);
             OnDestroyed?.Invoke(this);
-        }
-
-        public T GetStatisticOrDefault<T>(string path)
-        {
-            return TryGetStatistic<T>(path, out T statistic) ? statistic : default;
-        }
-
-        public T GetStatisticOrDefault<T>(string path, T defaultValue)
-        {
-            return TryGetStatistic<T>(path, out T statistic) ? statistic : defaultValue;
-        }
-
-        public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            return TryGetStatisticInChildren(path, out statistic);
-        }
-
-        private bool TryGetStatisticInChildren<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            foreach (IStatisticProviderOld statisticProviderChild in statisticProviderChildren)
-            {
-                if (statisticProviderChild.TryGetStatistic<T>(path, out statistic))
-                    return true;
-            }
-
-            statistic = default;
-            return false;
         }
 
         public virtual void Spawn(Agent agent, int spawnNumber, int direction)

@@ -6,36 +6,28 @@ using UnityEngine.Profiling;
 
 namespace Game
 {
-    public class Caster : CachedMonobehaviour
+    public class Caster : MonoBehaviour, IComponent
     {
-        private AgentObject agentObject;
-
-        public event System.Action OnCastBegin;
-        public event System.Action OnCastEnd;
-
-        public float LastAbilityUsed { get; set; }
-        public List<TransformTag> TransformTags { get; set; }
-        public Agent Agent => agentObject.Agent;
-        public Faction Faction => agentObject.Faction;
-        public Vector3 CenterPosition => agentObject.transform.position;
-        public int Direction => agentObject.Direction;
-        public AgentObject AgentObject => agentObject;
-        public bool IsCasting { get; set; }
-
-        private void Awake()
-        {
-            agentObject = GetComponentInParent<AgentObject>();
-            TransformTags = GetComponentsInChildren<TransformTag>().ToList();
-        }
-
         [Header("Abilities")]
         [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
 
         public event Action<Ability> OnAbilityUsed;
+        public event System.Action OnCastBegin;
+        public event System.Action OnCastEnd;
 
         public List<Ability> Abilities { get => abilities; set => abilities = value; }
+        public Entity Entity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        public float LastAbilityUsed { get; set; }
+        public List<TransformTag> TransformTags { get; set; }
+        public bool IsCasting { get; set; }
         private List<Ability> abilities = new List<Ability>();
+
+        private void Awake()
+        {
+            TransformTags = GetComponentsInChildren<TransformTag>().ToList();
+        }
+
 
         private void Start()
         {
@@ -61,7 +53,7 @@ namespace Game
         private void Update()
         {
             Profiler.BeginSample("Test");
-            int v = AgentObject.GetStatisticOrDefault<int>("attackpower", 1);
+            int v = StatisticUtility.ResolveStatisticOrDefault<int>(Entity as IStatisticProvider, "attackpower", 1);
             Profiler.EndSample();
             Debug.Log(v);
 
@@ -97,7 +89,7 @@ namespace Game
 
         public bool CanUseAbility()
         {
-            if (AgentObject.GetStatisticOrDefault("health", 0.0f) <= 0 || AgentObject.GetStatisticOrDefault("isDead", false))
+            if (StatisticUtility.ResolveStatisticOrDefault(Entity as IStatisticProvider, "health", 0.0f) <= 0 || StatisticUtility.ResolveStatisticOrDefault(Entity as IStatisticProvider, "isDead", false))
                 return false;
 
             return true;

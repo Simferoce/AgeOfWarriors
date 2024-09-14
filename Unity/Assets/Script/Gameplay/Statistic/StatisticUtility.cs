@@ -155,5 +155,21 @@
 
             throw new System.InvalidCastException($"Could not convert from {typeof(U).Name} to {typeof(T).Name}.");
         }
+
+        public static bool TryResolveStatistic<T>(IStatisticProvider statisticProvider, string path, out T value)
+        {
+            value = default;
+            return default;
+        }
+
+        public static T ResolveStatisticOrThrow<T>(IStatisticProvider statisticProvider, string path)
+        {
+            return default;
+        }
+
+        public static T ResolveStatisticOrDefault<T>(IStatisticProvider statisticProvider, string path, T defaultValue)
+        {
+            return default;
+        }
     }
 }

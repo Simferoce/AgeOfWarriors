@@ -18,14 +18,14 @@ namespace Game
                     this.slowEnemiesInPoolPerk = slowEnemiesInPoolPerk;
                 }
 
-                public override Game.Modifier Instanciate(IModifiable modifiable, IModifierSource modifierSource)
+                public override Game.Modifier Instanciate(ModifierHandler modifiable, IModifierSource modifierSource)
                 {
                     return new SpeedModifierDefinition.Modifier(modifiable, slowEnemiesInPoolPerk.speedModifierDefinition, -slowEnemiesInPoolPerk.amount, modifierSource);
                 }
 
-                public override bool Applicable(Pool pool, ITargeteable targeteable)
+                public override bool Applicable(Pool pool, Target targeteable)
                 {
-                    if (pool.Faction == targeteable.Faction)
+                    if (pool.Faction == (targeteable.Entity as AgentObject).Faction)
                         return false;
 
                     return true;
@@ -34,15 +34,17 @@ namespace Game
 
             private Character character;
 
-            public Modifier(IModifiable modifiable, SlowEnemiesInPoolPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, SlowEnemiesInPoolPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                character = modifiable.GetCachedComponent<Character>();
-                character.AddOrGetCachedComponent<Ownership>().OnChildAdded += Character_OnChildEntitySpawned;
+                character = modifiable.Entity as Character;
+                //character.AddOrGetCachedComponent<Ownership>().OnChildAdded += Character_OnChildEntitySpawned;
+
+                throw new System.Exception("Ownership not implemented");
             }
 
-            private void Character_OnChildEntitySpawned(CachedMonobehaviour entity)
+            private void Character_OnChildEntitySpawned(Entity entity)
             {
-                if (entity.TryGetCachedComponent<Pool>(out Pool pool))
+                if (entity is Pool pool)
                 {
                     pool.AddPoolEffect(new ApplyPeriodicBuffPoolEffect()
                     {
@@ -54,16 +56,16 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                character.AddOrGetCachedComponent<Ownership>().OnChildAdded -= Character_OnChildEntitySpawned;
+                //character.AddOrGetCachedComponent<Ownership>().OnChildAdded -= Character_OnChildEntitySpawned;
             }
         }
 
         [SerializeField] private SpeedModifierDefinition speedModifierDefinition;
         [SerializeField, Range(0, 1)] private float amount;
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
 
         public override string ParseDescription()

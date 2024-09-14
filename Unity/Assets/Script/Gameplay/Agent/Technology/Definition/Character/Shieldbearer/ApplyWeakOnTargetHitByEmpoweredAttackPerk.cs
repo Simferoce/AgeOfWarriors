@@ -8,16 +8,16 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, ApplyWeakOnTargetHitByEmpoweredAttackPerk>
         {
-            public Modifier(IModifiable modifiable, ApplyWeakOnTargetHitByEmpoweredAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, ApplyWeakOnTargetHitByEmpoweredAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
 
             private void Modifier_OnAttackLanded(AttackResult attack)
             {
                 if (attack.Attack.Empowered)
                 {
-                    IModifiable targetModifiable = attack.Target.GetCachedComponent<IModifiable>();
+                    ModifierHandler targetModifiable = attack.Target.Entity.GetCachedComponent<ModifierHandler>();
                     Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x.Definition == definition.damageDealtReductionModifierDefinition);
                     if (modifier != null)
                     {
@@ -41,7 +41,7 @@ namespace Game
             {
                 base.Dispose();
 
-                modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
         }
 
@@ -54,9 +54,9 @@ namespace Game
             return string.Format(Description, duration, damageReduction);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

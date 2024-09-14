@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
-    public abstract class Ability : MonoBehaviour, IStatisticProviderOld
+    [StatisticClass("ability")]
+    public abstract partial class Ability : MonoBehaviour
     {
-        public Caster Caster { get; set; }
-        public abstract float Cooldown { get; }
+        [Statistic("caster")] public Caster Caster { get; set; }
+        public virtual float Cooldown { get; }
 
         public event System.Action OnAbilityEffectApplied;
         public event System.Action<Ability> OnAbilityUsed;
 
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
-        public virtual List<ITargeteable> Targets => new List<ITargeteable>();
+        public virtual List<Target> Targets => new List<Target>();
         public AbilityDefinition Definition { get; set; }
         public abstract string ParseDescription();
         public Faction FactionWhenUsed { get; set; }
@@ -47,30 +47,6 @@ namespace Game
         protected void PublishEffectApplied()
         {
             OnAbilityEffectApplied?.Invoke();
-        }
-
-        public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            if (path.SequenceEqual("caster"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, Caster>(Caster);
-                return true;
-            }
-            else if (path.SequenceEqual("cooldown"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(Cooldown);
-                return true;
-            }
-            else if (path.StartsWith("caster"))
-            {
-                path = path.Slice("caster".Length + 1);
-                return Caster.AgentObject.TryGetStatistic(path, out statistic);
-            }
-            else
-            {
-                statistic = default;
-                return false;
-            }
         }
     }
 

@@ -13,7 +13,7 @@ namespace Game
         [Space]
         [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();
 
-        public override List<ITargeteable> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
+        public override List<Target> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
         public override bool IsActive { get => IsCasting || IsLingering; }
         public bool IsLingering { get; set; } = false;
 
@@ -23,7 +23,7 @@ namespace Game
         {
             base.Initialize(caster);
 
-            animated = caster.GetCachedComponent<IAnimated>()?.Animated;
+            animated = caster.Entity.GetCachedComponent<IAnimated>()?.Animated;
             Assert.IsNotNull(animated, "Cannot cast an animated ability if the caster does not own an animated component.");
 
             foreach (AbilityCondition condition in conditions)
@@ -40,7 +40,7 @@ namespace Game
 
         public override void InternalUse()
         {
-            FactionWhenUsed = Caster.AgentObject.Faction;
+            FactionWhenUsed = (Caster.Entity as AgentObject).Faction;
 
             Caster.BeginCast();
             animated.SetTrigger(parameter);

@@ -8,9 +8,9 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GainDefenseOnEmpowermentAttackPerk>
         {
-            public Modifier(IModifiable modifiable, GainDefenseOnEmpowermentAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, GainDefenseOnEmpowermentAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
 
             private void Modifier_OnAttackLanded(AttackResult attack)
@@ -26,7 +26,7 @@ namespace Game
                     {
                         modifiable.AddModifier(
                             new DefenseModifierDefinition.Modifier(
-                                modifiable.GetCachedComponent<Character>(),
+                                modifiable.Entity.GetCachedComponent<Character>(),
                                 definition.defenseModifierDefinition,
                                 definition.defense,
                                 Source)
@@ -39,7 +39,7 @@ namespace Game
             {
                 base.Dispose();
 
-                modifiable.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
             }
         }
 
@@ -52,9 +52,9 @@ namespace Game
             return string.Format(Description, defense, buffDuration);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

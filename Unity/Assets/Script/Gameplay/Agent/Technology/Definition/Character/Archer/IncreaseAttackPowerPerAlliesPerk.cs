@@ -13,7 +13,7 @@ namespace Game
 
             public override bool Show => amountOfAlliesPresentOnTheBattleField > 0;
 
-            public Modifier(IModifiable modifiable, IncreaseAttackPowerPerAlliesPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, IncreaseAttackPowerPerAlliesPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
             }
 
@@ -27,7 +27,7 @@ namespace Game
                 base.Update();
 
                 amountOfAlliesPresentOnTheBattleField = 0;
-                Character character = modifiable.GetCachedComponent<Character>();
+                Character character = modifiable.Entity.GetCachedComponent<Character>();
                 foreach (AgentObject agentObject in AgentObject.All)
                 {
                     if (agentObject is not Character)
@@ -51,9 +51,9 @@ namespace Game
             return string.Format(Description, attackPowerPerAlliesPresent);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

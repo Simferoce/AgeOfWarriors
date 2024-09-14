@@ -20,7 +20,7 @@ namespace Game
             float duration = staggerDuration.GetValueOrThrow(Ability);
             foreach (Character target in Ability.Targets.Cast<Character>().ToList())
             {
-                if (target.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
+                if (target.TryGetCachedComponent<ModifierHandler>(out ModifierHandler targetModifiable))
                     targetModifiable.AddModifier(new StaggerModifierDefinition.Modifier(targetModifiable, staggerModifierDefinition, duration, Ability.Caster as IModifierSource));
             }
 
@@ -29,10 +29,10 @@ namespace Game
 
         public bool Update(Caster caster)
         {
-            Vector3 destination = caster.AgentObject.transform.position + caster.AgentObject.Direction * destinationDistance * Vector3.right;
+            Vector3 destination = (caster.Entity as AgentObject).transform.position + (caster.Entity as AgentObject).Direction * destinationDistance * Vector3.right;
 
-            foreach (Character target in Ability.Targets.Cast<Character>().ToList())
-                target.Displace(Vector3.Lerp(target.CenterPosition, destination, damping) - target.CenterPosition);
+            foreach (Character character in Ability.Targets.Cast<Character>().ToList())
+                character.Displace(Vector3.Lerp(character.GetCachedComponent<Target>().CenterPosition, destination, damping) - character.GetCachedComponent<Target>().CenterPosition);
 
             return Time.time - startedAt > duration;
         }

@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 namespace Game
 {
-    public class Pool : AgentObject, IAttackSource
+    public partial class Pool : AgentObject, IAttackSource
     {
         [SerializeField] private Collider2D hitbox;
         [SerializeReference, SubclassSelector] private List<PoolEffect> poolEffects;
@@ -29,7 +29,7 @@ namespace Game
                 if (!agent.IsActive)
                     continue;
 
-                if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                     continue;
 
                 if (!hitbox.OverlapPoint(targeteable.CenterPosition))

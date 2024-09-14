@@ -8,7 +8,7 @@ namespace Game
     {
         public struct Input
         {
-            public IAttackable Attacked { get; set; }
+            public Attackable Attacked { get; set; }
             public float CurrentHealth { get; set; }
             public float Defense { get; set; }
             public float IncreaseDamageTaken { get; set; }
@@ -17,7 +17,7 @@ namespace Game
 
             public bool CanResistDeath { get; set; }
 
-            public Input(IAttackable attacked, float currentHealth = 0, float defense = 0, float increaseDamageTaken = 0, float rangedDamageReduction = 0, List<Shield> shields = null, bool canResistDeath = false)
+            public Input(Attackable attacked, float currentHealth = 0, float defense = 0, float increaseDamageTaken = 0, float rangedDamageReduction = 0, List<Shield> shields = null, bool canResistDeath = false)
             {
                 Attacked = attacked;
                 CurrentHealth = currentHealth;

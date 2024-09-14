@@ -14,7 +14,7 @@ namespace Game
             {
                 character.Animated.ClearTrigger("EndStagger");
                 character.Animated.SetTrigger("Stagger");
-                character.GetCachedComponent<Caster>().Interupt();
+                character.Entity.GetCachedComponent<Caster>().Interupt();
             }
 
             protected override void InternalExit()
@@ -24,7 +24,7 @@ namespace Game
 
             protected override void InternalUpdate()
             {
-                if (!character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsStagger != null).Any(x => x.IsStagger.Value))
+                if (!character.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsStagger != null).Any(x => x.IsStagger.Value))
                 {
                     character.stateMachine.SetState(new MoveState(character));
                     character.Animated.SetTrigger("EndStagger");

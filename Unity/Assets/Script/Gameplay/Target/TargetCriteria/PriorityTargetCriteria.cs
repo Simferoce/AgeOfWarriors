@@ -17,15 +17,15 @@ namespace Game
 
         [SerializeField] private Comparaison comparaison;
 
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable, IStatisticProviderOld statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(Target owner, Target targeteable, IStatisticProvider statisticProvider, Faction ownerFaction, Faction targetFaction)
         {
             return comparaison switch
             {
-                Comparaison.Equal => targeteable.Priority == owner.Priority,
-                Comparaison.Greater => targeteable.Priority > owner.Priority,
-                Comparaison.GreaterOrEqual => targeteable.Priority >= owner.Priority,
-                Comparaison.Lower => targeteable.Priority < owner.Priority,
-                Comparaison.LowerOrEqual => targeteable.Priority <= owner.Priority,
+                Comparaison.Equal => (targeteable.Entity as AgentObject).Priority == (owner.Entity as AgentObject).Priority,
+                Comparaison.Greater => (targeteable.Entity as AgentObject).Priority > (owner.Entity as AgentObject).Priority,
+                Comparaison.GreaterOrEqual => (targeteable.Entity as AgentObject).Priority >= (owner.Entity as AgentObject).Priority,
+                Comparaison.Lower => (targeteable.Entity as AgentObject).Priority < (owner.Entity as AgentObject).Priority,
+                Comparaison.LowerOrEqual => (targeteable.Entity as AgentObject).Priority <= (owner.Entity as AgentObject).Priority,
                 _ => throw new NotImplementedException()
             };
         }

@@ -11,19 +11,19 @@ namespace Game
             private Projectile projectile;
             private float duration;
 
-            public Modifier(IModifiable modifiable, StaggerProjectileModifierDefinition modifierDefinition, float duration, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, StaggerProjectileModifierDefinition modifierDefinition, float duration, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.duration = duration;
 
-                this.projectile = modifiable.GetCachedComponent<Projectile>();
+                this.projectile = modifiable.Entity as Projectile;
                 projectile.OnImpacted += Projectile_OnImpacted;
             }
 
-            private void Projectile_OnImpacted(List<ITargeteable> targeteables)
+            private void Projectile_OnImpacted(List<Target> targeteables)
             {
-                foreach (ITargeteable targeteable in targeteables)
+                foreach (Target targeteable in targeteables)
                 {
-                    if (targeteable.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+                    if (targeteable.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                     {
                         modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, duration, projectile.AgentObject as Character));
                     }

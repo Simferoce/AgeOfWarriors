@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public class Projectile : CachedMonobehaviour, IAttackSource, IStatisticProviderOld
+    [StatisticClass("projectile")]
+    public partial class Projectile : Entity, IAttackSource
     {
-        public delegate void Impacted(List<ITargeteable> targeteables);
+        public delegate void Impacted(List<Target> targeteables);
 
         public enum State
         {
@@ -24,27 +24,27 @@ namespace Game
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public AgentObject AgentObject { get => agentObject; set => agentObject = value; }
         public State StateValue { get => state; set => state = value; }
-        public ITargeteable Target { get => target; set => target = value; }
-        public ITargeteable Ignore { get; set; }
+        public Target Target { get => target; set => target = value; }
+        public Target Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
         public event Impacted OnImpacted;
         public Faction Faction { get; set; }
         public List<object> Parameters { get; set; }
-
-        public string StatisticProviderName => "projectile";
+        public Entity Entity { get; set; }
 
         private AgentObject agentObject;
-        private ITargeteable target;
+        private Target target;
         private State state = State.Alive;
 
-        public void Initialize(AgentObject agentObject, ITargeteable target, Faction faction, params object[] paramters)
+        public void Initialize(AgentObject agentObject, Target target, Faction faction, params object[] paramters)
         {
             this.Faction = faction;
             this.agentObject = agentObject;
             this.target = target;
             this.Parameters = paramters.ToList();
 
-            Ownership.SetOwner(this, agentObject);
+            //Ownership.SetOwner(this, agentObject);
+            throw new System.Exception("Ownership not implemented");
 
             foreach (ProjectileMovement movement in projectileMovements)
                 movement.Initialize(this);
@@ -52,9 +52,9 @@ namespace Game
             foreach (ProjectileImpact effect in impacts)
                 effect.Initialize(this);
 
-            foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
+            foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
             {
-                this.GetCachedComponent<IModifiable>().AddModifier(projectileModifier.GetModifier(this));
+                this.Entity.GetCachedComponent<ModifierHandler>().AddModifier(projectileModifier.GetModifier(this));
             }
         }
 
@@ -111,23 +111,6 @@ namespace Game
             StateValue = State.Dead;
 
             projectileDeath.Start(this, collision);
-        }
-
-        public bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            if (path.StartsWith("projectile"))
-                path = path.Slice("projectile".Length + 1);
-
-            foreach (object parameter in Parameters)
-            {
-                if (parameter is IStatisticProviderOld statisticProvider && path.StartsWith(statisticProvider.StatisticProviderName))
-                {
-                    return statisticProvider.TryGetStatistic<T>(path.Slice(statisticProvider.StatisticProviderName.Length + 1), out statistic);
-                }
-            }
-
-            statistic = default;
-            return false;
         }
     }
 }

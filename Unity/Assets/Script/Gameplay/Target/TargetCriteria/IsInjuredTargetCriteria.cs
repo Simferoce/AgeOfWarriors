@@ -5,9 +5,9 @@ namespace Game
     [Serializable]
     public class IsInjuredTargetCriteria : TargetCriteria
     {
-        public override bool Execute(ITargeteable owner, ITargeteable targeteable, IStatisticProviderOld statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(Target owner, Target targeteable, IStatisticProvider statisticProvider, Faction ownerFaction, Faction targetFaction)
         {
-            return (targeteable.TryGetCachedComponent<Character>(out Character character)) && character.IsInjured;
+            return (targeteable.Entity is Character character) && character.IsInjured;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Game
 
             private float defenseReduction;
 
-            public Modifier(IModifiable modifiable, DefenseReductionModifierDefinition modifierDefinition, float duration, float reduction, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, DefenseReductionModifierDefinition modifierDefinition, float duration, float reduction, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
             {
                 With(new CharacterModifierTimeElement(duration));
                 defenseReduction = reduction;

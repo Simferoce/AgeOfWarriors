@@ -8,24 +8,24 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, ReflectDamageModifierDefinition>, IAttackSource
         {
-            private IAttackable attackable;
+            private Attackable attackable;
             private Character character;
             private float damage;
 
-            public Modifier(IModifiable modifiable, ReflectDamageModifierDefinition modifierDefinition, IModifierSource source, float damage) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, ReflectDamageModifierDefinition modifierDefinition, IModifierSource source, float damage) : base(modifiable, modifierDefinition, source)
             {
                 this.damage = damage;
-                attackable = modifiable.GetCachedComponent<IAttackable>();
-                character = modifiable.GetCachedComponent<Character>();
+                attackable = modifiable.Entity.GetCachedComponent<Attackable>();
+                character = modifiable.Entity.GetCachedComponent<Character>();
                 attackable.OnDamageTaken += Attackable_OnDamageTaken;
             }
 
-            private void Attackable_OnDamageTaken(AttackResult attackResult, IAttackable attackable)
+            private void Attackable_OnDamageTaken(AttackResult attackResult, Attackable attackable)
             {
                 if (attackResult.Attack.Reflectable)
                 {
-                    IAttackable target = null;
-                    IAttackSource source = attackResult.Attack.AttackSource.Sources.FirstOrDefault(x => x is IComponent component && component.TryGetCachedComponent(out target));
+                    Attackable target = null;
+                    IAttackSource source = attackResult.Attack.AttackSource.Sources.FirstOrDefault(x => x is IComponent component && component.Entity.TryGetCachedComponent(out target));
                     if (target != null)
                     {
                         Attack attack = AttackUtility.Generate(character, damage, 0, 0, false, false, false, target, this);

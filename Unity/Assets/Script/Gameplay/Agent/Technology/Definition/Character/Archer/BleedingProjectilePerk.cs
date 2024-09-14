@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, BleedingProjectilePerk>, IProjectileModifier
         {
-            public Modifier(IModifiable modifiable, BleedingProjectilePerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, BleedingProjectilePerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
 
             }
@@ -15,9 +15,9 @@ namespace Game
             public Game.Modifier GetModifier(Projectile projectile)
             {
                 return new BleedingProjectileModifierDefinition.Modifier(
-                    projectile.GetCachedComponent<IModifiable>(),
+                    projectile.Entity.GetCachedComponent<ModifierHandler>(),
                     definition.bleedingProjectileModifierDefinition,
-                    definition.percentageAttackPower * modifiable.GetCachedComponent<Character>().AttackPower,
+                    definition.percentageAttackPower * modifiable.Entity.GetCachedComponent<Character>().AttackPower,
                     definition.duration,
                     Source);
             }
@@ -32,9 +32,9 @@ namespace Game
             return string.Format(this.Description, StatisticFormatter.Percentage(percentageAttackPower, StatisticDefinition.AttackPower), duration, bleedingProjectileModifierDefinition.BleedingModifierDefinition.MaxStack);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

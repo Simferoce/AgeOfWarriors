@@ -3,30 +3,22 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Base : AgentObject, IAttackable, ITargeteable, IBlock
+    public class Base : AgentObject, IBlock
     {
         [SerializeField] private float maxHealth;
         [SerializeField] private float defense;
         [SerializeField] private SpawnPoint spawnPoint;
-
-        [Header("Target")]
         [SerializeField] private Collider2D hitbox;
-        [SerializeField] private Transform targetPosition;
 
+        public Entity Entity { get; set; }
         public float Health { get; set; }
         public SpawnPoint SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
-        public Vector3 CenterPosition => transform.position;
-        public Vector3 TargetPosition => targetPosition.position;
+
         public float MaxHealth => maxHealth;
         public float Defense => defense;
         public bool IsDead => Health <= 0;
 
-        public event Action<AttackResult, IAttackable> OnDamageTaken;
-
-        public Vector3 ClosestPoint(Vector3 point)
-        {
-            return hitbox.ClosestPoint(point);
-        }
+        public event Action<AttackResult, Attackable> OnDamageTaken;
 
         public void Death()
         {
@@ -47,24 +39,24 @@ namespace Game
             Health = maxHealth;
         }
 
-        public void TakeAttack(Attack attack)
-        {
-            AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
-                    this,
-                    currentHealth: Health,
-                    defense: Defense));
+        //public void TakeAttack(Attack attack)
+        //{
+        //    AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
+        //            GetCachedComponent<Attackable>(),
+        //            currentHealth: Health,
+        //            defense: Defense));
 
-            Health -= result.DamageToTake;
+        //    Health -= result.DamageToTake;
 
-            AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, this);
-            foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attackResult);
+        //    AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, this);
+        //    foreach (IAttackSource source in attack.AttackSource.Sources)
+        //        source.AttackLanded(attackResult);
 
-            OnDamageTaken?.Invoke(attackResult, this);
+        //    OnDamageTaken?.Invoke(attackResult, GetCachedComponent<Attackable>());
 
-            if (Health <= 0 && !IsDead)
-                Death();
-        }
+        //    if (Health <= 0 && !IsDead)
+        //        Death();
+        //}
     }
 }
 

@@ -9,9 +9,9 @@ namespace Game
         {
             private Character character;
 
-            public Modifier(IModifiable modifiable, CreateDummyOnDeathPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, CreateDummyOnDeathPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                character = modifiable.GetCachedComponent<Character>();
+                character = modifiable.Entity.GetCachedComponent<Character>();
                 character.OnDeath += Character_OnDeath;
             }
 
@@ -19,11 +19,13 @@ namespace Game
             {
                 CharacterDefinition characterDefinition = Resources.Load<CharacterDefinition>("Definition/Character/Dummy/Dummy");
                 AgentObject agentObject = characterDefinition.Spawn(character.Agent, character.transform.position, character.SpawnNumber, character.Direction);
-                Ownership.SetOwner(agentObject, character);
-                IModifiable dummyModifiable = agentObject.GetCachedComponent<IModifiable>();
+                //Ownership.SetOwner(agentObject, character);
+                throw new System.Exception();
+
+                ModifierHandler dummyModifiable = agentObject.GetCachedComponent<ModifierHandler>();
 
                 float maxHealth = (agentObject as Character).MaxHealth;
-                dummyModifiable.AddModifier(new DamageOverTimeModifierDefinition.Modifier(dummyModifiable, definition.damageOverTimeModifierDefinition, modifiable.GetCachedComponent<IModifierSource>(), 9999, maxHealth * definition.percentageHealth));
+                dummyModifiable.AddModifier(new DamageOverTimeModifierDefinition.Modifier(dummyModifiable, definition.damageOverTimeModifierDefinition, modifiable.Entity.GetCachedComponent<IModifierSource>(), 9999, maxHealth * definition.percentageHealth));
             }
 
             public override void Dispose()
@@ -36,9 +38,9 @@ namespace Game
         [SerializeField] private DamageOverTimeModifierDefinition damageOverTimeModifierDefinition;
         [SerializeField, Range(0, 1)] private float percentageHealth;
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
 
         public override string ParseDescription()

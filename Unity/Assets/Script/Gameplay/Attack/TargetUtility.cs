@@ -6,25 +6,25 @@ namespace Game
 {
     public static class TargetUtility
     {
-        public static List<ITargeteable> GetTargets(AgentObject agentObject, TargetCriteria criteria, IStatisticProviderOld statisticProvider)
+        public static List<Target> GetTargets(Entity entity, TargetCriteria criteria, IStatisticProvider statisticProvider)
         {
-            List<ITargeteable> potentialTargets = new List<ITargeteable>();
-            foreach (ITargeteable targetteable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
+            List<Target> potentialTargets = new List<Target>();
+            foreach (Target targetteable in AgentObject.All.Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
             {
-                if (!targetteable.IsActive)
+                if (!(targetteable.Entity as AgentObject).IsActive)
                     continue;
 
-                if (targetteable == agentObject.GetCachedComponent<ITargeteable>())
+                if (targetteable == entity.GetCachedComponent<Target>())
                     continue;
 
-                if (!criteria.Execute(agentObject.GetCachedComponent<ITargeteable>(), targetteable, statisticProvider, agentObject.Faction, (agentObject is Character character) && character.IsConfused ? targetteable.Faction.GetConfusedFaction() : targetteable.Faction))
+                if (!criteria.Execute(entity.GetCachedComponent<Target>(), targetteable, statisticProvider, (entity as AgentObject).Faction, (entity is Character character) && character.IsConfused ? (targetteable.Entity as AgentObject).Faction.GetConfusedFaction() : (targetteable.Entity as AgentObject).Faction))
                     continue;
 
                 potentialTargets.Add(targetteable);
             }
 
             return potentialTargets
-                .OrderBy(x => x.Priority)
+                .OrderBy(x => (x.Entity as AgentObject).Priority)
                 .ToList();
         }
     }

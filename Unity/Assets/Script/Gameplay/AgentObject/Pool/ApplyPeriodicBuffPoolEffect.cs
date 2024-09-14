@@ -11,32 +11,33 @@ namespace Game
         {
             public abstract ModifierDefinition ModifierDefinition { get; }
 
-            public abstract bool Applicable(Pool pool, ITargeteable targeteable);
+            public abstract bool Applicable(Pool pool, Target targeteable);
 
-            public abstract Modifier Instanciate(IModifiable modifiable, IModifierSource modifierSource);
+            public abstract Modifier Instanciate(ModifierHandler modifiable, IModifierSource modifierSource);
         }
 
         public Instancier ModifierInstancier { get; set; }
 
         private List<Modifier> appliedModifiers = new List<Modifier>();
 
-        public override void Apply(Pool pool, ITargeteable targeteable)
+        public override void Apply(Pool pool, Target targeteable)
         {
             base.Apply(pool, targeteable);
 
             if (!ModifierInstancier.Applicable(pool, targeteable))
                 return;
 
-            if (!targeteable.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+            if (!targeteable.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                 return;
 
             Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == ModifierInstancier.ModifierDefinition);
             if (modifier != null)
                 return;
 
-            modifier = ModifierInstancier.Instanciate(modifiable, pool.AddOrGetCachedComponent<Ownership>().Owner.GetCachedComponent<IModifierSource>());
-            modifiable.AddModifier(modifier);
-            appliedModifiers.Add(modifier);
+            throw new Exception();
+            //modifier = ModifierInstancier.Instanciate(modifiable, pool.AddOrGetCachedComponent<Ownership>().Owner.Entity.GetCachedComponent<IModifierSource>());
+            //modifiable.AddModifier(modifier);
+            //appliedModifiers.Add(modifier);
         }
 
         public override void Dispose()

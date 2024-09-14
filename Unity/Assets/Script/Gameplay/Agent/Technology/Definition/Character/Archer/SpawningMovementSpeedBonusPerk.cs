@@ -8,9 +8,9 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, SpawningMovementSpeedBonusPerk>
         {
-            public Modifier(IModifiable modifiable, SpawningMovementSpeedBonusPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, SpawningMovementSpeedBonusPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                Character character = modifiable.GetCachedComponent<Character>();
+                Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                 foreach (AgentObject agent in AgentObject.All)
                 {
@@ -20,16 +20,16 @@ namespace Game
                     if (!agent.IsActive)
                         continue;
 
-                    if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                    if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                         continue;
 
                     if (agent.Faction == character.Faction)
                         continue;
 
-                    if (!agent.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+                    if (!agent.TryGetCachedComponent<Attackable>(out Attackable attackable))
                         continue;
 
-                    if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.distance)
+                    if (Mathf.Abs((targeteable.ClosestPoint(character.GetCachedComponent<Target>().CenterPosition) - character.GetCachedComponent<Target>().CenterPosition).x) > definition.distance)
                         continue;
 
                     return;
@@ -43,9 +43,9 @@ namespace Game
         [SerializeField, Range(0, 5)] private float movementSpeedIncrease;
         [SerializeField] private SpawningMovementSpeedBonusPerkEffect effect;
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

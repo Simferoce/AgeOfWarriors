@@ -21,11 +21,11 @@ namespace Game
         public override ImpactReport Impact(GameObject collision)
         {
             if (collision.CompareTag(GameTag.HIT_BOX) &&
-                collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
-                && targeteable.IsActive
+                collision.gameObject.TryGetComponentInParent<Target>(out Target targeteable)
+                && (targeteable.Entity as AgentObject).IsActive
                 && projectile.Ignore != targeteable
-                && criteria.Execute(projectile.AgentObject.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
-                && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+                && criteria.Execute(projectile.AgentObject.GetCachedComponent<Target>(), targeteable, projectile, projectile.Faction, (targeteable.Entity as AgentObject).Faction)
+                && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
             {
                 attack = AttackUtility.Generate(projectile.AgentObject as IAttackSource, damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, true, false, true, attackable, projectile);
                 attackable.TakeAttack(attack);

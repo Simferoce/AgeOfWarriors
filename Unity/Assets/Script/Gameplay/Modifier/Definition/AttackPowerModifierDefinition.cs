@@ -11,7 +11,7 @@ namespace Game
 
             public override float? AttackPower => amount;
 
-            public AttackPowerModifier(IModifiable modifiable, AttackPowerModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public AttackPowerModifier(ModifierHandler modifiable, AttackPowerModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.amount = amount;
             }

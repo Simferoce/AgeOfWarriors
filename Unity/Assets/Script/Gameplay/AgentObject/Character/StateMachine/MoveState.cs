@@ -25,9 +25,9 @@ namespace Game
             {
                 character.SetDirection();
 
-                if (character.GetCachedComponent<Caster>().CanUseAbility())
+                if (character.Entity.GetCachedComponent<Caster>().CanUseAbility())
                 {
-                    foreach (Ability ability in character.GetCachedComponent<Caster>().Abilities)
+                    foreach (Ability ability in character.Entity.GetCachedComponent<Caster>().Abilities)
                     {
                         if (ability.CanUse())
                         {
@@ -58,7 +58,7 @@ namespace Game
                 if (character.Speed <= 0)
                     return false;
 
-                if (character.GetCachedComponent<Caster>().IsCasting)
+                if (character.Entity.GetCachedComponent<Caster>().IsCasting)
                     return false;
 
                 foreach (IBlock blocker in AgentObject.All.OfType<IBlock>())

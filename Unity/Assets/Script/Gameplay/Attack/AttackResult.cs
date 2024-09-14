@@ -8,9 +8,9 @@ namespace Game
         public float DamageTaken { get; set; }
         public float DefenseDamagePrevented { get; set; }
         public bool KillingBlow { get; set; }
-        public IAttackable Target { get; set; }
+        public Attackable Target { get; set; }
 
-        public AttackResult(Attack attack, float damageTaken, float defenseDamagePrevented, bool killingBlow, IAttackable target)
+        public AttackResult(Attack attack, float damageTaken, float defenseDamagePrevented, bool killingBlow, Attackable target)
         {
             Attack = attack;
             DamageTaken = damageTaken;

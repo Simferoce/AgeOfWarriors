@@ -11,16 +11,16 @@ namespace Game
             private float duration;
             private float damage;
 
-            public Modifier(IModifiable modifiable, PoolProjectileModifierDefinition modifierDefinition, float duration, float damage, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, PoolProjectileModifierDefinition modifierDefinition, float duration, float damage, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
             {
-                this.projectile = modifiable.GetCachedComponent<Projectile>();
+                this.projectile = modifiable.Entity as Projectile;
                 projectile.OnImpacted += Projectile_OnImpacted;
 
                 this.damage = damage;
                 this.duration = duration;
             }
 
-            private void Projectile_OnImpacted(System.Collections.Generic.List<ITargeteable> targeteables)
+            private void Projectile_OnImpacted(System.Collections.Generic.List<Target> targeteables)
             {
                 Vector3 position = Lane.Instance.Project(projectile.transform.position);
                 Pool pool = GameObject.Instantiate(definition.prefab, position, Quaternion.identity).GetComponent<Pool>();

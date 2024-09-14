@@ -13,9 +13,9 @@ namespace Game
 
             public bool HasModifier => currentAttackApplied >= definition.stack;
 
-            public Modifier(IModifiable modifiable, StaggerProjectileAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, StaggerProjectileAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                affectedAbility = modifiable.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
+                affectedAbility = modifiable.Entity.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
 
@@ -40,7 +40,7 @@ namespace Game
             {
                 currentAttackApplied = 0;
                 return new StaggerProjectileModifierDefinition.Modifier(
-                    projectile.GetCachedComponent<IModifiable>(),
+                    projectile.Entity.GetCachedComponent<ModifierHandler>(),
                     definition.staggerProjectileAttackPerk,
                     definition.duration,
                     Source);
@@ -57,9 +57,9 @@ namespace Game
             return string.Format(Description, stack, duration);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

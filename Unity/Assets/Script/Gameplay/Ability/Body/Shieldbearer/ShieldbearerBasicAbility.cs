@@ -1,36 +1,11 @@
-﻿using System;
-
-namespace Game
+﻿namespace Game
 {
     public class ShieldbearerBasicAbility : AnimationBaseCharacterAbility<ShieldbearerBasicAbilityDefinition>
     {
-        public float Damage => Caster.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
-        public float Range => Caster.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
+        public float Damage => Caster.Entity.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
+        public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
 
         public override float Cooldown => 0f;
-
-        public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            if (path.StartsWith(StatisticProviderName))
-                path = path.Slice(StatisticProviderName.Length + 1);
-
-            if (path.SequenceEqual("damage"))
-            {
-                float damageTemporary = Damage;
-                statistic = __refvalue(__makeref(damageTemporary), T);
-                return true;
-            }
-            else if (path.SequenceEqual("range"))
-            {
-                float rangeTemporary = Range;
-                statistic = __refvalue(__makeref(rangeTemporary), T);
-                return true;
-            }
-            else
-            {
-                return base.TryGetStatistic<T>(path, out statistic);
-            }
-        }
 
         public override string ParseDescription()
         {

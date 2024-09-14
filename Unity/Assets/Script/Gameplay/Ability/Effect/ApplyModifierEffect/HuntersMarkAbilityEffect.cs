@@ -13,7 +13,7 @@ namespace Game
 
         public override void Apply()
         {
-            IModifiable modifiable = Ability.Targets.Select(x => x.GetCachedComponent<IModifiable>()).Where(x => x != null).FirstOrDefault();
+            ModifierHandler modifiable = Ability.Targets.Select(x => x.Entity.GetCachedComponent<ModifierHandler>()).Where(x => x != null).FirstOrDefault();
 
             if (modifiable != null)
             {
@@ -30,8 +30,8 @@ namespace Game
                             hunterMarkModifierDefinition,
                             this,
                             damage.GetValueOrThrow(Ability),
-                            modifiable.GetCachedComponent<IAttackable>(),
-                            Ability.Caster.GetCachedComponent<Character>())
+                            modifiable.Entity.GetCachedComponent<Attackable>(),
+                            Ability.Caster.Entity.GetCachedComponent<Character>())
                         .With(new CharacterModifierTimeElement(duration.GetValueOrThrow(Ability)));
 
                     modifiable.AddModifier(huntersMark);

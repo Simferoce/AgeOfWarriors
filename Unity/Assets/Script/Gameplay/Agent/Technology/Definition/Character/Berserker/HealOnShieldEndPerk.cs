@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, HealOnShieldEndPerk>
         {
-            public Modifier(IModifiable modifiable, HealOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, HealOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 modifiable.OnModifierRemoved += Modifiable_ModifierRemoved;
             }
@@ -17,7 +17,7 @@ namespace Game
                 if (obj is not ShieldModifierDefinition.Shield shield)
                     return;
 
-                if (!modifiable.TryGetCachedComponent<Character>(out Character character))
+                if (!modifiable.Entity.TryGetCachedComponent<Character>(out Character character))
                     return;
 
                 float heal = definition.healPerShieldPointRemaining * shield.Remaining;
@@ -42,9 +42,9 @@ namespace Game
             return string.Format(Description, healPerShieldPointRemaining);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }
