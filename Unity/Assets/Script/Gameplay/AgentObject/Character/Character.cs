@@ -8,7 +8,10 @@ using UnityEngine;
 namespace Game
 {
     [StatisticClass("character")]
-    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IModifierSource, IBlock, IAnimated
+    [RequireComponent(typeof(Blocker))]
+    [RequireComponent(typeof(Attackable))]
+    [RequireComponent(typeof(Target))]
+    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IModifierSource
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -88,7 +91,7 @@ namespace Game
             if (IsDead)
                 return;
 
-            stateMachine.Update();
+            stateMachine.FixedUpdate();
         }
 
         protected override void OnDestroy()
@@ -97,7 +100,7 @@ namespace Game
             GetCachedComponent<Attackable>().OnDamageTaken -= Character_OnDamageTaken;
         }
 
-        public void SetDirection()
+        public void RefreshDirection()
         {
             transform.localScale = new Vector3(Mathf.Sign(IsConfused ? -Direction : Direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
@@ -111,13 +114,6 @@ namespace Game
         public void RemoveAppliedModifier(Modifier modifier)
         {
             AppliedModifiers.Remove(modifier);
-        }
-
-        public bool IsBlocking(Character character)
-        {
-            return character.Hitbox.IsTouching(hitbox)
-                && (character.OriginalFaction != this.OriginalFaction
-                || character.Priority > this.Priority);
         }
 
         public void Death()
@@ -163,7 +159,6 @@ namespace Game
             if (stateMachine.Next == null)
                 stateMachine.SetState(new MoveState(this));
         }
-
         #endregion
     }
 }

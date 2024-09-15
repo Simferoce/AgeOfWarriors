@@ -3,7 +3,10 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Base : AgentObject, IBlock
+    [RequireComponent(typeof(Blocker))]
+    [RequireComponent(typeof(Attackable))]
+    [RequireComponent(typeof(Target))]
+    public class Base : AgentObject
     {
         [SerializeField] private float maxHealth;
         [SerializeField] private float defense;
@@ -43,12 +46,6 @@ namespace Game
         {
             EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
             Destroy(this.gameObject);
-        }
-
-        public bool IsBlocking(Character character)
-        {
-            return hitbox.IsTouching(character.Hitbox) &&
-                character.OriginalFaction != this.OriginalFaction;
         }
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)

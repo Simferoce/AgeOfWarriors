@@ -23,7 +23,7 @@ namespace Game
         {
             base.Initialize(caster);
 
-            animated = caster.Entity.GetCachedComponent<IAnimated>()?.Animated;
+            animated = caster.Entity.GetCachedComponent<Animated>();
             Assert.IsNotNull(animated, "Cannot cast an animated ability if the caster does not own an animated component.");
 
             foreach (AbilityCondition condition in conditions)

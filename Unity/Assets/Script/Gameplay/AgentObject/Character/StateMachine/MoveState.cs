@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -23,7 +22,7 @@ namespace Game
 
             protected override void InternalUpdate()
             {
-                character.SetDirection();
+                character.RefreshDirection();
 
                 if (character.Entity.GetCachedComponent<Caster>().CanUseAbility())
                 {
@@ -61,8 +60,11 @@ namespace Game
                 if (character.Entity.GetCachedComponent<Caster>().IsCasting)
                     return false;
 
-                foreach (IBlock blocker in AgentObject.All.OfType<IBlock>())
+                foreach (AgentObject agentObject in AgentObject.All)
                 {
+                    if (!agentObject.TryGetCachedComponent<Blocker>(out Blocker blocker))
+                        return false;
+
                     if (!blocker.IsActive)
                         continue;
 

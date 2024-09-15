@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(Animator))]
-    public class Animated : MonoBehaviour
+    public class Animated : MonoBehaviour, IComponent
     {
         private class Damping
         {
@@ -13,11 +13,13 @@ namespace Game
             public float Target;
         }
 
-        private Animator animator;
-        private Dictionary<string, Damping> dampings = new Dictionary<string, Damping>();
+        public event Action OnAbilityUsed;
 
         public Animator Animator => animator;
-        public event Action OnAbilityUsed;
+        public Entity Entity { get; set; }
+
+        private Animator animator;
+        private Dictionary<string, Damping> dampings = new Dictionary<string, Damping>();
 
         private void Awake()
         {
