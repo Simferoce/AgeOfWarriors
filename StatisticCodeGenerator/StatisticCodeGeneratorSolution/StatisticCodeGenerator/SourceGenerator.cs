@@ -75,11 +75,10 @@ namespace StatisticCodeGenerator
                 foreach (ClassDeclarationSyntax classDeclaration in receiver.AllClass)
                 {
                     SemanticModel semanticModel = context.Compilation.GetSemanticModel(classDeclaration.SyntaxTree);
+                    INamedTypeSymbol namedTypeSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
 
-                    if (HasAttribute(classDeclaration, ClassAttributeName)
-                        || IsChildOfClassWithAttribute(classDeclaration, semanticModel))
+                    if (HasAttributeOrIsChildOfClassWithAttribute(namedTypeSymbol, ClassAttributeName))
                     {
-                        INamedTypeSymbol namedTypeSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
                         List<PropertyDeclarationSyntax> propertyDeclarationSyntaxes = GetAllStatisticProperties(classDeclaration, semanticModel);
                         if (propertyDeclarationSyntaxes.Count == 0 && !HasAttribute(classDeclaration, ClassAttributeName))
                             continue;
@@ -119,7 +118,7 @@ namespace StatisticCodeGenerator
                         if (HasAttribute(classDeclaration, ClassAttributeName))
                             statisticGathering.StatisticClassName = GetStatisticClassName(classDeclaration, semanticModel);
 
-                        if (IsChildOfClassWithAttribute(classDeclaration, semanticModel))
+                        if (IsChildOfClassWithAttribute(namedTypeSymbol, ClassAttributeName))
                             statisticGathering.IsChild = true;
                     }
                 }
@@ -143,7 +142,6 @@ namespace StatisticCodeGenerator
 
         private void ProcessClassDeclaration(GeneratorExecutionContext context, StatisticGathering statisticGathering)
         {
-
             SymbolDisplayFormat classNameFormat = new SymbolDisplayFormat(genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters);
             string className = statisticGathering.NamedTypeSymbol.ToDisplayString(classNameFormat);
             Logger.Log($"Process: {className}");
@@ -248,7 +246,7 @@ namespace StatisticCodeGenerator
         {
             Logger.Log("AppendProviderStatistic");
 
-            List<StatisticProperty> allStatisticProviderProperties = allProperties.Where(x => InheritsOrImplements(x.PropertySymbol.Type, ProviderInterfaceName)).ToList();
+            List<StatisticProperty> allStatisticProviderProperties = allProperties.Where(x => HasAttributeOrIsChildOfClassWithAttribute(x.PropertySymbol.Type, ClassAttributeName)).ToList();
             List<StatisticProperty> allEnumerableOfStatisticProviderProperties = allProperties.Where(x => ImplementsIEnumerableOfProvider(x.PropertySymbol.Type, ProviderInterfaceName)).ToList();
 
             string methodModifier = isChild ? "override" : "virtual";
@@ -431,14 +429,23 @@ namespace StatisticCodeGenerator
             return null;
         }
 
-        private bool IsChildOfClassWithAttribute(ClassDeclarationSyntax classDeclaration, SemanticModel semanticModel)
+        private bool HasAttributeOrIsChildOfClassWithAttribute(ITypeSymbol typeSymbol, string attribute)
         {
-            INamedTypeSymbol namedTypeSymbol = semanticModel.GetDeclaredSymbol(classDeclaration);
-            INamedTypeSymbol parent = namedTypeSymbol.BaseType;
+            return HasAttribute(typeSymbol, attribute) || IsChildOfClassWithAttribute(typeSymbol, attribute);
+        }
+
+        private bool HasAttribute(ITypeSymbol typeSymbol, string attribute)
+        {
+            return typeSymbol.GetAttributes().Any(x => x.AttributeClass.Name == attribute || x.AttributeClass.Name == attribute + "Attribute");
+        }
+
+        private bool IsChildOfClassWithAttribute(ITypeSymbol typeSymbol, string attribute)
+        {
+            ITypeSymbol parent = typeSymbol.BaseType;
 
             while (parent != null)
             {
-                if (parent.GetAttributes().Any(x => x.AttributeClass.Name == ClassAttributeName || x.AttributeClass.Name == ClassAttributeName + "Attribute"))
+                if (HasAttribute(parent, attribute))
                 {
                     return true;
                 }
@@ -464,7 +471,7 @@ namespace StatisticCodeGenerator
                 .Any(y => y.Name.ToString() == attributeName);
         }
 
-        private bool ImplementsIEnumerableOfProvider(ITypeSymbol typeSymbol, string providerInterfaceName)
+        private bool ImplementsIEnumerableOfProvider(ITypeSymbol typeSymbol, string attribute)
         {
             if (typeSymbol is INamedTypeSymbol namedTypeSymbol && namedTypeSymbol.IsGenericType)
             {
@@ -473,7 +480,7 @@ namespace StatisticCodeGenerator
                     if (iface.Name == "IEnumerable" && iface.TypeArguments.Length == 1)
                     {
                         var typeArgument = iface.TypeArguments[0];
-                        if (InheritsOrImplements(typeArgument, providerInterfaceName))
+                        if (HasAttributeOrIsChildOfClassWithAttribute(typeArgument, attribute))
                         {
                             return true;
                         }
@@ -484,33 +491,10 @@ namespace StatisticCodeGenerator
             var baseType = typeSymbol.BaseType;
             while (baseType != null)
             {
-                if (ImplementsIEnumerableOfProvider(baseType, providerInterfaceName))
+                if (ImplementsIEnumerableOfProvider(baseType, attribute))
                 {
                     return true;
                 }
-
-                baseType = baseType.BaseType;
-            }
-
-            return false;
-        }
-
-        private bool InheritsOrImplements(ITypeSymbol typeSymbol, string interfaceName)
-        {
-            if (typeSymbol.Name == interfaceName)
-                return true;
-
-            foreach (var iface in typeSymbol.AllInterfaces)
-            {
-                if (iface.Name == interfaceName)
-                    return true;
-            }
-
-            var baseType = typeSymbol.BaseType;
-            while (baseType != null)
-            {
-                if (baseType.Name == interfaceName || baseType.AllInterfaces.Any(i => i.Name == interfaceName))
-                    return true;
 
                 baseType = baseType.BaseType;
             }
