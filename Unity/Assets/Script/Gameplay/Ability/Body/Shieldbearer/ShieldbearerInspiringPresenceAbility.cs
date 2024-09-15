@@ -1,10 +1,10 @@
 ﻿namespace Game
 {
-    public class ShieldbearerInspiringPresenceAbility : AnimationBaseCharacterAbility<ShieldbearerInspiringPresenceAbilityDefinition>
+    public partial class ShieldbearerInspiringPresenceAbility : AnimationBaseCharacterAbility<ShieldbearerInspiringPresenceAbilityDefinition>
     {
-        public float Defense => definition.Defense;
-        public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
-        public float BuffDuration => definition.BuffDuration;
+        [Statistic("defense")] public float Defense => definition.Defense;
+        [Statistic("range")] public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
+        [Statistic("buff_duration")] public float BuffDuration => definition.BuffDuration;
 
         public override float Cooldown => definition.Cooldown;
 

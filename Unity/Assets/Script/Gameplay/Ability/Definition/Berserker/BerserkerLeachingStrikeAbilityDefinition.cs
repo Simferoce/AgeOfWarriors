@@ -3,23 +3,16 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "BerserkerLeachingStrikeAbilityDefinition", menuName = "Definition/Ability/Berserker/BerserkerLeachingStrikeAbilityDefinition")]
-    public class BerserkerLeachingStrikeAbilityDefinition : AbilityDefinition
+    public partial class BerserkerLeachingStrikeAbilityDefinition : AbilityDefinition
     {
-        [Header("Range")]
         [SerializeField, Range(0, 5)] private float reachPercentage;
-
-        [Header("Damage")]
         [SerializeField, Range(0, 5)] private float damagePercentage;
-
-        [Header("Cooldown")]
         [SerializeField] private float cooldown;
-
-        [Header("Leach")]
         [SerializeField, Range(0, 5)] private float leach;
 
-        public float ReachPercentage { get => reachPercentage; set => reachPercentage = value; }
-        public float DamagePercentage { get => damagePercentage; set => damagePercentage = value; }
-        public float Cooldown { get => cooldown; set => cooldown = value; }
-        public float Leach { get => leach; set => leach = value; }
+        [Statistic("reach")] public float ReachPercentage { get => reachPercentage; set => reachPercentage = value; }
+        [Statistic("damage")] public float DamagePercentage { get => damagePercentage; set => damagePercentage = value; }
+        [Statistic("cooldown")] public float Cooldown { get => cooldown; set => cooldown = value; }
+        [Statistic("leach")] public float Leach { get => leach; set => leach = value; }
     }
 }

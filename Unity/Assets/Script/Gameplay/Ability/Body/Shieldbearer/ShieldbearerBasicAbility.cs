@@ -1,9 +1,9 @@
 ﻿namespace Game
 {
-    public class ShieldbearerBasicAbility : AnimationBaseCharacterAbility<ShieldbearerBasicAbilityDefinition>
+    public partial class ShieldbearerBasicAbility : AnimationBaseCharacterAbility<ShieldbearerBasicAbilityDefinition>
     {
-        public float Damage => Caster.Entity.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
-        public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
+        [Statistic("damage")] public float Damage => Caster.Entity.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
+        [Statistic("range")] public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
 
         public override float Cooldown => 0f;
 

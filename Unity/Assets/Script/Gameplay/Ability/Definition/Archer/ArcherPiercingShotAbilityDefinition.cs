@@ -3,23 +3,16 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "ArcherPiercingShotAbilityDefinition", menuName = "Definition/Ability/Archer/ArcherPiercingShotAbilityDefinition")]
-    public class ArcherPiercingShotAbilityDefinition : AbilityDefinition
+    public partial class ArcherPiercingShotAbilityDefinition : AbilityDefinition
     {
-        [Header("Range")]
         [SerializeField, Range(0, 5)] private float reachPercentage;
-
-        [Header("Damage")]
         [SerializeField, Range(0, 5)] private float damagePercentage;
-
-        [Header("Cooldown")]
         [SerializeField] private float cooldown;
-
-        [Header("Armor Penetration")]
         [SerializeField] private float armorPenetration;
 
-        public float ReachPercentage => reachPercentage;
-        public float DamagePercentage => damagePercentage;
-        public float Cooldown => cooldown;
-        public float ArmorPenetration => armorPenetration;
+        [Statistic("reach")] public float ReachPercentage => reachPercentage;
+        [Statistic("damage")] public float DamagePercentage => damagePercentage;
+        [Statistic("cooldown")] public float Cooldown => cooldown;
+        [Statistic("armor_penetration")] public float ArmorPenetration => armorPenetration;
     }
 }

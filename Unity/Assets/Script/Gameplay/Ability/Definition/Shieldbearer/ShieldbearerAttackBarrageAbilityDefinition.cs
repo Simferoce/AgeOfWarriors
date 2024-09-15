@@ -3,19 +3,14 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "ShieldbearerAttackBarrageAbilityDefinition", menuName = "Definition/Ability/Shieldbearer/ShieldbearerAttackBarrageAbilityDefinition")]
-    public class ShieldbearerAttackBarrageAbilityDefinition : AbilityDefinition
+    public partial class ShieldbearerAttackBarrageAbilityDefinition : AbilityDefinition
     {
-        [Header("Range")]
         [SerializeField, Range(0, 5)] private float reachPercentage;
-
-        [Header("Damage")]
         [SerializeField, Range(0, 5)] private float damagePercentage;
-
-        [Header("Cooldown")]
         [SerializeField] private float cooldown;
 
-        public float ReachPercentage => reachPercentage;
-        public float DamagePercentage => damagePercentage;
-        public float Cooldown => cooldown;
+        [Statistic("reach")] public float ReachPercentage => reachPercentage;
+        [Statistic("damage")] public float DamagePercentage => damagePercentage;
+        [Statistic("cooldown")] public float Cooldown => cooldown;
     }
 }

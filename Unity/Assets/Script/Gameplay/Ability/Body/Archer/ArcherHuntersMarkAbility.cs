@@ -1,10 +1,10 @@
 ﻿namespace Game
 {
-    public class ArcherHuntersMarkAbility : AnimationBaseCharacterAbility<ArcherHuntersMarkAbilityDefinition>
+    public partial class ArcherHuntersMarkAbility : AnimationBaseCharacterAbility<ArcherHuntersMarkAbilityDefinition>
     {
-        public float Damage => Caster.Entity.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
-        public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
-        public float BuffDuration => definition.BuffDuration;
+        [Statistic("damage")] public float Damage => Caster.Entity.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
+        [Statistic("range")] public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
+        [Statistic("buff_duration")] public float BuffDuration => definition.BuffDuration;
 
         public override float Cooldown => definition.Cooldown;
 

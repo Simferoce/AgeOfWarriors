@@ -2,7 +2,8 @@
 
 namespace Game
 {
-    public abstract class AbilityDefinition : Definition
+    [StatisticClass("definition")]
+    public abstract partial class AbilityDefinition : Definition
     {
         [SerializeField] private string title;
         [SerializeField] private string description;

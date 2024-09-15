@@ -1,10 +1,10 @@
 ﻿namespace Game
 {
-    public class BerserkerLeachingStrikeAbility : AnimationBaseCharacterAbility<BerserkerLeachingStrikeAbilityDefinition>
+    public partial class BerserkerLeachingStrikeAbility : AnimationBaseCharacterAbility<BerserkerLeachingStrikeAbilityDefinition>
     {
-        public float Damage => Caster.Entity.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
-        public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
-        public float Leach => definition.Leach;
+        [Statistic("damage")] public float Damage => Caster.Entity.GetCachedComponent<Character>().AttackPower * definition.DamagePercentage;
+        [Statistic("range")] public float Range => Caster.Entity.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
+        [Statistic("leach")] public float Leach => definition.Leach;
 
         public override float Cooldown => definition.Cooldown;
 

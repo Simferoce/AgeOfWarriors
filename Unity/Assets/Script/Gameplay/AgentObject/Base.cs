@@ -20,6 +20,25 @@ namespace Game
 
         public event Action<AttackResult, Attackable> OnDamageTaken;
 
+        protected override void Awake()
+        {
+            base.Awake();
+            GetCachedComponent<Attackable>().OnDamageTaken += Base_OnDamageTaken;
+        }
+
+        private void Base_OnDamageTaken(AttackResult attackResult, Attackable attackable)
+        {
+            Health -= attackResult.DamageTaken;
+            if (Health <= 0 && !IsDead)
+                Death();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            GetCachedComponent<Attackable>().OnDamageTaken -= Base_OnDamageTaken;
+        }
+
         public void Death()
         {
             EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
@@ -38,25 +57,6 @@ namespace Game
 
             Health = maxHealth;
         }
-
-        //public void TakeAttack(Attack attack)
-        //{
-        //    AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
-        //            GetCachedComponent<Attackable>(),
-        //            currentHealth: Health,
-        //            defense: Defense));
-
-        //    Health -= result.DamageToTake;
-
-        //    AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, this);
-        //    foreach (IAttackSource source in attack.AttackSource.Sources)
-        //        source.AttackLanded(attackResult);
-
-        //    OnDamageTaken?.Invoke(attackResult, GetCachedComponent<Attackable>());
-
-        //    if (Health <= 0 && !IsDead)
-        //        Death();
-        //}
     }
 }
 

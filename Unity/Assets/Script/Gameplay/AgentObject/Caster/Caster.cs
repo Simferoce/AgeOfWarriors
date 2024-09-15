@@ -6,21 +6,23 @@ using UnityEngine.Profiling;
 
 namespace Game
 {
-    public class Caster : MonoBehaviour, IComponent
+    [StatisticClass("caster")]
+    public partial class Caster : MonoBehaviour, IComponent
     {
         [Header("Abilities")]
         [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
 
+        [Statistic] public Entity Entity { get; set; }
+
         public event Action<Ability> OnAbilityUsed;
-        public event System.Action OnCastBegin;
-        public event System.Action OnCastEnd;
+        public event Action OnCastBegin;
+        public event Action OnCastEnd;
 
         public List<Ability> Abilities { get => abilities; set => abilities = value; }
-        public Entity Entity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         public float LastAbilityUsed { get; set; }
         public List<TransformTag> TransformTags { get; set; }
         public bool IsCasting { get; set; }
+
         private List<Ability> abilities = new List<Ability>();
 
         private void Awake()

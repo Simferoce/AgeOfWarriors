@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace Game
 {
+    [StatisticClass("character")]
     public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IModifierSource, IBlock, IAnimated
     {
         [Header("Collision")]
@@ -27,20 +28,20 @@ namespace Game
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
         public Entity Entity { get; set; }
 
-        public float Health { get; set; }
-        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
-        public float Defense { get => Definition.Defense + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
-        public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)); }
-        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
-        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
-        public float Reach { get => Definition.Reach * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
+        [Statistic("health")] public float Health { get; set; }
+        [Statistic("maxHealth")] public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
+        [Statistic("defense")] public float Defense { get => Definition.Defense + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
+        [Statistic("attackSpeed")] public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)); }
+        [Statistic("attackPower")] public float AttackPower { get => Definition.AttackPower + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
+        [Statistic("speed")] public float Speed { get => Definition.Speed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
+        [Statistic("reach")] public float Reach { get => Definition.Reach * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
-        public bool IsEngaged => TargetUtility.GetTargets(this, engagedCriteria, this).FirstOrDefault() != null;
-        public bool IsInvulnerable => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
-        public bool IsConfused => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
-        public bool IsDead { get => stateMachine.Current is DeathState; }
-        public bool IsInjured { get => Health < MaxHealth; }
+        [Statistic("isEngaged")] public bool IsEngaged => TargetUtility.GetTargets(this, engagedCriteria, this).FirstOrDefault() != null;
+        [Statistic("isInvulnerable")] public bool IsInvulnerable => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
+        [Statistic("isConfused")] public bool IsConfused => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
+        [Statistic("isDead")] public bool IsDead { get => stateMachine.Current is DeathState; }
+        [Statistic("isInjured")] public bool IsInjured { get => Health < MaxHealth; }
 
         private StateMachine stateMachine = new StateMachine();
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
@@ -49,6 +50,14 @@ namespace Game
         {
             base.Awake();
             TransformTags = GetComponentsInChildren<TransformTag>().ToList();
+            GetCachedComponent<Attackable>().OnDamageTaken += Character_OnDamageTaken;
+        }
+
+        private void Character_OnDamageTaken(AttackResult attackResult, Attackable attackable)
+        {
+            Health -= attackResult.DamageTaken;
+            if (Health <= 0 && !IsDead)
+                Death();
         }
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)
@@ -85,6 +94,7 @@ namespace Game
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            GetCachedComponent<Attackable>().OnDamageTaken -= Character_OnDamageTaken;
         }
 
         public void SetDirection()
@@ -140,39 +150,6 @@ namespace Game
         public bool RecentlyAttacked(Attackable attackable)
         {
             return RecentlyAttackedAttackeables.Contains(attackable);
-        }
-
-        public void TakeAttack(Attack attack)
-        {
-            AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
-                    GetCachedComponent<Attackable>(),
-                    currentHealth: Health,
-                    defense: Defense,
-                    increaseDamageTaken: GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0),
-                    rangedDamageReduction: GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0),
-                    shields: GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList(),
-                    canResistDeath: GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow())));
-
-            Health -= result.DamageToTake;
-
-            if (result.ResistedDeath)
-            {
-                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
-                if (modifier != null)
-                {
-                    modifier.ResistKillingBlow();
-                    Health = 0.001f;
-                }
-            }
-
-            AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, GetCachedComponent<Attackable>());
-            foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attackResult);
-
-            OnDamageTaken?.Invoke(attackResult, GetCachedComponent<Attackable>());
-
-            if (Health <= 0 && !IsDead)
-                Death();
         }
 
         #region Ability
