@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class StatisticPercentage : Statistic
+public class StatisticPercentage : StatisticSerializedIdentity
 {
     [SerializeReference, SubclassSelector] private Statistic provider;
     [SerializeField] private float percentage;

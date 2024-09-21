@@ -38,7 +38,7 @@ namespace Game
         {
             foreach (Statistic statistic in statistics)
             {
-                if (value.SequenceEqual(statistic.Name))
+                if (value.SequenceEqual(statistic.GetName(this)))
                     return statistic;
             }
 

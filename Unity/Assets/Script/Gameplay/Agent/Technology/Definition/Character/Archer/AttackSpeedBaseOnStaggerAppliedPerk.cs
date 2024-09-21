@@ -39,7 +39,7 @@ namespace Game
 
         public override Statistic GetStatistic(ReadOnlySpan<char> value)
         {
-            if (value.SequenceEqual(attackSpeedByStaggerApplied.Name))
+            if (value.SequenceEqual(attackSpeedByStaggerApplied.GetName(this)))
                 return attackSpeedByStaggerApplied;
 
             return base.GetStatistic(value);

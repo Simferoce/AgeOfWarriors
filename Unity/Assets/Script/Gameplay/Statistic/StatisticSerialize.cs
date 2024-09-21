@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class StatisticSerialize<Type> : Statistic
+public class StatisticSerialize<Type> : StatisticSerializedIdentity
 {
     [SerializeField]
     private Type value;

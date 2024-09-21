@@ -2,7 +2,7 @@
 using System;
 
 [Serializable]
-public class StatisticFunction<Context, Type> : Statistic
+public class StatisticFunction<Context, Type> : StatisticSerializedIdentity
     where Context : class
 {
     private Func<Context, Type> function;

@@ -63,37 +63,37 @@ namespace Game
 
         public override Statistic GetStatistic(ReadOnlySpan<char> value)
         {
-            if (value.SequenceEqual(health.Name))
+            if (value.SequenceEqual(health.GetName(this)))
                 return health;
 
-            if (value.SequenceEqual(defense.Name))
+            if (value.SequenceEqual(defense.GetName(this)))
                 return defense;
 
-            if (value.SequenceEqual(attackSpeed.Name))
+            if (value.SequenceEqual(attackSpeed.GetName(this)))
                 return attackSpeed;
 
-            if (value.SequenceEqual(attackPower.Name))
+            if (value.SequenceEqual(attackPower.GetName(this)))
                 return attackPower;
 
-            if (value.SequenceEqual(speed.Name))
+            if (value.SequenceEqual(speed.GetName(this)))
                 return speed;
 
-            if (value.SequenceEqual(reach.Name))
+            if (value.SequenceEqual(reach.GetName(this)))
                 return reach;
 
-            if (value.SequenceEqual(isEngaged.Name))
+            if (value.SequenceEqual(isEngaged.GetName(this)))
                 return isEngaged;
 
-            if (value.SequenceEqual(isInvulnerable.Name))
+            if (value.SequenceEqual(isInvulnerable.GetName(this)))
                 return isInvulnerable;
 
-            if (value.SequenceEqual(isConfused.Name))
+            if (value.SequenceEqual(isConfused.GetName(this)))
                 return isConfused;
 
-            if (value.SequenceEqual(isDead.Name))
+            if (value.SequenceEqual(isDead.GetName(this)))
                 return isDead;
 
-            if (value.SequenceEqual(isInjured.Name))
+            if (value.SequenceEqual(isInjured.GetName(this)))
                 return isInjured;
 
             return base.GetStatistic(value);

@@ -2,7 +2,7 @@
 using System;
 
 [Serializable]
-public class StatisticModifiable<Type> : Statistic
+public class StatisticModifiable<Type> : StatisticSerializedIdentity
 {
     protected Type currentValue;
 

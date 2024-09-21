@@ -1,4 +1,6 @@
-﻿namespace Game
+﻿using System;
+
+namespace Game
 {
     public static class StatisticUtility
     {
@@ -154,6 +156,46 @@
             }
 
             throw new System.InvalidCastException($"Could not convert from {typeof(U).Name} to {typeof(T).Name}.");
+        }
+
+        public static Statistic Resolve(IStatisticContext context, string path)
+        {
+            ReadOnlySpan<char> span = path.AsSpan();
+            int start = 0;
+            int index;
+
+            IStatisticContext current = context;
+            while ((index = span.Slice(start).IndexOf(".")) != -1)
+            {
+                current = current.GetContext(span.Slice(start, index));
+                if (current == null)
+                    return null;
+
+                start += index + 1;
+            }
+
+            return current.GetStatistic(span.Slice(start));
+        }
+
+        public static bool TryResolveValue<T>(IStatisticContext context, string path, out T value)
+        {
+            value = default;
+
+            ReadOnlySpan<char> span = path.AsSpan();
+            int start = 0;
+            int index;
+
+            IStatisticContext current = context;
+            while ((index = span.Slice(start).IndexOf(".")) != -1)
+            {
+                current = current.GetContext(span.Slice(start, index));
+                if (current == null)
+                    return false;
+
+                start += index + 1;
+            }
+
+            return current.GetStatistic(span.Slice(start))?.TryGetValue(current, out value) ?? false;
         }
     }
 }
