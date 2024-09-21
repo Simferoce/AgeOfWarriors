@@ -29,11 +29,6 @@ namespace Game
 
         [SerializeField, Range(0, 1)] private float percentageHealMaxHealth;
 
-        public override string ParseDescription()
-        {
-            return string.Format(this.Description, StatisticFormatter.Percentage(percentageHealMaxHealth, StatisticDefinition.MaxHealth));
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game
 {
@@ -9,7 +10,7 @@ namespace Game
         {
             private int amountOfStaggerApplied = 0;
 
-            public override float? AttackSpeedPercentage => amountOfStaggerApplied * definition.attackSpeedByStaggerApplied;
+            public override float? AttackSpeedPercentage => amountOfStaggerApplied * definition.attackSpeedByStaggerApplied.GetValueOrThrow<float>(this);
 
             public Modifier(ModifierHandler modifiable, AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
@@ -34,11 +35,14 @@ namespace Game
             }
         }
 
-        [SerializeField, Range(0, 5)] private float attackSpeedByStaggerApplied;
+        [SerializeField] public StatisticSerialize<float> attackSpeedByStaggerApplied = new StatisticSerialize<float>("attack_speed_per_stagger", null, 1f);
 
-        public override string ParseDescription()
+        public override Statistic GetStatistic(ReadOnlySpan<char> value)
         {
-            return string.Format(Description, attackSpeedByStaggerApplied);
+            if (value.SequenceEqual(attackSpeedByStaggerApplied.Name))
+                return attackSpeedByStaggerApplied;
+
+            return base.GetStatistic(value);
         }
 
         public override Game.Modifier GetModifier(ModifierHandler modifiable)

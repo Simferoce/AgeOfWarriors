@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEngine;
 using static Game.ShieldModifierDefinition;
 
-[StatisticClass("attackable")]
 public partial class Attackable : MonoBehaviour, IComponent
 {
     public struct Input
@@ -31,13 +30,13 @@ public partial class Attackable : MonoBehaviour, IComponent
         }
     }
 
-    [Statistic("")] public Entity Entity { get; set; }
+    public Entity Entity { get; set; }
     public event Action<AttackResult, Attackable> OnDamageTaken;
 
     public void TakeAttack(Attack attack)
     {
-        float currentHealth = StatisticUtility.ResolveStatisticOrThrow<float>(Entity as IStatisticProvider, "health");
-        float currentDefense = StatisticUtility.ResolveStatisticOrThrow<float>(Entity as IStatisticProvider, "defense");
+        float currentHealth = Entity.GetStatistic("health").GetValueOrThrow<float>(Entity);
+        float currentDefense = Entity.GetStatistic("defense").GetValueOrDefault<float>(Entity, 0f);
         float increaseDamageTaken = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0);
         float rangedDamageReduction = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0);
         List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();

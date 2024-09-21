@@ -1,16 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    [StatisticClass("ability")]
-    public abstract partial class Ability : MonoBehaviour
+    public abstract class Ability : MonoBehaviour, IStatisticContext
     {
-        [Statistic("caster")] public Caster Caster { get; set; }
-        public virtual float Cooldown { get; }
+        public Caster Caster { get; set; }
+        public virtual float Cooldown => Definition.GetStatistic("cooldown")?.GetValueOrThrow<float>(this) ?? 0f;
 
-        public event System.Action OnAbilityEffectApplied;
-        public event System.Action<Ability> OnAbilityUsed;
+        public event Action OnAbilityEffectApplied;
+        public event Action<Ability> OnAbilityUsed;
 
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
@@ -18,8 +19,6 @@ namespace Game
         public AbilityDefinition Definition { get; set; }
         public abstract string ParseDescription();
         public Faction FactionWhenUsed { get; set; }
-
-        public string StatisticProviderName => "ability";
 
         public virtual void Initialize(Caster caster)
         {
@@ -47,6 +46,27 @@ namespace Game
         protected void PublishEffectApplied()
         {
             OnAbilityEffectApplied?.Invoke();
+        }
+
+        public virtual Statistic GetStatistic(ReadOnlySpan<char> value)
+        {
+            return null;
+        }
+
+        public virtual IStatisticContext GetContext(ReadOnlySpan<char> value)
+        {
+            if (value.SequenceEqual("caster"))
+                return Caster;
+
+            if (value.SequenceEqual("definition"))
+                return Definition;
+
+            return null;
+        }
+
+        public bool IsName(ReadOnlySpan<char> name)
+        {
+            return name.SequenceEqual("ability");
         }
     }
 

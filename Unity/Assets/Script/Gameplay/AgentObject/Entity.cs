@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[StatisticClass("entity")]
-public abstract partial class Entity : MonoBehaviour
+public abstract class Entity : MonoBehaviour, IStatisticContext
 {
-    [Statistic] public List<IStatisticProvider> StatisticProviders { get; set; }
-
     private Dictionary<Type, List<IComponent>> cached = new Dictionary<Type, List<IComponent>>();
 
     private void Awake()
@@ -17,8 +14,6 @@ public abstract partial class Entity : MonoBehaviour
         {
             component.Entity = this;
         }
-
-        StatisticProviders = GetComponentsInChildren<IStatisticProvider>().ToList();
     }
 
     public bool TryGetCachedComponent<T>(out T component)
@@ -53,5 +48,20 @@ public abstract partial class Entity : MonoBehaviour
         cached[typeof(T)] = new List<IComponent>() { component };
 
         return component;
+    }
+
+    public virtual bool IsName(ReadOnlySpan<char> name)
+    {
+        return name.SequenceEqual("entity");
+    }
+
+    public virtual Statistic GetStatistic(ReadOnlySpan<char> value)
+    {
+        return null;
+    }
+
+    public virtual IStatisticContext GetContext(ReadOnlySpan<char> value)
+    {
+        return null;
     }
 }

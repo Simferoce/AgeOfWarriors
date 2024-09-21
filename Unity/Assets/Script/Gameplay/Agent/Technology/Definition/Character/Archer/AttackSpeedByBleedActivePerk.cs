@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -8,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, AttackSpeedByBleedActivePerk>
         {
-            public override float? AttackSpeedPercentage => amountOfBleedApplied * definition.attackSpeedPerBleedApplied;
+            public override float? AttackSpeedPercentage => amountOfBleedApplied * definition.attackSpeedPerBleedApplied.GetValueOrThrow<float>(this);
             public override bool Show => amountOfBleedApplied > 0;
 
             private int amountOfBleedApplied = 0;
@@ -37,12 +36,7 @@ namespace Game
             }
         }
 
-        [SerializeField, Range(0, 5)] private float attackSpeedPerBleedApplied;
-
-        public override string ParseDescription()
-        {
-            return string.Format(Description, attackSpeedPerBleedApplied);
-        }
+        [SerializeField] private StatisticSerialize<float> attackSpeedPerBleedApplied = new StatisticSerialize<float>("attack_speed_per_bleed", null, 1f);
 
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {

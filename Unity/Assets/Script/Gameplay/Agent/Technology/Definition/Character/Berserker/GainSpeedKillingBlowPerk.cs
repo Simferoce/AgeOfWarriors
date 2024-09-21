@@ -38,11 +38,6 @@ namespace Game
         [SerializeField] private float duration;
         [SerializeField] private SpeedModifierDefinition speedModifierDefinition;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, speed, duration);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

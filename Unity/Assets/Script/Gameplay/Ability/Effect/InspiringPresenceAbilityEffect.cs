@@ -8,9 +8,9 @@ namespace Game
     [Serializable]
     public class InspiringPresenceAbilityEffect : AbilityEffect
     {
-        [SerializeField] private StatisticReference<float> area;
-        [SerializeField] private StatisticReference<float> buffDuration;
-        [SerializeField] private StatisticReference<float> defense;
+        [SerializeField] private StatisticReference area;
+        [SerializeField] private StatisticReference buffDuration;
+        [SerializeField] private StatisticReference defense;
         [SerializeField] private DefenseModifierDefinition inspiringPresenceModifierDefinition;
 
         private float? startedAt = null;
@@ -21,7 +21,7 @@ namespace Game
 
             List<Character> characters = AgentObject.All.OfType<Character>()
                .Where(x => x.Faction == (x.Entity as AgentObject).Faction
-                   && Mathf.Abs((x.Entity as AgentObject).transform.position.x - x.transform.position.x) < area.GetValueOrThrow(Ability))
+                   && Mathf.Abs((x.Entity as AgentObject).transform.position.x - x.transform.position.x) < area.GetValueOrThrow<float>(Ability))
                .ToList();
 
             foreach (Character characterToBuff in characters)
@@ -41,9 +41,9 @@ namespace Game
                     inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(
                             Ability.Caster.Entity.GetCachedComponent<Character>(),
                             inspiringPresenceModifierDefinition,
-                            defense.GetValueOrThrow(Ability),
+                            defense.GetValueOrThrow<float>(Ability),
                             Ability.Caster.Entity.GetCachedComponent<IModifierSource>())
-                        .With(new CharacterModifierTimeElement(buffDuration.GetValueOrThrow(Ability)));
+                        .With(new CharacterModifierTimeElement(buffDuration.GetValueOrThrow<float>(Ability)));
 
                     characterToBuff.Entity.GetCachedComponent<ModifierHandler>().AddModifier(inspiringPresenceBuff);
                 }

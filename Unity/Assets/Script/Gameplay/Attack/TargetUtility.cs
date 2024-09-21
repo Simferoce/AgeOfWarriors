@@ -6,7 +6,7 @@ namespace Game
 {
     public static class TargetUtility
     {
-        public static List<Target> GetTargets(Entity entity, TargetCriteria criteria, IStatisticProvider statisticProvider)
+        public static List<Target> GetTargets(Entity entity, TargetCriteria criteria, IStatisticContext statisticProvider)
         {
             List<Target> potentialTargets = new List<Target>();
             foreach (Target targetteable in AgentObject.All.Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))

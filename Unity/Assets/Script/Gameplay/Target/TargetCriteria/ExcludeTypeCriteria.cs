@@ -10,7 +10,7 @@ namespace Game
     {
         [SerializeField] private List<AgentObject.Type> types = new List<AgentObject.Type>();
 
-        public override bool Execute(Target owner, Target targeteable, IStatisticProvider statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(Target owner, Target targeteable, IStatisticContext statisticProvider, Faction ownerFaction, Faction targetFaction)
         {
             return (targeteable.Entity is AgentObject agentObject) && agentObject.Types.All(x => !types.Contains(x));
         }

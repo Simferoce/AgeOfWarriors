@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class ModifierDefinition : Definition
+    public abstract class ModifierDefinition : Definition, IStatisticContext
     {
         [Serializable]
         public abstract class Instancier
@@ -34,6 +34,21 @@ namespace Game
         public virtual string ParseDescription()
         {
             return description;
+        }
+
+        public bool IsName(ReadOnlySpan<char> name)
+        {
+            return name.SequenceEqual("definition");
+        }
+
+        public virtual Statistic GetStatistic(ReadOnlySpan<char> value)
+        {
+            return null;
+        }
+
+        public virtual IStatisticContext GetContext(ReadOnlySpan<char> value)
+        {
+            return null;
         }
     }
 }

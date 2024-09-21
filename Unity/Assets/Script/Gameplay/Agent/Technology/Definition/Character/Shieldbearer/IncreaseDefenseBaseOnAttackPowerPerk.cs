@@ -17,11 +17,6 @@ namespace Game
         [SerializeField] private float attackPowerIncrease;
         [SerializeField] private float defenseRequired;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, attackPowerIncrease, defenseRequired);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

@@ -49,11 +49,6 @@ namespace Game
         [SerializeField] private PoolProjectileModifierDefinition projectileModifierDefinition;
         [SerializeField] private AbilityDefinition affectedAbility;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, stack, damage, duration);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

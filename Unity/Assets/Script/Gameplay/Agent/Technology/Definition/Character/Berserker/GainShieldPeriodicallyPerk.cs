@@ -34,11 +34,6 @@ namespace Game
         [SerializeField] private float cooldown;
         [SerializeField] private ShieldModifierDefinition shieldModifierDefinition;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, cooldown, duration, amount);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

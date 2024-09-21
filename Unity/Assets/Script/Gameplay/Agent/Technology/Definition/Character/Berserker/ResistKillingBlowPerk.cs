@@ -33,11 +33,6 @@ namespace Game
         [SerializeField] private float duration;
         [SerializeField] private ResistDeathModifierDefinition resistDeathModifierDefinition;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, duration);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

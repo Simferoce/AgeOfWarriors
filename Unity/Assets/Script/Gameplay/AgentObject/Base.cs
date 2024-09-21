@@ -8,18 +8,15 @@ namespace Game
     [RequireComponent(typeof(Target))]
     public class Base : AgentObject
     {
-        [SerializeField] private float maxHealth;
-        [SerializeField] private float defense;
+        [SerializeField] public StatisticFloatModifiable Health = new StatisticFloatModifiable("health", StatisticRepository.Health, new StatisticSerialize<float>("max", StatisticRepository.MaxHealth, 1000f));
+        [SerializeField] public StatisticSerialize<float> Defense = new StatisticSerialize<float>("defense", StatisticRepository.Defense, 0);
+        [SerializeField] public StatisticFunction<Base, bool> IsDead = new StatisticFunction<Base, bool>("isDead", null, x => x.Health.GetValueOrThrow<float>(x) <= 0);
+
         [SerializeField] private SpawnPoint spawnPoint;
         [SerializeField] private Collider2D hitbox;
 
         public Entity Entity { get; set; }
-        public float Health { get; set; }
         public SpawnPoint SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
-
-        public float MaxHealth => maxHealth;
-        public float Defense => defense;
-        public bool IsDead => Health <= 0;
 
         public event Action<AttackResult, Attackable> OnDamageTaken;
 
@@ -31,8 +28,8 @@ namespace Game
 
         private void Base_OnDamageTaken(AttackResult attackResult, Attackable attackable)
         {
-            Health -= attackResult.DamageTaken;
-            if (Health <= 0 && !IsDead)
+            Health.Modify(this, Health.GetValueOrThrow<float>(this) - attackResult.DamageTaken);
+            if (IsDead.GetValueOrThrow<bool>(this))
                 Death();
         }
 
@@ -52,7 +49,7 @@ namespace Game
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            Health = maxHealth;
+            Health.Modify(this, Health.Max.GetValueOrThrow<float>(this));
         }
     }
 }

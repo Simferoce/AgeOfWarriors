@@ -1,36 +1,47 @@
 ﻿using System;
-using Unity.Profiling;
 using UnityEngine;
 
 namespace Game
 {
     [Serializable]
-    public class StatisticReference<T>
+    public class StatisticReference : Statistic
     {
         [SerializeField] private string path;
 
-        public T GetValueOrThrow(IStatisticProvider statisticProvider)
+        public StatisticReference()
         {
-            return TryGetValue(statisticProvider, out T value) ? value : throw new Exception($"Could not resolve the path \"{path}\" for \"{statisticProvider}\"");
+
         }
 
-        public T GetValueOrDefault(IStatisticProvider statisticProvider)
+        public StatisticReference(string path)
         {
-            return TryGetValue(statisticProvider, out T value) ? value : default;
+            this.path = path;
         }
 
-        private bool TryGetValue(IStatisticProvider statisticProvider, out T value)
+        public override bool TryGetValue<T>(IStatisticContext context, out T value)
         {
-            using (new ProfilerMarker("Statistic.Resolve").Auto())
+            value = default;
+
+            ReadOnlySpan<char> span = path.AsSpan();
+            int start = 0;
+            int index;
+
+            IStatisticContext current = context;
+            while ((index = span.Slice(start).IndexOf(".")) != -1)
             {
-                if (string.IsNullOrEmpty(path))
-                {
-                    value = default(T);
+                current = GetContext(context, span.Slice(start, index));
+                if (current == null)
                     return false;
-                }
 
-                return statisticProvider.TryGetStatistic<T>(path, out value);
+                start += index + 1;
             }
+
+            return current.GetStatistic(span.Slice(start))?.TryGetValue(current, out value) ?? false;
+        }
+
+        private IStatisticContext GetContext(IStatisticContext context, ReadOnlySpan<char> part)
+        {
+            return context.GetContext(part);
         }
     }
 }

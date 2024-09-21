@@ -52,11 +52,6 @@ namespace Game
         [SerializeField] private float damageToPrevent = 50.0f;
         [SerializeField] private EmpoweredModifierDefinition empoweredModifierDefinition;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, damageToPrevent, empoweredModifierDefinition.PercentageDamageIncrease);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace Game
 {
-    [StatisticClass("character")]
     [RequireComponent(typeof(Blocker))]
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(Target))]
@@ -31,23 +30,82 @@ namespace Game
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
         public Entity Entity { get; set; }
 
-        [Statistic("health")] public float Health { get; set; }
-        [Statistic("maxHealth")] public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
-        [Statistic("defense")] public float Defense { get => Definition.Defense + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
-        [Statistic("attackSpeed")] public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)); }
-        [Statistic("attackPower")] public float AttackPower { get => Definition.AttackPower + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
-        [Statistic("speed")] public float Speed { get => Definition.Speed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
-        [Statistic("reach")] public float Reach { get => Definition.Reach * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
+        public float Health => health.GetValueOrThrow<float>(this);
+        public float MaxHealth => health.Max.GetValueOrThrow<float>(this);
+        public float Defense => health.GetValueOrThrow<float>(this);
+        public float AttackSpeed => health.GetValueOrThrow<float>(this);
+        public float AttackPower => health.GetValueOrThrow<float>(this);
+        public float Speed => health.GetValueOrThrow<float>(this);
+        public float Reach => health.GetValueOrThrow<float>(this);
+
+        public bool IsEngaged => isEngaged.GetValueOrThrow<bool>(this);
+        public bool IsInvulnerable => isInvulnerable.GetValueOrThrow<bool>(this);
+        public bool IsConfused => isConfused.GetValueOrThrow<bool>(this);
+        public bool IsDead => isDead.GetValueOrThrow<bool>(this);
+        public bool IsInjured => isInjured.GetValueOrThrow<bool>(this);
+
+        private StatisticFloatModifiable health = new StatisticFloatModifiable("health", StatisticRepository.Health, new StatisticFunction<Character, float>("max", StatisticRepository.MaxHealth, x => x.Definition.MaxHealth));
+        private StatisticFunction<Character, float> defense = new StatisticFunction<Character, float>("defense", StatisticRepository.Defense, x => x.Definition.Defense + x.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value));
+        private StatisticFunction<Character, float> attackSpeed = new StatisticFunction<Character, float>("attack_speed", StatisticRepository.AttackSpeed, x => x.Definition.AttackSpeed * (1 + x.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)));
+        private StatisticFunction<Character, float> attackPower = new StatisticFunction<Character, float>("attack_power", StatisticRepository.AttackPower, x => x.Definition.AttackPower + x.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value));
+        private StatisticFunction<Character, float> speed = new StatisticFunction<Character, float>("speed", StatisticRepository.Speed, x => x.Definition.Speed * (1 + x.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)));
+        private StatisticFunction<Character, float> reach = new StatisticFunction<Character, float>("reach", StatisticRepository.Reach, x => x.Definition.Reach * (1 + x.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)));
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
-        [Statistic("isEngaged")] public bool IsEngaged => TargetUtility.GetTargets(this, engagedCriteria, this).FirstOrDefault() != null;
-        [Statistic("isInvulnerable")] public bool IsInvulnerable => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
-        [Statistic("isConfused")] public bool IsConfused => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
-        [Statistic("isDead")] public bool IsDead { get => stateMachine.Current is DeathState; }
-        [Statistic("isInjured")] public bool IsInjured { get => Health < MaxHealth; }
+        private StatisticFunction<Character, bool> isEngaged = new StatisticFunction<Character, bool>("engaged", null, x => TargetUtility.GetTargets(x, x.engagedCriteria, x).FirstOrDefault() != null);
+        private StatisticFunction<Character, bool> isInvulnerable = new StatisticFunction<Character, bool>("invulnerable", null, x => x.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value));
+        private StatisticFunction<Character, bool> isConfused = new StatisticFunction<Character, bool>("confused", null, x => x.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value));
+        private StatisticFunction<Character, bool> isDead = new StatisticFunction<Character, bool>("dead", null, x => x.stateMachine.Current is DeathState);
+        private StatisticFunction<Character, bool> isInjured = new StatisticFunction<Character, bool>("injured", null, x => x.Health < x.MaxHealth);
 
         private StateMachine stateMachine = new StateMachine();
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
+
+        public override Statistic GetStatistic(ReadOnlySpan<char> value)
+        {
+            if (value.SequenceEqual(health.Name))
+                return health;
+
+            if (value.SequenceEqual(defense.Name))
+                return defense;
+
+            if (value.SequenceEqual(attackSpeed.Name))
+                return attackSpeed;
+
+            if (value.SequenceEqual(attackPower.Name))
+                return attackPower;
+
+            if (value.SequenceEqual(speed.Name))
+                return speed;
+
+            if (value.SequenceEqual(reach.Name))
+                return reach;
+
+            if (value.SequenceEqual(isEngaged.Name))
+                return isEngaged;
+
+            if (value.SequenceEqual(isInvulnerable.Name))
+                return isInvulnerable;
+
+            if (value.SequenceEqual(isConfused.Name))
+                return isConfused;
+
+            if (value.SequenceEqual(isDead.Name))
+                return isDead;
+
+            if (value.SequenceEqual(isInjured.Name))
+                return isInjured;
+
+            return base.GetStatistic(value);
+        }
+
+        public override IStatisticContext GetContext(ReadOnlySpan<char> value)
+        {
+            if (value.SequenceEqual("health"))
+                return health;
+
+            return base.GetContext(value);
+        }
 
         protected override void Awake()
         {
@@ -58,8 +116,8 @@ namespace Game
 
         private void Character_OnDamageTaken(AttackResult attackResult, Attackable attackable)
         {
-            Health -= attackResult.DamageTaken;
-            if (Health <= 0 && !IsDead)
+            health.Modify(this, Health - attackResult.DamageTaken);
+            if (health.GetValueOrThrow<float>(this) <= 0 && !IsDead)
                 Death();
         }
 
@@ -78,7 +136,7 @@ namespace Game
             }
 
             stateMachine.Initialize(new MoveState(this));
-            this.Health = MaxHealth;
+            this.health.Modify(this, MaxHealth);
         }
 
         public void Update()
@@ -132,8 +190,7 @@ namespace Game
 
         public void Heal(float amount)
         {
-            this.Health += amount;
-            this.Health = Mathf.Clamp(Health, 0, MaxHealth);
+            this.health.Modify(this, this.Health + amount);
         }
 
         public void AttackLanded(AttackResult attackResult)

@@ -17,7 +17,7 @@ namespace Game
 
         [SerializeField] private Comparaison comparaison;
 
-        public override bool Execute(Target owner, Target targeteable, IStatisticProvider statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(Target owner, Target targeteable, IStatisticContext statisticProvider, Faction ownerFaction, Faction targetFaction)
         {
             return comparaison switch
             {

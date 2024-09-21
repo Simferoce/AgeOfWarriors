@@ -49,11 +49,6 @@ namespace Game
         [SerializeField] private float duration;
         [SerializeField] private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, duration, damageReduction);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

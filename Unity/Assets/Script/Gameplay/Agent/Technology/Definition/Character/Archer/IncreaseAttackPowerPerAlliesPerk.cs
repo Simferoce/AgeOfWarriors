@@ -9,7 +9,7 @@ namespace Game
         {
             private int amountOfAlliesPresentOnTheBattleField;
 
-            public override float? AttackPower => amountOfAlliesPresentOnTheBattleField * definition.attackPowerPerAlliesPresent;
+            public override float? AttackPower => amountOfAlliesPresentOnTheBattleField * definition.attackPowerPerAlliesPresent.GetValueOrThrow<float>(this);
 
             public override bool Show => amountOfAlliesPresentOnTheBattleField > 0;
 
@@ -44,12 +44,7 @@ namespace Game
             }
         }
 
-        [SerializeField] private float attackPowerPerAlliesPresent;
-
-        public override string ParseDescription()
-        {
-            return string.Format(Description, attackPowerPerAlliesPresent);
-        }
+        [SerializeField] private StatisticSerialize<float> attackPowerPerAlliesPresent = new StatisticSerialize<float>("attack_power_per_allies", null, 1f);
 
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {

@@ -71,11 +71,6 @@ namespace Game
         [SerializeField, Range(0, 5)] private float reductionAmount;
         [SerializeField] private DamageDealtReductionModifierDefinition damageDealtReductionModifierDefinition;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, reductionAmount, StatisticFormatter.Percentage(percentageReachAffect, StatisticDefinition.Reach), duration);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

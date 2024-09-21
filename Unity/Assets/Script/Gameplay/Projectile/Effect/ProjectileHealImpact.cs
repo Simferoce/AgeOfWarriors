@@ -8,7 +8,7 @@ namespace Game
     public class ProjectileHealImpact : ProjectileImpact
     {
         [SerializeReference, SubclassSelector] private TargetCriteria criteria;
-        [SerializeField] private StatisticReference<float> heal;
+        [SerializeField] private StatisticReference heal;
 
         private float currentHeal;
 
@@ -16,7 +16,7 @@ namespace Game
         {
             base.Initialize(projectile);
 
-            currentHeal = heal.GetValueOrThrow(projectile);
+            currentHeal = heal.GetValueOrThrow<float>(projectile);
         }
 
         public override ImpactReport Impact(GameObject collision)

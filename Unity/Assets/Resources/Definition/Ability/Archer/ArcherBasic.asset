@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b139c93db119184698517bbc4398511, type: 3}
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
   m_Name: ArcherBasic
   m_EditorClassIdentifier: 
   id: 403e6a5681908f94dbcb8f4dd075a7f4

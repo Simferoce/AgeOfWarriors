@@ -37,11 +37,6 @@ namespace Game
 
         [SerializeField] private float healPerShieldPointRemaining;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, healPerShieldPointRemaining);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

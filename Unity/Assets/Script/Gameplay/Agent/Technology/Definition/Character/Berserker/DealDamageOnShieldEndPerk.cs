@@ -57,11 +57,6 @@ namespace Game
         [SerializeField] private float damagePerShieldPointAbsorbed;
         [SerializeField, Range(0, 5)] private float percentageReachExplosionRadius;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, damagePerShieldPointAbsorbed, StatisticFormatter.Percentage(percentageReachExplosionRadius, StatisticDefinition.Reach));
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

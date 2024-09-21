@@ -37,11 +37,6 @@ namespace Game
         [SerializeField] private float buffDuration;
         [SerializeField] private AttackPowerModifierDefinition attackPowerModifier;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, attackPowerGain, buffDuration);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

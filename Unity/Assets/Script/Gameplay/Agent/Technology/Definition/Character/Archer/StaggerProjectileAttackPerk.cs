@@ -52,11 +52,6 @@ namespace Game
         [SerializeField] private AbilityDefinition affectedAbility;
         [SerializeField] private StaggerProjectileModifierDefinition staggerProjectileAttackPerk;
 
-        public override string ParseDescription()
-        {
-            return string.Format(Description, stack, duration);
-        }
-
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());

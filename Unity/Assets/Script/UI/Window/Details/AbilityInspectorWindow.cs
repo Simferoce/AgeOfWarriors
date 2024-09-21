@@ -8,7 +8,7 @@ namespace Game
         [SerializeField] private TextMeshProUGUI title;
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private TextMeshProUGUI cooldownText;
-        [SerializeField] private StatisticReference<float> cooldown;
+        [SerializeField] private StatisticReference cooldown;
 
         public static AbilityInspectorWindow Open(Ability ability, string abilitySlotName)
         {
@@ -20,7 +20,7 @@ namespace Game
             if (ability.Cooldown > 0f)
             {
                 abilityInspectorWindow.cooldownText.alpha = 1f;
-                abilityInspectorWindow.cooldownText.text = $"{ability.Cooldown}{StatisticDefinition.Cooldown.TextIcon}";
+                abilityInspectorWindow.cooldownText.text = $"{ability.Cooldown}{StatisticRepository.GetDefinition(StatisticRepository.Cooldown).TextIcon}";
             }
             else
             {

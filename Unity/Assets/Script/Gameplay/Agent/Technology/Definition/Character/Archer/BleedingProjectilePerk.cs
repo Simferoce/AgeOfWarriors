@@ -17,20 +17,15 @@ namespace Game
                 return new BleedingProjectileModifierDefinition.Modifier(
                     projectile.Entity.GetCachedComponent<ModifierHandler>(),
                     definition.bleedingProjectileModifierDefinition,
-                    definition.percentageAttackPower * modifiable.Entity.GetCachedComponent<Character>().AttackPower,
-                    definition.duration,
+                    definition.Damage.GetValueOrThrow<float>(this),
+                    definition.Duration.GetValueOrThrow<float>(this),
                     Source);
             }
         }
 
-        [SerializeField] private float duration;
-        [SerializeField, Range(0, 5)] private float percentageAttackPower;
+        [SerializeField] public StatisticSerialize<float> Duration = new StatisticSerialize<float>("duration", StatisticRepository.Duration, 1f);
+        [SerializeField] public StatisticPercentage Damage = new StatisticPercentage("damage", StatisticRepository.Damage, new StatisticReference("source.attack_power"), 1f);
         [SerializeField] private BleedingProjectileModifierDefinition bleedingProjectileModifierDefinition;
-
-        public override string ParseDescription()
-        {
-            return string.Format(this.Description, StatisticFormatter.Percentage(percentageAttackPower, StatisticDefinition.AttackPower), duration, bleedingProjectileModifierDefinition.BleedingModifierDefinition.MaxStack);
-        }
 
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {

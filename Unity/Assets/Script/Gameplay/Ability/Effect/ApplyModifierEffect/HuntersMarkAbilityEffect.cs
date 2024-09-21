@@ -7,8 +7,8 @@ namespace Game
     [Serializable]
     public class HuntersMarkAbilityEffect : AbilityEffect
     {
-        [SerializeField] private StatisticReference<float> damage;
-        [SerializeField] private StatisticReference<float> duration;
+        [SerializeField] private StatisticReference damage;
+        [SerializeField] private StatisticReference duration;
         [SerializeField] private HunterMarkModifierDefinition hunterMarkModifierDefinition;
 
         public override void Apply()
@@ -29,10 +29,10 @@ namespace Game
                             modifiable,
                             hunterMarkModifierDefinition,
                             this,
-                            damage.GetValueOrThrow(Ability),
+                            damage.GetValueOrThrow<float>(Ability),
                             modifiable.Entity.GetCachedComponent<Attackable>(),
                             Ability.Caster.Entity.GetCachedComponent<Character>())
-                        .With(new CharacterModifierTimeElement(duration.GetValueOrThrow(Ability)));
+                        .With(new CharacterModifierTimeElement(duration.GetValueOrThrow<float>(Ability)));
 
                     modifiable.AddModifier(huntersMark);
                 }

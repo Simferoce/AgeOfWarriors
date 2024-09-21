@@ -4,8 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    [StatisticClass("agent")]
-    public abstract partial class AgentObject : Entity
+    public abstract class AgentObject : Entity
     {
         public delegate void AttackedLanded(AttackResult attack);
 

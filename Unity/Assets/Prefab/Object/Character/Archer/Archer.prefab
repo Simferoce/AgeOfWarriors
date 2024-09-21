@@ -210,6 +210,10 @@ PrefabInstance:
       propertyPath: abilitiesDefinition.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 403e6a5681908f94dbcb8f4dd075a7f4, type: 2}
+    - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
+      propertyPath: managedReferences[5836723881049325596]
+      value: Assembly-CSharp StatisticFloatCharacterFunction
+      objectReference: {fileID: 0}
     - target: {fileID: 427610621448729964, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       propertyPath: m_IsActive
       value: 1

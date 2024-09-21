@@ -9,8 +9,8 @@ namespace Game
     public class ProjectileTimedImpact : ProjectileImpact
     {
         [SerializeReference, SubclassSelector] private TargetCriteria criteria;
-        [SerializeField] private StatisticReference<float> damage;
-        [SerializeField] private StatisticReference<float> duration;
+        [SerializeField] private StatisticReference damage;
+        [SerializeField] private StatisticReference duration;
         [SerializeField] private float delay;
 
         private float startedAt;
@@ -23,7 +23,7 @@ namespace Game
             base.Initialize(projectile);
             startedAt = Time.time;
 
-            currentDuration = duration.GetValueOrThrow(projectile);
+            currentDuration = duration.GetValueOrThrow<float>(projectile);
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -68,7 +68,7 @@ namespace Game
                     && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable)
                     && !targetsHit.Contains(attackable))
                 {
-                    Attack attack = AttackUtility.Generate(projectile.AgentObject as Character, damage.GetValueOrThrow(projectile), 0, 0, true, false, true, attackable, projectile);
+                    Attack attack = AttackUtility.Generate(projectile.AgentObject as Character, damage.GetValueOrThrow<float>(projectile), 0, 0, true, false, true, attackable, projectile);
                     attack.AttackSource.Sources.Add(projectile);
                     attackable.TakeAttack(attack);
                     targetsHit.Add(attackable);

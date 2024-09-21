@@ -72,10 +72,5 @@ namespace Game
         {
             return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
-
-        public override string ParseDescription()
-        {
-            return string.Format(Description, amount, StatisticFormatter.Percentage(percentageReach, StatisticDefinition.Reach));
-        }
     }
 }

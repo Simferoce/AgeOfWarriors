@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 namespace Game
 {
-    [StatisticClass("caster")]
-    public partial class Caster : MonoBehaviour, IComponent
+    public partial class Caster : MonoBehaviour, IComponent, IStatisticContext
     {
         [Header("Abilities")]
         [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
 
-        [Statistic] public Entity Entity { get; set; }
+        public Entity Entity { get; set; }
 
         public event Action<Ability> OnAbilityUsed;
         public event Action OnCastBegin;
@@ -29,7 +27,6 @@ namespace Game
         {
             TransformTags = GetComponentsInChildren<TransformTag>().ToList();
         }
-
 
         private void Start()
         {
@@ -54,11 +51,6 @@ namespace Game
 
         private void Update()
         {
-            Profiler.BeginSample("Test");
-            int v = StatisticUtility.ResolveStatisticOrDefault<int>(Entity as IStatisticProvider, "attackpower", 1);
-            Profiler.EndSample();
-            Debug.Log(v);
-
             foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)
@@ -91,7 +83,10 @@ namespace Game
 
         public bool CanUseAbility()
         {
-            if (StatisticUtility.ResolveStatisticOrDefault(Entity as IStatisticProvider, "health", 0.0f) <= 0 || StatisticUtility.ResolveStatisticOrDefault(Entity as IStatisticProvider, "isDead", false))
+            float health = Entity.GetStatistic("health").GetValueOrThrow<float>(Entity);
+            bool isDead = Entity.GetStatistic("isDead").GetValueOrThrow<bool>(Entity);
+
+            if (health <= 0 || isDead)
                 return false;
 
             return true;
@@ -107,6 +102,21 @@ namespace Game
         {
             IsCasting = false;
             OnCastEnd?.Invoke();
+        }
+
+        public bool IsName(ReadOnlySpan<char> name)
+        {
+            return name.SequenceEqual("caster");
+        }
+
+        public Statistic GetStatistic(ReadOnlySpan<char> value)
+        {
+            return Entity.GetStatistic(value);
+        }
+
+        public IStatisticContext GetContext(ReadOnlySpan<char> value)
+        {
+            return Entity.GetContext(value);
         }
     }
 }

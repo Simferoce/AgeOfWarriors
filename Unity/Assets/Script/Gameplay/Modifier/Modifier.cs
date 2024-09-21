@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class Modifier : IModifier, IDisposable
+    public abstract class Modifier : IModifier, IDisposable, IStatisticContext
     {
         public List<ModifierElement> modifierElements = new List<ModifierElement>();
         public abstract ModifierDefinition Definition { get; }
@@ -88,6 +88,27 @@ namespace Game
         {
             if (Source != null)
                 Source.RemoveAppliedModifier(this);
+        }
+
+        public bool IsName(ReadOnlySpan<char> name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Statistic GetStatistic(ReadOnlySpan<char> value)
+        {
+            return null;
+        }
+
+        public IStatisticContext GetContext(ReadOnlySpan<char> value)
+        {
+            if (value.SequenceEqual("definition"))
+                return Definition;
+
+            if (value.SequenceEqual("source"))
+                return Source as IStatisticContext;
+
+            return null;
         }
     }
 

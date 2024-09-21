@@ -9,7 +9,7 @@ namespace Game
     {
         [SerializeField] private float destinationDistance;
         [SerializeField] private float duration = 0.3f;
-        [SerializeField] private StatisticReference<float> staggerDuration;
+        [SerializeField] private StatisticReference staggerDuration;
         [SerializeField, Range(0, 1)] private float damping = 0.05f;
         [SerializeField] private StaggerModifierDefinition staggerModifierDefinition;
 
@@ -17,7 +17,7 @@ namespace Game
 
         public override void Apply()
         {
-            float duration = staggerDuration.GetValueOrThrow(Ability);
+            float duration = staggerDuration.GetValueOrThrow<float>(Ability);
             foreach (Character target in Ability.Targets.Cast<Character>().ToList())
             {
                 if (target.TryGetCachedComponent<ModifierHandler>(out ModifierHandler targetModifiable))

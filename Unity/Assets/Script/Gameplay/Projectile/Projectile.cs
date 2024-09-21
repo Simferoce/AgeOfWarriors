@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    [StatisticClass("projectile")]
     public partial class Projectile : Entity, IAttackSource
     {
         public delegate void Impacted(List<Target> targeteables);

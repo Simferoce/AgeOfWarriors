@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 3263700911198353021}
   - component: {fileID: 6663662174080843966}
   - component: {fileID: 8016283899549924346}
+  - component: {fileID: 8616660575260376281}
+  - component: {fileID: 835839866340489376}
+  - component: {fileID: 1914491647998623168}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -57,7 +60,49 @@ MonoBehaviour:
   types: 
   rigidbody: {fileID: 9215057588866617565}
   hitbox: {fileID: 8271833102721241429}
-  targetPosition: {fileID: 7840795603293673896}
+  Health:
+    name: health
+    definitionId: health
+    max:
+      rid: 5836723881049325597
+  Defense:
+    name: defense
+    definitionId: defense
+  AttackSpeed:
+    name: attack_speed
+    definitionId: attack_speed
+  AttackPower:
+    name: attack_power
+    definitionId: attack_power
+  Speed:
+    name: speed
+    definitionId: speed
+  Reach:
+    name: reach
+    definitionId: reach
+  IsEngaged:
+    name: engaged
+    definitionId: 
+  IsInvulnerable:
+    name: invulnerable
+    definitionId: 
+  IsConfused:
+    name: confused
+    definitionId: 
+  IsDead:
+    name: dead
+    definitionId: 
+  IsInjured:
+    name: injured
+    definitionId: 
+  references:
+    version: 2
+    RefIds:
+    - rid: 5836723881049325597
+      type: {class: StatisticFloatCharacterFunction, ns: , asm: Assembly-CSharp}
+      data:
+        name: max
+        definitionId: max_health
 --- !u!50 &9215057588866617565
 Rigidbody2D:
   serializedVersion: 4
@@ -116,6 +161,47 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilitiesDefinition: []
+--- !u!114 &8616660575260376281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645757101492874935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b91c48bc8b5a8a14ea204e7451f79497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockAllies: 1
+  blockEnemies: 1
+  hitbox: {fileID: 0}
+--- !u!114 &835839866340489376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645757101492874935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2c32b3cad8ddc469532ee8b26f8c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1914491647998623168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645757101492874935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9e933d309931442918c3fef8818852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitbox: {fileID: 0}
+  targetPosition: {fileID: 0}
 --- !u!1 &4568683806961424362
 GameObject:
   m_ObjectHideFlags: 0

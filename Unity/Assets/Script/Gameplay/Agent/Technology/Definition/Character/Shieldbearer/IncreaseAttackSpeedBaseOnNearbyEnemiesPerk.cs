@@ -16,11 +16,6 @@ namespace Game
             {
             }
 
-            public override string ParseDescription()
-            {
-                return string.Format(Definition.Description, definition.attackSpeedIncreasePerEnemies, StatisticFormatter.Percentage(definition.percentageReach, StatisticDefinition.Reach), $"{AttackSpeedPercentage:0.0%}({numberOfNearbyEnemies}x{definition.attackSpeedIncreasePerEnemies:0.0%})");
-            }
-
             public override void Update()
             {
                 base.Update();
@@ -56,11 +51,6 @@ namespace Game
 
         [SerializeField, Range(0, 5)] private float percentageReach;
         [SerializeField, Range(0, 5)] private float attackSpeedIncreasePerEnemies;
-
-        public override string ParseDescription()
-        {
-            return string.Format(Description, attackSpeedIncreasePerEnemies, StatisticFormatter.Percentage(percentageReach, StatisticDefinition.Reach), "");
-        }
 
         public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
