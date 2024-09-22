@@ -16,6 +16,7 @@ namespace Game
         {
             base.Initialize(projectile);
 
+            heal.Initialize(projectile);
             currentHeal = heal;
         }
 

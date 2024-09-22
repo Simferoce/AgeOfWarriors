@@ -7,8 +7,9 @@ public class StatisticTemporary<Type> : Statistic
 
     private Type value;
 
-    public StatisticTemporary(string name, Type value, StatisticDefinition definition = null)
+    public StatisticTemporary(IStatisticContext context, string name, Type value, StatisticDefinition definition = null)
     {
+        this.context = context;
         Name = name;
         Definition = definition;
         this.value = value;

@@ -24,6 +24,10 @@ namespace Game
         public override bool TryGetValue<T>(out T value)
         {
             value = default;
+
+            if (string.IsNullOrEmpty(path))
+                return false;
+
             return StatisticUtility.Resolve(Context, path)?.TryGetValue(out value) ?? false;
         }
     }

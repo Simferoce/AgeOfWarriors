@@ -13,6 +13,12 @@ public class StatisticPercentage : StatisticSerializedIdentity
 
     }
 
+    public override void Initialize(IStatisticContext context)
+    {
+        base.Initialize(context);
+        provider.Initialize(context);
+    }
+
     public StatisticPercentage(string name, string definitionId, Statistic provider, float percentage)
         : base(name, definitionId)
     {

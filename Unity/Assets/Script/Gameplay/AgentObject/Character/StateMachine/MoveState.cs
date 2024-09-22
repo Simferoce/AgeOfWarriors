@@ -62,8 +62,11 @@ namespace Game
 
                 foreach (AgentObject agentObject in AgentObject.All)
                 {
+                    if (agentObject == character)
+                        continue;
+
                     if (!agentObject.TryGetCachedComponent<Blocker>(out Blocker blocker))
-                        return false;
+                        continue;
 
                     if (!blocker.IsActive)
                         continue;

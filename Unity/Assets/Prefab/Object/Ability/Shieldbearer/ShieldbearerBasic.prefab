@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52136a8ba1bccd24f9bb9d2a55559bc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statistics:
+  - rid: 5836723902342496263
+  - rid: 5836723902342496265
   parameter: Ability
   conditions:
   - rid: 3656781301283291221
@@ -57,13 +60,14 @@ MonoBehaviour:
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         attackSpeed:
-          path: ability.caster.attackspeed
+          path: ability.caster.attack_speed
     - rid: 3656781301283291221
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
           rid: 3656781301283291224
         count: 1
+        Targets: []
     - rid: 3656781301283291222
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
@@ -86,3 +90,27 @@ MonoBehaviour:
           path: ability.range
     - rid: 3656781301283291227
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+    - rid: 5836723902342496263
+      type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
+      data:
+        name: range
+        definitionId: 
+        provider:
+          rid: 5836723902342496264
+        percentage: 1
+    - rid: 5836723902342496264
+      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
+      data:
+        path: ability.caster.reach
+    - rid: 5836723902342496265
+      type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
+      data:
+        name: damage
+        definitionId: 
+        provider:
+          rid: 5836723902342496266
+        percentage: 1
+    - rid: 5836723902342496266
+      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
+      data:
+        path: ability.caster.attack_power

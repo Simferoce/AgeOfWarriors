@@ -10,20 +10,28 @@ namespace Game
 
         public Entity Entity { get; set; }
         public bool IsActive => Entity is not AgentObject agentObject || agentObject.IsActive;
+        public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
 
         public bool IsBlocking(Entity entity)
         {
-            return IsInContact(entity)
-                && (!blockAllies || BlockingAllies(entity))
-                && (!blockEnemies || BlockingEnemies(entity));
+            if (!IsInContact(entity))
+                return false;
+
+            if (blockAllies && BlockingAllies(entity))
+                return true;
+
+            if (blockEnemies && BlockingEnemies(entity))
+                return true;
+
+            return false;
         }
 
         public bool IsInContact(Entity entity)
         {
-            if (entity is not Character character)
+            if (!entity.TryGetCachedComponent<Blocker>(out Blocker blocker))
                 return false;
 
-            return hitbox.IsTouching(character.Hitbox);
+            return Hitbox.IsTouching(blocker.Hitbox);
         }
 
         public bool BlockingAllies(Entity entity)

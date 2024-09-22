@@ -16,6 +16,9 @@ namespace Game
         public override void Initialize(Projectile projectile)
         {
             base.Initialize(projectile);
+
+            damage.Initialize(projectile);
+            armorPenetration.Initialize(projectile);
         }
 
         public override ImpactReport Impact(GameObject collision)

@@ -243,7 +243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   cheatCost: 1
-  maxCharacter: 3
+  maxCharacter: 1
   technologyGainMultiplier: 0
 --- !u!4 &97917530
 Transform:
@@ -4645,7 +4645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6863451816038636727, guid: 4a09f03b9cd607e4b95b359af7e54d4c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6863451816038636727, guid: 4a09f03b9cd607e4b95b359af7e54d4c, type: 3}
       propertyPath: m_AnchoredPosition.y

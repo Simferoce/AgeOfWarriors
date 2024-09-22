@@ -15,6 +15,12 @@ namespace Game
 
         private float startedAt;
 
+        public override void Initialize(Ability ability)
+        {
+            base.Initialize(ability);
+            staggerDuration.Initialize(ability);
+        }
+
         public override void Apply()
         {
             float duration = staggerDuration;

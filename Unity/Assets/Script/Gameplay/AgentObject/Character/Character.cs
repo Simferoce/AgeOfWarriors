@@ -50,17 +50,18 @@ namespace Game
 
         public override IEnumerable<Statistic> GetStatistic()
         {
-            yield return new StatisticTemporary<float>("health", Health);
-            yield return new StatisticTemporary<float>("defense", Defense);
-            yield return new StatisticTemporary<float>("attack_speed", AttackSpeed);
-            yield return new StatisticTemporary<float>("attack_power", AttackPower);
-            yield return new StatisticTemporary<float>("speed", Speed);
-            yield return new StatisticTemporary<float>("reach", Reach);
-            yield return new StatisticTemporary<bool>("engaged", IsEngaged);
-            yield return new StatisticTemporary<bool>("invulnerable", IsInvulnerable);
-            yield return new StatisticTemporary<bool>("confused", IsConfused);
-            yield return new StatisticTemporary<bool>("isDead", IsDead);
-            yield return new StatisticTemporary<bool>("isInjured", IsInjured);
+            yield return new StatisticTemporary<float>(this, "health", Health, StatisticRepository.GetDefinition(StatisticRepository.Health));
+            yield return new StatisticTemporary<float>(this, "maxhealth", MaxHealth, StatisticRepository.GetDefinition(StatisticRepository.MaxHealth));
+            yield return new StatisticTemporary<float>(this, "defense", Defense, StatisticRepository.GetDefinition(StatisticRepository.Defense));
+            yield return new StatisticTemporary<float>(this, "attack_speed", AttackSpeed, StatisticRepository.GetDefinition(StatisticRepository.AttackSpeed));
+            yield return new StatisticTemporary<float>(this, "attack_power", AttackPower, StatisticRepository.GetDefinition(StatisticRepository.AttackPower));
+            yield return new StatisticTemporary<float>(this, "speed", Speed, StatisticRepository.GetDefinition(StatisticRepository.Speed));
+            yield return new StatisticTemporary<float>(this, "reach", Reach, StatisticRepository.GetDefinition(StatisticRepository.Reach));
+            yield return new StatisticTemporary<bool>(this, "engaged", IsEngaged);
+            yield return new StatisticTemporary<bool>(this, "invulnerable", IsInvulnerable);
+            yield return new StatisticTemporary<bool>(this, "confused", IsConfused);
+            yield return new StatisticTemporary<bool>(this, "isDead", IsDead);
+            yield return new StatisticTemporary<bool>(this, "isInjured", IsInjured);
 
             foreach (Statistic statistic in base.GetStatistic())
                 yield return statistic;

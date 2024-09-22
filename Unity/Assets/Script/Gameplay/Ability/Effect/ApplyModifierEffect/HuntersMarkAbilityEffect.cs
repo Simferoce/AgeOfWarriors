@@ -11,6 +11,13 @@ namespace Game
         [SerializeField] private StatisticReference duration;
         [SerializeField] private HunterMarkModifierDefinition hunterMarkModifierDefinition;
 
+        public override void Initialize(Ability ability)
+        {
+            base.Initialize(ability);
+            damage.Initialize(ability);
+            duration.Initialize(ability);
+        }
+
         public override void Apply()
         {
             ModifierHandler modifiable = Ability.Targets.Select(x => x.Entity.GetCachedComponent<ModifierHandler>()).Where(x => x != null).FirstOrDefault();

@@ -25,6 +25,9 @@ namespace Game
         public virtual void Initialize(Caster caster)
         {
             Caster = caster;
+
+            foreach (Statistic statistic in statistics)
+                statistic.Initialize(this);
         }
 
         public abstract void Dispose();
@@ -52,7 +55,7 @@ namespace Game
 
         public virtual IEnumerable<Statistic> GetStatistic()
         {
-            yield return new StatisticTemporary<Caster>("caster", Caster);
+            yield return new StatisticTemporary<Caster>(this, "caster", Caster);
 
             foreach (Statistic statistic in statistics)
                 yield return statistic;

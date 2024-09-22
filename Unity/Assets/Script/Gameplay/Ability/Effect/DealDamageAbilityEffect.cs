@@ -10,6 +10,14 @@ namespace Game
         [SerializeField] private StatisticReference damage;
         [SerializeField] private StatisticReference armorPenetration;
 
+        public override void Initialize(Ability ability)
+        {
+            base.Initialize(ability);
+            leach.Initialize(ability);
+            damage.Initialize(ability);
+            armorPenetration.Initialize(ability);
+        }
+
         public override void Apply()
         {
             if (Ability.Targets.Count == 0)
@@ -17,7 +25,7 @@ namespace Game
 
             Attackable target = Ability.Targets[0].Entity.GetCachedComponent<Attackable>();
 
-            Attack attack = AttackUtility.Generate(Ability.Caster.Entity as IAttackSource, damage, armorPenetration, leach, false, false, true, target, this);
+            Attack attack = AttackUtility.Generate(Ability.Caster.Entity as IAttackSource, damage.GetValueOrDefault<float>(), armorPenetration.GetValueOrDefault<float>(), leach.GetValueOrDefault<float>(), false, false, true, target, this);
             target.TakeAttack(attack);
         }
     }

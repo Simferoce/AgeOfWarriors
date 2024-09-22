@@ -154,6 +154,10 @@ namespace Game
                     return __refvalue(__makeref(b), T);
                 }
             }
+            else if (typeof(T).IsAssignableFrom(typeof(U)))
+            {
+                return (T)(object)(value);
+            }
 
             throw new System.InvalidCastException($"Could not convert from {typeof(U).Name} to {typeof(T).Name}.");
         }
@@ -164,28 +168,35 @@ namespace Game
             int start = 0;
             int index;
 
+            ReadOnlySpan<char> firstElement = span.Slice(0, span.IndexOf("."));
+            if (context.IsName(firstElement))
+                start = span.IndexOf(".") + 1;
+
             IStatisticContext current = context;
             while ((index = span.Slice(start).IndexOf(".")) != -1)
             {
-                if (!TryRetreiveStatistic<IStatisticContext>(current, span.Slice(start, index - start), out current))
+                if (!TryRetreiveStatistic(current, span.Slice(start, index), out Statistic statistic))
+                    return null;
+
+                if (!statistic.TryGetValue<IStatisticContext>(out current))
                     return null;
 
                 start += index + 1;
             }
 
-            if (!TryRetreiveStatistic<Statistic>(current, span.Slice(start), out Statistic value))
+            if (!TryRetreiveStatistic(current, span.Slice(start), out Statistic value))
                 return null;
 
             return value;
         }
 
-        private static bool TryRetreiveStatistic<T>(IStatisticContext current, ReadOnlySpan<char> span, out T value)
+        private static bool TryRetreiveStatistic(IStatisticContext current, ReadOnlySpan<char> span, out Statistic value)
         {
             foreach (Statistic statistic in current.GetStatistic())
             {
                 if (span.SequenceEqual(statistic.Name))
                 {
-                    value = statistic.GetValueOrThrow<T>();
+                    value = statistic;
                     return true;
                 }
             }

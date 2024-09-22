@@ -8,7 +8,7 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
 {
     private Dictionary<Type, List<IComponent>> cached = new Dictionary<Type, List<IComponent>>();
 
-    private void Awake()
+    protected virtual void Awake()
     {
         foreach (IComponent component in GetComponentsInChildren<IComponent>())
         {

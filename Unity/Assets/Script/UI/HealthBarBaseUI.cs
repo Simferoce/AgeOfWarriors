@@ -11,6 +11,6 @@ public class HealthBarBaseUI : MonoBehaviour
     private void Update()
     {
         Agent agent = Agent.agents.FirstOrDefault(x => x.Faction == faction);
-        foreground.fillAmount = agent.Base.Health / agent.Base.Health.Max;
+        foreground.fillAmount = agent.Base.Health / agent.Base.MaxHealth;
     }
 }

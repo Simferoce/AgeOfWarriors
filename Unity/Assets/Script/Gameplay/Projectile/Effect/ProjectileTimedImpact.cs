@@ -23,6 +23,8 @@ namespace Game
             base.Initialize(projectile);
             startedAt = Time.time;
 
+            damage.Initialize(projectile);
+            duration.Initialize(projectile);
             currentDuration = duration;
         }
 

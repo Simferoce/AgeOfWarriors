@@ -6,13 +6,13 @@ public abstract class Statistic
 {
     public abstract string Name { get; set; }
     public abstract StatisticDefinition Definition { get; set; }
-    protected IStatisticContext Context { get => context != null ? context : throw new Exception($"Statistic {Name} - Uninitialized context"); set => context = value; }
+    protected IStatisticContext Context { get => context != null ? context : throw new Exception($"Uninitialized context"); set => context = value; }
 
-    private IStatisticContext context;
+    protected IStatisticContext context;
 
-    public void Initialize(IStatisticContext context)
+    public virtual void Initialize(IStatisticContext context)
     {
-        this.Context = context;
+        this.context = context;
     }
 
     public T GetValueOrThrow<T>()
@@ -27,7 +27,7 @@ public abstract class Statistic
 
     public abstract bool TryGetValue<T>(out T value);
 
-    public static implicit operator bool(Statistic d) => d.GetValueOrDefault<bool>();
-    public static implicit operator int(Statistic d) => d.GetValueOrDefault<int>();
-    public static implicit operator float(Statistic d) => d.GetValueOrDefault<float>();
+    public static implicit operator bool(Statistic d) => d.GetValueOrThrow<bool>();
+    public static implicit operator int(Statistic d) => d.GetValueOrThrow<int>();
+    public static implicit operator float(Statistic d) => d.GetValueOrThrow<float>();
 }

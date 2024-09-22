@@ -15,6 +15,14 @@ namespace Game
 
         private float? startedAt = null;
 
+        public override void Initialize(Ability ability)
+        {
+            base.Initialize(ability);
+            area.Initialize(ability);
+            buffDuration.Initialize(ability);
+            defense.Initialize(ability);
+        }
+
         public override void Apply()
         {
             startedAt = Time.time;

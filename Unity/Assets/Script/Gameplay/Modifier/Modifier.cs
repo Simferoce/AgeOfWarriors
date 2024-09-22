@@ -97,7 +97,7 @@ namespace Game
 
         public IEnumerable<Statistic> GetStatistic()
         {
-            yield return new StatisticTemporary<ModifierDefinition>("definition", Definition);
+            yield return new StatisticTemporary<ModifierDefinition>(this, "definition", Definition);
         }
     }
 

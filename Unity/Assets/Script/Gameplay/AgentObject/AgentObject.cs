@@ -35,8 +35,9 @@ namespace Game
         public List<Type> Types { get => types; }
         public string Name => name;
 
-        protected virtual void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             All.Add(this);
         }
 
