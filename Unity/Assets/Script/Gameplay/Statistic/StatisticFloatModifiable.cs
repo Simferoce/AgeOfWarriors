@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
@@ -25,17 +26,9 @@ public class StatisticFloatModifiable : StatisticModifiable<float>, IStatisticCo
         currentValue = Mathf.Clamp(currentValue, float.MinValue, max);
     }
 
-    public IStatisticContext GetContext(ReadOnlySpan<char> value)
+    public IEnumerable<Statistic> GetStatistic()
     {
-        return null;
-    }
-
-    public Statistic GetStatistic(ReadOnlySpan<char> value)
-    {
-        if (value.SequenceEqual("max"))
-            return max;
-
-        return null;
+        yield return max;
     }
 
     public bool IsName(ReadOnlySpan<char> name)

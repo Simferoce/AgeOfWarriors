@@ -27,7 +27,7 @@ public abstract class Statistic
 
     public abstract bool TryGetValue<T>(out T value);
 
-    public static implicit operator bool(Statistic d) => d.GetValueOrThrow<bool>();
-    public static implicit operator int(Statistic d) => d.GetValueOrThrow<int>();
-    public static implicit operator float(Statistic d) => d.GetValueOrThrow<float>();
+    public static implicit operator bool(Statistic d) => d.GetValueOrDefault<bool>();
+    public static implicit operator int(Statistic d) => d.GetValueOrDefault<int>();
+    public static implicit operator float(Statistic d) => d.GetValueOrDefault<float>();
 }

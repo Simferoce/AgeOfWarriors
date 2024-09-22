@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -41,14 +42,9 @@ namespace Game
             return name.SequenceEqual("definition");
         }
 
-        public virtual Statistic GetStatistic(ReadOnlySpan<char> value)
+        public virtual IEnumerable<Statistic> GetStatistic()
         {
-            return null;
-        }
-
-        public virtual IStatisticContext GetContext(ReadOnlySpan<char> value)
-        {
-            return null;
+            yield break;
         }
     }
 }

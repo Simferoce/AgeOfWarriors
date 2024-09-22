@@ -167,14 +167,31 @@ namespace Game
             IStatisticContext current = context;
             while ((index = span.Slice(start).IndexOf(".")) != -1)
             {
-                current = current.GetContext(span.Slice(start, index));
-                if (current == null)
+                if (!TryRetreiveStatistic<IStatisticContext>(current, span.Slice(start, index - start), out current))
                     return null;
 
                 start += index + 1;
             }
 
-            return current.GetStatistic(span.Slice(start));
+            if (!TryRetreiveStatistic<Statistic>(current, span.Slice(start), out Statistic value))
+                return null;
+
+            return value;
+        }
+
+        private static bool TryRetreiveStatistic<T>(IStatisticContext current, ReadOnlySpan<char> span, out T value)
+        {
+            foreach (Statistic statistic in current.GetStatistic())
+            {
+                if (span.SequenceEqual(statistic.Name))
+                {
+                    value = statistic.GetValueOrThrow<T>();
+                    return true;
+                }
+            }
+
+            value = default;
+            return false;
         }
     }
 }

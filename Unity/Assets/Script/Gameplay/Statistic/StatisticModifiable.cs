@@ -11,7 +11,7 @@ public class StatisticModifiable<Type> : StatisticSerializedIdentity
 
     }
 
-    public StatisticModifiable(string name, string definitionId)
+    public StatisticModifiable(string name, string definitionId = null)
         : base(name, definitionId)
     {
 

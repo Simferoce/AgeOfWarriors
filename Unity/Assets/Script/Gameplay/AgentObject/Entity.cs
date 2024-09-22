@@ -55,13 +55,8 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
         return name.SequenceEqual("entity");
     }
 
-    public virtual Statistic GetStatistic(ReadOnlySpan<char> value)
+    public virtual IEnumerable<Statistic> GetStatistic()
     {
-        return null;
-    }
-
-    public virtual IStatisticContext GetContext(ReadOnlySpan<char> value)
-    {
-        return null;
+        yield break;
     }
 }

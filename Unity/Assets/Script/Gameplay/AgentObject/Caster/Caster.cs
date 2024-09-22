@@ -83,8 +83,8 @@ namespace Game
 
         public bool CanUseAbility()
         {
-            float health = Entity.GetStatistic("health");
-            bool isDead = Entity.GetStatistic("isDead");
+            float health = Entity.GetStatistic().FirstOrDefault(x => x.Name == "health");
+            bool isDead = Entity.GetStatistic().FirstOrDefault(x => x.Name == "isDead");
 
             if (health <= 0 || isDead)
                 return false;
@@ -109,14 +109,10 @@ namespace Game
             return name.SequenceEqual("caster");
         }
 
-        public Statistic GetStatistic(ReadOnlySpan<char> value)
+        public IEnumerable<Statistic> GetStatistic()
         {
-            return Entity.GetStatistic(value);
-        }
-
-        public IStatisticContext GetContext(ReadOnlySpan<char> value)
-        {
-            return Entity.GetContext(value);
+            foreach (Statistic statistic in Entity.GetStatistic())
+                yield return statistic;
         }
     }
 }

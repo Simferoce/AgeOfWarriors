@@ -92,23 +92,12 @@ namespace Game
 
         public bool IsName(ReadOnlySpan<char> name)
         {
-            throw new NotImplementedException();
+            return name.SequenceEqual("modifier");
         }
 
-        public Statistic GetStatistic(ReadOnlySpan<char> value)
+        public IEnumerable<Statistic> GetStatistic()
         {
-            return null;
-        }
-
-        public IStatisticContext GetContext(ReadOnlySpan<char> value)
-        {
-            if (value.SequenceEqual("definition"))
-                return Definition;
-
-            if (value.SequenceEqual("source"))
-                return Source as IStatisticContext;
-
-            return null;
+            yield return new StatisticTemporary<ModifierDefinition>("definition", Definition);
         }
     }
 

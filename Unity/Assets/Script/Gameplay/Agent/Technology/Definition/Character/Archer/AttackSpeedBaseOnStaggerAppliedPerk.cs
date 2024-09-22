@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -37,12 +37,12 @@ namespace Game
 
         [SerializeField] public StatisticSerialize<float> attackSpeedByStaggerApplied = new StatisticSerialize<float>("attack_speed_per_stagger", null, 1f);
 
-        public override Statistic GetStatistic(ReadOnlySpan<char> value)
+        public override IEnumerable<Statistic> GetStatistic()
         {
-            if (value.SequenceEqual(attackSpeedByStaggerApplied.Name))
-                return attackSpeedByStaggerApplied;
+            yield return attackSpeedByStaggerApplied;
 
-            return base.GetStatistic(value);
+            foreach (Statistic statistic in base.GetStatistic())
+                yield return statistic;
         }
 
         public override Game.Modifier GetModifier(ModifierHandler modifiable)

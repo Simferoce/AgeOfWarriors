@@ -10,11 +10,11 @@ namespace Game
         [SerializeReference, SubclassSelector] private List<Statistic> statistics;
 
         public Caster Caster { get; set; }
-        public virtual float Cooldown => GetStatistic("cooldown") ?? 0f;
+        public virtual float Cooldown => GetStatistic().FirstOrDefault(x => x.Name == "cooldown")?.GetValueOrDefault<float>() ?? 0f;
 
-        public event Action OnAbilityEffectApplied;
         public event Action<Ability> OnAbilityUsed;
 
+        public event Action OnAbilityEffectApplied;
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
         public virtual List<Target> Targets => new List<Target>();
@@ -24,7 +24,7 @@ namespace Game
 
         public virtual void Initialize(Caster caster)
         {
-            this.Caster = caster;
+            Caster = caster;
         }
 
         public abstract void Dispose();
@@ -50,23 +50,14 @@ namespace Game
             OnAbilityEffectApplied?.Invoke();
         }
 
-        public virtual Statistic GetStatistic(ReadOnlySpan<char> value)
+        public virtual IEnumerable<Statistic> GetStatistic()
         {
+            yield return new StatisticTemporary<Caster>("caster", Caster);
+
             foreach (Statistic statistic in statistics)
-            {
-                if (value.SequenceEqual(statistic.Name))
-                    return statistic;
-            }
+                yield return statistic;
 
-            return null;
-        }
-
-        public virtual IStatisticContext GetContext(ReadOnlySpan<char> value)
-        {
-            if (value.SequenceEqual("caster"))
-                return Caster;
-
-            return null;
+            yield break;
         }
 
         public bool IsName(ReadOnlySpan<char> name)
