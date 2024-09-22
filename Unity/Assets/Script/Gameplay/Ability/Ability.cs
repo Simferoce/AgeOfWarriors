@@ -7,8 +7,10 @@ namespace Game
 {
     public abstract class Ability : MonoBehaviour, IStatisticContext
     {
+        [SerializeReference, SubclassSelector] private List<Statistic> statistics;
+
         public Caster Caster { get; set; }
-        public virtual float Cooldown => Definition.GetStatistic("cooldown")?.GetValueOrThrow<float>(this) ?? 0f;
+        public virtual float Cooldown => GetStatistic("cooldown") ?? 0f;
 
         public event Action OnAbilityEffectApplied;
         public event Action<Ability> OnAbilityUsed;
@@ -50,6 +52,12 @@ namespace Game
 
         public virtual Statistic GetStatistic(ReadOnlySpan<char> value)
         {
+            foreach (Statistic statistic in statistics)
+            {
+                if (value.SequenceEqual(statistic.Name))
+                    return statistic;
+            }
+
             return null;
         }
 
@@ -57,9 +65,6 @@ namespace Game
         {
             if (value.SequenceEqual("caster"))
                 return Caster;
-
-            if (value.SequenceEqual("definition"))
-                return Definition;
 
             return null;
         }

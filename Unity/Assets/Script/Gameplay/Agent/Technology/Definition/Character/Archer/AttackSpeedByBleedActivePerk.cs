@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, AttackSpeedByBleedActivePerk>
         {
-            public override float? AttackSpeedPercentage => amountOfBleedApplied * definition.attackSpeedPerBleedApplied.GetValueOrThrow<float>(this);
+            public override float? AttackSpeedPercentage => amountOfBleedApplied * definition.attackSpeedPerBleedApplied;
             public override bool Show => amountOfBleedApplied > 0;
 
             private int amountOfBleedApplied = 0;

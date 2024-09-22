@@ -10,7 +10,7 @@ namespace Game
         {
             private int amountOfStaggerApplied = 0;
 
-            public override float? AttackSpeedPercentage => amountOfStaggerApplied * definition.attackSpeedByStaggerApplied.GetValueOrThrow<float>(this);
+            public override float? AttackSpeedPercentage => amountOfStaggerApplied * definition.attackSpeedByStaggerApplied;
 
             public Modifier(ModifierHandler modifiable, AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
@@ -39,7 +39,7 @@ namespace Game
 
         public override Statistic GetStatistic(ReadOnlySpan<char> value)
         {
-            if (value.SequenceEqual(attackSpeedByStaggerApplied.GetName(this)))
+            if (value.SequenceEqual(attackSpeedByStaggerApplied.Name))
                 return attackSpeedByStaggerApplied;
 
             return base.GetStatistic(value);

@@ -176,26 +176,5 @@ namespace Game
 
             return current.GetStatistic(span.Slice(start));
         }
-
-        public static bool TryResolveValue<T>(IStatisticContext context, string path, out T value)
-        {
-            value = default;
-
-            ReadOnlySpan<char> span = path.AsSpan();
-            int start = 0;
-            int index;
-
-            IStatisticContext current = context;
-            while ((index = span.Slice(start).IndexOf(".")) != -1)
-            {
-                current = current.GetContext(span.Slice(start, index));
-                if (current == null)
-                    return false;
-
-                start += index + 1;
-            }
-
-            return current.GetStatistic(span.Slice(start))?.TryGetValue(current, out value) ?? false;
-        }
     }
 }

@@ -16,13 +16,13 @@ public class StatisticFloatModifiable : StatisticModifiable<float>, IStatisticCo
         : base(name, definitionId)
     {
         this.max = max;
-        max.SetName(null, "max");
+        max.Name = name;
     }
 
-    public override void Modify(IStatisticContext context, float value)
+    public override void Modify(float value)
     {
-        base.Modify(context, value);
-        currentValue = Mathf.Clamp(currentValue, float.MinValue, max.GetValueOrThrow<float>(context));
+        base.Modify(value);
+        currentValue = Mathf.Clamp(currentValue, float.MinValue, max);
     }
 
     public IStatisticContext GetContext(ReadOnlySpan<char> value)
@@ -40,6 +40,6 @@ public class StatisticFloatModifiable : StatisticModifiable<float>, IStatisticCo
 
     public bool IsName(ReadOnlySpan<char> name)
     {
-        return name.SequenceEqual(this.GetName(this));
+        return name.SequenceEqual(Name);
     }
 }

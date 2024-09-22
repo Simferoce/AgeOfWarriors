@@ -18,13 +18,13 @@ namespace Game
             this.path = path;
         }
 
-        public override StatisticDefinition GetDefinition(IStatisticContext context) => StatisticUtility.Resolve(context, path).GetDefinition(context);
-        public override string GetName(IStatisticContext context) => StatisticUtility.Resolve(context, path).GetName(context);
-        public override string SetName(IStatisticContext context, string value) => StatisticUtility.Resolve(context, path).SetName(context, value);
+        public override string Name { get => StatisticUtility.Resolve(Context, path).Name; set => StatisticUtility.Resolve(Context, path).Name = value; }
+        public override StatisticDefinition Definition { get => StatisticUtility.Resolve(Context, path).Definition; set => StatisticUtility.Resolve(Context, path).Definition = value; }
 
-        public override bool TryGetValue<T>(IStatisticContext context, out T value)
+        public override bool TryGetValue<T>(out T value)
         {
-            return StatisticUtility.TryResolveValue<T>(context, path, out value);
+            value = default;
+            return StatisticUtility.Resolve(Context, path)?.TryGetValue(out value) ?? false;
         }
     }
 }

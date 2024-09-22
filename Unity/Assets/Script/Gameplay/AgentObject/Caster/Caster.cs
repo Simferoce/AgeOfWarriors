@@ -83,8 +83,8 @@ namespace Game
 
         public bool CanUseAbility()
         {
-            float health = Entity.GetStatistic("health").GetValueOrThrow<float>(Entity);
-            bool isDead = Entity.GetStatistic("isDead").GetValueOrThrow<bool>(Entity);
+            float health = Entity.GetStatistic("health");
+            bool isDead = Entity.GetStatistic("isDead");
 
             if (health <= 0 || isDead)
                 return false;

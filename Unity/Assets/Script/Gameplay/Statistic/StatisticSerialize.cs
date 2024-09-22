@@ -14,7 +14,7 @@ public class StatisticSerialize<Type> : StatisticSerializedIdentity
         this.value = value;
     }
 
-    public override bool TryGetValue<T>(IStatisticContext context, out T value)
+    public override bool TryGetValue<T>(out T value)
     {
         value = StatisticUtility.ConvertGeneric<T, Type>(this.value);
         return true;

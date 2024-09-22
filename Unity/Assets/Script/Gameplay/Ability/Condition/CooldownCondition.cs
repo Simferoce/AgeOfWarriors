@@ -18,7 +18,7 @@ namespace Game
 
         public override bool Execute()
         {
-            return Time.time - lastUsed > cooldown.GetValueOrThrow<float>(ability);
+            return Time.time - lastUsed > cooldown;
         }
 
         public override void OnAbilityEnded()

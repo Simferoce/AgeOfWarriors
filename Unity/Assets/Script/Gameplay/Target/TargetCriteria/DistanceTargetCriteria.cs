@@ -10,7 +10,7 @@ namespace Game
 
         public override bool Execute(Target owner, Target targeteable, IStatisticContext statisticProvider, Faction ownerFaction, Faction targetFaction)
         {
-            float value = reference.GetValueOrThrow<float>(statisticProvider);
+            float value = reference;
 
             return Mathf.Abs((targeteable.ClosestPoint(owner.CenterPosition) - owner.CenterPosition).x) < value;
         }

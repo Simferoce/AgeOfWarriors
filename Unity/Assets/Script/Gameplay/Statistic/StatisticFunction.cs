@@ -13,9 +13,9 @@ public class StatisticFunction<Context, Type> : StatisticSerializedIdentity
         this.function = function;
     }
 
-    public override bool TryGetValue<T>(IStatisticContext context, out T value)
+    public override bool TryGetValue<T>(out T value)
     {
-        value = StatisticUtility.ConvertGeneric<T, Type>(function(context as Context));
+        value = StatisticUtility.ConvertGeneric<T, Type>(function(base.Context as Context));
         return true;
     }
 }

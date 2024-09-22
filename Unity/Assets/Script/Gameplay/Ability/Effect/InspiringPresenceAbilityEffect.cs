@@ -21,7 +21,7 @@ namespace Game
 
             List<Character> characters = AgentObject.All.OfType<Character>()
                .Where(x => x.Faction == (x.Entity as AgentObject).Faction
-                   && Mathf.Abs((x.Entity as AgentObject).transform.position.x - x.transform.position.x) < area.GetValueOrThrow<float>(Ability))
+                   && Mathf.Abs((x.Entity as AgentObject).transform.position.x - x.transform.position.x) < area)
                .ToList();
 
             foreach (Character characterToBuff in characters)
@@ -41,9 +41,9 @@ namespace Game
                     inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(
                             Ability.Caster.Entity.GetCachedComponent<Character>(),
                             inspiringPresenceModifierDefinition,
-                            defense.GetValueOrThrow<float>(Ability),
+                            defense,
                             Ability.Caster.Entity.GetCachedComponent<IModifierSource>())
-                        .With(new CharacterModifierTimeElement(buffDuration.GetValueOrThrow<float>(Ability)));
+                        .With(new CharacterModifierTimeElement(buffDuration));
 
                     characterToBuff.Entity.GetCachedComponent<ModifierHandler>().AddModifier(inspiringPresenceBuff);
                 }

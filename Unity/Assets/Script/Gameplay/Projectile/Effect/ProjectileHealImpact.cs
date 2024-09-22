@@ -16,7 +16,7 @@ namespace Game
         {
             base.Initialize(projectile);
 
-            currentHeal = heal.GetValueOrThrow<float>(projectile);
+            currentHeal = heal;
         }
 
         public override ImpactReport Impact(GameObject collision)

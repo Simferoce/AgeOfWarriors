@@ -52,15 +52,17 @@ public class StatisticSerializedIdentityPropertyDrawer : PropertyDrawer
 
         yOffset += EditorGUI.GetPropertyHeight(definitionIdProperty, true) + 2;
 
-        while (iterator.NextVisible(true) && !SerializedProperty.EqualContents(iterator, endProperty))
+        iterator.NextVisible(true);
+        do
         {
-            if (SerializedProperty.EqualContents(iterator, definitionIdProperty) || SerializedProperty.EqualContents(iterator, nameProperty))
+            if (SerializedProperty.EqualContents(iterator, nameProperty) || SerializedProperty.EqualContents(iterator, definitionIdProperty))
                 continue;
 
             fieldRect = new Rect(position.x, yOffset, position.width, EditorGUIUtility.singleLineHeight);
             EditorGUI.PropertyField(fieldRect, iterator, true);
-            yOffset += EditorGUI.GetPropertyHeight(iterator, true) + 2;  // Dynamically determine the height
+            yOffset += EditorGUI.GetPropertyHeight(iterator, true) + 2;
         }
+        while (iterator.NextVisible(false) && !SerializedProperty.EqualContents(iterator, endProperty));
 
 
         EditorGUI.EndProperty();
@@ -70,16 +72,17 @@ public class StatisticSerializedIdentityPropertyDrawer : PropertyDrawer
     {
         float totalHeight = 0;
 
-
         if (property.isExpanded)
         {
             SerializedProperty iterator = property.Copy();
             SerializedProperty endProperty = iterator.GetEndProperty();
 
-            while (iterator.NextVisible(true) && !SerializedProperty.EqualContents(iterator, endProperty))
+            iterator.NextVisible(true);
+            do
             {
                 totalHeight += EditorGUI.GetPropertyHeight(iterator, true) + 2;
             }
+            while (iterator.NextVisible(false) && !SerializedProperty.EqualContents(iterator, endProperty));
         }
 
         return totalHeight;

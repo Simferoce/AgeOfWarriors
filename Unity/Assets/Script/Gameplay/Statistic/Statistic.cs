@@ -4,19 +4,30 @@ using System;
 [Serializable]
 public abstract class Statistic
 {
-    public abstract StatisticDefinition GetDefinition(IStatisticContext context);
-    public abstract string GetName(IStatisticContext context);
-    public abstract string SetName(IStatisticContext context, string value);
+    public abstract string Name { get; set; }
+    public abstract StatisticDefinition Definition { get; set; }
+    protected IStatisticContext Context { get => context != null ? context : throw new Exception($"Statistic {Name} - Uninitialized context"); set => context = value; }
 
-    public T GetValueOrThrow<T>(IStatisticContext context)
+    private IStatisticContext context;
+
+    public void Initialize(IStatisticContext context)
     {
-        return TryGetValue<T>(context, out T value) ? value : throw new Exception($"Unable to get the statistic from {GetName(context)} with context {context}");
+        this.Context = context;
     }
 
-    public T GetValueOrDefault<T>(IStatisticContext context, T defaultValue = default)
+    public T GetValueOrThrow<T>()
     {
-        return TryGetValue<T>(context, out T value) ? value : defaultValue;
+        return TryGetValue<T>(out T value) ? value : throw new Exception($"Unable to get the statistic from {Name} with context {Context}");
     }
 
-    public abstract bool TryGetValue<T>(IStatisticContext context, out T value);
+    public T GetValueOrDefault<T>(T defaultValue = default)
+    {
+        return TryGetValue<T>(out T value) ? value : defaultValue;
+    }
+
+    public abstract bool TryGetValue<T>(out T value);
+
+    public static implicit operator bool(Statistic d) => d.GetValueOrThrow<bool>();
+    public static implicit operator int(Statistic d) => d.GetValueOrThrow<int>();
+    public static implicit operator float(Statistic d) => d.GetValueOrThrow<float>();
 }

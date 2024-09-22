@@ -11,9 +11,8 @@ public abstract class StatisticSerializedIdentity : Statistic
     [SerializeField]
     protected string definitionId;
 
-    public override StatisticDefinition GetDefinition(IStatisticContext context) => StatisticRepository.GetDefinition(definitionId);
-    public override string GetName(IStatisticContext context) => name;
-    public override string SetName(IStatisticContext context, string value) => name = value;
+    public override StatisticDefinition Definition { get => StatisticRepository.GetDefinition(definitionId); set => definitionId = value.HumanReadableId; }
+    public override string Name { get => name; set => name = value; }
 
     protected StatisticSerializedIdentity()
     {

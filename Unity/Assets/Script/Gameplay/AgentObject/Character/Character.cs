@@ -30,19 +30,19 @@ namespace Game
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
         public Entity Entity { get; set; }
 
-        public float Health => health.GetValueOrThrow<float>(this);
-        public float MaxHealth => health.Max.GetValueOrThrow<float>(this);
-        public float Defense => health.GetValueOrThrow<float>(this);
-        public float AttackSpeed => health.GetValueOrThrow<float>(this);
-        public float AttackPower => health.GetValueOrThrow<float>(this);
-        public float Speed => health.GetValueOrThrow<float>(this);
-        public float Reach => health.GetValueOrThrow<float>(this);
+        public float Health => health;
+        public float MaxHealth => health.Max;
+        public float Defense => defense;
+        public float AttackSpeed => attackSpeed;
+        public float AttackPower => attackPower;
+        public float Speed => speed;
+        public float Reach => reach;
 
-        public bool IsEngaged => isEngaged.GetValueOrThrow<bool>(this);
-        public bool IsInvulnerable => isInvulnerable.GetValueOrThrow<bool>(this);
-        public bool IsConfused => isConfused.GetValueOrThrow<bool>(this);
-        public bool IsDead => isDead.GetValueOrThrow<bool>(this);
-        public bool IsInjured => isInjured.GetValueOrThrow<bool>(this);
+        public bool IsEngaged => isEngaged;
+        public bool IsInvulnerable => isInvulnerable;
+        public bool IsConfused => isConfused;
+        public bool IsDead => isDead;
+        public bool IsInjured => isInjured;
 
         private StatisticFloatModifiable health = new StatisticFloatModifiable("health", StatisticRepository.Health, new StatisticFunction<Character, float>("max", StatisticRepository.MaxHealth, x => x.Definition.MaxHealth));
         private StatisticFunction<Character, float> defense = new StatisticFunction<Character, float>("defense", StatisticRepository.Defense, x => x.Definition.Defense + x.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value));
@@ -63,37 +63,37 @@ namespace Game
 
         public override Statistic GetStatistic(ReadOnlySpan<char> value)
         {
-            if (value.SequenceEqual(health.GetName(this)))
+            if (value.SequenceEqual(health.Name))
                 return health;
 
-            if (value.SequenceEqual(defense.GetName(this)))
+            if (value.SequenceEqual(defense.Name))
                 return defense;
 
-            if (value.SequenceEqual(attackSpeed.GetName(this)))
+            if (value.SequenceEqual(attackSpeed.Name))
                 return attackSpeed;
 
-            if (value.SequenceEqual(attackPower.GetName(this)))
+            if (value.SequenceEqual(attackPower.Name))
                 return attackPower;
 
-            if (value.SequenceEqual(speed.GetName(this)))
+            if (value.SequenceEqual(speed.Name))
                 return speed;
 
-            if (value.SequenceEqual(reach.GetName(this)))
+            if (value.SequenceEqual(reach.Name))
                 return reach;
 
-            if (value.SequenceEqual(isEngaged.GetName(this)))
+            if (value.SequenceEqual(isEngaged.Name))
                 return isEngaged;
 
-            if (value.SequenceEqual(isInvulnerable.GetName(this)))
+            if (value.SequenceEqual(isInvulnerable.Name))
                 return isInvulnerable;
 
-            if (value.SequenceEqual(isConfused.GetName(this)))
+            if (value.SequenceEqual(isConfused.Name))
                 return isConfused;
 
-            if (value.SequenceEqual(isDead.GetName(this)))
+            if (value.SequenceEqual(isDead.Name))
                 return isDead;
 
-            if (value.SequenceEqual(isInjured.GetName(this)))
+            if (value.SequenceEqual(isInjured.Name))
                 return isInjured;
 
             return base.GetStatistic(value);
@@ -116,8 +116,8 @@ namespace Game
 
         private void Character_OnDamageTaken(AttackResult attackResult, Attackable attackable)
         {
-            health.Modify(this, Health - attackResult.DamageTaken);
-            if (health.GetValueOrThrow<float>(this) <= 0 && !IsDead)
+            health.Modify(Health - attackResult.DamageTaken);
+            if (health <= 0 && !IsDead)
                 Death();
         }
 
@@ -136,7 +136,7 @@ namespace Game
             }
 
             stateMachine.Initialize(new MoveState(this));
-            this.health.Modify(this, MaxHealth);
+            this.health.Modify(MaxHealth);
         }
 
         public void Update()
@@ -190,7 +190,7 @@ namespace Game
 
         public void Heal(float amount)
         {
-            this.health.Modify(this, this.Health + amount);
+            this.health.Modify(Health + amount);
         }
 
         public void AttackLanded(AttackResult attackResult)

@@ -17,8 +17,8 @@ namespace Game
                 return new BleedingProjectileModifierDefinition.Modifier(
                     projectile.Entity.GetCachedComponent<ModifierHandler>(),
                     definition.bleedingProjectileModifierDefinition,
-                    definition.Damage.GetValueOrThrow<float>(this),
-                    definition.Duration.GetValueOrThrow<float>(this),
+                    definition.Damage,
+                    definition.Duration,
                     Source);
             }
         }

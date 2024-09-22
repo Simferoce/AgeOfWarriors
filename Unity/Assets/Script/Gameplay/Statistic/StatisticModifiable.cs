@@ -17,12 +17,12 @@ public class StatisticModifiable<Type> : StatisticSerializedIdentity
 
     }
 
-    public virtual void Modify(IStatisticContext context, Type value)
+    public virtual void Modify(Type value)
     {
         currentValue = value;
     }
 
-    public override bool TryGetValue<T>(IStatisticContext context, out T value)
+    public override bool TryGetValue<T>(out T value)
     {
         value = StatisticUtility.ConvertGeneric<T, Type>(currentValue);
         return true;

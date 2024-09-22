@@ -10,7 +10,7 @@ namespace Game
 
         public override bool Execute()
         {
-            return Time.time - ability.Caster.LastAbilityUsed > 1 / attackSpeed.GetValueOrThrow<float>(ability);
+            return Time.time - ability.Caster.LastAbilityUsed > 1 / attackSpeed;
         }
     }
 }

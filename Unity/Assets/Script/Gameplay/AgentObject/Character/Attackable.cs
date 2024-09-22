@@ -35,8 +35,8 @@ public partial class Attackable : MonoBehaviour, IComponent
 
     public void TakeAttack(Attack attack)
     {
-        float currentHealth = Entity.GetStatistic("health").GetValueOrThrow<float>(Entity);
-        float currentDefense = Entity.GetStatistic("defense").GetValueOrDefault<float>(Entity, 0f);
+        float currentHealth = Entity.GetStatistic("health");
+        float currentDefense = Entity.GetStatistic("defense");
         float increaseDamageTaken = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0);
         float rangedDamageReduction = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0);
         List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();

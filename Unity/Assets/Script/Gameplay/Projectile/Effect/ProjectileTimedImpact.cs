@@ -23,7 +23,7 @@ namespace Game
             base.Initialize(projectile);
             startedAt = Time.time;
 
-            currentDuration = duration.GetValueOrThrow<float>(projectile);
+            currentDuration = duration;
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -68,7 +68,7 @@ namespace Game
                     && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable)
                     && !targetsHit.Contains(attackable))
                 {
-                    Attack attack = AttackUtility.Generate(projectile.AgentObject as Character, damage.GetValueOrThrow<float>(projectile), 0, 0, true, false, true, attackable, projectile);
+                    Attack attack = AttackUtility.Generate(projectile.AgentObject as Character, damage, 0, 0, true, false, true, attackable, projectile);
                     attack.AttackSource.Sources.Add(projectile);
                     attackable.TakeAttack(attack);
                     targetsHit.Add(attackable);

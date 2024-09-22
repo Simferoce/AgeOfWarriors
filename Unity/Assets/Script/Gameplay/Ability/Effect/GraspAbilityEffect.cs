@@ -17,7 +17,7 @@ namespace Game
 
         public override void Apply()
         {
-            float duration = staggerDuration.GetValueOrThrow<float>(Ability);
+            float duration = staggerDuration;
             foreach (Character target in Ability.Targets.Cast<Character>().ToList())
             {
                 if (target.TryGetCachedComponent<ModifierHandler>(out ModifierHandler targetModifiable))

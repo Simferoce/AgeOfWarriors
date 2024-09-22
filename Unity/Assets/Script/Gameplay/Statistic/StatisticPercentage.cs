@@ -20,9 +20,9 @@ public class StatisticPercentage : StatisticSerializedIdentity
         this.percentage = percentage;
     }
 
-    public override bool TryGetValue<T>(IStatisticContext context, out T value)
+    public override bool TryGetValue<T>(out T value)
     {
-        value = StatisticUtility.ConvertGeneric<T, float>(provider.GetValueOrThrow<float>(context) * percentage);
+        value = StatisticUtility.ConvertGeneric<T, float>(provider * percentage);
         return true;
     }
 }
