@@ -42,6 +42,7 @@ namespace Game
         public bool IsEngaged => TargetUtility.GetTargets(this, this.engagedCriteria, this).FirstOrDefault() != null;
         public bool IsInvulnerable => this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is IInvulnerableModifier);
         public bool IsConfused => this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);
+        public bool IsStaggered => this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is StaggerModifierDefinition.Modifier);
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
 
@@ -60,8 +61,9 @@ namespace Game
             yield return new StatisticTemporary<bool>(this, "engaged", IsEngaged);
             yield return new StatisticTemporary<bool>(this, "invulnerable", IsInvulnerable);
             yield return new StatisticTemporary<bool>(this, "confused", IsConfused);
-            yield return new StatisticTemporary<bool>(this, "isDead", IsDead);
-            yield return new StatisticTemporary<bool>(this, "isInjured", IsInjured);
+            yield return new StatisticTemporary<bool>(this, "dead", IsDead);
+            yield return new StatisticTemporary<bool>(this, "injured", IsInjured);
+            yield return new StatisticTemporary<bool>(this, "staggered", IsStaggered);
 
             foreach (Statistic statistic in base.GetStatistic())
                 yield return statistic;

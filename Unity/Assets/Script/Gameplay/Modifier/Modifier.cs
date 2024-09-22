@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class Modifier : IModifier, IDisposable, IStatisticContext
+    public abstract class Modifier : IDisposable, IStatisticContext
     {
         public List<ModifierElement> modifierElements = new List<ModifierElement>();
         public abstract ModifierDefinition Definition { get; }

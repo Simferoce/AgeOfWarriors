@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Game
+﻿namespace Game
 {
     public partial class Character
     {
@@ -24,7 +22,7 @@ namespace Game
 
             protected override void InternalUpdate()
             {
-                if (!character.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is StaggerModifierDefinition.Modifier))
+                if (!character.IsStaggered)
                 {
                     character.stateMachine.SetState(new MoveState(character));
                     character.Animated.SetTrigger("EndStagger");

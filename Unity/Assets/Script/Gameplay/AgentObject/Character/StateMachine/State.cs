@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -41,7 +40,7 @@ namespace Game
 
             public void CheckStagger()
             {
-                if (character.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is StaggerModifierDefinition.Modifier))
+                if (character.IsStaggered)
                 {
                     character.stateMachine.SetState(new StaggerState(character));
                 }
