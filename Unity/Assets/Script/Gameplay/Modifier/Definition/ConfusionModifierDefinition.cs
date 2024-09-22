@@ -7,8 +7,6 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, ConfusionModifierDefinition>
         {
-            public override bool? IsConfused => true;
-
             public Modifier(ModifierHandler modifiable, ConfusionModifierDefinition modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
             }

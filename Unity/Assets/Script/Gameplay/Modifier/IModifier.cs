@@ -11,6 +11,5 @@ namespace Game
         float? MaxHealth { get => null; }
         float? AttackPower { get => null; }
         bool? IsInvulnerable { get => null; }
-        bool? IsConfused => null;
     }
 }

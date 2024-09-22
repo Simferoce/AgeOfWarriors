@@ -16,9 +16,6 @@ namespace Game
         public virtual float? AttackSpeedPercentage => null;
         public virtual float? ReachPercentage => null;
         public virtual float? AttackPower => null;
-        public virtual bool? IsInvulnerable => null;
-        public virtual bool? IsStagger => null;
-        public virtual bool? IsConfused => null;
         public virtual float? RangedDamageReduction => null;
         public virtual float? DamageDealtReduction => null;
         public virtual float? DamageDealtAgainstWeak => null;

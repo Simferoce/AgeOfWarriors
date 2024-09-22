@@ -8,7 +8,6 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, StaggerModifierDefinition>
         {
-            public override bool? IsStagger => true;
             public override float? IncreaseDamageTaken
             {
                 get
