@@ -56,11 +56,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 2969737379885613066
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         attackSpeed:
-          path: ability.caster.attack_speed
+          query:
+            rid: 5836723976867676171
     - rid: 3656781301283291221
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
@@ -72,11 +75,14 @@ MonoBehaviour:
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach:
-          path: 
+          query:
+            rid: -2
         damage:
-          path: ability.damage
+          query:
+            rid: 5836723976867676173
         armorPenetration:
-          path: 
+          query:
+            rid: -2
     - rid: 3656781301283291224
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
@@ -87,30 +93,73 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          path: ability.range
+          query:
+            rid: 5836723976867676167
     - rid: 3656781301283291227
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
     - rid: 5836723902342496263
       type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
       data:
         name: range
-        definitionId: 
+        definitionId: range
         provider:
           rid: 5836723902342496264
         percentage: 1
     - rid: 5836723902342496264
       type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
       data:
-        path: ability.caster.reach
+        query:
+          rid: 5836723976867676176
     - rid: 5836723902342496265
       type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
       data:
         name: damage
-        definitionId: 
+        definitionId: damage
         provider:
           rid: 5836723902342496266
         percentage: 1
     - rid: 5836723902342496266
       type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
       data:
-        path: ability.caster.attack_power
+        query:
+          rid: 5836723976867676178
+    - rid: 5836723976867676167
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836723976867676170
+        statisticDefinition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+    - rid: 5836723976867676170
+      type: {class: StatisticAbilitySelfProvider, ns: , asm: Assembly-CSharp}
+    - rid: 5836723976867676171
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836723976867676172
+        statisticDefinition: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+    - rid: 5836723976867676172
+      type: {class: StatisticAbilityCasterProvider, ns: , asm: Assembly-CSharp}
+    - rid: 5836723976867676173
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836723976867676174
+        statisticDefinition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+    - rid: 5836723976867676174
+      type: {class: StatisticAbilitySelfProvider, ns: , asm: Assembly-CSharp}
+    - rid: 5836723976867676176
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836723976867676177
+        statisticDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+    - rid: 5836723976867676177
+      type: {class: StatisticAbilityCasterProvider, ns: , asm: Assembly-CSharp}
+    - rid: 5836723976867676178
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836723976867676179
+        statisticDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+    - rid: 5836723976867676179
+      type: {class: StatisticAbilityCasterProvider, ns: , asm: Assembly-CSharp}
