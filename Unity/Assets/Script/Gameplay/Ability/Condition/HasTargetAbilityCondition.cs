@@ -10,11 +10,12 @@ namespace Game
         [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private int count = 1;
 
-        public List<Target> Targets = new List<Target>();
+        public List<Target> Targets { get; set; } = new List<Target>();
 
         public override bool Execute()
         {
-            Targets = TargetUtility.GetTargets(ability.Caster.Entity, criteria, ability);
+            Targets.Clear();
+            Targets.AddRange(TargetUtility.GetTargets(ability.Caster.Entity, criteria, ability));
             return Targets.Count >= count;
         }
     }

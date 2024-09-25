@@ -2,15 +2,17 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace Game
 {
     public class AnimationBaseCharacterAbility : Ability
     {
-        [SerializeField] private string parameter;
         [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
-        [Space]
         [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();
+
+        [Header("Animation Parameters")]
+        [SerializeField, FormerlySerializedAs("parameter")] private string trigger;
 
         public override List<Target> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
         public override bool IsActive { get => IsCasting || IsLingering; }
@@ -42,7 +44,7 @@ namespace Game
             FactionWhenUsed = (Caster.Entity as AgentObject).Faction;
 
             Caster.BeginCast();
-            animated.SetTrigger(parameter);
+            animated.SetTrigger(trigger);
             Caster.LastAbilityUsed = Time.time;
             IsCasting = true;
 
