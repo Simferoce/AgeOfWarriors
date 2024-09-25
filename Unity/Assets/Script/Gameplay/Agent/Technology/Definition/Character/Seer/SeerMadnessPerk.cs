@@ -12,7 +12,7 @@ namespace Game
             private Ability affectedAbility;
             private Character character;
 
-            public override float? AttackPower => definition.attackPower;
+            //public override float? AttackPower => definition.attackPower;
 
             public Modifier(ModifierHandler modifiable, SeerMadnessPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {

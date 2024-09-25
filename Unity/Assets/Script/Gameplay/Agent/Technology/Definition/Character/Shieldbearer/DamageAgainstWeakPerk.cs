@@ -7,10 +7,12 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, DamageAgainstWeakPerk>
         {
-            public override float? DamageDealtAgainstWeak => definition.damageDealtAgainstWeak;
+            private StatisticModifiable<float> damageAgainstWeak = new StatisticModifiable<float>(definition: StatisticRepository.Damage);
 
             public Modifier(ModifierHandler modifiable, DamageAgainstWeakPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
+                damageAgainstWeak.Initialize(this);
+                damageAgainstWeak.Modify(definition.damageDealtAgainstWeak);
             }
         }
 

@@ -7,10 +7,12 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackSpeedPerk>
         {
-            public override float? AttackPower => definition.amount;
+            private StatisticModifiable<float> attackPower = new StatisticModifiable<float>(definition: StatisticRepository.AttackPower);
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackSpeedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                attackPower.Initialize(this);
+                attackPower.Modify(definition.amount);
             }
         }
 

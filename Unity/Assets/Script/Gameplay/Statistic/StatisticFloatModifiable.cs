@@ -13,7 +13,7 @@ public class StatisticFloatModifiable : StatisticModifiable<float>, IStatisticCo
     {
     }
 
-    public StatisticFloatModifiable(string name, string definitionId, Statistic max)
+    public StatisticFloatModifiable(string name, string definitionId, Statistic max = null)
         : base(name, definitionId)
     {
         this.max = max;
@@ -23,7 +23,9 @@ public class StatisticFloatModifiable : StatisticModifiable<float>, IStatisticCo
     public override void Modify(float value)
     {
         base.Modify(value);
-        currentValue = Mathf.Clamp(currentValue, float.MinValue, max);
+
+        if (max != null)
+            currentValue = Mathf.Clamp(currentValue, float.MinValue, max);
     }
 
     public IEnumerable<Statistic> GetStatistic()

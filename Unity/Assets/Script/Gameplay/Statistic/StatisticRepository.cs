@@ -13,6 +13,8 @@ public static class StatisticRepository
     }
 
     public static string Damage = "damage";
+    public static string DamagePercentage = "damage_percentage";
+    public static string DamageAgainstWeak = "damage_against_weak";
     public static string MaxHealth = "max_health";
     public static string Health = "health";
     public static string Defense = "defense";
@@ -23,9 +25,13 @@ public static class StatisticRepository
     public static string Reach = "reach";
     public static string Leach = "leach";
     public static string AttackSpeed = "attack_speed";
+    public static string AttackSpeedPercentage = "attack_speed_percentage";
     public static string AttackPower = "attack_power";
+    public static string AttackPowerPercentage = "attack_power_percentage";
     public static string Speed = "speed";
+    public static string SpeedPercentage = "speed_percentage";
     public static string Heal = "heal";
+    public static string DefenseReduction = "defense_reduction";
 
     public static List<StatisticDefinition> statisticDefinitions = null;
 

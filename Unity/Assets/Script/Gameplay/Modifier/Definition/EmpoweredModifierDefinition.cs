@@ -8,7 +8,6 @@ namespace Game
         public class Modifier : Modifier<Modifier, EmpoweredModifierDefinition>
         {
             private StackModifierElement stackModifierElement;
-
             public float PercentageDamageIncrease => definition.percentageDamageIncrease;
 
             public Modifier(ModifierHandler modifiable, EmpoweredModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)

@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, DefenseModifierDefinition>
         {
-            public override float? Defense => defense;
+            //public override float? Defense => defense;
 
             private float defense;
 

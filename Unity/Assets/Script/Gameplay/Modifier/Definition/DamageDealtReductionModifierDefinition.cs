@@ -21,7 +21,7 @@ namespace Game
                 }
             }
 
-            public override float? DamageDealtReduction => amount;
+            //public override float? DamageDealtReduction => amount;
 
             private float amount;
 

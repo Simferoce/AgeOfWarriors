@@ -7,10 +7,12 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseDefensePerk>
         {
-            public override float? Defense => definition.amount;
+            private StatisticModifiable<float> defense = new StatisticModifiable<float>(definition: StatisticRepository.Defense);
 
             public Modifier(ModifierHandler modifiable, IncreaseDefensePerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                defense.Initialize(this);
+                defense.Modify(definition.amount);
             }
         }
 

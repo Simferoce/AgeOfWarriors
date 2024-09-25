@@ -7,10 +7,12 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseMaxHealthPerk>
         {
-            public override float? MaxHealth => definition.amount;
+            private StatisticModifiable<float> maxHealth = new StatisticModifiable<float>(definition: StatisticRepository.MaxHealth);
 
             public Modifier(ModifierHandler modifiable, IncreaseMaxHealthPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                maxHealth.Initialize(this);
+                maxHealth.Modify(definition.amount);
             }
         }
 

@@ -32,11 +32,11 @@ namespace Game
 
         public float Health { get; set; }
         public float MaxHealth => this.Definition.MaxHealth;
-        public float Defense => this.Definition.Defense + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value);
-        public float AttackSpeed => this.Definition.AttackSpeed * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value));
-        public float AttackPower => this.Definition.AttackPower + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value);
-        public float Speed => this.Definition.Speed * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value));
-        public float Reach => this.Definition.Reach * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value));
+        public float Defense => this.Definition.Defense /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value)*/;
+        public float AttackSpeed => this.Definition.AttackSpeed /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value))*/;
+        public float AttackPower => this.Definition.AttackPower /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value)*/;
+        public float Speed => this.Definition.Speed/* * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value))*/;
+        public float Reach => this.Definition.Reach /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value))*/;
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => TargetUtility.GetTargets(this, this.engagedCriteria, this).FirstOrDefault() != null;

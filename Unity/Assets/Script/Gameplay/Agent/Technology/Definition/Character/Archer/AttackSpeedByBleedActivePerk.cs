@@ -7,13 +7,15 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, AttackSpeedByBleedActivePerk>
         {
-            public override float? AttackSpeedPercentage => amountOfBleedApplied * definition.attackSpeedPerBleedApplied;
+            private StatisticModifiable<float> attackSpeedPerBleed = new StatisticModifiable<float>(definition: StatisticRepository.AttackSpeed);
+
             public override bool Show => amountOfBleedApplied > 0;
 
             private int amountOfBleedApplied = 0;
 
             public Modifier(ModifierHandler modifiable, AttackSpeedByBleedActivePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
+                attackSpeedPerBleed.Initialize(this);
             }
 
             public override float? GetStack()
@@ -33,6 +35,8 @@ namespace Game
 
                     amountOfBleedApplied += (int)modifier.GetStack();
                 }
+
+                attackSpeedPerBleed.Modify(amountOfBleedApplied * definition.attackSpeedPerBleedApplied);
             }
         }
 

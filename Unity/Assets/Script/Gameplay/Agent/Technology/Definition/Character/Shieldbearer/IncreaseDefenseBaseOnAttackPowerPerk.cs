@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
@@ -7,10 +8,16 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseDefenseBaseOnAttackPowerPerk>
         {
-            public override float? AttackPower => Mathf.Floor(modifiable.Entity.GetCachedComponent<Character>().Defense / definition.defenseRequired) * definition.attackPowerIncrease;
-
             public Modifier(ModifierHandler modifiable, IncreaseDefenseBaseOnAttackPowerPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
+            }
+
+            public override IEnumerable<Statistic> GetStatistic()
+            {
+                yield return new StatisticTemporary<float>(this, "", Mathf.Floor(modifiable.Entity.GetCachedComponent<Character>().Defense / definition.defenseRequired) * definition.attackPowerIncrease, StatisticRepository.GetDefinition(StatisticRepository.AttackPower));
+
+                foreach (Statistic statistic in base.GetStatistic())
+                    yield return statistic;
             }
         }
 

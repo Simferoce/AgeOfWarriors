@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -8,14 +7,14 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, StaggerModifierDefinition>
         {
-            public override float? IncreaseDamageTaken
-            {
-                get
-                {
-                    IncreaseDamageTakenWhenStaggerPerk.Modifier modifier = (Source.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is IncreaseDamageTakenWhenStaggerPerk.Modifier) as IncreaseDamageTakenWhenStaggerPerk.Modifier);
-                    return modifier?.IncreaseDamageTakenOfStaggered ?? 0f;
-                }
-            }
+            //public override float? IncreaseDamageTaken
+            //{
+            //    get
+            //    {
+            //        IncreaseDamageTakenWhenStaggerPerk.Modifier modifier = (Source.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is IncreaseDamageTakenWhenStaggerPerk.Modifier) as IncreaseDamageTakenWhenStaggerPerk.Modifier);
+            //        return modifier?.IncreaseDamageTakenOfStaggered ?? 0f;
+            //    }
+            //}
 
             public Modifier(ModifierHandler modifiable, StaggerModifierDefinition modifierDefinition, float duration, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {

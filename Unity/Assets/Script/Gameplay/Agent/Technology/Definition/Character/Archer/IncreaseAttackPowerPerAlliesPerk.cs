@@ -9,7 +9,7 @@ namespace Game
         {
             private int amountOfAlliesPresentOnTheBattleField;
 
-            public override float? AttackPower => amountOfAlliesPresentOnTheBattleField * definition.attackPowerPerAlliesPresent;
+            //public override float? AttackPower => amountOfAlliesPresentOnTheBattleField * definition.attackPowerPerAlliesPresent;
 
             public override bool Show => amountOfAlliesPresentOnTheBattleField > 0;
 

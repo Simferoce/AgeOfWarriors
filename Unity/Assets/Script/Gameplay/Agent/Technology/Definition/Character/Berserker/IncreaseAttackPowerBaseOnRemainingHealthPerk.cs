@@ -7,10 +7,10 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackPowerBaseOnRemainingHealthPerk>
         {
-            public override float? AttackPower => modifiable.Entity.TryGetCachedComponent<Character>(out Character character)
-                && character.Health / character.MaxHealth < definition.attackpower
-                ? definition.threshold
-                : null;
+            //public override float? AttackPower => modifiable.Entity.TryGetCachedComponent<Character>(out Character character)
+            //    && character.Health / character.MaxHealth < definition.attackpower
+            //    ? definition.threshold
+            //    : null;
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackPowerBaseOnRemainingHealthPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {

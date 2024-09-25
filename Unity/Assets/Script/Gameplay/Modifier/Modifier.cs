@@ -10,17 +10,17 @@ namespace Game
         public List<ModifierElement> modifierElements = new List<ModifierElement>();
         public abstract ModifierDefinition Definition { get; }
 
-        public virtual float? SpeedPercentage => null;
-        public virtual float? Defense => null;
-        public virtual float? MaxHealth => null;
-        public virtual float? AttackSpeedPercentage => null;
-        public virtual float? ReachPercentage => null;
-        public virtual float? AttackPower => null;
-        public virtual float? RangedDamageReduction => null;
-        public virtual float? DamageDealtReduction => null;
-        public virtual float? DamageDealtAgainstWeak => null;
-        public virtual float? IncreaseDamageTaken => null;
-        public virtual float? DefenseReduction => null;
+        //public virtual float? SpeedPercentage => null;
+        //public virtual float? Defense => null;
+        //public virtual float? MaxHealth => null;
+        //public virtual float? AttackSpeedPercentage => null;
+        //public virtual float? ReachPercentage => null;
+        //public virtual float? AttackPower => null;
+        //public virtual float? RangedDamageReduction => null;
+        //public virtual float? DamageDealtReduction => null;
+        //public virtual float? DamageDealtAgainstWeak => null;
+        //public virtual float? IncreaseDamageTaken => null;
+        //public virtual float? DefenseReduction => null;
 
         public ModifierHandler Modifiable { get => modifiable; set => modifiable = value; }
         public IModifierSource Source { get; }
@@ -92,7 +92,7 @@ namespace Game
             return name.SequenceEqual("modifier");
         }
 
-        public IEnumerable<Statistic> GetStatistic()
+        public virtual IEnumerable<Statistic> GetStatistic()
         {
             yield return new StatisticTemporary<ModifierDefinition>(this, "definition", Definition);
         }

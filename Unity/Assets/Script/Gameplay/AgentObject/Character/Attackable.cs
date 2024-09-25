@@ -37,8 +37,8 @@ public partial class Attackable : MonoBehaviour, IComponent
     {
         float currentHealth = Entity.GetStatistic().FirstOrDefault(x => x.Definition == StatisticRepository.GetDefinition(StatisticRepository.Health));
         float currentDefense = Entity.GetStatistic().FirstOrDefault(x => x.Definition == StatisticRepository.GetDefinition(StatisticRepository.Defense));
-        float increaseDamageTaken = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0);
-        float rangedDamageReduction = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0);
+        float increaseDamageTaken = 0f;//Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0);
+        float rangedDamageReduction = 0f;//Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0);
         List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();
         bool canResistDeath = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
 

@@ -8,12 +8,13 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, AttackSpeedBaseOnStaggerAppliedPerk>
         {
-            private int amountOfStaggerApplied = 0;
+            private StatisticModifiable<float> attackPowerPercentage = new StatisticModifiable<float>(definition: StatisticRepository.DamagePercentage);
 
-            public override float? AttackSpeedPercentage => amountOfStaggerApplied * definition.attackSpeedByStaggerApplied;
+            private int amountOfStaggerApplied = 0;
 
             public Modifier(ModifierHandler modifiable, AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                attackPowerPercentage.Initialize(this);
                 modifiable.Entity.GetCachedComponent<IModifierSource>().OnModifierAdded += Modifier_OnModifierAdded;
             }
 
@@ -25,7 +26,10 @@ namespace Game
             private void Modifier_OnModifierAdded(Game.Modifier modifier)
             {
                 if (modifier is StaggerModifierDefinition.Modifier)
+                {
                     amountOfStaggerApplied++;
+                    attackPowerPercentage.Modify(amountOfStaggerApplied * definition.attackSpeedByStaggerApplied);
+                }
             }
 
             public override void Dispose()

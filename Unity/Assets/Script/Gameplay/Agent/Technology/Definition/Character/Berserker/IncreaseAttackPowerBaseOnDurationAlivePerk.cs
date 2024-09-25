@@ -9,7 +9,7 @@ namespace Game
         {
             private float startedAt;
 
-            public override float? AttackPower => definition.attackpowerPerSeconds * (Time.time - startedAt);
+            //public override float? AttackPower => definition.attackpowerPerSeconds * (Time.time - startedAt);
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackPowerBaseOnDurationAlivePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {

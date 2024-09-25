@@ -7,7 +7,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, RangedReductionDamagePerk>
         {
-            public override float? RangedDamageReduction => definition.rangedDamageReduction;
+            //public override float? RangedDamageReduction => definition.rangedDamageReduction;
 
             public Modifier(ModifierHandler modifiable, RangedReductionDamagePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {

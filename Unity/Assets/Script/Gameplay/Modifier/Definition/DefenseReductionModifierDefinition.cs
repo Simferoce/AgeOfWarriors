@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
@@ -7,14 +8,22 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, DefenseReductionModifierDefinition>
         {
-            public override float? DefenseReduction => defenseReduction;
+            private StatisticModifiable<float> defenseReduction = new StatisticModifiable<float>(definition: StatisticRepository.DefenseReduction);
 
-            private float defenseReduction;
-
-            public Modifier(ModifierHandler modifiable, DefenseReductionModifierDefinition modifierDefinition, float duration, float reduction, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, DefenseReductionModifierDefinition modifierDefinition, float duration, float reduction, IModifierSource source = null)
+                : base(modifiable, modifierDefinition, source)
             {
                 With(new CharacterModifierTimeElement(duration));
-                defenseReduction = reduction;
+                defenseReduction.Initialize(this);
+                defenseReduction.Modify(reduction);
+            }
+
+            public override IEnumerable<Statistic> GetStatistic()
+            {
+                yield return defenseReduction;
+
+                foreach (Statistic statistic in base.GetStatistic())
+                    yield return statistic;
             }
         }
     }

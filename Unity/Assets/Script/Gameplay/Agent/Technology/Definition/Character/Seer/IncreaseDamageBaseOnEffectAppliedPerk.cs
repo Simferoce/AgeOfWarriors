@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -8,8 +7,8 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseDamageBaseOnEffectAppliedPerk>
         {
-            public override float? AttackPower => definition.attackPowerPerEffectApplied * Source.AppliedModifiers.Count(x =>
-                x.Definition is not CharacterTechnologyPerkDefinition);
+            //public override float? AttackPower => definition.attackPowerPerEffectApplied * Source.AppliedModifiers.Count(x =>
+            //    x.Definition is not CharacterTechnologyPerkDefinition);
 
             public Modifier(ModifierHandler modifiable, IncreaseDamageBaseOnEffectAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {

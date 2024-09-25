@@ -9,11 +9,13 @@ namespace Game
         {
             private int numberOfNearbyEnemies;
 
-            public override float? AttackSpeedPercentage => numberOfNearbyEnemies * definition.attackSpeedIncreasePerEnemies;
+            private StatisticModifiable<float> attackSpeedPercentage = new StatisticModifiable<float>(definition: StatisticRepository.AttackSpeedPercentage);
+
             public override bool Show => numberOfNearbyEnemies > 0;
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackSpeedBaseOnNearbyEnemiesPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
+                attackSpeedPercentage.Initialize(this);
             }
 
             public override void Update()
@@ -46,6 +48,8 @@ namespace Game
 
                     numberOfNearbyEnemies++;
                 }
+
+                attackSpeedPercentage.Modify(numberOfNearbyEnemies * definition.attackSpeedIncreasePerEnemies);
             }
         }
 

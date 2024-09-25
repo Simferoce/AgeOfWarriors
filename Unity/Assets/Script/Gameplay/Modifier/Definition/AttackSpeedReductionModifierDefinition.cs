@@ -7,18 +7,12 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, AttackSpeedReductionModifierDefinition>
         {
-            private float amount;
-
-            public override float? AttackSpeedPercentage => -amount;
+            private StatisticModifiable<float> attackSpeedPercentage = new StatisticModifiable<float>(definition: StatisticRepository.AttackSpeedPercentage);
 
             public Modifier(ModifierHandler modifiable, AttackSpeedReductionModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                this.amount = amount;
-            }
-
-            public override string ParseDescription()
-            {
-                return string.Format(definition.Description, amount);
+                attackSpeedPercentage.Initialize(this);
+                attackSpeedPercentage.Modify(amount);
             }
         }
     }
