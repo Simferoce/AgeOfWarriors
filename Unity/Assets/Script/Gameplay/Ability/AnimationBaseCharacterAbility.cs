@@ -5,8 +5,7 @@ using UnityEngine.Assertions;
 
 namespace Game
 {
-    public abstract class AnimationBaseCharacterAbility<T> : Ability<T>
-        where T : AbilityDefinition
+    public class AnimationBaseCharacterAbility : Ability
     {
         [SerializeField] private string parameter;
         [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();

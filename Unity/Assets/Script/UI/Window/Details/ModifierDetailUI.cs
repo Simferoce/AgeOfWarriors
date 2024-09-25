@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,9 +18,9 @@ namespace Game
         {
             this.modifier = modifier;
             icon.sprite = modifier.Definition.Icon;
-            overlay.fillAmount = modifier.GetPercentageRemainingDuration() ?? 0;
+            overlay.fillAmount = modifier?.Behaviours.OfType<IModifierDuration>().FirstOrDefault().GetPercentageRemainingDuration() ?? 0;
 
-            float? stackValue = modifier.GetStack();
+            float? stackValue = modifier?.Behaviours.OfType<IModifierStack>().FirstOrDefault()?.CurrentStack;
             if (stackValue == null)
             {
                 stack.SetActive(false);

@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class ShieldbearerInspiringPresenceAbility : AnimationBaseCharacterAbility<AbilityDefinition>
+    public class ShieldbearerInspiringPresenceAbility : AnimationBaseCharacterAbility
     {
 
     }

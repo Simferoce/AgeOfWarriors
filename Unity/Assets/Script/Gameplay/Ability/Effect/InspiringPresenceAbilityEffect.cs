@@ -11,7 +11,7 @@ namespace Game
         [SerializeField] private StatisticReference area;
         [SerializeField] private StatisticReference buffDuration;
         [SerializeField] private StatisticReference defense;
-        [SerializeField] private DefenseModifierDefinition inspiringPresenceModifierDefinition;
+        //[SerializeField] private DefenseModifierDefinition inspiringPresenceModifierDefinition;
 
         private float? startedAt = null;
 
@@ -32,30 +32,30 @@ namespace Game
                    && Mathf.Abs((x.Entity as AgentObject).transform.position.x - x.transform.position.x) < area)
                .ToList();
 
-            foreach (Character characterToBuff in characters)
-            {
-                DefenseModifierDefinition.Modifier inspiringPresenceBuff = (DefenseModifierDefinition.Modifier)characterToBuff
-                    .Entity.GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is DefenseModifierDefinition.Modifier);
+            //foreach (Character characterToBuff in characters)
+            //{
+            //    DefenseModifierDefinition.Modifier inspiringPresenceBuff = (DefenseModifierDefinition.Modifier)characterToBuff
+            //        .Entity.GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is DefenseModifierDefinition.Modifier);
 
-                if (inspiringPresenceBuff != null)
-                {
-                    if (inspiringPresenceBuff.Source == Ability.Caster.Entity.GetCachedComponent<IModifierSource>())
-                    {
-                        inspiringPresenceBuff.Refresh();
-                    }
-                }
-                else
-                {
-                    inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(
-                            Ability.Caster.Entity.GetCachedComponent<Character>(),
-                            inspiringPresenceModifierDefinition,
-                            defense,
-                            Ability.Caster.Entity.GetCachedComponent<IModifierSource>())
-                        .With(new CharacterModifierTimeElement(buffDuration));
+            //    if (inspiringPresenceBuff != null)
+            //    {
+            //        if (inspiringPresenceBuff.Source == Ability.Caster.Entity.GetCachedComponent<IModifierSource>())
+            //        {
+            //            inspiringPresenceBuff.Refresh();
+            //        }
+            //    }
+            //    else
+            //    {
+            //        inspiringPresenceBuff = new DefenseModifierDefinition.Modifier(
+            //                Ability.Caster.Entity.GetCachedComponent<Character>(),
+            //                inspiringPresenceModifierDefinition,
+            //                defense,
+            //                Ability.Caster.Entity.GetCachedComponent<IModifierSource>())
+            //            .With(new TimeModifierBehaviour(buffDuration));
 
-                    characterToBuff.Entity.GetCachedComponent<ModifierHandler>().AddModifier(inspiringPresenceBuff);
-                }
-            }
+            //        characterToBuff.Entity.GetCachedComponent<ModifierHandler>().AddModifier(inspiringPresenceBuff);
+            //    }
+            //}
         }
 
         public override void OnAbilityEnded()

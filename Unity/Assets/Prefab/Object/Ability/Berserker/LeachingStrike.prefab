@@ -41,9 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 412271190907481078}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26aa1cdaee204454da593c70e5d4b382, type: 3}
+  m_Script: {fileID: 11500000, guid: 3be16aabdaf49824ab3fc3d80b0975fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statistics: []
   parameter: SpecialAbility1
   conditions:
   - rid: 3656781574257508353
@@ -61,15 +62,13 @@ MonoBehaviour:
           path: ability.caster.attackspeed
     - rid: 3656781574257508353
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
-      data:
-        cooldown:
-          path: 
     - rid: 3656781574257508355
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
           rid: 3656781574257508356
         count: 1
+        Targets: []
     - rid: 3656781574257508356
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:

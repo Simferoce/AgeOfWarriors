@@ -1,30 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
-    public abstract class ModifierDefinition : Definition, IStatisticContext
+    [CreateAssetMenu(fileName = "ModifierDefinition", menuName = "Definition/Modifier/ModifierDefinition")]
+    public class ModifierDefinition : Definition
     {
-        [Serializable]
-        public abstract class Instancier
-        {
-            public abstract ModifierDefinition Definition { get; set; }
-            public abstract Modifier Instantiate(ModifierHandler modifiable, IModifierSource source);
-        }
-
-        [Serializable]
-        public abstract class Instancier<T> : Instancier
-            where T : ModifierDefinition
-        {
-            [SerializeField] protected T definition;
-
-            public override ModifierDefinition Definition { get => definition; set => definition = (T)value; }
-        }
-
         [SerializeField] private string title;
         [SerializeField] private Sprite icon;
         [SerializeField] private string description;
+        [SerializeField] private GameObject prefab;
         [SerializeField] private bool showOnHealthBar = true;
 
         public Sprite Icon { get => icon; }
@@ -32,19 +16,14 @@ namespace Game
         public bool Show { get => showOnHealthBar; set => showOnHealthBar = value; }
         public string Description { get => description; set => description = value; }
 
-        public virtual string ParseDescription()
-        {
-            return description;
-        }
+        public string ParseDescription() { return description; }
 
-        public bool IsName(ReadOnlySpan<char> name)
+        public Modifier Instantiate(ModifierHandler handler, IModifierSource source)
         {
-            return name.SequenceEqual("definition");
-        }
-
-        public virtual IEnumerable<Statistic> GetStatistic()
-        {
-            yield break;
+            GameObject gameObject = Instantiate(prefab, handler.transform);
+            Modifier modifier = gameObject.GetComponent<Modifier>();
+            modifier.Initialize(handler, source, this);
+            return modifier;
         }
     }
 }

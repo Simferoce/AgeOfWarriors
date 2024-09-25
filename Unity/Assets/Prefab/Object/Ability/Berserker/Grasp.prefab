@@ -41,9 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5897430954624599547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 856fc4794e3848d4e90809a303b80de1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3be16aabdaf49824ab3fc3d80b0975fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statistics: []
   parameter: SpecialAbility2
   conditions:
   - rid: 3656781574226575361
@@ -61,15 +62,13 @@ MonoBehaviour:
           path: ability.caster.attackspeed
     - rid: 3656781574226575361
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
-      data:
-        cooldown:
-          path: 
     - rid: 3656781574226575363
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
           rid: 3656781574226575364
         count: 2
+        Targets: []
     - rid: 3656781574226575364
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
@@ -96,4 +95,3 @@ MonoBehaviour:
         staggerDuration:
           path: 
         damping: 0.5
-        staggerModifierDefinition: {fileID: 0}

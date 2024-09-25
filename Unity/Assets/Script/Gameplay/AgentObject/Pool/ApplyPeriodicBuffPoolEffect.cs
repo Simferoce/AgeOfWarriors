@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Game
 {
@@ -30,9 +29,9 @@ namespace Game
             if (!targeteable.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                 return;
 
-            Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == ModifierInstancier.ModifierDefinition);
-            if (modifier != null)
-                return;
+            //Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == ModifierInstancier.ModifierDefinition);
+            //if (modifier != null)
+            //    return;
 
             throw new Exception();
             //modifier = ModifierInstancier.Instanciate(modifiable, pool.AddOrGetCachedComponent<Ownership>().Owner.Entity.GetCachedComponent<IModifierSource>());
@@ -44,14 +43,14 @@ namespace Game
         {
             base.Dispose();
 
-            foreach (Modifier modifier in appliedModifiers)
-            {
-                //Should remove modifier of object that have been destroyed.
-                if (modifier.Modifiable == null)
-                    continue;
+            //foreach (Modifier modifier in appliedModifiers)
+            //{
+            //    //Should remove modifier of object that have been destroyed.
+            //    if (modifier.Modifiable == null)
+            //        continue;
 
-                modifier.Modifiable.RemoveModifier(modifier);
-            }
+            //    modifier.Modifiable.RemoveModifier(modifier);
+            //}
 
             appliedModifiers.Clear();
         }

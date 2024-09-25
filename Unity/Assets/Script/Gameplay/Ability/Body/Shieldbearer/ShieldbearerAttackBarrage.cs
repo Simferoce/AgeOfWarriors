@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class ShieldbearerAttackBarrage : AnimationBaseCharacterAbility<AbilityDefinition>
+    public class ShieldbearerAttackBarrage : AnimationBaseCharacterAbility
     {
 
     }

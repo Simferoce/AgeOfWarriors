@@ -1,5 +1,4 @@
-﻿using Assets.Script.Agent.Technology;
-using Extension;
+﻿using Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +40,8 @@ namespace Game
 
         public bool IsEngaged => TargetUtility.GetTargets(this, this.engagedCriteria, this).FirstOrDefault() != null;
         public bool IsInvulnerable => this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is IInvulnerableModifier);
-        public bool IsConfused => this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);
-        public bool IsStaggered => this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is StaggerModifierDefinition.Modifier);
+        public bool IsConfused => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);*/
+        public bool IsStaggered => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is StaggerModifierDefinition.Modifier);*/
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
 
@@ -90,11 +89,11 @@ namespace Game
             Animated = GetComponentInChildren<Animated>();
 
             AgentObjectDefinition agentObjectDefinition = GetDefinition();
-            List<ITechnologyModify> modifiers = agent.Technology.UnlockedPerks().OfType<ITechnologyModify>().ToList();
-            foreach (ITechnologyModify modifier in modifiers)
+            List<CharacterTechnologyPerkDefinition> modifiers = agent.Technology.UnlockedPerks().OfType<CharacterTechnologyPerkDefinition>().ToList();
+            foreach (CharacterTechnologyPerkDefinition modifier in modifiers)
             {
                 if (modifier.Affect(agentObjectDefinition))
-                    this.Entity.GetCachedComponent<ModifierHandler>().AddModifier(modifier.GetModifier(this.Entity.GetCachedComponent<ModifierHandler>()));
+                    modifier.Modify(this);
             }
 
             stateMachine.Initialize(new MoveState(this));
@@ -141,8 +140,6 @@ namespace Game
             EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
             OnDeath?.Invoke();
             stateMachine.SetState(new DeathState(this));
-
-            GetCachedComponent<ModifierHandler>().Clear();
         }
 
         public void Displace(Vector2 displacement)

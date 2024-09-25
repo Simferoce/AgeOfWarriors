@@ -1,90 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public abstract class Modifier : IDisposable, IStatisticContext
+    public class Modifier : MonoBehaviour, IStatisticContext
     {
-        public List<ModifierElement> modifierElements = new List<ModifierElement>();
-        public abstract ModifierDefinition Definition { get; }
+        [SerializeField] private bool visibleByDefault = true;
+        [SerializeReference, SubclassSelector] private List<Statistic> statistics;
+        [SerializeReference, SubclassSelector] private List<ModifierBehaviour> behaviours;
 
-        //public virtual float? SpeedPercentage => null;
-        //public virtual float? Defense => null;
-        //public virtual float? MaxHealth => null;
-        //public virtual float? AttackSpeedPercentage => null;
-        //public virtual float? ReachPercentage => null;
-        //public virtual float? AttackPower => null;
-        //public virtual float? RangedDamageReduction => null;
-        //public virtual float? DamageDealtReduction => null;
-        //public virtual float? DamageDealtAgainstWeak => null;
-        //public virtual float? IncreaseDamageTaken => null;
-        //public virtual float? DefenseReduction => null;
+        public ModifierDefinition Definition { get; set; }
+        public ModifierHandler Handler { get; set; }
+        public IModifierSource Source { get; set; }
+        public List<ModifierBehaviour> Behaviours { get => behaviours; set => behaviours = value; }
+        public bool IsVisible { get => visibleByDefault; }
 
-        public ModifierHandler Modifiable { get => modifiable; set => modifiable = value; }
-        public IModifierSource Source { get; }
-        public virtual bool Show => Definition.Show;
-
-        protected ModifierHandler modifiable;
-
-        protected Modifier(ModifierHandler modifiable, IModifierSource source = null)
+        public void Initialize(ModifierHandler handler, IModifierSource source, ModifierDefinition definition)
         {
+            this.Handler = handler;
             this.Source = source;
-            this.modifiable = modifiable;
+            this.Definition = definition;
 
-            if (Source != null)
-                Source.AddAppliedModifier(this);
+            foreach (ModifierBehaviour modifierBehaviour in Behaviours)
+                modifierBehaviour.Initialize();
         }
 
-        public void Initialize()
+        private void Update()
         {
-            foreach (ModifierElement element in modifierElements)
-                element.Initialize();
+            foreach (ModifierBehaviour modifierBehaviour in Behaviours)
+                modifierBehaviour.Update();
         }
 
-        public virtual string ParseDescription() { return Definition.ParseDescription(); }
-
-        public virtual void Update()
+        private void OnDestroy()
         {
-            bool end = false;
-            foreach (ModifierElement element in modifierElements)
-            {
-                end |= element.Update();
-            }
-
-            if (end)
-                modifiable.RemoveModifier(this);
+            foreach (ModifierBehaviour modifierBehaviour in Behaviours)
+                modifierBehaviour.Dispose();
         }
 
-        public virtual float? GetPercentageRemainingDuration()
+        public string ParseDescription()
         {
-            CharacterModifierTimeElement modifierElement = (CharacterModifierTimeElement)modifierElements.FirstOrDefault(x => x is CharacterModifierTimeElement);
-
-            if (modifierElement == null)
-                return null;
-
-            return Mathf.Clamp01(modifierElement.RemaingDuration / modifierElement.Duration);
-        }
-
-        public virtual float? GetStack()
-        {
-            StackModifierElement stackModifierElement = (StackModifierElement)modifierElements.FirstOrDefault(x => x is StackModifierElement);
-            return stackModifierElement?.CurrentStack;
-        }
-
-        public virtual void Refresh()
-        {
-            foreach (ModifierElement element in modifierElements)
-            {
-                element.Refresh();
-            }
-        }
-
-        public virtual void Dispose()
-        {
-            if (Source != null)
-                Source.RemoveAppliedModifier(this);
+            return Definition.ParseDescription();
         }
 
         public bool IsName(ReadOnlySpan<char> name)
@@ -92,35 +48,10 @@ namespace Game
             return name.SequenceEqual("modifier");
         }
 
-        public virtual IEnumerable<Statistic> GetStatistic()
+        public IEnumerable<Statistic> GetStatistic()
         {
-            yield return new StatisticTemporary<ModifierDefinition>(this, "definition", Definition);
-        }
-    }
-
-    public abstract class Modifier<T, U> : Modifier
-        where T : Modifier<T, U>
-        where U : ModifierDefinition
-    {
-        protected U definition;
-
-        public override ModifierDefinition Definition => definition;
-
-        protected Modifier(ModifierHandler modifiable, U modifierDefinition, IModifierSource source) : base(modifiable, source)
-        {
-            definition = modifierDefinition;
-        }
-
-        public T With(List<ModifierElement> modifierElements)
-        {
-            this.modifierElements.AddRange(modifierElements);
-            return (T)this;
-        }
-
-        public T With(ModifierElement modifierElement)
-        {
-            this.modifierElements.Add(modifierElement);
-            return (T)this;
+            foreach (Statistic statistic in statistics)
+                yield return statistic;
         }
     }
 }

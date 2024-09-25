@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Game
 {
@@ -11,14 +10,14 @@ namespace Game
 
             List<Modifier> modifiers = (attacker as IComponent).Entity.GetCachedComponent<ModifierHandler>().GetModifiers();
 
-            EmpoweredModifierDefinition.Modifier empowerment = modifiers.FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
-            if (empowerment != null)
-            {
-                damage *= 1 + empowerment.PercentageDamageIncrease;
-                empowerment.Consume();
+            //EmpoweredModifierDefinition.Modifier empowerment = modifiers.FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
+            //if (empowerment != null)
+            //{
+            //    damage *= 1 + empowerment.PercentageDamageIncrease;
+            //    empowerment.Consume();
 
-                empowered = true;
-            }
+            //    empowered = true;
+            //}
 
             if (modifiers.Count > 0)
             {

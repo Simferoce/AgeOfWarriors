@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class SeerDarkEmbraceAbility : AnimationBaseCharacterAbility<AbilityDefinition>
+    public class SeerDarkEmbraceAbility : AnimationBaseCharacterAbility
     {
 
     }

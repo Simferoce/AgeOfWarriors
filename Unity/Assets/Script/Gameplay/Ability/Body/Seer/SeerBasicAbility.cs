@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class SeerBasicAbility : AnimationBaseCharacterAbility<AbilityDefinition>
+    public class SeerBasicAbility : AnimationBaseCharacterAbility
     {
 
     }

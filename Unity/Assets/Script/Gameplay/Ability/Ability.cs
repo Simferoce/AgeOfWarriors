@@ -19,7 +19,6 @@ namespace Game
         public virtual bool IsActive => IsCasting;
         public virtual List<Target> Targets => new List<Target>();
         public AbilityDefinition Definition { get; set; }
-        public abstract string ParseDescription();
         public Faction FactionWhenUsed { get; set; }
 
         public virtual void Initialize(Caster caster)
@@ -67,12 +66,10 @@ namespace Game
         {
             return name.SequenceEqual("ability");
         }
-    }
 
-    public abstract class Ability<T> : Ability
-        where T : AbilityDefinition
-    {
-        protected T definition { get => Definition as T; set => Definition = value; }
-        public override string ParseDescription() => Definition.ParseDescription();
+        public string ParseDescription()
+        {
+            return Definition.ParseDescription();
+        }
     }
 }

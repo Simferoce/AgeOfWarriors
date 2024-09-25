@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class ArcherBasicAbility : AnimationBaseCharacterAbility<AbilityDefinition>
+    public class ArcherBasicAbility : AnimationBaseCharacterAbility
     {
     }
 }

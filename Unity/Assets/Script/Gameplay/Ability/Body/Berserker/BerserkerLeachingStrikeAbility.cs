@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class BerserkerLeachingStrikeAbility : AnimationBaseCharacterAbility<AbilityDefinition>
+    public class BerserkerLeachingStrikeAbility : AnimationBaseCharacterAbility
     {
 
     }

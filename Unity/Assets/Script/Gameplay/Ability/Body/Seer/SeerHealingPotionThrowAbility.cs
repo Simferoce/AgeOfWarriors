@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class SeerHealingPotionThrowAbility : AnimationBaseCharacterAbility<AbilityDefinition>
+    public class SeerHealingPotionThrowAbility : AnimationBaseCharacterAbility
     {
 
     }

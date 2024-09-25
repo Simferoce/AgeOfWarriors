@@ -51,10 +51,10 @@ namespace Game
             foreach (ProjectileImpact effect in impacts)
                 effect.Initialize(this);
 
-            foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
-            {
-                this.Entity.GetCachedComponent<ModifierHandler>().AddModifier(projectileModifier.GetModifier(this));
-            }
+            //foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
+            //{
+            //    this.Entity.GetCachedComponent<ModifierHandler>().AddModifier(projectileModifier.GetModifier(this));
+            //}
         }
 
         private void Update()

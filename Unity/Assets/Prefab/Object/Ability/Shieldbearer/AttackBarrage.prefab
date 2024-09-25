@@ -41,9 +41,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 234122527794856266}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 093e98d3a5d83e74797112c37c3d3400, type: 3}
+  m_Script: {fileID: 11500000, guid: 3be16aabdaf49824ab3fc3d80b0975fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statistics: []
   parameter: SpecialAbility1
   conditions:
   - rid: 3656781301283291221
@@ -65,6 +66,7 @@ MonoBehaviour:
         criteria:
           rid: 3656781301283291224
         count: 1
+        Targets: []
     - rid: 3656781301283291222
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
@@ -89,6 +91,3 @@ MonoBehaviour:
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
     - rid: 3656781343263817734
       type: {class: CooldownCondition, ns: Game, asm: Assembly-CSharp}
-      data:
-        cooldown:
-          path: 

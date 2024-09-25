@@ -1,6 +1,6 @@
 ﻿namespace Game
 {
-    public class BerserkerBasicAbility : AnimationBaseCharacterAbility<AbilityDefinition>
+    public class BerserkerBasicAbility : AnimationBaseCharacterAbility
     {
 
     }
