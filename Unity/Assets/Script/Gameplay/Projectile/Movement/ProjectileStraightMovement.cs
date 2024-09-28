@@ -12,7 +12,10 @@ namespace Game
         {
             base.Initialize(projectile);
 
-            Vector3 velocity = Vector3.right * projectile.AgentObject.Direction * speed;
+            if (!(projectile.Parent is AgentObject agentObject))
+                throw new ArgumentException($"Expecting the parent object to be an {nameof(AgentObject)}");
+
+            Vector3 velocity = Vector3.right * agentObject.Direction * speed;
             projectile.Rigidbody.linearVelocity = velocity;
             projectile.transform.right = projectile.Rigidbody.linearVelocity;
         }

@@ -9,21 +9,19 @@ namespace Game
     [RequireComponent(typeof(Blocker))]
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(Target))]
-    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IModifierSource
+    [RequireComponent(typeof(AttackFactory))]
+    public partial class Character : AgentObject<CharacterDefinition>, IModifierSource
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private Collider2D hitbox;
 
         public event Action OnDeath;
-        public event AttackedLanded OnAttackLanded;
         public event Action<Modifier> OnModifierAdded;
-        public event Action<AttackResult, Attackable> OnDamageTaken;
 
         public Animated Animated { get; set; }
         public List<TransformTag> TransformTags { get; set; }
         public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
-        public HashSet<Attackable> RecentlyAttackedAttackeables { get; set; } = new HashSet<Attackable>();
         public override bool IsActive { get => !IsDead; }
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
@@ -72,10 +70,11 @@ namespace Game
         {
             base.Awake();
             TransformTags = GetComponentsInChildren<TransformTag>().ToList();
-            GetCachedComponent<Attackable>().OnDamageTaken += Character_OnDamageTaken;
+            GetCachedComponent<Attackable>().OnDamageTaken += OnDamageTaken;
+            GetCachedComponent<AttackFactory>().OnAttackLanded += OnAttackLanded;
         }
 
-        private void Character_OnDamageTaken(AttackResult attackResult, Attackable attackable)
+        private void OnDamageTaken(AttackResult attackResult, Attackable attackable)
         {
             Health -= attackResult.DamageTaken;
             if (Health <= 0 && !IsDead)
@@ -100,11 +99,6 @@ namespace Game
             Health = MaxHealth;
         }
 
-        public void Update()
-        {
-            RecentlyAttackedAttackeables.RemoveWhere(x => x is UnityEngine.Object o && o == null);
-        }
-
         public void FixedUpdate()
         {
             if (IsDead)
@@ -116,7 +110,8 @@ namespace Game
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            GetCachedComponent<Attackable>().OnDamageTaken -= Character_OnDamageTaken;
+            GetCachedComponent<Attackable>().OnDamageTaken -= OnDamageTaken;
+            GetCachedComponent<AttackFactory>().OnAttackLanded -= OnAttackLanded;
         }
 
         public void RefreshDirection()
@@ -152,19 +147,11 @@ namespace Game
             Health += amount;
         }
 
-        public void AttackLanded(AttackResult attackResult)
+        public void OnAttackLanded(AttackResult attackResult)
         {
-            RecentlyAttackedAttackeables.Add(attackResult.Target);
             Heal(attackResult.DamageTaken * attackResult.Attack.Leach);
-            OnAttackLanded?.Invoke(attackResult);
         }
 
-        public bool RecentlyAttacked(Attackable attackable)
-        {
-            return RecentlyAttackedAttackeables.Contains(attackable);
-        }
-
-        #region Ability
         public void BeginCast()
         {
             stateMachine.SetState(new CastingState(this));
@@ -175,6 +162,5 @@ namespace Game
             if (stateMachine.Next == null)
                 stateMachine.SetState(new MoveState(this));
         }
-        #endregion
     }
 }

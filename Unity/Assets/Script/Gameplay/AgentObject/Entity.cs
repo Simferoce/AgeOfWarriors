@@ -6,7 +6,28 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour, IStatisticContext
 {
+    public Entity Parent
+    {
+        get
+        {
+            return parent;
+        }
+        set
+        {
+            if (parent != null)
+                parent.children.Remove(this);
+
+            parent = value;
+
+            if (parent != null)
+                parent.children.Add(this);
+        }
+    }
+    public IReadOnlyList<Entity> Children => children;
+
     private Dictionary<Type, List<IComponent>> cached = new Dictionary<Type, List<IComponent>>();
+    private Entity parent = null;
+    private List<Entity> children = new List<Entity>();
 
     protected virtual void Awake()
     {
@@ -58,5 +79,15 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
     public virtual IEnumerable<Statistic> GetStatistic()
     {
         yield break;
+    }
+
+    public IEnumerable<Entity> GetHierarchy()
+    {
+        Entity current = this;
+        while (current != null)
+        {
+            yield return current;
+            current = current.Parent;
+        }
     }
 }

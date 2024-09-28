@@ -44,14 +44,14 @@ public partial class Attackable : MonoBehaviour, IComponent
         float resultingDefense = currentDefense - attack.ArmorPenetration;
 
         float damageTakenModifier = -increaseDamageTaken;
-        if (attack.Ranged)
+        if (attack.Flags.HasFlag(Attack.Flag.Ranged))
             damageTakenModifier += rangedDamageReduction;
 
         damageTakenModifier = Mathf.Clamp(1 - damageTakenModifier, 0.35f, 1.65f);
         damage *= damageTakenModifier;
 
         float damageRemaining = damage;
-        if (!attack.OverTime)
+        if (!attack.Flags.HasFlag(Attack.Flag.OverTime))
             damageRemaining *= (1 / (1 + resultingDefense * 0.1f));
 
         float defenseDamagePrevented = damage - damageRemaining;
@@ -70,8 +70,7 @@ public partial class Attackable : MonoBehaviour, IComponent
         //}
 
         AttackResult attackResult = new AttackResult(attack, damage - damageRemaining, defenseDamagePrevented, damageRemaining >= currentHealth, this, resistedDeath);
-        foreach (IAttackSource source in attack.AttackSource.Sources)
-            source.AttackLanded(attackResult);
+        attack.Source.NotifyAttackResult(attackResult);
 
         OnDamageTaken?.Invoke(attackResult, this);
     }

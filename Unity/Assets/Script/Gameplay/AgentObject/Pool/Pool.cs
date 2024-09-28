@@ -5,17 +5,21 @@ using UnityEngine.Assertions;
 
 namespace Game
 {
-    public partial class Pool : AgentObject, IAttackSource
+    [RequireComponent(typeof(AttackFactory))]
+    public class Pool : Entity
     {
         [SerializeField] private Collider2D hitbox;
         [SerializeReference, SubclassSelector] private List<PoolEffect> poolEffects;
 
         public float Duration { get; set; }
+        public Faction Faction { get; set; }
 
         private float startTime;
 
-        public void Initialize()
+        public void Initialize(Entity parent, Faction faction)
         {
+            this.Parent = parent;
+            this.Faction = faction;
             startTime = Time.time;
 
             foreach (PoolEffect poolEffect in poolEffects)
@@ -46,10 +50,8 @@ namespace Game
             }
         }
 
-        protected override void OnDestroy()
+        protected virtual void OnDestroy()
         {
-            base.OnDestroy();
-
             foreach (PoolEffect poolEffect in poolEffects)
                 poolEffect.Dispose();
         }

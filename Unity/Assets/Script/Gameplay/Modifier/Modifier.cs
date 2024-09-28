@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Modifier : MonoBehaviour, IStatisticContext
+    [RequireComponent(typeof(AttackFactory))]
+    public class Modifier : Entity
     {
         [SerializeField] private bool visibleByDefault = true;
         [SerializeReference, SubclassSelector] private List<Statistic> statistics;
@@ -21,6 +22,7 @@ namespace Game
             this.Handler = handler;
             this.Source = source;
             this.Definition = definition;
+            this.Parent = handler.Entity;
 
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
                 modifierBehaviour.Initialize();
@@ -43,14 +45,17 @@ namespace Game
             return Definition.ParseDescription();
         }
 
-        public bool IsName(ReadOnlySpan<char> name)
+        public override bool IsName(ReadOnlySpan<char> name)
         {
-            return name.SequenceEqual("modifier");
+            return name.SequenceEqual("modifier") || base.IsName(name);
         }
 
-        public IEnumerable<Statistic> GetStatistic()
+        public override IEnumerable<Statistic> GetStatistic()
         {
             foreach (Statistic statistic in statistics)
+                yield return statistic;
+
+            foreach (Statistic statistic in base.GetStatistic())
                 yield return statistic;
         }
     }

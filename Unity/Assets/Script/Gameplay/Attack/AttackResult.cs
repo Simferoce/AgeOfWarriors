@@ -20,7 +20,7 @@ namespace Game
             Target = target;
             ResistedKillingBlow = resistedKillingBlow;
 
-            Debug.Log($"{target} is taking {damageTaken} (reduced by {defenseDamagePrevented}) from {attack.AttackSource.Sources[^1]}");
+            Debug.Log($"{target} is taking {damageTaken} (reduced by {defenseDamagePrevented}) from {attack.Source}");
         }
     }
 }

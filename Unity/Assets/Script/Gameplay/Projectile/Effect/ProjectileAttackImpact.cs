@@ -11,7 +11,8 @@ namespace Game
         [SerializeField] private StatisticReference damage;
         [SerializeField] private StatisticReference armorPenetration;
 
-        private Attack attack;
+        private float cachedDamage;
+        private float cachedArmorPenetration;
 
         public override void Initialize(Projectile projectile)
         {
@@ -19,6 +20,9 @@ namespace Game
 
             damage.Initialize(projectile);
             armorPenetration.Initialize(projectile);
+
+            cachedDamage = damage;
+            cachedArmorPenetration = armorPenetration;
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -27,10 +31,16 @@ namespace Game
                 collision.gameObject.TryGetComponentInParent<Target>(out Target targeteable)
                 && (targeteable.Entity as AgentObject).IsActive
                 && projectile.Ignore != targeteable
-                && criteria.Execute(projectile.AgentObject.GetCachedComponent<Target>(), targeteable, projectile, projectile.Faction, (targeteable.Entity as AgentObject).Faction)
+                && criteria.Execute(projectile.Parent.GetCachedComponent<Target>(), targeteable, projectile, projectile.Faction, (targeteable.Entity as AgentObject).Faction)
                 && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
             {
-                attack = AttackUtility.Generate(projectile.AgentObject as IAttackSource, damage, armorPenetration, 0, true, false, true, attackable, projectile);
+                AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
+                Attack attack = attackFactory.Generate(
+                    target: attackable,
+                    damage: damage,
+                    armorPenetration: armorPenetration,
+                    flags: Attack.Flag.Ranged | Attack.Flag.Reflectable);
+
                 attackable.TakeAttack(attack);
 
                 projectile.Kill(collision.gameObject);

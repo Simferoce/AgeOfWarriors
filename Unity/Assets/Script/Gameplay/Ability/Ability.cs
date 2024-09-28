@@ -5,7 +5,8 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class Ability : MonoBehaviour, IStatisticContext
+    [RequireComponent(typeof(AttackFactory))]
+    public abstract class Ability : Entity
     {
         [SerializeReference, SubclassSelector] private List<Statistic> statistics;
 
@@ -24,6 +25,7 @@ namespace Game
         public virtual void Initialize(Caster caster)
         {
             Caster = caster;
+            this.Parent = caster.Entity;
 
             foreach (Statistic statistic in statistics)
                 statistic.Initialize(this);
@@ -52,19 +54,18 @@ namespace Game
             OnAbilityEffectApplied?.Invoke();
         }
 
-        public virtual IEnumerable<Statistic> GetStatistic()
+        public override IEnumerable<Statistic> GetStatistic()
         {
-            yield return new StatisticTemporary<Caster>(this, "caster", Caster);
-
             foreach (Statistic statistic in statistics)
                 yield return statistic;
 
-            yield break;
+            foreach (Statistic statistic in base.GetStatistic())
+                yield return statistic;
         }
 
-        public bool IsName(ReadOnlySpan<char> name)
+        public override bool IsName(ReadOnlySpan<char> name)
         {
-            return name.SequenceEqual("ability");
+            return name.SequenceEqual("ability") || base.IsName(name);
         }
 
         public string ParseDescription()

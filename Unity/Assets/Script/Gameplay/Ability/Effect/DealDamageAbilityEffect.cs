@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class DealDamageAbilityEffect : AbilityEffect, IAttackSource
+    public class DealDamageAbilityEffect : AbilityEffect
     {
         [SerializeField] private StatisticReference leach;
         [SerializeField] private StatisticReference damage;
@@ -25,7 +25,13 @@ namespace Game
 
             Attackable target = Ability.Targets[0].Entity.GetCachedComponent<Attackable>();
 
-            Attack attack = AttackUtility.Generate(Ability.Caster.Entity as IAttackSource, damage.GetValueOrDefault<float>(), armorPenetration.GetValueOrDefault<float>(), leach.GetValueOrDefault<float>(), false, false, true, target, this);
+            Attack attack = Ability.GetCachedComponent<AttackFactory>().Generate(
+                target: target,
+                damage: damage.GetValueOrDefault<float>(),
+                armorPenetration: armorPenetration.GetValueOrDefault<float>(),
+                leach: leach.GetValueOrDefault<float>(),
+                flags: Attack.Flag.Reflectable);
+
             target.TakeAttack(attack);
         }
     }

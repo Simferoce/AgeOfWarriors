@@ -24,7 +24,13 @@ namespace Game
             if (!targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
                 return;
 
-            attackable.TakeAttack(new Attack(new AttackSource(pool), Damage, 0, 0, false, false, false, false));
+            AttackFactory attackFactory = pool.GetCachedComponent<AttackFactory>();
+            Attack attack = attackFactory.Generate(
+                target: attackable,
+                damage: Damage
+                );
+
+            attackable.TakeAttack(attack);
         }
     }
 }
