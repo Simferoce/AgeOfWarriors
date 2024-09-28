@@ -22,7 +22,7 @@ namespace Game
 
         public override ImpactReport Impact(GameObject collision)
         {
-            if (projectile.Rigidbody.velocity.y > 0)
+            if (projectile.Rigidbody.linearVelocity.y > 0)
                 return new ImpactReport(ImpactStatus.NotImpacted);
 
             if (collision.CompareTag(GameTag.HIT_BOX) &&

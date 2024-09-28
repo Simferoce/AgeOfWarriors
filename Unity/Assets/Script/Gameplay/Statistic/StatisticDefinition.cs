@@ -1,5 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -14,7 +13,7 @@ namespace Game
         public Sprite Icon => icon;
         public string Title => title;
         public string TitleFormatted => $"<color=#{ColorHex}>{Title}</color>";
-        public string ColorHex => color.ToHexString();
+        public string ColorHex => ColorUtility.ToHtmlStringRGBA(color);
         public Color Color => color;
         public string TextIcon => $"<sprite name=\"{Icon.name.Trim()}\" color=#{ColorHex}>";
         public string HumanReadableId => humanReadableId;

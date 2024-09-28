@@ -7,7 +7,7 @@ namespace Game
     {
         public override void Update()
         {
-            projectile.transform.right = projectile.Rigidbody.velocity;
+            projectile.transform.right = projectile.Rigidbody.linearVelocity;
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Scripting.APIUpdating;
 
@@ -21,9 +20,9 @@ namespace Game
         public override string Format(TechnologyPerkDefinition technologyPerkDefinition, TechnologyTree technologyTree)
         {
             if (technologyTree.GetStatus(technologyPerkDefinition) is TechnologyHandler.TechnologyPerkStatusUnlocked)
-                return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Green).ToHexString()}>{technologyPerkDefinition.Title}</color>";
+                return $"<color=#{ColorUtility.ToHtmlStringRGBA(WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Green))}>{technologyPerkDefinition.Title}</color>";
 
-            return $"<color=#{WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red).ToHexString()}>{technologyPerkDefinition.Title}</color>";
+            return $"<color=#{ColorUtility.ToHtmlStringRGBA(WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red))}>{technologyPerkDefinition.Title}</color>";
         }
     }
 }
