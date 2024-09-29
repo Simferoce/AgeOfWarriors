@@ -17,15 +17,18 @@ namespace Game
         public event Action OnAbilityEffectApplied;
 
         public bool IsCasting { get; set; }
-        public virtual bool IsActive => IsCasting;
+        public override bool IsActive => IsCasting;
         public virtual List<Target> Targets => new List<Target>();
         public AbilityDefinition Definition { get; set; }
-        public Faction Faction { get; set; }
+        public override Faction Faction => faction;
+
+        protected Faction faction;
 
         public virtual void Initialize(Caster caster)
         {
             Caster = caster;
             this.Parent = caster.Entity;
+            faction = caster.Entity.Faction;
 
             foreach (Statistic statistic in statistics)
                 statistic.Initialize(this);

@@ -2,9 +2,9 @@
 using System;
 
 [Serializable]
-public class StatisticAbilityCasterProvider : StatisticAbilityProvider
+public class AbilityCasterReferenceProvider : ReferenceProvider
 {
-    public override IStatisticContext Resolve(IStatisticContext context)
+    public override object Resolve(object context)
     {
         if (!(context is Ability ability))
             throw new ArgumentException();

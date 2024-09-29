@@ -21,8 +21,8 @@ namespace Game
             damage.Initialize(projectile);
             armorPenetration.Initialize(projectile);
 
-            cachedDamage = damage;
-            cachedArmorPenetration = armorPenetration;
+            cachedDamage = damage.GetValueOrThrow<float>();
+            cachedArmorPenetration = armorPenetration.GetValueOrDefault<float>();
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -31,14 +31,14 @@ namespace Game
                 collision.gameObject.TryGetComponentInParent<Target>(out Target targeteable)
                 && (targeteable.Entity as AgentObject).IsActive
                 && projectile.Ignore != targeteable
-                && criteria.Execute(projectile.Parent.GetCachedComponent<Target>(), targeteable, projectile, projectile.Faction, (targeteable.Entity as AgentObject).Faction)
+                && criteria.Execute(projectile, targeteable.Entity)
                 && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
             {
                 AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
                 Attack attack = attackFactory.Generate(
                     target: attackable,
-                    damage: damage,
-                    armorPenetration: armorPenetration,
+                    damage: cachedDamage,
+                    armorPenetration: cachedArmorPenetration,
                     flags: Attack.Flag.Ranged | Attack.Flag.Reflectable);
 
                 attackable.TakeAttack(attack);

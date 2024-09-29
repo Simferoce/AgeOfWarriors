@@ -25,7 +25,7 @@ namespace Game
         [SerializeField] private Factory factory;
         [SerializeReference, SubclassSelector] private AgentBehaviour agentBehaviour;
 
-        public Faction Faction { get => faction; }
+        public override Faction Faction => faction;
         public Factory Factory { get => factory; set => factory = value; }
         public Base Base { get => agentBase; set => agentBase = value; }
         public float Currency { get; set; }

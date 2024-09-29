@@ -1,5 +1,4 @@
-﻿using Extension;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Game
@@ -14,10 +13,10 @@ namespace Game
                 if (!(targetteable.Entity as AgentObject).IsActive)
                     continue;
 
-                if (targetteable == entity.GetCachedComponent<Target>())
+                if (targetteable.Entity == entity)
                     continue;
 
-                if (!criteria.Execute(entity.GetCachedComponent<Target>(), targetteable, statisticProvider, (entity as AgentObject).Faction, (entity is Character character) && character.IsConfused ? (targetteable.Entity as AgentObject).Faction.GetConfusedFaction() : (targetteable.Entity as AgentObject).Faction))
+                if (!criteria.Execute(entity, targetteable.Entity))
                     continue;
 
                 potentialTargets.Add(targetteable);

@@ -81,17 +81,6 @@ namespace Game
             return abilities.FirstOrDefault(a => a.IsActive);
         }
 
-        public bool CanUseAbility()
-        {
-            float health = Entity.GetStatistic().FirstOrDefault(x => x.Name == "health");
-            bool isDead = Entity.GetStatistic().FirstOrDefault(x => x.Name == "dead");
-
-            if (health <= 0 || isDead)
-                return false;
-
-            return true;
-        }
-
         public void BeginCast()
         {
             IsCasting = true;

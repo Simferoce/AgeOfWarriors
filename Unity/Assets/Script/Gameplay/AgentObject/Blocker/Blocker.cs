@@ -42,7 +42,7 @@ namespace Game
             if (Entity is not AgentObject agentObject)
                 return false;
 
-            return character.OriginalFaction == agentObject.OriginalFaction
+            return character.Agent.Faction == agentObject.Agent.Faction
                 && character.Priority > agentObject.Priority;
         }
 
@@ -54,7 +54,7 @@ namespace Game
             if (Entity is not AgentObject agentObject)
                 return false;
 
-            return character.OriginalFaction != agentObject.OriginalFaction;
+            return character.Agent.Faction != agentObject.Agent.Faction;
         }
     }
 }

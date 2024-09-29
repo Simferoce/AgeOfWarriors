@@ -68,7 +68,7 @@ namespace Game
             foreach (Target targeteable in targeteablesInEffect)
             {
                 if (Time.time - startedAt > delay
-                    && criteria.Execute(projectile.Parent.GetCachedComponent<Target>(), targeteable, projectile, projectile.Faction, (targeteable.Entity as AgentObject).Faction)
+                    && criteria.Execute(projectile, targeteable.Entity)
                     && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable)
                     && !targetsHit.Contains(attackable))
                 {

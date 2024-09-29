@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 52510551592376476}
   - component: {fileID: 4894327152861980531}
+  - component: {fileID: 5147895781952595201}
   m_Layer: 0
   m_Name: ShieldbearerBasic
   m_TagString: Untagged
@@ -24,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234122527794856266}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4894327152861980531
 MonoBehaviour:
@@ -47,12 +48,12 @@ MonoBehaviour:
   statistics:
   - rid: 5836723902342496263
   - rid: 5836723902342496265
-  parameter: Ability
   conditions:
   - rid: 3656781301283291221
   - rid: 2969737379885613066
   effects:
   - rid: 3656781301283291222
+  trigger: Ability
   references:
     version: 2
     RefIds:
@@ -63,14 +64,13 @@ MonoBehaviour:
       data:
         attackSpeed:
           query:
-            rid: 5836723976867676171
+            rid: 5836724064671236207
     - rid: 3656781301283291221
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
           rid: 3656781301283291224
         count: 1
-        Targets: []
     - rid: 3656781301283291222
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
@@ -79,7 +79,7 @@ MonoBehaviour:
             rid: -2
         damage:
           query:
-            rid: 5836723976867676173
+            rid: 5836724064671236209
         armorPenetration:
           query:
             rid: -2
@@ -93,10 +93,13 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
+          rid: 5836724064671236206
+        distance:
           query:
-            rid: 5836723976867676167
+            rid: 5836724064671236202
     - rid: 3656781301283291227
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data: 
     - rid: 5836723902342496263
       type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
       data:
@@ -109,7 +112,7 @@ MonoBehaviour:
       type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
       data:
         query:
-          rid: 5836723976867676176
+          rid: 5836724064671236227
     - rid: 5836723902342496265
       type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
       data:
@@ -122,44 +125,64 @@ MonoBehaviour:
       type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
       data:
         query:
-          rid: 5836723976867676178
-    - rid: 5836723976867676167
+          rid: 5836724064671236229
+    - rid: 5836724064671236202
       type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
       data:
         provider:
-          rid: 5836723976867676170
+          rid: 5836724064671236204
         statisticDefinition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-    - rid: 5836723976867676170
-      type: {class: StatisticAbilitySelfProvider, ns: , asm: Assembly-CSharp}
-    - rid: 5836723976867676171
+    - rid: 5836724064671236204
+      type: {class: SelfReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236206
+      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236207
       type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
       data:
         provider:
-          rid: 5836723976867676172
+          rid: 5836724064671236208
         statisticDefinition: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
-    - rid: 5836723976867676172
-      type: {class: StatisticAbilityCasterProvider, ns: , asm: Assembly-CSharp}
-    - rid: 5836723976867676173
+    - rid: 5836724064671236208
+      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236209
       type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
       data:
         provider:
-          rid: 5836723976867676174
+          rid: 5836724064671236210
         statisticDefinition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-    - rid: 5836723976867676174
-      type: {class: StatisticAbilitySelfProvider, ns: , asm: Assembly-CSharp}
-    - rid: 5836723976867676176
+    - rid: 5836724064671236210
+      type: {class: SelfReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236227
       type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
       data:
         provider:
-          rid: 5836723976867676177
+          rid: 5836724064671236228
         statisticDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-    - rid: 5836723976867676177
-      type: {class: StatisticAbilityCasterProvider, ns: , asm: Assembly-CSharp}
-    - rid: 5836723976867676178
+    - rid: 5836724064671236228
+      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236229
       type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
       data:
         provider:
-          rid: 5836723976867676179
+          rid: 5836724064671236230
         statisticDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-    - rid: 5836723976867676179
-      type: {class: StatisticAbilityCasterProvider, ns: , asm: Assembly-CSharp}
+    - rid: 5836724064671236230
+      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+--- !u!114 &5147895781952595201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 234122527794856266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

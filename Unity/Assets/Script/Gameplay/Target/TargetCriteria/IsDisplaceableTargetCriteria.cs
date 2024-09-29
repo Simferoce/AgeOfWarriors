@@ -5,9 +5,9 @@ namespace Game
     [Serializable]
     public class IsDisplaceableTargetCriteria : TargetCriteria
     {
-        public override bool Execute(Target owner, Target targeteable, IStatisticContext statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(Entity source, Entity targetEntity)
         {
-            return (targeteable.Entity is Character) && (targeteable.Entity as AgentObject).IsActive;
+            return (targetEntity is Character) && (targetEntity as AgentObject).IsActive;
         }
     }
 }

@@ -69,7 +69,7 @@ public partial class Attackable : MonoBehaviour, IComponent
         //    damageRemaining = currentHealth - 0.01f;
         //}
 
-        AttackResult attackResult = new AttackResult(attack, damage - damageRemaining, defenseDamagePrevented, damageRemaining >= currentHealth, this, resistedDeath);
+        AttackResult attackResult = new AttackResult(attack, damageRemaining, defenseDamagePrevented, damageRemaining >= currentHealth, this, resistedDeath);
         attack.Source.NotifyAttackResult(attackResult);
 
         OnDamageTaken?.Invoke(attackResult, this);

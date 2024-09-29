@@ -6,14 +6,17 @@ namespace Game
     [Serializable]
     public class DistanceTargetCriteria : TargetCriteria
     {
-        [SerializeField] private StatisticReference reference;
+        [SerializeReference, SubclassSelector] private ReferenceProvider reference;
+        [SerializeField] private StatisticReference distance;
 
-        public override bool Execute(Target owner, Target targeteable, IStatisticContext statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(Entity source, Entity targetEntity)
         {
-            reference.Initialize(statisticProvider);
-            float value = reference;
+            distance.Initialize(source);
+            float value = distance;
+            Transform from = (reference.Resolve(source) as MonoBehaviour).transform;
 
-            return Mathf.Abs((targeteable.ClosestPoint(owner.CenterPosition) - owner.CenterPosition).x) < value;
+            Target target = targetEntity.GetCachedComponent<Target>();
+            return Mathf.Abs((target.ClosestPoint(from.transform.position) - from.transform.position).x) < value;
         }
     }
 }

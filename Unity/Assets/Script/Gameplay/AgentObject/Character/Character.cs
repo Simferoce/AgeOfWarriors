@@ -53,12 +53,6 @@ namespace Game
             yield return new StatisticTemporary<float>(this, "attack_power", AttackPower, StatisticRepository.GetDefinition(StatisticRepository.AttackPower));
             yield return new StatisticTemporary<float>(this, "speed", Speed, StatisticRepository.GetDefinition(StatisticRepository.Speed));
             yield return new StatisticTemporary<float>(this, "reach", Reach, StatisticRepository.GetDefinition(StatisticRepository.Reach));
-            yield return new StatisticTemporary<bool>(this, "engaged", IsEngaged);
-            yield return new StatisticTemporary<bool>(this, "invulnerable", IsInvulnerable);
-            yield return new StatisticTemporary<bool>(this, "confused", IsConfused);
-            yield return new StatisticTemporary<bool>(this, "dead", IsDead);
-            yield return new StatisticTemporary<bool>(this, "injured", IsInjured);
-            yield return new StatisticTemporary<bool>(this, "staggered", IsStaggered);
 
             foreach (Statistic statistic in base.GetStatistic())
                 yield return statistic;

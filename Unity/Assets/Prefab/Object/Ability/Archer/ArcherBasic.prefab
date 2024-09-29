@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1877483182643843794}
   - component: {fileID: -5070284007368806083}
+  - component: {fileID: 654787136387042407}
   m_Layer: 0
   m_Name: ArcherBasic
   m_TagString: Untagged
@@ -24,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2238036748726012354}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-5070284007368806083
 MonoBehaviour:
@@ -44,13 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be16aabdaf49824ab3fc3d80b0975fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statistics: []
-  parameter: Ability
+  statistics:
+  - rid: 5836724064671236215
+  - rid: 5836724064671236219
   conditions:
   - rid: 4528059661052542988
   - rid: 2969737379885613056
   effects:
   - rid: 4528059661052542993
+  trigger: Ability
   references:
     version: 2
     RefIds:
@@ -58,14 +61,14 @@ MonoBehaviour:
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         attackSpeed:
-          path: ability.caster.attackspeed
+          query:
+            rid: 5836724064671236225
     - rid: 4528059661052542988
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
           rid: 4528059661052542989
         count: 1
-        Targets: []
     - rid: 4528059661052542989
       type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
@@ -76,9 +79,13 @@ MonoBehaviour:
       type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
       data:
         reference:
-          path: ability.range
+          rid: 5836724064671236213
+        distance:
+          query:
+            rid: 5836724064671236214
     - rid: 4528059661052542991
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+      data: 
     - rid: 4528059661052542993
       type: {class: ProjectileAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
@@ -89,3 +96,80 @@ MonoBehaviour:
       type: {class: ProjectileAbilityEffectTransformOrigin, ns: Game, asm: Assembly-CSharp}
       data:
         origin: ProjectileOrigin
+    - rid: 5836724064671236213
+      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236214
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836724064671236224
+        statisticDefinition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+    - rid: 5836724064671236215
+      type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
+      data:
+        name: range
+        definitionId: range
+        provider:
+          rid: 5836724064671236216
+        percentage: 1
+    - rid: 5836724064671236216
+      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
+      data:
+        query:
+          rid: 5836724064671236217
+    - rid: 5836724064671236217
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836724064671236218
+        statisticDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+    - rid: 5836724064671236218
+      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236219
+      type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
+      data:
+        name: damage
+        definitionId: damage
+        provider:
+          rid: 5836724064671236220
+        percentage: 1
+    - rid: 5836724064671236220
+      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
+      data:
+        query:
+          rid: 5836724064671236221
+    - rid: 5836724064671236221
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836724064671236222
+        statisticDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+    - rid: 5836724064671236222
+      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236224
+      type: {class: SelfReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 5836724064671236225
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 5836724064671236226
+        statisticDefinition: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+    - rid: 5836724064671236226
+      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+--- !u!114 &654787136387042407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2238036748726012354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

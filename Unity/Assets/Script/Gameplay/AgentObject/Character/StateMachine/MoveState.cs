@@ -24,7 +24,7 @@ namespace Game
             {
                 character.RefreshDirection();
 
-                if (character.GetCachedComponent<Caster>().CanUseAbility())
+                if (!character.IsDead && character.Health > 0)
                 {
                     foreach (Ability ability in character.GetCachedComponent<Caster>().Abilities)
                     {

@@ -7,11 +7,18 @@ using UnityEngine;
 [Serializable]
 public class StatisticByDefinitionQuery : StatisticQuery
 {
-    [SerializeReference, SubclassSelector] StatisticProvider provider;
+    [SerializeReference, SubclassSelector] ReferenceProvider provider;
     [SerializeField] private StatisticDefinition statisticDefinition;
 
     public override IEnumerable<Statistic> GetStatistics(IStatisticContext context)
     {
-        return provider.Resolve(context).GetStatistic().Where(x => x.Definition == statisticDefinition);
+        if (provider == null)
+            return Array.Empty<Statistic>();
+
+        object resolved = provider.Resolve(context);
+        if (!(resolved is IStatisticContext statisticContext))
+            throw new Exception($"Expecting the result of {provider.GetType()} to be of type {nameof(IStatisticContext)}");
+
+        return statisticContext.GetStatistic().Where(x => x.Definition == statisticDefinition);
     }
 }

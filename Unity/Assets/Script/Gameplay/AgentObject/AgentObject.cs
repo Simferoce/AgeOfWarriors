@@ -25,13 +25,11 @@ namespace Game
 
         public event System.Action<AgentObject> OnDestroyed;
 
-        public virtual bool IsActive { get => true; }
+        public override Faction Faction => Agent.Faction;
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
         public int SpawnNumber { get; private set; }
         public int Priority { get => SpawnNumber; }
-        public virtual Faction Faction { get => Agent.Faction; }
-        public virtual Faction OriginalFaction { get => Agent.Faction; }
         public List<Type> Types { get => types; }
         public string Name => name;
 

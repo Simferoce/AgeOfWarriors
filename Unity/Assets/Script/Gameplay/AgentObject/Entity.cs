@@ -24,6 +24,8 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
         }
     }
     public IReadOnlyList<Entity> Children => children;
+    public virtual Faction Faction => Faction.Undefined;
+    public virtual bool IsActive { get => true; }
 
     private Dictionary<Type, List<IComponent>> cached = new Dictionary<Type, List<IComponent>>();
     private Entity parent = null;

@@ -9,11 +9,11 @@ namespace Game
     {
         [SerializeReference, SubclassSelector] private List<TargetCriteria> criterias = new List<TargetCriteria>();
 
-        public override bool Execute(Target owner, Target targeteable, IStatisticContext statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(Entity source, Entity targetEntity)
         {
             foreach (TargetCriteria criteria in criterias)
             {
-                if (!criteria.Execute(owner, targeteable, statisticProvider, ownerFaction, targetFaction))
+                if (!criteria.Execute(source, targetEntity))
                     return false;
             }
 

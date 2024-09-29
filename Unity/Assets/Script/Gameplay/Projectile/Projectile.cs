@@ -26,14 +26,15 @@ namespace Game
         public Target Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
         public event Impacted OnImpacted;
-        public Faction Faction { get; set; }
+        public override Faction Faction => faction;
 
+        protected Faction faction;
         private Target target;
         private State state = State.Alive;
 
         public void Initialize(Entity source, Target target, Faction faction)
         {
-            this.Faction = faction;
+            this.faction = faction;
             this.target = target;
             this.Parent = source;
 

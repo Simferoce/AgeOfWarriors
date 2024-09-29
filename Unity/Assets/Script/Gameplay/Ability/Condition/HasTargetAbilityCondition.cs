@@ -15,7 +15,7 @@ namespace Game
         public override bool Execute()
         {
             Targets.Clear();
-            Targets.AddRange(TargetUtility.GetTargets(ability.Caster.Entity, criteria, ability));
+            Targets.AddRange(TargetUtility.GetTargets(ability, criteria, ability));
             return Targets.Count >= count;
         }
     }

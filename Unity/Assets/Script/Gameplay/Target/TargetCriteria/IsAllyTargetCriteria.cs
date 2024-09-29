@@ -5,9 +5,9 @@ namespace Game
     [Serializable]
     public class IsAllyTargetCriteria : TargetCriteria
     {
-        public override bool Execute(Target owner, Target targeteable, IStatisticContext statisticProvider, Faction ownerFaction, Faction targetFaction)
+        public override bool Execute(Entity source, Entity targetEntity)
         {
-            return ownerFaction == targetFaction;
+            return source.Faction == targetEntity.Faction;
         }
     }
 }
