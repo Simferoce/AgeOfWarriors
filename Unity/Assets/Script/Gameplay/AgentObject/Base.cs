@@ -10,19 +10,19 @@ namespace Game
     public class Base : AgentObject
     {
         [SerializeField] private float maxHealth = 1000;
-        [SerializeField] private float defense = 5;
 
         [SerializeField] private SpawnPoint spawnPoint;
         [SerializeField] private Collider2D hitbox;
 
-        public float Health { get; set; }
-        public float MaxHealth { get => maxHealth; set => maxHealth = value; }
-        public float Defense { get => defense; set => defense = value; }
+        public float Health { get => health; set => health.Modify(health); }
+        public float MaxHealth { get => health.Max; }
         public bool IsDead => this.Health <= 0;
         public Entity Entity { get; set; }
         public SpawnPoint SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
 
         public event Action<AttackResult, Attackable> OnDamageTaken;
+
+        private StatisticFloatModifiable health;
 
         protected override void Awake()
         {
@@ -51,9 +51,7 @@ namespace Game
 
         public override IEnumerable<Statistic> GetStatistic()
         {
-            yield return new StatisticTemporary<float>(this, "health", Health, StatisticRepository.GetDefinition(StatisticRepository.Health));
-            yield return new StatisticTemporary<float>(this, "maxhealth", MaxHealth, StatisticRepository.GetDefinition(StatisticRepository.MaxHealth));
-            yield return new StatisticTemporary<float>(this, "defense", Defense, StatisticRepository.GetDefinition(StatisticRepository.Defense));
+            yield return health;
 
             foreach (Statistic statistic in base.GetStatistic())
                 yield return statistic;
@@ -62,6 +60,9 @@ namespace Game
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
             base.Spawn(agent, spawnNumber, direction);
+
+            health = new StatisticFloatModifiable("health", StatisticRepository.Health, new StatisticSerialize<float>("max", StatisticRepository.MaxHealth, maxHealth));
+            health.Initialize(this);
 
             Health = MaxHealth;
         }
