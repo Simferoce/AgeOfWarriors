@@ -41,7 +41,7 @@ namespace Game
 
         public override void InternalUse()
         {
-            FactionWhenUsed = (Caster.Entity as AgentObject).Faction;
+            Faction = (Caster.Entity as AgentObject).Faction;
 
             Caster.BeginCast();
             animated.SetTrigger(trigger);

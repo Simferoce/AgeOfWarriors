@@ -18,11 +18,12 @@ namespace Game
 
         public string ParseDescription() { return description; }
 
-        public Modifier Instantiate(ModifierHandler handler, IModifierSource source)
+        public Modifier Instantiate()
         {
-            GameObject gameObject = Instantiate(prefab, handler.transform);
+            GameObject gameObject = Instantiate(prefab);
             Modifier modifier = gameObject.GetComponent<Modifier>();
-            modifier.Initialize(handler, source, this);
+            modifier.Definition = this;
+
             return modifier;
         }
     }

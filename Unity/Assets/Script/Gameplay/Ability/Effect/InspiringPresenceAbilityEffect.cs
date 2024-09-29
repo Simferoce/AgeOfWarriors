@@ -28,8 +28,8 @@ namespace Game
             startedAt = Time.time;
 
             List<Character> characters = AgentObject.All.OfType<Character>()
-               .Where(x => x.Faction == (x.Entity as AgentObject).Faction
-                   && Mathf.Abs((x.Entity as AgentObject).transform.position.x - x.transform.position.x) < area)
+               .Where(x => x.Faction == x.Faction
+                   && Mathf.Abs(x.transform.position.x - x.transform.position.x) < area)
                .ToList();
 
             //foreach (Character characterToBuff in characters)

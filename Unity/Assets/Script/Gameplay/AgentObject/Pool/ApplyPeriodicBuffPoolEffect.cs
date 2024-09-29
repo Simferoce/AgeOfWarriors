@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Game
 {
@@ -12,13 +11,10 @@ namespace Game
 
             public abstract bool Applicable(Pool pool, Target targeteable);
 
-            public abstract Modifier Instanciate(ModifierHandler modifiable, IModifierSource modifierSource);
+            public abstract Modifier Instanciate(ModifierHandler target);
         }
 
         public Instancier ModifierInstancier { get; set; }
-
-        private List<Modifier> appliedModifiers = new List<Modifier>();
-
         public override void Apply(Pool pool, Target targeteable)
         {
             base.Apply(pool, targeteable);
@@ -51,8 +47,6 @@ namespace Game
 
             //    modifier.Modifiable.RemoveModifier(modifier);
             //}
-
-            appliedModifiers.Clear();
         }
     }
 }

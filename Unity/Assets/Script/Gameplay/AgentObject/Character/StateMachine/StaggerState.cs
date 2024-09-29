@@ -12,7 +12,7 @@
             {
                 character.Animated.ClearTrigger("EndStagger");
                 character.Animated.SetTrigger("Stagger");
-                character.Entity.GetCachedComponent<Caster>().Interupt();
+                character.GetCachedComponent<Caster>().Interupt();
             }
 
             protected override void InternalExit()

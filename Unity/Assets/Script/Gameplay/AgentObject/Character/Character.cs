@@ -10,22 +10,20 @@ namespace Game
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(Target))]
     [RequireComponent(typeof(AttackFactory))]
-    public partial class Character : AgentObject<CharacterDefinition>, IModifierSource
+    [RequireComponent(typeof(ModifierApplier))]
+    public partial class Character : AgentObject<CharacterDefinition>
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private Collider2D hitbox;
 
         public event Action OnDeath;
-        public event Action<Modifier> OnModifierAdded;
 
         public Animated Animated { get; set; }
         public List<TransformTag> TransformTags { get; set; }
-        public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
         public override bool IsActive { get => !IsDead; }
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
-        public Entity Entity { get; set; }
 
         public float Health { get; set; }
         public float MaxHealth => this.Definition.MaxHealth;
@@ -92,7 +90,7 @@ namespace Game
             foreach (CharacterTechnologyPerkDefinition modifier in modifiers)
             {
                 if (modifier.Affect(agentObjectDefinition))
-                    modifier.Modify(this);
+                    modifier.Modify(agent, this);
             }
 
             stateMachine.Initialize(new MoveState(this));
@@ -117,17 +115,6 @@ namespace Game
         public void RefreshDirection()
         {
             transform.localScale = new Vector3(Mathf.Sign(IsConfused ? -Direction : Direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
-        }
-
-        public void AddAppliedModifier(Modifier modifier)
-        {
-            AppliedModifiers.Add(modifier);
-            OnModifierAdded?.Invoke(modifier);
-        }
-
-        public void RemoveAppliedModifier(Modifier modifier)
-        {
-            AppliedModifiers.Remove(modifier);
         }
 
         public void Death()

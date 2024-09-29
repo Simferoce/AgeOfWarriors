@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Agent : MonoBehaviour
+    [RequireComponent(typeof(ModifierApplier))]
+    public class Agent : Entity
     {
         public static List<Agent> agents = new List<Agent>();
         public static Agent Player => agents.FirstOrDefault(x => x.Faction == Faction.Player);
@@ -31,8 +32,9 @@ namespace Game
         public int Direction { get => direction; set => direction = value; }
         public TechnologyHandler Technology { get => technology; }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             factory.Initialize(this);
             technology.Initialize(this);
             agentBehaviour.Initialize(this);

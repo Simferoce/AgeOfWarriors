@@ -12,9 +12,13 @@ namespace Game
             return definition == affected || definition.IsSpecialization(affected);
         }
 
-        public void Modify(Entity entity)
+        public void Modify(Agent agent, Entity entity)
         {
-            modifierDefinition.Instantiate(entity.GetCachedComponent<ModifierHandler>(), null);
+            ModifierApplier modifierApplier = agent.GetComponent<ModifierApplier>();
+            ModifierHandler target = entity.GetComponent<ModifierHandler>();
+            Modifier modifier = modifierDefinition.Instantiate();
+
+            modifierApplier.Apply(modifier, target);
         }
     }
 }

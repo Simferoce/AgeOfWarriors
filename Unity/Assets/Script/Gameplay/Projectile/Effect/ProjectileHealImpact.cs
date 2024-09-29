@@ -29,7 +29,7 @@ namespace Game
                 collision.gameObject.TryGetComponentInParent<Target>(out Target targeteable)
                 && (targeteable.Entity as AgentObject).IsActive
                 && criteria.Execute(projectile.Parent.GetCachedComponent<Target>(), targeteable, projectile, projectile.Faction, (targeteable.Entity as AgentObject).Faction)
-                && targeteable.Entity.TryGetCachedComponent<Character>(out Character character))
+                && targeteable.Entity is Character character)
             {
                 character.Heal(currentHeal);
 

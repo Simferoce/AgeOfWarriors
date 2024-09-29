@@ -14,13 +14,13 @@ namespace Game
         public virtual float Cooldown => GetStatistic().FirstOrDefault(x => x.Name == "cooldown")?.GetValueOrDefault<float>() ?? 0f;
 
         public event Action<Ability> OnAbilityUsed;
-
         public event Action OnAbilityEffectApplied;
+
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
         public virtual List<Target> Targets => new List<Target>();
         public AbilityDefinition Definition { get; set; }
-        public Faction FactionWhenUsed { get; set; }
+        public Faction Faction { get; set; }
 
         public virtual void Initialize(Caster caster)
         {

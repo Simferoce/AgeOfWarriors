@@ -6,6 +6,7 @@ using UnityEngine.Assertions;
 namespace Game
 {
     [RequireComponent(typeof(AttackFactory))]
+    [RequireComponent(typeof(ModifierApplier))]
     public class Pool : Entity
     {
         [SerializeField] private Collider2D hitbox;

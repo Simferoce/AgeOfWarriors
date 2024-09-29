@@ -35,7 +35,7 @@ namespace Game
             float shieldPercentage = 0/*character.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().Sum(x => x.Remaining) / character.MaxHealth;*/;
             float healthPercentage = character.Health / character.MaxHealth;
 
-            List<Modifier> modifiers = character.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsVisible).ToList();
+            List<Modifier> modifiers = character.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsVisible).ToList();
 
             int i = 0;
             for (; i < modifiers.Count && i < modifiersUI.Count; ++i)

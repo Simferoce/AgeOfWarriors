@@ -11,18 +11,21 @@ namespace Game
         [SerializeReference, SubclassSelector] private List<Statistic> statistics;
         [SerializeReference, SubclassSelector] private List<ModifierBehaviour> behaviours;
 
+        public delegate void OnRemovedDelegate(Modifier modifier);
+        public event OnRemovedDelegate OnRemoved;
+
         public ModifierDefinition Definition { get; set; }
         public ModifierHandler Handler { get; set; }
-        public IModifierSource Source { get; set; }
+        public ModifierApplier Applier { get; set; }
         public List<ModifierBehaviour> Behaviours { get => behaviours; set => behaviours = value; }
         public bool IsVisible { get => visibleByDefault; }
 
-        public void Initialize(ModifierHandler handler, IModifierSource source, ModifierDefinition definition)
+        public void Initialize(ModifierHandler handler, ModifierApplier applier)
         {
             this.Handler = handler;
-            this.Source = source;
-            this.Definition = definition;
+            this.Applier = applier;
             this.Parent = handler.Entity;
+            this.transform.parent = handler.transform;
 
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
                 modifierBehaviour.Initialize();
@@ -36,6 +39,8 @@ namespace Game
 
         private void OnDestroy()
         {
+            OnRemoved?.Invoke(this);
+
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
                 modifierBehaviour.Dispose();
         }
