@@ -11,6 +11,11 @@ public class Target : MonoBehaviour, IComponent
 
     public Entity Entity { get; set; }
 
+    private void Awake()
+    {
+        Entity = GetComponentInParent<Entity>();
+    }
+
     public Vector3 ClosestPoint(Vector3 point)
     {
         return hitbox.ClosestPoint(point);

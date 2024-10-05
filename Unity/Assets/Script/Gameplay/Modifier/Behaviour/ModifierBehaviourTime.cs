@@ -4,19 +4,17 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class TimeModifierBehaviour : ModifierBehaviour, IModifierDuration
+    public class ModifierBehaviourTime : ModifierBehaviour, IModifierDuration
     {
-        private float duration = 0f;
-        private float startedAt = 0f;
+        [SerializeReference, SubclassSelector]
+        private StatisticReference duration;
+
         public float Duration { get => duration; }
         public float RemaingDuration { get => Time.time - startedAt; }
 
-        public TimeModifierBehaviour(float duration)
-        {
-            this.duration = duration;
-        }
+        private float startedAt = 0f;
 
-        public override void Initialize()
+        public override void Initialize(Modifier modifier)
         {
             startedAt = Time.time;
         }
@@ -26,10 +24,10 @@ namespace Game
             startedAt = Time.time;
         }
 
-        public override bool Update()
-        {
-            return Time.time - startedAt > duration;
-        }
+        //public override bool Update()
+        //{
+        //    return Time.time - startedAt > duration;
+        //}
 
         public float GetPercentageRemainingDuration()
         {

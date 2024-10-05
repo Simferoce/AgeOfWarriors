@@ -66,11 +66,6 @@ namespace Game
                 yield return statistic;
         }
 
-        public override bool IsName(ReadOnlySpan<char> name)
-        {
-            return name.SequenceEqual("ability") || base.IsName(name);
-        }
-
         public string ParseDescription()
         {
             return Definition.ParseDescription();

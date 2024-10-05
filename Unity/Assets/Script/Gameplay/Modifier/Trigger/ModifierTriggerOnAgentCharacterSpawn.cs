@@ -1,11 +1,17 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [Serializable]
-    public class OnAgentCharacterSpawnModifierTrigger : ModifierTrigger
+    public class ModifierTriggerOnAgentCharacterSpawn : ModifierTrigger, IModifierTargetProvider
     {
+        [SerializeField] private AgentObjectDefinition affected;
+
+        private List<object> targets = new List<object>();
+
         public override void Initialize(Modifier modifier)
         {
             base.Initialize(modifier);
@@ -16,9 +22,19 @@ namespace Game
             agent.OnAgentObjectSpawn += AgentObjectSpawn;
         }
 
+        public bool IsValid(AgentObjectDefinition definition)
+        {
+            return definition == affected || definition.IsSpecialization(affected);
+        }
+
         private void AgentObjectSpawn(AgentObject agentObject)
         {
-            Trigger();
+            if (IsValid(agentObject.GetDefinition()))
+            {
+                targets.Clear();
+                targets.Add(agentObject);
+                Trigger();
+            }
         }
 
         public override void Dispose()
@@ -27,6 +43,11 @@ namespace Game
 
             Agent agent = modifier.Handler.Entity as Agent;
             agent.OnAgentObjectSpawn -= AgentObjectSpawn;
+        }
+
+        public List<object> GetTargets()
+        {
+            return targets;
         }
     }
 }

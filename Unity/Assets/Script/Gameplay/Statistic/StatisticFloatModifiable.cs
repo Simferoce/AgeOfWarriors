@@ -32,9 +32,4 @@ public class StatisticFloatModifiable : StatisticModifiable<float>, IStatisticCo
     {
         yield return max;
     }
-
-    public bool IsName(ReadOnlySpan<char> name)
-    {
-        return name.SequenceEqual(Name);
-    }
 }

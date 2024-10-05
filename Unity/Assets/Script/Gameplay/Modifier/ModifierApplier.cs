@@ -15,6 +15,11 @@ namespace Game
 
         private readonly List<Modifier> currentlyAppliedModifiers = new List<Modifier>();
 
+        private void Awake()
+        {
+            Entity = GetComponentInParent<Entity>();
+        }
+
         private void OnDestroy()
         {
             foreach (Modifier modifier in CurrentlyAppliedModifiers)
@@ -23,10 +28,11 @@ namespace Game
             currentlyAppliedModifiers.Clear();
         }
 
-        public void Apply(Modifier modifier, ModifierHandler target)
+        public void Apply(Modifier modifier, ModifierHandler target, params ModifierParameter[] parameters)
         {
             currentlyAppliedModifiers.Add(modifier);
-            modifier.Initialize(target, this);
+            modifier.Initialize(target, this, parameters);
+            target.Add(modifier);
 
             modifier.OnRemoved += OnRemoved;
             OnModifierApplied?.Invoke(modifier);

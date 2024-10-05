@@ -24,6 +24,7 @@ namespace Game
         private void Awake()
         {
             animator = GetComponent<Animator>();
+            Entity = GetComponentInParent<Entity>();
         }
 
         private void Update()

@@ -10,6 +10,11 @@ namespace Game
 
         public Entity Entity { get; set; }
 
+        private void Awake()
+        {
+            Entity = GetComponentInParent<Entity>();
+        }
+
         public Attack Generate(Attackable target = null,
             float damage = 0f,
             float armorPenetration = 0f,

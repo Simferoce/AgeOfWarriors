@@ -12,6 +12,11 @@ namespace Game
         public bool IsActive => Entity is not AgentObject agentObject || agentObject.IsActive;
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
 
+        private void Awake()
+        {
+            Entity = GetComponentInParent<Entity>();
+        }
+
         public bool IsBlocking(Entity entity)
         {
             if (!IsInContact(entity))

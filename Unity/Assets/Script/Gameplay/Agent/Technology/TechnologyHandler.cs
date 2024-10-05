@@ -39,6 +39,11 @@ namespace Game
 
         private void PerkAcquired(TechnologyPerkDefinition perk)
         {
+            ModifierHandler modifierHandler = agent.AddOrGetCachedComponent<ModifierHandler>();
+            ModifierApplier modifierApplier = agent.AddOrGetCachedComponent<ModifierApplier>();
+            Modifier modifier = perk.Instantiate();
+
+            modifierApplier.Apply(modifier, modifierHandler);
             OnPerkAcquired?.Invoke(perk);
         }
 

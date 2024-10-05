@@ -33,11 +33,6 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
 
     protected virtual void Awake()
     {
-        foreach (IComponent component in GetComponentsInChildren<IComponent>())
-        {
-            component.Entity = this;
-        }
-
         EventChannelEntityCreated.Instance.Publish(new EventChannelEntityCreated.Event(this));
     }
 
@@ -58,7 +53,7 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
         else
         {
             cached[typeof(T)] = GetComponentsInChildren<T>().Cast<IComponent>().ToList();
-            return (T)cached[typeof(T)].First();
+            return (T)cached[typeof(T)].FirstOrDefault();
         }
     }
 
@@ -73,11 +68,6 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
         cached[typeof(T)] = new List<IComponent>() { component };
 
         return component;
-    }
-
-    public virtual bool IsName(ReadOnlySpan<char> name)
-    {
-        return name.SequenceEqual("entity");
     }
 
     public virtual IEnumerable<Statistic> GetStatistic()

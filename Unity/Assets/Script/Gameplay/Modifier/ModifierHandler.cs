@@ -13,6 +13,24 @@ namespace Game
 
         private List<Modifier> modifiers = new List<Modifier>();
 
+        private void Awake()
+        {
+            Entity = GetComponentInParent<Entity>();
+        }
+
+        public void Add(Modifier modifier)
+        {
+            modifiers.Add(modifier);
+            modifier.OnRemoved += ModifierRemoved;
+            OnModifierAdded?.Invoke(modifier);
+        }
+
+        private void ModifierRemoved(Modifier modifier)
+        {
+            modifiers.Remove(modifier);
+            OnModifierRemoved?.Invoke(modifier);
+        }
+
         public List<Modifier> GetModifiers()
         {
             return modifiers;

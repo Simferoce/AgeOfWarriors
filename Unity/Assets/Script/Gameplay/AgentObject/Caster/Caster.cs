@@ -26,6 +26,7 @@ namespace Game
         private void Awake()
         {
             TransformTags = GetComponentsInChildren<TransformTag>().ToList();
+            Entity = GetComponentInParent<Entity>();
         }
 
         private void Start()
@@ -91,11 +92,6 @@ namespace Game
         {
             IsCasting = false;
             OnCastEnd?.Invoke();
-        }
-
-        public bool IsName(ReadOnlySpan<char> name)
-        {
-            return name.SequenceEqual("caster");
         }
 
         public IEnumerable<Statistic> GetStatistic()

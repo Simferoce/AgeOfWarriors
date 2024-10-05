@@ -5,7 +5,8 @@ using UnityEngine.Serialization;
 
 namespace Game
 {
-    public abstract class TechnologyPerkDefinition : ModifierDefinition
+    [CreateAssetMenu(fileName = "TechnologyPerkDefinition", menuName = "Definition/Technology/TechnologyPerkDefinition")]
+    public class TechnologyPerkDefinition : ModifierDefinition
     {
         [Space]
         [SerializeField] private Sprite technologyTreeIcon;

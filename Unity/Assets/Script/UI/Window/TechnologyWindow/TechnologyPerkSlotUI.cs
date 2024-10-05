@@ -48,6 +48,9 @@ namespace Game
 
         public void Refresh()
         {
+            if (!technologyTree.Has(technologyPerkDefinition))
+                return;
+
             TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
             if (technologyPerkStatus is TechnologyPerkStatusLocked)
                 background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.LightGrayPurple);

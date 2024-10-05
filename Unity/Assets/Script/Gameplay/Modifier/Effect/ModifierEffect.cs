@@ -3,7 +3,7 @@
 namespace Game
 {
     [Serializable]
-    public abstract class ModifierBehaviour : IDisposable
+    public abstract class ModifierEffect
     {
         protected Modifier modifier;
 
@@ -12,8 +12,6 @@ namespace Game
             this.modifier = modifier;
         }
 
-        public virtual void Update() { }
-        public virtual void Refresh() { }
-        public virtual void Dispose() { }
+        public abstract void Execute();
     }
 }

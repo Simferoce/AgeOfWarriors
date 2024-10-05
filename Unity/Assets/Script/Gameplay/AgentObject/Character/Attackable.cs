@@ -31,6 +31,11 @@ public partial class Attackable : MonoBehaviour, IComponent
     public Entity Entity { get; set; }
     public event Action<AttackResult, Attackable> OnDamageTaken;
 
+    private void Awake()
+    {
+        Entity = GetComponentInParent<Entity>();
+    }
+
     public void TakeAttack(Attack attack)
     {
         float currentHealth = Entity.GetStatistic().FirstOrDefault(x => x.Definition == StatisticRepository.GetDefinition(StatisticRepository.Health));
