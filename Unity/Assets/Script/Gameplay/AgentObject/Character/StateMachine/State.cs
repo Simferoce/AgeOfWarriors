@@ -24,7 +24,7 @@ namespace Game
                 InternalEnter();
             }
 
-            public void FixedUpdate()
+            public void Update()
             {
                 InternalUpdate();
             }

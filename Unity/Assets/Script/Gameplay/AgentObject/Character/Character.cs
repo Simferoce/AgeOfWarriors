@@ -113,12 +113,12 @@ namespace Game
             stateMachine.Initialize(new MoveState(this));
         }
 
-        public void FixedUpdate()
+        public void Update()
         {
             if (IsDead)
                 return;
 
-            stateMachine.FixedUpdate();
+            stateMachine.Update();
         }
 
         protected override void OnDestroy()

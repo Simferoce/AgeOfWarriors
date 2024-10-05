@@ -13,7 +13,7 @@
                 Current.Enter();
             }
 
-            public void FixedUpdate()
+            public void Update()
             {
                 if (Next != null)
                 {
@@ -26,7 +26,7 @@
                 }
 
                 if (Current != null)
-                    Current.FixedUpdate();
+                    Current.Update();
             }
 
             public void SetState(State state)
