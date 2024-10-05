@@ -1,9 +1,16 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     public class EventChannel<T>
     {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void Init()
+        {
+            instance = null;
+        }
+
         public delegate void EventChannelHandler(T evt);
 
         private static EventChannel<T> instance = null;

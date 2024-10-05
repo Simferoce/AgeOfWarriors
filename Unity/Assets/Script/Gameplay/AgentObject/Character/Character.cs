@@ -57,6 +57,7 @@ namespace Game
             TransformTags = GetComponentsInChildren<TransformTag>().ToList();
             GetCachedComponent<Attackable>().OnDamageTaken += OnDamageTaken;
             GetCachedComponent<AttackFactory>().OnAttackLanded += OnAttackLanded;
+            Animated = GetComponentInChildren<Animated>();
         }
 
         public override IEnumerable<Statistic> GetStatistic()
@@ -83,8 +84,6 @@ namespace Game
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
             base.Spawn(agent, spawnNumber, direction);
-
-            Animated = GetComponentInChildren<Animated>();
 
             AgentObjectDefinition agentObjectDefinition = GetDefinition();
             List<CharacterTechnologyPerkDefinition> modifiers = agent.Technology.UnlockedPerks().OfType<CharacterTechnologyPerkDefinition>().ToList();

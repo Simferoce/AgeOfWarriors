@@ -37,14 +37,14 @@ namespace Game
             technologyDetailsPanelUI.title.text = technologyPerkDefinition.Title;
             technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription();
 
-            TechnologyHandler.TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
+            TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
 
-            if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusUnlockable)
+            if (technologyPerkStatus is TechnologyPerkStatusUnlockable)
             {
                 technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.unlockableColor;
                 technologyDetailsPanelUI.button.interactable = true;
             }
-            else if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusUnlocked)
+            else if (technologyPerkStatus is TechnologyPerkStatusUnlocked)
             {
                 technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.unlockedColor;
                 technologyDetailsPanelUI.button.interactable = false;

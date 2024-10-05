@@ -48,10 +48,10 @@ namespace Game
 
         public void Refresh()
         {
-            TechnologyHandler.TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
-            if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusLocked)
+            TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
+            if (technologyPerkStatus is TechnologyPerkStatusLocked)
                 background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.LightGrayPurple);
-            else if (technologyPerkStatus is TechnologyHandler.TechnologyPerkStatusUnlockable)
+            else if (technologyPerkStatus is TechnologyPerkStatusUnlockable)
                 background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red);
             else
                 background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Yellow);

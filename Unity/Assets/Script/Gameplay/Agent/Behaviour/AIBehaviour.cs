@@ -27,7 +27,7 @@ namespace Game
             if (active == false)
                 return;
 
-            if (agent.SpawnLaneObject(next))
+            if (agent.TryQueueSpawnAgentObject(next))
             {
                 next = ChooseNextToSpawn();
             }
@@ -35,7 +35,7 @@ namespace Game
 
         private int ChooseNextToSpawn()
         {
-            return UnityEngine.Random.Range(0, agent.Factory.AmountOfAgentObjectAvailable);
+            return UnityEngine.Random.Range(0, agent.Loadout.AmountOfAgentObjectAvailable);
         }
     }
 }

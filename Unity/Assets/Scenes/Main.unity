@@ -506,6 +506,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: loadout.agentObjectsDefinition.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'factory.agentObjectsDefinition.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
@@ -519,6 +523,22 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'factory.agentObjectsDefinition.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'loadout.agentObjectsDefinition.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'loadout.agentObjectsDefinition.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'loadout.agentObjectsDefinition.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'loadout.agentObjectsDefinition.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
@@ -1412,6 +1432,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
+      propertyPath: loadout.agentObjectsDefinition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: 'factory.agentObjectsDefinition.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
@@ -1427,6 +1451,10 @@ PrefabInstance:
       propertyPath: 'factory.agentObjectsDefinition.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
+      propertyPath: 'loadout.agentObjectsDefinition.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: managedReferences[8758732277519220758].active
       value: 1

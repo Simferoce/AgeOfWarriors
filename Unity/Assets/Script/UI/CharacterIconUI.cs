@@ -31,7 +31,7 @@ namespace UI
 
         private void Refresh()
         {
-            AgentObjectDefinition agentObjectDefinition = Agent.Player.Factory.GetAgentObjectDefinitionAtIndex(index);
+            AgentObjectDefinition agentObjectDefinition = Agent.Player.Loadout.GetAgentObjectDefinitionAtIndex(index);
             if (agentObjectDefinition == null)
             {
                 gameObject.SetActive(false);
@@ -44,7 +44,7 @@ namespace UI
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            Agent.Player.SpawnLaneObject(index);
+            Agent.Player.TryQueueSpawnAgentObject(index);
         }
     }
 }

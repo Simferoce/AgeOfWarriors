@@ -23,7 +23,12 @@ namespace Game
         [SerializeField] private float currencyGainRate = 5f;
         [SerializeField] private TechnologyHandler technology;
         [SerializeField] private Factory factory;
+        [SerializeField] private AgentLoadout loadout;
         [SerializeReference, SubclassSelector] private AgentBehaviour agentBehaviour;
+
+        public delegate void AgentObjectSpawnDelegate(AgentObject agentObject);
+
+        public event AgentObjectSpawnDelegate OnAgentObjectSpawn;
 
         public override Faction Faction => faction;
         public Factory Factory { get => factory; set => factory = value; }
@@ -31,11 +36,15 @@ namespace Game
         public float Currency { get; set; }
         public int Direction { get => direction; set => direction = value; }
         public TechnologyHandler Technology { get => technology; }
+        public AgentLoadout Loadout { get => loadout; set => loadout = value; }
+
+        private int nextSpawneeNumber = 0;
 
         protected override void Awake()
         {
             base.Awake();
             factory.Initialize(this);
+            loadout.Initialize(this);
             technology.Initialize(this);
             agentBehaviour.Initialize(this);
         }
@@ -69,10 +78,16 @@ namespace Game
             agentBehaviour.Dispose();
         }
 
-        public bool SpawnLaneObject(int index)
+        public bool TryQueueSpawnAgentObject(int index)
         {
-            AgentObjectDefinition agentObjectDefinition = Factory.GetAgentObjectDefinitionAtIndex(index);
-            return factory.QueueLaneObject(agentBase.SpawnPoint, agentObjectDefinition);
+            AgentObjectDefinition agentObjectDefinition = Loadout.GetAgentObjectDefinitionAtIndex(index);
+            return factory.QueueLaneObject(new FactoryCommand(this, agentBase.SpawnPoint, agentObjectDefinition.ProductionDuration, agentObjectDefinition), agentObjectDefinition.Cost);
+        }
+
+        public void SpawnAgentObject(AgentObjectDefinition agentObjectDefinition, Vector3 position, int direction)
+        {
+            AgentObject agentObject = agentObjectDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
+            OnAgentObjectSpawn?.Invoke(agentObject);
         }
     }
 }

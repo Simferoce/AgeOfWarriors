@@ -37,6 +37,8 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
         {
             component.Entity = this;
         }
+
+        EventChannelEntityCreated.Instance.Publish(new EventChannelEntityCreated.Event(this));
     }
 
     public bool TryGetCachedComponent<T>(out T component)

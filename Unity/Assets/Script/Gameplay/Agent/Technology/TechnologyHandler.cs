@@ -6,64 +6,24 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class TechnologyHandler
+    public class TechnologyHandler : IDisposable
     {
-        public abstract class TechnologyPerkStatus
-        {
-
-        }
-
-        public class TechnologyPerkStatusUnlockable : TechnologyPerkStatus
-        {
-
-        }
-
-        public class TechnologyPerkStatusUnlocked : TechnologyPerkStatus
-        {
-
-        }
-
-        public class TechnologyPerkStatusLocked : TechnologyPerkStatus
-        {
-            public enum LockedReason
-            {
-                TreeCompleted,
-                AlreadyChoosePerkForRow,
-                PerkRowHasNotBeenUnlocked,
-                PerkDoesNotMeetRequirement,
-                LevelRequirementNotSatisfied
-            }
-
-            public LockedReason Reason { get; set; }
-
-            public TechnologyPerkStatusLocked(LockedReason reason)
-            {
-                Reason = reason;
-            }
-        }
-
-        public class TechnologyPerkStatusNotInTree : TechnologyPerkStatus
-        {
-
-        }
-
-        public delegate void PerkAcquired(TechnologyPerkDefinition technologyPerkDefinition);
+        public delegate void PerkAcquiredDelegate(TechnologyPerkDefinition technologyPerkDefinition);
 
         [SerializeField] private float maxTechnology;
         [SerializeField] private List<TechnologyTreeDefinition> technologyTreeDefinitions;
 
-        public event PerkAcquired OnPerkAcquired;
+        public event PerkAcquiredDelegate OnPerkAcquired;
+        public event Action OnLeveledUp;
 
         public float CurrentTechnology { get; set; }
         public float CurrentLevel { get; set; }
         public float CurrentTechnologyNormalized { get => CurrentTechnology / maxTechnology; }
         public float MaxTechnology { get => maxTechnology; set => maxTechnology = value; }
-        public List<TechnologyTree> TechnologyTrees { get => technologyTrees; set => technologyTrees = value; }
+        public IReadOnlyList<TechnologyTree> TechnologyTrees { get => technologyTrees; }
 
         private Agent agent;
         private List<TechnologyTree> technologyTrees = new List<TechnologyTree>();
-
-        public event Action OnLeveledUp;
 
         public void Initialize(Agent agent)
         {
@@ -71,7 +31,22 @@ namespace Game
 
             foreach (TechnologyTreeDefinition technologyTreeDefinition in technologyTreeDefinitions)
             {
-                technologyTrees.Add(technologyTreeDefinition.Instantiate(agent));
+                TechnologyTree technologyTree = technologyTreeDefinition.Instantiate(agent);
+                technologyTree.OnPerkAcquired += PerkAcquired;
+                technologyTrees.Add(technologyTree);
+            }
+        }
+
+        private void PerkAcquired(TechnologyPerkDefinition perk)
+        {
+            OnPerkAcquired?.Invoke(perk);
+        }
+
+        public void Dispose()
+        {
+            foreach (TechnologyTree technologyTree in technologyTrees)
+            {
+                technologyTree.OnPerkAcquired -= PerkAcquired;
             }
         }
 
