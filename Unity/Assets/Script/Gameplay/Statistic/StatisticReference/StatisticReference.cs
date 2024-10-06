@@ -13,6 +13,16 @@ namespace Game
         public override string Name { get => Resolve()?.Name ?? "Undefined"; set => Resolve().Name = value; }
         public override StatisticDefinition Definition { get => Resolve()?.Definition; set => Resolve().Definition = value; }
 
+        public StatisticReference()
+        {
+
+        }
+
+        public StatisticReference(StatisticQuery query)
+        {
+            this.query = query;
+        }
+
         public Statistic Resolve()
         {
             Assert.IsTrue(context != null, "The statistic reference has not been initialized.");

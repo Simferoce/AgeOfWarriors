@@ -2,16 +2,16 @@
 using System;
 
 [Serializable]
-public class StatisticModifiable<Type> : StatisticSerializedIdentity
+public class StatisticDynamic<Type> : StatisticSerializedIdentity
 {
     protected Type currentValue;
 
-    public StatisticModifiable()
+    public StatisticDynamic()
     {
 
     }
 
-    public StatisticModifiable(string name = null, string definition = null)
+    public StatisticDynamic(string name = null, string definition = null)
         : base(name, definition)
     {
 

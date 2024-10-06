@@ -44,7 +44,7 @@ namespace Game
         private StateMachine stateMachine = new StateMachine();
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
-        private StatisticFloatModifiable health;
+        private StatisticDynamicFloat health;
         private StatisticSerialize<float> defense;
         private StatisticSerialize<float> attackPower;
         private StatisticSerialize<float> attackSpeed;
@@ -85,15 +85,14 @@ namespace Game
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            AgentObjectDefinition agentObjectDefinition = GetDefinition();
-            List<CharacterTechnologyPerkDefinition> modifiers = agent.Technology.UnlockedPerks().OfType<CharacterTechnologyPerkDefinition>().ToList();
-            foreach (CharacterTechnologyPerkDefinition modifier in modifiers)
-            {
-                if (modifier.Affect(agentObjectDefinition))
-                    modifier.Modify(agent, this);
-            }
+            Statistic maxHealth = new StatisticModifiableStandard(
+                "max",
+                StatisticRepository.MaxHealth,
+                new StatisticSerialize<float>("flat", null, this.Definition.MaxHealth),
+                new StatisticReference(new StatisticByDefinitionQuery(new ModifierHandlerReferenceProvider(), StatisticRepository.GetDefinition(StatisticRepository.MaxHealth))),
+                null);
 
-            health = new StatisticFloatModifiable("health", StatisticRepository.Health, new StatisticSerialize<float>("max", StatisticRepository.MaxHealth, this.Definition.MaxHealth));
+            health = new StatisticDynamicFloat("health", StatisticRepository.Health, maxHealth);
             defense = new StatisticSerialize<float>("defense", StatisticRepository.Defense, Definition.Defense);
             attackPower = new StatisticSerialize<float>("attackPower", StatisticRepository.AttackPower, Definition.AttackPower);
             attackSpeed = new StatisticSerialize<float>("attackSpeed", StatisticRepository.AttackSpeed, Definition.AttackSpeed);

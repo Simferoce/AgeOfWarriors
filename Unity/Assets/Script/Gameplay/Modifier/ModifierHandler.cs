@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ModifierHandler : MonoBehaviour, IComponent
+    public class ModifierHandler : MonoBehaviour, IComponent, IStatisticContext
     {
         public event Action<Modifier> OnModifierRemoved;
         public event Action<Modifier> OnModifierAdded;
@@ -40,6 +40,13 @@ namespace Game
         {
             modifier = modifiers.FirstOrDefault(x => x.Definition == definition);
             return modifier != null;
+        }
+
+        public IEnumerable<Statistic> GetStatistic()
+        {
+            foreach (Modifier modifier in modifiers)
+                foreach (Statistic statistic in modifier.GetStatistic())
+                    yield return statistic;
         }
     }
 }

@@ -10,6 +10,17 @@ public class StatisticByDefinitionQuery : StatisticQuery
     [SerializeReference, SubclassSelector] ReferenceProvider provider;
     [SerializeField] private StatisticDefinition statisticDefinition;
 
+    public StatisticByDefinitionQuery()
+    {
+
+    }
+
+    public StatisticByDefinitionQuery(ReferenceProvider provider, StatisticDefinition statisticDefinition)
+    {
+        this.provider = provider;
+        this.statisticDefinition = statisticDefinition;
+    }
+
     public override IEnumerable<Statistic> GetStatistics(IStatisticContext context)
     {
         if (provider == null)

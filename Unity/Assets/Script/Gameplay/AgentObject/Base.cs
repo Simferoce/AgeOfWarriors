@@ -22,7 +22,7 @@ namespace Game
 
         public event Action<AttackResult, Attackable> OnDamageTaken;
 
-        private StatisticFloatModifiable health;
+        private StatisticDynamicFloat health;
 
         protected override void Awake()
         {
@@ -61,7 +61,7 @@ namespace Game
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            health = new StatisticFloatModifiable("health", StatisticRepository.Health, new StatisticSerialize<float>("max", StatisticRepository.MaxHealth, maxHealth));
+            health = new StatisticDynamicFloat("health", StatisticRepository.Health, new StatisticSerialize<float>("max", StatisticRepository.MaxHealth, maxHealth));
             health.Initialize(this);
 
             Health = MaxHealth;

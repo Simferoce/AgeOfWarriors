@@ -3,17 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class StatisticFloatModifiable : StatisticModifiable<float>, IStatisticContext
+public class StatisticDynamicFloat : StatisticDynamic<float>, IStatisticContext
 {
     [SerializeReference, SubclassSelector] private Statistic max;
 
     public Statistic Max { get => max; set => max = value; }
 
-    public StatisticFloatModifiable()
+    public override void Initialize(IStatisticContext context)
+    {
+        base.Initialize(context);
+
+        max.Initialize(context);
+    }
+
+    public StatisticDynamicFloat()
     {
     }
 
-    public StatisticFloatModifiable(string name, string definitionId, Statistic max = null)
+    public StatisticDynamicFloat(string name, string definitionId, Statistic max = null)
         : base(name, definitionId)
     {
         this.max = max;

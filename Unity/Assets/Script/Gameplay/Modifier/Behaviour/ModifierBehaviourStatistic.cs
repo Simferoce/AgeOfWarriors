@@ -9,10 +9,18 @@ namespace Game
     {
         [SerializeReference, SubclassSelector] private List<Statistic> statistics;
 
+        public override void Initialize(Modifier modifier)
+        {
+            base.Initialize(modifier);
+
+            foreach (Statistic statistic in statistics)
+                statistic.Initialize(modifier);
+        }
+
         public IEnumerable<Statistic> GetStatistic()
         {
-            foreach (Statistic statistc in statistics)
-                yield return statistc;
+            foreach (Statistic statistic in statistics)
+                yield return statistic;
         }
     }
 }
