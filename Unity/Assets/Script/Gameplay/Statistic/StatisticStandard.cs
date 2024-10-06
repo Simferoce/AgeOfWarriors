@@ -1,19 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Game
 {
-    public class StatisticModifiableStandard : StatisticSerializedIdentity
+    [Serializable]
+    public class StatisticStandard : StatisticSerializedIdentity
     {
         [SerializeReference, SubclassSelector] private Statistic baseStatistic;
         [SerializeReference, SubclassSelector] private Statistic flatStatistic;
         [SerializeReference, SubclassSelector] private Statistic percentageStatistic;
 
-        public StatisticModifiableStandard()
+        public StatisticStandard()
         {
 
         }
 
-        public StatisticModifiableStandard(string name, string definitionId, Statistic baseStatistic, Statistic flatStatistic, Statistic percentageStatistic)
+        public StatisticStandard(string name, string definitionId, Statistic baseStatistic, Statistic flatStatistic, Statistic percentageStatistic)
             : base(name, definitionId)
         {
             this.baseStatistic = baseStatistic;

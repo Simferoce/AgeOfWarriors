@@ -46,8 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statistics:
-  - rid: 5836724064671236215
   - rid: 5836724064671236219
+  - rid: 5836724064671236215
+  - rid: 7754702836442857472
   conditions:
   - rid: 4528059661052542988
   - rid: 2969737379885613056
@@ -57,6 +58,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 2969737379885613056
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
@@ -161,6 +164,11 @@ MonoBehaviour:
     - rid: 5836724064671236226
       type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
       data: 
+    - rid: 7754702836442857472
+      type: {class: StatisticReferenceSummation, ns: Game, asm: Assembly-CSharp}
+      data:
+        query:
+          rid: -2
 --- !u!114 &654787136387042407
 MonoBehaviour:
   m_ObjectHideFlags: 0

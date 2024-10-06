@@ -47,6 +47,10 @@ namespace Game
             foreach (Modifier modifier in modifiers)
                 foreach (Statistic statistic in modifier.GetStatistic())
                     yield return statistic;
+
+            if (Entity.Parent != null && Entity.Parent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler parentModifierHandler))
+                foreach (Statistic statistic in parentModifierHandler.GetStatistic())
+                    yield return statistic;
         }
     }
 }

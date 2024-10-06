@@ -15,8 +15,10 @@ public static class StatisticRepository
     public static string Damage = "damage";
     public static string DamagePercentage = "damage_percentage";
     public static string DamageAgainstWeak = "damage_against_weak";
-    public static string MaxHealth = "max_health";
     public static string Health = "health";
+    public static string MaxHealth = "health_max";
+    public static string MaxHealthFlat = "health_max_flat";
+    public static string MaxHealthPercentage = "health_max_percentage";
     public static string Defense = "defense";
     public static string Cooldown = "cooldown";
     public static string Duration = "duration";

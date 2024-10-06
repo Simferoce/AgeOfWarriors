@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2439447710677529383}
   - component: {fileID: 8954445296651028284}
   m_Layer: 0
-  m_Name: IncreaseShieldbearerHealthTechnology
+  m_Name: IncreaseShieldbearerDamagePercentageTechnology
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ MonoBehaviour:
     - rid: 7754702808087265352
       type: {class: ModifierEffectApplyModifier, ns: Game, asm: Assembly-CSharp}
       data:
-        definition: {fileID: 11400000, guid: cce19f95e6f109c44975f418c74151c8, type: 2}
+        definition: {fileID: -5183416195023018314, guid: ce7fc294604c6124a9c25efb907f9412, type: 2}
         targets:
         - rid: 7754702808087265378
         parameters:
@@ -90,9 +90,9 @@ MonoBehaviour:
     - rid: 7754702808087265363
       type: {class: StatisticSerializeFloat, ns: , asm: Assembly-CSharp}
       data:
-        name: maxhealth
-        definitionId: max_health
-        value: 25
+        name: damage_percentage
+        definitionId: damage_percentage
+        value: 0.25
     - rid: 7754702808087265378
       type: {class: ModifierTargetTrigger, ns: Game, asm: Assembly-CSharp}
       data: 

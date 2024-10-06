@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statistics:
   - rid: 5836723902342496263
-  - rid: 5836723902342496265
+  - rid: 7754702836442857542
   conditions:
   - rid: 3656781301283291221
   - rid: 2969737379885613066
@@ -113,19 +113,6 @@ MonoBehaviour:
       data:
         query:
           rid: 5836724064671236227
-    - rid: 5836723902342496265
-      type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
-      data:
-        name: damage
-        definitionId: damage
-        provider:
-          rid: 5836723902342496266
-        percentage: 1
-    - rid: 5836723902342496266
-      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
-      data:
-        query:
-          rid: 5836724064671236229
     - rid: 5836724064671236202
       type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
       data:
@@ -165,14 +152,52 @@ MonoBehaviour:
     - rid: 5836724064671236228
       type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 5836724064671236229
+    - rid: 7754702836442857542
+      type: {class: StatisticStandard, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definitionId: damage
+        baseStatistic:
+          rid: 7754702836442857543
+        flatStatistic:
+          rid: -2
+        percentageStatistic:
+          rid: 7754702836442857547
+    - rid: 7754702836442857543
+      type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
+      data:
+        name: damage
+        definitionId: damage
+        provider:
+          rid: 7754702836442857544
+        percentage: 1
+    - rid: 7754702836442857544
+      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
+      data:
+        query:
+          rid: 7754702836442857545
+    - rid: 7754702836442857545
       type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
       data:
         provider:
-          rid: 5836724064671236230
+          rid: 7754702836442857546
         statisticDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-    - rid: 5836724064671236230
+    - rid: 7754702836442857546
       type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 7754702836442857547
+      type: {class: StatisticReferenceSummation, ns: Game, asm: Assembly-CSharp}
+      data:
+        query:
+          rid: 7754702836442857548
+    - rid: 7754702836442857548
+      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
+      data:
+        provider:
+          rid: 7754702836442857550
+        statisticDefinition: {fileID: 11400000, guid: c44430788b4fe5a4f822561156a457af, type: 2}
+    - rid: 7754702836442857550
+      type: {class: ModifierHandlerReferenceProvider, ns: Game, asm: Assembly-CSharp}
       data: 
 --- !u!114 &5147895781952595201
 MonoBehaviour:

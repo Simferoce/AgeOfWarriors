@@ -26,7 +26,7 @@ namespace Game
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
 
         public float Health { get => health; set => health.Modify(value); }
-        public float MaxHealth => health.Max;
+        public float MaxHealth => maxHealth;
         public float Defense => defense /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value)*/;
         public float AttackSpeed => attackSpeed /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value))*/;
         public float AttackPower => attackPower /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value)*/;
@@ -45,6 +45,9 @@ namespace Game
         private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
         private StatisticDynamicFloat health;
+        private Statistic maxHealth;
+        private Statistic maxHealthFlat;
+        private Statistic maxHealthPercentage;
         private StatisticSerialize<float> defense;
         private StatisticSerialize<float> attackPower;
         private StatisticSerialize<float> attackSpeed;
@@ -63,6 +66,8 @@ namespace Game
         public override IEnumerable<Statistic> GetStatistic()
         {
             yield return health;
+            yield return maxHealthFlat;
+            yield return maxHealthPercentage;
             yield return defense;
             yield return attackPower;
             yield return attackSpeed;
@@ -85,12 +90,14 @@ namespace Game
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            Statistic maxHealth = new StatisticModifiableStandard(
-                "max",
+            maxHealthFlat = new StatisticReferenceSummation(new StatisticByDefinitionQuery(new ModifierHandlerReferenceProvider(), StatisticRepository.GetDefinition(StatisticRepository.MaxHealthFlat)));
+            maxHealthPercentage = new StatisticReferenceSummation(new StatisticByDefinitionQuery(new ModifierHandlerReferenceProvider(), StatisticRepository.GetDefinition(StatisticRepository.MaxHealthPercentage)));
+            maxHealth = new StatisticStandard(
+                "health_max",
                 StatisticRepository.MaxHealth,
-                new StatisticSerialize<float>("flat", null, this.Definition.MaxHealth),
-                new StatisticReference(new StatisticByDefinitionQuery(new ModifierHandlerReferenceProvider(), StatisticRepository.GetDefinition(StatisticRepository.MaxHealth))),
-                null);
+                new StatisticSerialize<float>("base", null, this.Definition.MaxHealth),
+                maxHealthFlat,
+                maxHealthPercentage);
 
             health = new StatisticDynamicFloat("health", StatisticRepository.Health, maxHealth);
             defense = new StatisticSerialize<float>("defense", StatisticRepository.Defense, Definition.Defense);

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2612002314881457255}
   - component: {fileID: 506416722412907645}
   m_Layer: 0
-  m_Name: IncreaseHealthModifier
+  m_Name: IncreaseMaxHealthFlatModifier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ MonoBehaviour:
       data:
         provider:
           rid: 7754702808087265367
-        statisticDefinition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+        statisticDefinition: {fileID: 11400000, guid: 80313f8013c25d5429c444461ffe8b6d, type: 2}
     - rid: 7754702808087265367
       type: {class: ModifierParameterReferenceProvider, ns: Game, asm: Assembly-CSharp}
       data: 

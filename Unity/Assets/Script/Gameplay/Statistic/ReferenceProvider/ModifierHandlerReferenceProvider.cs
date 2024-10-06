@@ -2,6 +2,7 @@
 
 namespace Game
 {
+    [Serializable]
     public class ModifierHandlerReferenceProvider : ReferenceProvider
     {
         public override object Resolve(object context)
@@ -9,7 +10,7 @@ namespace Game
             if (!(context is Entity entity))
                 throw new ArgumentException();
 
-            return entity.GetCachedComponent<ModifierHandler>();
+            return entity.AddOrGetCachedComponent<ModifierHandler>();
         }
     }
 }
