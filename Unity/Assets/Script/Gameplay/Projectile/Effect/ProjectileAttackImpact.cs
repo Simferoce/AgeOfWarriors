@@ -7,22 +7,12 @@ namespace Game
     [Serializable]
     public class ProjectileAttackImpact : ProjectileImpact
     {
-        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
-        [SerializeField] private StatisticReference damage;
-        [SerializeField] private StatisticReference armorPenetration;
-
-        private float cachedDamage;
-        private float cachedArmorPenetration;
+        [SerializeField] private ProjectileStatistic damage;
+        [SerializeField] private ProjectileStatistic armorPenetration;
 
         public override void Initialize(Projectile projectile)
         {
             base.Initialize(projectile);
-
-            damage.Initialize(projectile);
-            armorPenetration.Initialize(projectile);
-
-            cachedDamage = damage.GetValueOrThrow<float>();
-            cachedArmorPenetration = armorPenetration.GetValueOrDefault<float>();
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -31,14 +21,14 @@ namespace Game
                 collision.gameObject.TryGetComponentInParent<Target>(out Target targeteable)
                 && (targeteable.Entity as AgentObject).IsActive
                 && projectile.Ignore != targeteable
-                && criteria.Execute(projectile, targeteable.Entity)
+                && projectile.Faction != (targeteable.Entity as AgentObject).Faction
                 && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
             {
                 AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
                 Attack attack = attackFactory.Generate(
                     target: attackable,
-                    damage: cachedDamage,
-                    armorPenetration: cachedArmorPenetration,
+                    damage: damage?.GetValue<float>(projectile) ?? 0f,
+                    armorPenetration: armorPenetration?.GetValue<float>(projectile) ?? 0f,
                     flags: Attack.Flag.Ranged | Attack.Flag.Reflectable);
 
                 attackable.TakeAttack(attack);

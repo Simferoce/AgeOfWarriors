@@ -3,12 +3,13 @@ using UnityEngine;
 
 namespace Game
 {
-    public class AttackFactory : MonoBehaviour, IComponent
+    public class AttackFactory : MonoBehaviour
     {
         public delegate void OnAttackLandedDelegate(AttackResult attackResult);
         public event OnAttackLandedDelegate OnAttackLanded;
 
         public Entity Entity { get; set; }
+        public float LastTimeAttackLanded { get; private set; }
 
         private void Awake()
         {
@@ -27,6 +28,7 @@ namespace Game
         public void NotifyAttackResult(AttackResult attackResult)
         {
             OnAttackLanded?.Invoke(attackResult);
+            LastTimeAttackLanded = Time.time;
 
             foreach (Entity entity in Entity.GetHierarchy())
             {

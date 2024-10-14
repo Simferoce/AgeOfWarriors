@@ -7,17 +7,11 @@ namespace Game
     [Serializable]
     public class ProjectileHealImpact : ProjectileImpact
     {
-        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
-        [SerializeField] private StatisticReference heal;
-
-        private float currentHeal;
+        [SerializeField] private ProjectileStatistic heal;
 
         public override void Initialize(Projectile projectile)
         {
             base.Initialize(projectile);
-
-            heal.Initialize(projectile);
-            currentHeal = heal;
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -28,10 +22,10 @@ namespace Game
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<Target>(out Target targeteable)
                 && (targeteable.Entity as AgentObject).IsActive
-                && criteria.Execute(projectile, targeteable.Entity)
+                && projectile.Faction == (targeteable.Entity as AgentObject).Faction
                 && targeteable.Entity is Character character)
             {
-                character.Heal(currentHeal);
+                character.Heal(heal.GetValue<float>(projectile));
 
                 projectile.Kill(collision.gameObject);
                 return new ImpactReport(ImpactStatus.Impacted, targeteable);

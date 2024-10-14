@@ -1,10 +1,7 @@
-﻿using System;
-
-namespace Game
+﻿namespace Game
 {
-    [Serializable]
     public abstract class ModifierParameter
     {
-
+        public virtual string Name { get; set; }
     }
 }

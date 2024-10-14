@@ -8,26 +8,18 @@ namespace Game
     [Serializable]
     public class ProjectileTimedImpact : ProjectileImpact
     {
-        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
-        [SerializeField] private StatisticReference damage;
-        [SerializeField] private StatisticReference duration;
+        [SerializeField] private ProjectileStatistic damage;
+        [SerializeField] private ProjectileStatistic duration;
         [SerializeField] private float delay;
 
         private float startedAt;
         private List<Attackable> targetsHit = new List<Attackable>();
         private List<Target> targeteablesInEffect = new List<Target>();
-        private float cachedDuration;
-        private float cachedDamage;
 
         public override void Initialize(Projectile projectile)
         {
             base.Initialize(projectile);
             startedAt = Time.time;
-
-            damage.Initialize(projectile);
-            duration.Initialize(projectile);
-            cachedDuration = duration;
-            cachedDamage = damage;
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -59,7 +51,7 @@ namespace Game
             if (projectile.StateValue == Projectile.State.Dead)
                 return new ImpactReport(ImpactStatus.NotImpacted);
 
-            if (Time.time - startedAt > cachedDuration)
+            if (Time.time - startedAt > duration.GetValue<float>(projectile))
             {
                 projectile.Kill(null);
             }
@@ -68,14 +60,14 @@ namespace Game
             foreach (Target targeteable in targeteablesInEffect)
             {
                 if (Time.time - startedAt > delay
-                    && criteria.Execute(projectile, targeteable.Entity)
+                    && projectile.Faction != (targeteable.Entity as AgentObject).Faction
                     && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable)
                     && !targetsHit.Contains(attackable))
                 {
                     AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
                     Attack attack = attackFactory.Generate(
                         target: attackable,
-                        damage: cachedDamage,
+                        damage: damage.GetValue<float>(projectile),
                         flags: Attack.Flag.Ranged | Attack.Flag.Reflectable
                         );
 

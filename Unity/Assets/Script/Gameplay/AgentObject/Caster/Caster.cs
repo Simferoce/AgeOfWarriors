@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public partial class Caster : MonoBehaviour, IComponent, IStatisticContext
+    public partial class Caster : MonoBehaviour
     {
         [Header("Abilities")]
         [SerializeField] private List<AbilityDefinition> abilitiesDefinition = new List<AbilityDefinition>();
@@ -92,12 +92,6 @@ namespace Game
         {
             IsCasting = false;
             OnCastEnd?.Invoke();
-        }
-
-        public IEnumerable<Statistic> GetStatistic()
-        {
-            foreach (Statistic statistic in Entity.GetStatistic())
-                yield return statistic;
         }
     }
 }

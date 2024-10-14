@@ -1,30 +1,39 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using UnityEngine;
 
 namespace Game
 {
     public static class TargetUtility
     {
-        public static List<Target> GetTargets(Entity entity, TargetCriteria criteria, IStatisticContext statisticProvider)
+        public struct NearestTargetResult
         {
-            List<Target> potentialTargets = new List<Target>();
-            foreach (Target targetteable in AgentObject.All.Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
+            public Target Target { get; set; }
+            public float Distance { get; set; }
+
+            public NearestTargetResult(Target target, float distance)
             {
-                if (!(targetteable.Entity as AgentObject).IsActive)
+                Target = target;
+                Distance = distance;
+            }
+        }
+
+        public static bool TryGetNearestTarget(Vector3 position, Func<Target, bool> predicat, out NearestTargetResult nearestTargetResult)
+        {
+            nearestTargetResult = new NearestTargetResult(null, float.MaxValue);
+            foreach (Target target in Target.All)
+            {
+                if (!predicat(target))
                     continue;
 
-                if (targetteable.Entity == entity)
-                    continue;
-
-                if (!criteria.Execute(entity, targetteable.Entity))
-                    continue;
-
-                potentialTargets.Add(targetteable);
+                float distance = Vector3.Distance(position, target.TargetPosition);
+                if (distance < nearestTargetResult.Distance)
+                {
+                    nearestTargetResult.Distance = distance;
+                    nearestTargetResult.Target = target;
+                }
             }
 
-            return potentialTargets
-                .OrderBy(x => (x.Entity as AgentObject).Priority)
-                .ToList();
+            return nearestTargetResult.Target != null;
         }
     }
 }

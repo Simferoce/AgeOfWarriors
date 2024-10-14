@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace Game
+﻿namespace Game
 {
-    [Serializable]
-    public class ModifierParameterStatistic : ModifierParameter, IStatisticContext
+    public abstract class ModifierParameterStatistic : ModifierParameter
     {
-        [SerializeReference, SubclassSelector] private Statistic statistic;
+        public StatisticDefinition StatisticDefinition { get; set; }
 
-        public IEnumerable<Statistic> GetStatistic()
+        protected ModifierParameterStatistic(string name, StatisticDefinition statisticDefinition)
         {
-            yield return statistic;
+            StatisticDefinition = statisticDefinition;
+            this.Name = name;
+        }
+    }
+
+    public class ModifierParameterStatistic<T> : ModifierParameterStatistic
+    {
+        public T Value { get; set; }
+
+        public ModifierParameterStatistic(string name, StatisticDefinition statisticDefinition, T value) : base(name, statisticDefinition)
+        {
+            Value = value;
         }
     }
 }

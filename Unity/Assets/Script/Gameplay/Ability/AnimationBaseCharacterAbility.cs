@@ -8,7 +8,6 @@ namespace Game
 {
     public class AnimationBaseCharacterAbility : Ability
     {
-        [SerializeReference, SubclassSelector] private List<AbilityCondition> conditions = new List<AbilityCondition>();
         [SerializeReference, SubclassSelector] private List<AbilityEffect> effects = new List<AbilityEffect>();
 
         [Header("Animation Parameters")]
@@ -27,16 +26,13 @@ namespace Game
             animated = caster.Entity.GetCachedComponent<Animated>();
             Assert.IsNotNull(animated, "Cannot cast an animated ability if the caster does not own an animated component.");
 
-            foreach (AbilityCondition condition in conditions)
-                condition.Initialize(this);
-
             foreach (AbilityEffect effect in effects)
                 effect.Initialize(this);
         }
 
         public override bool CanUse()
         {
-            return conditions.All(x => x.Execute()) && effects.All(x => x.CanBeApplied()) && IsCasting == false && IsLingering == false;
+            return base.CanUse() && effects.All(x => x.CanBeApplied()) && IsCasting == false && IsLingering == false;
         }
 
         public override void InternalUse()

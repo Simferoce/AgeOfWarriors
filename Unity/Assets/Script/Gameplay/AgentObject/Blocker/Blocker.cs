@@ -2,7 +2,7 @@
 
 namespace Game
 {
-    public class Blocker : MonoBehaviour, IComponent
+    public class Blocker : MonoBehaviour
     {
         [SerializeField] private bool blockAllies = true;
         [SerializeField] private bool blockEnemies = true;

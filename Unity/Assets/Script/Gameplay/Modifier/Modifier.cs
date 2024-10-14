@@ -16,8 +16,8 @@ namespace Game
         public ModifierDefinition Definition { get; set; }
         public ModifierHandler Handler { get; set; }
         public ModifierApplier Applier { get; set; }
-        public List<ModifierBehaviour> Behaviours { get => behaviours; set => behaviours = value; }
         public bool IsVisible { get => visibleByDefault; }
+        public List<ModifierBehaviour> Behaviours { get => behaviours; set => behaviours = value; }
         public List<ModifierParameter> Parameters { get => parameters; set => parameters = value; }
 
         private List<ModifierParameter> parameters;
@@ -40,8 +40,10 @@ namespace Game
                 modifierBehaviour.Update();
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+            Handler.Remove(this);
             OnRemoved?.Invoke(this);
 
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
@@ -51,15 +53,6 @@ namespace Game
         public string ParseDescription()
         {
             return Definition.ParseDescription();
-        }
-
-        public override IEnumerable<Statistic> GetStatistic()
-        {
-            foreach (Statistic statistic in behaviours.OfType<IStatisticContext>().SelectMany(x => x.GetStatistic()))
-                yield return statistic;
-
-            foreach (Statistic statistic in base.GetStatistic())
-                yield return statistic;
         }
     }
 }

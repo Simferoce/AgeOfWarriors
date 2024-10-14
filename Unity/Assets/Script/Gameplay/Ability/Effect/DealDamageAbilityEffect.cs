@@ -6,16 +6,17 @@ namespace Game
     [Serializable]
     public class DealDamageAbilityEffect : AbilityEffect
     {
-        [SerializeField] private StatisticReference leach;
-        [SerializeField] private StatisticReference damage;
-        [SerializeField] private StatisticReference armorPenetration;
+        [SerializeReference, SubclassSelector] private Statistic leach;
+        [SerializeReference, SubclassSelector] private Statistic damage;
+        [SerializeReference, SubclassSelector] private Statistic armorPenetration;
+
+        public float Damage => (damage?.GetValue<float>(Ability) ?? 0f) * (1 + Ability.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticRepository.DamagePercentage));
+        public float ArmorPenetration => armorPenetration?.GetValue<float>(Ability) ?? 0f;
+        public float Leach => leach?.GetValue<float>(Ability) ?? 0f;
 
         public override void Initialize(Ability ability)
         {
             base.Initialize(ability);
-            leach.Initialize(ability);
-            damage.Initialize(ability);
-            armorPenetration.Initialize(ability);
         }
 
         public override void Apply()
@@ -27,9 +28,9 @@ namespace Game
 
             Attack attack = Ability.GetCachedComponent<AttackFactory>().Generate(
                 target: target,
-                damage: damage.GetValueOrDefault<float>(),
-                armorPenetration: armorPenetration.GetValueOrDefault<float>(),
-                leach: leach.GetValueOrDefault<float>(),
+                damage: Damage,
+                armorPenetration: ArmorPenetration,
+                leach: Leach,
                 flags: Attack.Flag.Reflectable);
 
             target.TakeAttack(attack);

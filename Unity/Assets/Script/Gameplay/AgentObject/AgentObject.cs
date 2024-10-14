@@ -39,8 +39,9 @@ namespace Game
             All.Add(this);
         }
 
-        protected virtual void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             All.Remove(this);
             OnDestroyed?.Invoke(this);
         }

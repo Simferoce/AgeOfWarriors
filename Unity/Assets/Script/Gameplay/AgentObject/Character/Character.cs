@@ -25,16 +25,16 @@ namespace Game
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
 
-        public float Health { get => health; set => health.Modify(value); }
-        public float MaxHealth => maxHealth;
-        public float Defense => defense /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value)*/;
-        public float AttackSpeed => attackSpeed /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value))*/;
-        public float AttackPower => attackPower /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value)*/;
-        public float Speed => speed/* * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value))*/;
-        public float Reach => reach /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value))*/;
+        public float Health { get; set; }
+        public float MaxHealth => Definition.MaxHealth + this.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticRepository.MaxHealthFlat);
+        public float Defense => Definition.Defense /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value)*/;
+        public float AttackSpeed => Definition.AttackSpeed /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value))*/;
+        public float AttackPower => Definition.AttackPower /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value)*/;
+        public float Speed => Definition.Speed/* * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value))*/;
+        public float Reach => Definition.Reach /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value))*/;
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
-        public bool IsEngaged => TargetUtility.GetTargets(this, this.engagedCriteria, this).FirstOrDefault() != null;
+        public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
         public bool IsInvulnerable => this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is IInvulnerableModifier);
         public bool IsConfused => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);*/
         public bool IsStaggered => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is StaggerModifierDefinition.Modifier);*/
@@ -42,17 +42,6 @@ namespace Game
         public bool IsInjured => this.Health < this.MaxHealth;
 
         private StateMachine stateMachine = new StateMachine();
-        private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
-
-        private StatisticDynamicFloat health;
-        private Statistic maxHealth;
-        private Statistic maxHealthFlat;
-        private Statistic maxHealthPercentage;
-        private StatisticSerialize<float> defense;
-        private StatisticSerialize<float> attackPower;
-        private StatisticSerialize<float> attackSpeed;
-        private StatisticSerialize<float> speed;
-        private StatisticSerialize<float> reach;
 
         protected override void Awake()
         {
@@ -62,22 +51,6 @@ namespace Game
             GetCachedComponent<AttackFactory>().OnAttackLanded += OnAttackLanded;
             Animated = GetComponentInChildren<Animated>();
         }
-
-        public override IEnumerable<Statistic> GetStatistic()
-        {
-            yield return health;
-            yield return maxHealthFlat;
-            yield return maxHealthPercentage;
-            yield return defense;
-            yield return attackPower;
-            yield return attackSpeed;
-            yield return speed;
-            yield return reach;
-
-            foreach (Statistic statistic in base.GetStatistic())
-                yield return statistic;
-        }
-
 
         private void OnDamageTaken(AttackResult attackResult, Attackable attackable)
         {
@@ -90,28 +63,14 @@ namespace Game
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            maxHealthFlat = new StatisticReferenceSummation(new StatisticByDefinitionQuery(new ModifierHandlerReferenceProvider(), StatisticRepository.GetDefinition(StatisticRepository.MaxHealthFlat)));
-            maxHealthPercentage = new StatisticReferenceSummation(new StatisticByDefinitionQuery(new ModifierHandlerReferenceProvider(), StatisticRepository.GetDefinition(StatisticRepository.MaxHealthPercentage)));
-            maxHealth = new StatisticStandard(
-                "health_max",
-                StatisticRepository.MaxHealth,
-                new StatisticSerialize<float>("base", null, this.Definition.MaxHealth),
-                maxHealthFlat,
-                maxHealthPercentage);
-
-            health = new StatisticDynamicFloat("health", StatisticRepository.Health, maxHealth);
-            defense = new StatisticSerialize<float>("defense", StatisticRepository.Defense, Definition.Defense);
-            attackPower = new StatisticSerialize<float>("attackPower", StatisticRepository.AttackPower, Definition.AttackPower);
-            attackSpeed = new StatisticSerialize<float>("attackSpeed", StatisticRepository.AttackSpeed, Definition.AttackSpeed);
-            speed = new StatisticSerialize<float>("speed", StatisticRepository.Speed, Definition.Speed);
-            reach = new StatisticSerialize<float>("reach", StatisticRepository.Reach, Definition.Reach);
-
-            health.Initialize(this);
-            defense.Initialize(this);
-            attackPower.Initialize(this);
-            attackSpeed.Initialize(this);
-            speed.Initialize(this);
-            reach.Initialize(this);
+            StatisticIndex statisticIndex = GetCachedComponent<StatisticIndex>();
+            statisticIndex.Add(new StatisticFunction<float>(() => Health, StatisticRepository.Health));
+            statisticIndex.Add(new StatisticFunction<float>(() => MaxHealth, StatisticRepository.MaxHealth));
+            statisticIndex.Add(new StatisticFunction<float>(() => AttackPower, StatisticRepository.AttackPower));
+            statisticIndex.Add(new StatisticFunction<float>(() => AttackSpeed, StatisticRepository.AttackSpeed));
+            statisticIndex.Add(new StatisticFunction<float>(() => Defense, StatisticRepository.Defense));
+            statisticIndex.Add(new StatisticFunction<float>(() => Speed, StatisticRepository.Speed));
+            statisticIndex.Add(new StatisticFunction<float>(() => Reach, StatisticRepository.Reach));
 
             Health = MaxHealth;
 

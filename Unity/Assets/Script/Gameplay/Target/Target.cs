@@ -1,8 +1,15 @@
-﻿using Game;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Target : MonoBehaviour, IComponent
+public class Target : MonoBehaviour
 {
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+    static void Init()
+    {
+        All = new List<Target>();
+    }
+    public static List<Target> All { get; private set; }
+
     [SerializeField] private Collider2D hitbox;
     [SerializeField] private Transform targetPosition;
 
@@ -14,6 +21,12 @@ public class Target : MonoBehaviour, IComponent
     private void Awake()
     {
         Entity = GetComponentInParent<Entity>();
+        All.Add(this);
+    }
+
+    private void OnDestroy()
+    {
+        All.Remove(this);
     }
 
     public Vector3 ClosestPoint(Vector3 point)

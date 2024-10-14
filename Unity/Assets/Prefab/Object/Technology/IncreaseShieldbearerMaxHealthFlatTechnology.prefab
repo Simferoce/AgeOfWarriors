@@ -77,22 +77,22 @@ MonoBehaviour:
     - rid: 7754702808087265352
       type: {class: ModifierEffectApplyModifier, ns: Game, asm: Assembly-CSharp}
       data:
-        definition: {fileID: 11400000, guid: cce19f95e6f109c44975f418c74151c8, type: 2}
+        definition: {fileID: -1639253765382325953, guid: 27e8f34fddcd3db449e5e108d2aa4fe2, type: 2}
         targets:
         - rid: 7754702808087265378
-        parameters:
-        - rid: 7754702808087265360
-    - rid: 7754702808087265360
-      type: {class: ModifierParameterStatistic, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic:
-          rid: 7754702808087265363
-    - rid: 7754702808087265363
-      type: {class: StatisticSerializeFloat, ns: , asm: Assembly-CSharp}
-      data:
-        name: health_max
-        definitionId: health_max_flat
-        value: 25
+        parameterFactories:
+        - rid: 7754702997538734160
     - rid: 7754702808087265378
       type: {class: ModifierTargetTrigger, ns: Game, asm: Assembly-CSharp}
       data: 
+    - rid: 7754702997538734160
+      type: {class: ModifierParameterFactoryStatisticFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: health_max_flat
+        statistic:
+          rid: 7754702997538734162
+    - rid: 7754702997538734162
+      type: {class: SerializeStatisticFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 80313f8013c25d5429c444461ffe8b6d, type: 2}
+        value: 25

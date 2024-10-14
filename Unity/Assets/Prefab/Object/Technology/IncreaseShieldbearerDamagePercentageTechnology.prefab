@@ -80,19 +80,19 @@ MonoBehaviour:
         definition: {fileID: -5183416195023018314, guid: ce7fc294604c6124a9c25efb907f9412, type: 2}
         targets:
         - rid: 7754702808087265378
-        parameters:
-        - rid: 7754702808087265360
-    - rid: 7754702808087265360
-      type: {class: ModifierParameterStatistic, ns: Game, asm: Assembly-CSharp}
-      data:
-        statistic:
-          rid: 7754702808087265363
-    - rid: 7754702808087265363
-      type: {class: StatisticSerializeFloat, ns: , asm: Assembly-CSharp}
-      data:
-        name: damage_percentage
-        definitionId: damage_percentage
-        value: 0.25
+        parameterFactories:
+        - rid: 7754702997538734163
     - rid: 7754702808087265378
       type: {class: ModifierTargetTrigger, ns: Game, asm: Assembly-CSharp}
       data: 
+    - rid: 7754702997538734163
+      type: {class: ModifierParameterFactoryStatisticFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage_percentage
+        statistic:
+          rid: 7754702997538734164
+    - rid: 7754702997538734164
+      type: {class: SerializeStatisticFloat, ns: Game, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: e3d40aff9553ccb4f8213034d97cbbac, type: 2}
+        value: 0.1

@@ -1,8 +1,8 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Game
 {
@@ -11,7 +11,7 @@ namespace Game
     {
         [SerializeField] private ModifierDefinition definition;
         [SerializeReference, SubclassSelector] private List<ModifierTarget> targets;
-        [SerializeReference, SubclassSelector] private List<ModifierParameter> parameters;
+        [SerializeReference, SubclassSelector] private List<ModifierParameterFactory> parameterFactories;
 
         private ModifierApplier modifierApplier;
 
@@ -32,7 +32,7 @@ namespace Game
                 Assert.IsTrue(target is Entity, $"Expecting the target of {nameof(ModifierEffectApplyModifier)} to be of type {nameof(Entity)}");
 
                 Modifier modifier = definition.Instantiate();
-                modifierApplier.Apply(modifier, (target as Entity).GetCachedComponent<ModifierHandler>(), parameters.ToArray());
+                modifierApplier.Apply(modifier, (target as Entity).GetCachedComponent<ModifierHandler>(), parameterFactories.Select(x => x.Create(modifier)).ToArray());
             }
         }
     }

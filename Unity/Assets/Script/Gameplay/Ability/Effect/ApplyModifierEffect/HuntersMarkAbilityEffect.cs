@@ -6,15 +6,13 @@ namespace Game
     [Serializable]
     public class HuntersMarkAbilityEffect : AbilityEffect
     {
-        [SerializeField] private StatisticReference damage;
-        [SerializeField] private StatisticReference duration;
+        [SerializeField] private Statistic damage;
+        [SerializeField] private Statistic duration;
         //[SerializeField] private HunterMarkModifierDefinition hunterMarkModifierDefinition;
 
         public override void Initialize(Ability ability)
         {
             base.Initialize(ability);
-            damage.Initialize(ability);
-            duration.Initialize(ability);
         }
 
         public override void Apply()

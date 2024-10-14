@@ -8,6 +8,8 @@ namespace Game
     {
         [SerializeField] private Statistic cooldown;
 
+        public float Cooldown => cooldown.GetValue<float>(ability);
+
         private float lastUsed = 0f;
 
         public override void Initialize(Ability ability)
@@ -18,7 +20,7 @@ namespace Game
 
         public override bool Execute()
         {
-            return Time.time - lastUsed > cooldown;
+            return Time.time - lastUsed > Cooldown;
         }
 
         public override void OnAbilityEnded()

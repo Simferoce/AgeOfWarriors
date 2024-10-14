@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ModifierHandler : MonoBehaviour, IComponent, IStatisticContext
+    public class ModifierHandler : MonoBehaviour
     {
         public event Action<Modifier> OnModifierRemoved;
         public event Action<Modifier> OnModifierAdded;
@@ -20,13 +20,14 @@ namespace Game
 
         public void Add(Modifier modifier)
         {
+            Entity.GetCachedComponent<StatisticIndex>().Add(modifier.GetCachedComponent<StatisticIndex>());
             modifiers.Add(modifier);
-            modifier.OnRemoved += ModifierRemoved;
             OnModifierAdded?.Invoke(modifier);
         }
 
-        private void ModifierRemoved(Modifier modifier)
+        public void Remove(Modifier modifier)
         {
+            Entity.GetCachedComponent<StatisticIndex>().Remove(modifier.GetCachedComponent<StatisticIndex>());
             modifiers.Remove(modifier);
             OnModifierRemoved?.Invoke(modifier);
         }
@@ -40,17 +41,6 @@ namespace Game
         {
             modifier = modifiers.FirstOrDefault(x => x.Definition == definition);
             return modifier != null;
-        }
-
-        public IEnumerable<Statistic> GetStatistic()
-        {
-            foreach (Modifier modifier in modifiers)
-                foreach (Statistic statistic in modifier.GetStatistic())
-                    yield return statistic;
-
-            if (Entity.Parent != null && Entity.Parent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler parentModifierHandler))
-                foreach (Statistic statistic in parentModifierHandler.GetStatistic())
-                    yield return statistic;
         }
     }
 }

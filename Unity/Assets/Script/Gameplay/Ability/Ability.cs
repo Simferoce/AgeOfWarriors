@@ -8,14 +8,13 @@ namespace Game
     [RequireComponent(typeof(AttackFactory))]
     public abstract class Ability : Entity
     {
-        [SerializeReference, SubclassSelector] private List<Statistic> statistics;
-
-        public Caster Caster { get; set; }
-        public virtual float Cooldown => GetStatistic().FirstOrDefault(x => x.Name == "cooldown")?.GetValueOrDefault<float>() ?? 0f;
+        [SerializeReference, SubclassSelector] protected List<AbilityCondition> conditions = new List<AbilityCondition>();
 
         public event Action<Ability> OnAbilityUsed;
         public event Action OnAbilityEffectApplied;
 
+        public Caster Caster { get; set; }
+        public float Cooldown => conditions.OfType<CooldownCondition>().Select(x => x.Cooldown).Max();
         public bool IsCasting { get; set; }
         public override bool IsActive => IsCasting;
         public virtual List<Target> Targets => new List<Target>();
@@ -30,15 +29,18 @@ namespace Game
             this.Parent = caster.Entity;
             faction = caster.Entity.Faction;
 
-            foreach (Statistic statistic in statistics)
-                statistic.Initialize(this);
+            foreach (AbilityCondition condition in conditions)
+                condition.Initialize(this);
         }
 
         public abstract void Dispose();
 
         public abstract void Tick();
 
-        public abstract bool CanUse();
+        public virtual bool CanUse()
+        {
+            return conditions.All(x => x.Execute());
+        }
 
         public virtual void Use()
         {
@@ -55,15 +57,6 @@ namespace Game
         protected void PublishEffectApplied()
         {
             OnAbilityEffectApplied?.Invoke();
-        }
-
-        public override IEnumerable<Statistic> GetStatistic()
-        {
-            foreach (Statistic statistic in statistics)
-                yield return statistic;
-
-            foreach (Statistic statistic in base.GetStatistic())
-                yield return statistic;
         }
 
         public string ParseDescription()

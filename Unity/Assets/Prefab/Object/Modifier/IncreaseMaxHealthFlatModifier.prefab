@@ -59,26 +59,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visibleByDefault: 1
   behaviours:
-  - rid: 7754702808087265364
+  - rid: 7754702997538734158
   references:
     version: 2
     RefIds:
-    - rid: 7754702808087265364
+    - rid: 7754702997538734158
       type: {class: ModifierBehaviourStatistic, ns: Game, asm: Assembly-CSharp}
       data:
         statistics:
-        - rid: 7754702808087265365
-    - rid: 7754702808087265365
-      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
+        - rid: 7754702997538734159
+    - rid: 7754702997538734159
+      type: {class: ModifierStatisticParameterReference, ns: Game, asm: Assembly-CSharp}
       data:
-        query:
-          rid: 7754702808087265366
-    - rid: 7754702808087265366
-      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
-      data:
-        provider:
-          rid: 7754702808087265367
-        statisticDefinition: {fileID: 11400000, guid: 80313f8013c25d5429c444461ffe8b6d, type: 2}
-    - rid: 7754702808087265367
-      type: {class: ModifierParameterReferenceProvider, ns: Game, asm: Assembly-CSharp}
-      data: 
+        name: health_max_flat

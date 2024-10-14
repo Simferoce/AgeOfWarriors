@@ -1,9 +1,8 @@
 ﻿using Game;
 using System;
-using System.Linq;
 using UnityEngine;
 
-public partial class Attackable : MonoBehaviour, IComponent
+public partial class Attackable : MonoBehaviour
 {
     public struct Input
     {
@@ -29,6 +28,7 @@ public partial class Attackable : MonoBehaviour, IComponent
     }
 
     public Entity Entity { get; set; }
+    public float LastTimeAttacked { get; private set; }
     public event Action<AttackResult, Attackable> OnDamageTaken;
 
     private void Awake()
@@ -38,8 +38,8 @@ public partial class Attackable : MonoBehaviour, IComponent
 
     public void TakeAttack(Attack attack)
     {
-        float currentHealth = Entity.GetStatistic().FirstOrDefault(x => x.Definition == StatisticRepository.GetDefinition(StatisticRepository.Health));
-        float currentDefense = Entity.GetStatistic().FirstOrDefault(x => x.Definition == StatisticRepository.GetDefinition(StatisticRepository.Defense));
+        float currentHealth = Entity.GetCachedComponent<StatisticIndex>().SelfByDefinition<float>(StatisticRepository.Health);
+        float currentDefense = Entity.GetCachedComponent<StatisticIndex>().SelfByDefinition<float>(StatisticRepository.Defense);
         float increaseDamageTaken = 0f;//Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0);
         float rangedDamageReduction = 0f;//Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0);
         //List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();
@@ -78,6 +78,7 @@ public partial class Attackable : MonoBehaviour, IComponent
         attack.Source.NotifyAttackResult(attackResult);
 
         OnDamageTaken?.Invoke(attackResult, this);
+        LastTimeAttacked = Time.time;
     }
 
     //public float Absorb(float damageRemaining, List<Shield> shields)

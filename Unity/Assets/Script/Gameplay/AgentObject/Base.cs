@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -14,15 +13,13 @@ namespace Game
         [SerializeField] private SpawnPoint spawnPoint;
         [SerializeField] private Collider2D hitbox;
 
-        public float Health { get => health; set => health.Modify(health); }
-        public float MaxHealth { get => health.Max; }
+        public float Health { get; set; }
+        public float MaxHealth { get => maxHealth; }
         public bool IsDead => this.Health <= 0;
         public Entity Entity { get; set; }
         public SpawnPoint SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
 
         public event Action<AttackResult, Attackable> OnDamageTaken;
-
-        private StatisticDynamicFloat health;
 
         protected override void Awake()
         {
@@ -49,20 +46,13 @@ namespace Game
             Destroy(this.gameObject);
         }
 
-        public override IEnumerable<Statistic> GetStatistic()
-        {
-            yield return health;
-
-            foreach (Statistic statistic in base.GetStatistic())
-                yield return statistic;
-        }
-
         public override void Spawn(Agent agent, int spawnNumber, int direction)
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            health = new StatisticDynamicFloat("health", StatisticRepository.Health, new StatisticSerialize<float>("max", StatisticRepository.MaxHealth, maxHealth));
-            health.Initialize(this);
+            StatisticIndex statisticIndex = GetCachedComponent<StatisticIndex>();
+            statisticIndex.Add(new StatisticFunction<float>(() => Health, StatisticRepository.Health));
+            statisticIndex.Add(new StatisticFunction<float>(() => MaxHealth, StatisticRepository.MaxHealth));
 
             Health = MaxHealth;
         }

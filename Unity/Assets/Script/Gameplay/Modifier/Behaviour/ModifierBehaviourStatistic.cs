@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     [Serializable]
-    public class ModifierBehaviourStatistic : ModifierBehaviour, IStatisticContext
+    public class ModifierBehaviourStatistic : ModifierBehaviour
     {
         [SerializeReference, SubclassSelector] private List<Statistic> statistics;
 
@@ -13,14 +13,9 @@ namespace Game
         {
             base.Initialize(modifier);
 
+            StatisticIndex statisticIndex = modifier.AddOrGetCachedComponent<StatisticIndex>();
             foreach (Statistic statistic in statistics)
-                statistic.Initialize(modifier);
-        }
-
-        public IEnumerable<Statistic> GetStatistic()
-        {
-            foreach (Statistic statistic in statistics)
-                yield return statistic;
+                statisticIndex.Add(statistic);
         }
     }
 }

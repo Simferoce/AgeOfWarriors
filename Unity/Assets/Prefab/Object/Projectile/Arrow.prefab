@@ -245,21 +245,12 @@ MonoBehaviour:
           rid: 3656781574100221956
         damage:
           query:
-            rid: 5836724064671236233
+            rid: -2
         armorPenetration:
           query:
             rid: -2
     - rid: 3656781574100221956
       type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data: 
-    - rid: 5836724064671236233
-      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
-      data:
-        provider:
-          rid: 5836724064671236234
-        statisticDefinition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-    - rid: 5836724064671236234
-      type: {class: ProjectileSourceReferenceProvider, ns: Game, asm: Assembly-CSharp}
       data: 
 --- !u!50 &-9219538325602513416
 Rigidbody2D:

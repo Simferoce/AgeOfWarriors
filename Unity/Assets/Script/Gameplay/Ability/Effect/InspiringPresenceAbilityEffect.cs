@@ -8,9 +8,9 @@ namespace Game
     [Serializable]
     public class InspiringPresenceAbilityEffect : AbilityEffect
     {
-        [SerializeField] private StatisticReference area;
-        [SerializeField] private StatisticReference buffDuration;
-        [SerializeField] private StatisticReference defense;
+        [SerializeField] private Statistic area;
+        [SerializeField] private Statistic buffDuration;
+        [SerializeField] private Statistic defense;
         //[SerializeField] private DefenseModifierDefinition inspiringPresenceModifierDefinition;
 
         private float? startedAt = null;
@@ -18,9 +18,6 @@ namespace Game
         public override void Initialize(Ability ability)
         {
             base.Initialize(ability);
-            area.Initialize(ability);
-            buffDuration.Initialize(ability);
-            defense.Initialize(ability);
         }
 
         public override void Apply()
@@ -29,7 +26,7 @@ namespace Game
 
             List<Character> characters = AgentObject.All.OfType<Character>()
                .Where(x => x.Faction == x.Faction
-                   && Mathf.Abs(x.transform.position.x - x.transform.position.x) < area)
+                   && Mathf.Abs(x.transform.position.x - x.transform.position.x) < area.GetValue<float>(Ability))
                .ToList();
 
             //foreach (Character characterToBuff in characters)

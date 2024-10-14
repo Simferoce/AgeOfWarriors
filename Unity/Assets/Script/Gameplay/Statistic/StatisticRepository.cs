@@ -12,43 +12,40 @@ public static class StatisticRepository
         statisticDefinitions = null;
     }
 
-    public static string Damage = "damage";
-    public static string DamagePercentage = "damage_percentage";
-    public static string DamageAgainstWeak = "damage_against_weak";
-    public static string Health = "health";
-    public static string MaxHealth = "health_max";
-    public static string MaxHealthFlat = "health_max_flat";
-    public static string MaxHealthPercentage = "health_max_percentage";
-    public static string Defense = "defense";
-    public static string Cooldown = "cooldown";
-    public static string Duration = "duration";
-    public static string BuffDuration = "buff_duration";
-    public static string Range = "range";
-    public static string Reach = "reach";
-    public static string Leach = "leach";
-    public static string AttackSpeed = "attack_speed";
-    public static string AttackSpeedPercentage = "attack_speed_percentage";
-    public static string AttackPower = "attack_power";
-    public static string AttackPowerPercentage = "attack_power_percentage";
-    public static string Speed = "speed";
-    public static string SpeedPercentage = "speed_percentage";
-    public static string Heal = "heal";
-    public static string DefenseReduction = "defense_reduction";
+    public static StatisticDefinition Damage => GetDefinition("damage");
+    public static StatisticDefinition DamagePercentage => GetDefinition("damage_percentage");
+    public static StatisticDefinition DamageAgainstWeak => GetDefinition("damage_against_weak");
+    public static StatisticDefinition Health => GetDefinition("health");
+    public static StatisticDefinition MaxHealth => GetDefinition("health_max");
+    public static StatisticDefinition MaxHealthFlat => GetDefinition("health_max_flat");
+    public static StatisticDefinition MaxHealthPercentage => GetDefinition("health_max_percentage");
+    public static StatisticDefinition Defense => GetDefinition("defense");
+    public static StatisticDefinition Cooldown => GetDefinition("cooldown");
+    public static StatisticDefinition Duration => GetDefinition("duration");
+    public static StatisticDefinition BuffDuration => GetDefinition("buff_duration");
+    public static StatisticDefinition Range => GetDefinition("range");
+    public static StatisticDefinition Reach => GetDefinition("reach");
+    public static StatisticDefinition Leach => GetDefinition("leach");
+    public static StatisticDefinition AttackSpeed => GetDefinition("attack_speed");
+    public static StatisticDefinition AttackSpeedPercentage => GetDefinition("attack_speed_percentage");
+    public static StatisticDefinition AttackPower => GetDefinition("attack_power");
+    public static StatisticDefinition AttackPowerPercentage => GetDefinition("attack_power_percentage");
+    public static StatisticDefinition Speed => GetDefinition("speed");
+    public static StatisticDefinition SpeedPercentage => GetDefinition("speed_percentage");
+    public static StatisticDefinition Heal => GetDefinition("heal");
+    public static StatisticDefinition DefenseReduction => GetDefinition("defense_reduction");
 
-    public static List<StatisticDefinition> statisticDefinitions = null;
+    private static Dictionary<string, StatisticDefinition> statisticDefinitions = null;
 
     public static StatisticDefinition GetDefinition(string name)
     {
         if (statisticDefinitions == null)
-            statisticDefinitions = Resources.LoadAll<StatisticDefinition>("Definition/Statistic").ToList();
+            statisticDefinitions = Resources.LoadAll<StatisticDefinition>("Definition/Statistic").ToDictionary(x => x.HumanReadableId);
 
-        foreach (StatisticDefinition statisticDefinition in statisticDefinitions)
-        {
-            if (statisticDefinition.HumanReadableId == name)
-                return statisticDefinition;
-        }
+        if (!statisticDefinitions.ContainsKey(name))
+            throw new System.Exception($"Unable to find the statistic with the name {name}");
 
-        throw new System.Exception($"Unable to find the statistic with the name {name}");
+        return statisticDefinitions[name];
     }
 }
 

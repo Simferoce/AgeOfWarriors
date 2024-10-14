@@ -45,160 +45,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be16aabdaf49824ab3fc3d80b0975fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statistics:
-  - rid: 5836723902342496263
-  - rid: 7754702836442857542
   conditions:
-  - rid: 3656781301283291221
-  - rid: 2969737379885613066
+  - rid: 7754702974035951696
+  - rid: 7754702974035951697
   effects:
-  - rid: 3656781301283291222
+  - rid: 7754702974035951707
   trigger: Ability
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 2969737379885613066
+    - rid: 7754702974035951696
       type: {class: AttackSpeedAbilityCondition, ns: Game, asm: Assembly-CSharp}
-      data:
-        attackSpeed:
-          query:
-            rid: 5836724064671236207
-    - rid: 3656781301283291221
+      data: 
+    - rid: 7754702974035951697
       type: {class: HasTargetAbilityCondition, ns: Game, asm: Assembly-CSharp}
       data:
         criteria:
-          rid: 3656781301283291224
+          rid: 7754702974035951698
         count: 1
-    - rid: 3656781301283291222
+    - rid: 7754702974035951698
+      type: {class: AbilityTargetCriteriaAnd, ns: Game, asm: Assembly-CSharp}
+      data:
+        criterias:
+        - rid: 7754702974035951702
+        - rid: 7754702974035951703
+    - rid: 7754702974035951702
+      type: {class: AbilityTargetCriteriaIsEnemy, ns: Game, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754702974035951703
+      type: {class: AbilityTargetCriteriaDistance, ns: Game, asm: Assembly-CSharp}
+      data:
+        distance:
+          rid: 7754702974035951705
+    - rid: 7754702974035951705
+      type: {class: AbilityStatisticCasterStatisticRatio, ns: Game, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1
+    - rid: 7754702974035951707
       type: {class: DealDamageAbilityEffect, ns: Game, asm: Assembly-CSharp}
       data:
         leach:
-          query:
-            rid: -2
-        damage:
-          query:
-            rid: 5836724064671236209
-        armorPenetration:
-          query:
-            rid: -2
-    - rid: 3656781301283291224
-      type: {class: AndTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data:
-        criterias:
-        - rid: 3656781301283291225
-        - rid: 3656781301283291227
-    - rid: 3656781301283291225
-      type: {class: DistanceTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data:
-        reference:
-          rid: 5836724064671236206
-        distance:
-          query:
-            rid: 5836724064671236202
-    - rid: 3656781301283291227
-      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
-      data: 
-    - rid: 5836723902342496263
-      type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
-      data:
-        name: range
-        definitionId: range
-        provider:
-          rid: 5836723902342496264
-        percentage: 1
-    - rid: 5836723902342496264
-      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
-      data:
-        query:
-          rid: 5836724064671236227
-    - rid: 5836724064671236202
-      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
-      data:
-        provider:
-          rid: 5836724064671236204
-        statisticDefinition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-    - rid: 5836724064671236204
-      type: {class: SelfReferenceProvider, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 5836724064671236206
-      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 5836724064671236207
-      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
-      data:
-        provider:
-          rid: 5836724064671236208
-        statisticDefinition: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
-    - rid: 5836724064671236208
-      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 5836724064671236209
-      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
-      data:
-        provider:
-          rid: 5836724064671236210
-        statisticDefinition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-    - rid: 5836724064671236210
-      type: {class: SelfReferenceProvider, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 5836724064671236227
-      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
-      data:
-        provider:
-          rid: 5836724064671236228
-        statisticDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-    - rid: 5836724064671236228
-      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 7754702836442857542
-      type: {class: StatisticStandard, ns: Game, asm: Assembly-CSharp}
-      data:
-        name: damage
-        definitionId: damage
-        baseStatistic:
-          rid: 7754702836442857543
-        flatStatistic:
           rid: -2
-        percentageStatistic:
-          rid: 7754702836442857547
-    - rid: 7754702836442857543
-      type: {class: StatisticPercentage, ns: , asm: Assembly-CSharp}
+        damage:
+          rid: 7754702974035951710
+        armorPenetration:
+          rid: -2
+    - rid: 7754702974035951710
+      type: {class: AbilityStatisticCasterStatisticRatio, ns: Game, asm: Assembly-CSharp}
       data:
-        name: damage
-        definitionId: damage
-        provider:
-          rid: 7754702836442857544
-        percentage: 1
-    - rid: 7754702836442857544
-      type: {class: StatisticReference, ns: Game, asm: Assembly-CSharp}
-      data:
-        query:
-          rid: 7754702836442857545
-    - rid: 7754702836442857545
-      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
-      data:
-        provider:
-          rid: 7754702836442857546
-        statisticDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-    - rid: 7754702836442857546
-      type: {class: AbilityCasterReferenceProvider, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 7754702836442857547
-      type: {class: StatisticReferenceSummation, ns: Game, asm: Assembly-CSharp}
-      data:
-        query:
-          rid: 7754702836442857548
-    - rid: 7754702836442857548
-      type: {class: StatisticByDefinitionQuery, ns: , asm: Assembly-CSharp}
-      data:
-        provider:
-          rid: 7754702836442857550
-        statisticDefinition: {fileID: 11400000, guid: c44430788b4fe5a4f822561156a457af, type: 2}
-    - rid: 7754702836442857550
-      type: {class: ModifierHandlerReferenceProvider, ns: Game, asm: Assembly-CSharp}
-      data: 
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1
 --- !u!114 &5147895781952595201
 MonoBehaviour:
   m_ObjectHideFlags: 0

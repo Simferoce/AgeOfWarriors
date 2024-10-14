@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(Animator))]
-    public class Animated : MonoBehaviour, IComponent
+    public class Animated : MonoBehaviour
     {
         private class Damping
         {

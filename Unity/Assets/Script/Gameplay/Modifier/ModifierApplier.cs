@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class ModifierApplier : MonoBehaviour, IComponent
+    public class ModifierApplier : MonoBehaviour
     {
         public delegate void OnModifierRemovedDelegate(Modifier modifier);
         public delegate void OnModifierAppliedDelegate(Modifier modifier);

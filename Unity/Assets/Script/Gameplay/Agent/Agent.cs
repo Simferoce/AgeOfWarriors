@@ -73,8 +73,9 @@ namespace Game
             agents.Remove(this);
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
             agentBehaviour.Dispose();
         }
 

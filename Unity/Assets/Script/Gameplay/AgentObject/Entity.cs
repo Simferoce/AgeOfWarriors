@@ -4,8 +4,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class Entity : MonoBehaviour, IStatisticContext
+public abstract class Entity : MonoBehaviour
 {
+    public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
+
+    public event OnParentChangedDelegate OnParentChanged;
+
     public Entity Parent
     {
         get
@@ -17,6 +21,7 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
             if (parent != null)
                 parent.children.Remove(this);
 
+            OnParentChanged?.Invoke(this, parent, value);
             parent = value;
 
             if (parent != null)
@@ -27,24 +32,38 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
     public virtual Faction Faction => Faction.Undefined;
     public virtual bool IsActive { get => true; }
 
-    private Dictionary<Type, List<IComponent>> cached = new Dictionary<Type, List<IComponent>>();
+    private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();
     private Entity parent = null;
     private List<Entity> children = new List<Entity>();
 
     protected virtual void Awake()
     {
+        AddOrGetCachedComponent<StatisticIndex>().Initialize(this);
         EventChannelEntityCreated.Instance.Publish(new EventChannelEntityCreated.Event(this));
     }
 
-    public bool TryGetCachedComponent<T>(out T component)
-        where T : IComponent
+    protected virtual void OnDestroy()
     {
-        component = GetCachedComponent<T>();
+    }
+
+    public void Link<T>(T component)
+        where T : class
+    {
+        if (!cached.ContainsKey(typeof(T)))
+            cached[typeof(T)] = new List<object>();
+
+        cached[typeof(T)].Add(component);
+    }
+
+    public bool TryGetCachedComponent<T>(out T component)
+        where T : class
+    {
+        component = GetCachedComponent<T>() as T;
         return component != null;
     }
 
     public T GetCachedComponent<T>()
-        where T : IComponent
+        where T : class
     {
         if (cached.ContainsKey(typeof(T)))
         {
@@ -52,27 +71,29 @@ public abstract class Entity : MonoBehaviour, IStatisticContext
         }
         else
         {
-            cached[typeof(T)] = GetComponentsInChildren<T>().Cast<IComponent>().ToList();
+            if (typeof(Component).IsAssignableFrom(typeof(T)))
+                cached[typeof(T)] = GetComponentsInChildren<T>().Cast<object>().ToList();
+            else
+                cached[typeof(T)] = new List<object>();
+
             return (T)cached[typeof(T)].FirstOrDefault();
         }
     }
 
     public T AddOrGetCachedComponent<T>()
-        where T : Component, IComponent
+        where T : class
     {
         T component = GetCachedComponent<T>();
         if (component != null)
             return component;
 
-        component = gameObject.AddComponent<T>();
-        cached[typeof(T)] = new List<IComponent>() { component };
+        if (typeof(Component).IsAssignableFrom(typeof(T)))
+            component = gameObject.AddComponent(typeof(T)) as T;
+        else
+            component = Activator.CreateInstance(typeof(T)) as T;
 
+        cached[typeof(T)] = new List<object>() { component };
         return component;
-    }
-
-    public virtual IEnumerable<Statistic> GetStatistic()
-    {
-        yield break;
     }
 
     public IEnumerable<Entity> GetHierarchy()
