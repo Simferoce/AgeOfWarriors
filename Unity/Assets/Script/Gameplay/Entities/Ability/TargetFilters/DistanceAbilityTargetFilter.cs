@@ -8,7 +8,7 @@ namespace Game.Ability
     [Serializable]
     public class DistanceAbilityTargetFilter : AbilityTargetFilter
     {
-        [SerializeReference, SubclassSelector] private Statistic distance;
+        [SerializeReference, SubclassSelector] private AbilityStatistic distance;
 
         public override bool Validate()
         {

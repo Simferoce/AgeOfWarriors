@@ -8,9 +8,9 @@ namespace Game.Ability
     [Serializable]
     public class DealDamageAbilityEffect : AbilityEffect
     {
-        [SerializeReference, SubclassSelector] private Statistic leach;
-        [SerializeReference, SubclassSelector] private Statistic damage;
-        [SerializeReference, SubclassSelector] private Statistic armorPenetration;
+        [SerializeReference, SubclassSelector] private AbilityStatistic leach;
+        [SerializeReference, SubclassSelector] private AbilityStatistic damage;
+        [SerializeReference, SubclassSelector] private AbilityStatistic armorPenetration;
 
         public float Damage => (damage?.GetValue<float>(Ability) ?? 0f) * (1 + Ability.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.DamagePercentage)));
         public float ArmorPenetration => armorPenetration?.GetValue<float>(Ability) ?? 0f;

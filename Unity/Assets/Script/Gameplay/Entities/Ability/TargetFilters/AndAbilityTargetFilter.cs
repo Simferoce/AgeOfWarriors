@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Ability
@@ -12,7 +13,7 @@ namespace Game.Ability
         public override bool Validate()
         {
             bool changed = base.Validate();
-            foreach (AbilityTargetFilter filter in filters)
+            foreach (AbilityTargetFilter filter in filters.Where(x => x != null))
             {
                 changed |= filter.Validate();
             }

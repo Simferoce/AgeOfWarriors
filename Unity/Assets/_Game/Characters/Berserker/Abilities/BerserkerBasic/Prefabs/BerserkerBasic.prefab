@@ -57,9 +57,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditions: []
-  effects: []
-  trigger: 
+  conditions:
+  - rid: 7754703128047648882
+  - rid: 7754703128047648883
+  effects:
+  - rid: 7754703128047648890
+  trigger: Ability
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7754703128047648882
+      type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703128047648883
+      type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filter:
+          rid: 7754703128047648884
+        count: 1
+    - rid: 7754703128047648884
+      type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filters:
+        - rid: 7754703128047648885
+        - rid: 7754703128047648886
+    - rid: 7754703128047648885
+      type: {class: IsEnemyAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703128047648886
+      type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        distance:
+          rid: 7754703128047648889
+    - rid: 7754703128047648889
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1
+    - rid: 7754703128047648890
+      type: {class: DealDamageAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        leach:
+          rid: -2
+        damage:
+          rid: 7754703128047648892
+        armorPenetration:
+          rid: -2
+    - rid: 7754703128047648892
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1
