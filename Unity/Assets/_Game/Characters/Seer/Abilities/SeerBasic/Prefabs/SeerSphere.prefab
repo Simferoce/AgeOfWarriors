@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2245209897345872193}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8633233943157110530}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3100808499573642047
 SpriteRenderer:
@@ -49,6 +49,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -95,6 +98,8 @@ GameObject:
   - component: {fileID: 8633233943157110530}
   - component: {fileID: 2588519069082530218}
   - component: {fileID: -9219538325602513416}
+  - component: {fileID: 4757967246084485677}
+  - component: {fileID: 1176079378919801912}
   m_Layer: 0
   m_Name: SeerSphere
   m_TagString: Untagged
@@ -109,6 +114,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6675190562695518451}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
@@ -117,7 +123,6 @@ Transform:
   - {fileID: 4119289002896348384}
   - {fileID: 5275244451145294098}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2588519069082530218
 MonoBehaviour:
@@ -133,39 +138,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
-    rid: 3656781574126698518
+    rid: 7754703128047648912
   projectileMovements:
-  - rid: 3656781574126698519
-  - rid: 3656781574126698520
+  - rid: 7754703128047648908
+  - rid: 7754703128047648907
   impacts:
-  - rid: 3656781574126698521
+  - rid: 7754703128047648909
   references:
     version: 2
     RefIds:
-    - rid: 3656781574126698518
-      type: {class: ProjectileBubbleUpDeath, ns: Game, asm: Assembly-CSharp}
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7754703128047648907
+      type: {class: SelfRotateProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        speed: 1
+        clockwise: 0
+    - rid: 7754703128047648908
+      type: {class: AngledProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        angle: 40
+    - rid: 7754703128047648909
+      type: {class: AttackProjectileImpact, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        damage:
+          rid: 7754703128047648910
+        armorPenetration:
+          rid: -2
+    - rid: 7754703128047648910
+      type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        name: damage
+    - rid: 7754703128047648912
+      type: {class: BubbleUpProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         duration: 0.25
-        scale: 1.25
-        stopSimulatedDelay: 0.05
-    - rid: 3656781574126698519
-      type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
-    - rid: 3656781574126698520
-      type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
-      data:
-        angle: 45
-    - rid: 3656781574126698521
-      type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
-      data:
-        criteria:
-          rid: 3656781574126698522
-        damage:
-        armorPenetration:
-    - rid: 3656781574126698522
-      type: {class: IsEnemyTargetCriteria, ns: Game, asm: Assembly-CSharp}
+        scale: 1
+        stopSimulatedDelay: 0
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -176,14 +189,44 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4757967246084485677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675190562695518451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0847c3c86ed4f1d4092690ba02e64498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1176079378919801912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675190562695518451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8540451893314856808
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,13 +251,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8540451893314856808}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8633233943157110530}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &2683363801490073985
 CircleCollider2D:
@@ -224,11 +267,31 @@ CircleCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8540451893314856808}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
   m_Radius: 0.295
