@@ -17,10 +17,6 @@ MonoBehaviour:
   description: Mark a target in {0} meters for {1} seconds which receive an additional
     {2} damage per hit taken.
   prefab: {fileID: 6398100958839073666, guid: cd61022fd62f5fe4d95b39b35ad3e644, type: 3}
-  reachPercentage: 2
-  damagePercentage: 0.25
-  cooldown: 5
-  buffDuration: 7.5
 --- !u!114 &4328000484182388948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,11 +26,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2de6f7e3178fe0449aed0db88224cfb3, type: 3}
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
   m_Name: HunterMarkModifierDefinition
   m_EditorClassIdentifier: 
   id: c4720fddb23620c4b8ebe740273906c1
   title: Hunter's Mark
   icon: {fileID: -412835066, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
   description: Receive an additional {0} damage per hit taken.
+  prefab: {fileID: 6668665993678449400, guid: 5d7b351e114e7724d91a74d62c48e074, type: 3}
   showOnHealthBar: 1

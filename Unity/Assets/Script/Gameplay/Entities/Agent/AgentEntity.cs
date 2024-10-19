@@ -42,7 +42,7 @@ namespace Game.Agent
 
         private void Start()
         {
-            agentBase.Spawn(this, 0, direction);
+            agentBase.Spawn(this, nextSpawneeNumber++, direction);
         }
 
         private void Update()

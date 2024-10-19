@@ -7,7 +7,7 @@ namespace Game.Ability
     [Serializable]
     public class CooldownAbilityCondition : AbilityCondition
     {
-        [SerializeField] private Statistic cooldown;
+        [SerializeReference, SubclassSelector] private Statistic cooldown;
 
         public float Cooldown => cooldown.GetValue<float>(ability);
 

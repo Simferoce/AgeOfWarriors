@@ -38,6 +38,11 @@ namespace Game.Modifier
             return modifiers;
         }
 
+        public ModifierEntity GetModifier(ModifierDefinition definition)
+        {
+            return modifiers.FirstOrDefault(x => x.Definition == definition);
+        }
+
         public bool TryGetModifier(ModifierDefinition definition, out ModifierEntity modifier)
         {
             modifier = modifiers.FirstOrDefault(x => x.Definition == definition);

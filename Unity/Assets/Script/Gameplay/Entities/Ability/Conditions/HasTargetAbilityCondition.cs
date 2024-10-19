@@ -10,8 +10,9 @@ namespace Game.Ability
     [Serializable]
     public class HasTargetAbilityCondition : AbilityCondition
     {
+        [SerializeField] private Vector2Int countInterval = Vector2Int.one;
         [SerializeReference, SubclassSelector] private AbilityTargetFilter filter;
-        [SerializeField] private int count = 1;
+        [SerializeReference, SubclassSelector] private List<AbilityTargetOrderBy> orderBy;
 
         public List<Target> Targets { get; set; } = new List<Target>();
 
@@ -20,17 +21,18 @@ namespace Game.Ability
             bool changed = base.Validate();
             if (filter != null)
                 changed |= filter.Validate();
+
             return changed;
         }
 
         public override bool Execute()
         {
             Targets.Clear();
-            Targets.AddRange(GetTargets(ability, filter));
-            return Targets.Count >= count;
+            Targets.AddRange(GetTargets().Take(countInterval.y));
+            return Targets.Count >= countInterval.x;
         }
 
-        public static List<Target> GetTargets(AbilityEntity ability, AbilityTargetFilter filter)
+        public List<Target> GetTargets()
         {
             List<Target> potentialTargets = new List<Target>();
             foreach (Target targetteable in EntityRepository.Instance.GetByType<AgentObject>().Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
@@ -47,9 +49,11 @@ namespace Game.Ability
                 potentialTargets.Add(targetteable);
             }
 
-            return potentialTargets
-                .OrderBy(x => (x.Entity as AgentObject).Priority)
-                .ToList();
+            IEnumerable<Target> orderByTargets = potentialTargets;
+            foreach (AbilityTargetOrderBy orderBy in orderBy)
+                orderByTargets = orderBy.OrderBy(orderByTargets);
+
+            return orderByTargets.ToList();
         }
     }
 }

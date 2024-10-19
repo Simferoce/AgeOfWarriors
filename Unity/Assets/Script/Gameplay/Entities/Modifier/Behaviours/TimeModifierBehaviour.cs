@@ -16,6 +16,7 @@ namespace Game.Modifier
 
         public override void Initialize(ModifierEntity modifier)
         {
+            base.Initialize(modifier);
             startedAt = Time.time;
         }
 
@@ -24,14 +25,17 @@ namespace Game.Modifier
             startedAt = Time.time;
         }
 
-        //public override bool Update()
-        //{
-        //    return Time.time - startedAt > duration;
-        //}
+        public override Result Update()
+        {
+            if (Time.time - startedAt > Duration)
+                return Result.Dead;
+
+            return Result.Alive;
+        }
 
         public float GetPercentageRemainingDuration()
         {
-            throw new NotImplementedException();
+            return Mathf.Clamp01(RemaingDuration / Duration);
         }
     }
 }

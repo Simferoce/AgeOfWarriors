@@ -37,8 +37,26 @@ namespace Game.Modifier
 
         private void Update()
         {
+            bool kill = false;
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
-                modifierBehaviour.Update();
+            {
+                if (modifierBehaviour.Update() == ModifierBehaviour.Result.Dead)
+                    kill = true;
+            }
+
+            if (kill)
+                Kill();
+        }
+
+        public void Refresh()
+        {
+            foreach (ModifierBehaviour modifierBehaviour in Behaviours)
+                modifierBehaviour.Refresh();
+        }
+
+        public void Kill()
+        {
+            GameObject.Destroy(gameObject);
         }
 
         protected override void OnDestroy()
