@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Name: SeerDarkEmbrace
+  m_EditorClassIdentifier: 
+  id: 156a5e5d2b7389c458935a45ae3476d7
+  title: Dark Embrace
+  description: Invoke a medium size dark fissure behind the first enemy in {0} meters
+    that deals {1} damage to all enemy in range.
+  prefab: {fileID: 1262703249881643635, guid: fc6a4b62da811034d98dbfc0f4757caf, type: 3}
+  reachPercentage: 1
+  damagePercentage: 2
+  cooldown: 5
+  duration: 1

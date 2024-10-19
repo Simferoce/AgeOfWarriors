@@ -8,7 +8,7 @@ namespace Game
     {
         private static bool isSnapshotting = false;
         private static string path;
-        private static Camera camera;
+        private static UnityEngine.Camera camera;
         private static RenderTexture renderTexture;
         private static float startedAt;
 
@@ -18,7 +18,7 @@ namespace Game
             if (isSnapshotting)
                 return;
 
-            camera = command.context as Camera;
+            camera = command.context as UnityEngine.Camera;
             path = PlayerPrefs.GetString("snapshot_file_path", "");
             path = EditorUtility.SaveFilePanel("Snapshot", path, "snapshot", "png");
 

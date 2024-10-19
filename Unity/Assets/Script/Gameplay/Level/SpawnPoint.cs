@@ -4,13 +4,11 @@ namespace Game
 {
     public class SpawnPoint : MonoBehaviour
     {
-        [SerializeField] private int direction = 1;
-
-        public int Direction { get => direction; }
+        public int Direction { get; set; }
 
         public void Start()
         {
-            Lane.Instance.Project(this.transform.position);
+            this.transform.position = Lane.Instance.Project(this.transform.position);
         }
     }
 }

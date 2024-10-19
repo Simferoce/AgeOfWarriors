@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1722971267097484216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d42117e43fbf042bc11500dc17cc45, type: 3}
+  m_Name: InspiringPresenceModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 06d847f75400868408459a0345d91d65
+  title: Inspiring Presence - Defense
+  icon: {fileID: -1676996386, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description: Increase defense by {0}.
+  showOnHealthBar: 1
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Name: ShieldbearerInspiringPresence
+  m_EditorClassIdentifier: 
+  id: 2fe57550d51a64f4897979212d8ac68d
+  title: Inspiring Presence
+  description: Increase defense by {0} of any ally in {1} meters for {2} seconds.
+  prefab: {fileID: 4759011807880347097, guid: 11db9b6c5b59ecc418da60fe709596c6, type: 3}
+  reachPercentage: 1
+  defense: 25
+  cooldown: 5
+  buffDuration: 7

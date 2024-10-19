@@ -7,9 +7,10 @@ public class DefinitionImport : AssetPostprocessor
         foreach (string str in importedAssets)
         {
             Game.Definition definition = AssetDatabase.LoadAssetAtPath<Game.Definition>(str);
-            if (definition != null && AssetDatabase.TryGetGUIDAndLocalFileIdentifier(definition, out string guid, out long _))
+            if (definition != null && AssetDatabase.TryGetGUIDAndLocalFileIdentifier(definition, out string guid, out long _) && definition.Id != guid)
             {
                 definition.Id = guid;
+                EditorUtility.SetDirty(definition);
             }
         }
     }
