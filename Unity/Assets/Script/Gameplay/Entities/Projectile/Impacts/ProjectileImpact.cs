@@ -43,6 +43,7 @@ namespace Game.Projectile
             this.projectile = projectile;
         }
 
+        public virtual bool Validate(ProjectileEntity projectile) { return false; }
         public abstract ImpactReport Impact(GameObject collision);
         public virtual void LeaveZone(GameObject collision) { }
         public virtual ImpactReport Update() { return new ImpactReport(ImpactStatus.NotImpacted); }

@@ -2,11 +2,12 @@
 using Game.Character;
 using Game.Components;
 using Game.Extensions;
+using Game.Statistics;
 using Game.Utilities;
 using System;
 using UnityEngine;
 
-namespace Game.Projectile.Impacts
+namespace Game.Projectile
 {
     [Serializable]
     public class HealProjectileImpact : ProjectileImpact
@@ -16,6 +17,18 @@ namespace Game.Projectile.Impacts
         public override void Initialize(ProjectileEntity projectile)
         {
             base.Initialize(projectile);
+        }
+
+        public override bool Validate(ProjectileEntity projectile)
+        {
+            bool changed = base.Validate(projectile);
+            if (heal != null && heal.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Heal))
+            {
+                heal.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Heal);
+                changed = true;
+            }
+
+            return changed;
         }
 
         public override ImpactReport Impact(GameObject collision)

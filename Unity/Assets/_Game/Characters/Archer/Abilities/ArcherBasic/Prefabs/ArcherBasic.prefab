@@ -57,9 +57,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditions: []
-  effects: []
-  trigger: 
+  conditions:
+  - rid: 7754703128047648768
+  - rid: 7754703128047648769
+  effects:
+  - rid: 7754703128047648774
+  trigger: Ability
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7754703128047648768
+      type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703128047648769
+      type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filter:
+          rid: 7754703128047648770
+        count: 1
+    - rid: 7754703128047648770
+      type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filters:
+        - rid: 7754703128047648771
+        - rid: 7754703128047648772
+    - rid: 7754703128047648771
+      type: {class: IsEnemyAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703128047648772
+      type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        distance:
+          rid: 7754703128047648773
+    - rid: 7754703128047648773
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1
+    - rid: 7754703128047648774
+      type: {class: ProjectileAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 6675190562695518451, guid: 9a33a33555180bf4690eff9ada726b89, type: 3}
+        origin:
+          rid: 7754703128047648777
+        parameters:
+        - rid: 7754703128047648879
+    - rid: 7754703128047648777
+      type: {class: TransformProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        origin: ProjectileBowEnd
+    - rid: 7754703128047648879
+      type: {class: FloatStatisticAbilityProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: damage
+        statistic:
+          rid: 7754703128047648880
+    - rid: 7754703128047648880
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1

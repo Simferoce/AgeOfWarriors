@@ -1,5 +1,7 @@
 ﻿using Game.Projectile;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Ability
@@ -9,13 +11,14 @@ namespace Game.Ability
     {
         [SerializeField] private GameObject projectilePrefab;
         [SerializeReference, SubclassSelector] private ProjectileAbilityEffectOrigin origin;
+        [SerializeReference, SubclassSelector] private List<AbilityProjectileParameterFactory> parameters;
 
         public override void Apply()
         {
             GameObject gameObject = UnityEngine.Object.Instantiate(projectilePrefab, origin.GetPosition(Ability), Quaternion.identity);
             ProjectileEntity projectile = gameObject.GetComponent<ProjectileEntity>();
 
-            projectile.Initialize(Ability, Ability.Targets[0], Ability.Faction);
+            projectile.Initialize(Ability, Ability.Targets[0], Ability.Faction, parameters.Select(x => x.Create(Ability)).ToArray());
         }
     }
 }

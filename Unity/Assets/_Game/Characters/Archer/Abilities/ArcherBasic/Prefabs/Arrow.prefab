@@ -216,29 +216,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
   projectileDeath:
-    rid: 3656781574100221952
+    rid: 7754703128047648868
   projectileMovements:
-  - rid: 3656781574100221953
-  - rid: 3656781574100221954
+  - rid: 7754703128047648873
+  - rid: 7754703128047648872
   impacts:
-  - rid: 3656781574100221955
+  - rid: 7754703128047648869
   references:
     version: 2
     RefIds:
-    - rid: 3656781574100221952
-      type: {class: ProjectileStickDeath, ns: Game, asm: Assembly-CSharp}
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7754703128047648868
+      type: {class: StickProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
-        stopSimulatedDelay: 0.01
-    - rid: 3656781574100221953
-      type: {class: ProjectileAngledMovement, ns: Game, asm: Assembly-CSharp}
+        stopSimulatedDelay: 0.05
+    - rid: 7754703128047648869
+      type: {class: AttackProjectileImpact, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        damage:
+          rid: 7754703128047648870
+        armorPenetration:
+          rid: -2
+    - rid: 7754703128047648870
+      type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        name: damage
+    - rid: 7754703128047648872
+      type: {class: AlignWithVelocityProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703128047648873
+      type: {class: AngledProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         angle: 40
-    - rid: 3656781574100221954
-      type: {class: ProjectileAlignWithVelocityMovement, ns: Game, asm: Assembly-CSharp}
-      data: 
-    - rid: 3656781574100221955
-      type: {class: ProjectileAttackImpact, ns: Game, asm: Assembly-CSharp}
-      data: 
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5

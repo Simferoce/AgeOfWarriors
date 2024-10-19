@@ -1,6 +1,10 @@
 ﻿using Game.Components;
 using Game.Modifier;
 using System.Collections.Generic;
+using System.Linq;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Game.Projectile
@@ -22,28 +26,32 @@ namespace Game.Projectile
         [SerializeReference, SubclassSelector] private List<ProjectileMovement> projectileMovements = new List<ProjectileMovement>();
         [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
 
+        public event Impacted OnImpacted;
+
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public State StateValue { get => state; set => state = value; }
         public Target Target { get; set; }
         public Target Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
-        public event Impacted OnImpacted;
+        public List<ProjectileParameter> Parameters { get => parameters; set => parameters = value; }
         public override FactionType Faction => faction;
 
         protected FactionType faction;
         private State state = State.Alive;
+        private List<ProjectileParameter> parameters;
 
-        public void Initialize(Entity source, Target target, FactionType faction)
+        public void Initialize(Entity source, Target target, FactionType faction, params ProjectileParameter[] parameters)
         {
             this.faction = faction;
             this.Target = target;
+            this.parameters = parameters.ToList();
             Parent = source;
 
             foreach (ProjectileMovement movement in projectileMovements)
                 movement.Initialize(this);
 
-            foreach (ProjectileImpact effect in impacts)
-                effect.Initialize(this);
+            foreach (ProjectileImpact impact in impacts)
+                impact.Initialize(this);
 
             //foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
             //{
@@ -53,7 +61,14 @@ namespace Game.Projectile
 
         public void OnValidate()
         {
+            bool changed = false;
+            foreach (ProjectileImpact impact in impacts)
+                changed |= impact?.Validate(this) ?? false;
 
+#if UNITY_EDITOR
+            if (changed)
+                EditorUtility.SetDirty(this);
+#endif
         }
 
         private void Update()

@@ -11,7 +11,7 @@ namespace Game.Modifier
 
         public override T GetValue<T>(object context)
         {
-            if (TryResolve(context, out ModifierParameterStatistic<T> modifierStatistic))
+            if (TryResolve(context, out StatisticModifierParameter<T> modifierStatistic))
                 return modifierStatistic.Value;
 
             return default(T);

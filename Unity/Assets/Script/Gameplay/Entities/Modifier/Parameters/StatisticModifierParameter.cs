@@ -13,11 +13,11 @@ namespace Game.Modifier
         }
     }
 
-    public class ModifierParameterStatistic<T> : StatisticModifierParameter
+    public class StatisticModifierParameter<T> : StatisticModifierParameter
     {
         public T Value { get; set; }
 
-        public ModifierParameterStatistic(string name, StatisticDefinition statisticDefinition, T value) : base(name, statisticDefinition)
+        public StatisticModifierParameter(string name, StatisticDefinition statisticDefinition, T value) : base(name, statisticDefinition)
         {
             Value = value;
         }

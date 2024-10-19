@@ -1,6 +1,7 @@
 ﻿using Game.Agent;
 using Game.Components;
 using Game.Extensions;
+using Game.Statistics;
 using Game.Utilities;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Game.Projectile
     {
         [SerializeReference, SubclassSelector] private ProjectileStatistic damage;
         [SerializeReference, SubclassSelector] private ProjectileStatistic duration;
-        [SerializeReference, SubclassSelector] private ProjectileStatistic delay;
+        [SerializeField] private float delay;
 
         private float startedAt;
         private List<Attackable> targetsHit = new List<Attackable>();
@@ -23,6 +24,23 @@ namespace Game.Projectile
         {
             base.Initialize(projectile);
             startedAt = Time.time;
+        }
+
+        public override bool Validate(ProjectileEntity projectile)
+        {
+            bool changed = base.Validate(projectile);
+            if (damage != null && damage.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Damage))
+            {
+                damage.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Damage);
+                changed = true;
+            }
+            if (duration != null && duration.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Duration))
+            {
+                duration.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Duration);
+                changed = true;
+            }
+
+            return changed;
         }
 
         public override ImpactReport Impact(GameObject collision)
@@ -62,7 +80,7 @@ namespace Game.Projectile
             List<Target> targeteablesHitThisFrame = new List<Target>();
             foreach (Target targeteable in targeteablesInEffect)
             {
-                if (Time.time - startedAt > delay.GetValue<float>(projectile)
+                if (Time.time - startedAt > delay
                     && projectile.Faction != (targeteable.Entity as AgentObject).Faction
                     && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable)
                     && !targetsHit.Contains(attackable))

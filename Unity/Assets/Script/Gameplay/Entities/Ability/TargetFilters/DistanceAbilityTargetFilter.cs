@@ -13,7 +13,7 @@ namespace Game.Ability
         public override bool Validate()
         {
             bool changed = base.Validate();
-            if (distance.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Range))
+            if (distance != null && distance.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Range))
             {
                 distance.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Range);
                 changed = true;

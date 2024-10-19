@@ -1,6 +1,7 @@
 ﻿using Game.Agent;
 using Game.Components;
 using Game.Extensions;
+using Game.Statistics;
 using Game.Utilities;
 using System;
 using UnityEngine;
@@ -16,6 +17,22 @@ namespace Game.Projectile
         public override void Initialize(ProjectileEntity projectile)
         {
             base.Initialize(projectile);
+        }
+
+        public override bool Validate(ProjectileEntity projectile)
+        {
+            bool changed = base.Validate(projectile);
+            if (damage != null && damage.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Damage))
+            {
+                damage.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Damage);
+                changed = true;
+            }
+            if (armorPenetration != null && armorPenetration.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.ArmorPenetration))
+            {
+                armorPenetration.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.ArmorPenetration);
+                changed = true;
+            }
+            return changed;
         }
 
         public override ImpactReport Impact(GameObject collision)
