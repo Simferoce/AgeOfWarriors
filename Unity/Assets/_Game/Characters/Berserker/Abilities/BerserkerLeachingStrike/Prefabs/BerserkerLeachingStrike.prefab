@@ -57,9 +57,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditions: []
-  effects: []
-  trigger: 
+  conditions:
+  - rid: 7754703144169767099
+  - rid: 7754703144169767100
+  - rid: 7754703144169767102
+  effects:
+  - rid: 7754703144169767110
+  trigger: SpecialAbility1
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7754703144169767099
+      type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767100
+      type: {class: CooldownAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        cooldown:
+          rid: 7754703144169767101
+    - rid: 7754703144169767101
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        value: 5
+    - rid: 7754703144169767102
+      type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        countInterval: {x: 1, y: 1}
+        filter:
+          rid: 7754703144169767104
+        orderBy:
+        - rid: 7754703144169767109
+    - rid: 7754703144169767104
+      type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filters:
+        - rid: 7754703144169767105
+        - rid: 7754703144169767106
+    - rid: 7754703144169767105
+      type: {class: IsEnemyAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767106
+      type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        distance:
+          rid: 7754703144169767107
+    - rid: 7754703144169767107
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1
+    - rid: 7754703144169767109
+      type: {class: PriorityAbilityTargetOrderBy, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767110
+      type: {class: DealDamageAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        leach:
+          rid: 7754703144169767112
+        damage:
+          rid: 7754703144169767113
+        armorPenetration:
+          rid: -2
+    - rid: 7754703144169767112
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: e864fc16d0f0def478387446a9b41863, type: 2}
+        value: 1
+    - rid: 7754703144169767113
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1.5
