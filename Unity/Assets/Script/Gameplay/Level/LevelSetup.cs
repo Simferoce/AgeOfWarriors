@@ -20,10 +20,12 @@ namespace Game
         [SerializeField] private bool cheatCost;
         [SerializeField] private int maxCharacter = 10;
         [SerializeField] private float technologyGainMultiplier = 1;
+        [SerializeField] private float factorySpeed = 1f;
 
         public bool CheatCost { get => cheatCost; }
         public int MaxCharacter { get => maxCharacter; set => maxCharacter = value; }
         public float TechnologyGainMultiplier { get => technologyGainMultiplier; }
+        public float FactorySpeed { get => factorySpeed; set => factorySpeed = value; }
 
         private void Awake()
         {

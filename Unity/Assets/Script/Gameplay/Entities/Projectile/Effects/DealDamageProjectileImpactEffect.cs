@@ -11,6 +11,8 @@ namespace Game.Projectile
         [SerializeReference, SubclassSelector] private ProjectileStatistic damage;
         [SerializeReference, SubclassSelector] private ProjectileStatistic armorPenetration;
 
+        public float Damage => (damage?.GetValue<float>(projectile) ?? 0f) * (1 + projectile.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticIdentifiant.DamagePercentage)) * projectile.GetCachedComponent<StatisticIndex>().MultiplierByDefinition(StatisticIdentifiant.DamageMultiplier);
+
         public override bool Validate(ProjectileEntity projectile)
         {
             bool changed = base.Validate(projectile);
@@ -27,15 +29,15 @@ namespace Game.Projectile
             return changed;
         }
 
-        public void Execute(Collider2D collider, Target target)
+        public void Execute(Entity entity)
         {
-            if (!target.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
+            if (!entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
                 return;
 
             AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
             AttackData attack = attackFactory.Generate(
                 target: attackable,
-                damage: damage?.GetValue<float>(projectile) ?? 0f,
+                damage: Damage,
                 armorPenetration: armorPenetration?.GetValue<float>(projectile) ?? 0f,
                 flags: AttackData.Flag.Ranged);
 

@@ -237,22 +237,10 @@ MonoBehaviour:
       type: {class: CollisionProjectileImpact, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         filter:
-          rid: 7754703133506797648
+          rid: 7754703144169767031
         effects:
         - rid: 7754703133506797652
         - rid: 7754703133506797681
-    - rid: 7754703133506797648
-      type: {class: OrProjectileImpactFilter, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        filters:
-        - rid: 7754703133506797649
-        - rid: 7754703133506797650
-    - rid: 7754703133506797649
-      type: {class: IsGroundProjectileImpactFilter, ns: Game.Projectile, asm: Assembly-CSharp}
-      data: 
-    - rid: 7754703133506797650
-      type: {class: IsEnemyProjectileImpactFilter, ns: Game.Projectile, asm: Assembly-CSharp}
-      data: 
     - rid: 7754703133506797652
       type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -274,6 +262,9 @@ MonoBehaviour:
       type: {class: StickProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         stopSimulatedDelay: 0.05
+    - rid: 7754703144169767031
+      type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
+      data: 
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5

@@ -64,7 +64,7 @@ namespace Game.Agent
         public bool TryQueueSpawnAgentObject(int index)
         {
             AgentObjectDefinition agentObjectDefinition = Loadout.GetAgentObjectDefinitionAtIndex(index);
-            return factory.QueueLaneObject(new AgentFactoryCommand(this, agentBase.SpawnPoint, agentObjectDefinition.ProductionDuration, agentObjectDefinition), agentObjectDefinition.Cost);
+            return factory.QueueLaneObject(new AgentFactoryCommand(this, agentBase.SpawnPoint, agentObjectDefinition.ProductionDuration / LevelSetup.Instance.FactorySpeed, agentObjectDefinition), agentObjectDefinition.Cost);
         }
 
         public void SpawnAgentObject(AgentObjectDefinition agentObjectDefinition, Vector3 position, int direction)

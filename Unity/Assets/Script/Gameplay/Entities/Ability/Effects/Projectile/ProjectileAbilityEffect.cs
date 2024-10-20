@@ -11,7 +11,7 @@ namespace Game.Ability
     {
         [SerializeField] private GameObject projectilePrefab;
         [SerializeReference, SubclassSelector] private ProjectileAbilityEffectOrigin origin;
-        [SerializeReference, SubclassSelector] private List<AbilityProjectileParameterFactory> parameters;
+        [SerializeReference, SubclassSelector] private List<ProjectileParameterFactory> parameters;
 
         public override void Apply()
         {

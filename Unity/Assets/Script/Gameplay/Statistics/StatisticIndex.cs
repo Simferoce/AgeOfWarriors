@@ -84,5 +84,26 @@ namespace Game.Statistics
 
             return result;
         }
+        public float MultiplierByDefinition(StatisticIdentifiant statisticIdentifiant)
+        {
+            return MultiplierByDefinition(StatisticDefinitionRepository.Instance.GetById(statisticIdentifiant));
+        }
+
+        public float MultiplierByDefinition(StatisticDefinition definition)
+        {
+            float result = 1f;
+            foreach (Statistic statistic in statistics)
+            {
+                if (statistic.Definition == definition)
+                {
+                    result += statistic.GetValue<float>(context);
+                }
+            }
+
+            foreach (StatisticIndex relation in relations)
+                result *= relation.SumByDefinition(definition);
+
+            return result;
+        }
     }
 }

@@ -26,5 +26,6 @@
         Heal,
         DefensePercentage,
         ArmorPenetration,
+        DamageMultiplier,
     }
 }

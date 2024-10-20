@@ -9,7 +9,7 @@ namespace Game.Projectile
     [Serializable]
     public class CollisionProjectileImpact : ProjectileImpact
     {
-        [SerializeReference, SubclassSelector] private ProjectileImpactFilter filter;
+        [SerializeReference, SubclassSelector] private ProjectileTargetFilter filter;
         [SerializeReference, SubclassSelector] private List<ProjectileEffect> effects;
 
         private List<Collider2D> collidersProcessed = new List<Collider2D>();
@@ -18,7 +18,8 @@ namespace Game.Projectile
         {
             base.Initialize(projectile);
 
-            filter.Initialize(projectile);
+            if (filter != null)
+                filter.Initialize(projectile);
 
             foreach (ProjectileEffect effect in effects)
                 effect.Initialize(projectile);
@@ -27,6 +28,8 @@ namespace Game.Projectile
         public override bool Validate(ProjectileEntity projectile)
         {
             bool changed = base.Validate(projectile);
+            if (filter != null)
+                changed |= filter.Validate(projectile);
             foreach (ProjectileEffect effect in effects.Where(x => x != null))
                 changed |= effect.Validate(projectile);
 
@@ -42,11 +45,14 @@ namespace Game.Projectile
             if (target != null && !target.Entity.IsActive)
                 return;
 
-            if (!filter.Execute(collider, target))
+            if (filter is IImpactProjectileTargetFilter impactImpactTargetFilter && !impactImpactTargetFilter.Execute(collider, target))
+                return;
+
+            if (filter is IStandardProjectileTargetFilter standardProjectileTargetFilter && !standardProjectileTargetFilter.Execute(target))
                 return;
 
             foreach (IProjectileImpactEffect effect in effects.OfType<IProjectileImpactEffect>())
-                effect.Execute(collider, target);
+                effect.Execute(target.Entity);
 
             foreach (IProjectileStandardEffect effect in effects.OfType<IProjectileStandardEffect>().Where(x => x is not IProjectileImpactEffect))
                 effect.Execute();

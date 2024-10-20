@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: ReduceDamagePerHitModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 0c5f42fb54597cc46938526223bc3949
+  title: 
+  icon: {fileID: 0}
+  description: 
+  prefab: {fileID: 5067718274737837044, guid: 0bc9f1ecd4cebd74a9bce785404586a8, type: 3}
+  showOnHealthBar: 1

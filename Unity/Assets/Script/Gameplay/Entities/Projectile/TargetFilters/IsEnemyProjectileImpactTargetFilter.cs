@@ -1,14 +1,13 @@
 ﻿using Game.Agent;
 using Game.Components;
 using System;
-using UnityEngine;
 
 namespace Game.Projectile
 {
     [Serializable]
-    public class IsEnemyProjectileImpactFilter : ProjectileImpactFilter
+    public class IsEnemyProjectileImpactTargetFilter : ProjectileTargetFilter, IStandardProjectileTargetFilter
     {
-        public override bool Execute(Collider2D collider, Target target)
+        public bool Execute(Target target)
         {
             return target != null && (target.Entity is AgentObject agentObject) && agentObject.Faction != projectile.Faction;
         }

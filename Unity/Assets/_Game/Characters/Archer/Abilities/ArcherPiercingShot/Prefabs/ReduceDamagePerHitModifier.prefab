@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5067718274737837044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7132601255340362084}
+  - component: {fileID: 2007723867276033751}
+  - component: {fileID: 4688318402553255523}
+  m_Layer: 0
+  m_Name: ReduceDamagePerHitModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7132601255340362084
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067718274737837044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2007723867276033751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067718274737837044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4688318402553255523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5067718274737837044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibleByDefault: 1
+  behaviours:
+  - rid: 7754703144169767008
+  - rid: 7754703144169767009
+  references:
+    version: 2
+    RefIds:
+    - rid: 7754703144169767008
+      type: {class: StackModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767009
+      type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        statistics:
+        - rid: 7754703144169767026
+    - rid: 7754703144169767026
+      type: {class: PerStackMultiplierModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
+        multiplier:
+          rid: 7754703144169767027
+    - rid: 7754703144169767027
+      type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
+        name: damage_multiplier

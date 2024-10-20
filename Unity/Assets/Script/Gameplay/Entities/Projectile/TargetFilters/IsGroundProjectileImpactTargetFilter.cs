@@ -6,9 +6,9 @@ using UnityEngine;
 namespace Game.Projectile
 {
     [Serializable]
-    public class IsGroundProjectileImpactFilter : ProjectileImpactFilter
+    public class IsGroundProjectileImpactTargetFilter : ProjectileTargetFilter, IImpactProjectileTargetFilter
     {
-        public override bool Execute(Collider2D collider, Target target)
+        public bool Execute(Collider2D collider, Target target)
         {
             return collider.gameObject.CompareTag(GameTag.GROUND);
         }

@@ -1,10 +1,7 @@
-﻿using Game.Components;
-using UnityEngine;
-
-namespace Game.Projectile
+﻿namespace Game.Projectile
 {
     public interface IProjectileImpactEffect
     {
-        public void Execute(Collider2D collider, Target target);
+        public void Execute(Entity entity);
     }
 }

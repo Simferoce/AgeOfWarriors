@@ -1,5 +1,4 @@
-﻿using Game.Components;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Game.Projectile
@@ -15,9 +14,9 @@ namespace Game.Projectile
             projectile.Kill(projectileDeath);
         }
 
-        public void Execute(Collider2D collider, Target target)
+        public void Execute(Entity entity)
         {
-            projectileDeath.Start(projectile, target.gameObject);
+            projectileDeath.Start(projectile, entity.gameObject);
             projectile.Kill(projectileDeath);
         }
     }

@@ -87,35 +87,13 @@ MonoBehaviour:
         origin:
           rid: 7754703133506797700
         parameters:
-        - rid: 7754703133506797701
-        - rid: 7754703133506797703
+        - rid: 7754703144169766996
+        - rid: 7754703144169766998
+        - rid: 7754703144169767001
     - rid: 7754703133506797700
       type: {class: TransformProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         origin: ProjectileBowEnd
-    - rid: 7754703133506797701
-      type: {class: FloatStatisticAbilityProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        name: damage
-        statistic:
-          rid: 7754703133506797702
-    - rid: 7754703133506797702
-      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-        ratio: 1
-    - rid: 7754703133506797703
-      type: {class: FloatStatisticAbilityProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        name: armor_penetration
-        statistic:
-          rid: 7754703133506797705
-    - rid: 7754703133506797705
-      type: {class: StatisticSerialize, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
-        value: 15
     - rid: 7754703133506797706
       type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data:
@@ -143,3 +121,38 @@ MonoBehaviour:
         definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
         casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
         ratio: 1
+    - rid: 7754703144169766996
+      type: {class: FloatStatisticProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: damage
+        statistic:
+          rid: 7754703144169766997
+    - rid: 7754703144169766997
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1
+    - rid: 7754703144169766998
+      type: {class: FloatStatisticProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: armor_penetration
+        statistic:
+          rid: 7754703144169767000
+    - rid: 7754703144169767000
+      type: {class: StatisticSerialize, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
+        value: 15
+    - rid: 7754703144169767001
+      type: {class: FloatStatisticProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: range
+        statistic:
+          rid: 7754703144169767002
+    - rid: 7754703144169767002
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 2

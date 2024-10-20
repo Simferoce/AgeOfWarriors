@@ -11,7 +11,7 @@ namespace Game.Ability
     public class ApplyModifierAbilityEffect : AbilityEffect
     {
         [SerializeField] private ModifierDefinition modifierDefinition;
-        [SerializeReference, SubclassSelector] private List<AbilityModifierParameterFactory> parameters;
+        [SerializeReference, SubclassSelector] private List<ModifierParameterFactory> parameters;
 
         public override void Initialize(AbilityEntity ability)
         {
@@ -32,7 +32,6 @@ namespace Game.Ability
                 else
                     modifierApplier.Apply(modifierDefinition.Instantiate(), target, parameters.Select(x => x.Create(Ability)).ToArray());
             }
-
         }
     }
 }

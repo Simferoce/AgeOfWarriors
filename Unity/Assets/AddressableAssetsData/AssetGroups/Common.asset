@@ -248,6 +248,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ffa9a2d75aa6c9f4cb8ed744120428fc
+    m_Address: Assets/_Game/Statistics/DamageMultiplierStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: cfd7a89af1206664092cd236e2ab212d, type: 2}
   m_SchemaSet:

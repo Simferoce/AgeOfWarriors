@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Game.Components;
+using System;
 
 namespace Game.Projectile
 {
     [Serializable]
-    public abstract class ProjectileBehaviour : IDisposable
+    public abstract class OnHitProjectileBehaviourTargetProvider
     {
         protected ProjectileEntity projectile;
 
@@ -12,13 +13,7 @@ namespace Game.Projectile
             this.projectile = projectile;
         }
 
+        public abstract Entity Execute(AttackResult attackResult);
         public virtual bool Validate(ProjectileEntity projectile) { return false; }
-
-        public virtual void Update() { }
-
-        public virtual void Dispose()
-        {
-
-        }
     }
 }

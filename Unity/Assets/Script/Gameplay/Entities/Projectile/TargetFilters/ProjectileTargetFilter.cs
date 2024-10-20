@@ -1,11 +1,9 @@
-﻿using Game.Components;
-using System;
-using UnityEngine;
+﻿using System;
 
 namespace Game.Projectile
 {
     [Serializable]
-    public abstract class ProjectileImpactFilter
+    public abstract class ProjectileTargetFilter
     {
         protected ProjectileEntity projectile;
 
@@ -14,6 +12,6 @@ namespace Game.Projectile
             this.projectile = projectile;
         }
 
-        public abstract bool Execute(Collider2D collider, Target target);
+        public virtual bool Validate(ProjectileEntity projectile) { return false; }
     }
 }

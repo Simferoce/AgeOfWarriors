@@ -50,6 +50,8 @@ namespace Game.Components
 
             float damage = attack.Damage;
             float resultingDefense = currentDefense - attack.ArmorPenetration;
+            if (resultingDefense < 0f)
+                resultingDefense = 0f;
 
             float damageTakenModifier = -increaseDamageTaken;
             if (attack.Flags.HasFlag(AttackData.Flag.Ranged))

@@ -26,7 +26,7 @@ namespace Game.Character
             protected override void InternalUpdate()
             {
                 character.RefreshDirection();
-                if (!character.IsDead && character.Health > 0)
+                if (!character.IsDead && character.Health > 0 && character.GetCachedComponent<Caster>().IsCasting == false)
                 {
                     foreach (AbilityEntity ability in character.GetCachedComponent<Caster>().Abilities)
                     {

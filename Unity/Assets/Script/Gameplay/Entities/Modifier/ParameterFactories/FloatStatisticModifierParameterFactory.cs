@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Statistics;
+using System;
 using UnityEngine;
 
 namespace Game.Modifier
@@ -7,11 +8,11 @@ namespace Game.Modifier
     public class FloatStatisticModifierParameterFactory : ModifierParameterFactory
     {
         [SerializeField] private string name;
-        [SerializeReference, SubclassSelector] private ModifierStatistic statistic;
+        [SerializeReference, SubclassSelector] private Statistic statistic;
 
-        public override ModifierParameter Create(ModifierEntity modifier)
+        public override ModifierParameter Create(object entity)
         {
-            return new StatisticModifierParameter<float>(name, statistic.Definition, statistic.GetValue<float>(modifier));
+            return new StatisticModifierParameter<float>(name, statistic.Definition, statistic.GetValue<float>(entity));
         }
     }
 }
