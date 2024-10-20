@@ -1,4 +1,5 @@
-﻿using Game.Agent;
+﻿using Game.Ability;
+using Game.Agent;
 using System;
 using UnityEngine;
 
@@ -13,8 +14,17 @@ namespace Game.Projectile
         {
             base.Initialize(projectile);
 
-            if (!(projectile.Parent is AgentObject agentObject))
-                throw new ArgumentException($"Expecting the parent object to be an {nameof(AgentObject)}");
+            if (projectile.Parent is not AbilityEntity ability)
+            {
+                Debug.LogError($"Expecting the parent object to be a {nameof(AbilityEntity)}", projectile);
+                return;
+            }
+
+            if (ability.Caster.Entity is not AgentObject agentObject)
+            {
+                Debug.LogError($"Expecting the caster to be a {nameof(AgentObject)}", projectile);
+                return;
+            }
 
             Vector3 velocity = Vector3.right * agentObject.Direction * speed;
             projectile.Rigidbody.linearVelocity = velocity;

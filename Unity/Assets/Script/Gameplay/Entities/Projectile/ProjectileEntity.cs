@@ -13,8 +13,6 @@ namespace Game.Projectile
     [RequireComponent(typeof(AttackFactory))]
     public partial class ProjectileEntity : Entity
     {
-        public delegate void Impacted(List<Target> targeteables);
-
         public enum State
         {
             Alive,
@@ -22,16 +20,13 @@ namespace Game.Projectile
         }
 
         [SerializeField] private new Rigidbody2D rigidbody;
-        [SerializeReference, SubclassSelector] private ProjectileDeath projectileDeath = new StickProjectileDeath();
         [SerializeReference, SubclassSelector] private List<ProjectileMovement> projectileMovements = new List<ProjectileMovement>();
+        [SerializeReference, SubclassSelector] private List<ProjectileBehaviour> behaviours = new List<ProjectileBehaviour>();
         [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
-
-        public event Impacted OnImpacted;
 
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public State StateValue { get => state; set => state = value; }
         public Target Target { get; set; }
-        public Target Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
         public List<ProjectileParameter> Parameters { get => parameters; set => parameters = value; }
         public override FactionType Faction => faction;
@@ -39,6 +34,7 @@ namespace Game.Projectile
         protected FactionType faction;
         private State state = State.Alive;
         private List<ProjectileParameter> parameters;
+        private ProjectileDeath projectileDeath = null;
 
         public void Initialize(Entity source, Target target, FactionType faction, params ProjectileParameter[] parameters)
         {
@@ -49,6 +45,9 @@ namespace Game.Projectile
 
             foreach (ProjectileMovement movement in projectileMovements)
                 movement.Initialize(this);
+
+            foreach (ProjectileBehaviour behaviour in behaviours)
+                behaviour.Initialize(this);
 
             foreach (ProjectileImpact impact in impacts)
                 impact.Initialize(this);
@@ -65,6 +64,9 @@ namespace Game.Projectile
             foreach (ProjectileImpact impact in impacts)
                 changed |= impact?.Validate(this) ?? false;
 
+            foreach (ProjectileBehaviour behaviour in behaviours)
+                changed |= behaviour?.Validate(this) ?? false;
+
 #if UNITY_EDITOR
             if (changed)
                 EditorUtility.SetDirty(this);
@@ -78,19 +80,11 @@ namespace Game.Projectile
 
             if (StateValue == State.Alive)
             {
-                bool impacted = false;
-                foreach (ProjectileImpact effect in impacts)
-                {
-                    ProjectileImpact.ImpactReport impactReport = effect.Update();
-                    if (impactReport.ImpactStatus == ProjectileImpact.ImpactStatus.Impacted)
-                    {
-                        impacted = true;
-                        OnImpacted?.Invoke(impactReport.ImpactedTargeteables);
-                    }
-                }
+                foreach (ProjectileBehaviour behaviour in behaviours)
+                    behaviour.Update();
 
-                if (impacted)
-                    Kill(null);
+                foreach (ProjectileImpact impact in impacts)
+                    impact.Update();
             }
             else if (StateValue == State.Dead)
             {
@@ -98,32 +92,28 @@ namespace Game.Projectile
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter2D(Collider2D collider)
         {
             if (StateValue != State.Alive)
                 return;
 
             foreach (ProjectileImpact effect in impacts)
-            {
-                ProjectileImpact.ImpactReport impactReport = effect.Impact(collision.gameObject);
-                if (impactReport.ImpactStatus == ProjectileImpact.ImpactStatus.Impacted)
-                {
-                    OnImpacted?.Invoke(impactReport.ImpactedTargeteables);
-                }
-            }
+                effect.Impact(collider);
         }
 
-        private void OnTriggerExit2D(Collider2D collision)
+        private void OnTriggerExit2D(Collider2D collider)
         {
             foreach (ProjectileImpact effect in impacts)
-                effect.LeaveZone(collision.gameObject);
+                effect.LeaveZone(collider);
         }
 
-        public void Kill(GameObject collision)
+        public void Kill(ProjectileDeath death)
         {
             StateValue = State.Dead;
+            projectileDeath = death;
 
-            projectileDeath.Start(this, collision);
+            if (projectileDeath == null)
+                GameObject.Destroy(gameObject);
         }
     }
 }

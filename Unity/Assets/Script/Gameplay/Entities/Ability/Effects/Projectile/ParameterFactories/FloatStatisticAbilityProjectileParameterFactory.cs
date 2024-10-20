@@ -1,4 +1,5 @@
 ﻿using Game.Projectile;
+using Game.Statistics;
 using System;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Game.Ability
     public class FloatStatisticAbilityProjectileParameterFactory : AbilityProjectileParameterFactory
     {
         [SerializeField] private string name;
-        [SerializeReference, SubclassSelector] private AbilityStatistic statistic;
+        [SerializeReference, SubclassSelector] private Statistic statistic;
 
         public override ProjectileParameter Create(AbilityEntity ability)
         {

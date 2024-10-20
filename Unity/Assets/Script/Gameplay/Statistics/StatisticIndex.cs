@@ -43,6 +43,18 @@ namespace Game.Statistics
             return SelfByDefinition<T>(StatisticDefinitionRepository.Instance.GetById(statisticIdentifiant));
         }
 
+        public bool TrySelfByDefinition<T>(StatisticIdentifiant statisticIdentifiant, out T value)
+        {
+            return TrySelfByDefinition<T>(StatisticDefinitionRepository.Instance.GetById(statisticIdentifiant), out value);
+        }
+
+        public bool TrySelfByDefinition<T>(StatisticDefinition definition, out T value)
+        {
+            Statistic statistic = statistics.FirstOrDefault(x => x.Definition == definition);
+            value = statistic != null ? statistic.GetValue<T>(context) : default;
+            return statistic != null;
+        }
+
         public T SelfByDefinition<T>(StatisticDefinition definition)
         {
             Statistic statistic = statistics.FirstOrDefault(x => x.Definition == definition);
