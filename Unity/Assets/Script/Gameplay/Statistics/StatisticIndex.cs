@@ -84,6 +84,7 @@ namespace Game.Statistics
 
             return result;
         }
+
         public float MultiplierByDefinition(StatisticIdentifiant statisticIdentifiant)
         {
             return MultiplierByDefinition(StatisticDefinitionRepository.Instance.GetById(statisticIdentifiant));
@@ -96,14 +97,24 @@ namespace Game.Statistics
             {
                 if (statistic.Definition == definition)
                 {
-                    result += statistic.GetValue<float>(context);
+                    result *= statistic.GetValue<float>(context);
                 }
             }
 
             foreach (StatisticIndex relation in relations)
-                result *= relation.SumByDefinition(definition);
+                result *= relation.MultiplierByDefinition(definition);
 
             return result;
+        }
+
+        public bool Any(StatisticDefinition definition)
+        {
+            return statistics.Any(x => x.Definition == definition && x.GetValue<bool>(context)) || relations.Any(x => x.Any(definition));
+        }
+
+        public bool Any(StatisticIdentifiant statisticIdentifiant)
+        {
+            return Any(StatisticDefinitionRepository.Instance.GetById(statisticIdentifiant));
         }
     }
 }

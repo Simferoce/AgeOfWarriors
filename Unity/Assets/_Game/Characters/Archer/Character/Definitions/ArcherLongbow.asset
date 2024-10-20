@@ -20,8 +20,8 @@ MonoBehaviour:
   baseDefinition: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   reach: 2.5
   speed: 0.5
-  attackSpeed: 1
-  attackPower: 25
+  attackSpeed: 0.5
+  attackPower: 10
   maxHealth: 100
   defense: 5
   technologyGainPerSecond: 0

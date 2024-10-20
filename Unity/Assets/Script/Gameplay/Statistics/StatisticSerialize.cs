@@ -1,13 +1,18 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Scripting.APIUpdating;
 
 namespace Game.Statistics
 {
     [Serializable]
-    public class StatisticSerialize : GameStatisticSerialize<float> { }
+    [MovedFrom(true, sourceClassName: "StatisticSerialize")]
+    public class StatisticSerializeFloat : StatisticSerialize<float> { }
 
     [Serializable]
-    public class GameStatisticSerialize<T> : Statistic
+    public class StatisticSerializeBool : StatisticSerialize<bool> { }
+
+    [Serializable]
+    public class StatisticSerialize<T> : Statistic
     {
         [SerializeField] private T value;
 

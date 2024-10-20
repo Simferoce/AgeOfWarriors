@@ -24,6 +24,7 @@ namespace Game.Ability
         public bool IsLingering { get; set; } = false;
 
         private Animated animated;
+        private bool applied = false;
 
         public override void Initialize(Caster caster)
         {
@@ -66,6 +67,7 @@ namespace Game.Ability
             animated.SetTrigger(trigger);
             Caster.LastAbilityUsed = Time.time;
             IsCasting = true;
+            applied = false;
 
             foreach (AbilityCondition condition in conditions)
                 condition.OnAbilityStarted();
@@ -79,21 +81,20 @@ namespace Game.Ability
 
         public override void Tick()
         {
-            if (IsCasting == true)
+            if (applied == false)
                 return;
 
             bool end = true;
             foreach (IAbilityEffectLingering lingeringAbilityEffect in effects.OfType<IAbilityEffectLingering>())
-            {
                 end &= lingeringAbilityEffect.Update(Caster);
-            }
 
-            if (end)
+            if (IsLingering && end)
                 End();
         }
 
         public override void Apply()
         {
+            applied = true;
             foreach (AbilityEffect effect in effects)
                 effect.Apply();
 
@@ -113,8 +114,6 @@ namespace Game.Ability
                 End();
             else
                 IsLingering = true;
-
-            Caster.EndCast();
         }
 
         public override void Dispose()
@@ -125,6 +124,7 @@ namespace Game.Ability
 
         private void End()
         {
+            Caster.EndCast();
             IsLingering = false;
 
             foreach (AbilityCondition condition in conditions)

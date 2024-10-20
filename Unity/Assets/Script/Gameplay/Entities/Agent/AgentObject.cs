@@ -12,7 +12,8 @@ namespace Game.Agent
 
         public enum Type
         {
-            Building
+            Building,
+            Ranger
         }
 
         [SerializeField] private List<Type> types = new List<Type>();

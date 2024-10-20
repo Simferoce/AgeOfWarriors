@@ -87,6 +87,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Window
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e5259fb27f804f4285e6e0dfa6c229d
+    m_Address: Assets/_Game/Statistics/StaggerStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f02395ac1a9d664c8074cace506fa10
     m_Address: Assets/_Game/Statistics/DamageDealtReductionDefinition.asset
     m_ReadOnly: 0

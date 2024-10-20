@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5914724204636337494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1983515798842637665}
+  - component: {fileID: 6591169466669658220}
+  - component: {fileID: 2272586364108649392}
+  m_Layer: 0
+  m_Name: StaggerModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1983515798842637665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914724204636337494}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6591169466669658220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914724204636337494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2272586364108649392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5914724204636337494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibleByDefault: 1
+  behaviours:
+  - rid: 7754703144169767049
+  - rid: 7754703144169767056
+  references:
+    version: 2
+    RefIds:
+    - rid: 7754703144169767049
+      type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        statistics:
+        - rid: 7754703144169767055
+    - rid: 7754703144169767055
+      type: {class: StatisticSerializeBool, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 4e5259fb27f804f4285e6e0dfa6c229d, type: 2}
+        value: 1
+    - rid: 7754703144169767056
+      type: {class: TimeModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        duration:
+          rid: 7754703144169767057
+    - rid: 7754703144169767057
+      type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        name: duration

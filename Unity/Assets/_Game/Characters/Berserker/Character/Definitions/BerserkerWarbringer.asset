@@ -18,7 +18,7 @@ MonoBehaviour:
   productionDuration: 2
   cost: 15
   baseDefinition: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  reach: 0.5
+  reach: 0.6
   speed: 0.5
   attackSpeed: 0.5
   attackPower: 50

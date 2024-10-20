@@ -7,13 +7,13 @@ using UnityEngine;
 namespace Game.Ability
 {
     [Serializable]
-    public class ExcludeAbilityTargetFilter : AbilityTargetFilter
+    public class HasTagAbilityTargetFilter : AbilityTargetFilter
     {
         [SerializeField] private List<AgentObject.Type> types = new List<AgentObject.Type>();
 
         public override bool Execute(AbilityEntity source, Entity targetEntity)
         {
-            return (targetEntity is AgentObject agentObject) && agentObject.Types.All(x => !types.Contains(x));
+            return (targetEntity is AgentObject agentObject) && agentObject.Types.Any(x => types.Contains(x));
         }
     }
 }

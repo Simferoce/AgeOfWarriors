@@ -41,9 +41,7 @@ namespace Game.Character
             public void CheckStagger()
             {
                 if (character.IsStaggered)
-                {
                     character.stateMachine.SetState(new StaggerState(character));
-                }
             }
         }
     }

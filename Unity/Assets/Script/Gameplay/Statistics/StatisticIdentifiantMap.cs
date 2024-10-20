@@ -32,6 +32,7 @@ namespace Game.Statistics
             { StatisticIdentifiant.DefensePercentage, "493109d50bb4d0d4f916891e33c067e1" },
             { StatisticIdentifiant.ArmorPenetration, "1687044977f8da6489e79d61a4fa60b9" },
             { StatisticIdentifiant.DamageMultiplier, "ffa9a2d75aa6c9f4cb8ed744120428fc" },
+            { StatisticIdentifiant.Stagger, "4e5259fb27f804f4285e6e0dfa6c229d" },
         };
 
         public static string GetReferenceId(StatisticIdentifiant identifiant)

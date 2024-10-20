@@ -57,9 +57,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditions: []
-  effects: []
-  trigger: 
+  conditions:
+  - rid: 7754703144169767036
+  - rid: 7754703144169767037
+  - rid: 7754703144169767094
+  - rid: 7754703144169767039
+  effects:
+  - rid: 7754703144169767048
+  trigger: SpecialAbility2
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7754703144169767036
+      type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767037
+      type: {class: CooldownAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        cooldown:
+          rid: 7754703144169767038
+    - rid: 7754703144169767038
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        value: 3
+    - rid: 7754703144169767039
+      type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        countInterval: {x: 1, y: 2}
+        filter:
+          rid: 7754703144169767040
+        orderBy:
+        - rid: 7754703144169767045
+    - rid: 7754703144169767040
+      type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filters:
+        - rid: 7754703144169767041
+        - rid: 7754703144169767042
+        - rid: 7754703144169767043
+    - rid: 7754703144169767041
+      type: {class: IsDisplaceableAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767042
+      type: {class: IsEnemyAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767043
+      type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        distance:
+          rid: 7754703144169767044
+    - rid: 7754703144169767044
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1.5
+    - rid: 7754703144169767045
+      type: {class: PriorityAbilityTargetOrderBy, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767048
+      type: {class: DisplaceAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        destinationDistance: 0.75
+        translationDuration: 0.75
+        damping: 0.25
+        modifierDefinition: {fileID: 11400000, guid: ba40cceb2cb71c94eb29850cb286878f, type: 2}
+        parameters:
+        - rid: 7754703144169767058
+    - rid: 7754703144169767058
+      type: {class: FloatStatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+        statistic:
+          rid: 7754703144169767059
+    - rid: 7754703144169767059
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        value: 3
+    - rid: 7754703144169767094
+      type: {class: IsFirstAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 

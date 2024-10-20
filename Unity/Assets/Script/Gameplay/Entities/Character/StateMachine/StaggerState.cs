@@ -24,6 +24,7 @@ namespace Game.Character
 
             protected override void InternalUpdate()
             {
+                character.rigidbody.linearVelocityX = 0;
                 if (!character.IsStaggered)
                 {
                     character.stateMachine.SetState(new MoveState(character));

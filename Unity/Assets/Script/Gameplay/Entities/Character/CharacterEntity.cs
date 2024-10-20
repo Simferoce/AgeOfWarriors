@@ -43,7 +43,7 @@ namespace Game.Character
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
         public bool IsInvulnerable => false;/*this.GetCachedComponent<GameModifierHandler>().GetModifiers().Any(x => x is IModifierInvulnerable);*/
         public bool IsConfused => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);*/
-        public bool IsStaggered => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is StaggerModifierDefinition.Modifier);*/
+        public bool IsStaggered => this.GetCachedComponent<StatisticIndex>().Any(StatisticIdentifiant.Stagger);
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
 
