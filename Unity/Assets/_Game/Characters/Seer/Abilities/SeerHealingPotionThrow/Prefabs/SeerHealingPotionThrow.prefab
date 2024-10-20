@@ -57,9 +57,84 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditions: []
-  effects: []
-  trigger: 
+  conditions:
+  - rid: 7754703144169767133
+  - rid: 7754703144169767134
+  - rid: 7754703144169767136
+  effects:
+  - rid: 7754703144169767143
+  trigger: Ability
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7754703144169767133
+      type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767134
+      type: {class: CooldownAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        cooldown:
+          rid: 7754703144169767135
+    - rid: 7754703144169767135
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        value: 5
+    - rid: 7754703144169767136
+      type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        countInterval: {x: 1, y: 1}
+        filter:
+          rid: 7754703144169767137
+        orderBy:
+        - rid: 7754703144169767142
+    - rid: 7754703144169767137
+      type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filters:
+        - rid: 7754703144169767138
+        - rid: 7754703144169767139
+        - rid: 7754703144169767140
+    - rid: 7754703144169767138
+      type: {class: IsAllyAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767139
+      type: {class: IsInjuredAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767140
+      type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        distance:
+          rid: 7754703144169767141
+    - rid: 7754703144169767141
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1
+    - rid: 7754703144169767142
+      type: {class: PriorityAbilityTargetOrderBy, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767143
+      type: {class: ProjectileAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 6675190562695518451, guid: c315967ff12cba145a66a8eb3684b796, type: 3}
+        origin:
+          rid: 7754703144169767144
+        parameters:
+        - rid: 7754703144169767145
+    - rid: 7754703144169767144
+      type: {class: TransformProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        origin: ProjectileOrigin
+    - rid: 7754703144169767145
+      type: {class: FloatStatisticProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: heal
+        statistic:
+          rid: 7754703144169767146
+    - rid: 7754703144169767146
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
+        value: 25

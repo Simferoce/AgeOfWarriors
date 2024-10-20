@@ -118,6 +118,7 @@ namespace Game.Character
         public void Heal(float amount)
         {
             Health += amount;
+            Health = Mathf.Min(Health, MaxHealth);
         }
 
         public void OnAttackLanded(AttackResult attackResult)

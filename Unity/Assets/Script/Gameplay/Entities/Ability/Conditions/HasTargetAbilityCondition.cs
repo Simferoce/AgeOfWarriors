@@ -40,9 +40,6 @@ namespace Game.Ability
                 if (!(targetteable.Entity as AgentObject).IsActive)
                     continue;
 
-                if (targetteable.Entity == ability.Caster.Entity)
-                    continue;
-
                 if (!filter.Execute(ability, targetteable.Entity))
                     continue;
 
