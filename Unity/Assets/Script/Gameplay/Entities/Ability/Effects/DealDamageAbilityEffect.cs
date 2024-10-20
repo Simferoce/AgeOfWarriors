@@ -54,8 +54,7 @@ namespace Game.Ability
                 target: target,
                 damage: Damage,
                 armorPenetration: ArmorPenetration,
-                leach: Leach,
-                flags: AttackData.Flag.Reflectable);
+                leach: Leach);
 
             target.TakeAttack(attack);
         }

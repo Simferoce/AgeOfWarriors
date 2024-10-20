@@ -1,5 +1,4 @@
 ﻿using Game.Statistics;
-using System;
 using UnityEngine;
 
 namespace Game.Components
@@ -29,9 +28,11 @@ namespace Game.Components
             }
         }
 
+        public delegate void OnDamageTakenDelegate(AttackResult result, Attackable receiver);
+
         public Entity Entity { get; set; }
         public float LastTimeAttacked { get; private set; }
-        public event Action<AttackResult, Attackable> OnDamageTaken;
+        public event OnDamageTakenDelegate OnDamageTaken;
 
         private void Awake()
         {

@@ -60,6 +60,7 @@ MonoBehaviour:
   visibleByDefault: 1
   behaviours:
   - rid: 7754703128047648929
+  - rid: 7754703128047648951
   references:
     version: 2
     RefIds:
@@ -73,3 +74,40 @@ MonoBehaviour:
       data:
         definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
         name: duration
+    - rid: 7754703128047648951
+      type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        triggers:
+        - rid: 7754703128047648952
+        effects:
+        - rid: 7754703128047648957
+    - rid: 7754703128047648952
+      type: {class: OnHitModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 7754703128047648953
+    - rid: 7754703128047648953
+      type: {class: InverseOnHitModifierTriggerCondition, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        condition:
+          rid: 7754703128047648955
+    - rid: 7754703128047648955
+      type: {class: HasFlagOnHitModifierTriggerCondition, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        flags: 8
+    - rid: 7754703128047648957
+      type: {class: DealDamageModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        target:
+          rid: 7754703128047648965
+        damage:
+          rid: 7754703128047648959
+        extraFlags: 8
+    - rid: 7754703128047648959
+      type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        name: damage
+    - rid: 7754703128047648965
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 

@@ -11,7 +11,7 @@ namespace Game.Components
             Ranged = 1 << 0,
             Empowered = 1 << 1,
             OverTime = 1 << 2,
-            Reflectable = 1 << 3,
+            Unreflectable = 1 << 3,
         }
 
         public AttackFactory Source { get; set; }

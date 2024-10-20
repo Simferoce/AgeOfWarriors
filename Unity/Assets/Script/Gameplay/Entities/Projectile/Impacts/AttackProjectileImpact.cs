@@ -49,7 +49,7 @@ namespace Game.Projectile
                     target: attackable,
                     damage: damage?.GetValue<float>(projectile) ?? 0f,
                     armorPenetration: armorPenetration?.GetValue<float>(projectile) ?? 0f,
-                    flags: AttackData.Flag.Ranged | AttackData.Flag.Reflectable);
+                    flags: AttackData.Flag.Ranged);
 
                 attackable.TakeAttack(attack);
 

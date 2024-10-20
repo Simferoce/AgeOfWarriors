@@ -89,7 +89,7 @@ namespace Game.Projectile
                     AttackData attack = attackFactory.Generate(
                         target: attackable,
                         damage: damage.GetValue<float>(projectile),
-                        flags: AttackData.Flag.Ranged | AttackData.Flag.Reflectable
+                        flags: AttackData.Flag.Ranged
                         );
 
                     attackable.TakeAttack(attack);
