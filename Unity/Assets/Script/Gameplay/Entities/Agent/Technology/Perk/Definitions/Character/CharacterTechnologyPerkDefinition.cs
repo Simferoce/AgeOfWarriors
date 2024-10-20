@@ -18,9 +18,8 @@ namespace Game.Technology
         {
             ModifierApplier modifierApplier = agent.GetComponent<ModifierApplier>();
             ModifierHandler target = entity.GetComponent<ModifierHandler>();
-            ModifierEntity modifier = modifierDefinition.Instantiate();
 
-            modifierApplier.Apply(modifier, target);
+            modifierApplier.Apply(modifierDefinition, target);
         }
     }
 }

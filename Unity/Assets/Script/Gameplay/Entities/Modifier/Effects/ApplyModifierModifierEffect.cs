@@ -31,8 +31,7 @@ namespace Game.Modifier
             {
                 Assert.IsTrue(target is Entity, $"Expecting the target of {nameof(ApplyModifierModifierEffect)} to be of type {nameof(Entity)}");
 
-                ModifierEntity modifier = definition.Instantiate();
-                modifierApplier.Apply(modifier, (target as Entity).GetCachedComponent<ModifierHandler>(), parameterFactories.Select(x => x.Create(modifier)).ToArray());
+                modifierApplier.Apply(definition, (target as Entity).GetCachedComponent<ModifierHandler>(), parameterFactories.Select(x => x.Create(modifier)).ToArray());
             }
         }
     }

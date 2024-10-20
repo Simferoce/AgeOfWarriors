@@ -28,13 +28,22 @@ namespace Game.Modifier
             currentlyAppliedModifiers.Clear();
         }
 
-        public void Apply(ModifierEntity modifier, ModifierHandler target, params ModifierParameter[] parameters)
+        public void Apply(ModifierDefinition definition, ModifierHandler target, params ModifierParameter[] parameters)
         {
-            currentlyAppliedModifiers.Add(modifier);
-            modifier.Initialize(target, this, parameters);
-            target.Add(modifier);
+            if (target.TryGetUnique(definition, this, out ModifierEntity modifier))
+            {
+                modifier.Refresh(parameters);
+            }
+            else
+            {
+                modifier = definition.Instantiate();
+                currentlyAppliedModifiers.Add(modifier);
+                modifier.Initialize(target, this, parameters);
+                target.Add(modifier);
 
-            modifier.OnRemoved += OnRemoved;
+                modifier.OnRemoved += OnRemoved;
+            }
+
             OnModifierApplied?.Invoke(modifier);
         }
 

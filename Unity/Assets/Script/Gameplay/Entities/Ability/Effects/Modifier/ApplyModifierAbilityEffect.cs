@@ -26,12 +26,7 @@ namespace Game.Ability
             ModifierApplier modifierApplier = Ability.AddOrGetCachedComponent<ModifierApplier>();
 
             foreach (ModifierHandler target in targets)
-            {
-                if (target.TryGetModifier(modifierDefinition, out ModifierEntity modifier))
-                    modifier.Refresh();
-                else
-                    modifierApplier.Apply(modifierDefinition.Instantiate(), target, parameters.Select(x => x.Create(Ability)).ToArray());
-            }
+                modifierApplier.Apply(modifierDefinition, target, parameters.Select(x => x.Create(Ability)).ToArray());
         }
     }
 }

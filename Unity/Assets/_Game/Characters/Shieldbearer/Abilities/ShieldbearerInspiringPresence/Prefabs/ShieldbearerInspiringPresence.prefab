@@ -57,9 +57,78 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  conditions: []
-  effects: []
-  trigger: 
+  conditions:
+  - rid: 7754703150677491751
+  - rid: 7754703150677491753
+  effects:
+  - rid: 7754703150677491829
+  trigger: SpecialAbility2
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7754703150677491751
+      type: {class: CooldownAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        cooldown:
+          rid: 7754703150677491752
+    - rid: 7754703150677491752
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        value: 5
+    - rid: 7754703150677491753
+      type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        countInterval: {x: 1, y: 999}
+        filter:
+          rid: 7754703150677491754
+        orderBy: []
+    - rid: 7754703150677491754
+      type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filters:
+        - rid: 7754703150677491755
+        - rid: 7754703150677491756
+    - rid: 7754703150677491755
+      type: {class: IsAllyAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703150677491756
+      type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        distance:
+          rid: 7754703150677491757
+    - rid: 7754703150677491757
+      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 2
+    - rid: 7754703150677491829
+      type: {class: ApplyModifierAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        modifierDefinition: {fileID: -1722971267097484216, guid: 2fe57550d51a64f4897979212d8ac68d, type: 2}
+        parameters:
+        - rid: 7754703150677491835
+        - rid: 7754703150677491837
+    - rid: 7754703150677491835
+      type: {class: FloatStatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+        statistic:
+          rid: 7754703150677491836
+    - rid: 7754703150677491836
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        value: 10
+    - rid: 7754703150677491837
+      type: {class: FloatStatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: defense
+        statistic:
+          rid: 7754703150677491839
+    - rid: 7754703150677491839
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 06200c8604de2004e9d137aa559904e0, type: 2}
+        value: 15

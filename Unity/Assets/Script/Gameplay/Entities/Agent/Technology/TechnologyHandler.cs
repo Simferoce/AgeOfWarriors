@@ -44,9 +44,8 @@ namespace Game.Technology
         {
             ModifierHandler modifierHandler = agent.AddOrGetCachedComponent<ModifierHandler>();
             ModifierApplier modifierApplier = agent.AddOrGetCachedComponent<ModifierApplier>();
-            ModifierEntity modifier = perk.Instantiate();
 
-            modifierApplier.Apply(modifier, modifierHandler);
+            modifierApplier.Apply(perk, modifierHandler);
             OnPerkAcquired?.Invoke(perk);
         }
 

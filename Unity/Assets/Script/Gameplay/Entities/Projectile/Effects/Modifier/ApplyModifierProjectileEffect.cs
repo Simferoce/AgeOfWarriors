@@ -17,10 +17,7 @@ namespace Game.Projectile
             ModifierApplier modifierApplier = projectile.AddOrGetCachedComponent<ModifierApplier>();
             ModifierHandler target = entity.GetCachedComponent<ModifierHandler>();
 
-            if (target.TryGetModifier(modifierDefinition, out ModifierEntity modifier))
-                modifier.Refresh();
-            else
-                modifierApplier.Apply(modifierDefinition.Instantiate(), target, parameters.Select(x => x.Create(projectile)).ToArray());
+            modifierApplier.Apply(modifierDefinition, target, parameters.Select(x => x.Create(projectile)).ToArray());
         }
     }
 }

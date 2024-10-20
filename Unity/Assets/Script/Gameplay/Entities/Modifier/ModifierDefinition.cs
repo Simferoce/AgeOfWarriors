@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Game.Modifier
 {
@@ -17,6 +18,12 @@ namespace Game.Modifier
         public string Description { get => description; set => description = value; }
 
         public string ParseDescription() { return description; }
+
+        public virtual UniqueType GetUniqueType()
+        {
+            UniqueModifierBehaviour uniqueModifierBehaviour = prefab.GetComponent<ModifierEntity>().Behaviours.OfType<UniqueModifierBehaviour>().FirstOrDefault();
+            return uniqueModifierBehaviour != null ? uniqueModifierBehaviour.Type : UniqueType.None;
+        }
 
         public ModifierEntity Instantiate()
         {

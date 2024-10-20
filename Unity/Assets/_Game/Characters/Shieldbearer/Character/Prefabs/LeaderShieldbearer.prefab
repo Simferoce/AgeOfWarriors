@@ -5,7 +5,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 464811166439803521, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2659154771875852710, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: abilitiesDefinition.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2659154771875852710, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: 'abilitiesDefinition.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fe57550d51a64f4897979212d8ac68d, type: 2}
+    - target: {fileID: 2659154771875852710, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
+      propertyPath: 'abilitiesDefinition.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: bef61e67e44b5944bb0a2a95304474d1, type: 2}
     - target: {fileID: 3849294457998289623, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: m_Bounds.m_Center.x
       value: 0.024029195
@@ -89,11 +101,11 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: abilitiesDefinition.Array.data[0]
+      propertyPath: 'abilitiesDefinition.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 2fe57550d51a64f4897979212d8ac68d, type: 2}
     - target: {fileID: 5217243639580789687, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
-      propertyPath: abilitiesDefinition.Array.data[1]
+      propertyPath: 'abilitiesDefinition.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: bef61e67e44b5944bb0a2a95304474d1, type: 2}
     - target: {fileID: 5477393054522080936, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
@@ -130,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6705402225686340843, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: m_Name
-      value: Leader
+      value: LeaderShieldbearer
       objectReference: {fileID: 0}
     - target: {fileID: 7154503150658746679, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
       propertyPath: m_Sprite
@@ -173,5 +185,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 681735c8b7cadf94685a5d6834d147e1, type: 3}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}

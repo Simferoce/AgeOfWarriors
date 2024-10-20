@@ -48,7 +48,7 @@ namespace Game.Modifier
                 Kill();
         }
 
-        public void Refresh()
+        public void Refresh(params ModifierParameter[] parameters)
         {
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
                 modifierBehaviour.Refresh();

@@ -32,8 +32,8 @@ namespace Game.Character
         public override FactionType Faction => IsConfused ? Faction.GetConfusedFaction() : Agent.Faction;
 
         public float Health { get; set; }
-        public float MaxHealth => Definition.MaxHealth + this.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.MaxHealthFlat));
-        public float Defense => Definition.Defense /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value)*/;
+        public float MaxHealth => Definition.MaxHealth + this.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticIdentifiant.MaxHealthFlat);
+        public float Defense => Definition.Defense + this.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticIdentifiant.DefenseFlat);
         public float AttackSpeed => Definition.AttackSpeed /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value))*/;
         public float AttackPower => Definition.AttackPower /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value)*/;
         public float Speed => Definition.Speed/* * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value))*/;

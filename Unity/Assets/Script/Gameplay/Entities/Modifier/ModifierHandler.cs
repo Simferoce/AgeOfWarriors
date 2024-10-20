@@ -43,10 +43,35 @@ namespace Game.Modifier
             return modifiers.FirstOrDefault(x => x.Definition == definition);
         }
 
+        public bool TryGetModifier(ModifierDefinition definition, ModifierApplier applier, out ModifierEntity modifier)
+        {
+            modifier = modifiers.FirstOrDefault(x => x.Definition == definition && x.Applier == applier);
+            return modifier != null;
+        }
+
         public bool TryGetModifier(ModifierDefinition definition, out ModifierEntity modifier)
         {
             modifier = modifiers.FirstOrDefault(x => x.Definition == definition);
             return modifier != null;
+        }
+
+        public bool TryGetUnique(ModifierDefinition definition, ModifierApplier applier, out ModifierEntity modifier)
+        {
+            UniqueType uniqueType = definition.GetUniqueType();
+
+            if (uniqueType == UniqueType.None)
+            {
+                modifier = null;
+                return false;
+            }
+
+            if (uniqueType == UniqueType.ByDefinition)
+                return TryGetModifier(definition, out modifier);
+
+            if (uniqueType == UniqueType.ByDefinition)
+                return TryGetModifier(definition, applier, out modifier);
+
+            throw new NotImplementedException();
         }
     }
 }

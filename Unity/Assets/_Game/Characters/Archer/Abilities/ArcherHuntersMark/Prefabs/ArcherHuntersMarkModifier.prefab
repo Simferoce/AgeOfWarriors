@@ -61,6 +61,7 @@ MonoBehaviour:
   behaviours:
   - rid: 7754703128047648929
   - rid: 7754703128047648951
+  - rid: 7754703150677491840
   references:
     version: 2
     RefIds:
@@ -111,3 +112,7 @@ MonoBehaviour:
     - rid: 7754703128047648965
       type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 
+    - rid: 7754703150677491840
+      type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        type: 2

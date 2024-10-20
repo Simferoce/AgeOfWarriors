@@ -40,8 +40,7 @@ namespace Game.Ability
             {
                 if (target.TryGetCachedComponent<ModifierHandler>(out ModifierHandler targetModifiable))
                 {
-                    ModifierEntity modifierEntity = modifierDefinition.Instantiate();
-                    modifierApplier.Apply(modifierEntity, targetModifiable, parameters.Select(x => x.Create(Ability)).ToArray());
+                    modifierApplier.Apply(modifierDefinition, targetModifiable, parameters.Select(x => x.Create(Ability)).ToArray());
                 }
             }
 
