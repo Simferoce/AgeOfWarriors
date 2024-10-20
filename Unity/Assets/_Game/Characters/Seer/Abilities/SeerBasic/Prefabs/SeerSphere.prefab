@@ -137,13 +137,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: -9219538325602513416}
-  projectileDeath:
-    rid: 7754703128047648912
   projectileMovements:
   - rid: 7754703128047648908
   - rid: 7754703128047648907
+  behaviours: []
   impacts:
-  - rid: 7754703128047648909
+  - rid: 7754703144169767117
   references:
     version: 2
     RefIds:
@@ -158,19 +157,35 @@ MonoBehaviour:
       type: {class: AngledProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         angle: 40
-    - rid: 7754703128047648909
-      type: {class: AttackProjectileImpact, ns: Game.Projectile, asm: Assembly-CSharp}
+    - rid: 7754703144169767117
+      type: {class: CollisionProjectileImpact, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        filter:
+          rid: 7754703144169767118
+        effects:
+        - rid: 7754703144169767119
+        - rid: 7754703144169767121
+    - rid: 7754703144169767118
+      type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767119
+      type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         damage:
-          rid: 7754703128047648910
+          rid: 7754703144169767120
         armorPenetration:
           rid: -2
-    - rid: 7754703128047648910
+    - rid: 7754703144169767120
       type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
         name: damage
-    - rid: 7754703128047648912
+    - rid: 7754703144169767121
+      type: {class: KillProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        projectileDeath:
+          rid: 7754703144169767122
+    - rid: 7754703144169767122
       type: {class: BubbleUpProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         duration: 0.25

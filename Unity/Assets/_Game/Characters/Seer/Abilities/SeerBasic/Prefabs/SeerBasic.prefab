@@ -72,9 +72,11 @@ MonoBehaviour:
     - rid: 7754703128047648894
       type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data:
+        countInterval: {x: 1, y: 1}
         filter:
           rid: 7754703128047648895
-        count: 1
+        orderBy:
+        - rid: 7754703144169767114
     - rid: 7754703128047648895
       type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
       data:
@@ -102,18 +104,21 @@ MonoBehaviour:
         origin:
           rid: 7754703128047648902
         parameters:
-        - rid: 7754703128047648903
+        - rid: 7754703144169767115
     - rid: 7754703128047648902
       type: {class: TransformProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         origin: ProjectileOrigin
-    - rid: 7754703128047648903
-      type: {class: FloatStatisticAbilityProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
+    - rid: 7754703144169767114
+      type: {class: PriorityAbilityTargetOrderBy, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703144169767115
+      type: {class: FloatStatisticProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         name: damage
         statistic:
-          rid: 7754703128047648904
-    - rid: 7754703128047648904
+          rid: 7754703144169767116
+    - rid: 7754703144169767116
       type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
