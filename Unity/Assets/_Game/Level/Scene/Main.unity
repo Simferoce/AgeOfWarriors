@@ -1653,7 +1653,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: 74a688cb15379f34dae1112a4198926c, type: 2}
+      objectReference: {fileID: 11400000, guid: 71ef5a81b0132e0478a2cc1b244d3357, type: 2}
     - target: {fileID: 5053631171570033998, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: m_Name
       value: PlayerAgent
