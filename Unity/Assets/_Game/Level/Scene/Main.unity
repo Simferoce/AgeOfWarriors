@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   cheatCost: 1
-  maxCharacter: 3
+  maxCharacter: 1
   technologyGainMultiplier: 0
   factorySpeed: 10
 --- !u!4 &97917530
@@ -1641,7 +1641,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+      objectReference: {fileID: 11400000, guid: 3ddf776ed1310c04f9b4c5200636d2a3, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[1]'
       value: 
@@ -1649,7 +1649,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: a0a3e2c88b079f4458c331514474afcc, type: 2}
+      objectReference: {fileID: 11400000, guid: 2a683f36d1e23b348a11b9d7031ddcc0, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[3]'
       value: 
@@ -1941,7 +1941,7 @@ PrefabInstance:
       objectReference: {fileID: 111389768}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: loadout.agentObjectsDefinition.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[0]'
