@@ -15,9 +15,15 @@ MonoBehaviour:
   id: cce19f95e6f109c44975f418c74151c8
   title: 
   icon: {fileID: 0}
-  description: 
+  description:
+    text: 
+    parameters: []
+  descriptionOld: 
   prefab: {fileID: 8563415768294624348, guid: 425d537dc6dde5e468d7621c0e203e78, type: 3}
   showOnHealthBar: 1
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33,7 +39,10 @@ MonoBehaviour:
   id: 27e8f34fddcd3db449e5e108d2aa4fe2
   title: 
   icon: {fileID: 0}
-  description: 
+  description:
+    text: 
+    parameters: []
+  descriptionOld: 
   prefab: {fileID: 899619428102555062, guid: 04b6550b102bb2249b97dbbe5a0bf439, type: 3}
   showOnHealthBar: 1
   technologyTreeIcon: {fileID: 0}

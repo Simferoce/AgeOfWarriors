@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 006b6adb402372743a772d4ea309584b
   title: Healing Potion Throw
-  description: Throw a potion that heals an ally on contact by {0}.
+  descriptionOld: Throw a potion that heals an ally on contact by {0}.
   prefab: {fileID: 815283590128273858, guid: 08ed66d5d8883da4c9d3e88907deffd1, type: 3}
-  reachPercentage: 1
-  heal: 2
-  cooldown: 5
+  description:
+    text: Throw a potion that heals an ally on contact by {0}.
+    parameters: []
+  references:
+    version: 2
+    RefIds: []

@@ -7,7 +7,7 @@ namespace Game.Projectile
     [Serializable]
     public class ParameterReferenceProjectileStatistic : ProjectileStatistic
     {
-        [SerializeField] private string name;
+        [SerializeField] private string parameterName;
 
         public override T GetValue<T>(object context)
         {
@@ -15,6 +15,14 @@ namespace Game.Projectile
                 return modifierStatistic.Value;
 
             return default(T);
+        }
+
+        public override string GetDescription(object context)
+        {
+            if (context is ProjectileEntity && TryResolve(context, out StatisticProjectileParameter modifierStatistic))
+                return modifierStatistic.GetDescription();
+
+            return $"<color=#{definition.ColorHex}>({definition.TextIcon})</color>";
         }
 
         private bool TryResolve<T>(object context, out T statistic)

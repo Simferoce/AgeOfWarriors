@@ -8,16 +8,18 @@ namespace Game.Modifier
     {
         [SerializeField] private string title;
         [SerializeField] private Sprite icon;
-        [SerializeField] private string description;
+        [SerializeField] private Description description;
         [SerializeField] private GameObject prefab;
         [SerializeField] private bool showOnHealthBar = true;
 
         public Sprite Icon { get => icon; }
         public string Title { get => title; }
         public bool Show { get => showOnHealthBar; set => showOnHealthBar = value; }
-        public string Description { get => description; set => description = value; }
 
-        public string ParseDescription() { return description; }
+        public string ParseDescription(object context)
+        {
+            return description.Parse(this, context);
+        }
 
         public virtual UniqueType GetUniqueType()
         {

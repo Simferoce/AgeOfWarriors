@@ -18,10 +18,11 @@ namespace Game.UI.Windows
             abilityInspectorWindow.title.text = ability.Definition.Title;
             abilityInspectorWindow.description.text = ability.ParseDescription();
 
-            if (ability.Cooldown > 0f)
+            float cooldown = ability.GetCachedComponent<StatisticIndex>().Max(StatisticIdentifiant.Cooldown);
+            if (cooldown > 0f)
             {
                 abilityInspectorWindow.cooldownText.alpha = 1f;
-                abilityInspectorWindow.cooldownText.text = $"{ability.Cooldown}{StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Cooldown).TextIcon}";
+                abilityInspectorWindow.cooldownText.text = $"{cooldown}{StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Cooldown).TextIcon}";
             }
             else
             {

@@ -17,6 +17,9 @@ namespace Game.Ability
         {
             base.Initialize(ability);
             lastUsed = float.MinValue;
+
+            if (cooldown != null)
+                ability.GetCachedComponent<StatisticIndex>().Add(new StatisticFunction<float>(() => Cooldown, cooldown.Name, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Cooldown)));
         }
 
         public override bool Validate()

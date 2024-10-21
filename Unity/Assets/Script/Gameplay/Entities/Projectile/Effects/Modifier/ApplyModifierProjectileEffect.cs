@@ -12,6 +12,14 @@ namespace Game.Projectile
         [SerializeField] private ModifierDefinition modifierDefinition;
         [SerializeReference, SubclassSelector] private List<ModifierParameterFactory> parameters;
 
+        public override void Initialize(ProjectileEntity projectile)
+        {
+            base.Initialize(projectile);
+
+            foreach (ModifierParameterFactory parameter in parameters)
+                parameter.Initialize(projectile);
+        }
+
         public void Execute(Entity entity)
         {
             ModifierApplier modifierApplier = projectile.AddOrGetCachedComponent<ModifierApplier>();

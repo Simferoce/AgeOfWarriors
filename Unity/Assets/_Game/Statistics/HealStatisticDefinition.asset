@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 43442952713ba724d9f3d09e9d1abdf9
   icon: {fileID: 0}
-  humanReadableId: heal
   title: Heal
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  isPercentage: 0

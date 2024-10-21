@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1ccc5b379e02eba4d9b26729c6ede2af
   icon: {fileID: 0}
-  humanReadableId: duration
   title: Duration
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  isPercentage: 0

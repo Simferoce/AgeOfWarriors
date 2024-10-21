@@ -10,6 +10,24 @@ namespace Game.Modifier
     {
         [SerializeReference, SubclassSelector] private Statistic multiplier;
 
+        public override string GetDescription(object context)
+        {
+            if (context is not ModifierEntity modifier)
+            {
+                Debug.LogError($"Expecting the {context} to be of type {nameof(ModifierEntity)}.");
+                return default;
+            }
+
+            StackModifierBehaviour stackModifierBehaviour = modifier.Behaviours.FirstOrDefault(x => x is StackModifierBehaviour) as StackModifierBehaviour;
+            if (stackModifierBehaviour == null)
+            {
+                Debug.LogError($"Expecting the {modifier} to own {nameof(StackModifierBehaviour)}.", modifier);
+                return default;
+            }
+
+            return $"(stacks * {multiplier.GetDescription(context)})<color=#{ColorUtility.ToHtmlStringRGBA(Color.white)}>({GetValue<float>(context)})</color>";
+        }
+
         public override T GetValue<T>(object context)
         {
             if (context is not ModifierEntity modifier)

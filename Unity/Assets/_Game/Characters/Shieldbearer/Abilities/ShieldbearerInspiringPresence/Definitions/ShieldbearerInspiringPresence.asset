@@ -15,9 +15,19 @@ MonoBehaviour:
   id: 06d847f75400868408459a0345d91d65
   title: Inspiring Presence - Defense
   icon: {fileID: -1676996386, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Increase defense by {0}.
+  description:
+    text: Increase defense by {0}.
+    parameters:
+    - rid: 7754703153621368909
   prefab: {fileID: 534274834742516742, guid: 023357a01787c8544a550875316e2647, type: 3}
   showOnHealthBar: 1
+  references:
+    version: 2
+    RefIds:
+    - rid: 7754703153621368909
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: defense_flat
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,5 +42,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2fe57550d51a64f4897979212d8ac68d
   title: Inspiring Presence
-  description: Increase defense by {0} of any ally in {1} meters for {2} seconds.
+  description:
+    text: Increase defense by {0} of any ally in {1} meters for {2} seconds.
+    parameters:
+    - rid: 7754703153621368927
+    - rid: 7754703153621368928
+    - rid: 7754703153621368929
   prefab: {fileID: 4759011807880347097, guid: 11db9b6c5b59ecc418da60fe709596c6, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7754703153621368927
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: defense_flat
+    - rid: 7754703153621368928
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range
+    - rid: 7754703153621368929
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: duration

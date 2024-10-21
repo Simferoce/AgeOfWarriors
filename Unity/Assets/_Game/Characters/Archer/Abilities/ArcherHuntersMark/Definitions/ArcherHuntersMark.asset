@@ -14,9 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 94bc3887fe1aaad468e21f5c79064f4f
   title: Hunter's Mark
-  description: Mark a target in {0} meters for {1} seconds which receive an additional
+  descriptionOld: Mark a target in {0} meters for {1} seconds which receive an additional
     {2} damage per hit taken.
   prefab: {fileID: 6398100958839073666, guid: cd61022fd62f5fe4d95b39b35ad3e644, type: 3}
+  description:
+    text: Mark a target in {0} meters for {1} seconds which receive an additional
+      {2} damage per hit taken.
+    parameters: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &4328000484182388948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,6 +39,12 @@ MonoBehaviour:
   id: c4720fddb23620c4b8ebe740273906c1
   title: Hunter's Mark
   icon: {fileID: -412835066, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
-  description: Receive an additional {0} damage per hit taken.
+  description:
+    text: Receive an additional {0} damage per hit taken.
+    parameters: []
+  descriptionOld: Receive an additional {0} damage per hit taken.
   prefab: {fileID: 6668665993678449400, guid: 5d7b351e114e7724d91a74d62c48e074, type: 3}
   showOnHealthBar: 1
+  references:
+    version: 2
+    RefIds: []

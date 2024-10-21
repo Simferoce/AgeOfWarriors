@@ -14,5 +14,11 @@ namespace Game.Modifier
         {
             return new StatisticModifierParameter<float>(name, statistic.Definition, statistic.GetValue<float>(entity));
         }
+
+        public override void Initialize(object context)
+        {
+            if (context is Entity entity)
+                entity.AddOrGetCachedComponent<StatisticIndex>().Add(statistic);
+        }
     }
 }

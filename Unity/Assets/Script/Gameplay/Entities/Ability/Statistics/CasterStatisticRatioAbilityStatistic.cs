@@ -17,5 +17,13 @@ namespace Game.Ability
 
             return StatisticConverter.ConvertGeneric<T, float>(ability.Caster.Entity.GetCachedComponent<StatisticIndex>().SelfByDefinition<float>(casterDefinition) * ratio);
         }
+
+        public override string GetDescription(object context)
+        {
+            if (context is AbilityEntity)
+                return $"<color=#{casterDefinition.ColorHex}>({ratio:0.0%}{casterDefinition.TextIcon}) ({GetValue<float>(context)})</color>";
+
+            return $"<color=#{casterDefinition.ColorHex}>({ratio:0.0%}{casterDefinition.TextIcon})</color>";
+        }
     }
 }

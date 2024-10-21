@@ -15,6 +15,12 @@ MonoBehaviour:
   id: ba40cceb2cb71c94eb29850cb286878f
   title: 
   icon: {fileID: 0}
-  description: 
+  description:
+    text: 
+    parameters: []
+  descriptionOld: 
   prefab: {fileID: 5914724204636337494, guid: e9c9cc67f4580ee42bb47215a6cde8f6, type: 3}
   showOnHealthBar: 1
+  references:
+    version: 2
+    RefIds: []

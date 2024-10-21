@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Game.Statistics
 {
+    [Serializable]
     public class StatisticIndex
     {
+        [SerializeReference, SubclassSelector] private List<Statistic> statistics = new List<Statistic>();
+
         public IReadOnlyList<StatisticIndex> Relations => relations;
         public IReadOnlyList<Statistic> Statistics => statistics;
 
         private List<StatisticIndex> relations = new List<StatisticIndex>();
-        private List<Statistic> statistics = new List<Statistic>();
         private object context;
 
         public void Initialize(object context)
@@ -115,6 +119,35 @@ namespace Game.Statistics
         public bool Any(StatisticIdentifiant statisticIdentifiant)
         {
             return Any(StatisticDefinitionRepository.Instance.GetById(statisticIdentifiant));
+        }
+
+        public float Max(StatisticDefinition definition)
+        {
+            float max = statistics.Where(x => x.Definition == definition).DefaultIfEmpty().Max(x => x?.GetValue<float>(context) ?? 0f);
+            foreach (StatisticIndex relation in relations)
+                max = Mathf.Max(max, relation.Max(definition));
+
+            return max;
+        }
+
+        public float Max(StatisticIdentifiant statisticIdentifiant)
+        {
+            return Max(StatisticDefinitionRepository.Instance.GetById(statisticIdentifiant));
+        }
+
+        public bool TryGetStatisticByName(string name, out Statistic statistic)
+        {
+            statistic = statistics.FirstOrDefault(x => x.Name == name);
+            if (statistic != null)
+                return true;
+
+            foreach (StatisticIndex relation in relations)
+            {
+                if (relation.TryGetStatisticByName(name, out statistic))
+                    return true;
+            }
+
+            return false;
         }
     }
 }

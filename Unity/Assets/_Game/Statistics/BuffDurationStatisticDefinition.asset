@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: cbdb2f244b5bcc947aa217190b37b0f5
   icon: {fileID: 0}
-  humanReadableId: buff_duration
   title: Buff Duration
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  isPercentage: 0

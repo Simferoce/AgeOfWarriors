@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Ability
@@ -8,6 +9,13 @@ namespace Game.Ability
     public class OrAbilityTargetFilter : AbilityTargetFilter
     {
         [SerializeReference, SubclassSelector] private List<AbilityTargetFilter> filters = new List<AbilityTargetFilter>();
+
+        public override void Initialize(AbilityEntity ability)
+        {
+            base.Initialize(ability);
+            foreach (AbilityTargetFilter filter in filters.Where(x => x != null))
+                filter.Initialize(ability);
+        }
 
         public override bool Validate()
         {

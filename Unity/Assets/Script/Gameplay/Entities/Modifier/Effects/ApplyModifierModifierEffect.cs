@@ -21,6 +21,9 @@ namespace Game.Modifier
 
             modifierApplier = modifier.AddOrGetCachedComponent<ModifierApplier>();
 
+            foreach (ModifierParameterFactory parameter in parameterFactories)
+                parameter.Initialize(modifier);
+
             foreach (ModifierTarget modifierTarget in targets)
                 modifierTarget.Initialize(modifier);
         }

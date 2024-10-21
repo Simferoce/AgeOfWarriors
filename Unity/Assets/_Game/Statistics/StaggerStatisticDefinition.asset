@@ -15,4 +15,5 @@ MonoBehaviour:
   id: 4e5259fb27f804f4285e6e0dfa6c229d
   icon: {fileID: 0}
   title: Stagger
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  isPercentage: 0

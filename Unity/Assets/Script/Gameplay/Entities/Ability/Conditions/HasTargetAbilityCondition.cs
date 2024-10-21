@@ -16,6 +16,13 @@ namespace Game.Ability
 
         public List<Target> Targets { get; set; } = new List<Target>();
 
+        public override void Initialize(AbilityEntity ability)
+        {
+            base.Initialize(ability);
+            if (filter != null)
+                filter.Initialize(ability);
+        }
+
         public override bool Validate()
         {
             bool changed = base.Validate();

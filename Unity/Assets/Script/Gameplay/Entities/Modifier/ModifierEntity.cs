@@ -71,7 +71,7 @@ namespace Game.Modifier
 
         public string ParseDescription()
         {
-            return Definition.ParseDescription();
+            return Definition.ParseDescription(this);
         }
     }
 }

@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2ab37e8c507d5354b8c42977274cd9f3
   title: Attack Barrage
-  description: Execute 3 attacks dealing {0} damage in a burst on a target at {1}
-    meters.
+  descriptionOld: Execute 3 attacks dealing {0} damage in a burst on a target at
+    {1} meters.
   prefab: {fileID: 234122527794856266, guid: 6a679bb1f288ed742952ac06cf3653ed, type: 3}
-  reachPercentage: 1
-  damagePercentage: 1
-  cooldown: 5
+  description:
+    text: Execute 3 attacks dealing {0} damage in a burst on a target at {1} meters.
+    parameters: []
+  references:
+    version: 2
+    RefIds: []

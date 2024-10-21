@@ -1,4 +1,5 @@
 ﻿using Game.Components;
+using Game.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,6 @@ namespace Game.Ability
         public event Action OnAbilityEffectApplied;
 
         public Caster Caster { get; set; }
-        public float Cooldown => conditions.OfType<CooldownAbilityCondition>().Select(x => x.Cooldown).Max();
         public bool IsCasting { get; set; } = false;
         public override bool IsActive => IsCasting;
         public virtual List<Target> Targets => new List<Target>();
@@ -29,6 +29,9 @@ namespace Game.Ability
 
         public virtual void Initialize(Caster caster)
         {
+            StatisticIndex statisticIndex = AddOrGetCachedComponent<StatisticIndex>();
+            statisticIndex.Add(caster.Entity.GetCachedComponent<StatisticIndex>());
+
             Caster = caster;
             Parent = caster.Entity;
             faction = caster.Entity.Faction;
@@ -80,7 +83,7 @@ namespace Game.Ability
 
         public string ParseDescription()
         {
-            return Definition.ParseDescription();
+            return Definition.ParseDescription(this);
         }
     }
 }

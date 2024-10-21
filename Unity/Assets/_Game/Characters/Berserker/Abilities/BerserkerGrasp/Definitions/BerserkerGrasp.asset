@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 96bcb15ffca68c647bcecca181aee9c2
   title: Grasp
-  description: Pull all enemies in {0} meters. Staggers the affected enemies for
+  descriptionOld: Pull all enemies in {0} meters. Staggers the affected enemies for
     {1} seconds. Trigger only if there is at least 2 enemies in range.
   prefab: {fileID: 5897430954624599547, guid: 18ad5626a0432ca47aad335c827312a3, type: 3}
-  reachPercentage: 2
-  cooldown: 7.5
-  buffDuration: 2
+  description:
+    text: Pull all enemies in {0} meters. Staggers the affected enemies for {1} seconds.
+      Trigger only if there is at least 2 enemies in range.
+    parameters: []
+  references:
+    version: 2
+    RefIds: []

@@ -7,7 +7,7 @@ namespace Game.Modifier
     [Serializable]
     public class ParameterReferenceModifierStatistic : ModifierStatistic
     {
-        [SerializeField] private string name;
+        [SerializeField] private string parameterName;
 
         public override T GetValue<T>(object context)
         {
@@ -15,6 +15,14 @@ namespace Game.Modifier
                 return modifierStatistic.Value;
 
             return default(T);
+        }
+
+        public override string GetDescription(object context)
+        {
+            if (context is ModifierEntity && TryResolve(context, out StatisticModifierParameter modifierStatistic))
+                return modifierStatistic.GetDescription();
+
+            return $"<color=#{definition.ColorHex}>({definition.TextIcon})</color>";
         }
 
         private bool TryResolve<T>(object context, out T statistic)

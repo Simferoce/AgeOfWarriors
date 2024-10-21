@@ -6,15 +6,14 @@ namespace Game.Ability
     public class AbilityDefinition : Definition
     {
         [SerializeField] private string title;
-        [SerializeField] private string description;
+        [SerializeField] private Description description;
         [SerializeField] private GameObject prefab;
 
         public string Title { get => title; }
-        public string Description { get => description; set => description = value; }
 
-        public virtual string ParseDescription()
+        public virtual string ParseDescription(object context)
         {
-            return Description;
+            return description.Parse(this, context);
         }
 
         public AbilityEntity GetAbility()

@@ -7,7 +7,7 @@ namespace Game.Projectile
     {
         protected ProjectileEntity projectile;
 
-        public void Initialize(ProjectileEntity projectile)
+        public virtual void Initialize(ProjectileEntity projectile)
         {
             this.projectile = projectile;
         }

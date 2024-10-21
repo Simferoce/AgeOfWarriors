@@ -70,13 +70,13 @@ namespace Game.Character
             base.Spawn(agent, spawnNumber, direction);
 
             StatisticIndex statisticIndex = GetCachedComponent<StatisticIndex>();
-            statisticIndex.Add(new StatisticFunction<float>(() => Health, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Health)));
-            statisticIndex.Add(new StatisticFunction<float>(() => MaxHealth, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.MaxHealth)));
-            statisticIndex.Add(new StatisticFunction<float>(() => AttackPower, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.AttackPower)));
-            statisticIndex.Add(new StatisticFunction<float>(() => AttackSpeed, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.AttackSpeed)));
-            statisticIndex.Add(new StatisticFunction<float>(() => Defense, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Defense)));
-            statisticIndex.Add(new StatisticFunction<float>(() => Speed, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Speed)));
-            statisticIndex.Add(new StatisticFunction<float>(() => Reach, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Reach)));
+            statisticIndex.Add(new StatisticFunction<float>(() => Health, "health", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Health)));
+            statisticIndex.Add(new StatisticFunction<float>(() => MaxHealth, "max_health", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.MaxHealth)));
+            statisticIndex.Add(new StatisticFunction<float>(() => AttackPower, "attack_power", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.AttackPower)));
+            statisticIndex.Add(new StatisticFunction<float>(() => AttackSpeed, "attack_speed", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.AttackSpeed)));
+            statisticIndex.Add(new StatisticFunction<float>(() => Defense, "defense", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Defense)));
+            statisticIndex.Add(new StatisticFunction<float>(() => Speed, "speed", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Speed)));
+            statisticIndex.Add(new StatisticFunction<float>(() => Reach, "reach", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Reach)));
 
             Health = MaxHealth;
 

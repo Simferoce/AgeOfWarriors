@@ -15,4 +15,5 @@ MonoBehaviour:
   id: 1687044977f8da6489e79d61a4fa60b9
   icon: {fileID: 0}
   title: 
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  isPercentage: 0

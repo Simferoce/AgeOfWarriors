@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class Entity : MonoBehaviour
+    public abstract class Entity : MonoBehaviour, IEntity
     {
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
 

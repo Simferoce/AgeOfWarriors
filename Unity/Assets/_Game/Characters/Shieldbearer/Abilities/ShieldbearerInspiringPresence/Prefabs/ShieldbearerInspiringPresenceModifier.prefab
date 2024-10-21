@@ -77,8 +77,9 @@ MonoBehaviour:
     - rid: 7754703150677491832
       type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
         name: duration
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        parameterName: 
     - rid: 7754703150677491833
       type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -87,5 +88,6 @@ MonoBehaviour:
     - rid: 7754703150677491834
       type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
+        name: defense_flat
         definition: {fileID: 11400000, guid: 06200c8604de2004e9d137aa559904e0, type: 2}
-        name: defense
+        parameterName: defense_flat

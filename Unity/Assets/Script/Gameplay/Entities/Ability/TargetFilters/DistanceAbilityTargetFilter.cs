@@ -22,6 +22,13 @@ namespace Game.Ability
             return changed;
         }
 
+        public override void Initialize(AbilityEntity ability)
+        {
+            base.Initialize(ability);
+            if (distance != null)
+                ability.AddOrGetCachedComponent<StatisticIndex>().Add(distance);
+        }
+
         public override bool Execute(AbilityEntity source, Entity targetEntity)
         {
             Target target = targetEntity.GetCachedComponent<Target>();
