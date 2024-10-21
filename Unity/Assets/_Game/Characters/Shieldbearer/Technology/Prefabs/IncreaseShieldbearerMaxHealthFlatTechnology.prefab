@@ -59,9 +59,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visibleByDefault: 1
   behaviours:
-  - rid: -2
+  - rid: 7754703153621368937
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 7754703153621368937
+      type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        triggers:
+        - rid: 7754703153621368938
+        effects:
+        - rid: 7754703153621368939
+    - rid: 7754703153621368938
+      type: {class: OnAgentCharacterSpawnModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        affected: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+    - rid: 7754703153621368939
+      type: {class: ApplyModifierModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: -1639253765382325953, guid: 27e8f34fddcd3db449e5e108d2aa4fe2, type: 2}
+        targets:
+        - rid: 7754703153621368940
+        parameterFactories:
+        - rid: 7754703153621368941
+    - rid: 7754703153621368940
+      type: {class: TriggerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703153621368941
+      type: {class: FloatStatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: max_health_flat
+        statistic:
+          rid: 7754703153621368942
+    - rid: 7754703153621368942
+      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: max_health_flat
+        definition: {fileID: 11400000, guid: 80313f8013c25d5429c444461ffe8b6d, type: 2}
+        value: 25

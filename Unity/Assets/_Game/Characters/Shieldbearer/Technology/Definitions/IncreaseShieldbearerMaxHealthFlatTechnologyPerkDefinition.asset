@@ -16,14 +16,18 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description:
-    text: 
-    parameters: []
-  descriptionOld: 
+    text: Increase max health by {0}.
+    parameters:
+    - rid: 7754703153621368945
   prefab: {fileID: 8563415768294624348, guid: 425d537dc6dde5e468d7621c0e203e78, type: 3}
   showOnHealthBar: 1
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7754703153621368945
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: max_health_flat
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,13 +44,17 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description:
-    text: 
-    parameters: []
-  descriptionOld: 
+    text: Increase max health of shieldbearer by {0}.
+    parameters:
+    - rid: 7754703153621368946
   prefab: {fileID: 899619428102555062, guid: 04b6550b102bb2249b97dbbe5a0bf439, type: 3}
-  showOnHealthBar: 1
+  showOnHealthBar: 0
   technologyTreeIcon: {fileID: 0}
   requirements: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7754703153621368946
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: max_health_flat
