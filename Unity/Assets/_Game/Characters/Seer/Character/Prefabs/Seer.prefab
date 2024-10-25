@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 102076219234139461}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.0437042, y: 3.98, z: 0.010660799}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 464811166439803521}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5863107809128820654
 MonoBehaviour:
@@ -69,13 +69,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5393432416403401351}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.5350001, y: 2.635, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6571384368056576865}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3355230769917440732
 SpriteRenderer:
@@ -94,6 +94,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -134,7 +137,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    serializedVersion: 2
+    serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 89974853300181392, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
@@ -150,7 +153,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 270189467573928427, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: abilitiesDefinition.Array.data[0]
+      propertyPath: 'abilitiesDefinition.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 583f27f933430694893ccbf3929fa8cf, type: 2}
     - target: {fileID: 427610621448729964, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
@@ -566,7 +569,7 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8016283899549924346, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
-      propertyPath: abilitiesDefinition.Array.data[0]
+      propertyPath: 'abilitiesDefinition.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 583f27f933430694893ccbf3929fa8cf, type: 2}
     - target: {fileID: 8507967783945570603, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
@@ -682,6 +685,7 @@ PrefabInstance:
       value: 0.64104176
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 5596830681929695453, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       insertIndex: -1
@@ -689,6 +693,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1218935998251786557, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5530908141960072079}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9deeff04ffbfb1d42bb403e6bf5213aa, type: 3}
 --- !u!4 &464811166439803521 stripped
 Transform:

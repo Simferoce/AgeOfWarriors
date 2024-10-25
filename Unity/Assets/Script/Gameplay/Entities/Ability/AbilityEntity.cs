@@ -29,8 +29,7 @@ namespace Game.Ability
 
         public virtual void Initialize(Caster caster)
         {
-            StatisticIndex statisticIndex = AddOrGetCachedComponent<StatisticIndex>();
-            statisticIndex.Add(caster.Entity.GetCachedComponent<StatisticIndex>());
+            GetCachedComponent<StatisticIndex>().Add(caster.Entity.GetCachedComponent<StatisticIndex>());
 
             Caster = caster;
             Parent = caster.Entity;

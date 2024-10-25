@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Statistics;
+using System;
 using UnityEngine;
 
 namespace Game.Modifier
@@ -7,9 +8,9 @@ namespace Game.Modifier
     public class TimeModifierBehaviour : ModifierBehaviour, IModifierDuration
     {
         [SerializeReference, SubclassSelector]
-        private ModifierStatistic duration;
+        private Statistic duration;
 
-        public float Duration { get => duration.GetValue<float>(modifier); }
+        public float Duration { get => /*duration.GetValue<float>(modifier)*/0f; }
         public float RemaingDuration { get => Time.time - startedAt; }
 
         private float startedAt = 0f;

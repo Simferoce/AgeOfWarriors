@@ -22,23 +22,11 @@ namespace Game.Projectile
                 effect.Initialize(projectile);
         }
 
-        public override bool Validate(ProjectileEntity projectile)
-        {
-            bool changed = base.Validate(projectile);
-            if (duration != null && duration.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Duration))
-            {
-                duration.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Duration);
-                changed = true;
-            }
-
-            return changed;
-        }
-
         public override void Update()
         {
             base.Update();
 
-            if (startedAt + duration.GetValue<float>(projectile) > Time.time)
+            if (startedAt/* + duration.GetValue<float>(projectile)*/ > Time.time)
                 return;
 
             foreach (IProjectileStandardEffect effect in effects)

@@ -2,34 +2,18 @@
 
 namespace Game.Projectile
 {
-    public abstract class StatisticProjectileParameter : ProjectileParameter
+    public class StatisticProjectileParameter<T> : ProjectileParameter<T>
     {
-        public StatisticDefinition StatisticDefinition { get; set; }
+        public Statistic<T> Statistic { get; set; }
 
-        protected StatisticProjectileParameter(string name, StatisticDefinition statisticDefinition)
+        public StatisticProjectileParameter(string name, Statistic<T> statistic) : base(name)
         {
-            StatisticDefinition = statisticDefinition;
-            this.Name = name;
+            Statistic = statistic;
         }
 
-        public abstract string GetDescription();
-    }
-
-    public class StatisticProjectileParameter<T> : StatisticProjectileParameter
-    {
-        public T Value { get; set; }
-
-        public StatisticProjectileParameter(string name, StatisticDefinition statisticDefinition, T value) : base(name, statisticDefinition)
+        public override T GetValue(Context context)
         {
-            Value = value;
-        }
-
-        public override string GetDescription()
-        {
-            if (StatisticDefinition.IsPercentage)
-                return $"<color=#{StatisticDefinition.ColorHex}>({Value:0.0%}{StatisticDefinition.TextIcon})</color>";
-            else
-                return $"<color=#{StatisticDefinition.ColorHex}>({Value}{StatisticDefinition.TextIcon})</color>";
+            return Statistic.GetValue(context);
         }
     }
 }

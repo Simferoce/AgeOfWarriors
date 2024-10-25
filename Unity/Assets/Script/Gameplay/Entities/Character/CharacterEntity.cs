@@ -31,9 +31,9 @@ namespace Game.Character
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override FactionType Faction => IsConfused ? Faction.GetConfusedFaction() : Agent.Faction;
 
-        public float Health { get; set; }
-        public float MaxHealth => Definition.MaxHealth + this.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticIdentifiant.MaxHealthFlat);
-        public float Defense => Definition.Defense + this.GetCachedComponent<StatisticIndex>().SumByDefinition(StatisticIdentifiant.DefenseFlat);
+        public float Health { get => this[StatisticIdentifiant.Health].GetValue<float>(null); set => (this[StatisticIdentifiant.Health] as StatisticModifiable<float>).Modify(value, null); }
+        public float MaxHealth => this[StatisticIdentifiant.MaxHealth].GetValue<float>(null);
+        public float Defense => Definition.Defense;
         public float AttackSpeed => Definition.AttackSpeed /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value))*/;
         public float AttackPower => Definition.AttackPower /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value)*/;
         public float Speed => Definition.Speed/* * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value))*/;
@@ -43,7 +43,7 @@ namespace Game.Character
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
         public bool IsInvulnerable => false;/*this.GetCachedComponent<GameModifierHandler>().GetModifiers().Any(x => x is IModifierInvulnerable);*/
         public bool IsConfused => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);*/
-        public bool IsStaggered => this.GetCachedComponent<StatisticIndex>().Any(StatisticIdentifiant.Stagger);
+        public bool IsStaggered => false;
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
 
@@ -70,13 +70,6 @@ namespace Game.Character
             base.Spawn(agent, spawnNumber, direction);
 
             StatisticIndex statisticIndex = GetCachedComponent<StatisticIndex>();
-            statisticIndex.Add(new StatisticFunction<float>(() => Health, "health", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Health)));
-            statisticIndex.Add(new StatisticFunction<float>(() => MaxHealth, "max_health", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.MaxHealth)));
-            statisticIndex.Add(new StatisticFunction<float>(() => AttackPower, "attack_power", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.AttackPower)));
-            statisticIndex.Add(new StatisticFunction<float>(() => AttackSpeed, "attack_speed", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.AttackSpeed)));
-            statisticIndex.Add(new StatisticFunction<float>(() => Defense, "defense", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Defense)));
-            statisticIndex.Add(new StatisticFunction<float>(() => Speed, "speed", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Speed)));
-            statisticIndex.Add(new StatisticFunction<float>(() => Reach, "reach", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Reach)));
 
             Health = MaxHealth;
 

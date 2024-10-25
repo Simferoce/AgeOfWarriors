@@ -55,8 +55,6 @@ namespace Game
             base.Spawn(agent, spawnNumber, direction);
 
             StatisticIndex statisticIndex = GetCachedComponent<StatisticIndex>();
-            statisticIndex.Add(new StatisticFunction<float>(() => Health, "health", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Health)));
-            statisticIndex.Add(new StatisticFunction<float>(() => MaxHealth, "health", StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.MaxHealth)));
 
             spawnPoint.Direction = direction;
             Health = MaxHealth;

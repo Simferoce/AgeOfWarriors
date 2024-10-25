@@ -14,11 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 403e6a5681908f94dbcb8f4dd075a7f4
   title: Basic
-  descriptionOld: Throw an arrow that deals {0} damage in {1} meters.
-  prefab: {fileID: 2238036748726012354, guid: 7fbe8b94e506e9242a9c7bd84158bd56, type: 3}
   description:
     text: Throw an arrow that deals {0} damage in {1} meters.
-    parameters: []
+    parameters:
+    - rid: 7754703200850804823
+    - rid: 7754703200850804824
+  prefab: {fileID: 2238036748726012354, guid: 7fbe8b94e506e9242a9c7bd84158bd56, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7754703200850804823
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+    - rid: 7754703200850804824
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range

@@ -9,6 +9,8 @@ namespace Game
 {
     public abstract class Entity : MonoBehaviour, IEntity
     {
+        [SerializeField] private StatisticIndex index;
+
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
 
         public event OnParentChangedDelegate OnParentChanged;
@@ -35,6 +37,11 @@ namespace Game
         public virtual FactionType Faction => FactionType.Undefined;
         public virtual bool IsActive { get => true; }
 
+        public Statistic this[StatisticIdentifiant identifiant]
+        {
+            get => GetCachedComponent<StatisticIndex>().Get(identifiant);
+        }
+
         private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();
         private Entity parent = null;
         private List<Entity> children = new List<Entity>();
@@ -42,7 +49,8 @@ namespace Game
         protected virtual void Awake()
         {
             EntityRepository.Instance.Add(this);
-            AddOrGetCachedComponent<StatisticIndex>().Initialize(this);
+            Link(index);
+            index.Initialize(this);
             EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
         }
 

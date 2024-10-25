@@ -13,6 +13,11 @@ namespace Game.Ability
         [SerializeReference, SubclassSelector] private ProjectileAbilityEffectOrigin origin;
         [SerializeReference, SubclassSelector] private List<ProjectileParameterFactory> parameters;
 
+        public override void Initialize(AbilityEntity ability)
+        {
+            base.Initialize(ability);
+        }
+
         public override void Apply()
         {
             GameObject gameObject = UnityEngine.Object.Instantiate(projectilePrefab, origin.GetPosition(Ability), Quaternion.identity);

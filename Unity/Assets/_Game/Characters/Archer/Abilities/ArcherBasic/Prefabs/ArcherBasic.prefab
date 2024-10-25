@@ -57,6 +57,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index:
+    statistics:
+    - rid: 7754703246279311360
+    - rid: 7754703246279311362
   conditions:
   - rid: 7754703128047648768
   - rid: 7754703128047648769
@@ -89,13 +93,7 @@ MonoBehaviour:
       type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         distance:
-          rid: 7754703128047648773
-    - rid: 7754703128047648773
-      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-        ratio: 1
+          name: range
     - rid: 7754703128047648774
       type: {class: ProjectileAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
       data:
@@ -103,20 +101,38 @@ MonoBehaviour:
         origin:
           rid: 7754703128047648777
         parameters:
-        - rid: 7754703144169767028
+        - rid: 7754703246279311365
     - rid: 7754703128047648777
       type: {class: TransformProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         origin: ProjectileBowEnd
-    - rid: 7754703144169767028
-      type: {class: FloatStatisticProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
+    - rid: 7754703246279311360
+      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        value:
+          rid: 7754703246279311361
+    - rid: 7754703246279311361
+      type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1
+    - rid: 7754703246279311362
+      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        value:
+          rid: 7754703246279311363
+    - rid: 7754703246279311363
+      type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1
+    - rid: 7754703246279311365
+      type: {class: StatisticProjectileParameterFactoryFloat, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         name: damage
         statistic:
-          rid: 7754703144169767030
-    - rid: 7754703144169767030
-      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-        ratio: 1
+          name: damage

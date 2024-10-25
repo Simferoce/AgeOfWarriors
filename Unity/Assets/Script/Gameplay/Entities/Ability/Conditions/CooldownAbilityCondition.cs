@@ -7,9 +7,7 @@ namespace Game.Ability
     [Serializable]
     public class CooldownAbilityCondition : AbilityCondition
     {
-        [SerializeReference, SubclassSelector] private Statistic cooldown;
-
-        public float Cooldown => cooldown.GetValue<float>(ability);
+        [SerializeField] private StatisticReference<float> cooldown;
 
         private float lastUsed = 0f;
 
@@ -17,26 +15,11 @@ namespace Game.Ability
         {
             base.Initialize(ability);
             lastUsed = float.MinValue;
-
-            if (cooldown != null)
-                ability.GetCachedComponent<StatisticIndex>().Add(new StatisticFunction<float>(() => Cooldown, cooldown.Name, StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Cooldown)));
-        }
-
-        public override bool Validate()
-        {
-            bool changed = base.Validate();
-            if (cooldown != null && cooldown.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Cooldown))
-            {
-                cooldown.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Cooldown);
-                changed = true;
-            }
-
-            return changed;
         }
 
         public override bool Execute()
         {
-            return Time.time - lastUsed > Cooldown;
+            return Time.time - lastUsed > cooldown.Resolve(ability).GetValue(null);
         }
 
         public override void OnAbilityEnded()

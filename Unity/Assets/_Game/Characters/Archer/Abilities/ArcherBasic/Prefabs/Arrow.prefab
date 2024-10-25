@@ -214,6 +214,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad934abfe165f5649b45856d47d2d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index:
+    statistics:
+    - rid: 7754703246279311438
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
   - rid: 7754703128047648873
@@ -224,8 +227,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 7754703128047648872
       type: {class: AlignWithVelocityProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
@@ -245,14 +246,9 @@ MonoBehaviour:
       type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         damage:
-          rid: 7754703133506797653
+          name: damage
         armorPenetration:
-          rid: -2
-    - rid: 7754703133506797653
-      type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        name: damage
+          name: 
     - rid: 7754703133506797681
       type: {class: KillProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -265,6 +261,17 @@ MonoBehaviour:
     - rid: 7754703144169767031
       type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
+    - rid: 7754703246279311438
+      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        value:
+          rid: 7754703246279311440
+    - rid: 7754703246279311440
+      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: damage
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5

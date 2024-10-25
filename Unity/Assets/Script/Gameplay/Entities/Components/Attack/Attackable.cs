@@ -1,5 +1,4 @@
-﻿using Game.Statistics;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game.Components
 {
@@ -41,8 +40,8 @@ namespace Game.Components
 
         public void TakeAttack(AttackData attack)
         {
-            float currentHealth = Entity.GetCachedComponent<StatisticIndex>().SelfByDefinition<float>(StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Health));
-            float currentDefense = Entity.GetCachedComponent<StatisticIndex>().TrySelfByDefinition<float>(StatisticIdentifiant.Defense, out float defenseValue) ? defenseValue : 0f;
+            float currentHealth = 0f;//Entity.GetCachedComponent<StatisticIndex>().SelfByDefinition<float>(StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Health));
+            float currentDefense = 0f;//Entity.GetCachedComponent<StatisticIndex>().TrySelfByDefinition<float>(StatisticIdentifiant.Defense, out float defenseValue) ? defenseValue : 0f;
             float increaseDamageTaken = 0f;//Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0);
             float rangedDamageReduction = 0f;//Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0);
                                              //List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();

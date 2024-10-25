@@ -25,21 +25,6 @@ namespace Game.Projectile
                 effect.Initialize(projectile);
         }
 
-        public override bool Validate(ProjectileEntity projectile)
-        {
-            bool changed = base.Validate(projectile);
-            if (range != null && range.Definition != StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Range))
-            {
-                range.Definition = StatisticDefinitionRepository.Instance.GetById(StatisticIdentifiant.Range);
-                changed |= true;
-            }
-
-            foreach (IProjectileStandardEffect effect in effects)
-                changed |= effect.Validate(projectile);
-
-            return changed;
-        }
-
         public override void Update()
         {
             base.Update();
@@ -48,8 +33,8 @@ namespace Game.Projectile
             distanceTraveled += delta;
 
             previousPosition = currentPosition;
-            if (distanceTraveled < range.GetValue<float>(projectile))
-                return;
+            //if (distanceTraveled < range.GetValue<float>(projectile))
+            //    return;
 
             foreach (IProjectileStandardEffect effect in effects)
                 effect.Execute();

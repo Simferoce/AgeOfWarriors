@@ -18,7 +18,7 @@ namespace Game.UI.Windows
             abilityInspectorWindow.title.text = ability.Definition.Title;
             abilityInspectorWindow.description.text = ability.ParseDescription();
 
-            float cooldown = ability.GetCachedComponent<StatisticIndex>().Max(StatisticIdentifiant.Cooldown);
+            float cooldown = 0f;//ability.GetCachedComponent<StatisticIndex>().Max(StatisticIdentifiant.Cooldown);
             if (cooldown > 0f)
             {
                 abilityInspectorWindow.cooldownText.alpha = 1f;
