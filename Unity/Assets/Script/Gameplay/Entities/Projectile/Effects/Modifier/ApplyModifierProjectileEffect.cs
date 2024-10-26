@@ -15,9 +15,6 @@ namespace Game.Projectile
         public override void Initialize(ProjectileEntity projectile)
         {
             base.Initialize(projectile);
-
-            foreach (ModifierParameterFactory parameter in parameters)
-                parameter.Initialize(projectile);
         }
 
         public void Execute(Entity entity)

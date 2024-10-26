@@ -3,7 +3,6 @@ using Game.Modifier;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 using UnityEngine;
 
@@ -22,7 +21,6 @@ namespace Game.Projectile
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeReference, SubclassSelector] private List<ProjectileMovement> projectileMovements = new List<ProjectileMovement>();
         [SerializeReference, SubclassSelector] private List<ProjectileBehaviour> behaviours = new List<ProjectileBehaviour>();
-        [SerializeReference, SubclassSelector] private List<ProjectileImpact> impacts = new List<ProjectileImpact>();
 
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public State StateValue { get => state; set => state = value; }
@@ -48,29 +46,6 @@ namespace Game.Projectile
 
             foreach (ProjectileBehaviour behaviour in behaviours)
                 behaviour.Initialize(this);
-
-            foreach (ProjectileImpact impact in impacts)
-                impact.Initialize(this);
-
-            //foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
-            //{
-            //    this.Entity.GetCachedComponent<ModifierHandler>().AddModifier(projectileModifier.GetModifier(this));
-            //}
-        }
-
-        public void OnValidate()
-        {
-            bool changed = false;
-            foreach (ProjectileImpact impact in impacts)
-                changed |= impact?.Validate(this) ?? false;
-
-            foreach (ProjectileBehaviour behaviour in behaviours)
-                changed |= behaviour?.Validate(this) ?? false;
-
-#if UNITY_EDITOR
-            if (changed)
-                EditorUtility.SetDirty(this);
-#endif
         }
 
         private void Update()
@@ -82,9 +57,6 @@ namespace Game.Projectile
             {
                 foreach (ProjectileBehaviour behaviour in behaviours)
                     behaviour.Update();
-
-                foreach (ProjectileImpact impact in impacts)
-                    impact.Update();
             }
             else if (StateValue == State.Dead)
             {
@@ -97,13 +69,13 @@ namespace Game.Projectile
             if (StateValue != State.Alive)
                 return;
 
-            foreach (ProjectileImpact effect in impacts)
-                effect.Impact(collider);
+            foreach (IProjectileZoneBehaviour effect in behaviours.OfType<IProjectileZoneBehaviour>())
+                effect.EnterZone(collider);
         }
 
         private void OnTriggerExit2D(Collider2D collider)
         {
-            foreach (ProjectileImpact effect in impacts)
+            foreach (IProjectileZoneBehaviour effect in behaviours.OfType<IProjectileZoneBehaviour>())
                 effect.LeaveZone(collider);
         }
 

@@ -9,7 +9,7 @@ namespace Game.Modifier
     public class DealDamageModifierEffect : ModifierEffect
     {
         [SerializeReference, SubclassSelector] private ModifierTarget target;
-        [SerializeReference, SubclassSelector] private Statistic damage;
+        [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private AttackData.Flag extraFlags;
 
         private AttackFactory attackFactory;

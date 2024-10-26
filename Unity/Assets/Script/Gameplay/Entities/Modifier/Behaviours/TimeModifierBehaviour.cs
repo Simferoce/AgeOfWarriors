@@ -7,10 +7,9 @@ namespace Game.Modifier
     [Serializable]
     public class TimeModifierBehaviour : ModifierBehaviour, IModifierDuration
     {
-        [SerializeReference, SubclassSelector]
-        private Statistic duration;
+        [SerializeField] private StatisticReference<float> duration;
 
-        public float Duration { get => /*duration.GetValue<float>(modifier)*/0f; }
+        public float Duration { get => duration.Resolve(null).GetValue<float>(null); }
         public float RemaingDuration { get => Time.time - startedAt; }
 
         private float startedAt = 0f;

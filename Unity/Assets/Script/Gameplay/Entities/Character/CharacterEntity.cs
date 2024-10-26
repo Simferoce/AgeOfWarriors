@@ -69,8 +69,6 @@ namespace Game.Character
         {
             base.Spawn(agent, spawnNumber, direction);
 
-            StatisticIndex statisticIndex = GetCachedComponent<StatisticIndex>();
-
             Health = MaxHealth;
 
             stateMachine.Initialize(new MoveState(this));

@@ -14,6 +14,5 @@ namespace Game.Projectile
         }
 
         public abstract Entity Execute(AttackResult attackResult);
-        public virtual bool Validate(ProjectileEntity projectile) { return false; }
     }
 }

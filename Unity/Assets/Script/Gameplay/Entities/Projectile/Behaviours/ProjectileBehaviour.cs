@@ -12,8 +12,6 @@ namespace Game.Projectile
             this.projectile = projectile;
         }
 
-        public virtual bool Validate(ProjectileEntity projectile) { return false; }
-
         public virtual void Update() { }
 
         public virtual void Dispose()

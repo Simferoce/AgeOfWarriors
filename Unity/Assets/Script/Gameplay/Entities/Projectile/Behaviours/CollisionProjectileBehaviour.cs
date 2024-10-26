@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Game.Projectile
 {
     [Serializable]
-    public class CollisionProjectileImpact : ProjectileImpact
+    public class CollisionProjectileBehaviour : ProjectileBehaviour, IProjectileZoneBehaviour
     {
         [SerializeReference, SubclassSelector] private ProjectileTargetFilter filter;
         [SerializeReference, SubclassSelector] private List<ProjectileEffect> effects;
@@ -25,18 +25,7 @@ namespace Game.Projectile
                 effect.Initialize(projectile);
         }
 
-        public override bool Validate(ProjectileEntity projectile)
-        {
-            bool changed = base.Validate(projectile);
-            if (filter != null)
-                changed |= filter.Validate(projectile);
-            foreach (ProjectileEffect effect in effects.Where(x => x != null))
-                changed |= effect.Validate(projectile);
-
-            return changed;
-        }
-
-        public override void Impact(Collider2D collider)
+        public void EnterZone(Collider2D collider)
         {
             if (collidersProcessed.Contains(collider))
                 return;
@@ -58,6 +47,10 @@ namespace Game.Projectile
                 effect.Execute();
 
             collidersProcessed.Add(collider);
+        }
+
+        public void LeaveZone(Collider2D collider)
+        {
         }
     }
 }

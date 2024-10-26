@@ -59,78 +59,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index:
     statistics:
-    - rid: 7754703246279311360
-    - rid: 7754703246279311362
+    - rid: 7754703286907174912
+    - rid: 7754703286907174914
   conditions:
-  - rid: 7754703128047648768
-  - rid: 7754703128047648769
+  - rid: 7754703286907174916
+  - rid: 7754703286907174917
   effects:
-  - rid: 7754703128047648774
+  - rid: 7754703286907174922
   trigger: Ability
   references:
     version: 2
     RefIds:
-    - rid: 7754703128047648768
-      type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
-      data: 
-    - rid: 7754703128047648769
-      type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        countInterval: {x: 1, y: 1}
-        filter:
-          rid: 7754703128047648770
-        orderBy: []
-    - rid: 7754703128047648770
-      type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        filters:
-        - rid: 7754703128047648771
-        - rid: 7754703128047648772
-    - rid: 7754703128047648771
-      type: {class: IsEnemyAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
-      data: 
-    - rid: 7754703128047648772
-      type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        distance:
-          name: range
-    - rid: 7754703128047648774
-      type: {class: ProjectileAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        projectilePrefab: {fileID: 6675190562695518451, guid: 9a33a33555180bf4690eff9ada726b89, type: 3}
-        origin:
-          rid: 7754703128047648777
-        parameters:
-        - rid: 7754703246279311365
-    - rid: 7754703128047648777
-      type: {class: TransformProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        origin: ProjectileBowEnd
-    - rid: 7754703246279311360
-      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+    - rid: 7754703286907174912
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: damage
         definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
         value:
-          rid: 7754703246279311361
-    - rid: 7754703246279311361
+          rid: 7754703286907174913
+    - rid: 7754703286907174913
       type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
         ratio: 1
-    - rid: 7754703246279311362
-      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+    - rid: 7754703286907174914
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: range
         definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
         value:
-          rid: 7754703246279311363
-    - rid: 7754703246279311363
+          rid: 7754703286907174915
+    - rid: 7754703286907174915
       type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
         ratio: 1
-    - rid: 7754703246279311365
+    - rid: 7754703286907174916
+      type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703286907174917
+      type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        countInterval: {x: 1, y: 1}
+        filter:
+          rid: 7754703286907174918
+        orderBy: []
+    - rid: 7754703286907174918
+      type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        filters:
+        - rid: 7754703286907174919
+        - rid: 7754703286907174920
+    - rid: 7754703286907174919
+      type: {class: IsEnemyAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703286907174920
+      type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        distance:
+          name: range
+    - rid: 7754703286907174922
+      type: {class: ProjectileAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 6675190562695518451, guid: 9a33a33555180bf4690eff9ada726b89, type: 3}
+        origin:
+          rid: 7754703286907174923
+        parameters:
+        - rid: 7754703286907174924
+    - rid: 7754703286907174923
+      type: {class: TransformProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        origin: ProjectileBowEnd
+    - rid: 7754703286907174924
       type: {class: StatisticProjectileParameterFactoryFloat, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         name: damage

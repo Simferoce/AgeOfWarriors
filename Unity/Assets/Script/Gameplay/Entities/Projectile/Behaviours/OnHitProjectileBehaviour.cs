@@ -50,21 +50,5 @@ namespace Game.Projectile
             base.Dispose();
             attackFactory.OnAttackLanded -= OnAttackLanded;
         }
-
-        public override bool Validate(ProjectileEntity projectile)
-        {
-            bool changed = base.Validate(projectile);
-
-            if (target != null)
-                changed |= target.Validate(projectile);
-
-            foreach (ProjectileTargetFilter filter in filters.Where(x => x != null))
-                filter.Validate(projectile);
-
-            foreach (ProjectileEffect effect in effects.Where(x => x != null))
-                effect.Validate(projectile);
-
-            return changed;
-        }
     }
 }

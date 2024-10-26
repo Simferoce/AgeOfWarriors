@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 318943d3680260d4d8ad4147cd8ec6ec, type: 3}
-  m_Name: MaxHealthStatisticDefinition
+  m_Name: ModifierMaxHealthFlatStatisticDefinition
   m_EditorClassIdentifier: 
-  id: 73d27da68cca71f4ebc2e071904b1f80
+  id: a27e5e6e7bc08c24cb6723bbe0954c64
   icon: {fileID: 4287196743007105525, guid: 0971139afa142b149b66296ac595fedf, type: 3}
-  humanReadableId: max_health
-  title: Max Health
+  humanReadableId: modifier_max_health_flat
+  title: Modifier Max Health Flat
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
   isPercentage: 0
-  flat:
-  - {fileID: 11400000, guid: 80313f8013c25d5429c444461ffe8b6d, type: 2}
+  flat: []
   percentage: []
   multiplier: []
   maximum: []
