@@ -39,7 +39,7 @@ namespace Game.Agent
             OnDestroyed?.Invoke(this);
         }
 
-        public virtual void Spawn(AgentEntity agent, int spawnNumber, int direction)
+        public void Spawn(AgentEntity agent, int spawnNumber, int direction)
         {
             Direction = direction;
             SpawnNumber = spawnNumber;
@@ -47,6 +47,8 @@ namespace Game.Agent
 
             transform.localScale = new Vector3(Mathf.Sign(direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
+
+        public virtual void Activate() { }
 
         public virtual AgentObjectDefinition GetDefinition() { return null; }
     }

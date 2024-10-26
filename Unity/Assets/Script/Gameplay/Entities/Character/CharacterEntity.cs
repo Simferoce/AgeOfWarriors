@@ -65,12 +65,11 @@ namespace Game.Character
                 Death();
         }
 
-        public override void Spawn(AgentEntity agent, int spawnNumber, int direction)
+        public override void Activate()
         {
-            base.Spawn(agent, spawnNumber, direction);
+            base.Activate();
 
             Health = MaxHealth;
-
             stateMachine.Initialize(new MoveState(this));
         }
 

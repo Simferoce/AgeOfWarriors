@@ -1,7 +1,6 @@
 using Game.Agent;
 using Game.Components;
 using Game.EventChannel;
-using Game.Statistics;
 using System;
 using UnityEngine;
 
@@ -50,13 +49,9 @@ namespace Game
             Destroy(gameObject);
         }
 
-        public override void Spawn(AgentEntity agent, int spawnNumber, int direction)
+        public override void Activate()
         {
-            base.Spawn(agent, spawnNumber, direction);
-
-            StatisticIndex statisticIndex = GetCachedComponent<StatisticIndex>();
-
-            spawnPoint.Direction = direction;
+            spawnPoint.Direction = Direction;
             Health = MaxHealth;
         }
     }

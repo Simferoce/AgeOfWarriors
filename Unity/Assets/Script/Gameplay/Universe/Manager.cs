@@ -29,7 +29,6 @@ namespace Game
             }
 
             Instance = (T)this;
-            DontDestroyOnLoad(Instance);
         }
     }
 }

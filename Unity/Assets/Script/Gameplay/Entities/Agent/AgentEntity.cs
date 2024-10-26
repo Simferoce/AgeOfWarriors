@@ -43,6 +43,7 @@ namespace Game.Agent
         private void Start()
         {
             agentBase.Spawn(this, nextSpawneeNumber++, direction);
+            agentBase.Activate();
         }
 
         private void Update()
@@ -71,6 +72,8 @@ namespace Game.Agent
         {
             AgentObject agentObject = agentObjectDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
             OnAgentObjectSpawn?.Invoke(agentObject);
+
+            agentObject.Activate();
         }
     }
 }
