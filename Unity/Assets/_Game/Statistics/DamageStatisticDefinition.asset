@@ -9,11 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 318943d3680260d4d8ad4147cd8ec6ec, type: 3}
   m_Name: DamageStatisticDefinition
   m_EditorClassIdentifier: 
   id: 00df8ac314188b945945353a3fbb705b
-  icon: {fileID: -197075369, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  icon: {fileID: -8086850440826228858, guid: 665809d0d2c840548bc049c603bae4d8, type: 3}
   humanReadableId: damage
   title: Damage
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
+  isPercentage: 0
+  flat: []
+  percentage: []
+  multiplier: []
+  maximum: []
+  minimum: []

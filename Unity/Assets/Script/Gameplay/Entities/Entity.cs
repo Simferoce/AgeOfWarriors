@@ -37,11 +37,6 @@ namespace Game
         public virtual FactionType Faction => FactionType.Undefined;
         public virtual bool IsActive { get => true; }
 
-        public Statistic this[StatisticIdentifiant identifiant]
-        {
-            get => GetCachedComponent<StatisticIndex>().Get(identifiant);
-        }
-
         private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();
         private Entity parent = null;
         private List<Entity> children = new List<Entity>();

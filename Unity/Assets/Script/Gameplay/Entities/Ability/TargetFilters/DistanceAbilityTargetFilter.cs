@@ -18,7 +18,7 @@ namespace Game.Ability
         public override bool Execute(AbilityEntity source, Entity targetEntity)
         {
             Target target = targetEntity.GetCachedComponent<Target>();
-            float distanceValue = distance?.Resolve(source).GetValue(null) ?? 0f;
+            float distanceValue = distance?.Resolve(source).GetValue<float>(null) ?? 0f;
             return Mathf.Abs((target.ClosestPoint(source.Caster.transform.position) - source.Caster.transform.position).x) < distanceValue;
         }
     }

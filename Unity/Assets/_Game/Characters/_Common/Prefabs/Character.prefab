@@ -61,73 +61,90 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index:
     statistics:
-    - rid: 7754703245271105626
-    - rid: 7754703245271105623
-    - rid: 7754703245271105628
-    - rid: 7754703245271105630
-    - rid: 7754703245271105632
+    - rid: 7754703281476337765
+    - rid: 7754703268775461013
+    - rid: 7754703281476337766
+    - rid: 7754703281476337947
+    - rid: 7754703281476337948
+    - rid: 7754703281476337953
+    - rid: 7754703281476337955
   types: 
   rigidbody: {fileID: 9215057588866617565}
   hitbox: {fileID: 8271833102721241429}
   references:
     version: 2
     RefIds:
-    - rid: 7754703245271105623
-      type: {class: StatisticModifiableFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: health
-        definition: {fileID: 11400000, guid: 692bd90ecc8e43840a83aaa5c9e54022, type: 2}
-        defaultValue:
-          rid: 7754703245271105625
-    - rid: 7754703245271105625
-      type: {class: ReferenceStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        reference:
-          name: max_health
-    - rid: 7754703245271105626
-      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: max_health
-        definition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
-        value:
-          rid: 7754703245271105627
-    - rid: 7754703245271105627
-      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 100
-    - rid: 7754703245271105628
-      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+    - rid: 7754703268775461013
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: attack_power
         definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
         value:
-          rid: 7754703245271105629
-    - rid: 7754703245271105629
-      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+          rid: 7754703281476337951
+    - rid: 7754703281476337765
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        value: 10
-    - rid: 7754703245271105630
-      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: attack_speed
-        definition: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+        name: defense
+        definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
         value:
-          rid: 7754703245271105631
-    - rid: 7754703245271105631
-      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+          rid: 7754703281476337952
+    - rid: 7754703281476337766
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        value: 1
-    - rid: 7754703245271105632
-      type: {class: StatisticStandardFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+        name: max_health
+        definition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+        value:
+          rid: 7754703281476337950
+    - rid: 7754703281476337947
+      type: {class: StatisticModifiable, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: health
+        definition: {fileID: 11400000, guid: 692bd90ecc8e43840a83aaa5c9e54022, type: 2}
+    - rid: 7754703281476337948
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: reach
         definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
         value:
-          rid: 7754703245271105633
-    - rid: 7754703245271105633
+          rid: 7754703281476337949
+    - rid: 7754703281476337949
       type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         value: 0.5
+    - rid: 7754703281476337950
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 100
+    - rid: 7754703281476337951
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 15
+    - rid: 7754703281476337952
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 10
+    - rid: 7754703281476337953
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: speed
+        definition: {fileID: 11400000, guid: b6e7acc220a4175489e13715c3932744, type: 2}
+        value:
+          rid: 7754703281476337954
+    - rid: 7754703281476337954
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0.5
+    - rid: 7754703281476337955
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        definition: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+        value:
+          rid: 7754703281476337956
+    - rid: 7754703281476337956
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1
 --- !u!50 &9215057588866617565
 Rigidbody2D:
   serializedVersion: 5

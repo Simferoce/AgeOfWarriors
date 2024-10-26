@@ -9,10 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 318943d3680260d4d8ad4147cd8ec6ec, type: 3}
   m_Name: DefensePercentageStatisticDefinition
   m_EditorClassIdentifier: 
   id: 493109d50bb4d0d4f916891e33c067e1
-  icon: {fileID: -1540707902, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  icon: {fileID: -7612114061151743823, guid: 2a50200866bb2ec46b25ae0324e42799, type: 3}
+  humanReadableId: defense_percentage
   title: Defense Percentage
   color: {r: 0.90099996, g: 0.90099996, b: 0.08919903, a: 1}
+  isPercentage: 0
+  flat: []
+  percentage: []
+  multiplier: []
+  maximum: []
+  minimum: []

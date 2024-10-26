@@ -1,26 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using System.Linq;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 
 namespace Game.Statistics
 {
-    [CreateAssetMenu(fileName = "StatisticDefinition", menuName = "Definition/Statistic")]
-    public class StatisticDefinition : Definition
+    public abstract class StatisticDefinition : Definition
     {
-        public enum OperationType
-        {
-            Base,
-            Flat,
-            Percentage,
-            Multiplier,
-            Maximum,
-            Minimum
-        }
-
         [SerializeField] private Sprite icon;
+        [SerializeField] private string humanReadableId;
         [SerializeField] private string title;
         [SerializeField] private Color color = Color.white;
-        [SerializeField] private List<StatisticDefinition> modifiers;
-        [SerializeField] private OperationType operationType = OperationType.Base;
+        [SerializeField] private bool isPercentage = false;
 
         public Sprite Icon => icon;
         public string Title => title;
@@ -28,8 +20,22 @@ namespace Game.Statistics
         public string ColorHex => ColorUtility.ToHtmlStringRGBA(color);
         public Color Color => color;
         public string TextIcon => Icon != null ? $"<sprite name=\"{Icon.name.Trim()}\" color=#{ColorHex}>" : "";
-        public bool IsPercentage { get => operationType == OperationType.Percentage; }
-        public OperationType Operation => operationType;
-        public List<StatisticDefinition> Modifiers { get => modifiers; set => modifiers = value; }
+        public bool IsPercentage => isPercentage;
+        public string HumanReadableId => humanReadableId;
+
+        public abstract Statistic BuildStatistic();
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (icon == null)
+            {
+                string[] guids = AssetDatabase.FindAssets("DefaultStatisticIcon t:Sprite");
+                string assetPath = guids.Select(x => AssetDatabase.GUIDToAssetPath(x)).FirstOrDefault();
+                icon = AssetDatabase.LoadAssetAtPath<Sprite>(assetPath);
+                EditorUtility.SetDirty(this);
+            }
+        }
     }
+#endif
 }

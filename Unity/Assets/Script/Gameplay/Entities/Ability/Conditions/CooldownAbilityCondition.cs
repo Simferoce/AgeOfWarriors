@@ -19,7 +19,7 @@ namespace Game.Ability
 
         public override bool Execute()
         {
-            return Time.time - lastUsed > cooldown.Resolve(ability).GetValue(null);
+            return Time.time - lastUsed > cooldown.Resolve(ability).GetValue<float>(null);
         }
 
         public override void OnAbilityEnded()

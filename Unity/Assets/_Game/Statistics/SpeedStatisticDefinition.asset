@@ -9,11 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 318943d3680260d4d8ad4147cd8ec6ec, type: 3}
   m_Name: SpeedStatisticDefinition
   m_EditorClassIdentifier: 
   id: b6e7acc220a4175489e13715c3932744
-  icon: {fileID: 1597650535, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  icon: {fileID: -2678394577819576460, guid: 621ef731e92965243b21e4a9892cf089, type: 3}
   humanReadableId: speed
   title: Speed
   color: {r: 0, g: 0.7490196, b: 0.31209156, a: 1}
+  isPercentage: 0
+  flat: []
+  percentage: []
+  multiplier: []
+  maximum: []
+  minimum: []

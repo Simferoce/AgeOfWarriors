@@ -25,10 +25,10 @@ namespace Game.Ability
             Attackable target = Ability.Targets[0].Entity.GetCachedComponent<Attackable>();
 
             AttackData attack = Ability.GetCachedComponent<AttackFactory>().Generate(
-            target: target,
-            damage: damage?.Resolve(Ability)?.GetValue(null) ?? 0f,
-            armorPenetration: leach?.Resolve(Ability)?.GetValue(null) ?? 0f,
-            leach: armorPenetration?.Resolve(Ability)?.GetValue(null) ?? 0f);
+                target: target,
+                damage: damage?.Resolve(Ability)?.GetValue<float>(null) ?? 0f,
+                armorPenetration: leach?.Resolve(Ability)?.GetValue<float>(null) ?? 0f,
+                leach: armorPenetration?.Resolve(Ability)?.GetValue<float>(null) ?? 0f);
 
             target.TakeAttack(attack);
         }

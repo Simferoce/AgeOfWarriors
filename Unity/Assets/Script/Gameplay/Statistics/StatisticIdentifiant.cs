@@ -27,6 +27,6 @@
         DefensePercentage,
         ArmorPenetration,
         DamageMultiplier,
-        Stagger,
+        DamageTakenPercentage,
     }
 }

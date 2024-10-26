@@ -13,7 +13,7 @@ namespace Game.Projectile
 
         public override T GetValue(Context context)
         {
-            return Statistic.GetValue(context);
+            return Statistic.GetValue<T>(context);
         }
     }
 }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.codewriter.textmeshpro-spriteatlas-support": "https://github.com/codewriter-packages/textmeshpro-spriteatlas-support.git",
     "com.mackysoft.serializereference-extensions": "https://github.com/mackysoft/Unity-SerializeReferenceExtensions.git?path=Assets/MackySoft/MackySoft.SerializeReferenceExtensions",
     "com.unity.addressables": "2.2.2",
     "com.unity.feature.2d": "2.0.1",
