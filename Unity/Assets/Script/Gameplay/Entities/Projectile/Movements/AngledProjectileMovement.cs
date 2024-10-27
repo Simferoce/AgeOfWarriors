@@ -15,6 +15,10 @@ namespace Game.Projectile
             base.Initialize(projectile);
 
             SolveForVelocity(projectile.transform.position, projectile.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, angle, out Vector3 velocity);
+
+            if (float.IsNaN(velocity.x) || float.IsNaN(velocity.y))
+                return;
+
             projectile.Rigidbody.linearVelocity = velocity;
         }
 

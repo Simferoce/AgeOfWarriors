@@ -1,6 +1,4 @@
-﻿using Game.Statistics;
-
-namespace Game.Modifier
+﻿namespace Game.Modifier
 {
     public abstract class ModifierParameter
     {
@@ -12,12 +10,18 @@ namespace Game.Modifier
         }
     }
 
-    public abstract class ModifierParameter<T> : ModifierParameter
+    public class ModifierParameter<T> : ModifierParameter
     {
-        protected ModifierParameter(string name) : base(name)
+        public T value;
+
+        public ModifierParameter(string name, T value) : base(name)
         {
+            this.value = value;
         }
 
-        public abstract T GetValue(Context context);
+        public T GetValue()
+        {
+            return value;
+        }
     }
 }

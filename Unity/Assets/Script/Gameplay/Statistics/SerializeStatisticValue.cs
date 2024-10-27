@@ -11,6 +11,8 @@ namespace Game.Statistics
     {
         [SerializeField] private T value;
 
+        public override bool ExpressiveDescription => false;
+
         public override T GetValue(Context context)
         {
             return value;

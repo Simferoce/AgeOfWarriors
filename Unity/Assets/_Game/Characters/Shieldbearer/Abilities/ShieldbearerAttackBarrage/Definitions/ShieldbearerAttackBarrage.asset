@@ -14,12 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2ab37e8c507d5354b8c42977274cd9f3
   title: Attack Barrage
-  descriptionOld: Execute 3 attacks dealing {0} damage in a burst on a target at
-    {1} meters.
-  prefab: {fileID: 234122527794856266, guid: 6a679bb1f288ed742952ac06cf3653ed, type: 3}
   description:
     text: Execute 3 attacks dealing {0} damage in a burst on a target at {1} meters.
-    parameters: []
+    parameters:
+    - rid: 7754703303340195847
+    - rid: 7754703303340195848
+  prefab: {fileID: 234122527794856266, guid: 6a679bb1f288ed742952ac06cf3653ed, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7754703303340195847
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+    - rid: 7754703303340195848
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range

@@ -4,7 +4,6 @@ using Game.Components;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -20,7 +19,6 @@ namespace Game.Ability
         [SerializeField, FormerlySerializedAs("parameter")] private string trigger;
 
         public override List<Target> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
-        public override bool IsActive { get => IsCasting || IsLingering; }
         public bool IsLingering { get; set; } = false;
 
         private Animated animated;
@@ -37,26 +35,9 @@ namespace Game.Ability
                 effect.Initialize(this);
         }
 
-        public override void OnValidate()
-        {
-            base.OnValidate();
-
-            bool changed = false;
-            foreach (AbilityEffect effect in effects)
-            {
-                if (effect != null)
-                    changed |= effect.Validate();
-            }
-
-#if UNITY_EDITOR
-            if (changed)
-                EditorUtility.SetDirty(this);
-#endif
-        }
-
         public override bool CanUse()
         {
-            return base.CanUse() && effects.All(x => x.CanBeApplied()) && IsCasting == false && IsLingering == false;
+            return base.CanUse() && effects.All(x => x.CanBeApplied()) && IsCasting == false;
         }
 
         public override void InternalUse()
@@ -67,6 +48,7 @@ namespace Game.Ability
             animated.SetTrigger(trigger);
             Caster.LastAbilityUsed = Time.time;
             IsCasting = true;
+            IsLingering = false;
             applied = false;
 
             foreach (AbilityCondition condition in conditions)
@@ -85,8 +67,8 @@ namespace Game.Ability
                 return;
 
             bool end = true;
-            foreach (IAbilityEffectLingering lingeringAbilityEffect in effects.OfType<IAbilityEffectLingering>())
-                end &= lingeringAbilityEffect.Update(Caster);
+            foreach (IContinousAbilityEffect continousAbilityEffect in effects.OfType<IContinousAbilityEffect>())
+                end &= continousAbilityEffect.Update(Caster);
 
             if (IsLingering && end)
                 End();
@@ -108,9 +90,7 @@ namespace Game.Ability
 
         private void OnCastEnded()
         {
-            IsCasting = false;
-
-            if (effects.OfType<IAbilityEffectLingering>().Count() == 0)
+            if (effects.OfType<IContinousAbilityEffect>().Count() == 0)
                 End();
             else
                 IsLingering = true;
@@ -125,7 +105,7 @@ namespace Game.Ability
         private void End()
         {
             Caster.EndCast();
-            IsLingering = false;
+            IsCasting = false;
 
             foreach (AbilityCondition condition in conditions)
                 condition.OnAbilityEnded();
@@ -139,7 +119,6 @@ namespace Game.Ability
         public override void Interrupt()
         {
             Caster.EndCast();
-            IsLingering = false;
             IsCasting = false;
 
             foreach (AbilityCondition condition in conditions)

@@ -1,6 +1,4 @@
-﻿using Game.Agent;
-using Game.Character;
-using System;
+﻿using System;
 
 namespace Game.Ability
 {
@@ -9,7 +7,7 @@ namespace Game.Ability
     {
         public override bool Execute(AbilityEntity source, Entity targetEntity)
         {
-            return (targetEntity is CharacterEntity) && (targetEntity as AgentObject).IsActive;
+            return !targetEntity.Tags.Contains(Entity.EntityTag.Building);
         }
     }
 }

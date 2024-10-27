@@ -68,7 +68,7 @@ namespace Game.Modifier
             if (uniqueType == UniqueType.ByDefinition)
                 return TryGetModifier(definition, out modifier);
 
-            if (uniqueType == UniqueType.ByDefinition)
+            if (uniqueType == UniqueType.BySource)
                 return TryGetModifier(definition, applier, out modifier);
 
             throw new NotImplementedException();

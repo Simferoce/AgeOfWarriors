@@ -21,15 +21,9 @@ namespace Game.Ability
             base.Initialize(ability);
             if (filter != null)
                 filter.Initialize(ability);
-        }
 
-        public override bool Validate()
-        {
-            bool changed = base.Validate();
-            if (filter != null)
-                changed |= filter.Validate();
-
-            return changed;
+            foreach (AbilityTargetOrderBy orderBy in orderBy)
+                orderBy.Initialize(ability);
         }
 
         public override bool Execute()
@@ -44,7 +38,7 @@ namespace Game.Ability
             List<Target> potentialTargets = new List<Target>();
             foreach (Target targetteable in EntityRepository.Instance.GetByType<AgentObject>().Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
             {
-                if (!(targetteable.Entity as AgentObject).IsActive)
+                if (targetteable.enabled == false)
                     continue;
 
                 if (!filter.Execute(ability, targetteable.Entity))

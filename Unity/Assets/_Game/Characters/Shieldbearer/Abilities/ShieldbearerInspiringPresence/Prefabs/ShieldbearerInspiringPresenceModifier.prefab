@@ -57,11 +57,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statisticRegistry:
+    statistics:
+    - rid: 7754703303340195859
+    - rid: 7754703303340195860
   visibleByDefault: 1
   behaviours:
   - rid: 7754703150677491830
   - rid: 7754703150677491831
-  - rid: 7754703150677491833
   references:
     version: 2
     RefIds:
@@ -73,21 +76,26 @@ MonoBehaviour:
       type: {class: TimeModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         duration:
-          rid: 7754703150677491832
-    - rid: 7754703150677491832
-      type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
+          name: duration
+    - rid: 7754703303340195859
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: duration
         definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
-        parameterName: 
-    - rid: 7754703150677491833
-      type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        statistics:
-        - rid: 7754703150677491834
-    - rid: 7754703150677491834
-      type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
+        value:
+          rid: 7754703303340195862
+    - rid: 7754703303340195860
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: defense_flat
         definition: {fileID: 11400000, guid: 06200c8604de2004e9d137aa559904e0, type: 2}
-        parameterName: defense_flat
+        value:
+          rid: 7754703303340195863
+    - rid: 7754703303340195862
+      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: modifier_duration
+    - rid: 7754703303340195863
+      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: modifier_defense_flat

@@ -30,9 +30,9 @@ namespace Game.Statistics
 
         public override string GetDescription(Context context)
         {
-            string valueDescrition = value.GetDescription(context);
-            if (!string.IsNullOrEmpty(valueDescrition))
-                return $"{valueDescrition}<color=#{definition.ColorHex}>({GetValue(context)})</color>";
+            string valueDescription = value.GetDescription(context);
+            if (!string.IsNullOrEmpty(valueDescription))
+                return $"{valueDescription}<color=#{definition.ColorHex}>({GetValue(context)})</color>";
 
             return $"<color=#{definition.ColorHex}>({GetValue(context)})</color>";
         }

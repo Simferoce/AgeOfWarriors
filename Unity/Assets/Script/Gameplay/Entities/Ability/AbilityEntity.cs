@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 using UnityEngine;
 
@@ -20,10 +19,10 @@ namespace Game.Ability
 
         public Caster Caster { get; set; }
         public bool IsCasting { get; set; } = false;
-        public override bool IsActive => IsCasting;
         public virtual List<Target> Targets => new List<Target>();
         public AbilityDefinition Definition { get; set; }
         public override FactionType Faction => faction;
+        public override bool IsActive => base.IsActive && Caster.enabled;
 
         protected FactionType faction;
 
@@ -37,21 +36,6 @@ namespace Game.Ability
 
             foreach (AbilityCondition condition in conditions)
                 condition.Initialize(this);
-        }
-
-        public virtual void OnValidate()
-        {
-            bool changed = false;
-            foreach (AbilityCondition condition in conditions)
-            {
-                if (condition != null)
-                    changed |= condition.Validate();
-            }
-
-#if UNITY_EDITOR
-            if (changed)
-                EditorUtility.SetDirty(this);
-#endif
         }
 
         public abstract void Dispose();

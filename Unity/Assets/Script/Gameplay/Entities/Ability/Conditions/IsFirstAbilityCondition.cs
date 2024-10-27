@@ -13,8 +13,7 @@ namespace Game.Ability
             if (ability.Caster.Entity is not AgentObject agentObject)
                 return true;
 
-            int minPriority = EntityRepository.Instance.GetByType<CharacterEntity>().Where(x => x.Agent == agentObject.Agent && x.IsActive).Min(x => x.Priority);
-
+            int minPriority = EntityRepository.Instance.GetByType<CharacterEntity>().Where(x => x.Agent == agentObject.Agent && !x.IsDead).Min(x => x.Priority);
             return minPriority == agentObject.Priority;
         }
     }

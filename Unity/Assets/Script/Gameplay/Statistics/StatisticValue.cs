@@ -5,6 +5,8 @@ namespace Game.Statistics
     [Serializable]
     public abstract class StatisticValue
     {
+        public virtual bool ExpressiveDescription => true;
+
         protected Entity owner;
 
         public void Initialize(Entity owner)

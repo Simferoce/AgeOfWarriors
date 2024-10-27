@@ -12,7 +12,7 @@ namespace Game.Modifier
 
         public override ModifierParameter Create(object entity)
         {
-            return new StatisticModifierParameter<T>(name, statistic.Resolve(entity as Entity));
+            return new ModifierParameter<T>(name, statistic.Resolve(entity as Entity).GetValue<T>(null));
         }
     }
 

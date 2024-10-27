@@ -12,7 +12,6 @@ namespace Game.Ability
             this.ability = ability;
         }
 
-        public virtual bool Validate() { return false; }
         public abstract bool Execute();
         public virtual void OnAbilityStarted() { }
         public virtual void OnAbilityEnded() { }

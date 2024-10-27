@@ -56,7 +56,7 @@ namespace Game.Components
         {
             foreach (AbilityEntity ability in abilities)
             {
-                if (ability.IsActive)
+                if (ability.IsCasting)
                     ability.Tick();
             }
         }
@@ -74,14 +74,14 @@ namespace Game.Components
         {
             foreach (AbilityEntity ability in abilities)
             {
-                if (ability.IsActive)
+                if (ability.IsCasting)
                     ability.Interrupt();
             }
         }
 
         public AbilityEntity GetCurrentAbility()
         {
-            return abilities.FirstOrDefault(a => a.IsActive);
+            return abilities.FirstOrDefault(a => a.IsCasting);
         }
 
         public void BeginCast()

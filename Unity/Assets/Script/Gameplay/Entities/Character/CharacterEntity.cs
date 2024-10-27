@@ -27,7 +27,6 @@ namespace Game.Character
 
         public Animated Animated { get; set; }
         public List<TransformTag> TransformTags { get; set; }
-        public override bool IsActive { get => !IsDead; }
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override FactionType Faction => IsConfused ? Faction.GetConfusedFaction() : Agent.Faction;
 
@@ -65,9 +64,9 @@ namespace Game.Character
                 Death();
         }
 
-        public override void Activate()
+        public override void Initialize()
         {
-            base.Activate();
+            base.Initialize();
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));
@@ -75,17 +74,7 @@ namespace Game.Character
 
         public void Update()
         {
-            if (IsDead)
-                return;
-
             stateMachine.Update();
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            GetCachedComponent<Attackable>().OnDamageTaken -= OnDamageTaken;
-            GetCachedComponent<AttackFactory>().OnAttackLanded -= OnAttackLanded;
         }
 
         public void RefreshDirection()
@@ -95,6 +84,11 @@ namespace Game.Character
 
         public void Death()
         {
+            GetCachedComponent<Blocker>().enabled = false;
+            GetCachedComponent<Target>().enabled = false;
+            GetCachedComponent<Caster>().enabled = false;
+            GetCachedComponent<Attackable>().OnDamageTaken -= OnDamageTaken;
+            GetCachedComponent<AttackFactory>().OnAttackLanded -= OnAttackLanded;
             DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { AgentObject = this });
             OnDeath?.Invoke();
             stateMachine.SetState(new DeathState(this));

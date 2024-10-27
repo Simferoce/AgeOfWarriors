@@ -1,6 +1,4 @@
-﻿using Game.Statistics;
-
-namespace Game.Projectile
+﻿namespace Game.Projectile
 {
     public abstract class ProjectileParameter
     {
@@ -12,12 +10,18 @@ namespace Game.Projectile
         }
     }
 
-    public abstract class ProjectileParameter<T> : ProjectileParameter
+    public class ProjectileParameter<T> : ProjectileParameter
     {
-        protected ProjectileParameter(string name) : base(name)
+        private T value;
+
+        public ProjectileParameter(string name, T value) : base(name)
         {
+            this.value = value;
         }
 
-        public abstract T GetValue(Context context);
+        public T GetValue()
+        {
+            return value;
+        }
     }
 }

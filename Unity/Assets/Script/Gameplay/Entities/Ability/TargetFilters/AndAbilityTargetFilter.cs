@@ -17,17 +17,6 @@ namespace Game.Ability
                 filter.Initialize(ability);
         }
 
-        public override bool Validate()
-        {
-            bool changed = base.Validate();
-            foreach (AbilityTargetFilter filter in filters.Where(x => x != null))
-            {
-                changed |= filter.Validate();
-            }
-
-            return changed;
-        }
-
         public override bool Execute(AbilityEntity source, Entity targetEntity)
         {
             foreach (AbilityTargetFilter filter in filters)

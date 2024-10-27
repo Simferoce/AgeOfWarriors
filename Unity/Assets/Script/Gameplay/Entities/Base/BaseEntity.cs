@@ -37,19 +37,15 @@ namespace Game
                 Death();
         }
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            GetCachedComponent<Attackable>().OnDamageTaken -= Base_OnDamageTaken;
-        }
-
         public void Death()
         {
             DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { AgentObject = this });
+
+            GetCachedComponent<Attackable>().OnDamageTaken -= Base_OnDamageTaken;
             Destroy(gameObject);
         }
 
-        public override void Activate()
+        public override void Initialize()
         {
             spawnPoint.Direction = Direction;
             Health = MaxHealth;

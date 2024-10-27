@@ -57,6 +57,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statisticRegistry:
+    statistics:
+    - rid: 7754703303340195951
+    - rid: 7754703303340195953
   visibleByDefault: 1
   behaviours:
   - rid: 7754703128047648929
@@ -69,12 +73,7 @@ MonoBehaviour:
       type: {class: TimeModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         duration:
-          rid: 7754703128047648930
-    - rid: 7754703128047648930
-      type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
-        name: duration
+          name: duration
     - rid: 7754703128047648951
       type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -102,13 +101,8 @@ MonoBehaviour:
         target:
           rid: 7754703128047648965
         damage:
-          rid: 7754703128047648959
+          name: damage
         extraFlags: 8
-    - rid: 7754703128047648959
-      type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        name: damage
     - rid: 7754703128047648965
       type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 
@@ -116,3 +110,25 @@ MonoBehaviour:
       type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         type: 2
+    - rid: 7754703303340195951
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        value:
+          rid: 7754703303340195952
+    - rid: 7754703303340195952
+      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: modifier_damage
+    - rid: 7754703303340195953
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        value:
+          rid: 7754703303340195954
+    - rid: 7754703303340195954
+      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: modifier_duration

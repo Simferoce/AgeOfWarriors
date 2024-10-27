@@ -26,7 +26,7 @@ namespace Game.Projectile
                 return default;
             }
 
-            return projectileParameter.GetValue(context);
+            return projectileParameter.GetValue();
         }
 
         public override string GetDescription(Context context)

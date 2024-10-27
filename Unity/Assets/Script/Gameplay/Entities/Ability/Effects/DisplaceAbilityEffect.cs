@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Game.Ability
 {
     [Serializable]
-    public class DisplaceAbilityEffect : AbilityEffect, IAbilityEffectLingering
+    public class DisplaceAbilityEffect : AbilityEffect, IContinousAbilityEffect
     {
         [SerializeField] private float destinationDistance;
         [SerializeField] private float translationDuration = 0.3f;

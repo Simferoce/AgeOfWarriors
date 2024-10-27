@@ -1,9 +1,9 @@
 ﻿using Game.Extensions;
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Game.Statistics
 {
@@ -14,8 +14,8 @@ namespace Game.Statistics
 
         public Entity Entity { get => entity; set => entity = value; }
 
-        private List<StatisticRegistry> relations = new List<StatisticRegistry>();
-        private Entity entity;
+        [NonSerialized] private List<StatisticRegistry> relations = new List<StatisticRegistry>();
+        [NonSerialized] private Entity entity;
 
         public void Initialize(Entity entity)
         {
@@ -49,7 +49,7 @@ namespace Game.Statistics
         public void Modify<T>(T value, StatisticIdentifiant identifiant, Context context = null)
         {
             Statistic statistic = statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant));
-            Assert.IsNotNull(statistic, $"Unable to modify the statistic \"{identifiant}\" because it does not exists in the index of {Entity.transform.GetFullPath()}", Entity);
+            Assert.IsNotNull(statistic, $"Unable to modify the statistic \"{identifiant}\" because it does not exists in the index of {Entity.transform.GetFullPath()}");
             if (statistic is not IStatisticModifiable<T> modifiableStatistic)
                 throw new Exception($"Unable to modify the statistic \"{identifiant}\" in \"{Entity.transform.GetFullPath()}\" because it is not of type \"{nameof(IStatisticModifiable<T>)}\".");
 
@@ -68,7 +68,9 @@ namespace Game.Statistics
 
         public T GetOrThrow<T>(StatisticDefinition definition, Context context = null)
         {
-            return statistics.FirstOrDefault(x => x.Definition == definition).GetValue<T>(context);
+            Statistic statistic = statistics.FirstOrDefault(x => x.Definition == definition);
+            Assert.IsNotNull(statistic, $"Unable to get the statistic with the definition {definition} from {entity.transform.GetFullPath()}.");
+            return statistic.GetValue<T>(context);
         }
 
         public bool TryGetStatistic(string name, out Statistic value)

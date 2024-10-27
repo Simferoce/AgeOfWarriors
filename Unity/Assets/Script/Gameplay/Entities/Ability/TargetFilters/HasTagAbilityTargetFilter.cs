@@ -9,11 +9,11 @@ namespace Game.Ability
     [Serializable]
     public class HasTagAbilityTargetFilter : AbilityTargetFilter
     {
-        [SerializeField] private List<AgentObject.Type> types = new List<AgentObject.Type>();
+        [SerializeField] private List<AgentObject.EntityTag> types = new List<AgentObject.EntityTag>();
 
         public override bool Execute(AbilityEntity source, Entity targetEntity)
         {
-            return (targetEntity is AgentObject agentObject) && agentObject.Types.Any(x => types.Contains(x));
+            return (targetEntity is AgentObject agentObject) && agentObject.Tags.Any(x => types.Contains(x));
         }
     }
 }

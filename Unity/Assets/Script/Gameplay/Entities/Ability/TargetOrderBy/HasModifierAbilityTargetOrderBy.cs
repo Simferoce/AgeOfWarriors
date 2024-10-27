@@ -15,9 +15,9 @@ namespace Game.Ability
         public override IOrderedEnumerable<Target> OrderBy(IEnumerable<Target> targets)
         {
             if (targets is IOrderedEnumerable<Target> orderedTargets)
-                return orderedTargets.ThenByDescending(x => x.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler handler) && handler.GetModifier(modifierDefinition) != null);
+                return orderedTargets.ThenBy(x => x.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler handler) && handler.TryGetUnique(modifierDefinition, ability.GetCachedComponent<ModifierApplier>(), out _));
 
-            return targets.OrderByDescending(x => x.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler handler) && handler.GetModifier(modifierDefinition) != null);
+            return targets.OrderBy(x => x.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler handler) && handler.TryGetUnique(modifierDefinition, ability.GetCachedComponent<ModifierApplier>(), out _));
         }
     }
 }

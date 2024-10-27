@@ -17,7 +17,6 @@ namespace Game.Components
 
         public Vector3 CenterPosition => transform.position;
         public Vector3 TargetPosition => targetPosition.position;
-
         public Entity Entity { get; set; }
 
         private void Awake()

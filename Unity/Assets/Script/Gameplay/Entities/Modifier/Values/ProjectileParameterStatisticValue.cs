@@ -26,7 +26,7 @@ namespace Game.Modifier
                 return default;
             }
 
-            return modifierParameter.GetValue(context);
+            return modifierParameter.GetValue();
         }
 
         public override string GetDescription(Context context)

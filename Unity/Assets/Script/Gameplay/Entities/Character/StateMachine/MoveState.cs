@@ -71,7 +71,7 @@ namespace Game.Character
                     if (!agentObject.TryGetCachedComponent<Blocker>(out Blocker blocker))
                         continue;
 
-                    if (!blocker.IsActive)
+                    if (!blocker.enabled)
                         continue;
 
                     if (blocker.IsBlocking(character))

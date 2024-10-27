@@ -8,6 +8,8 @@ namespace Game.Character
         {
             public override bool CanExit => false;
 
+            private float startedAt;
+
             public DeathState(CharacterEntity character) : base(character)
             {
             }
@@ -15,7 +17,7 @@ namespace Game.Character
             protected override void InternalEnter()
             {
                 character.Animated.SetTrigger("Dead");
-                GameObject.Destroy(character.gameObject, 2);
+                startedAt = Time.time;
             }
 
             protected override void InternalExit()
@@ -25,7 +27,8 @@ namespace Game.Character
 
             protected override void InternalUpdate()
             {
-
+                if (Time.time - startedAt > 2)
+                    GameObject.Destroy(character.gameObject);
             }
         }
     }

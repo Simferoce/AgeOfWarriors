@@ -55,7 +55,7 @@ MonoBehaviour:
     - rid: 7754703153621368927
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
-        name: defense_flat
+        name: modifier_defense_flat
     - rid: 7754703153621368928
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
@@ -63,4 +63,4 @@ MonoBehaviour:
     - rid: 7754703153621368929
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
-        name: duration
+        name: modifier_duration

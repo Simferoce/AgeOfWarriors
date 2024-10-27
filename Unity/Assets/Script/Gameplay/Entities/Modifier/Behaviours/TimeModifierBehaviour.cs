@@ -9,7 +9,7 @@ namespace Game.Modifier
     {
         [SerializeField] private StatisticReference<float> duration;
 
-        public float Duration { get => duration.Resolve(null).GetValue<float>(null); }
+        public float Duration { get => duration.Resolve(modifier).GetValue<float>(null); }
         public float RemaingDuration { get => Time.time - startedAt; }
 
         private float startedAt = 0f;

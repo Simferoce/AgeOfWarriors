@@ -2,7 +2,7 @@
 
 namespace Game.Ability
 {
-    public interface IAbilityEffectLingering
+    public interface IContinousAbilityEffect
     {
         public bool Update(Caster character);
     }

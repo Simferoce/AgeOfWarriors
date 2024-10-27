@@ -31,7 +31,7 @@ namespace Game.Projectile
                 return;
 
             Target target = collider.gameObject.GetComponentInParent<Target>();
-            if (target != null && !target.Entity.IsActive)
+            if (target != null && !target.enabled)
                 return;
 
             if (filter is IImpactProjectileTargetFilter impactImpactTargetFilter && !impactImpactTargetFilter.Execute(collider, target))

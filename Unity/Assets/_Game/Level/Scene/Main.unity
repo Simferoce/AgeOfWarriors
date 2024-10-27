@@ -1641,7 +1641,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[0]'
       value: 
-      objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+      objectReference: {fileID: 11400000, guid: e3785274f87475045bce6f63977d63fc, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[1]'
       value: 
@@ -1649,7 +1649,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+      objectReference: {fileID: 11400000, guid: 2a683f36d1e23b348a11b9d7031ddcc0, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[3]'
       value: 
@@ -1953,7 +1953,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: managedReferences[7754703125069692928].active
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5053631171570033998, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: m_Name

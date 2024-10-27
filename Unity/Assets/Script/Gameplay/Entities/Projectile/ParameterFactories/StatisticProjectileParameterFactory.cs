@@ -13,7 +13,7 @@ namespace Game.Ability
 
         public override ProjectileParameter Create(object entity)
         {
-            return new StatisticProjectileParameter<T>(name, statistic.Resolve(entity as Entity));
+            return new ProjectileParameter<T>(name, statistic.Resolve(entity as Entity).GetValue<T>(null));
         }
     }
 

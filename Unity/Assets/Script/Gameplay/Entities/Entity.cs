@@ -1,4 +1,5 @@
 ﻿using Game.EventChannel;
+using Game.Modifier;
 using Game.Statistics;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,14 @@ namespace Game
 {
     public abstract class Entity : MonoBehaviour, IEntity
     {
+        public enum EntityTag
+        {
+            Building,
+            Ranger
+        }
+
         [SerializeField] private StatisticRegistry statisticRegistry;
+        [SerializeField] private List<EntityTag> tags = new List<EntityTag>();
 
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
 
@@ -36,6 +44,7 @@ namespace Game
         public IReadOnlyList<Entity> Children => children;
         public virtual FactionType Faction => FactionType.Undefined;
         public virtual bool IsActive { get => true; }
+        public List<EntityTag> Tags { get => tags; }
 
         private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();
         private Entity parent = null;
@@ -46,14 +55,21 @@ namespace Game
             EntityRepository.Instance.Add(this);
             Link(statisticRegistry);
             statisticRegistry.Initialize(this);
+            AddOrGetCachedComponent<ModifierApplier>();
             EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
+        }
+
+        public virtual void Initialize()
+        {
         }
 
         protected virtual void OnDestroy()
         {
+            Parent = null;
             EntityRepository.Instance.Remove(this);
         }
 
+        #region Components
         public void Link<T>(T component)
             where T : class
         {
@@ -113,5 +129,6 @@ namespace Game
                 current = current.Parent;
             }
         }
+        #endregion
     }
 }

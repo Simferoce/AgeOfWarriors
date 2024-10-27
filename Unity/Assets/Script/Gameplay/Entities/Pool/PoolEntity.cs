@@ -32,10 +32,10 @@ namespace Game.Pool
         {
             foreach (AgentObject agent in EntityRepository.Instance.GetByType<AgentObject>())
             {
-                if (!agent.IsActive)
+                if (!agent.TryGetCachedComponent(out Target targeteable))
                     continue;
 
-                if (!agent.TryGetCachedComponent(out Target targeteable))
+                if (!targeteable.enabled)
                     continue;
 
                 if (!hitbox.OverlapPoint(targeteable.CenterPosition))

@@ -23,20 +23,20 @@ namespace Game.Modifier
 
         public override void Execute()
         {
-            //foreach (object target in target.GetTargets())
-            //{
-            //    if (target is Entity entityTarget && entityTarget.TryGetCachedComponent<Attackable>(out Attackable attackable))
-            //    {
-            //        AttackData attack = attackFactory.Generate(
-            //                                target: attackable,
-            //                                damage: damage.GetValue<float>(modifier),
-            //                                flags: extraFlags
-            //                                );
+            foreach (object target in target.GetTargets())
+            {
+                if (target is Entity entityTarget && entityTarget.TryGetCachedComponent<Attackable>(out Attackable attackable))
+                {
+                    AttackData attack = attackFactory.Generate(
+                                            target: attackable,
+                                            damage: damage?.Resolve(modifier)?.GetValue<float>(null) ?? 0f,
+                                            flags: extraFlags
+                                            );
 
-            //        attackable.TakeAttack(attack);
-            //    }
+                    attackable.TakeAttack(attack);
+                }
 
-            //}
+            }
         }
     }
 }

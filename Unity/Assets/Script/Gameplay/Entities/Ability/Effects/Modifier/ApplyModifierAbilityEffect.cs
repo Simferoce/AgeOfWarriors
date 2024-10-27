@@ -23,7 +23,7 @@ namespace Game.Ability
             List<ModifierHandler> targets = Ability.Targets.Select(x => x.Entity.GetCachedComponent<ModifierHandler>()).ToList();
             Assert.IsFalse(targets.Any(x => x == null), "Expecting all target to be modifiable.");
 
-            ModifierApplier modifierApplier = Ability.AddOrGetCachedComponent<ModifierApplier>();
+            ModifierApplier modifierApplier = Ability.GetCachedComponent<ModifierApplier>();
 
             foreach (ModifierHandler target in targets)
                 modifierApplier.Apply(modifierDefinition, target, parameters.Select(x => x.Create(Ability)).ToArray());

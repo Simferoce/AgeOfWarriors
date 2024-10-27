@@ -11,7 +11,6 @@ namespace Game.Components
         [SerializeField] private Collider2D hitbox;
 
         public Entity Entity { get; set; }
-        public bool IsActive => Entity is not AgentObject agentObject || agentObject.IsActive;
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
 
         private void Awake()
