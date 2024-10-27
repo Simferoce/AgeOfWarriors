@@ -61,6 +61,7 @@ MonoBehaviour:
     statistics:
     - rid: 7754703303340195859
     - rid: 7754703303340195860
+  tags: 
   visibleByDefault: 1
   behaviours:
   - rid: 7754703150677491830
@@ -81,21 +82,23 @@ MonoBehaviour:
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: duration
+        isExposed: 1
         definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
         value:
-          rid: 7754703303340195862
+          rid: 7754703308747964593
     - rid: 7754703303340195860
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: defense_flat
+        isExposed: 1
         definition: {fileID: 11400000, guid: 06200c8604de2004e9d137aa559904e0, type: 2}
         value:
-          rid: 7754703303340195863
-    - rid: 7754703303340195862
-      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+          rid: 7754703308747964596
+    - rid: 7754703308747964593
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        name: modifier_duration
-    - rid: 7754703303340195863
-      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+        value: 10
+    - rid: 7754703308747964596
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        name: modifier_defense_flat
+        value: 10

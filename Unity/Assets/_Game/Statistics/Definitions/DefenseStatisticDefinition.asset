@@ -18,7 +18,8 @@ MonoBehaviour:
   title: Defense
   color: {r: 0.90099996, g: 0.90099996, b: 0.08919903, a: 1}
   isPercentage: 0
-  flat: []
+  flat:
+  - {fileID: 11400000, guid: 06200c8604de2004e9d137aa559904e0, type: 2}
   percentage: []
   multiplier: []
   maximum: []

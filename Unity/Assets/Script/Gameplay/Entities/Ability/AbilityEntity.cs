@@ -34,6 +34,8 @@ namespace Game.Ability
             Parent = caster.Entity;
             faction = caster.Entity.Faction;
 
+            base.Initialize();
+
             foreach (AbilityCondition condition in conditions)
                 condition.Initialize(this);
         }

@@ -5,7 +5,7 @@ namespace Game.Modifier
     [Serializable]
     public class StackModifierBehaviour : ModifierBehaviour, IModifierStack
     {
-        private int currentStack;
+        private int currentStack = 1;
 
         public event Action<StackModifierBehaviour> OnStackGained;
 

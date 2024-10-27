@@ -20,6 +20,7 @@ MonoBehaviour:
   isPercentage: 0
   flat: []
   percentage: []
-  multiplier: []
+  multiplier:
+  - {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
   maximum: []
   minimum: []

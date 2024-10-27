@@ -41,6 +41,8 @@ namespace Game.Projectile
             this.parameters = parameters.ToList();
             Parent = source;
 
+            base.Initialize();
+
             foreach (ProjectileMovement movement in projectileMovements)
                 movement.Initialize(this);
 

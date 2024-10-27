@@ -54,13 +54,13 @@ namespace Game
         {
             EntityRepository.Instance.Add(this);
             Link(statisticRegistry);
-            statisticRegistry.Initialize(this);
             AddOrGetCachedComponent<ModifierApplier>();
             EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
         }
 
         public virtual void Initialize()
         {
+            statisticRegistry.Initialize(this);
         }
 
         protected virtual void OnDestroy()

@@ -12,7 +12,7 @@ namespace Game.Projectile
         [SerializeReference, SubclassSelector] private ProjectileTargetFilter filter;
         [SerializeReference, SubclassSelector] private List<ProjectileEffect> effects;
 
-        private List<Collider2D> collidersProcessed = new List<Collider2D>();
+        private List<Entity> processedEntities = new List<Entity>();
 
         public override void Initialize(ProjectileEntity projectile)
         {
@@ -27,11 +27,11 @@ namespace Game.Projectile
 
         public void EnterZone(Collider2D collider)
         {
-            if (collidersProcessed.Contains(collider))
+            Target target = collider.gameObject.GetComponentInParent<Target>();
+            if (target == null || !target.enabled)
                 return;
 
-            Target target = collider.gameObject.GetComponentInParent<Target>();
-            if (target != null && !target.enabled)
+            if (processedEntities.Contains(target.Entity))
                 return;
 
             if (filter is IImpactProjectileTargetFilter impactImpactTargetFilter && !impactImpactTargetFilter.Execute(collider, target))
@@ -46,7 +46,7 @@ namespace Game.Projectile
             foreach (IProjectileStandardEffect effect in effects.OfType<IProjectileStandardEffect>().Where(x => x is not IProjectileImpactEffect))
                 effect.Execute();
 
-            collidersProcessed.Add(collider);
+            processedEntities.Add(target.Entity);
         }
 
         public void LeaveZone(Collider2D collider)

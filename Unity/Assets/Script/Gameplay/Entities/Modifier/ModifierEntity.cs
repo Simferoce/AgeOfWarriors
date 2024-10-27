@@ -31,6 +31,8 @@ namespace Game.Modifier
             this.Parent = handler.Entity;
             this.transform.parent = handler.transform;
 
+            base.Initialize();
+
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
                 modifierBehaviour.Initialize(this);
         }

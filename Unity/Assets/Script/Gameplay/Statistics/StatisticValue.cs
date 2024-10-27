@@ -9,7 +9,7 @@ namespace Game.Statistics
 
         protected Entity owner;
 
-        public void Initialize(Entity owner)
+        public virtual void Initialize(Entity owner)
         {
             this.owner = owner;
         }

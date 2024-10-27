@@ -57,29 +57,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statisticRegistry:
+    statistics:
+    - rid: 7754703303340195983
+  tags: 
   visibleByDefault: 1
   behaviours:
   - rid: 7754703144169767008
-  - rid: 7754703144169767009
   references:
     version: 2
     RefIds:
     - rid: 7754703144169767008
       type: {class: StackModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 
-    - rid: 7754703144169767009
-      type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 7754703303340195983
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        statistics:
-        - rid: 7754703144169767026
-    - rid: 7754703144169767026
-      type: {class: PerStackMultiplierModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
-        multiplier:
-          rid: 7754703144169767027
-    - rid: 7754703144169767027
-      type: {class: ParameterReferenceModifierStatistic, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
         name: damage_multiplier
+        definition: {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
+        value:
+          rid: 7754703303340195984
+    - rid: 7754703303340195984
+      type: {class: ModifierStackStatisticValue, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        multiplier:
+          rid: 7754703308747964509
+    - rid: 7754703308747964509
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0.8

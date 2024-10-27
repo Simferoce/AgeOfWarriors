@@ -9,11 +9,11 @@ namespace Game.Ability
     public class StatisticProjectileParameterFactory<T> : ProjectileParameterFactory
     {
         [SerializeField] private string name;
-        [SerializeField] private StatisticReference<T> statistic;
+        [SerializeField] private StatisticReference<T> reference;
 
         public override ProjectileParameter Create(object entity)
         {
-            return new ProjectileParameter<T>(name, statistic.Resolve(entity as Entity).GetValue<T>(null));
+            return new ProjectileParameter<T>(name, reference.Resolve(entity as Entity).GetValue<T>(null));
         }
     }
 

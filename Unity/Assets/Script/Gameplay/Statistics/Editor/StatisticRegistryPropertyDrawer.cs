@@ -12,122 +12,130 @@ public class StatisticRegistryPropertyDrawer : PropertyDrawer
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
     {
-        Rect test = new Rect(position.x, position.y, position.width, position.height);
-        EditorGUI.LabelField(test, label);
         EditorGUI.BeginProperty(position, label, property);
+        property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, label, true);
 
-        SerializedProperty statisticsProperty = property.FindPropertyRelative("statistics");
+        if (property.isExpanded)
+        {
+            SerializedProperty statisticsProperty = property.FindPropertyRelative("statistics");
 
-        if (reorderableList == null)
-            reorderableList = new ReorderableList(property.serializedObject, statisticsProperty, true, true, true, true)
-            {
-                drawHeaderCallback = (Rect rect) => EditorGUI.LabelField(rect, "Statistics"),
-
-                drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+            if (reorderableList == null)
+                reorderableList = new ReorderableList(property.serializedObject, statisticsProperty, true, false, true, true)
                 {
-                    SerializedProperty statisticProperty = statisticsProperty.GetArrayElementAtIndex(index);
-                    SerializedProperty definitionProperty = statisticProperty.FindPropertyRelative("definition");
 
-                    if (!isEditingLabel.ContainsKey(index))
-                        isEditingLabel[index] = false;
-
-                    Rect foldoutRect = new Rect(rect.x, rect.y, 15, EditorGUIUtility.singleLineHeight);
-                    statisticProperty.isExpanded = EditorGUI.Foldout(foldoutRect, statisticProperty.isExpanded, GUIContent.none, true);
-
-                    Rect labelRect = new Rect(rect.x + 15, rect.y, rect.width - 15, EditorGUIUtility.singleLineHeight);
-
-                    Event evt = Event.current;
-                    if (evt.type == EventType.MouseDown)
+                    drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
                     {
-                        if (labelRect.Contains(evt.mousePosition) && evt.clickCount == 2)
-                        {
-                            isEditingLabel[index] = true;
-                            evt.Use();
-                        }
-                        else if (!labelRect.Contains(evt.mousePosition))
-                        {
+                        SerializedProperty statisticProperty = statisticsProperty.GetArrayElementAtIndex(index);
+                        SerializedProperty definitionProperty = statisticProperty.FindPropertyRelative("definition");
+                        SerializedProperty isExposedProperty = statisticProperty.FindPropertyRelative("isExposed");
+
+                        if (!isEditingLabel.ContainsKey(index))
                             isEditingLabel[index] = false;
-                        }
-                    }
 
-                    if (definitionProperty.objectReferenceValue is StatisticDefinition definition)
-                    {
-                        Rect iconRect = new Rect(rect.x + 15, rect.y, 16, 16);
-                        DrawTexturePreview(iconRect, definition.Icon);
+                        Rect foldoutRect = new Rect(rect.x, rect.y, 15, EditorGUIUtility.singleLineHeight);
+                        statisticProperty.isExpanded = EditorGUI.Foldout(foldoutRect, statisticProperty.isExpanded, GUIContent.none, true);
 
-                        if (GUI.Button(iconRect, GUIContent.none, GUIStyle.none))
-                            EditorGUIUtility.PingObject(definition);
+                        Rect checkboxRect = new Rect(rect.x + rect.width - 20, rect.y, 20, EditorGUIUtility.singleLineHeight);
+                        isExposedProperty.boolValue = EditorGUI.Toggle(checkboxRect, isExposedProperty.boolValue);
 
-                        labelRect.x += iconRect.width + 5;
-                    }
+                        Rect isExposedLabel = new Rect(rect.x + rect.width - 85, rect.y, 60, EditorGUIUtility.singleLineHeight);
+                        EditorGUI.LabelField(isExposedLabel, "IsExposed");
 
-                    if (isEditingLabel[index])
-                    {
-                        statisticProperty.FindPropertyRelative("name").stringValue = EditorGUI.TextField(labelRect, statisticProperty.FindPropertyRelative("name").stringValue);
+                        Rect labelRect = new Rect(rect.x + 15, rect.y, rect.width - 15 - 20 - 85, EditorGUIUtility.singleLineHeight);
 
-                        if (evt.keyCode == KeyCode.Return || evt.keyCode == KeyCode.KeypadEnter)
-                            isEditingLabel[index] = false;
-                    }
-                    else
-                    {
-                        EditorGUI.LabelField(labelRect, statisticProperty.displayName);
-                    }
-
-                    if (statisticProperty.isExpanded)
-                    {
-                        EditorGUI.indentLevel++;
-                        float yOffset = rect.y + EditorGUIUtility.singleLineHeight;
-
-                        SerializedProperty iterator = statisticProperty.Copy();
-                        SerializedProperty endProperty = iterator.GetEndProperty();
-
-                        iterator.NextVisible(true);
-                        while (iterator.propertyPath != endProperty.propertyPath)
+                        Event evt = Event.current;
+                        if (evt.type == EventType.MouseDown)
                         {
-                            if (iterator.name != "definition" && iterator.name != "name")
+                            if (labelRect.Contains(evt.mousePosition) && evt.clickCount == 2)
                             {
-                                Rect propertyRect = new Rect(rect.x + 15, yOffset, rect.width - 15, EditorGUIUtility.singleLineHeight);
-                                EditorGUI.PropertyField(propertyRect, iterator, true);
-                                yOffset += EditorGUI.GetPropertyHeight(iterator, true);
+                                isEditingLabel[index] = true;
+                                evt.Use();
                             }
-                            iterator.NextVisible(false);
+                            else if (!labelRect.Contains(evt.mousePosition))
+                            {
+                                isEditingLabel[index] = false;
+                            }
                         }
-                        EditorGUI.indentLevel--;
-                    }
-                },
 
-                elementHeightCallback = (int index) =>
-                {
-                    SerializedProperty statisticProperty = statisticsProperty.GetArrayElementAtIndex(index);
-                    float height = EditorGUIUtility.singleLineHeight;
-
-                    if (statisticProperty.isExpanded)
-                    {
-                        SerializedProperty iterator = statisticProperty.Copy();
-                        SerializedProperty endProperty = iterator.GetEndProperty();
-
-                        iterator.NextVisible(true);
-                        while (iterator.propertyPath != endProperty.propertyPath)
+                        if (definitionProperty.objectReferenceValue is StatisticDefinition definition)
                         {
-                            if (iterator.name != "definition" && iterator.name != "name")
-                                height += EditorGUI.GetPropertyHeight(iterator, iterator.isExpanded);
-                            iterator.NextVisible(false);
+                            Rect iconRect = new Rect(rect.x + 15, rect.y, 16, 16);
+                            DrawTexturePreview(iconRect, definition.Icon);
+
+                            if (GUI.Button(iconRect, GUIContent.none, GUIStyle.none))
+                                EditorGUIUtility.PingObject(definition);
+
+                            labelRect.x += iconRect.width + 5;
                         }
+
+                        if (isEditingLabel[index])
+                        {
+                            statisticProperty.FindPropertyRelative("name").stringValue = EditorGUI.TextField(labelRect, statisticProperty.FindPropertyRelative("name").stringValue);
+
+                            if (evt.keyCode == KeyCode.Return || evt.keyCode == KeyCode.KeypadEnter)
+                                isEditingLabel[index] = false;
+                        }
+                        else
+                        {
+                            EditorGUI.LabelField(labelRect, statisticProperty.displayName);
+                        }
+
+                        if (statisticProperty.isExpanded)
+                        {
+                            EditorGUI.indentLevel++;
+                            float yOffset = rect.y + EditorGUIUtility.singleLineHeight;
+
+                            SerializedProperty iterator = statisticProperty.Copy();
+                            SerializedProperty endProperty = iterator.GetEndProperty();
+
+                            iterator.NextVisible(true);
+                            while (iterator.propertyPath != endProperty.propertyPath)
+                            {
+                                if (iterator.name != "definition" && iterator.name != "name" && iterator.name != "isExposed")
+                                {
+                                    Rect propertyRect = new Rect(rect.x + 15, yOffset, rect.width - 15, EditorGUIUtility.singleLineHeight);
+                                    EditorGUI.PropertyField(propertyRect, iterator, true);
+                                    yOffset += EditorGUI.GetPropertyHeight(iterator, true);
+                                }
+                                iterator.NextVisible(false);
+                            }
+                            EditorGUI.indentLevel--;
+                        }
+                    },
+
+                    elementHeightCallback = (int index) =>
+                    {
+                        SerializedProperty statisticProperty = statisticsProperty.GetArrayElementAtIndex(index);
+                        float height = EditorGUIUtility.singleLineHeight;
+
+                        if (statisticProperty.isExpanded)
+                        {
+                            SerializedProperty iterator = statisticProperty.Copy();
+                            SerializedProperty endProperty = iterator.GetEndProperty();
+
+                            iterator.NextVisible(true);
+                            while (iterator.propertyPath != endProperty.propertyPath)
+                            {
+                                if (iterator.name != "definition" && iterator.name != "name" && iterator.name != "isExposed")
+                                    height += EditorGUI.GetPropertyHeight(iterator, iterator.isExpanded);
+                                iterator.NextVisible(false);
+                            }
+                        }
+                        return height;
+                    },
+
+                    onAddCallback = (ReorderableList list) =>
+                        ShowDefinitionSelectionPopup(statisticsProperty),
+
+                    onRemoveCallback = (ReorderableList list) =>
+                    {
+                        statisticsProperty.DeleteArrayElementAtIndex(list.index);
+                        statisticsProperty.serializedObject.ApplyModifiedProperties();
                     }
-                    return height;
-                },
+                };
 
-                onAddCallback = (ReorderableList list) =>
-                    ShowDefinitionSelectionPopup(statisticsProperty),
-
-                onRemoveCallback = (ReorderableList list) =>
-                {
-                    statisticsProperty.DeleteArrayElementAtIndex(list.index);
-                    statisticsProperty.serializedObject.ApplyModifiedProperties();
-                }
-            };
-
-        reorderableList.DoLayoutList();
+            reorderableList.DoLayoutList();
+        }
 
         EditorGUI.EndProperty();
     }

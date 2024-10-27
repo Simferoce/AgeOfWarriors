@@ -7,9 +7,12 @@ namespace Game.Statistics
     public abstract class Statistic
     {
         [SerializeField] protected string name;
+        [SerializeField] private bool isExposed = true;
 
         public abstract StatisticDefinition Definition { get; set; }
         public string Name { get => name; set => name = value; }
+        public bool IsExposed { get => isExposed; set => isExposed = value; }
+
         protected Entity owner;
 
         public virtual void Initialize(Entity owner)

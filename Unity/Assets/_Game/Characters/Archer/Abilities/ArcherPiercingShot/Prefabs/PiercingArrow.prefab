@@ -214,6 +214,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad934abfe165f5649b45856d47d2d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  statisticRegistry:
+    statistics:
+    - rid: 7754703308747964510
+    - rid: 7754703308747964516
+    - rid: 7754703308747964564
+  tags: 
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
   - rid: 7754703133506797683
@@ -221,8 +227,7 @@ MonoBehaviour:
   behaviours:
   - rid: 7754703144169766983
   - rid: 7754703144169767004
-  impacts:
-  - rid: 7754703133506797689
+  - rid: 7754703308747964513
   references:
     version: 2
     RefIds:
@@ -233,35 +238,11 @@ MonoBehaviour:
       type: {class: StraightProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         speed: 8
-    - rid: 7754703133506797689
-      type: {class: CollisionProjectileImpact, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        filter:
-          rid: 7754703144169767023
-        effects:
-        - rid: 7754703133506797691
-    - rid: 7754703133506797691
-      type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        damage:
-          rid: 7754703133506797692
-        armorPenetration:
-          rid: 7754703133506797693
-    - rid: 7754703133506797692
-      type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        name: damage
-    - rid: 7754703133506797693
-      type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
-        name: armor_penetration
     - rid: 7754703144169766983
       type: {class: DistanceProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         range:
-          rid: 7754703144169766987
+          name: range
         effects:
         - rid: 7754703144169766984
     - rid: 7754703144169766984
@@ -275,15 +256,11 @@ MonoBehaviour:
         duration: 0.25
         scale: 0.5
         stopSimulatedDelay: 0
-    - rid: 7754703144169766987
-      type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        name: range
     - rid: 7754703144169767004
       type: {class: OnHitProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
-        filters: []
+        filters:
+        - rid: 7754703303340195994
         target:
           rid: 7754703144169767005
         effects:
@@ -295,22 +272,75 @@ MonoBehaviour:
       type: {class: ApplyModifierProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         modifierDefinition: {fileID: 11400000, guid: 0c5f42fb54597cc46938526223bc3949, type: 2}
-        parameters:
-        - rid: 7754703144169767014
-    - rid: 7754703144169767014
-      type: {class: FloatStatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: damage_multiplier
-        statistic:
-          rid: 7754703144169767018
-    - rid: 7754703144169767018
-      type: {class: StatisticSerialize, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
-        value: 0.8
-    - rid: 7754703144169767023
+        parameters: []
+    - rid: 7754703303340195994
       type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
+    - rid: 7754703308747964510
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        isExposed: 1
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        value:
+          rid: 7754703308747964586
+    - rid: 7754703308747964513
+      type: {class: CollisionProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        filter:
+          rid: 7754703308747964514
+        effects:
+        - rid: 7754703308747964515
+    - rid: 7754703308747964514
+      type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
+      data: 
+    - rid: 7754703308747964515
+      type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        damage:
+          name: damage
+        armorPenetration:
+          name: armor_penetration
+    - rid: 7754703308747964516
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        isExposed: 1
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        value:
+          rid: 7754703308747964588
+    - rid: 7754703308747964564
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: armor_penetration
+        isExposed: 1
+        definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
+        value:
+          rid: 7754703308747964590
+    - rid: 7754703308747964586
+      type: {class: ProjectileAbilityStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        value:
+          rid: 7754703308747964587
+    - rid: 7754703308747964587
+      type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1.5
+    - rid: 7754703308747964588
+      type: {class: ProjectileAbilityStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        value:
+          rid: 7754703308747964589
+    - rid: 7754703308747964589
+      type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1
+    - rid: 7754703308747964590
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 15
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5
