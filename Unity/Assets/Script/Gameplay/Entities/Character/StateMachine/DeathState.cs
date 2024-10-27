@@ -28,7 +28,7 @@ namespace Game.Character
             protected override void InternalUpdate()
             {
                 if (Time.time - startedAt > 2)
-                    GameObject.Destroy(character.gameObject);
+                    character.Deactivate();
             }
         }
     }

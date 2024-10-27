@@ -63,10 +63,18 @@ namespace Game
             statisticRegistry.Initialize(this);
         }
 
-        protected virtual void OnDestroy()
+        public virtual void Deactivate()
         {
             Parent = null;
+            gameObject.SetActive(false);
             EntityRepository.Instance.Remove(this);
+
+            GameObject.Destroy(this.gameObject);
+        }
+
+        protected virtual void OnDestroy()
+        {
+
         }
 
         #region Components

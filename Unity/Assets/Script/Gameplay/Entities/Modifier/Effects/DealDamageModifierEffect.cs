@@ -13,12 +13,15 @@ namespace Game.Modifier
         [SerializeField] private AttackData.Flag extraFlags;
 
         private AttackFactory attackFactory;
+        private float cachedDamage;
 
         public override void Initialize(ModifierEntity modifier)
         {
             base.Initialize(modifier);
             target.Initialize(modifier);
             attackFactory = modifier.AddOrGetCachedComponent<AttackFactory>();
+
+            cachedDamage = damage?.Resolve(modifier)?.GetValue<float>(null) ?? 0f;
         }
 
         public override void Execute()
@@ -29,7 +32,7 @@ namespace Game.Modifier
                 {
                     AttackData attack = attackFactory.Generate(
                                             target: attackable,
-                                            damage: damage?.Resolve(modifier)?.GetValue<float>(null) ?? 0f,
+                                            damage: cachedDamage,
                                             flags: extraFlags
                                             );
 

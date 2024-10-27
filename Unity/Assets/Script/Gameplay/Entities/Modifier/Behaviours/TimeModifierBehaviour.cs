@@ -9,15 +9,17 @@ namespace Game.Modifier
     {
         [SerializeField] private StatisticReference<float> duration;
 
-        public float Duration { get => duration.Resolve(modifier).GetValue<float>(null); }
+        public float Duration { get => cachedDuration; }
         public float RemaingDuration { get => Time.time - startedAt; }
 
         private float startedAt = 0f;
+        private float cachedDuration;
 
         public override void Initialize(ModifierEntity modifier)
         {
             base.Initialize(modifier);
             startedAt = Time.time;
+            cachedDuration = duration.Resolve(modifier).GetValue<float>(null);
         }
 
         public override void Refresh()
