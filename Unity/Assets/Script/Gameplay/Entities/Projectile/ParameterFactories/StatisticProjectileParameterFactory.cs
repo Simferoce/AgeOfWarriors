@@ -8,12 +8,17 @@ namespace Game.Ability
     [Serializable]
     public class StatisticProjectileParameterFactory<T> : ProjectileParameterFactory
     {
-        [SerializeField] private string name;
-        [SerializeField] private StatisticReference<T> reference;
+        [SerializeReference, SubclassSelector] private Statistic statistic;
+
+        public override void Initialize(Entity entity)
+        {
+            base.Initialize(entity);
+            statistic.Initialize(entity);
+        }
 
         public override ProjectileParameter Create(object entity)
         {
-            return new ProjectileParameter<T>(name, reference.Resolve(entity as Entity).GetValue<T>(null));
+            return new ProjectileParameter<T>(statistic.Name, statistic.GetValue<T>(null));
         }
     }
 

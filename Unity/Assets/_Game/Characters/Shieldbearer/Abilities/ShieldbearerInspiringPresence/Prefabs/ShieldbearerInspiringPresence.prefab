@@ -106,7 +106,7 @@ MonoBehaviour:
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: range
-        isExposed: 1
+        isApplied: 1
         definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
         value:
           rid: 7754703303340195850
@@ -119,7 +119,7 @@ MonoBehaviour:
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: cooldown
-        isExposed: 1
+        isApplied: 1
         definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
         value:
           rid: 7754703303340195852

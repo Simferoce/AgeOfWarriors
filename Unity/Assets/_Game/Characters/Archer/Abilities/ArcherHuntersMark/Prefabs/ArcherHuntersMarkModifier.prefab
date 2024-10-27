@@ -58,9 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statisticRegistry:
-    statistics:
-    - rid: 7754703303340195951
-    - rid: 7754703303340195953
+    statistics: []
   tags: 
   visibleByDefault: 1
   behaviours:
@@ -74,7 +72,7 @@ MonoBehaviour:
       type: {class: TimeModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         duration:
-          name: duration
+          rid: 7754703308747964662
     - rid: 7754703128047648951
       type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -102,7 +100,7 @@ MonoBehaviour:
         target:
           rid: 7754703128047648965
         damage:
-          name: damage
+          rid: 7754703308747964666
         extraFlags: 8
     - rid: 7754703128047648965
       type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
@@ -111,33 +109,25 @@ MonoBehaviour:
       type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         type: 2
-    - rid: 7754703303340195951
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage
-        isExposed: 1
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        value:
-          rid: 7754703308747964581
-    - rid: 7754703303340195953
+    - rid: 7754703308747964662
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: duration
-        isExposed: 1
         definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
         value:
-          rid: 7754703308747964583
-    - rid: 7754703308747964581
-      type: {class: ModifierAbilityStatisticValue, ns: Game.Modifier, asm: Assembly-CSharp}
+          rid: 7754703308747964664
+    - rid: 7754703308747964664
+      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
+        name: duration
+    - rid: 7754703308747964666
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
         value:
-          rid: 7754703308747964582
-    - rid: 7754703308747964582
-      type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
+          rid: 7754703308747964667
+    - rid: 7754703308747964667
+      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-        ratio: 0.1
-    - rid: 7754703308747964583
-      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 10
+        name: damage

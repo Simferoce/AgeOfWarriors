@@ -19,6 +19,9 @@ namespace Game.Character
     [RequireComponent(typeof(ModifierApplier))]
     public partial class CharacterEntity : AgentObject<CharacterDefinition>
     {
+        [Header("Inherent Statistics")]
+        [SerializeReference, SubclassSelector] private List<Statistic> statistics;
+
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private Collider2D hitbox;
@@ -67,6 +70,12 @@ namespace Game.Character
         public override void Initialize()
         {
             base.Initialize();
+
+            foreach (Statistic statistic in statistics)
+            {
+                statistic.Initialize(this);
+                GetCachedComponent<StatisticRegistry>().Add(statistic);
+            }
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

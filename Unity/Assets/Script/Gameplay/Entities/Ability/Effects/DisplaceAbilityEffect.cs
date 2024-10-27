@@ -26,6 +26,9 @@ namespace Game.Ability
         {
             base.Initialize(ability);
             modifierApplier = ability.AddOrGetCachedComponent<ModifierApplier>();
+
+            foreach (ModifierParameterFactory parameterFactory in parameters)
+                parameterFactory.Initialize(ability);
         }
 
         public override bool Validate()

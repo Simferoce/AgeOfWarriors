@@ -15,12 +15,10 @@ namespace Game.Projectile
 
         private Vector3 previousPosition;
         private float distanceTraveled;
-        private float cachedRange;
 
         public override void Initialize(ProjectileEntity projectile)
         {
             base.Initialize(projectile);
-            cachedRange = range.Resolve(projectile).GetValue<float>(null);
             previousPosition = projectile.transform.position;
 
             foreach (IProjectileStandardEffect effect in effects)
@@ -35,7 +33,7 @@ namespace Game.Projectile
             distanceTraveled += delta;
 
             previousPosition = currentPosition;
-            if (distanceTraveled < cachedRange)
+            if (distanceTraveled < range.Resolve(projectile).GetValue<float>(null))
                 return;
 
             foreach (IProjectileStandardEffect effect in effects)

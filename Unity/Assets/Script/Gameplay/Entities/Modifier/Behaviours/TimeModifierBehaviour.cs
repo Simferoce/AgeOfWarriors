@@ -7,19 +7,18 @@ namespace Game.Modifier
     [Serializable]
     public class TimeModifierBehaviour : ModifierBehaviour, IModifierDuration
     {
-        [SerializeField] private StatisticReference<float> duration;
+        [SerializeReference, SubclassSelector] private Statistic duration;
 
-        public float Duration { get => cachedDuration; }
+        public float Duration { get => duration.GetValue<float>(null); }
         public float RemaingDuration { get => Time.time - startedAt; }
 
         private float startedAt = 0f;
-        private float cachedDuration;
 
         public override void Initialize(ModifierEntity modifier)
         {
             base.Initialize(modifier);
+            duration.Initialize(modifier);
             startedAt = Time.time;
-            cachedDuration = duration.Resolve(modifier).GetValue<float>(null);
         }
 
         public override void Refresh()

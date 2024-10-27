@@ -7,15 +7,14 @@ using UnityEngine.Assertions;
 
 namespace Game.Statistics
 {
-    [Serializable]
     public class StatisticRegistry
     {
-        [SerializeReference] private List<Statistic> statistics = new List<Statistic>();
+        private List<Statistic> statistics = new List<Statistic>();
 
         public Entity Entity { get => entity; set => entity = value; }
 
-        [NonSerialized] private List<StatisticRegistry> relations = new List<StatisticRegistry>();
-        [NonSerialized] private Entity entity;
+        private List<StatisticRegistry> relations = new List<StatisticRegistry>();
+        private Entity entity;
 
         public void Initialize(Entity entity)
         {
@@ -118,7 +117,7 @@ namespace Game.Statistics
 
         public float Sum(StatisticIdentifiant identifiant, Context context = null)
         {
-            return statistics.Where(x => x.IsExposed && x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant))
+            return statistics.Where(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant))
                              .Select(x => x.GetValue<float>(context))
                              .Sum()
                    + relations.Sum(x => x.Sum(identifiant, context));
@@ -131,7 +130,7 @@ namespace Game.Statistics
 
         public float Sum(IEnumerable<StatisticDefinition> identifiants, Context context = null)
         {
-            return statistics.Where(x => x.IsExposed && identifiants.Contains(x.Definition))
+            return statistics.Where(x => identifiants.Contains(x.Definition))
                              .Select(x => x.GetValue<float>(context))
                              .Sum()
                    + relations.Sum(x => x.Sum(identifiants, context));
@@ -139,7 +138,7 @@ namespace Game.Statistics
 
         public float Multiply(StatisticIdentifiant identifiant, Context context = null)
         {
-            return statistics.Where(x => x.IsExposed && x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant))
+            return statistics.Where(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant))
                              .Select(x => x.GetValue<float>(context))
                              .Aggregate(1f, (x, y) => x * y)
                    * relations.Aggregate(1f, (x, y) => x * y.Multiply(identifiant, context));
@@ -152,7 +151,7 @@ namespace Game.Statistics
 
         public float Multiply(IEnumerable<StatisticDefinition> identifiants, Context context = null)
         {
-            return statistics.Where(x => x.IsExposed && identifiants.Contains(x.Definition))
+            return statistics.Where(x => identifiants.Contains(x.Definition))
                              .Select(x => x.GetValue<float>(context))
                              .Aggregate(1f, (x, y) => x * y)
                    * relations.Aggregate(1f, (x, y) => x * y.Multiply(identifiants, context));
@@ -160,7 +159,7 @@ namespace Game.Statistics
 
         public float Maximum(StatisticDefinition identifiant, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => x.IsExposed && x.Definition == identifiant)
+            return Mathf.Min(statistics.Where(x => x.Definition == identifiant)
                                         .Select(y => y.GetValue<float>(context))
                                         .DefaultIfEmpty(float.MaxValue)
                                         .Min(),
@@ -179,7 +178,7 @@ namespace Game.Statistics
 
         public float Maximum(IEnumerable<StatisticDefinition> identifiants, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => x.IsExposed && identifiants.Contains(x.Definition))
+            return Mathf.Min(statistics.Where(x => identifiants.Contains(x.Definition))
                                         .Select(y => y.GetValue<float>(context))
                                         .DefaultIfEmpty(float.MaxValue)
                                         .Min(),
@@ -193,7 +192,7 @@ namespace Game.Statistics
 
         public float Minimum(StatisticDefinition identifiant, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => x.IsExposed && x.Definition == identifiant)
+            return Mathf.Min(statistics.Where(x => x.Definition == identifiant)
                                         .Select(y => y.GetValue<float>(context))
                                         .DefaultIfEmpty(float.MinValue)
                                         .Max(),
@@ -207,7 +206,7 @@ namespace Game.Statistics
 
         public float Minimum(IEnumerable<StatisticDefinition> identifiants, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => x.IsExposed && identifiants.Contains(x.Definition))
+            return Mathf.Min(statistics.Where(x => identifiants.Contains(x.Definition))
                                         .Select(y => y.GetValue<float>(context))
                                         .DefaultIfEmpty(float.MinValue)
                                         .Max(),

@@ -58,9 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statisticRegistry:
-    statistics:
-    - rid: 7754703303340195940
-    - rid: 7754703303340195943
+    statistics: []
   tags: 
   conditions:
   - rid: 7754703128047648948
@@ -76,12 +74,14 @@ MonoBehaviour:
       type: {class: CooldownAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         cooldown:
-          name: cooldown
+          rid: 7754703308747964657
     - rid: 7754703128047648923
       type: {class: ApplyModifierAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         modifierDefinition: {fileID: 4328000484182388948, guid: 94bc3887fe1aaad468e21f5c79064f4f, type: 2}
-        parameters: []
+        parameters:
+        - rid: 7754703308747964618
+        - rid: 7754703308747964619
     - rid: 7754703128047648931
       type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data:
@@ -108,7 +108,7 @@ MonoBehaviour:
       type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         distance:
-          name: range
+          rid: 7754703308747964659
     - rid: 7754703128047648942
       type: {class: HasModifierAbilityTargetOrderBy, ns: Game.Ability, asm: Assembly-CSharp}
       data:
@@ -119,28 +119,59 @@ MonoBehaviour:
     - rid: 7754703128047648948
       type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data: 
-    - rid: 7754703303340195940
+    - rid: 7754703308747964618
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        statistic:
+          rid: 7754703308747964652
+    - rid: 7754703308747964619
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        statistic:
+          rid: 7754703308747964654
+    - rid: 7754703308747964652
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        name: range
-        isExposed: 1
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
         value:
-          rid: 7754703303340195942
-    - rid: 7754703303340195942
+          rid: 7754703308747964653
+    - rid: 7754703308747964653
       type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
       data:
-        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-        ratio: 2
-    - rid: 7754703303340195943
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 0.1
+    - rid: 7754703308747964654
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        value:
+          rid: 7754703308747964655
+    - rid: 7754703308747964655
+      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 10
+    - rid: 7754703308747964657
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: cooldown
-        isExposed: 1
         definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
         value:
-          rid: 7754703303340195944
-    - rid: 7754703303340195944
+          rid: 7754703308747964658
+    - rid: 7754703308747964658
       type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         value: 5
+    - rid: 7754703308747964659
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        value:
+          rid: 7754703308747964660
+    - rid: 7754703308747964660
+      type: {class: CasterStatisticRatioAbilityStatisticValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1

@@ -10,12 +10,9 @@ namespace Game.Projectile
     {
         [SerializeField] private StatisticReference<float> heal;
 
-        private float cachedHeal;
-
         public override void Initialize(ProjectileEntity projectile)
         {
             base.Initialize(projectile);
-            cachedHeal = heal.Resolve(projectile).GetValue<float>(null);
         }
 
         public void Execute(Entity entity)
@@ -23,7 +20,7 @@ namespace Game.Projectile
             if (!entity.TryGetCachedComponent<CharacterEntity>(out CharacterEntity character))
                 return;
 
-            character.Heal(cachedHeal);
+            character.Heal(heal.Resolve(projectile).GetValue<float>(null));
         }
     }
 }

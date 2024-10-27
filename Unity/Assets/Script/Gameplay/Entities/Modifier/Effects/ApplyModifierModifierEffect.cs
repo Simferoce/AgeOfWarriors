@@ -23,6 +23,9 @@ namespace Game.Modifier
 
             foreach (ModifierTarget modifierTarget in targets)
                 modifierTarget.Initialize(modifier);
+
+            foreach (ModifierParameterFactory parameterFactory in parameterFactories)
+                parameterFactory.Initialize(modifier);
         }
 
         public override void Execute()

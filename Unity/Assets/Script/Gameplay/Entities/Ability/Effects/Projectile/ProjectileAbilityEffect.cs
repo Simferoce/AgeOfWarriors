@@ -16,6 +16,9 @@ namespace Game.Ability
         public override void Initialize(AbilityEntity ability)
         {
             base.Initialize(ability);
+
+            foreach (ProjectileParameterFactory parameter in parameters)
+                parameter.Initialize(ability);
         }
 
         public override void Apply()

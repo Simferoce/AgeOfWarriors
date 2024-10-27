@@ -74,15 +74,11 @@ MonoBehaviour:
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: damage_multiplier
+        isApplied: 1
         definition: {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
         value:
-          rid: 7754703303340195984
-    - rid: 7754703303340195984
-      type: {class: ModifierStackStatisticValue, ns: Game.Modifier, asm: Assembly-CSharp}
+          rid: 7754703308747964634
+    - rid: 7754703308747964634
+      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        multiplier:
-          rid: 7754703308747964509
-    - rid: 7754703308747964509
-      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 0.8
+        name: damage_multiplier

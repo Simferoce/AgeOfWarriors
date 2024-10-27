@@ -16,7 +16,6 @@ namespace Game
             Ranger
         }
 
-        [SerializeField] private StatisticRegistry statisticRegistry;
         [SerializeField] private List<EntityTag> tags = new List<EntityTag>();
 
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
@@ -53,14 +52,14 @@ namespace Game
         protected virtual void Awake()
         {
             EntityRepository.Instance.Add(this);
-            Link(statisticRegistry);
             AddOrGetCachedComponent<ModifierApplier>();
+            StatisticRegistry statisticRegistry = AddOrGetCachedComponent<StatisticRegistry>();
+            statisticRegistry.Initialize(this);
             EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
         }
 
         public virtual void Initialize()
         {
-            statisticRegistry.Initialize(this);
         }
 
         public virtual void Deactivate()

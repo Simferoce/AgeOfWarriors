@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(StatisticRegistry))]
+//[CustomPropertyDrawer(typeof(StatisticRegistry))]
 public class StatisticRegistryPropertyDrawer : PropertyDrawer
 {
     private ReorderableList reorderableList;
@@ -27,7 +27,7 @@ public class StatisticRegistryPropertyDrawer : PropertyDrawer
                     {
                         SerializedProperty statisticProperty = statisticsProperty.GetArrayElementAtIndex(index);
                         SerializedProperty definitionProperty = statisticProperty.FindPropertyRelative("definition");
-                        SerializedProperty isExposedProperty = statisticProperty.FindPropertyRelative("isExposed");
+                        SerializedProperty isAppliedProperty = statisticProperty.FindPropertyRelative("isApplied");
 
                         if (!isEditingLabel.ContainsKey(index))
                             isEditingLabel[index] = false;
@@ -36,10 +36,10 @@ public class StatisticRegistryPropertyDrawer : PropertyDrawer
                         statisticProperty.isExpanded = EditorGUI.Foldout(foldoutRect, statisticProperty.isExpanded, GUIContent.none, true);
 
                         Rect checkboxRect = new Rect(rect.x + rect.width - 20, rect.y, 20, EditorGUIUtility.singleLineHeight);
-                        isExposedProperty.boolValue = EditorGUI.Toggle(checkboxRect, isExposedProperty.boolValue);
+                        isAppliedProperty.boolValue = EditorGUI.Toggle(checkboxRect, isAppliedProperty.boolValue);
 
-                        Rect isExposedLabel = new Rect(rect.x + rect.width - 85, rect.y, 60, EditorGUIUtility.singleLineHeight);
-                        EditorGUI.LabelField(isExposedLabel, "IsExposed");
+                        Rect isAppliedLabel = new Rect(rect.x + rect.width - 85, rect.y, 60, EditorGUIUtility.singleLineHeight);
+                        EditorGUI.LabelField(isAppliedLabel, "IsApplied");
 
                         Rect labelRect = new Rect(rect.x + 15, rect.y, rect.width - 15 - 20 - 85, EditorGUIUtility.singleLineHeight);
 
@@ -91,7 +91,7 @@ public class StatisticRegistryPropertyDrawer : PropertyDrawer
                             iterator.NextVisible(true);
                             while (iterator.propertyPath != endProperty.propertyPath)
                             {
-                                if (iterator.name != "definition" && iterator.name != "name" && iterator.name != "isExposed")
+                                if (iterator.name != "definition" && iterator.name != "name" && iterator.name != "isApplied")
                                 {
                                     Rect propertyRect = new Rect(rect.x + 15, yOffset, rect.width - 15, EditorGUIUtility.singleLineHeight);
                                     EditorGUI.PropertyField(propertyRect, iterator, true);
@@ -116,7 +116,7 @@ public class StatisticRegistryPropertyDrawer : PropertyDrawer
                             iterator.NextVisible(true);
                             while (iterator.propertyPath != endProperty.propertyPath)
                             {
-                                if (iterator.name != "definition" && iterator.name != "name" && iterator.name != "isExposed")
+                                if (iterator.name != "definition" && iterator.name != "name" && iterator.name != "isApplied")
                                     height += EditorGUI.GetPropertyHeight(iterator, iterator.isExpanded);
                                 iterator.NextVisible(false);
                             }

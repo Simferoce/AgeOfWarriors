@@ -7,19 +7,20 @@ namespace Game.Ability
     [Serializable]
     public class CooldownAbilityCondition : AbilityCondition
     {
-        [SerializeField] private StatisticReference<float> cooldown;
+        [SerializeReference, SubclassSelector] private Statistic cooldown;
 
         private float lastUsed = 0f;
 
         public override void Initialize(AbilityEntity ability)
         {
             base.Initialize(ability);
+            cooldown.Initialize(ability);
             lastUsed = float.MinValue;
         }
 
         public override bool Execute()
         {
-            return Time.time - lastUsed > cooldown.Resolve(ability).GetValue<float>(null);
+            return Time.time - lastUsed > cooldown.GetValue<float>(null);
         }
 
         public override void OnAbilityEnded()
