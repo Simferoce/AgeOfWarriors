@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using Game.Statistics;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Modifier
@@ -16,9 +17,12 @@ namespace Game.Modifier
         public string Title { get => title; }
         public bool Show { get => showOnHealthBar; set => showOnHealthBar = value; }
 
-        public string ParseDescription(object context)
+        public string ParseDescription(Entity source, Context context)
         {
-            return description.Parse(this, context);
+            if (source == null)
+                return description.Parse(prefab.GetComponent<Entity>(), context);
+
+            return description.Parse(source, context);
         }
 
         public virtual UniqueType GetUniqueType()

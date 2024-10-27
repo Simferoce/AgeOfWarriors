@@ -15,5 +15,10 @@ namespace Game.Statistics
         {
             return value;
         }
+
+        public override string GetDescription(Context context)
+        {
+            return $"<color=#000000>({value})</color>";
+        }
     }
 }

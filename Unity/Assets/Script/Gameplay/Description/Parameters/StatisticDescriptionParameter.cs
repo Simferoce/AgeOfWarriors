@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Statistics;
+using System;
 using UnityEngine;
 
 namespace Game
@@ -8,10 +9,10 @@ namespace Game
     {
         [SerializeField] private string name;
 
-        public override object GetValue(object context)
+        public override object GetValue(Entity source, Context context)
         {
-            //if (context is Entity entity && entity.TryGetCachedComponent<StatisticIndex>(out StatisticIndex statisticIndex) && statisticIndex.TryGetStatisticByName(name, out Statistic statistic))
-            //    return statistic.GetDescription(context);
+            if (source.TryGetCachedComponent<StatisticRegistry>(out StatisticRegistry statisticRegistry) && statisticRegistry.TryGetStatistic(name, out Statistic statistic))
+                return statistic.GetDescription(context);
 
             return $"{{{name}}}";
         }

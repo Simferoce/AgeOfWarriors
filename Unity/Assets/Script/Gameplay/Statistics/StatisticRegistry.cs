@@ -12,9 +12,6 @@ namespace Game.Statistics
     {
         [SerializeReference] private List<Statistic> statistics = new List<Statistic>();
 
-        public IReadOnlyList<StatisticRegistry> Relations => relations;
-        public IReadOnlyList<Statistic> Statistics => statistics;
-
         public Entity Entity { get => entity; set => entity = value; }
 
         private List<StatisticRegistry> relations = new List<StatisticRegistry>();
@@ -66,7 +63,38 @@ namespace Game.Statistics
 
         public T GetOrThrow<T>(StatisticIdentifiant identifiant, Context context = null)
         {
-            return statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)).GetValue<T>(context);
+            return GetOrThrow<T>(StatisticDefinitionRegistry.Instance.GetById(identifiant));
+        }
+
+        public T GetOrThrow<T>(StatisticDefinition definition, Context context = null)
+        {
+            return statistics.FirstOrDefault(x => x.Definition == definition).GetValue<T>(context);
+        }
+
+        public bool TryGetStatistic(string name, out Statistic value)
+        {
+            Statistic statistic = statistics.FirstOrDefault(x => x.Name == name);
+            if (statistic == null)
+            {
+                value = default;
+                return false;
+            }
+
+            value = statistic;
+            return true;
+        }
+
+        public bool TryGetStatistic<T>(string name, out Statistic<T> value)
+        {
+            Statistic<T> statistic = statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
+            if (statistic == null)
+            {
+                value = default;
+                return false;
+            }
+
+            value = statistic;
+            return true;
         }
 
         public bool TryGet<T>(StatisticIdentifiant identifiant, out T value, Context context = null)
@@ -121,9 +149,14 @@ namespace Game.Statistics
             return statistics.Where(x => identifiants.Contains(x.Definition)).Select(x => x.GetValue<float>(context)).Aggregate(1f, (x, y) => x * y) * relations.Aggregate(1f, (x, y) => x * y.Multiply(identifiants, context));
         }
 
+        public float Maximum(StatisticDefinition identifiant, Context context = null)
+        {
+            return Mathf.Min(statistics.Where(x => x.Definition == identifiant).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MaxValue).Min(), relations.Select(x => x.Maximum(identifiant, context)).DefaultIfEmpty(float.MaxValue).Min());
+        }
+
         public float Maximum(StatisticIdentifiant identifiant, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MaxValue).Min(), relations.Select(x => x.Maximum(identifiant, context)).DefaultIfEmpty(float.MaxValue).Min());
+            return Maximum(StatisticDefinitionRegistry.Instance.GetById(identifiant), context);
         }
 
         public float Maximum(IEnumerable<StatisticIdentifiant> identifiants, Context context = null)
@@ -138,7 +171,12 @@ namespace Game.Statistics
 
         public float Minimum(StatisticIdentifiant identifiant, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MinValue).Max(), relations.Select(x => x.Maximum(identifiant, context)).DefaultIfEmpty(float.MinValue).Max());
+            return Minimum(StatisticDefinitionRegistry.Instance.GetById(identifiant), context);
+        }
+
+        public float Minimum(StatisticDefinition identifiant, Context context = null)
+        {
+            return Mathf.Min(statistics.Where(x => x.Definition == identifiant).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MinValue).Max(), relations.Select(x => x.Minimum(identifiant, context)).DefaultIfEmpty(float.MinValue).Max());
         }
 
         public float Minimum(IEnumerable<StatisticIdentifiant> identifiants, Context context = null)
@@ -148,7 +186,7 @@ namespace Game.Statistics
 
         public float Minimum(IEnumerable<StatisticDefinition> identifiants, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => identifiants.Contains(x.Definition)).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MinValue).Max(), relations.Select(x => x.Maximum(identifiants, context)).DefaultIfEmpty(float.MinValue).Max());
+            return Mathf.Min(statistics.Where(x => identifiants.Contains(x.Definition)).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MinValue).Max(), relations.Select(x => x.Minimum(identifiants, context)).DefaultIfEmpty(float.MinValue).Max());
         }
     }
 }

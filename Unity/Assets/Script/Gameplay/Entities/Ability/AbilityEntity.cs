@@ -82,7 +82,7 @@ namespace Game.Ability
 
         public string ParseDescription()
         {
-            return Definition.ParseDescription(this);
+            return Definition.ParseDescription(this, null);
         }
     }
 }

@@ -28,6 +28,11 @@ namespace Game.Projectile
 
             return projectileParameter.GetValue(context);
         }
+
+        public override string GetDescription(Context context)
+        {
+            return string.Empty;
+        }
     }
 
     [Serializable]

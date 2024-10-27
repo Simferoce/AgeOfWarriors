@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Game.Statistics
@@ -11,7 +10,10 @@ namespace Game.Statistics
 
         public Statistic<T> Resolve(Entity entity)
         {
-            return entity.GetCachedComponent<StatisticRegistry>().Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
+            if (entity.GetCachedComponent<StatisticRegistry>().TryGetStatistic<T>(name, out Statistic<T> value))
+                return value;
+
+            return null;
         }
     }
 }

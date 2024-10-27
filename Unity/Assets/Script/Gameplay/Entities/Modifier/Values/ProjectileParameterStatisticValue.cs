@@ -28,6 +28,11 @@ namespace Game.Modifier
 
             return modifierParameter.GetValue(context);
         }
+
+        public override string GetDescription(Context context)
+        {
+            return string.Empty;
+        }
     }
 
     [Serializable]

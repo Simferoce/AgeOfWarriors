@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Statistics;
+using UnityEngine;
 
 namespace Game.Ability
 {
@@ -11,9 +12,12 @@ namespace Game.Ability
 
         public string Title { get => title; }
 
-        public virtual string ParseDescription(object context)
+        public virtual string ParseDescription(Entity source, Context context)
         {
-            return description.Parse(this, context);
+            if (source == null)
+                return description.Parse(prefab.GetComponent<Entity>(), context);
+
+            return description.Parse(source, context);
         }
 
         public AbilityEntity GetAbility()

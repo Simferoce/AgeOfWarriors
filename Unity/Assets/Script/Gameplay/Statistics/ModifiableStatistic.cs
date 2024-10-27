@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Game.Statistics
@@ -21,8 +20,8 @@ namespace Game.Statistics
 
         public void Modify(float value, Context context)
         {
-            float maximumValue = definition.Maximum.SelectMany(x => owner.GetCachedComponent<StatisticRegistry>().Statistics.Where(y => y.Definition == x).Select(y => y.GetValue<float>(context))).DefaultIfEmpty(float.MaxValue).Min();
-            float minimumValue = definition.Minimum.SelectMany(x => owner.GetCachedComponent<StatisticRegistry>().Statistics.Where(y => y.Definition == x).Select(y => y.GetValue<float>(context))).DefaultIfEmpty(float.MinValue).Max();
+            float maximumValue = owner.GetCachedComponent<StatisticRegistry>().Maximum(definition.Maximum, context);
+            float minimumValue = owner.GetCachedComponent<StatisticRegistry>().Minimum(definition.Minimum, context);
             value = Mathf.Clamp(value, minimumValue, maximumValue);
             currentValue = value;
         }
@@ -30,6 +29,11 @@ namespace Game.Statistics
         protected override float GetValue(Context context)
         {
             return currentValue;
+        }
+
+        public override string GetDescription(Context context)
+        {
+            return $"<color=#{definition.ColorHex}>({currentValue})</color>";
         }
     }
 }

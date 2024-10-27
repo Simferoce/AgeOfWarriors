@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Statistics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,12 +14,12 @@ namespace Game
 
         public string Text { get => text; set => text = value; }
 
-        public string Parse(Definition definition, object context)
+        public string Parse(Entity source, Context context)
         {
             if (parameters.Count == 0)
                 return text;
 
-            return string.Format(text, parameters.Select(x => x.GetValue(context)).ToArray());
+            return string.Format(text, parameters.Select(x => x.GetValue(source, context)).ToArray());
         }
     }
 }

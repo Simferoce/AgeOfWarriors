@@ -1,6 +1,5 @@
 ﻿using Game.Statistics;
 using System;
-using System.Linq;
 using UnityEngine;
 
 namespace Game.Ability
@@ -16,7 +15,12 @@ namespace Game.Ability
             if (owner is not AbilityEntity ability)
                 throw new Exception($"Excepting the type of {owner} to be of {nameof(AbilityEntity)}");
 
-            return ability.Caster.Entity.GetCachedComponent<StatisticRegistry>().Statistics.FirstOrDefault(x => x.Definition == casterDefinition).GetValue<float>(context) * ratio;
+            return ability.Caster.Entity.GetCachedComponent<StatisticRegistry>().GetOrThrow<float>(casterDefinition, context) * ratio;
+        }
+
+        public override string GetDescription(Context context)
+        {
+            return $"<color=#{casterDefinition.ColorHex}>{ratio:0.0%}{casterDefinition.TextIcon}</color>";
         }
     }
 }

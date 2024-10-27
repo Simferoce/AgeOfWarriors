@@ -27,5 +27,14 @@ namespace Game.Statistics
 
             return Mathf.Clamp((baseValue + flatValue) * (1 + percentageValue) * multiplierValue, minimumValue, maximumValue);
         }
+
+        public override string GetDescription(Context context)
+        {
+            string valueDescrition = value.GetDescription(context);
+            if (!string.IsNullOrEmpty(valueDescrition))
+                return $"{valueDescrition}<color=#{definition.ColorHex}>({GetValue(context)})</color>";
+
+            return $"<color=#{definition.ColorHex}>({GetValue(context)})</color>";
+        }
     }
 }

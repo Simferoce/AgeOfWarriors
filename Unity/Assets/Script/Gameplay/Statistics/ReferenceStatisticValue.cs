@@ -12,6 +12,11 @@ namespace Game.Statistics
         {
             return reference.Resolve(owner).GetValue<T>(context);
         }
+
+        public override string GetDescription(Context context)
+        {
+            return string.Empty;
+        }
     }
 
     [Serializable]

@@ -18,6 +18,8 @@ namespace Game.Statistics
         }
 
         public abstract T GetValue<T>(Context context);
+
+        public abstract string GetDescription(Context context);
     }
 
     [Serializable]
