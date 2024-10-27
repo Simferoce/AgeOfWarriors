@@ -4,13 +4,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Game
 {
     public abstract class Entity : MonoBehaviour, IEntity
     {
-        [SerializeField, FormerlySerializedAs("index")] private StatisticRegistry statisticRegistry;
+        [SerializeField] private StatisticRegistry statisticRegistry;
 
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
 

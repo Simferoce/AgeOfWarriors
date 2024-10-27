@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad934abfe165f5649b45856d47d2d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index:
+  statisticRegistry:
     statistics:
     - rid: 7754703286907174925
   rigidbody: {fileID: -9219538325602513416}

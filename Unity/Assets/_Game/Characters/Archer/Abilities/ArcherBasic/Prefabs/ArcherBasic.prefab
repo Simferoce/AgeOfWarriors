@@ -57,7 +57,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index:
+  statisticRegistry:
     statistics:
     - rid: 7754703286907174912
     - rid: 7754703286907174914
