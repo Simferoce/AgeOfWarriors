@@ -21,8 +21,8 @@ namespace Game.Statistics
 
         public void Modify(float value, Context context)
         {
-            float maximumValue = definition.Maximum.SelectMany(x => owner.GetCachedComponent<StatisticIndex>().Statistics.Where(y => y.Definition == x).Select(y => y.GetValue<float>(context))).DefaultIfEmpty(float.MaxValue).Min();
-            float minimumValue = definition.Minimum.SelectMany(x => owner.GetCachedComponent<StatisticIndex>().Statistics.Where(y => y.Definition == x).Select(y => y.GetValue<float>(context))).DefaultIfEmpty(float.MinValue).Max();
+            float maximumValue = definition.Maximum.SelectMany(x => owner.GetCachedComponent<StatisticRegistry>().Statistics.Where(y => y.Definition == x).Select(y => y.GetValue<float>(context))).DefaultIfEmpty(float.MaxValue).Min();
+            float minimumValue = definition.Minimum.SelectMany(x => owner.GetCachedComponent<StatisticRegistry>().Statistics.Where(y => y.Definition == x).Select(y => y.GetValue<float>(context))).DefaultIfEmpty(float.MinValue).Max();
             value = Mathf.Clamp(value, minimumValue, maximumValue);
             currentValue = value;
         }

@@ -8,16 +8,16 @@ using UnityEngine;
 namespace Game.Statistics
 {
     [Serializable]
-    public class StatisticIndex
+    public class StatisticRegistry
     {
         [SerializeReference] private List<Statistic> statistics = new List<Statistic>();
 
-        public IReadOnlyList<StatisticIndex> Relations => relations;
+        public IReadOnlyList<StatisticRegistry> Relations => relations;
         public IReadOnlyList<Statistic> Statistics => statistics;
 
         public Entity Entity { get => entity; set => entity = value; }
 
-        private List<StatisticIndex> relations = new List<StatisticIndex>();
+        private List<StatisticRegistry> relations = new List<StatisticRegistry>();
         private Entity entity;
 
         public void Initialize(Entity entity)
@@ -39,19 +39,19 @@ namespace Game.Statistics
             statistics.Remove(statistic);
         }
 
-        public void Add(StatisticIndex statisticIndex)
+        public void Add(StatisticRegistry statisticRegistry)
         {
-            relations.Add(statisticIndex);
+            relations.Add(statisticRegistry);
         }
 
-        public void Remove(StatisticIndex statisticIndex)
+        public void Remove(StatisticRegistry statisticRegistry)
         {
-            relations.Remove(statisticIndex);
+            relations.Remove(statisticRegistry);
         }
 
         public void Modify<T>(T value, StatisticIdentifiant identifiant, Context context = null)
         {
-            Statistic statistic = statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant));
+            Statistic statistic = statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant));
             Assert.IsNotNull(statistic, $"Unable to modify the statistic \"{identifiant}\" because it does not exists in the index of {Entity.transform.GetFullPath()}", Entity);
             if (statistic is not IStatisticModifiable<T> modifiableStatistic)
                 throw new Exception($"Unable to modify the statistic \"{identifiant}\" in \"{Entity.transform.GetFullPath()}\" because it is not of type \"{nameof(IStatisticModifiable<T>)}\".");
@@ -61,17 +61,17 @@ namespace Game.Statistics
 
         public bool Has(StatisticIdentifiant identifiant, Context context = null)
         {
-            return statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant)) != null;
+            return statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)) != null;
         }
 
         public T GetOrThrow<T>(StatisticIdentifiant identifiant, Context context = null)
         {
-            return statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant)).GetValue<T>(context);
+            return statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)).GetValue<T>(context);
         }
 
         public bool TryGet<T>(StatisticIdentifiant identifiant, out T value, Context context = null)
         {
-            Statistic statistic = statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant));
+            Statistic statistic = statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant));
             if (statistic == null)
             {
                 value = default;
@@ -84,7 +84,7 @@ namespace Game.Statistics
 
         public T GetOrDefault<T>(StatisticIdentifiant identifiant, T defaultValue, Context context = null)
         {
-            Statistic statistic = statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant));
+            Statistic statistic = statistics.FirstOrDefault(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant));
             if (statistic == null)
                 return defaultValue;
 
@@ -93,12 +93,12 @@ namespace Game.Statistics
 
         public float Sum(StatisticIdentifiant identifiant, Context context = null)
         {
-            return statistics.Where(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant)).Select(x => x.GetValue<float>(context)).Sum() + relations.Sum(x => x.Sum(identifiant, context));
+            return statistics.Where(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)).Select(x => x.GetValue<float>(context)).Sum() + relations.Sum(x => x.Sum(identifiant, context));
         }
 
         public float Sum(IEnumerable<StatisticIdentifiant> identifiants, Context context = null)
         {
-            return Sum(identifiants.Select(x => StatisticDefinitionRepository.Instance.GetById(x)), context);
+            return Sum(identifiants.Select(x => StatisticDefinitionRegistry.Instance.GetById(x)), context);
         }
 
         public float Sum(IEnumerable<StatisticDefinition> identifiants, Context context = null)
@@ -108,12 +108,12 @@ namespace Game.Statistics
 
         public float Multiply(StatisticIdentifiant identifiant, Context context = null)
         {
-            return statistics.Where(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant)).Select(x => x.GetValue<float>(context)).Aggregate(1f, (x, y) => x * y) * relations.Aggregate(1f, (x, y) => x * y.Multiply(identifiant, context));
+            return statistics.Where(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)).Select(x => x.GetValue<float>(context)).Aggregate(1f, (x, y) => x * y) * relations.Aggregate(1f, (x, y) => x * y.Multiply(identifiant, context));
         }
 
         public float Multiply(IEnumerable<StatisticIdentifiant> identifiants, Context context = null)
         {
-            return Multiply(identifiants.Select(x => StatisticDefinitionRepository.Instance.GetById(x)), context);
+            return Multiply(identifiants.Select(x => StatisticDefinitionRegistry.Instance.GetById(x)), context);
         }
 
         public float Multiply(IEnumerable<StatisticDefinition> identifiants, Context context = null)
@@ -123,12 +123,12 @@ namespace Game.Statistics
 
         public float Maximum(StatisticIdentifiant identifiant, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant)).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MaxValue).Min(), relations.Select(x => x.Maximum(identifiant, context)).DefaultIfEmpty(float.MaxValue).Min());
+            return Mathf.Min(statistics.Where(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MaxValue).Min(), relations.Select(x => x.Maximum(identifiant, context)).DefaultIfEmpty(float.MaxValue).Min());
         }
 
         public float Maximum(IEnumerable<StatisticIdentifiant> identifiants, Context context = null)
         {
-            return Maximum(identifiants.Select(x => StatisticDefinitionRepository.Instance.GetById(x)), context);
+            return Maximum(identifiants.Select(x => StatisticDefinitionRegistry.Instance.GetById(x)), context);
         }
 
         public float Maximum(IEnumerable<StatisticDefinition> identifiants, Context context = null)
@@ -138,12 +138,12 @@ namespace Game.Statistics
 
         public float Minimum(StatisticIdentifiant identifiant, Context context = null)
         {
-            return Mathf.Min(statistics.Where(x => x.Definition == StatisticDefinitionRepository.Instance.GetById(identifiant)).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MinValue).Max(), relations.Select(x => x.Maximum(identifiant, context)).DefaultIfEmpty(float.MinValue).Max());
+            return Mathf.Min(statistics.Where(x => x.Definition == StatisticDefinitionRegistry.Instance.GetById(identifiant)).Select(y => y.GetValue<float>(context)).DefaultIfEmpty(float.MinValue).Max(), relations.Select(x => x.Maximum(identifiant, context)).DefaultIfEmpty(float.MinValue).Max());
         }
 
         public float Minimum(IEnumerable<StatisticIdentifiant> identifiants, Context context = null)
         {
-            return Minimum(identifiants.Select(x => StatisticDefinitionRepository.Instance.GetById(x)), context);
+            return Minimum(identifiants.Select(x => StatisticDefinitionRegistry.Instance.GetById(x)), context);
         }
 
         public float Minimum(IEnumerable<StatisticDefinition> identifiants, Context context = null)

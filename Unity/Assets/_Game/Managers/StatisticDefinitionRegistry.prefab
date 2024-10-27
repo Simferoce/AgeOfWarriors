@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4252250471253930478}
   - component: {fileID: 8822611868087042044}
   m_Layer: 0
-  m_Name: StatisticDefinitionRepository
+  m_Name: StatisticDefinitionRegistry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

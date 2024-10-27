@@ -21,14 +21,14 @@ namespace Game.Modifier
 
         public void Add(ModifierEntity modifier)
         {
-            Entity.GetCachedComponent<StatisticIndex>().Add(modifier.GetCachedComponent<StatisticIndex>());
+            Entity.GetCachedComponent<StatisticRegistry>().Add(modifier.GetCachedComponent<StatisticRegistry>());
             modifiers.Add(modifier);
             OnModifierAdded?.Invoke(modifier);
         }
 
         public void Remove(ModifierEntity modifier)
         {
-            Entity.GetCachedComponent<StatisticIndex>().Remove(modifier.GetCachedComponent<StatisticIndex>());
+            Entity.GetCachedComponent<StatisticRegistry>().Remove(modifier.GetCachedComponent<StatisticRegistry>());
             modifiers.Remove(modifier);
             OnModifierRemoved?.Invoke(modifier);
         }

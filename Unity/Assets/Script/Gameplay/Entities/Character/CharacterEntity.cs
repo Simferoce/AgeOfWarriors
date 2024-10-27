@@ -31,8 +31,8 @@ namespace Game.Character
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override FactionType Faction => IsConfused ? Faction.GetConfusedFaction() : Agent.Faction;
 
-        public float Health { get => GetCachedComponent<StatisticIndex>().GetOrThrow<float>(StatisticIdentifiant.Health); set => GetCachedComponent<StatisticIndex>().Modify(value, StatisticIdentifiant.Health, null); }
-        public float MaxHealth => GetCachedComponent<StatisticIndex>().GetOrThrow<float>(StatisticIdentifiant.MaxHealth);
+        public float Health { get => GetCachedComponent<StatisticRegistry>().GetOrThrow<float>(StatisticIdentifiant.Health); set => GetCachedComponent<StatisticRegistry>().Modify(value, StatisticIdentifiant.Health, null); }
+        public float MaxHealth => GetCachedComponent<StatisticRegistry>().GetOrThrow<float>(StatisticIdentifiant.MaxHealth);
         public float Defense => Definition.Defense;
         public float AttackSpeed => Definition.AttackSpeed /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value))*/;
         public float AttackPower => Definition.AttackPower /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value)*/;

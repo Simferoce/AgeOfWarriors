@@ -11,7 +11,7 @@ namespace Game.Statistics
 
         public Statistic<T> Resolve(Entity entity)
         {
-            return entity.GetCachedComponent<StatisticIndex>().Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
+            return entity.GetCachedComponent<StatisticRegistry>().Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
         }
     }
 }

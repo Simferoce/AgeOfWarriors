@@ -4,8 +4,8 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(StatisticIndex))]
-public class StatisticIndexPropertyDrawer : PropertyDrawer
+[CustomPropertyDrawer(typeof(StatisticRegistry))]
+public class StatisticRegistryPropertyDrawer : PropertyDrawer
 {
     private ReorderableList reorderableList;
     private Dictionary<int, bool> isEditingLabel = new Dictionary<int, bool>();

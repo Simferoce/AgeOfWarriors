@@ -16,14 +16,14 @@ namespace Game.Statistics
 
         protected override float GetValue(Context context)
         {
-            StatisticIndex index = owner.GetCachedComponent<StatisticIndex>();
+            StatisticRegistry registry = owner.GetCachedComponent<StatisticRegistry>();
 
             float baseValue = value.GetValue<float>(context);
-            float flatValue = index.Sum(definition.Flat, context);
-            float percentageValue = index.Sum(definition.Percentage, context);
-            float multiplierValue = index.Multiply(definition.Multiplier, context);
-            float maximumValue = index.Maximum(definition.Maximum, context);
-            float minimumValue = index.Minimum(definition.Minimum, context);
+            float flatValue = registry.Sum(definition.Flat, context);
+            float percentageValue = registry.Sum(definition.Percentage, context);
+            float multiplierValue = registry.Multiply(definition.Multiplier, context);
+            float maximumValue = registry.Maximum(definition.Maximum, context);
+            float minimumValue = registry.Minimum(definition.Minimum, context);
 
             return Mathf.Clamp((baseValue + flatValue) * (1 + percentageValue) * multiplierValue, minimumValue, maximumValue);
         }

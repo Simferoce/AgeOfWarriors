@@ -6,7 +6,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Game.Statistics
 {
-    public class StatisticDefinitionRepository : Manager<StatisticDefinitionRepository>
+    public class StatisticDefinitionRegistry : Manager<StatisticDefinitionRegistry>
     {
         private Dictionary<string, StatisticDefinition> statisticDefinitions = new Dictionary<string, StatisticDefinition>();
         private AsyncOperationHandle<IList<StatisticDefinition>> statisticsHandle;

@@ -58,7 +58,7 @@ MonoBehaviour:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2f354585411abe24291b2717797ee247
-    m_Address: Assets/_Game/Managers/StatisticDefinitionRepository.prefab
+    m_Address: Assets/_Game/Managers/StatisticDefinitionRegistry.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Manager

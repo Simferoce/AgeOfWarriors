@@ -4,12 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Game
 {
     public abstract class Entity : MonoBehaviour, IEntity
     {
-        [SerializeField] private StatisticIndex index;
+        [SerializeField, FormerlySerializedAs("index")] private StatisticRegistry statisticRegistry;
 
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
 
@@ -44,8 +45,8 @@ namespace Game
         protected virtual void Awake()
         {
             EntityRepository.Instance.Add(this);
-            Link(index);
-            index.Initialize(this);
+            Link(statisticRegistry);
+            statisticRegistry.Initialize(this);
             EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
         }
 

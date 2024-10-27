@@ -16,7 +16,7 @@ namespace Game.Ability
             if (owner is not AbilityEntity ability)
                 throw new Exception($"Excepting the type of {owner} to be of {nameof(AbilityEntity)}");
 
-            return ability.Caster.Entity.GetCachedComponent<StatisticIndex>().Statistics.FirstOrDefault(x => x.Definition == casterDefinition).GetValue<float>(context) * ratio;
+            return ability.Caster.Entity.GetCachedComponent<StatisticRegistry>().Statistics.FirstOrDefault(x => x.Definition == casterDefinition).GetValue<float>(context) * ratio;
         }
     }
 }
