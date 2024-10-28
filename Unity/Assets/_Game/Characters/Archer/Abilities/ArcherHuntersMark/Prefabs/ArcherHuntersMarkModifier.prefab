@@ -57,8 +57,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statisticRegistry:
-    statistics: []
   tags: 
   visibleByDefault: 1
   behaviours:
@@ -72,7 +70,7 @@ MonoBehaviour:
       type: {class: TimeModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         duration:
-          rid: 7754703308747964662
+          rid: 7754703308747964722
     - rid: 7754703128047648951
       type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -100,7 +98,7 @@ MonoBehaviour:
         target:
           rid: 7754703128047648965
         damage:
-          rid: 7754703308747964666
+          rid: 7754703308747964721
         extraFlags: 8
     - rid: 7754703128047648965
       type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
@@ -109,25 +107,11 @@ MonoBehaviour:
       type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         type: 2
-    - rid: 7754703308747964662
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: duration
-        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
-        value:
-          rid: 7754703308747964664
-    - rid: 7754703308747964664
-      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: duration
-    - rid: 7754703308747964666
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        value:
-          rid: 7754703308747964667
-    - rid: 7754703308747964667
+    - rid: 7754703308747964721
       type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: damage
+    - rid: 7754703308747964722
+      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration

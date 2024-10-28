@@ -8,7 +8,9 @@ namespace Game.Ability
     [Serializable]
     public class DistanceAbilityTargetFilter : AbilityTargetFilter
     {
-        [SerializeReference, SubclassSelector] private Statistic distance;
+        [SerializeReference, SubclassSelector] private Value distance;
+
+        public float Distance => distance?.GetValue<float>() ?? 0f;
 
         public override void Initialize(AbilityEntity ability)
         {
@@ -19,8 +21,7 @@ namespace Game.Ability
         public override bool Execute(AbilityEntity source, Entity targetEntity)
         {
             Target target = targetEntity.GetCachedComponent<Target>();
-            float distanceValue = distance?.GetValue<float>(null) ?? 0f;
-            return Mathf.Abs((target.ClosestPoint(source.Caster.transform.position) - source.Caster.transform.position).x) < distanceValue;
+            return Mathf.Abs((target.ClosestPoint(source.Caster.transform.position) - source.Caster.transform.position).x) < Distance;
         }
     }
 }

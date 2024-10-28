@@ -214,12 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad934abfe165f5649b45856d47d2d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statisticRegistry:
-    statistics:
-    - rid: 7754703308747964510
-    - rid: 7754703308747964516
-    - rid: 7754703308747964564
-    - rid: 7754703308747964631
   tags: 
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
@@ -243,7 +237,7 @@ MonoBehaviour:
       type: {class: DistanceProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         range:
-          name: range
+          rid: 7754703308747964733
         effects:
         - rid: 7754703144169766984
     - rid: 7754703144169766984
@@ -265,27 +259,13 @@ MonoBehaviour:
         target:
           rid: 7754703144169767005
         effects:
-        - rid: 7754703144169767006
+        - rid: 7754703308747964729
     - rid: 7754703144169767005
       type: {class: SelfOnHitProjectileBehaviourTargetProvider, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
-    - rid: 7754703144169767006
-      type: {class: ApplyModifierProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        modifierDefinition: {fileID: 11400000, guid: 0c5f42fb54597cc46938526223bc3949, type: 2}
-        parameters:
-        - rid: 7754703308747964633
     - rid: 7754703303340195994
       type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
-    - rid: 7754703308747964510
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: range
-        isApplied: 1
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        value:
-          rid: 7754703308747964626
     - rid: 7754703308747964513
       type: {class: CollisionProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -300,55 +280,31 @@ MonoBehaviour:
       type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         damage:
-          name: damage
+          rid: 7754703308747964727
         armorPenetration:
-          name: armor_penetration
-    - rid: 7754703308747964516
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+          rid: 7754703308747964728
+    - rid: 7754703308747964727
+      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         name: damage
-        isApplied: 1
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        value:
-          rid: 7754703308747964627
-    - rid: 7754703308747964564
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+    - rid: 7754703308747964728
+      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         name: armor_penetration
-        isApplied: 1
-        definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
+    - rid: 7754703308747964729
+      type: {class: MultiplyParameterByStandardEffect, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        parameter: damage
         value:
-          rid: 7754703308747964628
-    - rid: 7754703308747964626
+          rid: 7754703308747964732
+    - rid: 7754703308747964732
+      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: damage_multiplier
+    - rid: 7754703308747964733
       type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         name: range
-    - rid: 7754703308747964627
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: damage
-    - rid: 7754703308747964628
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: armor_penetration
-    - rid: 7754703308747964631
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: modifier_damage_multiplier
-        isApplied: 0
-        definition: {fileID: 11400000, guid: ffa9a2d75aa6c9f4cb8ed744120428fc, type: 2}
-        value:
-          rid: 7754703308747964632
-    - rid: 7754703308747964632
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: damage_multiplier
-    - rid: 7754703308747964633
-      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: damage_multiplier
-        reference:
-          name: modifier_damage_multiplier
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5

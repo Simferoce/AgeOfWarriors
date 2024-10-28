@@ -22,7 +22,7 @@ namespace Game.UI.Windows
             if (cooldown > 0f)
             {
                 abilityInspectorWindow.cooldownText.alpha = 1f;
-                abilityInspectorWindow.cooldownText.text = $"{cooldown}{StatisticDefinitionRegistry.Instance.GetById(StatisticIdentifiant.Cooldown).TextIcon}";
+                abilityInspectorWindow.cooldownText.text = $"{cooldown}{StatisticDefinitionRegistry.Instance.Cooldown.TextIcon}";
             }
             else
             {

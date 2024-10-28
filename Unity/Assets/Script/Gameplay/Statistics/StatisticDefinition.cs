@@ -6,7 +6,8 @@ using UnityEngine;
 
 namespace Game.Statistics
 {
-    public abstract class StatisticDefinition : Definition
+    [CreateAssetMenu(fileName = "StatisticDefinition", menuName = "Definition/Statistic/StatisticDefinition")]
+    public class StatisticDefinition : Definition
     {
         [SerializeField] private Sprite icon;
         [SerializeField] private string humanReadableId;
@@ -22,8 +23,6 @@ namespace Game.Statistics
         public string TextIcon => Icon != null ? $"<sprite name=\"{Icon.name.Trim()}\" color=#{ColorHex}>" : "";
         public bool IsPercentage => isPercentage;
         public string HumanReadableId => humanReadableId;
-
-        public abstract Statistic BuildStatistic();
 
 #if UNITY_EDITOR
         private void OnValidate()

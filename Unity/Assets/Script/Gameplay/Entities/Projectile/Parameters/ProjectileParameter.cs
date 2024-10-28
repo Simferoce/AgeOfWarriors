@@ -19,6 +19,11 @@
             this.value = value;
         }
 
+        public void Modify(T value)
+        {
+            this.value = value;
+        }
+
         public T GetValue()
         {
             return value;

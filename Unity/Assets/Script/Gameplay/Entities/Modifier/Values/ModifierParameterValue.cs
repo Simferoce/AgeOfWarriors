@@ -7,15 +7,15 @@ using UnityEngine;
 namespace Game.Modifier
 {
     [Serializable]
-    public class ModifierParameterStatisticValue<T> : StatisticValue<T>
+    public class ModifierParameterValue<T> : Value<T>
     {
         [SerializeField] private string name;
 
-        public override T GetValue(Context context)
+        public override T GetValue()
         {
             if (owner is not ModifierEntity modifier)
             {
-                Debug.LogError($"Expecting the owner to be of type {nameof(ModifierEntity)} but instead got {context.GetType()}.");
+                Debug.LogError($"Expecting the owner to be of type {nameof(ModifierEntity)} but instead got {owner.GetType()}.");
                 return default;
             }
 
@@ -36,7 +36,7 @@ namespace Game.Modifier
     }
 
     [Serializable]
-    public class ModifierParameterStatisticValueFloat : ModifierParameterStatisticValue<float>
+    public class ModifierParameterValueFloat : ModifierParameterValue<float>
     {
 
     }

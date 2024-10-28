@@ -53,8 +53,6 @@ namespace Game
         {
             EntityRepository.Instance.Add(this);
             AddOrGetCachedComponent<ModifierApplier>();
-            StatisticRegistry statisticRegistry = AddOrGetCachedComponent<StatisticRegistry>();
-            statisticRegistry.Initialize(this);
             EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
         }
 
@@ -74,6 +72,22 @@ namespace Game
         protected virtual void OnDestroy()
         {
 
+        }
+
+        public T GetStatisticOrDefault<T>(StatisticDefinition definition, T defaultValue)
+        {
+            return TryGetStatistic(definition, out T value) ? value : defaultValue;
+        }
+
+        public T GetStatisticOrThrow<T>(StatisticDefinition definition)
+        {
+            return TryGetStatistic(definition, out T value) ? value : throw new Exception($"Unable to find the statistic \"{definition}\"");
+        }
+
+        public virtual bool TryGetStatistic<T>(StatisticDefinition definition, out T value)
+        {
+            value = default;
+            return false;
         }
 
         #region Components

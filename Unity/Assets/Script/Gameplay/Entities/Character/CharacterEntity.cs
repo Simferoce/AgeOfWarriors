@@ -19,9 +19,6 @@ namespace Game.Character
     [RequireComponent(typeof(ModifierApplier))]
     public partial class CharacterEntity : AgentObject<CharacterDefinition>
     {
-        [Header("Inherent Statistics")]
-        [SerializeReference, SubclassSelector] private List<Statistic> statistics;
-
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private Collider2D hitbox;
@@ -33,13 +30,13 @@ namespace Game.Character
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override FactionType Faction => IsConfused ? Faction.GetConfusedFaction() : Agent.Faction;
 
-        public float Health { get => GetCachedComponent<StatisticRegistry>().GetOrThrow<float>(StatisticIdentifiant.Health); set => GetCachedComponent<StatisticRegistry>().Modify(value, StatisticIdentifiant.Health, null); }
-        public float MaxHealth => GetCachedComponent<StatisticRegistry>().GetOrThrow<float>(StatisticIdentifiant.MaxHealth);
-        public float Defense => Definition.Defense;
-        public float AttackSpeed => Definition.AttackSpeed /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value))*/;
-        public float AttackPower => Definition.AttackPower /*+ this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value)*/;
-        public float Speed => Definition.Speed/* * (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value))*/;
-        public float Reach => Definition.Reach /** (1 + this.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value))*/;
+        public float Health { get; set; }
+        public float MaxHealth => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.MaxHealth, Definition.MaxHealth);
+        public float Defense => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Defense, Definition.Defense);
+        public float AttackSpeed => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.AttackSpeed, Definition.AttackSpeed);
+        public float AttackPower => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.AttackPower, Definition.AttackPower);
+        public float Speed => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Speed, Definition.Speed);
+        public float Reach => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Reach, Definition.Reach);
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
@@ -50,6 +47,7 @@ namespace Game.Character
         public bool IsInjured => this.Health < this.MaxHealth;
 
         private StateMachine stateMachine = new StateMachine();
+        private ModifierHandler modifierHandler;
 
         protected override void Awake()
         {
@@ -58,6 +56,48 @@ namespace Game.Character
             GetCachedComponent<Attackable>().OnDamageTaken += OnDamageTaken;
             GetCachedComponent<AttackFactory>().OnAttackLanded += OnAttackLanded;
             Animated = GetComponentInChildren<Animated>();
+            modifierHandler = GetCachedComponent<ModifierHandler>();
+        }
+
+        public override bool TryGetStatistic<T>(StatisticDefinition definition, out T value)
+        {
+            if (definition == StatisticDefinitionRegistry.Instance.AttackPower)
+            {
+                value = StatisticConverter.ConvertGeneric<T, float>(AttackPower);
+                return true;
+            }
+            else if (definition == StatisticDefinitionRegistry.Instance.Health)
+            {
+                value = StatisticConverter.ConvertGeneric<T, float>(Health);
+                return true;
+            }
+            else if (definition == StatisticDefinitionRegistry.Instance.MaxHealth)
+            {
+                value = StatisticConverter.ConvertGeneric<T, float>(MaxHealth);
+                return true;
+            }
+            else if (definition == StatisticDefinitionRegistry.Instance.Speed)
+            {
+                value = StatisticConverter.ConvertGeneric<T, float>(Speed);
+                return true;
+            }
+            else if (definition == StatisticDefinitionRegistry.Instance.Reach)
+            {
+                value = StatisticConverter.ConvertGeneric<T, float>(Reach);
+                return true;
+            }
+            else if (definition == StatisticDefinitionRegistry.Instance.AttackSpeed)
+            {
+                value = StatisticConverter.ConvertGeneric<T, float>(AttackSpeed);
+                return true;
+            }
+            else if (definition == StatisticDefinitionRegistry.Instance.Defense)
+            {
+                value = StatisticConverter.ConvertGeneric<T, float>(Defense);
+                return true;
+            }
+
+            return base.TryGetStatistic(definition, out value);
         }
 
         private void OnDamageTaken(AttackResult attackResult, Attackable attackable)
@@ -70,12 +110,6 @@ namespace Game.Character
         public override void Initialize()
         {
             base.Initialize();
-
-            foreach (Statistic statistic in statistics)
-            {
-                statistic.Initialize(this);
-                GetCachedComponent<StatisticRegistry>().Add(statistic);
-            }
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

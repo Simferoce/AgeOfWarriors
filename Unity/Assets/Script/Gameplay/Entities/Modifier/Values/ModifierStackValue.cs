@@ -6,9 +6,9 @@ using UnityEngine;
 namespace Game.Modifier
 {
     [Serializable]
-    public class ModifierStackStatisticValue : StatisticValue<float>
+    public class ModifierStackValue : Value<float>
     {
-        [SerializeReference, SubclassSelector] private StatisticValue multiplier;
+        [SerializeReference, SubclassSelector] private Value multiplier;
 
         public override void Initialize(Entity owner)
         {
@@ -21,11 +21,11 @@ namespace Game.Modifier
             return $"({multiplier.GetDescription(context)} * stack)";
         }
 
-        public override float GetValue(Context context)
+        public override float GetValue()
         {
             if (owner is not ModifierEntity modifier)
             {
-                Debug.LogError($"Expecting the owner of {nameof(ModifierStackStatisticValue)} to be {nameof(ModifierEntity)} but instead got {owner.GetType().Name}", owner);
+                Debug.LogError($"Expecting the owner of {nameof(ModifierStackValue)} to be {nameof(ModifierEntity)} but instead got {owner.GetType().Name}", owner);
                 return default;
             }
 
@@ -36,7 +36,7 @@ namespace Game.Modifier
                 return default;
             }
 
-            return multiplier.GetValue<float>(context) * modifierBehaviour.CurrentStack;
+            return multiplier.GetValue<float>() * modifierBehaviour.CurrentStack;
         }
     }
 }

@@ -57,15 +57,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statisticRegistry:
-    statistics:
-    - rid: 7754703303340195859
-    - rid: 7754703303340195860
   tags: 
   visibleByDefault: 1
   behaviours:
   - rid: 7754703150677491830
   - rid: 7754703150677491831
+  - rid: 7754703308747964752
   references:
     version: 2
     RefIds:
@@ -77,28 +74,19 @@ MonoBehaviour:
       type: {class: TimeModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         duration:
-          name: duration
-    - rid: 7754703303340195859
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+          rid: 7754703308747964751
+    - rid: 7754703308747964751
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: duration
-        isExposed: 1
-        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+    - rid: 7754703308747964752
+      type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        modifierOperator: 0
+        definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
         value:
-          rid: 7754703308747964593
-    - rid: 7754703303340195860
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+          rid: 7754703308747964754
+    - rid: 7754703308747964754
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        name: defense_flat
-        isExposed: 1
-        definition: {fileID: 11400000, guid: 06200c8604de2004e9d137aa559904e0, type: 2}
-        value:
-          rid: 7754703308747964596
-    - rid: 7754703308747964593
-      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 10
-    - rid: 7754703308747964596
-      type: {class: SerializeStatisticValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 10
+        name: defense

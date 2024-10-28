@@ -21,12 +21,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 06200c8604de2004e9d137aa559904e0
-    m_Address: Assets/_Game/Statistics/DefenseFlatStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0daeb2d661b48664f9f8656c569beb36
     m_Address: Assets/_Game/UI/Window/InspectorModifierWindow/Prefabs/InspectorModifierWindow.prefab
     m_ReadOnly: 0
@@ -63,26 +57,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - Manager
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 3a8366e7cfe4d2f449af5017cbec8765
-    m_Address: Assets/_Game/Statistics/DamageTakenPercentageStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 43442952713ba724d9f3d09e9d1abdf9
     m_Address: Assets/_Game/Statistics/HealStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 4625489d85014b746b361303b9541d43
-    m_Address: Assets/_Game/Statistics/AttackSpeedPercentageStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 493109d50bb4d0d4f916891e33c067e1
-    m_Address: Assets/_Game/Statistics/DefensePercentageStatisticDefinition.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic
@@ -92,12 +68,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Window
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 604f9fcc6fc7f4a4ba799319774f00f0
-    m_Address: Assets/_Game/Statistics/HealthMaxPercentageStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 692bd90ecc8e43840a83aaa5c9e54022
     m_Address: Assets/_Game/Statistics/HealthStatisticDefinition.asset
@@ -111,20 +81,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 7dc7968e82158fc43824701568177722
-    m_Address: Assets/_Game/Statistics/SpeedPercentageStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7f97419c07cf32d49ae612434c1fb6b8
     m_Address: Assets/_Game/Statistics/DefenseStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 80313f8013c25d5429c444461ffe8b6d
-    m_Address: Assets/_Game/Statistics/HealthMaxFlatStatisticDefinition.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic
@@ -153,12 +111,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Window
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a01a2864733b8e44c953827a131a98bd
-    m_Address: Assets/_Game/Statistics/AttackPowerPercentageStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a2aa5c999dfb39e4a989f3c6b532ecbf
     m_Address: Assets/_Game/Statistics/RangeStatisticDefinition.asset
     m_ReadOnly: 0
@@ -182,12 +134,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Window
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b036b5bdd1cc473499a87d48935769a2
-    m_Address: Assets/_Game/Statistics/DamageDealtAgainstWeakStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b6e7acc220a4175489e13715c3932744
     m_Address: Assets/_Game/Statistics/SpeedStatisticDefinition.asset
     m_ReadOnly: 0
@@ -199,12 +145,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Manager
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: c44430788b4fe5a4f822561156a457af
-    m_Address: Assets/_Game/Statistics/DamagePercentageStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d71a191ae10eaf24f8e2f26ada07d54a
     m_Address: Assets/_Game/Statistics/AttackSpeedStatisticDefinition.asset
@@ -226,12 +166,6 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff6ee24adf3c8424aad04267addb363d
     m_Address: Assets/_Game/Statistics/AttackPowerStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: ffa9a2d75aa6c9f4cb8ed744120428fc
-    m_Address: Assets/_Game/Statistics/DamageMultiplierStatisticDefinition.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic

@@ -7,15 +7,15 @@ using UnityEngine;
 namespace Game.Projectile
 {
     [Serializable]
-    public class ProjectileParameterStatisticValue<T> : StatisticValue<T>
+    public class ProjectileParameterValue<T> : Value<T>
     {
         [SerializeField] private string name;
 
-        public override T GetValue(Context context)
+        public override T GetValue()
         {
             if (owner is not ProjectileEntity projectile)
             {
-                Debug.LogError($"Expecting the owner to be of type {nameof(ProjectileEntity)} but instead got {context.GetType()}.");
+                Debug.LogError($"Expecting the owner to be of type {nameof(ProjectileEntity)} but instead got {owner.GetType()}.");
                 return default;
             }
 
@@ -36,7 +36,7 @@ namespace Game.Projectile
     }
 
     [Serializable]
-    public class ProjectileParameterStatisticValueFloat : ProjectileParameterStatisticValue<float>
+    public class ProjectileParameterValueFloat : ProjectileParameterValue<float>
     {
 
     }

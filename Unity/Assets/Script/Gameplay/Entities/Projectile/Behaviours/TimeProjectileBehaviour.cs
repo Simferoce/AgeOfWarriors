@@ -8,7 +8,7 @@ namespace Game.Projectile
     [Serializable]
     public class TimeProjectileBehaviour : ProjectileBehaviour
     {
-        [SerializeReference, SubclassSelector] private Statistic duration;
+        [SerializeReference, SubclassSelector] private Value duration;
         [SerializeReference, SubclassSelector] private List<IProjectileStandardEffect> effects;
 
         private float startedAt;
@@ -18,6 +18,8 @@ namespace Game.Projectile
             base.Initialize(projectile);
             startedAt = Time.time;
 
+            duration.Initialize(projectile);
+
             foreach (IProjectileStandardEffect effect in effects)
                 effect.Initialize(projectile);
         }
@@ -26,7 +28,7 @@ namespace Game.Projectile
         {
             base.Update();
 
-            if (startedAt/* + duration.GetValue<float>(projectile)*/ > Time.time)
+            if (startedAt + duration.GetValue<float>() > Time.time)
                 return;
 
             foreach (IProjectileStandardEffect effect in effects)

@@ -1,5 +1,4 @@
 ﻿using Game.Components;
-using Game.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,8 +27,6 @@ namespace Game.Ability
 
         public virtual void Initialize(Caster caster)
         {
-            GetCachedComponent<StatisticRegistry>().Add(caster.Entity.GetCachedComponent<StatisticRegistry>());
-
             Caster = caster;
             Parent = caster.Entity;
             faction = caster.Entity.Faction;

@@ -214,8 +214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad934abfe165f5649b45856d47d2d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statisticRegistry:
-    statistics: []
   tags: 
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
@@ -226,8 +224,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 7754703286907174927
       type: {class: AlignWithVelocityProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
@@ -241,18 +237,11 @@ MonoBehaviour:
         filter:
           rid: 7754703286907175004
         effects:
-        - rid: 7754703286907175005
+        - rid: 7754703308747964715
         - rid: 7754703286907175006
     - rid: 7754703286907175004
       type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
-    - rid: 7754703286907175005
-      type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        damage:
-          rid: 7754703308747964648
-        armorPenetration:
-          rid: -2
     - rid: 7754703286907175006
       type: {class: KillProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -262,17 +251,21 @@ MonoBehaviour:
       type: {class: StickProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         stopSimulatedDelay: 0.05
-    - rid: 7754703308747964648
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+    - rid: 7754703308747964715
+      type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
-        name: damage
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        value:
-          rid: 7754703308747964649
-    - rid: 7754703308747964649
+        damage:
+          rid: 7754703308747964719
+        armorPenetration:
+          rid: 7754703308747964720
+    - rid: 7754703308747964719
       type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         name: damage
+    - rid: 7754703308747964720
+      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: armor_penetration
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5

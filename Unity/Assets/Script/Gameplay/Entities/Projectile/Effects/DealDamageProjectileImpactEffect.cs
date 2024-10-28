@@ -8,8 +8,11 @@ namespace Game.Projectile
     [Serializable]
     public class DealDamageProjectileImpactEffect : ProjectileEffect, IProjectileImpactEffect
     {
-        [SerializeReference, SubclassSelector] private Statistic damage;
-        [SerializeReference, SubclassSelector] private Statistic armorPenetration;
+        [SerializeReference, SubclassSelector] private Value damage;
+        [SerializeReference, SubclassSelector] private Value armorPenetration;
+
+        public float Damage => damage?.GetValue<float>() ?? 0f;
+        public float ArmorPenetration => armorPenetration?.GetValue<float>() ?? 0f;
 
         public override void Initialize(ProjectileEntity projectile)
         {
@@ -26,8 +29,8 @@ namespace Game.Projectile
             AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
             AttackData attack = attackFactory.Generate(
                 target: attackable,
-                damage: damage?.GetValue<float>(null) ?? 0f,
-                armorPenetration: armorPenetration?.GetValue<float>(null) ?? 0f,
+                damage: Damage,
+                armorPenetration: ArmorPenetration,
                 flags: AttackData.Flag.Ranged);
 
             attackable.TakeAttack(attack);

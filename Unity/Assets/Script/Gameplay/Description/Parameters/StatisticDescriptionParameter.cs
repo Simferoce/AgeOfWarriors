@@ -11,8 +11,8 @@ namespace Game
 
         public override object GetValue(Entity source, Context context)
         {
-            if (source.TryGetCachedComponent<StatisticRegistry>(out StatisticRegistry statisticRegistry) && statisticRegistry.TryGetStatistic(name, out Statistic statistic))
-                return statistic.GetDescription(context);
+            //if (source.TryGetCachedComponent<StatisticRegistry>(out StatisticRegistry statisticRegistry) && statisticRegistry.TryGetStatistic(name, out Statistic statistic))
+            //    return statistic.GetDescription(context);
 
             return $"{{{name}}}";
         }

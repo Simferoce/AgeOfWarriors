@@ -21,16 +21,24 @@ namespace Game.Modifier
 
         public void Add(ModifierEntity modifier)
         {
-            Entity.GetCachedComponent<StatisticRegistry>().Add(modifier.GetCachedComponent<StatisticRegistry>());
             modifiers.Add(modifier);
             OnModifierAdded?.Invoke(modifier);
         }
 
         public void Remove(ModifierEntity modifier)
         {
-            Entity.GetCachedComponent<StatisticRegistry>().Remove(modifier.GetCachedComponent<StatisticRegistry>());
             modifiers.Remove(modifier);
             OnModifierRemoved?.Invoke(modifier);
+        }
+
+        public float Modify(StatisticDefinition definition, float value)
+        {
+            List<StatisticModifierBehaviour> statisticModifierBehaviours = modifiers.SelectMany(x => x.Behaviours.OfType<StatisticModifierBehaviour>()).Where(x => x.Definition == definition).ToList();
+            float flat = statisticModifierBehaviours.Where(x => x.Operator == StatisticModifierBehaviour.StatisticModifierOperator.Flat).Select(x => x.GetValue<float>()).Sum();
+            float percentage = statisticModifierBehaviours.Where(x => x.Operator == StatisticModifierBehaviour.StatisticModifierOperator.Percentage).Select(x => x.GetValue<float>()).Sum();
+            float muliplier = statisticModifierBehaviours.Where(x => x.Operator == StatisticModifierBehaviour.StatisticModifierOperator.Percentage).Select(x => x.GetValue<float>()).Aggregate(1f, (x, y) => x * y);
+
+            return (value + flat) * (1 + percentage) * muliplier;
         }
 
         public List<ModifierEntity> GetModifiers()

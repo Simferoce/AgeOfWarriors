@@ -9,7 +9,7 @@ namespace Game.Ability
     {
         public override bool Execute()
         {
-            float attackSpeed = ability.Caster.Entity.GetCachedComponent<StatisticRegistry>().GetOrThrow<float>(StatisticIdentifiant.AttackSpeed);
+            float attackSpeed = ability.Caster.Entity.GetStatisticOrThrow<float>(StatisticDefinitionRegistry.Instance.AttackSpeed);
             return Time.time - ability.Caster.LastAbilityUsed > 1f / attackSpeed;
         }
     }

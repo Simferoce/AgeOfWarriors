@@ -3,7 +3,7 @@
 namespace Game.Statistics
 {
     [Serializable]
-    public abstract class StatisticValue
+    public abstract class Value
     {
         public virtual bool ExpressiveDescription => true;
 
@@ -14,19 +14,19 @@ namespace Game.Statistics
             this.owner = owner;
         }
 
-        public abstract T GetValue<T>(Context context);
+        public abstract T GetValue<T>();
 
         public abstract string GetDescription(Context context);
     }
 
     [Serializable]
-    public abstract class StatisticValue<ReferenceType> : StatisticValue
+    public abstract class Value<ReferenceType> : Value
     {
-        public abstract ReferenceType GetValue(Context context);
+        public abstract ReferenceType GetValue();
 
-        public override T GetValue<T>(Context context)
+        public override T GetValue<T>()
         {
-            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetValue(context));
+            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetValue());
         }
     }
 }

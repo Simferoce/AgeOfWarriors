@@ -1,6 +1,4 @@
-﻿
-
-using Game.Statistics;
+﻿using Game.Statistics;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace Game.Projectile
     [Serializable]
     public class DistanceProjectileBehaviour : ProjectileBehaviour
     {
-        [SerializeField] private StatisticReference<float> range;
+        [SerializeReference, SubclassSelector] private Value range;
         [SerializeReference, SubclassSelector] private List<IProjectileStandardEffect> effects;
 
         private Vector3 previousPosition;
@@ -20,6 +18,8 @@ namespace Game.Projectile
         {
             base.Initialize(projectile);
             previousPosition = projectile.transform.position;
+
+            range.Initialize(projectile);
 
             foreach (IProjectileStandardEffect effect in effects)
                 effect.Initialize(projectile);
@@ -33,7 +33,7 @@ namespace Game.Projectile
             distanceTraveled += delta;
 
             previousPosition = currentPosition;
-            if (distanceTraveled < range.Resolve(projectile).GetValue<float>(null))
+            if (distanceTraveled < range.GetValue<float>())
                 return;
 
             foreach (IProjectileStandardEffect effect in effects)

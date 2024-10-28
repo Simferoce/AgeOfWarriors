@@ -38,10 +38,10 @@ namespace Game.Projectile
                 return;
             }
 
-            foreach (IProjectileImpactEffect effect in effects.Cast<IProjectileImpactEffect>())
+            foreach (IProjectileImpactEffect effect in effects.OfType<IProjectileImpactEffect>())
                 effect.Execute(entity);
 
-            foreach (IProjectileStandardEffect effect in effects.Where(x => x is not IProjectileImpactEffect).Cast<IProjectileStandardEffect>())
+            foreach (IProjectileStandardEffect effect in effects.Where(x => x is not IProjectileImpactEffect).OfType<IProjectileStandardEffect>())
                 effect.Execute();
         }
 

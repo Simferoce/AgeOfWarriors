@@ -4,16 +4,16 @@ using UnityEngine;
 namespace Game.Statistics
 {
     [Serializable]
-    public class SerializeStatisticValueFloat : SerializeStatisticValue<float> { }
+    public class SerializeValueFloat : SerializeValue<float> { }
 
     [Serializable]
-    public class SerializeStatisticValue<T> : StatisticValue<T>
+    public class SerializeValue<T> : Value<T>
     {
         [SerializeField] private T value;
 
         public override bool ExpressiveDescription => false;
 
-        public override T GetValue(Context context)
+        public override T GetValue()
         {
             return value;
         }

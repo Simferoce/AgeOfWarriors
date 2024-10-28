@@ -5,17 +5,17 @@ using UnityEngine;
 namespace Game.Ability
 {
     [Serializable]
-    public class CasterStatisticRatioAbilityStatisticValue : StatisticValue<float>
+    public class CasterStatisticRatioAbilityValue : Value<float>
     {
         [SerializeField] private StatisticDefinition casterDefinition;
         [SerializeField, Range(0, 10)] private float ratio;
 
-        public override float GetValue(Context context)
+        public override float GetValue()
         {
             if (owner is not AbilityEntity ability)
                 throw new Exception($"Excepting the type of {owner} to be of {nameof(AbilityEntity)}");
 
-            return ability.Caster.Entity.GetCachedComponent<StatisticRegistry>().GetOrThrow<float>(casterDefinition, context) * ratio;
+            return ability.Caster.Entity.GetStatisticOrThrow<float>(casterDefinition) * ratio;
         }
 
         public override string GetDescription(Context context)
