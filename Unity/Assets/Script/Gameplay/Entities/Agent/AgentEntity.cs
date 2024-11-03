@@ -1,6 +1,8 @@
 ﻿using Game.Character;
 using Game.Modifier;
+using Game.Statistics;
 using Game.Technology;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Agent
@@ -71,6 +73,25 @@ namespace Game.Agent
         public void SpawnAgentObject(CharacterDefinition characterDefinition, Vector3 position, int direction)
         {
             CharacterEntity character = characterDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
+
+            ModifierHandler modifierHandler = AddOrGetCachedComponent<ModifierHandler>();
+            ModifierApplier modifierApplier = AddOrGetCachedComponent<ModifierApplier>();
+            foreach (StatisticModifierBehaviour modifierBehaviour in modifierHandler.GetModifiers().SelectMany(x => x.Behaviours.OfType<StatisticModifierBehaviour>()))
+            {
+                if (modifierBehaviour.Definition is CharacterStatisticDefinition characterStatisticDefinition)
+                {
+                    ModifierHandler characterModifierHandler = character.AddOrGetCachedComponent<ModifierHandler>();
+                    StatisticModifierBehaviour statisticModifierBehaviour = new StatisticModifierBehaviour()
+                    {
+                        Definition = characterStatisticDefinition.OutputDefinition,
+                        Operator = modifierBehaviour.Operator,
+                        Value = modifierBehaviour.Value.Snapshot()
+                    };
+
+                    modifierApplier.Apply(characterStatisticDefinition.ModifierDefinition, characterModifierHandler, new ModifierParameter<ModifierBehaviour>(null, statisticModifierBehaviour));
+                }
+            }
+
             OnAgentObjectSpawn?.Invoke(character.GetCachedComponent<AgentIdentity>());
 
             character.Initialize();

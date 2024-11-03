@@ -15,6 +15,7 @@ namespace Game.Statistics
         }
 
         public abstract T GetValue<T>();
+        public abstract Value Snapshot();
 
         public abstract string GetDescription(Context context);
     }
@@ -23,6 +24,11 @@ namespace Game.Statistics
     public abstract class Value<ReferenceType> : Value
     {
         public abstract ReferenceType GetValue();
+
+        public override Value Snapshot()
+        {
+            return new SerializeValue<ReferenceType>() { Value = GetValue() };
+        }
 
         public override T GetValue<T>()
         {

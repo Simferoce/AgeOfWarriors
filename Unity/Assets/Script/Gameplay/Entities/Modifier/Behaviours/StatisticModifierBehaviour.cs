@@ -22,6 +22,7 @@ namespace Game.Modifier
 
         public StatisticModifierOperator Operator { get => modifierOperator; set => modifierOperator = value; }
         public StatisticDefinition Definition { get => definition; set => definition = value; }
+        public Value Value { get => value; set => this.value = value; }
 
         public override void Initialize(ModifierEntity modifier)
         {

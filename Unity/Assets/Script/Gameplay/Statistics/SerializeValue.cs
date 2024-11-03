@@ -13,6 +13,8 @@ namespace Game.Statistics
 
         public override bool ExpressiveDescription => false;
 
+        public T Value { get => value; set => this.value = value; }
+
         public override T GetValue()
         {
             return value;

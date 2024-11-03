@@ -32,6 +32,9 @@ namespace Game.Modifier
 
             base.Initialize();
 
+            foreach (ModifierParameter<ModifierBehaviour> modifierBehaviorParameter in parameters.OfType<ModifierParameter<ModifierBehaviour>>())
+                Behaviours.Add(modifierBehaviorParameter.GetValue());
+
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
                 modifierBehaviour.Initialize(this);
         }
