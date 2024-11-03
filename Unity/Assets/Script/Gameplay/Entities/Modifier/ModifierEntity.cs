@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game.Modifier
 {
     [RequireComponent(typeof(AttackFactory))]
-    public class ModifierEntity : Entity
+    public class ModifierEntity : Entity<ModifierDefinition>
     {
         [SerializeField] private bool visibleByDefault = true;
         [SerializeReference, SubclassSelector] private List<ModifierBehaviour> behaviours;
@@ -14,7 +14,6 @@ namespace Game.Modifier
         public delegate void OnRemovedDelegate(ModifierEntity modifier);
         public event OnRemovedDelegate OnRemoved;
 
-        public ModifierDefinition Definition { get; set; }
         public ModifierHandler Handler { get; set; }
         public ModifierApplier Applier { get; set; }
         public bool IsVisible { get => visibleByDefault; }
@@ -73,7 +72,7 @@ namespace Game.Modifier
 
         public string ParseDescription()
         {
-            return Definition.ParseDescription(this, null);
+            return definition.ParseDescription(this, null);
         }
     }
 }

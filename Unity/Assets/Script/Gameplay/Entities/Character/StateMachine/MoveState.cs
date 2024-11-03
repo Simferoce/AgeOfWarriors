@@ -1,6 +1,7 @@
 ﻿using Game.Ability;
 using Game.Agent;
 using Game.Components;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Character
@@ -41,7 +42,7 @@ namespace Game.Character
                 if (CanMove())
                 {
                     character.Animated.SetFloat("SpeedRatio", 1, 0.25f);
-                    character.rigidbody.linearVelocity = Vector2.right * character.Direction * character.Speed;
+                    character.rigidbody.linearVelocity = Vector2.right * character.GetCachedComponent<AgentIdentity>().Direction * character.Speed;
                 }
                 else
                 {
@@ -63,12 +64,12 @@ namespace Game.Character
                 if (character.GetCachedComponent<Caster>().IsCasting)
                     return false;
 
-                foreach (AgentObject agentObject in EntityRepository.Instance.GetByType<AgentObject>())
+                foreach (Entity entity in Entity.All.OfType<Entity>())
                 {
-                    if (agentObject == character)
+                    if (entity == character)
                         continue;
 
-                    if (!agentObject.TryGetCachedComponent<Blocker>(out Blocker blocker))
+                    if (!entity.TryGetCachedComponent<Blocker>(out Blocker blocker))
                         continue;
 
                     if (!blocker.enabled)

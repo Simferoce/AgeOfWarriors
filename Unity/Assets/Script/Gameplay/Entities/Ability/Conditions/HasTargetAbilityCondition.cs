@@ -1,5 +1,4 @@
-﻿using Game.Agent;
-using Game.Components;
+﻿using Game.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +35,7 @@ namespace Game.Ability
         public List<Target> GetTargets()
         {
             List<Target> potentialTargets = new List<Target>();
-            foreach (Target targetteable in EntityRepository.Instance.GetByType<AgentObject>().Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
+            foreach (Target targetteable in Entity.All.Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
             {
                 if (targetteable.enabled == false)
                     continue;

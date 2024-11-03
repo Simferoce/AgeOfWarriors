@@ -1,4 +1,5 @@
 using Game.Agent;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ namespace Game.UI.Windows
 
         private void Update()
         {
-            AgentEntity agentEntity = AgentRepository.Instance.GetByFaction(FactionType.Player);
+            AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
             currencyText.text = agentEntity.Currency.ToString("0");
         }
     }

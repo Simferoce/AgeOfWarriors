@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   cheatCost: 1
-  maxCharacter: 3
+  maxCharacter: 1
   technologyGainMultiplier: 0
   factorySpeed: 10
 --- !u!4 &97917530
@@ -1639,6 +1639,10 @@ PrefabInstance:
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: loadout.agentIdentitysDefinition.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
@@ -1654,6 +1658,22 @@ PrefabInstance:
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: 71ef5a81b0132e0478a2cc1b244d3357, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'loadout.agentIdentitysDefinition.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'loadout.agentIdentitysDefinition.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'loadout.agentIdentitysDefinition.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'loadout.agentIdentitysDefinition.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
     - target: {fileID: 5053631171570033998, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: m_Name
       value: PlayerAgent
@@ -1944,6 +1964,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
+      propertyPath: loadout.agentIdentitysDefinition.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: 'loadout.agentObjectsDefinition.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
@@ -1953,8 +1977,12 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
     - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: managedReferences[7754703125069692928].active
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1278113342030530679, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
+      propertyPath: 'loadout.agentIdentitysDefinition.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
     - target: {fileID: 5053631171570033998, guid: 445d352682ee2ac4298fdcecb632d25f, type: 3}
       propertyPath: m_Name
       value: OpponentAgent

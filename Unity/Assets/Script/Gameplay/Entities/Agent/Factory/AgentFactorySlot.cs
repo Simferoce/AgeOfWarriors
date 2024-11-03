@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using Game.Character;
+using UnityEngine;
 
 namespace Game.Agent
 {
     public class AgentFactorySlot
     {
-        [SerializeField] private AgentObjectDefinition definition;
+        [SerializeField] private CharacterDefinition definition;
     }
 }

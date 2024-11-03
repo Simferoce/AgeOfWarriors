@@ -10,6 +10,14 @@ namespace Game
 {
     public abstract class Entity : MonoBehaviour, IEntity
     {
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void Init()
+        {
+            All = new List<Entity>();
+        }
+
+        public static List<Entity> All = new List<Entity>();
+
         public enum EntityTag
         {
             Building,
@@ -41,9 +49,9 @@ namespace Game
             }
         }
         public IReadOnlyList<Entity> Children => children;
-        public virtual FactionType Faction => FactionType.Undefined;
         public virtual bool IsActive { get => true; }
         public List<EntityTag> Tags { get => tags; }
+        public virtual Definition Definition { get; set; }
 
         private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();
         private Entity parent = null;
@@ -51,7 +59,7 @@ namespace Game
 
         protected virtual void Awake()
         {
-            EntityRepository.Instance.Add(this);
+            All.Add(this);
             AddOrGetCachedComponent<ModifierApplier>();
             EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
         }
@@ -64,14 +72,13 @@ namespace Game
         {
             Parent = null;
             gameObject.SetActive(false);
-            EntityRepository.Instance.Remove(this);
 
             GameObject.Destroy(this.gameObject);
         }
 
         protected virtual void OnDestroy()
         {
-
+            All.Remove(this);
         }
 
         public T GetStatisticOrDefault<T>(StatisticDefinition definition, T defaultValue)
@@ -112,7 +119,7 @@ namespace Game
         {
             if (cached.ContainsKey(typeof(T)))
             {
-                return (T)cached[typeof(T)].First();
+                return (T)cached[typeof(T)].FirstOrDefault();
             }
             else
             {
@@ -151,5 +158,18 @@ namespace Game
             }
         }
         #endregion
+    }
+
+    public abstract class Entity<T> : Entity
+        where T : Definition
+    {
+        protected T definition;
+
+        public override Definition Definition { get => definition; set => definition = value as T; }
+
+        public T GetDefinition()
+        {
+            return definition;
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Game.Agent;
-using Game.Components;
+﻿using Game.Components;
 using Game.Modifier;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,19 +29,16 @@ namespace Game.Pool
 
         private void FixedUpdate()
         {
-            foreach (AgentObject agent in EntityRepository.Instance.GetByType<AgentObject>())
+            foreach (Target target in Entity.All.Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
             {
-                if (!agent.TryGetCachedComponent(out Target targeteable))
+                if (!target.enabled)
                     continue;
 
-                if (!targeteable.enabled)
-                    continue;
-
-                if (!hitbox.OverlapPoint(targeteable.CenterPosition))
+                if (!hitbox.OverlapPoint(target.CenterPosition))
                     continue;
 
                 foreach (PoolEffect poolEffect in poolEffects)
-                    poolEffect.Apply(this, targeteable);
+                    poolEffect.Apply(this, target);
             }
 
             if (Time.time - startTime > Duration)

@@ -1,4 +1,5 @@
 using Game.Agent;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace Game.UI.Windows
 
         private void Update()
         {
-            AgentEntity agentEntity = AgentRepository.Instance.GetByFaction(faction);
+            AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
             foreground.fillAmount = agentEntity.Base.Health / agentEntity.Base.MaxHealth;
         }
     }

@@ -45,11 +45,14 @@ namespace Game.Components
             if (entity is not CharacterEntity character)
                 return false;
 
-            if (Entity is not AgentObject agentObject)
+            if (!Entity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity selfIdentity))
                 return false;
 
-            return character.Agent.Faction == agentObject.Agent.Faction
-                && character.Priority > agentObject.Priority;
+            if (!character.TryGetCachedComponent<AgentIdentity>(out AgentIdentity otherIdentity))
+                return false;
+
+            return otherIdentity.Agent.Faction == selfIdentity.Agent.Faction
+                && otherIdentity.Priority > selfIdentity.Priority;
         }
 
         public bool BlockingEnemies(Entity entity)
@@ -57,10 +60,13 @@ namespace Game.Components
             if (entity is not CharacterEntity character)
                 return false;
 
-            if (Entity is not AgentObject agentObject)
+            if (!Entity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity selfIdentity))
                 return false;
 
-            return character.Agent.Faction != agentObject.Agent.Faction;
+            if (!character.TryGetCachedComponent<AgentIdentity>(out AgentIdentity otherIdentity))
+                return false;
+
+            return selfIdentity.Agent.Faction != otherIdentity.Agent.Faction;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Game.Pool
             lastTimeApplied = Time.time;
             base.Apply(pool, targeteable);
 
-            if ((targeteable.Entity as AgentObject).Faction == pool.Faction)
+            if (targeteable.Entity.GetCachedComponent<AgentIdentity>().Faction == pool.GetCachedComponent<AgentIdentity>().Faction)
                 return;
 
             if (!targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))

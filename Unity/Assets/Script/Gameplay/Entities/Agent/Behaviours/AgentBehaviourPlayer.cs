@@ -1,5 +1,6 @@
 ﻿using Game.UI.Windows;
 using System;
+using System.Linq;
 
 namespace Game.Agent
 {
@@ -8,7 +9,7 @@ namespace Game.Agent
     {
         public override void OnLevelUp()
         {
-            TechnologyWindow.Open(AgentRepository.Instance.GetByFaction(FactionType.Player));
+            TechnologyWindow.Open(Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.GetCachedComponent<AgentIdentity>().Faction == FactionType.Player));
         }
     }
 }

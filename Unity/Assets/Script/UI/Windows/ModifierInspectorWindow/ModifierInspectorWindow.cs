@@ -22,9 +22,9 @@ namespace Game.UI.Windows
 
         public void Refresh(ModifierEntity modifier)
         {
-            modifierName.text = modifier.Definition.Title;
+            modifierName.text = modifier.GetDefinition().Title;
             description.text = modifier.ParseDescription();
-            icon.sprite = modifier.Definition.Icon;
+            icon.sprite = modifier.GetDefinition().Icon;
         }
 
         public void Close()

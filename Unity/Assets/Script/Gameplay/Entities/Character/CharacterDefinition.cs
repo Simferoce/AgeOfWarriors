@@ -5,12 +5,18 @@ using UnityEngine.Serialization;
 namespace Game.Character
 {
     [CreateAssetMenu(fileName = "Character", menuName = "Definition/AgentObject/Character")]
-    public class CharacterDefinition : AgentObjectDefinition
+    public class CharacterDefinition : Definition
     {
+        [Header("Display")]
+        [SerializeField] private Sprite icon;
+        [SerializeField] private string title;
+
         [Header("Base")]
         [SerializeField] private CharacterDefinition baseDefinition;
 
         [Header("Character - Statistic")]
+        [SerializeField] private float productionDuration;
+        [SerializeField] private float cost;
         [SerializeField] private float reach = 1f;
         [SerializeField] private float speed = 1f;
         [SerializeField, FormerlySerializedAs("attackPerSeconds")] private float attackSpeed = 1f;
@@ -22,6 +28,9 @@ namespace Game.Character
         [Header("Prefab")]
         [SerializeField] private GameObject prefab;
 
+        public Sprite Icon { get => icon; }
+        public string Title { get => title; set => title = value; }
+
         public float Reach => reach;
         public float Speed => speed;
         public float AttackSpeed => attackSpeed;
@@ -29,17 +38,21 @@ namespace Game.Character
         public float MaxHealth => maxHealth;
         public float Defense => defense;
         public float TechnologyGainPerSecond => technologyGainPerSecond;
+        public float ProductionDuration { get => productionDuration; set => productionDuration = value; }
+        public float Cost { get => cost; set => cost = value; }
 
-        public override bool IsSpecialization(AgentObjectDefinition agentObjectDefinition)
+        public bool IsSpecialization(CharacterDefinition agentIdentityDefinition)
         {
-            return baseDefinition == agentObjectDefinition || (baseDefinition?.IsSpecialization(agentObjectDefinition) ?? false);
+            return baseDefinition == agentIdentityDefinition || (baseDefinition?.IsSpecialization(agentIdentityDefinition) ?? false);
         }
 
-        public override AgentObject Spawn(AgentEntity agent, Vector3 position, int spawnNumber, int direction)
+        public CharacterEntity Spawn(AgentEntity agent, Vector3 position, int spawnNumber, int direction)
         {
-            CharacterEntity character = Instantiate(prefab, position, Quaternion.identity).GetComponent<CharacterEntity>();
+            CharacterEntity character = GameObject.Instantiate(prefab, position, Quaternion.identity).GetComponent<CharacterEntity>();
             character.Definition = this;
-            character.Spawn(agent, spawnNumber, direction);
+
+            AgentIdentity agentIdentity = character.AddOrGetCachedComponent<AgentIdentity>();
+            agentIdentity.Set(agent, spawnNumber, direction);
 
             return character;
         }

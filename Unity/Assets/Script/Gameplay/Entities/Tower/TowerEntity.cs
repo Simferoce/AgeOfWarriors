@@ -1,8 +1,6 @@
-﻿using Game.Agent;
-
-namespace Game
+﻿namespace Game
 {
-    public class TowerEntity : AgentObject
+    public class TowerEntity : Entity
     {
     }
 }

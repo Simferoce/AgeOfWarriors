@@ -1,4 +1,5 @@
 ﻿using Game.Agent;
+using System.Linq;
 
 namespace Game.UI.Windows
 {
@@ -6,7 +7,7 @@ namespace Game.UI.Windows
     {
         public void OpenTechnology()
         {
-            AgentEntity agentEntity = AgentRepository.Instance.GetByFaction(FactionType.Player);
+            AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
             TechnologyWindow.Open(agentEntity);
         }
     }

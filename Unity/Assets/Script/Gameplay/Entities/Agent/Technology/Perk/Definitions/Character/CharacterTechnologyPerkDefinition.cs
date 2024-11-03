@@ -1,4 +1,4 @@
-﻿using Game.Agent;
+﻿using Game.Character;
 using Game.Modifier;
 using UnityEngine;
 
@@ -6,10 +6,10 @@ namespace Game.Technology
 {
     public abstract class CharacterTechnologyPerkDefinition : TechnologyPerkDefinition
     {
-        [SerializeField] private AgentObjectDefinition affected;
+        [SerializeField] private CharacterDefinition affected;
         [SerializeField] private ModifierDefinition modifierDefinition;
 
-        public bool Affect(AgentObjectDefinition definition)
+        public bool Affect(CharacterDefinition definition)
         {
             return definition == affected || definition.IsSpecialization(affected);
         }

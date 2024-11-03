@@ -22,11 +22,11 @@ namespace Game.Ability
         {
             return comparaison switch
             {
-                Comparaison.Equal => (targetEntity as AgentObject).Priority == (source.Caster.Entity as AgentObject).Priority,
-                Comparaison.Greater => (targetEntity as AgentObject).Priority > (source.Caster.Entity as AgentObject).Priority,
-                Comparaison.GreaterOrEqual => (targetEntity as AgentObject).Priority >= (source.Caster.Entity as AgentObject).Priority,
-                Comparaison.Lower => (targetEntity as AgentObject).Priority < (source.Caster.Entity as AgentObject).Priority,
-                Comparaison.LowerOrEqual => (targetEntity as AgentObject).Priority <= (source.Caster.Entity as AgentObject).Priority,
+                Comparaison.Equal => targetEntity.GetCachedComponent<AgentIdentity>().Priority == source.Caster.Entity.GetCachedComponent<AgentIdentity>().Priority,
+                Comparaison.Greater => targetEntity.GetCachedComponent<AgentIdentity>().Priority > source.Caster.Entity.GetCachedComponent<AgentIdentity>().Priority,
+                Comparaison.GreaterOrEqual => targetEntity.GetCachedComponent<AgentIdentity>().Priority >= source.Caster.Entity.GetCachedComponent<AgentIdentity>().Priority,
+                Comparaison.Lower => targetEntity.GetCachedComponent<AgentIdentity>().Priority < source.Caster.Entity.GetCachedComponent<AgentIdentity>().Priority,
+                Comparaison.LowerOrEqual => targetEntity.GetCachedComponent<AgentIdentity>().Priority <= source.Caster.Entity.GetCachedComponent<AgentIdentity>().Priority,
                 _ => throw new NotImplementedException()
             };
         }

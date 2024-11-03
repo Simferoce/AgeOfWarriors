@@ -1,5 +1,7 @@
 ﻿using Game.Agent;
+using Game.Character;
 using Game.Technology;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -15,14 +17,14 @@ namespace Game.UI.Windows
 
         private void Start()
         {
-            AgentEntity agentEntity = AgentRepository.Instance.GetByFaction(FactionType.Player);
+            AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
             agentEntity.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
             Refresh();
         }
 
         private void OnDestroy()
         {
-            AgentEntity agentEntity = AgentRepository.Instance.GetByFaction(FactionType.Player);
+            AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
             if (agentEntity != null)
                 agentEntity.Technology.OnPerkAcquired -= Technology_OnPerkAcquired;
         }
@@ -34,21 +36,21 @@ namespace Game.UI.Windows
 
         private void Refresh()
         {
-            AgentEntity agentEntity = AgentRepository.Instance.GetByFaction(FactionType.Player);
-            AgentObjectDefinition agentObjectDefinition = agentEntity.Loadout.GetAgentObjectDefinitionAtIndex(index);
-            if (agentObjectDefinition == null)
+            AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
+            CharacterDefinition characterDefinition = agentEntity.Loadout.GetCharacterDefinitionAtIndex(index);
+            if (characterDefinition == null)
             {
                 gameObject.SetActive(false);
                 return;
             }
 
-            costText.text = agentObjectDefinition.Cost.ToString();
-            icon.sprite = agentObjectDefinition.Icon;
+            costText.text = characterDefinition.Cost.ToString();
+            icon.sprite = characterDefinition.Icon;
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            AgentEntity agentEntity = AgentRepository.Instance.GetByFaction(FactionType.Player);
+            AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
             agentEntity.TryQueueSpawnAgentObject(index);
         }
     }

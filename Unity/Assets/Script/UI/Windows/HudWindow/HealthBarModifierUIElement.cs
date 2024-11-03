@@ -15,7 +15,7 @@ namespace Game.UI.Windows
 
         public void Refresh(ModifierEntity modifier)
         {
-            icon.sprite = modifier.Definition.Icon;
+            icon.sprite = modifier.GetDefinition().Icon;
             overlay.fillAmount = modifier?.Behaviours.OfType<IModifierDuration>().FirstOrDefault()?.GetPercentageRemainingDuration() ?? 0;
 
             float? stackValue = modifier?.Behaviours.OfType<IModifierStack>().FirstOrDefault()?.CurrentStack;

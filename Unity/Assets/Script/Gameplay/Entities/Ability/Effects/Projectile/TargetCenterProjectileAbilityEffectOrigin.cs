@@ -14,7 +14,7 @@ namespace Game.Ability
         {
             Vector3 closest = ability.Targets.OrderBy(x => Mathf.Abs(x.TargetPosition.x - ability.Caster.Entity.transform.position.x)).FirstOrDefault().TargetPosition;
 
-            return closest + new Vector3(offset.x * (ability.Caster.Entity as AgentObject).Direction, offset.y);
+            return closest + new Vector3(offset.x * ability.Caster.Entity.GetCachedComponent<AgentIdentity>().Direction, offset.y);
         }
     }
 }

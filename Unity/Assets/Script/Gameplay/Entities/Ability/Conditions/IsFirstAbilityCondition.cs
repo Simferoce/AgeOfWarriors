@@ -10,11 +10,11 @@ namespace Game.Ability
     {
         public override bool Execute()
         {
-            if (ability.Caster.Entity is not AgentObject agentObject)
+            if (!ability.Caster.Entity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity agentIdentity))
                 return true;
 
-            int minPriority = EntityRepository.Instance.GetByType<CharacterEntity>().Where(x => x.Agent == agentObject.Agent && !x.IsDead).Min(x => x.Priority);
-            return minPriority == agentObject.Priority;
+            int minPriority = Entity.All.OfType<CharacterEntity>().Where(x => x.TryGetCachedComponent<AgentIdentity>(out AgentIdentity characterIdentity) && characterIdentity.Agent == agentIdentity.Agent && !x.IsDead).Min(x => x.GetCachedComponent<AgentIdentity>().Priority);
+            return minPriority == agentIdentity.Priority;
         }
     }
 }

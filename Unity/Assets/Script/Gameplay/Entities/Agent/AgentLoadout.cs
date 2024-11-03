@@ -1,4 +1,5 @@
-﻿using Game.Technology;
+﻿using Game.Character;
+using Game.Technology;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,9 +9,9 @@ namespace Game.Agent
     [Serializable]
     public class AgentLoadout
     {
-        [SerializeField] private List<AgentObjectDefinition> agentObjectsDefinition = new List<AgentObjectDefinition>();
+        [SerializeField] private List<CharacterDefinition> agentIdentitysDefinition = new List<CharacterDefinition>();
 
-        public int AmountOfAgentObjectAvailable => agentObjectsDefinition.Count;
+        public int AmountOfAgentObjectAvailable => agentIdentitysDefinition.Count;
 
         private AgentEntity agent;
 
@@ -19,17 +20,17 @@ namespace Game.Agent
             this.agent = agent;
         }
 
-        public AgentObjectDefinition GetAgentObjectDefinitionAtIndex(int index)
+        public CharacterDefinition GetCharacterDefinitionAtIndex(int index)
         {
-            if (index >= agentObjectsDefinition.Count)
+            if (index >= agentIdentitysDefinition.Count)
                 return null;
 
-            AgentObjectDefinition agentObjectDefinition = agentObjectsDefinition[index];
-            SpecializationTechnologyPerkDefinition specializationTechnologyPerkDefinition = agent.Technology.GetFirst(x => x is SpecializationTechnologyPerkDefinition s && s.Specialization.IsSpecialization(agentObjectDefinition)) as SpecializationTechnologyPerkDefinition;
+            CharacterDefinition agentIdentityDefinition = agentIdentitysDefinition[index];
+            SpecializationTechnologyPerkDefinition specializationTechnologyPerkDefinition = agent.Technology.GetFirst(x => x is SpecializationTechnologyPerkDefinition s && s.Specialization.IsSpecialization(agentIdentityDefinition)) as SpecializationTechnologyPerkDefinition;
             if (specializationTechnologyPerkDefinition != null)
                 return specializationTechnologyPerkDefinition.Specialization;
 
-            return agentObjectDefinition;
+            return agentIdentityDefinition;
         }
     }
 }

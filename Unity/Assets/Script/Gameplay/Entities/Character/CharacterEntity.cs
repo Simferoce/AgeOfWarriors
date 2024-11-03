@@ -1,6 +1,4 @@
-﻿using Extensions;
-using Game.Agent;
-using Game.Components;
+﻿using Game.Components;
 using Game.EventChannel;
 using Game.Modifier;
 using Game.Statistics;
@@ -17,7 +15,7 @@ namespace Game.Character
     [RequireComponent(typeof(Target))]
     [RequireComponent(typeof(AttackFactory))]
     [RequireComponent(typeof(ModifierApplier))]
-    public partial class CharacterEntity : AgentObject<CharacterDefinition>
+    public partial class CharacterEntity : Entity<CharacterDefinition>
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -28,16 +26,15 @@ namespace Game.Character
         public Animated Animated { get; set; }
         public List<TransformTag> TransformTags { get; set; }
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
-        public override FactionType Faction => IsConfused ? Faction.GetConfusedFaction() : Agent.Faction;
 
         public float Health { get; set; }
-        public float MaxHealth => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.MaxHealth, Definition.MaxHealth);
-        public float Defense => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Defense, Definition.Defense);
-        public float AttackSpeed => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.AttackSpeed, Definition.AttackSpeed);
-        public float AttackPower => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.AttackPower, Definition.AttackPower);
-        public float Speed => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Speed, Definition.Speed);
-        public float Reach => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Reach, Definition.Reach);
-        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
+        public float MaxHealth => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.MaxHealth, definition.MaxHealth);
+        public float Defense => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Defense, definition.Defense);
+        public float AttackSpeed => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.AttackSpeed, definition.AttackSpeed);
+        public float AttackPower => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.AttackPower, definition.AttackPower);
+        public float Speed => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Speed, definition.Speed);
+        public float Reach => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Reach, definition.Reach);
+        public float TechnologyGainPerSecond => definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
         public bool IsInvulnerable => false;/*this.GetCachedComponent<GameModifierHandler>().GetModifiers().Any(x => x is IModifierInvulnerable);*/
@@ -122,7 +119,7 @@ namespace Game.Character
 
         public void RefreshDirection()
         {
-            transform.localScale = new Vector3(Mathf.Sign(IsConfused ? -Direction : Direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            //transform.localScale = new Vector3(Mathf.Sign(IsConfused ? -Direction : Direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
         public void Death()
@@ -132,7 +129,8 @@ namespace Game.Character
             GetCachedComponent<Caster>().enabled = false;
             GetCachedComponent<Attackable>().OnDamageTaken -= OnDamageTaken;
             GetCachedComponent<AttackFactory>().OnAttackLanded -= OnAttackLanded;
-            DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { AgentObject = this });
+            DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { Entity = this });
+
             OnDeath?.Invoke();
             stateMachine.SetState(new DeathState(this));
         }

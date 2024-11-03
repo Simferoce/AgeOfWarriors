@@ -1,4 +1,4 @@
-﻿using Game.Agent;
+﻿using Game.Character;
 using UnityEngine;
 
 namespace Game.Technology
@@ -6,8 +6,8 @@ namespace Game.Technology
     [CreateAssetMenu(fileName = "Specialization", menuName = "Definition/Technology/Specialization")]
     public class SpecializationTechnologyPerkDefinition : TechnologyPerkDefinition
     {
-        [SerializeField] private AgentObjectDefinition specializations;
+        [SerializeField] private CharacterDefinition specializations;
 
-        public AgentObjectDefinition Specialization { get => specializations; set => specializations = value; }
+        public CharacterDefinition Specialization { get => specializations; set => specializations = value; }
     }
 }

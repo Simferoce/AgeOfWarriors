@@ -1,4 +1,5 @@
 ﻿using Game.Agent;
+using Game.Character;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Game.Modifier
     [Serializable]
     public class OnAgentCharacterSpawnModifierTrigger : ModifierTrigger, IModifierTargetProvider
     {
-        [SerializeField] private AgentObjectDefinition affected;
+        [SerializeField] private CharacterDefinition affected;
 
         private List<object> targets = new List<object>();
 
@@ -23,17 +24,17 @@ namespace Game.Modifier
             agent.OnAgentObjectSpawn += AgentObjectSpawn;
         }
 
-        public bool IsValid(AgentObjectDefinition definition)
+        public bool IsValid(CharacterDefinition definition)
         {
             return definition == affected || definition.IsSpecialization(affected);
         }
 
-        private void AgentObjectSpawn(AgentObject agentObject)
+        private void AgentObjectSpawn(AgentIdentity agentIdentity)
         {
-            if (IsValid(agentObject.GetDefinition()))
+            if (agentIdentity.Entity is CharacterEntity character && IsValid(character.GetDefinition()))
             {
                 targets.Clear();
-                targets.Add(agentObject);
+                targets.Add(character);
                 Trigger();
             }
         }

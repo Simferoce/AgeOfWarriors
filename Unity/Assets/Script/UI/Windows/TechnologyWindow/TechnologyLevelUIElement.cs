@@ -1,4 +1,3 @@
-using Game.Agent;
 using TMPro;
 using UnityEngine;
 
@@ -11,8 +10,7 @@ namespace Game.UI.Windows
 
         public void Refresh(Agent.AgentEntity agent)
         {
-            AgentEntity agentEntity = AgentRepository.Instance.GetByFaction(FactionType.Player);
-            textMeshProUGUI.text = agentEntity.Technology.CurrentLevel.ToString();
+            textMeshProUGUI.text = agent.Technology.CurrentLevel.ToString();
         }
     }
 }

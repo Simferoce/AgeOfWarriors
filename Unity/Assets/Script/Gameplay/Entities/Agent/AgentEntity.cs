@@ -1,4 +1,5 @@
-﻿using Game.Modifier;
+﻿using Game.Character;
+using Game.Modifier;
 using Game.Technology;
 using UnityEngine;
 
@@ -16,23 +17,22 @@ namespace Game.Agent
         [SerializeField] private AgentLoadout loadout;
         [SerializeReference, SubclassSelector] private AgentBehaviour agentBehaviour;
 
-        public delegate void AgentObjectSpawnDelegate(AgentObject agentObject);
+        public delegate void AgentObjectSpawnDelegate(AgentIdentity agentIdentity);
 
         public event AgentObjectSpawnDelegate OnAgentObjectSpawn;
 
-        public override FactionType Faction => faction;
         public AgentFactory Factory { get => factory; set => factory = value; }
         public BaseEntity Base { get => agentBase; set => agentBase = value; }
         public float Currency { get; set; }
         public int Direction { get => direction; set => direction = value; }
         public TechnologyHandler Technology { get => technology; }
         public AgentLoadout Loadout { get => loadout; set => loadout = value; }
+        public FactionType Faction { get => faction; set => faction = value; }
 
         private int nextSpawneeNumber = 0;
 
         protected override void Awake()
         {
-            AgentRepository.Instance.Add(this);
             base.Awake();
             factory.Initialize(this);
             loadout.Initialize(this);
@@ -42,7 +42,8 @@ namespace Game.Agent
 
         private void Start()
         {
-            agentBase.Spawn(this, nextSpawneeNumber++, direction);
+            AgentIdentity agentIdentity = agentBase.AddOrGetCachedComponent<AgentIdentity>();
+            agentIdentity.Set(this, nextSpawneeNumber++, direction);
             agentBase.Initialize();
         }
 
@@ -58,22 +59,21 @@ namespace Game.Agent
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            AgentRepository.Instance.Remove(this);
             agentBehaviour.Dispose();
         }
 
         public bool TryQueueSpawnAgentObject(int index)
         {
-            AgentObjectDefinition agentObjectDefinition = Loadout.GetAgentObjectDefinitionAtIndex(index);
-            return factory.QueueLaneObject(new AgentFactoryCommand(this, agentBase.SpawnPoint, agentObjectDefinition.ProductionDuration / LevelSetup.Instance.FactorySpeed, agentObjectDefinition), agentObjectDefinition.Cost);
+            CharacterDefinition characterDefinition = Loadout.GetCharacterDefinitionAtIndex(index);
+            return factory.QueueLaneObject(new AgentFactoryCommand(this, agentBase.SpawnPoint, characterDefinition.ProductionDuration / LevelSetup.Instance.FactorySpeed, characterDefinition), characterDefinition.Cost);
         }
 
-        public void SpawnAgentObject(AgentObjectDefinition agentObjectDefinition, Vector3 position, int direction)
+        public void SpawnAgentObject(CharacterDefinition characterDefinition, Vector3 position, int direction)
         {
-            AgentObject agentObject = agentObjectDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
-            OnAgentObjectSpawn?.Invoke(agentObject);
+            CharacterEntity character = characterDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
+            OnAgentObjectSpawn?.Invoke(character.GetCachedComponent<AgentIdentity>());
 
-            agentObject.Initialize();
+            character.Initialize();
         }
     }
 }

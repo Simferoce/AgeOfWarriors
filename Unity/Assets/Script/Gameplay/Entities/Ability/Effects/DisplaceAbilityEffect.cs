@@ -53,7 +53,7 @@ namespace Game.Ability
 
         public bool Update(Caster caster)
         {
-            Vector3 offset = (caster.Entity as AgentObject).Direction * destinationDistance * Vector3.right;
+            Vector3 offset = caster.Entity.GetCachedComponent<AgentIdentity>().Direction * destinationDistance * Vector3.right;
 
             List<CharacterEntity> targets = Ability.Targets.Select(x => x.Entity).OfType<CharacterEntity>().ToList();
             for (int i = 0; i < targets.Count; i++)

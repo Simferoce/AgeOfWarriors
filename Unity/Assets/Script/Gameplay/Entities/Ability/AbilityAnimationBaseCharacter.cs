@@ -42,7 +42,7 @@ namespace Game.Ability
 
         public override void InternalUse()
         {
-            faction = (Caster.Entity as AgentObject).Faction;
+            Faction = Caster.Entity.GetCachedComponent<AgentIdentity>().Faction;
 
             Caster.BeginCast();
             animated.SetTrigger(trigger);

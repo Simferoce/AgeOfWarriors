@@ -9,7 +9,7 @@ namespace Game
     [RequireComponent(typeof(Blocker))]
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(Target))]
-    public class BaseEntity : AgentObject
+    public class BaseEntity : Entity
     {
         [SerializeField] private float maxHealth = 1000;
 
@@ -19,7 +19,6 @@ namespace Game
         public float Health { get; set; }
         public float MaxHealth { get => maxHealth; }
         public bool IsDead => Health <= 0;
-        public Entity Entity { get; set; }
         public SpawnPoint SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
 
         public event Action<AttackResult, Attackable> OnDamageTaken;
@@ -39,7 +38,7 @@ namespace Game
 
         public void Death()
         {
-            DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { AgentObject = this });
+            DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { Entity = this });
 
             GetCachedComponent<Attackable>().OnDamageTaken -= Base_OnDamageTaken;
             Destroy(gameObject);
@@ -47,7 +46,7 @@ namespace Game
 
         public override void Initialize()
         {
-            spawnPoint.Direction = Direction;
+            spawnPoint.Direction = GetCachedComponent<AgentIdentity>().Direction;
             Health = MaxHealth;
         }
     }

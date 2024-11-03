@@ -26,7 +26,7 @@ namespace Game.Agent
             if (commands.Count >= commandSlot)
                 return false;
 
-            if (EntityRepository.Instance.GetByType<CharacterEntity>().Count(x => x.Agent == agent) >= LevelSetup.Instance.MaxCharacter)
+            if (Entity.All.OfType<CharacterEntity>().Count(x => x.GetCachedComponent<AgentIdentity>().Agent == agent) >= LevelSetup.Instance.MaxCharacter)
                 return false;
 
             if (LevelSetup.Instance.CheatCost)

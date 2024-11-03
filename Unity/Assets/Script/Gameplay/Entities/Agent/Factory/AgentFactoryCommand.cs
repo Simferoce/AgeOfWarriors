@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Character;
+using UnityEngine;
 
 namespace Game.Agent
 {
@@ -6,22 +7,22 @@ namespace Game.Agent
     {
         public SpawnPoint SpawnPoint { get; set; }
         public float ProductionDuration { get; set; }
-        public AgentObjectDefinition AgentObjectDefinition { get; set; }
+        public CharacterDefinition CharacterDefinition { get; set; }
         public AgentEntity Agent { get; set; }
         public float Progress => Mathf.Clamp01((startedAt + ProductionDuration - Time.time) / ProductionDuration);
         private float startedAt;
 
-        public AgentFactoryCommand(AgentEntity agent, SpawnPoint spawnPoint, float productionDuration, AgentObjectDefinition agentObjectDefinition)
+        public AgentFactoryCommand(AgentEntity agent, SpawnPoint spawnPoint, float productionDuration, CharacterDefinition characterDefinition)
         {
             this.Agent = agent;
             SpawnPoint = spawnPoint;
             ProductionDuration = productionDuration;
-            AgentObjectDefinition = agentObjectDefinition;
+            CharacterDefinition = characterDefinition;
         }
 
         public void Execute(AgentFactory factory)
         {
-            Agent.SpawnAgentObject(AgentObjectDefinition, SpawnPoint.transform.position, SpawnPoint.Direction);
+            Agent.SpawnAgentObject(CharacterDefinition, SpawnPoint.transform.position, SpawnPoint.Direction);
         }
 
         public void Start()

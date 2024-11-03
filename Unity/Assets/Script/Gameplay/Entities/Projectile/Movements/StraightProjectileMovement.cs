@@ -20,13 +20,13 @@ namespace Game.Projectile
                 return;
             }
 
-            if (ability.Caster.Entity is not AgentObject agentObject)
+            if (ability.Caster.Entity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity agentIdentity))
             {
-                Debug.LogError($"Expecting the caster to be a {nameof(AgentObject)}", projectile);
+                Debug.LogError($"Expecting the caster to be a {nameof(AgentIdentity)}", projectile);
                 return;
             }
 
-            Vector3 velocity = Vector3.right * agentObject.Direction * speed;
+            Vector3 velocity = Vector3.right * agentIdentity.Direction * speed;
             projectile.Rigidbody.linearVelocity = velocity;
             projectile.transform.right = projectile.Rigidbody.linearVelocity;
         }

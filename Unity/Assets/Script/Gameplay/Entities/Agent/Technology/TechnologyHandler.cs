@@ -4,6 +4,7 @@ using Game.Modifier;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Technology
@@ -59,9 +60,9 @@ namespace Game.Technology
 
         public void Update()
         {
-            foreach (AgentObject agentObject in EntityRepository.Instance.GetByType<AgentObject>())
+            foreach (CharacterEntity character in Entity.All.OfType<CharacterEntity>())
             {
-                if (agentObject is CharacterEntity character && agentObject.Agent == agent)
+                if (character.TryGetCachedComponent<AgentIdentity>(out AgentIdentity agentIdentity) && agentIdentity.Agent == agent)
                 {
                     CurrentTechnology += LevelSetup.Instance.TechnologyGainMultiplier * character.TechnologyGainPerSecond * Time.deltaTime;
                 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Agent;
+using System;
 
 namespace Game.Ability
 {
@@ -7,7 +8,8 @@ namespace Game.Ability
     {
         public override bool Execute(AbilityEntity source, Entity targetEntity)
         {
-            return source.Faction != targetEntity.Faction;
+            return targetEntity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity targetIdentity)
+                && source.Faction != targetIdentity.Faction;
         }
     }
 }

@@ -27,16 +27,15 @@ namespace Game.Projectile
         public Target Target { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
         public List<ProjectileParameter> Parameters { get => parameters; set => parameters = value; }
-        public override FactionType Faction => faction;
+        public FactionType Faction { get; set; }
 
-        protected FactionType faction;
         private State state = State.Alive;
         private List<ProjectileParameter> parameters;
         private ProjectileDeath projectileDeath = null;
 
         public void Initialize(Entity source, Target target, FactionType faction, params ProjectileParameter[] parameters)
         {
-            this.faction = faction;
+            this.Faction = faction;
             this.Target = target;
             this.parameters = parameters.ToList();
             Parent = source;

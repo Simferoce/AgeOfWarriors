@@ -15,7 +15,7 @@ namespace Game.UI.Windows
         {
             AbilityInspectorWindow abilityInspectorWindow = WindowManager.Instance.GetWindow<AbilityInspectorWindow>();
             abilityInspectorWindow.Show();
-            abilityInspectorWindow.title.text = ability.Definition.Title;
+            abilityInspectorWindow.title.text = ability.GetDefinition().Title;
             abilityInspectorWindow.description.text = ability.ParseDescription();
 
             float cooldown = 0f;//ability.GetCachedComponent<StatisticIndex>().Max(StatisticIdentifiant.Cooldown);

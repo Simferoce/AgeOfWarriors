@@ -1,4 +1,5 @@
-﻿using Game.Components;
+﻿using Game.Agent;
+using Game.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using UnityEngine;
 namespace Game.Ability
 {
     [RequireComponent(typeof(AttackFactory))]
-    public abstract class AbilityEntity : Entity
+    public abstract class AbilityEntity : Entity<AbilityDefinition>
     {
         [SerializeReference, SubclassSelector] protected List<AbilityCondition> conditions = new List<AbilityCondition>();
 
@@ -19,17 +20,14 @@ namespace Game.Ability
         public Caster Caster { get; set; }
         public bool IsCasting { get; set; } = false;
         public virtual List<Target> Targets => new List<Target>();
-        public AbilityDefinition Definition { get; set; }
-        public override FactionType Faction => faction;
         public override bool IsActive => base.IsActive && Caster.enabled;
-
-        protected FactionType faction;
+        public FactionType Faction { get; set; }
 
         public virtual void Initialize(Caster caster)
         {
             Caster = caster;
             Parent = caster.Entity;
-            faction = caster.Entity.Faction;
+            Faction = caster.Entity.GetCachedComponent<AgentIdentity>().Faction;
 
             base.Initialize();
 
@@ -65,7 +63,7 @@ namespace Game.Ability
 
         public string ParseDescription()
         {
-            return Definition.ParseDescription(this, null);
+            return definition.ParseDescription(this, null);
         }
     }
 }

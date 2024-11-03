@@ -9,7 +9,7 @@ namespace Game.Projectile
     {
         public bool Execute(Target target)
         {
-            return target != null && (target.Entity is AgentObject agentObject) && agentObject.Faction != projectile.Faction;
+            return target != null && target.Entity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity agentIdentity) && agentIdentity.Faction != projectile.Faction;
         }
     }
 }
