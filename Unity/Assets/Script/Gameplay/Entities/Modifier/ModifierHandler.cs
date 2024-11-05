@@ -1,5 +1,4 @@
-﻿using Game.Statistics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -29,16 +28,6 @@ namespace Game.Modifier
         {
             modifiers.Remove(modifier);
             OnModifierRemoved?.Invoke(modifier);
-        }
-
-        public float Modify(StatisticDefinition definition, float value)
-        {
-            List<StatisticModifierBehaviour> statisticModifierBehaviours = modifiers.SelectMany(x => x.Behaviours.OfType<StatisticModifierBehaviour>()).Where(x => x.Definition == definition).ToList();
-            float flat = statisticModifierBehaviours.Where(x => x.Operator == StatisticModifierBehaviour.StatisticModifierOperator.Flat).Select(x => x.GetValue<float>()).Sum();
-            float percentage = statisticModifierBehaviours.Where(x => x.Operator == StatisticModifierBehaviour.StatisticModifierOperator.Percentage).Select(x => x.GetValue<float>()).Sum();
-            float muliplier = statisticModifierBehaviours.Where(x => x.Operator == StatisticModifierBehaviour.StatisticModifierOperator.Percentage).Select(x => x.GetValue<float>()).Aggregate(1f, (x, y) => x * y);
-
-            return (value + flat) * (1 + percentage) * muliplier;
         }
 
         public List<ModifierEntity> GetModifiers()

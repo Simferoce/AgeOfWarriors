@@ -14,7 +14,7 @@ namespace Game.Modifier
         public override void Initialize(ModifierEntity modifier)
         {
             base.Initialize(modifier);
-            attackable = modifier.Handler.Entity.GetCachedComponent<Attackable>();
+            attackable = modifier.Target.Entity.GetCachedComponent<Attackable>();
             attackable.OnDamageTaken += OnDamageTaken;
         }
 

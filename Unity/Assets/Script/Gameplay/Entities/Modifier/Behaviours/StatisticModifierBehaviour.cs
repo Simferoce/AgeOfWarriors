@@ -7,32 +7,31 @@ namespace Game.Modifier
     [Serializable]
     public class StatisticModifierBehaviour : ModifierBehaviour
     {
-        public enum StatisticModifierOperator
-        {
-            Flat,
-            Percentage,
-            Multiplier,
-            Maximum,
-            Minimum
-        }
-
-        [SerializeField] private StatisticModifierOperator modifierOperator;
         [SerializeField] private StatisticDefinition definition;
         [SerializeReference, SubclassSelector] private Value value;
 
-        public StatisticModifierOperator Operator { get => modifierOperator; set => modifierOperator = value; }
         public StatisticDefinition Definition { get => definition; set => definition = value; }
         public Value Value { get => value; set => this.value = value; }
+
+        private Statistic statistic;
 
         public override void Initialize(ModifierEntity modifier)
         {
             base.Initialize(modifier);
+
             value.Initialize(modifier);
+            statistic = new Statistic() { Definition = definition, Value = Value };
+
+            StatisticRepository statisticRepository = modifier.Target.Entity.GetCachedComponent<StatisticRepository>();
+            statisticRepository.Add(statistic);
         }
 
-        public T GetValue<T>()
+        public override void Dispose()
         {
-            return value.GetValue<T>();
+            base.Dispose();
+
+            StatisticRepository statisticRepository = modifier.Target.Entity.GetCachedComponent<StatisticRepository>();
+            statisticRepository.Remove(statistic);
         }
     }
 }

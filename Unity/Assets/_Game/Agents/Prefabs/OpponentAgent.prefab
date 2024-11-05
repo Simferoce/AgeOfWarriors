@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8415477105694862956}
   - component: {fileID: 1278113342030530679}
   - component: {fileID: 3037483473999663325}
+  - component: {fileID: 6396798875190289214}
   m_Layer: 0
   m_Name: OpponentAgent
   m_TagString: Untagged
@@ -45,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9af73a6ddba4b5b4d8562d6d7f51a73a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tags: 
   faction: 2
   agentBase: {fileID: 0}
   direction: -1
@@ -55,7 +57,7 @@ MonoBehaviour:
   factory:
     commandSlot: 1
   loadout:
-    agentObjectsDefinition: []
+    agentIdentitysDefinition: []
   agentBehaviour:
     rid: 7754703125069692928
   references:
@@ -77,3 +79,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de04fdfdf15d15046ad243b1afa714da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6396798875190289214
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053631171570033998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics: []
+  references:
+    version: 2
+    RefIds: []

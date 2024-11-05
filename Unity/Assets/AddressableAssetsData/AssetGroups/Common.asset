@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b708799665497a4992fbb9b7a4b83fb
+    m_Address: Assets/_Game/Statistics/Definitions/ShieldbearerFlatMaxHealthStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0daeb2d661b48664f9f8656c569beb36
     m_Address: Assets/_Game/UI/Window/InspectorModifierWindow/Prefabs/InspectorModifierWindow.prefab
     m_ReadOnly: 0
@@ -121,6 +127,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Window
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b2357192271e2da41802a3d5de230ede
+    m_Address: Assets/_Game/Statistics/Definitions/FlatMaxHealthStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b6e7acc220a4175489e13715c3932744
     m_Address: Assets/_Game/Statistics/SpeedStatisticDefinition.asset

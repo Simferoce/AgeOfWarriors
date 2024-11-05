@@ -14,7 +14,7 @@ namespace Game.Modifier
         public delegate void OnRemovedDelegate(ModifierEntity modifier);
         public event OnRemovedDelegate OnRemoved;
 
-        public ModifierHandler Handler { get; set; }
+        public ModifierHandler Target { get; set; }
         public ModifierApplier Applier { get; set; }
         public bool IsVisible { get => visibleByDefault; }
         public List<ModifierBehaviour> Behaviours { get => behaviours; set => behaviours = value; }
@@ -22,13 +22,13 @@ namespace Game.Modifier
 
         private List<ModifierParameter> parameters;
 
-        public void Initialize(ModifierHandler handler, ModifierApplier applier, params ModifierParameter[] parameters)
+        public void Initialize(ModifierHandler target, ModifierApplier applier, params ModifierParameter[] parameters)
         {
             this.parameters = parameters.ToList();
-            this.Handler = handler;
+            this.Target = target;
             this.Applier = applier;
-            this.Parent = handler.Entity;
-            this.transform.parent = handler.transform;
+            this.Parent = target.Entity;
+            this.transform.parent = target.transform;
 
             base.Initialize();
 
@@ -66,7 +66,7 @@ namespace Game.Modifier
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            Handler.Remove(this);
+            Target.Remove(this);
             OnRemoved?.Invoke(this);
 
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)

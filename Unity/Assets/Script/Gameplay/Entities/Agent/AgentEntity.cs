@@ -74,22 +74,13 @@ namespace Game.Agent
         {
             CharacterEntity character = characterDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
 
-            ModifierHandler modifierHandler = AddOrGetCachedComponent<ModifierHandler>();
-            ModifierApplier modifierApplier = AddOrGetCachedComponent<ModifierApplier>();
-            foreach (StatisticModifierBehaviour modifierBehaviour in modifierHandler.GetModifiers().SelectMany(x => x.Behaviours.OfType<StatisticModifierBehaviour>()))
-            {
-                if (modifierBehaviour.Definition is CharacterStatisticDefinition characterStatisticDefinition)
-                {
-                    ModifierHandler characterModifierHandler = character.AddOrGetCachedComponent<ModifierHandler>();
-                    StatisticModifierBehaviour statisticModifierBehaviour = new StatisticModifierBehaviour()
-                    {
-                        Definition = characterStatisticDefinition.OutputDefinition,
-                        Operator = modifierBehaviour.Operator,
-                        Value = modifierBehaviour.Value.Snapshot()
-                    };
+            StatisticRepository statisticRepository = GetCachedComponent<StatisticRepository>();
+            StatisticRepository targetStatisticRepository = character.GetCachedComponent<StatisticRepository>();
 
-                    modifierApplier.Apply(characterStatisticDefinition.ModifierDefinition, characterModifierHandler, new ModifierParameter<ModifierBehaviour>(null, statisticModifierBehaviour));
-                }
+            foreach (Statistic statistic in statisticRepository.Statistics.Where(x => x.Definition.Behaviors.OfType<CharacterStatisticBehavior>().Any(x => x.CharacterDefinition == characterDefinition)))
+            {
+                CharacterStatisticBehavior characterStatisticBehavior = statistic.Definition.Behaviors.OfType<CharacterStatisticBehavior>().FirstOrDefault(x => x.CharacterDefinition == characterDefinition);
+                targetStatisticRepository.Add(new Statistic() { Definition = characterStatisticBehavior.OutputDefinition, Value = statistic.Value.Snapshot() });
             }
 
             OnAgentObjectSpawn?.Invoke(character.GetCachedComponent<AgentIdentity>());

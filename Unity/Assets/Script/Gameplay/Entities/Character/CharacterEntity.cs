@@ -27,13 +27,13 @@ namespace Game.Character
         public List<TransformTag> TransformTags { get; set; }
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
 
-        public float Health { get; set; }
-        public float MaxHealth => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.MaxHealth, definition.MaxHealth);
-        public float Defense => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Defense, definition.Defense);
-        public float AttackSpeed => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.AttackSpeed, definition.AttackSpeed);
-        public float AttackPower => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.AttackPower, definition.AttackPower);
-        public float Speed => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Speed, definition.Speed);
-        public float Reach => modifierHandler.Modify(StatisticDefinitionRegistry.Instance.Reach, definition.Reach);
+        public float Health { get => StatisticDefinitionRegistry.Instance.Health.Modify(health, GetCachedComponent<StatisticRepository>()); set => health = value; }
+        public float MaxHealth => StatisticDefinitionRegistry.Instance.MaxHealth.Modify(definition.MaxHealth, GetCachedComponent<StatisticRepository>());
+        public float Defense => StatisticDefinitionRegistry.Instance.Defense.Modify(definition.Defense, GetCachedComponent<StatisticRepository>());
+        public float AttackSpeed => StatisticDefinitionRegistry.Instance.AttackSpeed.Modify(definition.AttackSpeed, GetCachedComponent<StatisticRepository>());
+        public float AttackPower => StatisticDefinitionRegistry.Instance.AttackPower.Modify(definition.AttackPower, GetCachedComponent<StatisticRepository>());
+        public float Speed => StatisticDefinitionRegistry.Instance.Speed.Modify(definition.Speed, GetCachedComponent<StatisticRepository>());
+        public float Reach => StatisticDefinitionRegistry.Instance.Reach.Modify(definition.Reach, GetCachedComponent<StatisticRepository>());
         public float TechnologyGainPerSecond => definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
@@ -45,6 +45,7 @@ namespace Game.Character
 
         private StateMachine stateMachine = new StateMachine();
         private ModifierHandler modifierHandler;
+        private float health;
 
         protected override void Awake()
         {

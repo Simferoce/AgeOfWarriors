@@ -67,8 +67,7 @@ MonoBehaviour:
     - rid: 3390488222416240719
       type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        modifierOperator: 0
-        definition: {fileID: 11400000, guid: a98b56a3006c303468fe7e7ad2477c8b, type: 2}
+        definition: {fileID: 11400000, guid: 0b708799665497a4992fbb9b7a4b83fb, type: 2}
         value:
           rid: 3390488222416240720
     - rid: 3390488222416240720

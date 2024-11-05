@@ -18,7 +18,7 @@ namespace Game.Modifier
         {
             base.Initialize(modifier);
 
-            Agent.AgentEntity agent = modifier.Handler.Entity as Agent.AgentEntity;
+            Agent.AgentEntity agent = modifier.Target.Entity as Agent.AgentEntity;
             Assert.IsNotNull(agent, $"Expecting the type of the entity of {nameof(ModifierHandler)} to be of type {nameof(Agent)}");
 
             agent.OnAgentObjectSpawn += AgentObjectSpawn;
@@ -43,7 +43,7 @@ namespace Game.Modifier
         {
             base.Dispose();
 
-            Agent.AgentEntity agent = modifier.Handler.Entity as Agent.AgentEntity;
+            Agent.AgentEntity agent = modifier.Target.Entity as Agent.AgentEntity;
             agent.OnAgentObjectSpawn -= AgentObjectSpawn;
         }
 

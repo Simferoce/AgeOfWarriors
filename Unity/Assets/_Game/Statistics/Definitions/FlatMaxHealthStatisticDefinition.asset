@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Name: FlatMaxHealthStatisticDefinition
+  m_EditorClassIdentifier: 
+  id: b2357192271e2da41802a3d5de230ede
+  icon: {fileID: 4287196743007105525, guid: 0971139afa142b149b66296ac595fedf, type: 3}
+  humanReadableId: flat_max_health
+  title: Flat Max Health
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
+  isPercentage: 0
+  behaviors:
+  - rid: 3390488275698843724
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488275698843724
+      type: {class: ModifyStatisticBehavior, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+        statisticOperator: 0

@@ -8,7 +8,7 @@ namespace Game.Modifier
     {
         public override List<object> GetTargets()
         {
-            return new List<object>() { modifier.Handler.Entity };
+            return new List<object>() { modifier.Target.Entity };
         }
     }
 }
