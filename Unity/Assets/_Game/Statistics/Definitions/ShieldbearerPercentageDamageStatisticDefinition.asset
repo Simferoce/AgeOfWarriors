@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Name: ShieldbearerPercentageDamageStatisticDefinition
+  m_EditorClassIdentifier: 
+  id: 2760ac83c6c90a745bd931afb26b5317
+  icon: {fileID: -8086850440826228858, guid: 665809d0d2c840548bc049c603bae4d8, type: 3}
+  humanReadableId: shieldbearer_percentage_damage
+  title: Shieldbearer Percentage Damage
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
+  isPercentage: 0
+  behaviors:
+  - rid: 3390488275698843721
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488275698843721
+      type: {class: CharacterStatisticBehavior, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        characterDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+        outputDefinition: {fileID: 11400000, guid: 008ba1fb394b4a647b4bfbfe26afc726, type: 2}

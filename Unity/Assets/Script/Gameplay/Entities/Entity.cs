@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace Game
 {
+    [RequireComponent(typeof(StatisticRepository))]
     public abstract class Entity : MonoBehaviour, IEntity
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -66,6 +67,8 @@ namespace Game
 
         public virtual void Initialize()
         {
+            StatisticRepository statisticRepository = AddOrGetCachedComponent<StatisticRepository>();
+            statisticRepository.Initialize();
         }
 
         public virtual void Deactivate()
@@ -79,22 +82,6 @@ namespace Game
         protected virtual void OnDestroy()
         {
             All.Remove(this);
-        }
-
-        public T GetStatisticOrDefault<T>(StatisticDefinition definition, T defaultValue)
-        {
-            return TryGetStatistic(definition, out T value) ? value : defaultValue;
-        }
-
-        public T GetStatisticOrThrow<T>(StatisticDefinition definition)
-        {
-            return TryGetStatistic(definition, out T value) ? value : throw new Exception($"Unable to find the statistic \"{definition}\"");
-        }
-
-        public virtual bool TryGetStatistic<T>(StatisticDefinition definition, out T value)
-        {
-            value = default;
-            return false;
         }
 
         #region Components

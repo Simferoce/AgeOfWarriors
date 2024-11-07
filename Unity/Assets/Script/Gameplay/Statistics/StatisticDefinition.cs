@@ -54,15 +54,15 @@ namespace Game.Statistics
                     continue;
 
                 if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Flat)
-                    flat += statistic.Value.GetValue<float>();
+                    flat += statistic.GetModifiedValue();
                 else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Pecentage)
-                    percentage += statistic.Value.GetValue<float>();
+                    percentage += statistic.GetModifiedValue();
                 else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Multiplier)
-                    multiplier *= statistic.Value.GetValue<float>();
+                    multiplier *= statistic.GetModifiedValue();
                 else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Maximum)
-                    maximum = Mathf.Min(maximum, statistic.Value.GetValue<float>());
+                    maximum = Mathf.Min(maximum, statistic.GetModifiedValue());
                 else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Minimum)
-                    minimum = Mathf.Max(minimum, statistic.Value.GetValue<float>());
+                    minimum = Mathf.Max(minimum, statistic.GetModifiedValue());
             }
 
             return Mathf.Clamp((value + flat) * (1 + percentage) * multiplier, minimum, maximum);

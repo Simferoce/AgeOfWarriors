@@ -40,6 +40,8 @@ namespace Game.Agent
             loadout.Initialize(this);
             technology.Initialize(this);
             agentBehaviour.Initialize(this);
+
+            base.Initialize();
         }
 
         private void Start()
@@ -80,7 +82,7 @@ namespace Game.Agent
             foreach (Statistic statistic in statisticRepository.Statistics.Where(x => x.Definition.Behaviors.OfType<CharacterStatisticBehavior>().Any(x => x.CharacterDefinition == characterDefinition)))
             {
                 CharacterStatisticBehavior characterStatisticBehavior = statistic.Definition.Behaviors.OfType<CharacterStatisticBehavior>().FirstOrDefault(x => x.CharacterDefinition == characterDefinition);
-                targetStatisticRepository.Add(new Statistic() { Definition = characterStatisticBehavior.OutputDefinition, Value = statistic.Value.Snapshot() });
+                targetStatisticRepository.Add(new StandardStatistic() { Definition = characterStatisticBehavior.OutputDefinition, Value = new SerializeValue<float>() { Value = statistic.GetModifiedValue() } });
             }
 
             OnAgentObjectSpawn?.Invoke(character.GetCachedComponent<AgentIdentity>());

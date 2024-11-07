@@ -20,7 +20,8 @@ namespace Game.Modifier
             base.Initialize(modifier);
 
             value.Initialize(modifier);
-            statistic = new Statistic() { Definition = definition, Value = Value };
+            statistic = new StandardStatistic() { Definition = definition, Value = Value };
+            statistic.Initialize(modifier);
 
             StatisticRepository statisticRepository = modifier.Target.Entity.GetCachedComponent<StatisticRepository>();
             statisticRepository.Add(statistic);

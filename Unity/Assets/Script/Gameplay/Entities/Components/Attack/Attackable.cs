@@ -41,8 +41,8 @@ namespace Game.Components
 
         public void TakeAttack(AttackData attack)
         {
-            float currentHealth = Entity.GetStatisticOrThrow<float>(StatisticDefinitionRegistry.Instance.Health);
-            float currentDefense = Entity.GetStatisticOrDefault<float>(StatisticDefinitionRegistry.Instance.Defense, 0f);
+            float currentHealth = Entity.GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue();
+            float currentDefense = Entity.GetCachedComponent<StatisticRepository>().Get(StatisticDefinitionRegistry.Instance.Defense)?.GetModifiedValue() ?? 0f;
 
             //List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();
             //bool canResistDeath = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());

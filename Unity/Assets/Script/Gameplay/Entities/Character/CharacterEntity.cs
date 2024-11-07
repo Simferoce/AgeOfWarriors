@@ -27,13 +27,13 @@ namespace Game.Character
         public List<TransformTag> TransformTags { get; set; }
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
 
-        public float Health { get => StatisticDefinitionRegistry.Instance.Health.Modify(health, GetCachedComponent<StatisticRepository>()); set => health = value; }
-        public float MaxHealth => StatisticDefinitionRegistry.Instance.MaxHealth.Modify(definition.MaxHealth, GetCachedComponent<StatisticRepository>());
-        public float Defense => StatisticDefinitionRegistry.Instance.Defense.Modify(definition.Defense, GetCachedComponent<StatisticRepository>());
-        public float AttackSpeed => StatisticDefinitionRegistry.Instance.AttackSpeed.Modify(definition.AttackSpeed, GetCachedComponent<StatisticRepository>());
-        public float AttackPower => StatisticDefinitionRegistry.Instance.AttackPower.Modify(definition.AttackPower, GetCachedComponent<StatisticRepository>());
-        public float Speed => StatisticDefinitionRegistry.Instance.Speed.Modify(definition.Speed, GetCachedComponent<StatisticRepository>());
-        public float Reach => StatisticDefinitionRegistry.Instance.Reach.Modify(definition.Reach, GetCachedComponent<StatisticRepository>());
+        public float Health { get => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue(); set => (GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health) as DynamicStatistic).Set(value); }
+        public float MaxHealth => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.MaxHealth).GetModifiedValue();
+        public float Defense => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Defense).GetModifiedValue();
+        public float AttackSpeed => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.AttackSpeed).GetModifiedValue();
+        public float AttackPower => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.AttackPower).GetModifiedValue();
+        public float Speed => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Speed).GetModifiedValue();
+        public float Reach => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Reach).GetModifiedValue();
         public float TechnologyGainPerSecond => definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
@@ -55,47 +55,6 @@ namespace Game.Character
             GetCachedComponent<AttackFactory>().OnAttackLanded += OnAttackLanded;
             Animated = GetComponentInChildren<Animated>();
             modifierHandler = GetCachedComponent<ModifierHandler>();
-        }
-
-        public override bool TryGetStatistic<T>(StatisticDefinition definition, out T value)
-        {
-            if (definition == StatisticDefinitionRegistry.Instance.AttackPower)
-            {
-                value = StatisticConverter.ConvertGeneric<T, float>(AttackPower);
-                return true;
-            }
-            else if (definition == StatisticDefinitionRegistry.Instance.Health)
-            {
-                value = StatisticConverter.ConvertGeneric<T, float>(Health);
-                return true;
-            }
-            else if (definition == StatisticDefinitionRegistry.Instance.MaxHealth)
-            {
-                value = StatisticConverter.ConvertGeneric<T, float>(MaxHealth);
-                return true;
-            }
-            else if (definition == StatisticDefinitionRegistry.Instance.Speed)
-            {
-                value = StatisticConverter.ConvertGeneric<T, float>(Speed);
-                return true;
-            }
-            else if (definition == StatisticDefinitionRegistry.Instance.Reach)
-            {
-                value = StatisticConverter.ConvertGeneric<T, float>(Reach);
-                return true;
-            }
-            else if (definition == StatisticDefinitionRegistry.Instance.AttackSpeed)
-            {
-                value = StatisticConverter.ConvertGeneric<T, float>(AttackSpeed);
-                return true;
-            }
-            else if (definition == StatisticDefinitionRegistry.Instance.Defense)
-            {
-                value = StatisticConverter.ConvertGeneric<T, float>(Defense);
-                return true;
-            }
-
-            return base.TryGetStatistic(definition, out value);
         }
 
         private void OnDamageTaken(AttackResult attackResult, Attackable attackable)

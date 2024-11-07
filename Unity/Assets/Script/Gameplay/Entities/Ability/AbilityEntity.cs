@@ -1,5 +1,6 @@
 ﻿using Game.Agent;
 using Game.Components;
+using Game.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace Game.Ability
             Faction = caster.Entity.GetCachedComponent<AgentIdentity>().Faction;
 
             base.Initialize();
+
+            GetCachedComponent<StatisticRepository>().AddExtension(caster.Entity.GetCachedComponent<StatisticRepository>());
 
             foreach (AbilityCondition condition in conditions)
                 condition.Initialize(this);

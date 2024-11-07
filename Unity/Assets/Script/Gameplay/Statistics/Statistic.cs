@@ -4,14 +4,22 @@ using UnityEngine;
 namespace Game.Statistics
 {
     [Serializable]
-    public class Statistic
+    public abstract class Statistic
     {
-        [SerializeField] private string name;
-        [SerializeField] private StatisticDefinition definition;
-        [SerializeReference, SubclassSelector] private Value value;
+        [SerializeField] protected string name;
+        [SerializeField] protected StatisticDefinition definition;
 
         public string Name { get => name; set => name = value; }
         public StatisticDefinition Definition { get => definition; set => definition = value; }
-        public Value Value { get => value; set => this.value = value; }
+
+        protected Entity entity;
+
+        public virtual void Initialize(Entity entity)
+        {
+            this.entity = entity;
+        }
+
+        public abstract float GetModifiedValue();
+        public abstract float GetBaseValue();
     }
 }
