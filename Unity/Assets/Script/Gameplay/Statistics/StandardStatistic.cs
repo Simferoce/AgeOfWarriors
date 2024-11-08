@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Statistics
 {
     [Serializable]
-    public class StandardStatistic : Statistic
+    public class StandardStatistic : Statistic<float>
     {
         [SerializeReference, SubclassSelector] private Value value;
         public Value Value { get => value; set => this.value = value; }
@@ -15,9 +15,14 @@ namespace Game.Statistics
             value.Initialize(entity);
         }
 
+        public override Statistic Snapshot()
+        {
+            return new StandardStatistic() { definition = this.definition, Value = new SerializeValue<float>() { Value = GetModifiedValue() } };
+        }
+
         public override float GetModifiedValue()
         {
-            return definition.Modify(value.GetValue<float>(), entity.GetCachedComponent<StatisticRepository>());
+            return definition != null ? definition.Modify(value.GetValue<float>(), entity.GetCachedComponent<StatisticRepository>()) : GetBaseValue();
         }
 
         public override float GetBaseValue()

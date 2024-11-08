@@ -3,23 +3,31 @@
 namespace Game.Statistics
 {
     [Serializable]
-    public class DynamicStatistic : Statistic
+    public class DynamicStatistic<T> : Statistic<T>
     {
-        private float current;
+        private T current;
 
-        public void Set(float value)
+        public void Set(T value)
         {
             current = value;
         }
 
-        public override float GetBaseValue()
+        public override Statistic Snapshot()
+        {
+            return new DynamicStatistic<T>() { definition = this.definition, current = GetModifiedValue() };
+        }
+
+        public override T GetBaseValue()
         {
             return current;
         }
 
-        public override float GetModifiedValue()
+        public override T GetModifiedValue()
         {
             return definition.Modify(current, entity.GetCachedComponent<StatisticRepository>());
         }
     }
+
+    [Serializable]
+    public class DynamicStatisticFloat : DynamicStatistic<float> { }
 }

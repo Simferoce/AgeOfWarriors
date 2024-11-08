@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6999156395522084311}
   - component: {fileID: 2439447710677529383}
   - component: {fileID: 8954445296651028284}
+  - component: {fileID: 7114353416753970965}
   m_Layer: 0
   m_Name: IncreaseShieldbearerMaxHealthFlatTechnology
   m_TagString: Untagged
@@ -60,17 +61,41 @@ MonoBehaviour:
   tags: 
   visibleByDefault: 1
   behaviours:
-  - rid: 3390488222416240719
+  - rid: 3390488321798963277
   references:
     version: 2
     RefIds:
-    - rid: 3390488222416240719
-      type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 3390488321798963277
+      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         definition: {fileID: 11400000, guid: 0b708799665497a4992fbb9b7a4b83fb, type: 2}
+        reference:
+          name: max_health
+--- !u!114 &7114353416753970965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899619428102555062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488321798963279
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488321798963279
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: max_health
+        definition: {fileID: 0}
         value:
-          rid: 3390488222416240720
-    - rid: 3390488222416240720
+          rid: 3390488321798963281
+    - rid: 3390488321798963281
       type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         value: 25

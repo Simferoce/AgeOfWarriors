@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 457ef5104dc5506478af5a40092efe1e, type: 3}
   m_Name: HealthStatisticDefinition
   m_EditorClassIdentifier: 
   id: 692bd90ecc8e43840a83aaa5c9e54022
@@ -18,6 +18,7 @@ MonoBehaviour:
   title: Health
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
   isPercentage: 0
-  maximum:
-  - {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
-  minimum: []
+  behaviors: []
+  references:
+    version: 2
+    RefIds: []

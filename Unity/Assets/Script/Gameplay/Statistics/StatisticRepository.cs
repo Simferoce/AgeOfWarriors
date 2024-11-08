@@ -44,6 +44,38 @@ namespace Game.Statistics
             statistics.Remove(statistic);
         }
 
+        public bool TryGet<T>(StatisticDefinition definition, out Statistic<T> statistic)
+        {
+            statistic = Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Definition == definition);
+            return statistic != null;
+        }
+
+        public bool TryGet<T>(string name, out Statistic<T> statistic)
+        {
+            statistic = Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
+            return statistic != null;
+        }
+
+        public Statistic<T> Get<T>(StatisticDefinition definition)
+        {
+            return Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Definition == definition);
+        }
+
+        public Statistic<T> Get<T>(string name)
+        {
+            return Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
+        }
+
+        public Statistic<T> GetOrThrow<T>(StatisticDefinition definition)
+        {
+            return TryGet(definition, out Statistic<T> statistic) ? statistic : throw new System.Exception($"There is no statistic of definition \"{definition}\" in {this}");
+        }
+
+        public Statistic<T> GetOrThrow<T>(string name)
+        {
+            return TryGet(name, out Statistic<T> statistic) ? statistic : throw new System.Exception($"There is no statistic with name \"{name}\" in {this}");
+        }
+
         public bool TryGet(StatisticDefinition definition, out Statistic statistic)
         {
             statistic = Statistics.FirstOrDefault(x => x.Definition == definition);

@@ -61,20 +61,16 @@ MonoBehaviour:
   tags: 
   visibleByDefault: 1
   behaviours:
-  - rid: 3390488299769430113
+  - rid: 3390488321798963294
   references:
     version: 2
     RefIds:
-    - rid: 3390488299769430113
-      type: {class: StatisticModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 3390488321798963294
+      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         definition: {fileID: 11400000, guid: 2760ac83c6c90a745bd931afb26b5317, type: 2}
-        value:
-          rid: 3390488299769430114
-    - rid: 3390488299769430114
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 0.5
+        reference:
+          name: damage
 --- !u!114 &7114353416753970965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,7 +83,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statistics: []
+  statistics:
+  - rid: 3390488321798963295
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3390488321798963295
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 0}
+        value:
+          rid: 3390488321798963296
+    - rid: 3390488321798963296
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0.5

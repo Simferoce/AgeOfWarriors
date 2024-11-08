@@ -7,10 +7,9 @@ namespace Game.Statistics
     public abstract class Statistic
     {
         [SerializeField] protected string name;
-        [SerializeField] protected StatisticDefinition definition;
 
         public string Name { get => name; set => name = value; }
-        public StatisticDefinition Definition { get => definition; set => definition = value; }
+        public abstract StatisticDefinition Definition { get; set; }
 
         protected Entity entity;
 
@@ -19,7 +18,29 @@ namespace Game.Statistics
             this.entity = entity;
         }
 
-        public abstract float GetModifiedValue();
-        public abstract float GetBaseValue();
+        public abstract T GetModifiedValue<T>();
+        public abstract T GetBaseValue<T>();
+        public abstract Statistic Snapshot();
+    }
+
+    [Serializable]
+    public abstract class Statistic<ReferenceType> : Statistic
+    {
+        [SerializeField] protected StatisticDefinition<ReferenceType> definition;
+
+        public override StatisticDefinition Definition { get => definition; set => definition = value as StatisticDefinition<ReferenceType>; }
+
+        public abstract ReferenceType GetModifiedValue();
+        public abstract ReferenceType GetBaseValue();
+
+        public override T GetModifiedValue<T>()
+        {
+            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetModifiedValue());
+        }
+
+        public override T GetBaseValue<T>()
+        {
+            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetBaseValue());
+        }
     }
 }

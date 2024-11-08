@@ -9,7 +9,7 @@ namespace Game.Ability
     public class StatisticProjectileParameterFactory<T> : ProjectileParameterFactory
     {
         [SerializeField] private string name;
-        [SerializeReference, SubclassSelector] private Value value;
+        [SerializeField] private StatisticReference<T> value;
 
         public override void Initialize(Entity entity)
         {
@@ -19,7 +19,7 @@ namespace Game.Ability
 
         public override ProjectileParameter Create(object entity)
         {
-            return new ProjectileParameter<T>(name, value.GetValue<T>());
+            return new ProjectileParameter<T>(name, value.GetOrThrow().GetModifiedValue());
         }
     }
 

@@ -7,8 +7,7 @@ using UnityEngine;
 
 namespace Game.Statistics
 {
-    [CreateAssetMenu(fileName = "StatisticDefinition", menuName = "Definition/Statistic/StatisticDefinition")]
-    public class StatisticDefinition : Definition
+    public abstract class StatisticDefinition : Definition
     {
         [SerializeField] private Sprite icon;
         [SerializeField] private string humanReadableId;
@@ -39,33 +38,10 @@ namespace Game.Statistics
             }
         }
 #endif
-        public float Modify(float value, StatisticRepository repository)
-        {
-            float flat = 0f;
-            float percentage = 0f;
-            float multiplier = 1f;
-            float maximum = float.MaxValue;
-            float minimum = float.MinValue;
+    }
 
-            foreach (Statistic statistic in repository.Statistics)
-            {
-                ModifyStatisticBehavior modifyStatisticBehavior = statistic.Definition.Behaviors.OfType<ModifyStatisticBehavior>().FirstOrDefault(x => x.Definition == this);
-                if (modifyStatisticBehavior == null)
-                    continue;
-
-                if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Flat)
-                    flat += statistic.GetModifiedValue();
-                else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Pecentage)
-                    percentage += statistic.GetModifiedValue();
-                else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Multiplier)
-                    multiplier *= statistic.GetModifiedValue();
-                else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Maximum)
-                    maximum = Mathf.Min(maximum, statistic.GetModifiedValue());
-                else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Minimum)
-                    minimum = Mathf.Max(minimum, statistic.GetModifiedValue());
-            }
-
-            return Mathf.Clamp((value + flat) * (1 + percentage) * multiplier, minimum, maximum);
-        }
+    public abstract class StatisticDefinition<T> : StatisticDefinition
+    {
+        public abstract T Modify(T value, StatisticRepository repository);
     }
 }

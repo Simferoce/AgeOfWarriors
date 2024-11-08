@@ -15,6 +15,12 @@ MonoBehaviour:
   m_GroupName: Common
   m_GUID: 6e4dc9a59db32084f82d9a1db0b18c64
   m_SerializeEntries:
+  - m_GUID: 008ba1fb394b4a647b4bfbfe26afc726
+    m_Address: Assets/_Game/Statistics/Definitions/PercentageDamageStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 00df8ac314188b945945353a3fbb705b
     m_Address: Assets/_Game/Statistics/DamageStatisticDefinition.asset
     m_ReadOnly: 0
@@ -50,6 +56,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Window
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2760ac83c6c90a745bd931afb26b5317
+    m_Address: Assets/_Game/Statistics/Definitions/ShieldbearerPercentageDamageStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2825126f3d8ee3941b6ea8c4d91818b8
     m_Address: Assets/_Game/Statistics/CooldownStatisticDefinition.asset

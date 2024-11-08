@@ -9,7 +9,7 @@ namespace Game.Modifier
     public class DealDamageModifierEffect : ModifierEffect
     {
         [SerializeReference, SubclassSelector] private ModifierTarget target;
-        [SerializeReference, SubclassSelector] private Value damage;
+        [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private AttackData.Flag extraFlags;
 
         private AttackFactory attackFactory;
@@ -29,7 +29,7 @@ namespace Game.Modifier
                 {
                     AttackData attack = attackFactory.Generate(
                                             target: attackable,
-                                            damage: damage?.GetValue<float>() ?? 0f,
+                                            damage: damage?.Get().GetModifiedValue<float>() ?? 0f,
                                             flags: extraFlags
                                             );
 

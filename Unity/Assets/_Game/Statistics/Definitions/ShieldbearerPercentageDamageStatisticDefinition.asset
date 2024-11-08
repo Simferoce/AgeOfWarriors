@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 457ef5104dc5506478af5a40092efe1e, type: 3}
   m_Name: ShieldbearerPercentageDamageStatisticDefinition
   m_EditorClassIdentifier: 
   id: 2760ac83c6c90a745bd931afb26b5317

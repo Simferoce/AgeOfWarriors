@@ -91,7 +91,7 @@ MonoBehaviour:
       type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         distance:
-          rid: 7754703308747964739
+          name: range
     - rid: 7754703283282509908
       type: {class: DealDamageAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
       data:
@@ -101,11 +101,6 @@ MonoBehaviour:
           name: damage
         armorPenetration:
           name: 
-    - rid: 7754703308747964739
-      type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-        ratio: 1
 --- !u!114 &3160878026917076126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statistics:
   - rid: 3390488299769430111
+  - rid: 3390488321798963292
   references:
     version: 2
     RefIds:
@@ -134,4 +130,16 @@ MonoBehaviour:
       type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1
+    - rid: 3390488321798963292
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        value:
+          rid: 3390488321798963293
+    - rid: 3390488321798963293
+      type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
         ratio: 1

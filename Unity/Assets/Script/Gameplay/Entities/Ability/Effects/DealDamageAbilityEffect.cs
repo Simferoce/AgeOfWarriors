@@ -8,9 +8,9 @@ namespace Game.Ability
     [Serializable]
     public class DealDamageAbilityEffect : AbilityEffect
     {
-        [SerializeField] private StatisticReferenceValue leach;
-        [SerializeField] private StatisticReferenceValue damage;
-        [SerializeField] private StatisticReferenceValue armorPenetration;
+        [SerializeField] private StatisticReference<float> leach;
+        [SerializeField] private StatisticReference<float> damage;
+        [SerializeField] private StatisticReference<float> armorPenetration;
 
         public override void Initialize(AbilityEntity ability)
         {

@@ -8,9 +8,9 @@ namespace Game.Ability
     [Serializable]
     public class DistanceAbilityTargetFilter : AbilityTargetFilter
     {
-        [SerializeReference, SubclassSelector] private Value distance;
+        [SerializeField] private StatisticReference<float> distance;
 
-        public float Distance => distance?.GetValue<float>() ?? 0f;
+        public float Distance => distance.GetOrThrow()?.GetModifiedValue() ?? 0f;
 
         public override void Initialize(AbilityEntity ability)
         {

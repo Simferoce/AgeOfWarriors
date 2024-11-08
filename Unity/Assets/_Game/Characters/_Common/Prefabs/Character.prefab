@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statistics:
-  - rid: 3390488299769430091
+  - rid: 3390488321798963282
   - rid: 3390488299769430092
   - rid: 3390488299769430094
   - rid: 3390488299769430096
@@ -215,11 +215,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3390488299769430091
-      type: {class: DynamicStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: health
-        definition: {fileID: 11400000, guid: 692bd90ecc8e43840a83aaa5c9e54022, type: 2}
     - rid: 3390488299769430092
       type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
@@ -286,6 +281,11 @@ MonoBehaviour:
       type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         value: 0.5
+    - rid: 3390488321798963282
+      type: {class: DynamicStatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: health
+        definition: {fileID: 11400000, guid: 692bd90ecc8e43840a83aaa5c9e54022, type: 2}
 --- !u!1 &4568683806961424362
 GameObject:
   m_ObjectHideFlags: 0

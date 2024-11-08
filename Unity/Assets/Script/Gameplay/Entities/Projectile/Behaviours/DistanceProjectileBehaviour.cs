@@ -8,7 +8,7 @@ namespace Game.Projectile
     [Serializable]
     public class DistanceProjectileBehaviour : ProjectileBehaviour
     {
-        [SerializeReference, SubclassSelector] private Value range;
+        [SerializeField] private StatisticReference<float> range;
         [SerializeReference, SubclassSelector] private List<IProjectileStandardEffect> effects;
 
         private Vector3 previousPosition;
@@ -33,7 +33,7 @@ namespace Game.Projectile
             distanceTraveled += delta;
 
             previousPosition = currentPosition;
-            if (distanceTraveled < range.GetValue<float>())
+            if (distanceTraveled < range.GetOrThrow().GetModifiedValue<float>())
                 return;
 
             foreach (IProjectileStandardEffect effect in effects)

@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Script: {fileID: 11500000, guid: 457ef5104dc5506478af5a40092efe1e, type: 3}
   m_Name: AttackSpeedStatisticDefinition
   m_EditorClassIdentifier: 
   id: d71a191ae10eaf24f8e2f26ada07d54a
@@ -18,8 +18,7 @@ MonoBehaviour:
   title: Attack Speed
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
   isPercentage: 0
-  flat: []
-  percentage: []
-  multiplier: []
-  maximum: []
-  minimum: []
+  behaviors: []
+  references:
+    version: 2
+    RefIds: []

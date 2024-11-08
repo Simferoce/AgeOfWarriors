@@ -8,11 +8,11 @@ namespace Game.Projectile
     [Serializable]
     public class DealDamageProjectileImpactEffect : ProjectileEffect, IProjectileImpactEffect
     {
-        [SerializeReference, SubclassSelector] private Value damage;
-        [SerializeReference, SubclassSelector] private Value armorPenetration;
+        [SerializeField] private StatisticReference<float> damage;
+        [SerializeField] private StatisticReference<float> armorPenetration;
 
-        public float Damage => damage?.GetValue<float>() ?? 0f;
-        public float ArmorPenetration => armorPenetration?.GetValue<float>() ?? 0f;
+        public float Damage => damage?.Get().GetModifiedValue<float>() ?? 0f;
+        public float ArmorPenetration => armorPenetration?.Get().GetModifiedValue<float>() ?? 0f;
 
         public override void Initialize(ProjectileEntity projectile)
         {

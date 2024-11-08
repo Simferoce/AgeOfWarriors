@@ -5,13 +5,10 @@ using UnityEngine;
 namespace Game.Modifier
 {
     [Serializable]
-    public class StatisticModifierBehaviour : ModifierBehaviour
+    public class StatisticModifierBehaviour<T> : ModifierBehaviour
     {
-        [SerializeField] private StatisticDefinition definition;
-        [SerializeReference, SubclassSelector] private Value value;
-
-        public StatisticDefinition Definition { get => definition; set => definition = value; }
-        public Value Value { get => value; set => this.value = value; }
+        [SerializeField] private StatisticDefinition<T> definition;
+        [SerializeField] private StatisticReference<T> reference;
 
         private Statistic statistic;
 
@@ -19,8 +16,9 @@ namespace Game.Modifier
         {
             base.Initialize(modifier);
 
-            value.Initialize(modifier);
-            statistic = new StandardStatistic() { Definition = definition, Value = Value };
+            reference.Initialize(modifier);
+            statistic = reference.GetOrThrow().Snapshot();
+            statistic.Definition = definition;
             statistic.Initialize(modifier);
 
             StatisticRepository statisticRepository = modifier.Target.Entity.GetCachedComponent<StatisticRepository>();
@@ -35,4 +33,7 @@ namespace Game.Modifier
             statisticRepository.Remove(statistic);
         }
     }
+
+    [Serializable]
+    public class StatisticModifierBehaviourFloat : StatisticModifierBehaviour<float> { }
 }

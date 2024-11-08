@@ -79,10 +79,14 @@ namespace Game.Agent
             StatisticRepository statisticRepository = GetCachedComponent<StatisticRepository>();
             StatisticRepository targetStatisticRepository = character.GetCachedComponent<StatisticRepository>();
 
-            foreach (Statistic statistic in statisticRepository.Statistics.Where(x => x.Definition.Behaviors.OfType<CharacterStatisticBehavior>().Any(x => x.CharacterDefinition == characterDefinition)))
+            foreach (Statistic statistic in statisticRepository.Statistics.Where(x => x.Definition != null && x.Definition.Behaviors.OfType<CharacterStatisticBehavior>().Any(x => x.CharacterDefinition == characterDefinition)))
             {
                 CharacterStatisticBehavior characterStatisticBehavior = statistic.Definition.Behaviors.OfType<CharacterStatisticBehavior>().FirstOrDefault(x => x.CharacterDefinition == characterDefinition);
-                targetStatisticRepository.Add(new StandardStatistic() { Definition = characterStatisticBehavior.OutputDefinition, Value = new SerializeValue<float>() { Value = statistic.GetModifiedValue() } });
+                Statistic newStatistic = statistic.Snapshot();
+                newStatistic.Definition = characterStatisticBehavior.OutputDefinition;
+                newStatistic.Initialize(character);
+
+                targetStatisticRepository.Add(newStatistic);
             }
 
             OnAgentObjectSpawn?.Invoke(character.GetCachedComponent<AgentIdentity>());

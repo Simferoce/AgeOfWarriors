@@ -8,7 +8,7 @@ namespace Game.Projectile
     [Serializable]
     public class HealProjectileImpactEffect : ProjectileEffect, IProjectileImpactEffect
     {
-        [SerializeReference, SubclassSelector] private Value heal;
+        [SerializeField] private StatisticReference<float> heal;
 
         public override void Initialize(ProjectileEntity projectile)
         {
@@ -20,7 +20,7 @@ namespace Game.Projectile
             if (!entity.TryGetCachedComponent<CharacterEntity>(out CharacterEntity character))
                 return;
 
-            character.Heal(heal.GetValue<float>());
+            character.Heal(heal.GetOrThrow().GetModifiedValue<float>());
         }
     }
 }
