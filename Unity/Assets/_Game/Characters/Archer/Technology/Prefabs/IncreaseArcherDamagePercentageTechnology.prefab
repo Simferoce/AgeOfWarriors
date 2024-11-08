@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &899619428102555062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6999156395522084311}
+  - component: {fileID: 2439447710677529383}
+  - component: {fileID: 8954445296651028284}
+  - component: {fileID: 7114353416753970965}
+  m_Layer: 0
+  m_Name: IncreaseArcherDamagePercentageTechnology
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6999156395522084311
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899619428102555062}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2439447710677529383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899619428102555062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8954445296651028284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899619428102555062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  visibleByDefault: 1
+  behaviours:
+  - rid: 3390488321798963294
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488321798963294
+      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 19bd601ebadaaca4783a87a5c2bf1e83, type: 2}
+        reference:
+          name: damage
+--- !u!114 &7114353416753970965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899619428102555062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488321798963295
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488321798963295
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 0}
+        value:
+          rid: 3390488321798963296
+    - rid: 3390488321798963296
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0.5

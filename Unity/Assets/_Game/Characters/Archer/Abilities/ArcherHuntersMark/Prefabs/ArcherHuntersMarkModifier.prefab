@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5868605538872841212}
   - component: {fileID: 3447001807722088199}
   - component: {fileID: 9135378219006446933}
+  - component: {fileID: 8390207629757324971}
   m_Layer: 0
   m_Name: ArcherHuntersMarkModifier
   m_TagString: Untagged
@@ -70,7 +71,7 @@ MonoBehaviour:
       type: {class: TimeModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         duration:
-          rid: 7754703308747964722
+          name: duration
     - rid: 7754703128047648951
       type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -98,7 +99,7 @@ MonoBehaviour:
         target:
           rid: 7754703128047648965
         damage:
-          rid: 7754703308747964721
+          name: damage
         extraFlags: 8
     - rid: 7754703128047648965
       type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
@@ -107,11 +108,43 @@ MonoBehaviour:
       type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         type: 2
-    - rid: 7754703308747964721
-      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+--- !u!114 &8390207629757324971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6668665993678449400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488321798963305
+  - rid: 3390488321798963307
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488321798963305
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        value:
+          rid: 3390488321798963310
+    - rid: 3390488321798963307
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: damage
-    - rid: 7754703308747964722
-      type: {class: ModifierParameterStatisticValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        value:
+          rid: 3390488321798963309
+    - rid: 3390488321798963309
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: damage
+    - rid: 3390488321798963310
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: duration

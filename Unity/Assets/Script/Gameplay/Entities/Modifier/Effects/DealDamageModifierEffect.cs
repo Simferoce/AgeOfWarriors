@@ -18,6 +18,7 @@ namespace Game.Modifier
         {
             base.Initialize(modifier);
             target.Initialize(modifier);
+            damage.Initialize(modifier);
             attackFactory = modifier.AddOrGetCachedComponent<AttackFactory>();
         }
 
@@ -29,7 +30,7 @@ namespace Game.Modifier
                 {
                     AttackData attack = attackFactory.Generate(
                                             target: attackable,
-                                            damage: damage?.Get().GetModifiedValue<float>() ?? 0f,
+                                            damage: damage?.Get()?.GetModifiedValue<float>() ?? 0f,
                                             flags: extraFlags
                                             );
 

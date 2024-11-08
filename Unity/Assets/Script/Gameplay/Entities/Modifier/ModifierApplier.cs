@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Game.Statistics;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Modifier
@@ -37,6 +39,10 @@ namespace Game.Modifier
             else
             {
                 modifier = definition.Instantiate();
+                StatisticRepository modifierStatisticRepository = modifier.GetCachedComponent<StatisticRepository>();
+                foreach (Statistic statistic in Entity.GetCachedComponent<StatisticRepository>().Statistics.Where(x => x.Definition != null && x.Definition.Behaviors.Any(x => x is ModifyStatisticBehavior)))
+                    modifierStatisticRepository.Add(statistic.Snapshot());
+
                 currentlyAppliedModifiers.Add(modifier);
                 modifier.Initialize(target, this, parameters);
                 target.Add(modifier);

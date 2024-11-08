@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: -9219538325602513416}
   - component: {fileID: 4713138217991281389}
   - component: {fileID: 3975066864259573292}
+  - component: {fileID: 5794082563527842383}
   m_Layer: 0
   m_Name: Arrow
   m_TagString: Untagged
@@ -255,17 +256,9 @@ MonoBehaviour:
       type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         damage:
-          rid: 7754703308747964719
+          name: damage
         armorPenetration:
-          rid: 7754703308747964720
-    - rid: 7754703308747964719
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: damage
-    - rid: 7754703308747964720
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: armor_penetration
+          name: 
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5
@@ -317,3 +310,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5794082563527842383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675190562695518451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488321798963301
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488321798963301
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        value:
+          rid: 3390488321798963302
+    - rid: 3390488321798963302
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: damage

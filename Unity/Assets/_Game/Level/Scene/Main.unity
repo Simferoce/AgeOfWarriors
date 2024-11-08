@@ -1669,11 +1669,19 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+      objectReference: {fileID: 11400000, guid: 2a683f36d1e23b348a11b9d7031ddcc0, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[3]'
       value: 
       objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: technology.technologyTreeDefinitions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'technology.technologyTreeDefinitions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a9fb559a92b01a647b19f42ade259fa3, type: 2}
     - target: {fileID: 5053631171570033998, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: m_Name
       value: PlayerAgent

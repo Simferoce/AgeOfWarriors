@@ -11,8 +11,8 @@ namespace Game.Projectile
         [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private StatisticReference<float> armorPenetration;
 
-        public float Damage => damage?.Get().GetModifiedValue<float>() ?? 0f;
-        public float ArmorPenetration => armorPenetration?.Get().GetModifiedValue<float>() ?? 0f;
+        public float Damage => damage?.Get()?.GetModifiedValue<float>() ?? 0f;
+        public float ArmorPenetration => armorPenetration?.Get()?.GetModifiedValue<float>() ?? 0f;
 
         public override void Initialize(ProjectileEntity projectile)
         {

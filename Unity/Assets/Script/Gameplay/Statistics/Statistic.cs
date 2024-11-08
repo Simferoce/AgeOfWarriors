@@ -10,6 +10,7 @@ namespace Game.Statistics
 
         public string Name { get => name; set => name = value; }
         public abstract StatisticDefinition Definition { get; set; }
+        public Entity Entity { get => entity; set => entity = value; }
 
         protected Entity entity;
 

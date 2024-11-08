@@ -79,9 +79,9 @@ namespace Game.Agent
             StatisticRepository statisticRepository = GetCachedComponent<StatisticRepository>();
             StatisticRepository targetStatisticRepository = character.GetCachedComponent<StatisticRepository>();
 
-            foreach (Statistic statistic in statisticRepository.Statistics.Where(x => x.Definition != null && x.Definition.Behaviors.OfType<CharacterStatisticBehavior>().Any(x => x.CharacterDefinition == characterDefinition)))
+            foreach (Statistic statistic in statisticRepository.Statistics.Where(x => x.Definition != null && x.Definition.Behaviors.OfType<CharacterStatisticBehavior>().Any(x => x.CharacterDefinition == characterDefinition || characterDefinition.IsSpecialization(x.CharacterDefinition))))
             {
-                CharacterStatisticBehavior characterStatisticBehavior = statistic.Definition.Behaviors.OfType<CharacterStatisticBehavior>().FirstOrDefault(x => x.CharacterDefinition == characterDefinition);
+                CharacterStatisticBehavior characterStatisticBehavior = statistic.Definition.Behaviors.OfType<CharacterStatisticBehavior>().FirstOrDefault(x => x.CharacterDefinition == characterDefinition || characterDefinition.IsSpecialization(x.CharacterDefinition));
                 Statistic newStatistic = statistic.Snapshot();
                 newStatistic.Definition = characterStatisticBehavior.OutputDefinition;
                 newStatistic.Initialize(character);

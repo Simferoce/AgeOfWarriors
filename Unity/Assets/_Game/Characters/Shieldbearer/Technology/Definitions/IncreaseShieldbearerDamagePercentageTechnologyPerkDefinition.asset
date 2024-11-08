@@ -1,29 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5183416195023018314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
-  m_Name: IncreaseDamagePercentageModifierDefinition
-  m_EditorClassIdentifier: 
-  id: ad43ab0ae3f4fd8449fddef43cc1d782
-  title: 
-  icon: {fileID: 0}
-  description:
-    text: 
-    parameters: []
-  descriptionOld: 
-  prefab: {fileID: 8563415768294624348, guid: 08f951b226b09b74c949452d87c7dbbe, type: 3}
-  showOnHealthBar: 1
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +18,6 @@ MonoBehaviour:
   description:
     text: 
     parameters: []
-  descriptionOld: 
   prefab: {fileID: 899619428102555062, guid: d2b309278640e914db33b8d263a5a725, type: 3}
   showOnHealthBar: 1
   technologyTreeIcon: {fileID: 0}
