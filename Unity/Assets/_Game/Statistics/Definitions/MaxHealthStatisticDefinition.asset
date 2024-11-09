@@ -18,7 +18,17 @@ MonoBehaviour:
   title: Max Health
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
   isPercentage: 0
-  behaviors: []
+  data:
+  - rid: 3390488359635517516
+  - rid: 3390488359635517517
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 3390488359635517516
+      type: {class: BaseStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 692bd90ecc8e43840a83aaa5c9e54022, type: 2}
+    - rid: 3390488359635517517
+      type: {class: OperatorStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        statisticOperator: 3

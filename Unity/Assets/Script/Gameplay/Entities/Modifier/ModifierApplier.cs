@@ -40,7 +40,7 @@ namespace Game.Modifier
             {
                 modifier = definition.Instantiate();
                 StatisticRepository modifierStatisticRepository = modifier.GetCachedComponent<StatisticRepository>();
-                foreach (Statistic statistic in Entity.GetCachedComponent<StatisticRepository>().Statistics.Where(x => x.Definition != null && x.Definition.Behaviors.Any(x => x is ModifyStatisticBehavior)))
+                foreach (Statistic statistic in Entity.GetCachedComponent<StatisticRepository>().Statistics.Where(x => x.Definition != null && x.Definition.Data.Any(x => x is BaseStatisticDefinitionData)))
                     modifierStatisticRepository.Add(statistic.Snapshot());
 
                 currentlyAppliedModifiers.Add(modifier);

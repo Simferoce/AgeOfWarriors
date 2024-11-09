@@ -79,11 +79,24 @@ namespace Game.Agent
             StatisticRepository statisticRepository = GetCachedComponent<StatisticRepository>();
             StatisticRepository targetStatisticRepository = character.GetCachedComponent<StatisticRepository>();
 
-            foreach (Statistic statistic in statisticRepository.Statistics.Where(x => x.Definition != null && x.Definition.Behaviors.OfType<CharacterStatisticBehavior>().Any(x => x.CharacterDefinition == characterDefinition || characterDefinition.IsSpecialization(x.CharacterDefinition))))
+            foreach (Statistic statistic in statisticRepository.Statistics)
             {
-                CharacterStatisticBehavior characterStatisticBehavior = statistic.Definition.Behaviors.OfType<CharacterStatisticBehavior>().FirstOrDefault(x => x.CharacterDefinition == characterDefinition || characterDefinition.IsSpecialization(x.CharacterDefinition));
+                if (statistic.Definition == null)
+                    continue;
+
+                CharacterStatisticDefinitionData characterStatisticDefinitionData = statistic.Definition.Data.OfType<CharacterStatisticDefinitionData>().FirstOrDefault();
+                if (characterStatisticDefinitionData == null)
+                    continue;
+
+                if (characterStatisticDefinitionData.CharacterDefinition != characterDefinition && !characterDefinition.IsSpecialization(characterStatisticDefinitionData.CharacterDefinition))
+                    continue;
+
+                BaseStatisticDefinitionData baseStatisticDefinitionData = statistic.Definition.Data.OfType<BaseStatisticDefinitionData>().FirstOrDefault();
+                if (baseStatisticDefinitionData == null)
+                    continue;
+
                 Statistic newStatistic = statistic.Snapshot();
-                newStatistic.Definition = characterStatisticBehavior.OutputDefinition;
+                newStatistic.Definition = baseStatisticDefinitionData.Definition;
                 newStatistic.Initialize(character);
 
                 targetStatisticRepository.Add(newStatistic);

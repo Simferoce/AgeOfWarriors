@@ -14,7 +14,7 @@ namespace Game.Statistics
         [SerializeField] private string title;
         [SerializeField] private Color color = Color.white;
         [SerializeField] private bool isPercentage = false;
-        [SerializeReference, SubclassSelector] private List<StatisticBehavior> behaviors;
+        [SerializeReference, SubclassSelector] private List<StatisticDefinitionData> data;
 
         public Sprite Icon => icon;
         public string Title => title;
@@ -24,7 +24,7 @@ namespace Game.Statistics
         public string TextIcon => Icon != null ? $"<sprite name=\"{Icon.name.Trim()}\" color=#{ColorHex}>" : "";
         public bool IsPercentage => isPercentage;
         public string HumanReadableId => humanReadableId;
-        public List<StatisticBehavior> Behaviors { get => behaviors; set => behaviors = value; }
+        public List<StatisticDefinitionData> Data { get => data; set => data = value; }
 
 #if UNITY_EDITOR
         private void OnValidate()

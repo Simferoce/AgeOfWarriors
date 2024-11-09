@@ -18,9 +18,10 @@ namespace Game.Ability
             return ability.Caster.Entity.GetCachedComponent<StatisticRepository>().GetOrThrow<float>(casterDefinition).GetModifiedValue() * ratio;
         }
 
-        public override string GetDescription(Context context)
+        public override bool TryGetDescription(out string description)
         {
-            return $"<color=#{casterDefinition.ColorHex}>{ratio:0.0%}{casterDefinition.TextIcon}</color>";
+            description = $"<color=#{casterDefinition.ColorHex}>{ratio:0.0%}{casterDefinition.TextIcon}</color>";
+            return true;
         }
     }
 }

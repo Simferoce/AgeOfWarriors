@@ -3,7 +3,7 @@
 namespace Game.Statistics
 {
     [Serializable]
-    public abstract class StatisticBehavior
+    public abstract class StatisticDefinitionData
     {
     }
 }

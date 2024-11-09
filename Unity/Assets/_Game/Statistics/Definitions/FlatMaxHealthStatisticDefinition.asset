@@ -18,13 +18,17 @@ MonoBehaviour:
   title: Flat Max Health
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
   isPercentage: 0
-  behaviors:
-  - rid: 3390488275698843724
+  data:
+  - rid: 3390488359635517522
+  - rid: 3390488359635517523
   references:
     version: 2
     RefIds:
-    - rid: 3390488275698843724
-      type: {class: ModifyStatisticBehavior, ns: Game.Statistics, asm: Assembly-CSharp}
+    - rid: 3390488359635517522
+      type: {class: BaseStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         definition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+    - rid: 3390488359635517523
+      type: {class: OperatorStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
         statisticOperator: 0

@@ -1,11 +1,10 @@
-﻿using Game.Statistics;
-using System;
+﻿using System;
 
 namespace Game
 {
     [Serializable]
     public abstract class DescriptionParameter
     {
-        public abstract object GetValue(Entity source, Context context);
+        public abstract object GetValue(Entity source);
     }
 }

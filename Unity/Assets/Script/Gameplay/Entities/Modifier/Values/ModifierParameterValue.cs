@@ -29,9 +29,10 @@ namespace Game.Modifier
             return modifierParameter.GetValue();
         }
 
-        public override string GetDescription(Context context)
+        public override bool TryGetDescription(out string description)
         {
-            return string.Empty;
+            description = string.Empty;
+            return false;
         }
     }
 

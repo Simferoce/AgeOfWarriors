@@ -17,7 +17,7 @@ namespace Game.Statistics
         public abstract T GetValue<T>();
         public abstract Value Snapshot();
 
-        public abstract string GetDescription(Context context);
+        public abstract bool TryGetDescription(out string description);
     }
 
     [Serializable]

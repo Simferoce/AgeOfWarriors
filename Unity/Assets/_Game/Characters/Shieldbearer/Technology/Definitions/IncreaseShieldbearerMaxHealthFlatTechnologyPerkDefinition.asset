@@ -29,4 +29,5 @@ MonoBehaviour:
     - rid: 7754703153621368946
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
-        name: max_health_flat
+        name: max_health
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}

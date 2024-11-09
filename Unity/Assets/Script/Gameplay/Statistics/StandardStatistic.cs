@@ -29,5 +29,15 @@ namespace Game.Statistics
         {
             return value.GetValue<float>();
         }
+
+        public override bool TryGetDescription(out string description)
+        {
+            return value.TryGetDescription(out description);
+        }
+
+        public override string GetFormattedValue()
+        {
+            return value.GetValue<float>().ToString();
+        }
     }
 }

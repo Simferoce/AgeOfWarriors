@@ -19,19 +19,23 @@ namespace Game.Statistics
                 if (statistic.Definition == null)
                     continue;
 
-                ModifyStatisticBehavior modifyStatisticBehavior = statistic.Definition.Behaviors.OfType<ModifyStatisticBehavior>().FirstOrDefault(x => x.Definition == this);
-                if (modifyStatisticBehavior == null)
+                BaseStatisticDefinitionData baseStatisticDefinitionData = statistic.Definition.Data.OfType<BaseStatisticDefinitionData>().FirstOrDefault(x => x.Definition == this);
+                if (baseStatisticDefinitionData == null)
                     continue;
 
-                if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Flat)
+                OperatorStatisticDefinitionData operatorStatisticDefinitionData = statistic.Definition.Data.OfType<OperatorStatisticDefinitionData>().FirstOrDefault();
+                if (operatorStatisticDefinitionData == null)
+                    continue;
+
+                if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Flat)
                     flat += statistic.GetModifiedValue<float>();
-                else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Pecentage)
+                else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Pecentage)
                     percentage += statistic.GetModifiedValue<float>();
-                else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Multiplier)
+                else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Multiplier)
                     multiplier *= statistic.GetModifiedValue<float>();
-                else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Maximum)
+                else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Maximum)
                     maximum = Mathf.Min(maximum, statistic.GetModifiedValue<float>());
-                else if (modifyStatisticBehavior.StatisticOperator == StatisticOperator.Minimum)
+                else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Minimum)
                     minimum = Mathf.Max(minimum, statistic.GetModifiedValue<float>());
             }
 

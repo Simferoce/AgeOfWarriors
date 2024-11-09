@@ -18,13 +18,17 @@ MonoBehaviour:
   title: Shieldbearer Max Health
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
   isPercentage: 0
-  behaviors:
-  - rid: 3390488275698843721
+  data:
+  - rid: 3390488359635517513
+  - rid: 3390488359635517515
   references:
     version: 2
     RefIds:
-    - rid: 3390488275698843721
-      type: {class: CharacterStatisticBehavior, ns: Game.Statistics, asm: Assembly-CSharp}
+    - rid: 3390488359635517513
+      type: {class: BaseStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: b2357192271e2da41802a3d5de230ede, type: 2}
+    - rid: 3390488359635517515
+      type: {class: CharacterStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         characterDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-        outputDefinition: {fileID: 11400000, guid: b2357192271e2da41802a3d5de230ede, type: 2}

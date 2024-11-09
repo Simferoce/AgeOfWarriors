@@ -20,9 +20,10 @@ namespace Game.Statistics
             return value;
         }
 
-        public override string GetDescription(Context context)
+        public override bool TryGetDescription(out string description)
         {
-            return $"<color=#000000>({value})</color>";
+            description = string.Empty;
+            return false;
         }
     }
 }

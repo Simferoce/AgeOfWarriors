@@ -16,9 +16,10 @@ namespace Game.Modifier
             multiplier.Initialize(owner);
         }
 
-        public override string GetDescription(Context context)
+        public override bool TryGetDescription(out string description)
         {
-            return $"({multiplier.GetDescription(context)} * stack)";
+            description = $"...";
+            return true;
         }
 
         public override float GetValue()
