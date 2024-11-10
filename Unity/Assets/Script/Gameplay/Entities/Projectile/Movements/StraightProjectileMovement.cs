@@ -1,6 +1,5 @@
-﻿using Game.Ability;
-using Game.Agent;
-using System;
+﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Projectile
@@ -14,19 +13,14 @@ namespace Game.Projectile
         {
             base.Initialize(projectile);
 
-            if (projectile.Parent is not AbilityEntity ability)
+            ProjectileParameter<float> projectileParameter = projectile.Parameters.OfType<ProjectileParameter<float>>().FirstOrDefault(x => x.Name == "direction");
+            if (projectileParameter == null)
             {
-                Debug.LogError($"Expecting the parent object to be a {nameof(AbilityEntity)}", projectile);
+                Debug.LogError($"Could not find a parameter with the name \"direction\".");
                 return;
             }
 
-            if (ability.Caster.Entity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity agentIdentity))
-            {
-                Debug.LogError($"Expecting the caster to be a {nameof(AgentIdentity)}", projectile);
-                return;
-            }
-
-            Vector3 velocity = Vector3.right * agentIdentity.Direction * speed;
+            Vector3 velocity = Vector3.right * projectileParameter.GetValue() * speed;
             projectile.Rigidbody.linearVelocity = velocity;
             projectile.transform.right = projectile.Rigidbody.linearVelocity;
         }

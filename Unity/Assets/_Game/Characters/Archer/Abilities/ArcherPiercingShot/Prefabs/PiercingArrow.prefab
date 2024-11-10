@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: -9219538325602513416}
   - component: {fileID: 4757967246084485677}
   - component: {fileID: 1176079378919801912}
+  - component: {fileID: 5794082563527842383}
   m_Layer: 0
   m_Name: PiercingArrow
   m_TagString: Untagged
@@ -226,6 +227,18 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 3390488367809429513
+      type: {class: ApplyModifierProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        modifierDefinition: {fileID: 11400000, guid: ed46d60fe0008b2459323ae9c6253462, type: 2}
+        parameters:
+        - rid: 3390488367809429519
+    - rid: 3390488367809429519
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: damage_reduction_per_hit
+        value:
+          name: damage_reduction_per_hit
     - rid: 7754703133506797683
       type: {class: AlignWithVelocityProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
@@ -237,7 +250,7 @@ MonoBehaviour:
       type: {class: DistanceProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         range:
-          rid: 7754703308747964733
+          name: range
         effects:
         - rid: 7754703144169766984
     - rid: 7754703144169766984
@@ -259,7 +272,7 @@ MonoBehaviour:
         target:
           rid: 7754703144169767005
         effects:
-        - rid: 7754703308747964729
+        - rid: 3390488367809429513
     - rid: 7754703144169767005
       type: {class: SelfOnHitProjectileBehaviourTargetProvider, ns: Game.Projectile, asm: Assembly-CSharp}
       data: 
@@ -280,31 +293,9 @@ MonoBehaviour:
       type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         damage:
-          rid: 7754703308747964727
+          name: damage
         armorPenetration:
-          rid: 7754703308747964728
-    - rid: 7754703308747964727
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: damage
-    - rid: 7754703308747964728
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: armor_penetration
-    - rid: 7754703308747964729
-      type: {class: MultiplyParameterByStandardEffect, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        parameter: damage
-        value:
-          rid: 7754703308747964732
-    - rid: 7754703308747964732
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: damage_multiplier
-    - rid: 7754703308747964733
-      type: {class: ProjectileParameterStatisticValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: range
+          name: armor_penetration
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5
@@ -356,3 +347,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5794082563527842383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675190562695518451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488367809429520
+  - rid: 3390488367809429522
+  - rid: 3390488367809429524
+  - rid: 3390488367809429526
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488367809429520
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        value:
+          rid: 3390488367809429521
+    - rid: 3390488367809429521
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: damage
+    - rid: 3390488367809429522
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: armor_penetration
+        definition: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
+        value:
+          rid: 3390488367809429523
+    - rid: 3390488367809429523
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: armor_penetration
+    - rid: 3390488367809429524
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage_reduction_per_hit
+        definition: {fileID: 0}
+        value:
+          rid: 3390488367809429525
+    - rid: 3390488367809429525
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: damage_reduction_per_hit
+    - rid: 3390488367809429526
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        value:
+          rid: 3390488367809429527
+    - rid: 3390488367809429527
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: range

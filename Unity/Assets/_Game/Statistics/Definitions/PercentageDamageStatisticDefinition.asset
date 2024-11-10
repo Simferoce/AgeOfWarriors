@@ -18,13 +18,17 @@ MonoBehaviour:
   title: Percentage Damage
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
   isPercentage: 0
-  behaviors:
-  - rid: 3390488275698843724
+  data:
+  - rid: 3390488367809429611
+  - rid: 3390488367809429612
   references:
     version: 2
     RefIds:
-    - rid: 3390488275698843724
-      type: {class: ModifyStatisticBehavior, ns: Game.Statistics, asm: Assembly-CSharp}
+    - rid: 3390488367809429611
+      type: {class: BaseStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+    - rid: 3390488367809429612
+      type: {class: OperatorStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
         statisticOperator: 1

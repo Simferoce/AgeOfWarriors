@@ -1,4 +1,5 @@
-﻿using Game.Projectile;
+﻿using Game.Agent;
+using Game.Projectile;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,8 @@ namespace Game.Ability
             GameObject gameObject = UnityEngine.Object.Instantiate(projectilePrefab, origin.GetPosition(Ability), Quaternion.identity);
             ProjectileEntity projectile = gameObject.GetComponent<ProjectileEntity>();
 
-            projectile.Initialize(Ability, Ability.Targets[0], Ability.Faction, parameters.Select(x => x.Create(Ability)).ToArray());
+            float direction = Ability.Caster.Entity.GetCachedComponent<AgentIdentity>().Direction;
+            projectile.Initialize(Ability, Ability.Targets[0], Ability.Faction, parameters.Select(x => x.Create(Ability)).Append(new ProjectileParameter<float>("direction", direction)).ToArray());
         }
     }
 }
