@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4840469097770244859}
   - component: {fileID: 2965118429573556157}
   - component: {fileID: 8382389830139093115}
+  - component: {fileID: 6509533490521921770}
   m_Layer: 0
   m_Name: SeerHealingPotionThrow
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100060e0d481adb4ba16b73ca1874f54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tags: 
   conditions:
   - rid: 7754703144169767133
   - rid: 7754703144169767134
@@ -67,6 +69,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 3390488384832274491
+      type: {class: StatisticProjectileParameterFactoryFloat, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: heal
+        value:
+          name: heal
     - rid: 7754703144169767133
       type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data: 
@@ -74,12 +82,7 @@ MonoBehaviour:
       type: {class: CooldownAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         cooldown:
-          rid: 7754703144169767135
-    - rid: 7754703144169767135
-      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
-        value: 5
+          name: cooldown
     - rid: 7754703144169767136
       type: {class: HasTargetAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data:
@@ -105,13 +108,7 @@ MonoBehaviour:
       type: {class: DistanceAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         distance:
-          rid: 7754703144169767141
-    - rid: 7754703144169767141
-      type: {class: CasterStatisticRatioAbilityStatistic, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-        ratio: 1
+          name: range
     - rid: 7754703144169767142
       type: {class: PriorityAbilityTargetOrderBy, ns: Game.Ability, asm: Assembly-CSharp}
       data: 
@@ -122,19 +119,62 @@ MonoBehaviour:
         origin:
           rid: 7754703144169767144
         parameters:
-        - rid: 7754703144169767145
+        - rid: 3390488384832274491
     - rid: 7754703144169767144
       type: {class: TransformProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
       data:
         origin: ProjectileOrigin
-    - rid: 7754703144169767145
-      type: {class: FloatStatisticProjectileParameterFactory, ns: Game.Ability, asm: Assembly-CSharp}
+--- !u!114 &6509533490521921770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 815283590128273858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488384832274485
+  - rid: 3390488384832274487
+  - rid: 3390488384832274489
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488384832274485
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: heal
-        statistic:
-          rid: 7754703144169767146
-    - rid: 7754703144169767146
-      type: {class: StatisticSerializeFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
         definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
-        value: 25
+        value:
+          rid: 3390488384832274486
+    - rid: 3390488384832274486
+      type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1
+    - rid: 3390488384832274487
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        value:
+          rid: 3390488384832274488
+    - rid: 3390488384832274488
+      type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1
+    - rid: 3390488384832274489
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: cooldown
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        value:
+          rid: 3390488384832274490
+    - rid: 3390488384832274490
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 5

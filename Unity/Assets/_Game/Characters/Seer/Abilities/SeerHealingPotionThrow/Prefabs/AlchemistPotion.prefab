@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: -9219538325602513416}
   - component: {fileID: 4757967246084485677}
   - component: {fileID: 1176079378919801912}
+  - component: {fileID: 5794082563527842383}
   m_Layer: 0
   m_Name: AlchemistPotion
   m_TagString: Untagged
@@ -136,62 +137,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad934abfe165f5649b45856d47d2d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tags: 
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
   - rid: 7754703144169767158
   - rid: 7754703144169767125
-  behaviours: []
-  impacts:
-  - rid: 7754703144169767126
+  behaviours:
+  - rid: 3390488384832274493
   references:
     version: 2
     RefIds:
+    - rid: 3390488384832274493
+      type: {class: CollisionProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        filter:
+          rid: 3390488384832274495
+        effects:
+        - rid: 3390488384832274498
+        - rid: 3390488384832274574
+    - rid: 3390488384832274495
+      type: {class: AndProjectileTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        filters:
+        - rid: 3390488384832274496
+        - rid: 3390488384832274497
+    - rid: 3390488384832274496
+      type: {class: IsGoingDownProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488384832274497
+      type: {class: IsAllyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488384832274498
+      type: {class: HealProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        heal:
+          name: heal
+    - rid: 3390488384832274574
+      type: {class: KillProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        projectileDeath:
+          rid: 3390488384832274575
+    - rid: 3390488384832274575
+      type: {class: BubbleUpProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        duration: 0.25
+        scale: 0.5
+        stopSimulatedDelay: 0.05
     - rid: 7754703144169767125
       type: {class: SelfRotateProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         speed: 1
         clockwise: 0
-    - rid: 7754703144169767126
-      type: {class: CollisionProjectileImpact, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        filter:
-          rid: 7754703144169767129
-        effects:
-        - rid: 7754703144169767128
-        - rid: 7754703144169767151
-    - rid: 7754703144169767128
-      type: {class: HealProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        heal:
-          rid: 7754703144169767132
-    - rid: 7754703144169767129
-      type: {class: AndProjectileTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        filters:
-        - rid: 7754703144169767130
-        - rid: 7754703144169767131
-    - rid: 7754703144169767130
-      type: {class: IsAllyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
-      data: 
-    - rid: 7754703144169767131
-      type: {class: IsGoingDownProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
-      data: 
-    - rid: 7754703144169767132
-      type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
-        name: heal
-    - rid: 7754703144169767151
-      type: {class: KillProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        projectileDeath:
-          rid: 7754703144169767152
-    - rid: 7754703144169767152
-      type: {class: BubbleUpProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        duration: 0.25
-        scale: 1
-        stopSimulatedDelay: 0
     - rid: 7754703144169767158
       type: {class: FixHeightProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -247,6 +243,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5794082563527842383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675190562695518451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488384832274499
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488384832274499
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: heal
+        definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
+        value:
+          rid: 3390488384832274500
+    - rid: 3390488384832274500
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: heal
 --- !u!1 &8540451893314856808
 GameObject:
   m_ObjectHideFlags: 0

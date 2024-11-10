@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: -9219538325602513416}
   - component: {fileID: 4757967246084485677}
   - component: {fileID: 1176079378919801912}
+  - component: {fileID: 5794082563527842383}
   m_Layer: 0
   m_Name: SeerSphere
   m_TagString: Untagged
@@ -136,18 +137,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad934abfe165f5649b45856d47d2d54d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tags: 
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
   - rid: 7754703128047648908
   - rid: 7754703128047648907
-  behaviours: []
-  impacts:
-  - rid: 7754703144169767117
+  behaviours:
+  - rid: 3390488384832274458
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 3390488384832274458
+      type: {class: CollisionProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        filter:
+          rid: 3390488384832274459
+        effects:
+        - rid: 3390488384832274460
+        - rid: 3390488384832274463
+    - rid: 3390488384832274459
+      type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488384832274460
+      type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        damage:
+          name: damage
+        armorPenetration:
+          name: 
+    - rid: 3390488384832274463
+      type: {class: KillProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        projectileDeath:
+          rid: 3390488384832274464
+    - rid: 3390488384832274464
+      type: {class: BubbleUpProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        duration: 0.2
+        scale: 0.5
+        stopSimulatedDelay: 0.05
     - rid: 7754703128047648907
       type: {class: SelfRotateProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -157,40 +185,6 @@ MonoBehaviour:
       type: {class: AngledProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         angle: 40
-    - rid: 7754703144169767117
-      type: {class: CollisionProjectileImpact, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        filter:
-          rid: 7754703144169767118
-        effects:
-        - rid: 7754703144169767119
-        - rid: 7754703144169767121
-    - rid: 7754703144169767118
-      type: {class: IsEnemyProjectileImpactTargetFilter, ns: Game.Projectile, asm: Assembly-CSharp}
-      data: 
-    - rid: 7754703144169767119
-      type: {class: DealDamageProjectileImpactEffect, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        damage:
-          rid: 7754703144169767120
-        armorPenetration:
-          rid: -2
-    - rid: 7754703144169767120
-      type: {class: ParameterReferenceProjectileStatistic, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        name: damage
-    - rid: 7754703144169767121
-      type: {class: KillProjectileEffect, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        projectileDeath:
-          rid: 7754703144169767122
-    - rid: 7754703144169767122
-      type: {class: BubbleUpProjectileDeath, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        duration: 0.25
-        scale: 1
-        stopSimulatedDelay: 0
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5
@@ -242,6 +236,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5794082563527842383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675190562695518451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488384832274461
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488384832274461
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        value:
+          rid: 3390488384832274462
+    - rid: 3390488384832274462
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: damage
 --- !u!1 &8540451893314856808
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ namespace Game.Projectile
         public override void Initialize(ProjectileEntity projectile)
         {
             base.Initialize(projectile);
+            heal.Initialize(projectile);
         }
 
         public void Execute(Entity entity)

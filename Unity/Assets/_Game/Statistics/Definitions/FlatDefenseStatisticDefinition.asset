@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457ef5104dc5506478af5a40092efe1e, type: 3}
+  m_Name: FlatDefenseStatisticDefinition
+  m_EditorClassIdentifier: 
+  id: 3286899521c922344bf7cbb75aa08c05
+  icon: {fileID: -7612114061151743823, guid: 2a50200866bb2ec46b25ae0324e42799, type: 3}
+  humanReadableId: defense
+  title: Defense
+  color: {r: 0.90099996, g: 0.90099996, b: 0.08919903, a: 1}
+  isPercentage: 0
+  data:
+  - rid: 3390488384832274447
+  - rid: 3390488384832274448
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488384832274447
+      type: {class: BaseStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
+    - rid: 3390488384832274448
+      type: {class: OperatorStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        statisticOperator: 0
