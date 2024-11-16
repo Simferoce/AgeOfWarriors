@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AgeOfWarriors.Unity
+namespace AgeOfWarriors.Visual
 {
     public class CharacterVisual : MonoBehaviour
     {

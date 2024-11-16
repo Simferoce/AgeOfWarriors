@@ -1,11 +1,14 @@
-﻿using AgeOfWarriors.Core;
+﻿using AgeOfWarriors.Visual;
 using UnityEngine;
 
 namespace AgeOfWarriors.Unity
 {
-    public class EntryPoint : MonoBehaviour
+    public class GameApplication : MonoBehaviour
     {
         [SerializeField] private UnityDefinitionRepository definitionRepository;
+        [SerializeField] private VisualApplication visualApplication;
+
+        public Game Game { get => game; }
 
         private Game game;
 
@@ -15,7 +18,7 @@ namespace AgeOfWarriors.Unity
             UnityDebug unityDebug = new UnityDebug();
 
             game.Initialize(unityDebug, definitionRepository);
-            game.EventChannel.Subscribe<EntityCreatedEvent>(EntityCreated);
+            visualApplication.Initialize(this);
         }
 
         private void Update()
@@ -23,12 +26,5 @@ namespace AgeOfWarriors.Unity
             game.Update(UnityEngine.Time.deltaTime);
         }
 
-        private void EntityCreated(EntityCreatedEvent evt)
-        {
-            if (evt.Entity is Character character && character.Definition is CharacterDefinition characterDefinition)
-            {
-                characterDefinition.Instantiate(character);
-            }
-        }
     }
 }
