@@ -18,3 +18,12 @@
 /StatisticCodeGenerator/StatisticCodeGeneratorSolution/.vs
 /StatisticCodeGenerator/StatisticCodeGeneratorSolution/StatisticCodeGenerator/bin
 /StatisticCodeGenerator/StatisticCodeGeneratorSolution/StatisticCodeGenerator/obj
+/Unity2/Library
+/Unity2/Logs
+/Unity2/obj
+/Unity2/*.sln
+/Unity2/*.csproj
+/Unity2/*.vsconfig
+/Unity2/.vs
+/Unity2/Temp
+/Unity2/UserSettings
