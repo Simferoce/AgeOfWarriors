@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c27d574c4e7f6469993967ab496914, type: 3}
   m_Name: ShieldbearerCharacterVisualDefinition
   m_EditorClassIdentifier: 
-  visual: {fileID: 1852301205935447641, guid: 1e03dfdfe9f7ba2459f5697cf6fad287, type: 3}
+  visual: {fileID: 6705402225686340843, guid: fcbd3daf533dd47499e17e93299843e0, type: 3}
   characterDefinition: {fileID: 11400000, guid: e5dee01aa5901bf4daa19286a1d1b4b7, type: 2}

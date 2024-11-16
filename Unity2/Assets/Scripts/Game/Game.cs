@@ -1,5 +1,6 @@
 using AgeOfWarriors.Core;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AgeOfWarriors
 {
@@ -32,8 +33,8 @@ namespace AgeOfWarriors
         public void Update(float deltaTime)
         {
             time.Update(deltaTime);
-            foreach (Agent agent in agents)
-                agent.Update();
+            foreach (Entity entity in entities.ToList())
+                entity.Update();
         }
     }
 }

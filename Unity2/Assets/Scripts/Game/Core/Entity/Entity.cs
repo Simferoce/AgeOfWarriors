@@ -7,6 +7,25 @@ namespace AgeOfWarriors.Core
     {
         public Game Game { get => game; }
 
+        public virtual float this[string name]
+        {
+            get
+            {
+                if (!statistics.ContainsKey(name))
+                {
+                    game.Debug.LogError($"Could not find the statistic \"{name}\" in \"{this}\"");
+                    return default;
+                }
+
+                return statistics[name];
+            }
+            set
+            {
+                statistics[name] = value;
+            }
+        }
+
+        protected Dictionary<string, float> statistics = new Dictionary<string, float>();
         private List<Component> components = new List<Component>();
         private Game game;
 
@@ -27,6 +46,8 @@ namespace AgeOfWarriors.Core
             game.EventChannel.Publish(new EntityCreatedEvent(this));
         }
 
+        public virtual void Update() { }
+
         public void AddComponent(Component component)
         {
             components.Add(component);
@@ -42,6 +63,12 @@ namespace AgeOfWarriors.Core
         {
             component = components.FirstOrDefault(x => x is T) as T;
             return component != null;
+        }
+
+        public T GetComponent<T>()
+            where T : Component
+        {
+            return components.FirstOrDefault(x => x is T) as T;
         }
     }
 }

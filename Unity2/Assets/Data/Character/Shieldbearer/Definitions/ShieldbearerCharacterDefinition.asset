@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ShieldbearerCharacterDefinition
   m_EditorClassIdentifier: 
   id: 
-  visual: {fileID: 1852301205935447641, guid: 1e03dfdfe9f7ba2459f5697cf6fad287, type: 3}
+  speed: 0.5

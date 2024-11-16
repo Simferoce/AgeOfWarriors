@@ -1,15 +1,13 @@
-﻿using AgeOfWarriors.Core;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AgeOfWarriors
 {
-    public class AgentCharacterFactory : Entity
+    public class AgentCharacterFactory
     {
         private List<AgentFactoryCommand> commands = new List<AgentFactoryCommand>();
         private int slot = 1;
 
         public AgentCharacterFactory(Agent agent)
-            : base(agent.Game)
         {
         }
 

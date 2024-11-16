@@ -30,8 +30,9 @@ namespace AgeOfWarriors
             characters.Add(character);
         }
 
-        public void Update()
+        public override void Update()
         {
+            base.Update();
             behaviour.Update();
             factory.Update();
         }
