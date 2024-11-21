@@ -26,7 +26,8 @@ namespace AgeOfWarriors
                 Transform transform = stateMachine.Character.GetComponent<Transform>();
                 CurrentSpeed = stateMachine.Character.Speed;
 
-                transform.Translate(CurrentSpeed * stateMachine.Character.Game.Time.DeltaTime * new Vector3(1, 0, 0));
+                Vector3 direction = Vector3.Transform(new Vector3(0, 0, 1), transform.Rotation);
+                transform.Translate(CurrentSpeed * stateMachine.Character.Game.Time.DeltaTime * new Vector2(direction.X, direction.Y));
             }
         }
     }

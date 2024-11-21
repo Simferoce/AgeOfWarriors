@@ -17,8 +17,8 @@ namespace AgeOfWarriors.Unity
             game = new Game();
             UnityDebug unityDebug = new UnityDebug();
 
-            game.Initialize(unityDebug, definitionRepository);
             visualApplication.Initialize(this);
+            game.Initialize(unityDebug, definitionRepository);
         }
 
         private void Update()

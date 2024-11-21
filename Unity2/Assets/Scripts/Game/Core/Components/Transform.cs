@@ -5,21 +5,27 @@ namespace AgeOfWarriors.Core
 {
     public class Transform : Component
     {
-        private Vector3 position;
+        private Vector2 position;
         private Quaternion rotation;
 
-        public Vector3 Position { get => position; }
+        public Vector2 Position { get => position; set => position = value; }
+        public Quaternion Rotation { get => rotation; set => rotation = value; }
 
-        public Transform(Game game, Vector3 position, Quaternion rotation)
+        public Transform(Game game, Vector2 position, Quaternion rotation)
             : base(game)
         {
             this.position = position;
             this.rotation = rotation;
         }
 
-        public void Translate(Vector3 translation)
+        public void Translate(Vector2 translation)
         {
             position += translation;
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
         }
     }
 }

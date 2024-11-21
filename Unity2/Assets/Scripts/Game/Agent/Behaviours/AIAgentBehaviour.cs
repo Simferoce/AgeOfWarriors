@@ -17,7 +17,7 @@
 
         private void Spawn()
         {
-            agent.Factory.TryEnqueue(new AgentFactoryCommand(agent, agent.Loadout.GetCharacterFactoryAtIndex(0), 0.5f));
+            agent.Factory.TryEnqueue(new AgentFactoryCommand(agent, agent.Base.SpawnPoint, agent.Loadout.GetCharacterFactoryAtIndex(0), 0.5f));
             lastSpawn = agent.Game.Time.CurrentTime;
         }
     }

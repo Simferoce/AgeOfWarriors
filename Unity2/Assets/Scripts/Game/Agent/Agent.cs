@@ -7,6 +7,7 @@ namespace AgeOfWarriors
     {
         public AgentCharacterFactory Factory { get => factory; }
         public AgentLoadout Loadout { get => loadout; }
+        public Base Base { get; private set; }
 
         private AgentBehaviour behaviour;
         private AgentCharacterFactory factory;
@@ -22,7 +23,14 @@ namespace AgeOfWarriors
             factory = new AgentCharacterFactory(this);
 
             ICharacterDefinition shieldbearerDefinition = game.DefinitionRepository.ShieldbearerDefinition;
-            loadout = new AgentLoadout(this, new List<CharacterFactory>() { new ShieldbearerFactory(shieldbearerDefinition) });
+            loadout = new AgentLoadout(this, new List<CharacterFactory>() { new CharacterFactory(shieldbearerDefinition) });
+        }
+
+        public void Initialize(Base agentBase)
+        {
+            this.Base = agentBase;
+
+            this.Initialize();
         }
 
         public void AssignCharacter(Character character)

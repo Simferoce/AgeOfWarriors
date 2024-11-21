@@ -1,12 +1,15 @@
 ﻿using AgeOfWarriors.Core;
 using AgeOfWarriors.Unity;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AgeOfWarriors.Visual
 {
     public class VisualApplication : MonoBehaviour
     {
-        [SerializeField] private CharacterVisualDefinitionRepository characterVisualDefinitionRepository;
+        [SerializeField] private VisualDefinitionRepository characterVisualDefinitionRepository;
+
+        private List<EntityVisual> visuals = new List<EntityVisual>();
 
         public void Initialize(GameApplication application)
         {
@@ -15,10 +18,20 @@ namespace AgeOfWarriors.Visual
 
         private void EntityCreated(EntityCreatedEvent evt)
         {
-            if (evt.Entity is Character character && character.Definition is CharacterDefinition characterDefinition)
+            VisualDefinition visualDefinition = characterVisualDefinitionRepository.GetCorrespondingVisual(evt.Entity);
+            if (visualDefinition != null)
             {
-                CharacterVisualDefinition characterVisualDefinition = characterVisualDefinitionRepository.GetCorrespondingVisual(characterDefinition);
-                characterVisualDefinition.Instantiate(character);
+                EntityVisual entityVisual = visualDefinition.Instantiate(evt.Entity);
+                entityVisual.Refresh();
+                visuals.Add(entityVisual);
+            }
+        }
+
+        private void Update()
+        {
+            foreach (EntityVisual visual in visuals)
+            {
+                visual.Refresh();
             }
         }
     }
