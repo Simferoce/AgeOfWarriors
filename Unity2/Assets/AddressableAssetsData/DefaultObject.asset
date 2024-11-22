@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 260d5122ec300cb41b485f296e64ade8, type: 3}
-  m_Name: ShieldbearerCharacterDefinition
+  m_Script: {fileID: 11500000, guid: 3a189bb168d8d90478a09ea08c2f3d72, type: 3}
+  m_Name: DefaultObject
   m_EditorClassIdentifier: 
-  id: shieldbearer
-  speed: 0.5
+  m_AddressableAssetSettingsGuid: 08444672b1c486e4ca5f562c03321811

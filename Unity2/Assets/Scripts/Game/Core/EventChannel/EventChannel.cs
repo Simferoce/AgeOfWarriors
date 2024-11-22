@@ -15,6 +15,14 @@ namespace AgeOfWarriors.Core
             subscribers[typeof(T)].Add(subscriber);
         }
 
+        public void Unsubscribe<T>(System.Action<T> subscriber)
+        {
+            if (!subscribers.ContainsKey(typeof(T)))
+                subscribers.Add(typeof(T), new List<object>());
+
+            subscribers[typeof(T)].Remove(subscriber);
+        }
+
         public void Publish<T>(T data)
         {
             if (!subscribers.ContainsKey(typeof(T)))

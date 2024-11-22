@@ -38,7 +38,6 @@ namespace AgeOfWarriors
             agentBase2.Initialize();
             agent2.Initialize(agentBase2);
 
-
             this.agents.Add(agent);
         }
 

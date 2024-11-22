@@ -5,25 +5,34 @@ namespace AgeOfWarriors.Unity
 {
     public class GameApplication : MonoBehaviour
     {
-        [SerializeField] private UnityDefinitionRepository definitionRepository;
-        [SerializeField] private VisualApplication visualApplication;
-
-        public Game Game { get => game; }
-
         private Game game;
+        private UnityDefinitionRepository definitionRepository;
+        private VisualApplication visualApplication;
 
-        private void Awake()
+        private async void Start()
         {
             game = new Game();
             UnityDebug unityDebug = new UnityDebug();
 
-            visualApplication.Initialize(this);
+            visualApplication = new VisualApplication();
+            await visualApplication.Initialize(game);
+
+            definitionRepository = new UnityDefinitionRepository(unityDebug);
+            await definitionRepository.Initialize();
+
             game.Initialize(unityDebug, definitionRepository);
+        }
+
+        private void OnDestroy()
+        {
+            visualApplication.Dispose();
+            definitionRepository.Dispose();
         }
 
         private void Update()
         {
             game.Update(UnityEngine.Time.deltaTime);
+            visualApplication.Update();
         }
 
     }

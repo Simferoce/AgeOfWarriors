@@ -22,7 +22,7 @@ namespace AgeOfWarriors
 
             factory = new AgentCharacterFactory(this);
 
-            ICharacterDefinition shieldbearerDefinition = game.DefinitionRepository.ShieldbearerDefinition;
+            ICharacterDefinition shieldbearerDefinition = game.DefinitionRepository.Get<ICharacterDefinition>("shieldbearer");
             loadout = new AgentLoadout(this, new List<CharacterFactory>() { new CharacterFactory(shieldbearerDefinition) });
         }
 

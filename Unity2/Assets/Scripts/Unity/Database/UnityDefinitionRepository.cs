@@ -1,21 +1,30 @@
 ﻿using AgeOfWarriors.Core;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AgeOfWarriors.Unity
 {
-    public class UnityDefinitionRepository : MonoBehaviour, IDefinitionRepository
+    public class UnityDefinitionRepository : IDefinitionRepository
     {
-        [SerializeField] private CharacterDefinition shieldbearerDefinition;
-
-        public ICharacterDefinition ShieldbearerDefinition => shieldbearerDefinition;
-
+        private AddressablesExtensions.AddressablesHandle<IDefinition> handle;
         private Dictionary<string, IDefinition> definitions = new Dictionary<string, IDefinition>();
         private IGameDebug debug;
 
         public UnityDefinitionRepository(IGameDebug debug)
         {
             this.debug = debug;
+        }
+
+        public async Awaitable Initialize()
+        {
+            handle = await AddressablesExtensions.LoadAssetsAsync<IDefinition>("Definition");
+            definitions = handle.Result.ToDictionary(x => x.Id);
+        }
+
+        public void Dispose()
+        {
+            handle.Dispose();
         }
 
         public T Get<T>(string id)

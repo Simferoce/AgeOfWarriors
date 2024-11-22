@@ -1,37 +1,62 @@
 ﻿using AgeOfWarriors.Core;
-using AgeOfWarriors.Unity;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace AgeOfWarriors.Visual
 {
-    public class VisualApplication : MonoBehaviour
+    public class VisualApplication : IDisposable
     {
-        [SerializeField] private VisualDefinitionRepository characterVisualDefinitionRepository;
-
+        private VisualDefinitionRepository visualDefinitionRepository;
         private List<EntityVisual> visuals = new List<EntityVisual>();
+        private Game game;
 
-        public void Initialize(GameApplication application)
+        public async Awaitable Initialize(Game game)
         {
-            application.Game.EventChannel.Subscribe<EntityCreatedEvent>(EntityCreated);
+            this.game = game;
+            visualDefinitionRepository = new VisualDefinitionRepository();
+            await visualDefinitionRepository.Initialize();
         }
 
-        private void EntityCreated(EntityCreatedEvent evt)
+        public void Dispose()
         {
-            VisualDefinition visualDefinition = characterVisualDefinitionRepository.GetCorrespondingVisual(evt.Entity);
-            if (visualDefinition != null)
-            {
-                EntityVisual entityVisual = visualDefinition.Instantiate(evt.Entity);
-                entityVisual.Refresh();
-                visuals.Add(entityVisual);
-            }
+            visualDefinitionRepository.Dispose();
         }
 
-        private void Update()
+        public void Update()
         {
+            Refresh();
             foreach (EntityVisual visual in visuals)
             {
                 visual.Refresh();
+            }
+        }
+
+        private void Refresh()
+        {
+            foreach (Entity entity in game.Entities)
+            {
+                if (!visuals.Any(x => x.Entity == entity))
+                {
+                    VisualDefinition visualDefinition = visualDefinitionRepository.GetCorrespondingVisual(entity);
+                    if (visualDefinition == null)
+                        continue;
+
+                    EntityVisual entityVisual = visualDefinition.Instantiate(entity);
+                    entityVisual.Refresh();
+                    visuals.Add(entityVisual);
+                }
+            }
+
+            for (int i = visuals.Count - 1; i >= 0; i--)
+            {
+                EntityVisual visual = visuals[i];
+                if (!game.Entities.Any(x => x == visual.Entity))
+                {
+                    GameObject.Destroy(visual);
+                    visuals.Remove(visual);
+                }
             }
         }
     }

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Shieldbearer
+  m_EditorClassIdentifier: 
+  m_GroupName: Shieldbearer
+  m_GUID: a68e56ee136a0eb4eb801978f7bd49de
+  m_SerializeEntries:
+  - m_GUID: 2a77147712b7eb34ab46bc4f18fb7cf7
+    m_Address: Assets/Data/Character/Shieldbearer/Definitions/ShieldbearerCharacterVisualDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Visual
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1aec6db074cec34dad23b8eacd4f208
+    m_Address: Assets/Data/Character/Shieldbearer
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e5dee01aa5901bf4daa19286a1d1b4b7
+    m_Address: Assets/Data/Character/Shieldbearer/Definitions/ShieldbearerCharacterDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Definition
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 08444672b1c486e4ca5f562c03321811, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5779e2e18a90409439bfee66f2b25e77, type: 2}
+    - {fileID: 11400000, guid: 50757b7261a7ece4bb3d9a39882619f5, type: 2}
