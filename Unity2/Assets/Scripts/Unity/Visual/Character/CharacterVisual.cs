@@ -1,4 +1,4 @@
-﻿using AgeOfWarriors.Core;
+﻿using AgeOfWarriors;
 
 namespace AgeOfWarriors.Visual
 {

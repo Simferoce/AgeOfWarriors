@@ -1,4 +1,4 @@
-﻿namespace AgeOfWarriors.Core
+﻿namespace AgeOfWarriors
 {
     public abstract class Component
     {

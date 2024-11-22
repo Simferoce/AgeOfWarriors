@@ -1,7 +1,7 @@
 ﻿
 using System.Numerics;
 
-namespace AgeOfWarriors.Core
+namespace AgeOfWarriors
 {
     public class Transform : Component
     {

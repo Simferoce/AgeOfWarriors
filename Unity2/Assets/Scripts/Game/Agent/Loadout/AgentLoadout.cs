@@ -1,4 +1,4 @@
-﻿using AgeOfWarriors.Core;
+﻿using AgeOfWarriors;
 using System.Collections.Generic;
 
 namespace AgeOfWarriors

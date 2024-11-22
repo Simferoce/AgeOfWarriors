@@ -1,5 +1,4 @@
-﻿using AgeOfWarriors.Core;
-using AgeOfWarriors.Unity;
+﻿using AgeOfWarriors.Unity;
 using System;
 using System.Collections.Generic;
 using System.Linq;

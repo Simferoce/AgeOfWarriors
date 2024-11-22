@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace AgeOfWarriors.Core
+namespace AgeOfWarriors
 {
     public abstract class Entity
     {

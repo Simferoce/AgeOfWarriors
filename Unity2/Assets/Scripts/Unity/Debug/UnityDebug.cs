@@ -1,5 +1,4 @@
-﻿using AgeOfWarriors.Core;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AgeOfWarriors.Unity
 {

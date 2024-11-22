@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AgeOfWarriors.Core
+namespace AgeOfWarriors
 {
     public class EventChannel
     {

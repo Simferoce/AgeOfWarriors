@@ -1,6 +1,4 @@
-﻿using AgeOfWarriors.Core;
-
-namespace AgeOfWarriors.Visual
+﻿namespace AgeOfWarriors.Visual
 {
     public class BaseVisual : EntityVisual
     {

@@ -1,4 +1,4 @@
-﻿using AgeOfWarriors.Core;
+﻿using AgeOfWarriors;
 using AgeOfWarriors.Unity;
 using UnityEngine;
 
