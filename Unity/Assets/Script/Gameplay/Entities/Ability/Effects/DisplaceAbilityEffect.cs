@@ -16,19 +16,13 @@ namespace Game.Ability
         [SerializeField] private float translationDuration = 0.3f;
         [SerializeField, Range(0, 1)] private float damping = 0.05f;
         [SerializeField] private ModifierDefinition modifierDefinition;
-        [SerializeReference, SubclassSelector] private List<ModifierParameterFactory> parameters;
 
         private float startedAt;
-        private ModifierApplier modifierApplier;
         private Vector3 destination;
 
         public override void Initialize(AbilityEntity ability)
         {
             base.Initialize(ability);
-            modifierApplier = ability.AddOrGetCachedComponent<ModifierApplier>();
-
-            foreach (ModifierParameterFactory parameterFactory in parameters)
-                parameterFactory.Initialize(ability);
         }
 
         public override bool Validate()
@@ -39,14 +33,6 @@ namespace Game.Ability
 
         public override void Apply()
         {
-            foreach (CharacterEntity target in Ability.Targets.Select(x => x.Entity).OfType<CharacterEntity>())
-            {
-                if (target.TryGetCachedComponent<ModifierHandler>(out ModifierHandler targetModifiable))
-                {
-                    modifierApplier.Apply(modifierDefinition, targetModifiable, parameters.Select(x => x.Create(Ability)).ToArray());
-                }
-            }
-
             destination = Ability.Caster.Entity.transform.position;
             startedAt = Time.time;
         }

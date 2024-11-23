@@ -62,12 +62,16 @@ MonoBehaviour:
   conditions:
   - rid: 7754703283282509898
   - rid: 7754703283282509899
+  - rid: 3390488662789587060
   effects:
   - rid: 7754703283282509908
   trigger: Ability
   references:
     version: 2
     RefIds:
+    - rid: 3390488662789587060
+      type: {class: IsFirstAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
     - rid: 7754703283282509898
       type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data: 

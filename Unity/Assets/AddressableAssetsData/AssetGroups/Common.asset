@@ -105,6 +105,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8289f2c2701c696408ecb8b8733b6d56
+    m_Address: Assets/_Game/Statistics/Definitions/StaggerStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8584c16a81698e24ba47a4dc0dbc16f7
     m_Address: Assets/_Game/Managers/GameFlowManager.prefab
     m_ReadOnly: 0

@@ -1665,7 +1665,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+      objectReference: {fileID: 11400000, guid: f8eb9f76999cb8547bc4379eb8f6d09a, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[2]'
       value: 

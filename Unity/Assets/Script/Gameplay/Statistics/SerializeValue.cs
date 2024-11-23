@@ -7,6 +7,9 @@ namespace Game.Statistics
     public class SerializeValueFloat : SerializeValue<float> { }
 
     [Serializable]
+    public class SerializeValueBool : SerializeValue<bool> { }
+
+    [Serializable]
     public class SerializeValue<T> : Value<T>
     {
         [SerializeField] private T value;

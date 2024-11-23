@@ -36,4 +36,7 @@ namespace Game.Modifier
 
     [Serializable]
     public class StatisticModifierBehaviourFloat : StatisticModifierBehaviour<float> { }
+
+    [Serializable]
+    public class StatisticModifierBehaviourBool : StatisticModifierBehaviour<bool> { }
 }
