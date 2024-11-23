@@ -671,7 +671,7 @@ PrefabInstance:
     - target: {fileID: 5168807410063995927, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 30932b679f153494380410c95faa30de, type: 2}
+      objectReference: {fileID: 11400000, guid: ad87612513683a84385f387ff18538ba, type: 2}
     - target: {fileID: 5168978420122969116, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

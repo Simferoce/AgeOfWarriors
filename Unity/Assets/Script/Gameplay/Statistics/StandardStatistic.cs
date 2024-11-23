@@ -15,27 +15,27 @@ namespace Game.Statistics
             value.Initialize(entity);
         }
 
-        public override Statistic Snapshot()
+        public override Statistic Snapshot(Context context)
         {
-            return new StandardStatistic() { definition = this.definition, Value = new SerializeValue<float>() { Value = GetModifiedValue() } };
+            return new StandardStatistic() { definition = this.definition, Value = new SerializeValue<float>() { Value = GetModifiedValue(context) } };
         }
 
-        public override float GetModifiedValue()
+        public override float GetModifiedValue(Context context)
         {
-            return definition != null ? definition.Modify(value.GetValue<float>(), entity.GetCachedComponent<StatisticRepository>()) : GetBaseValue();
+            return definition != null ? definition.Modify(value.GetValue<float>(), entity.GetCachedComponent<StatisticRepository>(), context) : GetBaseValue(context);
         }
 
-        public override float GetBaseValue()
+        public override float GetBaseValue(Context context)
         {
             return value.GetValue<float>();
         }
 
-        public override bool TryGetDescription(out string description)
+        public override bool TryGetDescription(out string description, Context context)
         {
             return value.TryGetDescription(out description);
         }
 
-        public override string GetFormattedValue(string format)
+        public override string GetFormattedValue(string format, Context context)
         {
             return value.GetValue<float>().ToString(format);
         }

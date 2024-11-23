@@ -27,19 +27,19 @@ namespace Game.Character
         public List<TransformTag> TransformTags { get; set; }
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
 
-        public float Health { get => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue<float>(); set => (GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health) as DynamicStatistic<float>).Set(value); }
-        public float MaxHealth => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.MaxHealth).GetModifiedValue<float>();
-        public float Defense => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Defense).GetModifiedValue<float>();
-        public float AttackSpeed => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.AttackSpeed).GetModifiedValue<float>();
-        public float AttackPower => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.AttackPower).GetModifiedValue<float>();
-        public float Speed => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Speed).GetModifiedValue<float>();
-        public float Reach => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Reach).GetModifiedValue<float>();
+        public float Health { get => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue<float>(Context.Empty); set => (GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health) as DynamicStatistic<float>).Set(value); }
+        public float MaxHealth => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.MaxHealth).GetModifiedValue<float>(Context.Empty);
+        public float Defense => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Defense).GetModifiedValue<float>(Context.Empty);
+        public float AttackSpeed => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.AttackSpeed).GetModifiedValue<float>(Context.Empty);
+        public float AttackPower => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.AttackPower).GetModifiedValue<float>(Context.Empty);
+        public float Speed => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Speed).GetModifiedValue<float>(Context.Empty);
+        public float Reach => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Reach).GetModifiedValue<float>(Context.Empty);
         public float TechnologyGainPerSecond => definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
         public bool IsInvulnerable => false;/*this.GetCachedComponent<GameModifierHandler>().GetModifiers().Any(x => x is IModifierInvulnerable);*/
         public bool IsConfused => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);*/
-        public bool IsStaggered => GetCachedComponent<StatisticRepository>().Get(StatisticDefinitionRegistry.Instance.Stagger)?.GetModifiedValue<bool>() ?? false;
+        public bool IsStaggered => GetCachedComponent<StatisticRepository>().Get(StatisticDefinitionRegistry.Instance.Stagger)?.GetModifiedValue<bool>(Context.Empty) ?? false;
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
 

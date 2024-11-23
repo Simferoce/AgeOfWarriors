@@ -42,6 +42,6 @@ namespace Game.Statistics
 
     public abstract class StatisticDefinition<T> : StatisticDefinition
     {
-        public abstract T Modify(T value, StatisticRepository repository);
+        public abstract T Modify(T value, StatisticRepository repository, Context context);
     }
 }

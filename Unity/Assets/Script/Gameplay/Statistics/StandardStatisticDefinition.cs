@@ -6,7 +6,7 @@ namespace Game.Statistics
     [CreateAssetMenu(fileName = "StandardStatisticDefinition", menuName = "Definition/Statistic/StandardStatisticDefinition")]
     public class StandardStatisticDefinition : StatisticDefinition<float>
     {
-        public override float Modify(float value, StatisticRepository repository)
+        public override float Modify(float value, StatisticRepository repository, Context context)
         {
             float flat = 0f;
             float percentage = 0f;
@@ -27,16 +27,22 @@ namespace Game.Statistics
                 if (operatorStatisticDefinitionData == null)
                     continue;
 
+                bool applicable = statistic.Definition.Data.OfType<ContextStatisticDefinitionData>().All(x => x.IsApplicable(context));
+                if (!applicable)
+                    continue;
+
                 if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Flat)
-                    flat += statistic.GetModifiedValue<float>();
+                    flat += statistic.GetModifiedValue<float>(context);
                 else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Pecentage)
-                    percentage += statistic.GetModifiedValue<float>();
+                    percentage += statistic.GetModifiedValue<float>(context);
                 else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Multiplier)
-                    multiplier *= statistic.GetModifiedValue<float>();
+                    multiplier *= statistic.GetModifiedValue<float>(context);
+                else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.OneMinusMultiplier)
+                    multiplier *= 1 - statistic.GetModifiedValue<float>(context);
                 else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Maximum)
-                    maximum = Mathf.Min(maximum, statistic.GetModifiedValue<float>());
+                    maximum = Mathf.Min(maximum, statistic.GetModifiedValue<float>(context));
                 else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Minimum)
-                    minimum = Mathf.Max(minimum, statistic.GetModifiedValue<float>());
+                    minimum = Mathf.Max(minimum, statistic.GetModifiedValue<float>(context));
             }
 
             return Mathf.Clamp((value + flat) * (1 + percentage) * multiplier, minimum, maximum);

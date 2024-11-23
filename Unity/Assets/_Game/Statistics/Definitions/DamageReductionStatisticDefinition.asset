@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457ef5104dc5506478af5a40092efe1e, type: 3}
+  m_Name: DamageReductionStatisticDefinition
+  m_EditorClassIdentifier: 
+  id: 3ad4b8a6cd2c5824bb6541fb52d632fd
+  icon: {fileID: 3201737593864979608, guid: 073bf77206b8f9d45b8c3f38b1db57f9, type: 3}
+  humanReadableId: damage_reduction
+  title: Damage Reduction
+  color: {r: 0.90099996, g: 0.90099996, b: 0.08919903, a: 1}
+  format: 0.0%
+  data: []
+  references:
+    version: 2
+    RefIds: []

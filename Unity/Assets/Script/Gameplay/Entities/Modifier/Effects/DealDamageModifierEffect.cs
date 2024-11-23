@@ -30,7 +30,7 @@ namespace Game.Modifier
                 {
                     AttackData attack = attackFactory.Generate(
                                             target: attackable,
-                                            damage: damage?.Get()?.GetModifiedValue<float>() ?? 0f,
+                                            damage: damage?.Get()?.GetModifiedValue<float>(Context.Empty) ?? 0f,
                                             flags: extraFlags
                                             );
 

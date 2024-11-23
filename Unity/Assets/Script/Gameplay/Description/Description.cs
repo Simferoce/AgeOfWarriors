@@ -19,7 +19,7 @@ namespace Game
             if (parameters.Count == 0)
                 return text;
 
-            return string.Format(text, parameters.Select(x => x.GetValue(source)).ToArray());
+            return string.Format(text, parameters.Select(x => x.GetValue(source, context)).ToArray());
         }
     }
 }

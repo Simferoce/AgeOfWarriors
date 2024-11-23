@@ -16,6 +16,7 @@ namespace Game.Statistics
         public StatisticDefinition Reach => statisticDefinitions["reach"];
         public StatisticDefinition Cooldown => statisticDefinitions["cooldown"];
         public StatisticDefinition Stagger => statisticDefinitions["stagger"];
+        public StatisticDefinition DamageReduction => statisticDefinitions["damage_reduction"];
 
         private Dictionary<string, StatisticDefinition> statisticDefinitions = new Dictionary<string, StatisticDefinition>();
         private AsyncOperationHandle<IList<StatisticDefinition>> statisticsHandle;

@@ -41,14 +41,15 @@ namespace Game.Components
 
         public void TakeAttack(AttackData attack)
         {
-            float currentHealth = Entity.GetCachedComponent<StatisticRepository>().GetOrThrow<float>(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue();
-            float currentDefense = Entity.GetCachedComponent<StatisticRepository>().Get<float>(StatisticDefinitionRegistry.Instance.Defense)?.GetModifiedValue() ?? 0f;
-
+            DefendAttackContext defendAttackContext = new DefendAttackContext(attack);
+            float currentHealth = Entity.GetCachedComponent<StatisticRepository>().GetOrThrow<float>(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue(defendAttackContext);
+            float currentDefense = Entity.GetCachedComponent<StatisticRepository>().Get<float>(StatisticDefinitionRegistry.Instance.Defense)?.GetModifiedValue(defendAttackContext) ?? 0f;
+            float damageReduction = Entity.GetCachedComponent<StatisticRepository>().Get<float>(StatisticDefinitionRegistry.Instance.DamageReduction)?.GetModifiedValue(defendAttackContext) ?? 0f;
             //List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();
             //bool canResistDeath = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
 
             float damage = attack.Damage;
-
+            damage *= damageReduction;
             float resultingDefense = currentDefense - attack.ArmorPenetration;
             if (resultingDefense < 0f)
                 resultingDefense = 0f;

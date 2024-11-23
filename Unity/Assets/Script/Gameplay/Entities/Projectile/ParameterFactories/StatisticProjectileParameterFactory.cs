@@ -19,7 +19,7 @@ namespace Game.Ability
 
         public override ProjectileParameter Create(object entity)
         {
-            return new ProjectileParameter<T>(name, value.GetOrThrow().GetModifiedValue());
+            return new ProjectileParameter<T>(name, value.GetOrThrow().GetModifiedValue(Context.Empty));
         }
     }
 

@@ -19,11 +19,11 @@ namespace Game.Statistics
             this.entity = entity;
         }
 
-        public abstract T GetModifiedValue<T>();
-        public abstract T GetBaseValue<T>();
-        public abstract Statistic Snapshot();
-        public abstract bool TryGetDescription(out string description);
-        public abstract string GetFormattedValue(string format);
+        public abstract T GetModifiedValue<T>(Context context);
+        public abstract T GetBaseValue<T>(Context context);
+        public abstract Statistic Snapshot(Context context);
+        public abstract bool TryGetDescription(out string description, Context context);
+        public abstract string GetFormattedValue(string format, Context context);
     }
 
     [Serializable]
@@ -33,17 +33,17 @@ namespace Game.Statistics
 
         public override StatisticDefinition Definition { get => definition; set => definition = value as StatisticDefinition<ReferenceType>; }
 
-        public abstract ReferenceType GetModifiedValue();
-        public abstract ReferenceType GetBaseValue();
+        public abstract ReferenceType GetModifiedValue(Context context);
+        public abstract ReferenceType GetBaseValue(Context context);
 
-        public override T GetModifiedValue<T>()
+        public override T GetModifiedValue<T>(Context context)
         {
-            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetModifiedValue());
+            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetModifiedValue(context));
         }
 
-        public override T GetBaseValue<T>()
+        public override T GetBaseValue<T>(Context context)
         {
-            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetBaseValue());
+            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetBaseValue(context));
         }
     }
 }

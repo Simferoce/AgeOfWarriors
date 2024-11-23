@@ -33,7 +33,7 @@ namespace Game.Projectile
             distanceTraveled += delta;
 
             previousPosition = currentPosition;
-            if (distanceTraveled < range.GetOrThrow().GetModifiedValue<float>())
+            if (distanceTraveled < range.GetOrThrow().GetModifiedValue<float>(Context.Empty))
                 return;
 
             foreach (IProjectileStandardEffect effect in effects)

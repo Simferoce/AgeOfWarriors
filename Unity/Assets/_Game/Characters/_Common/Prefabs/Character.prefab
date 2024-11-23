@@ -212,6 +212,7 @@ MonoBehaviour:
   - rid: 3390488299769430098
   - rid: 3390488299769430100
   - rid: 3390488299769430102
+  - rid: 3390488682020208733
   references:
     version: 2
     RefIds:
@@ -286,6 +287,17 @@ MonoBehaviour:
       data:
         name: health
         definition: {fileID: 11400000, guid: 692bd90ecc8e43840a83aaa5c9e54022, type: 2}
+    - rid: 3390488682020208733
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage_reduction
+        definition: {fileID: 11400000, guid: 3ad4b8a6cd2c5824bb6541fb52d632fd, type: 2}
+        value:
+          rid: 3390488682020208734
+    - rid: 3390488682020208734
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1
 --- !u!1 &4568683806961424362
 GameObject:
   m_ObjectHideFlags: 0

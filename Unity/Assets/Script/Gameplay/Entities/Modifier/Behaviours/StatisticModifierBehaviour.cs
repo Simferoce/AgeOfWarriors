@@ -17,7 +17,7 @@ namespace Game.Modifier
             base.Initialize(modifier);
 
             reference.Initialize(modifier);
-            statistic = reference.GetOrThrow().Snapshot();
+            statistic = reference.GetOrThrow().Snapshot(Context.Empty);
             statistic.Definition = definition;
             statistic.Initialize(modifier);
 

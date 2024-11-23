@@ -6,6 +6,7 @@
         Pecentage,
         Multiplier,
         Maximum,
-        Minimum
+        Minimum,
+        OneMinusMultiplier,
     }
 }

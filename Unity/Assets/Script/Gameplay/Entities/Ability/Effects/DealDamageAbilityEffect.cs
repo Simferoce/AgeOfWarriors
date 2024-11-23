@@ -11,6 +11,7 @@ namespace Game.Ability
         [SerializeField] private StatisticReference<float> leach;
         [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private StatisticReference<float> armorPenetration;
+        [SerializeField] private AttackData.Flag extraFlags;
 
         public override void Initialize(AbilityEntity ability)
         {
@@ -29,9 +30,10 @@ namespace Game.Ability
 
             AttackData attack = Ability.GetCachedComponent<AttackFactory>().Generate(
                 target: target,
-                damage: damage.Get()?.GetModifiedValue() ?? 0f,
-                armorPenetration: armorPenetration.Get()?.GetModifiedValue() ?? 0f,
-                leach: leach.Get()?.GetModifiedValue() ?? 0f);
+                damage: damage.Get()?.GetModifiedValue(Context.Empty) ?? 0f,
+                armorPenetration: armorPenetration.Get()?.GetModifiedValue(Context.Empty) ?? 0f,
+                leach: leach.Get()?.GetModifiedValue(Context.Empty) ?? 0f,
+                flags: extraFlags);
 
             target.TakeAttack(attack);
         }

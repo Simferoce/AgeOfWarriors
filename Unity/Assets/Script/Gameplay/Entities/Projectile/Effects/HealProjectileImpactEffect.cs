@@ -21,7 +21,7 @@ namespace Game.Projectile
             if (!entity.TryGetCachedComponent<CharacterEntity>(out CharacterEntity character))
                 return;
 
-            character.Heal(heal.GetOrThrow().GetModifiedValue<float>());
+            character.Heal(heal.GetOrThrow().GetModifiedValue<float>(Context.Empty));
         }
     }
 }

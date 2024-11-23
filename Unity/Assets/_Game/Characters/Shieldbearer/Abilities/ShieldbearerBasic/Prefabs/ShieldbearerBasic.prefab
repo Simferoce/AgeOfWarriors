@@ -105,6 +105,7 @@ MonoBehaviour:
           name: damage
         armorPenetration:
           name: 
+        extraFlags: 0
 --- !u!114 &3160878026917076126
 MonoBehaviour:
   m_ObjectHideFlags: 0

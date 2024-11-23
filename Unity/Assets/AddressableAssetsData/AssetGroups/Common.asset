@@ -63,6 +63,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Manager
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ad4b8a6cd2c5824bb6541fb52d632fd
+    m_Address: Assets/_Game/Statistics/Definitions/DamageReductionStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 43442952713ba724d9f3d09e9d1abdf9
     m_Address: Assets/_Game/Statistics/HealStatisticDefinition.asset
     m_ReadOnly: 0
@@ -74,6 +80,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Window
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56889f00aab0b8440b071b9dd15442a0
+    m_Address: Assets/_Game/Statistics/Definitions/RangedDamageReductionStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 692bd90ecc8e43840a83aaa5c9e54022
     m_Address: Assets/_Game/Statistics/HealthStatisticDefinition.asset
