@@ -32,9 +32,9 @@ namespace Game.Statistics
             return false;
         }
 
-        public override string GetFormattedValue()
+        public override string GetFormattedValue(string format)
         {
-            return current.ToString();
+            return current.ToString(format);
         }
 
         public override Statistic Snapshot()

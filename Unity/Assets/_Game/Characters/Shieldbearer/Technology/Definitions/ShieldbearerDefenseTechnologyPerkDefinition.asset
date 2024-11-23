@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
+  m_Name: ShieldbearerDefenseTechnologyPerkDefinition
+  m_EditorClassIdentifier: 
+  id: 30932b679f153494380410c95faa30de
+  title: Increase Defense
+  icon: {fileID: 0}
+  description:
+    text: Increase Defense by {0}.
+    parameters:
+    - rid: 3390488678730301526
+  prefab: {fileID: 5260313248293485178, guid: 3c30dfc3c429b554cbaa74c6e89b11b3, type: 3}
+  technologyTreeIcon: {fileID: -7612114061151743823, guid: 2a50200866bb2ec46b25ae0324e42799, type: 3}
+  requirements: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488678730301526
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: defense
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}

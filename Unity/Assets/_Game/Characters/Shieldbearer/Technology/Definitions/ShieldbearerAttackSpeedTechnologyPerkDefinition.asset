@@ -10,24 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
-  m_Name: IncreaseShieldbearerMaxHealthFlatTechnologyPerkDefinition
+  m_Name: ShieldbearerAttackSpeedTechnologyPerkDefinition
   m_EditorClassIdentifier: 
-  id: 27e8f34fddcd3db449e5e108d2aa4fe2
-  title: 
+  id: c9f6963d239305947bdae4190ebed200
+  title: Increase Attack Speed
   icon: {fileID: 0}
   description:
-    text: Increase max health of shieldbearer by {0}.
+    text: Increase Attack Speed by {0}.
     parameters:
-    - rid: 7754703153621368946
-  prefab: {fileID: 899619428102555062, guid: 04b6550b102bb2249b97dbbe5a0bf439, type: 3}
-  showOnHealthBar: 0
-  technologyTreeIcon: {fileID: 0}
+    - rid: 3390488678730301542
+  prefab: {fileID: 2069518400063579166, guid: 884137dcf25989d4fa172c44b48bd786, type: 3}
+  technologyTreeIcon: {fileID: -3085972332808833774, guid: 5284a412c0ee71049a1f741f26c11cb1, type: 3}
   requirements: []
   references:
     version: 2
     RefIds:
-    - rid: 7754703153621368946
+    - rid: 3390488678730301542
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
-        name: max_health
-        overrideDefinitionDescriptor: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+        name: attack_speed
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}

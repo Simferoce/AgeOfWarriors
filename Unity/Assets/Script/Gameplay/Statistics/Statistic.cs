@@ -23,7 +23,7 @@ namespace Game.Statistics
         public abstract T GetBaseValue<T>();
         public abstract Statistic Snapshot();
         public abstract bool TryGetDescription(out string description);
-        public abstract string GetFormattedValue();
+        public abstract string GetFormattedValue(string format);
     }
 
     [Serializable]

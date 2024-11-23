@@ -17,8 +17,8 @@ MonoBehaviour:
   humanReadableId: attack_speed
   title: Attack Speed
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
-  isPercentage: 0
-  behaviors: []
+  format: 0.0%
+  data: []
   references:
     version: 2
     RefIds: []

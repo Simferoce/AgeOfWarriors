@@ -15,11 +15,12 @@ namespace Game
             if (source.TryGetCachedComponent<StatisticRepository>(out StatisticRepository statisticRepository) && statisticRepository.TryGet(name, out Statistic statistic))
             {
                 StatisticDefinition definition = overrideDefinitionDescriptor != null ? overrideDefinitionDescriptor : statistic.Definition;
+                string formattedValue = statistic.GetFormattedValue(definition != null ? definition.Format : string.Empty);
 
                 if (statistic.TryGetDescription(out string description))
-                    return AddDefinitionFormat($"({description}) ({statistic.GetFormattedValue()})", definition);
+                    return AddDefinitionFormat($"({description}) ({formattedValue})", definition);
                 else
-                    return AddDefinitionFormat($"({statistic.GetFormattedValue()})", definition);
+                    return AddDefinitionFormat($"({formattedValue})", definition);
             }
 
             return $"{{{name}}}";

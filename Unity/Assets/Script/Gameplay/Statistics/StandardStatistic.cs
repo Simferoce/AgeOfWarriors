@@ -35,9 +35,9 @@ namespace Game.Statistics
             return value.TryGetDescription(out description);
         }
 
-        public override string GetFormattedValue()
+        public override string GetFormattedValue(string format)
         {
-            return value.GetValue<float>().ToString();
+            return value.GetValue<float>().ToString(format);
         }
     }
 }

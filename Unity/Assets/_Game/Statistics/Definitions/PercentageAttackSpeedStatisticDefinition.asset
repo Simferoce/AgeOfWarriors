@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457ef5104dc5506478af5a40092efe1e, type: 3}
+  m_Name: PercentageAttackSpeedStatisticDefinition
+  m_EditorClassIdentifier: 
+  id: fa8583d556561fe45a879e4a24677d2f
+  icon: {fileID: -3085972332808833774, guid: 5284a412c0ee71049a1f741f26c11cb1, type: 3}
+  humanReadableId: percentage_attack_speed
+  title: Percentage Attack Speed
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
+  isPercentage: 0
+  data:
+  - rid: 3390488678730301540
+  - rid: 3390488678730301541
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488678730301540
+      type: {class: BaseStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+    - rid: 3390488678730301541
+      type: {class: OperatorStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        statisticOperator: 1

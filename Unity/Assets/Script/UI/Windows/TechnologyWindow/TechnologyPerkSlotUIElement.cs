@@ -50,7 +50,7 @@ namespace Game.UI.Windows
 
         public void Refresh()
         {
-            if (!technologyTree.Has(technologyPerkDefinition))
+            if (technologyPerkDefinition == null)
                 return;
 
             TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);

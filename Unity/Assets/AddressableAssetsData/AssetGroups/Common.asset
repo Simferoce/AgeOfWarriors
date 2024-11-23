@@ -27,12 +27,6 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 0b708799665497a4992fbb9b7a4b83fb
-    m_Address: Assets/_Game/Statistics/Definitions/ShieldbearerFlatMaxHealthStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0daeb2d661b48664f9f8656c569beb36
     m_Address: Assets/_Game/UI/Window/InspectorModifierWindow/Prefabs/InspectorModifierWindow.prefab
     m_ReadOnly: 0
@@ -56,12 +50,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Window
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2760ac83c6c90a745bd931afb26b5317
-    m_Address: Assets/_Game/Statistics/Definitions/ShieldbearerPercentageDamageStatisticDefinition.asset
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - Statistic
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2825126f3d8ee3941b6ea8c4d91818b8
     m_Address: Assets/_Game/Statistics/CooldownStatisticDefinition.asset

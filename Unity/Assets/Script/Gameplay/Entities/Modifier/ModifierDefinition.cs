@@ -11,11 +11,9 @@ namespace Game.Modifier
         [SerializeField] private Sprite icon;
         [SerializeField] private Description description;
         [SerializeField] private GameObject prefab;
-        [SerializeField] private bool showOnHealthBar = true;
 
         public Sprite Icon { get => icon; }
         public string Title { get => title; }
-        public bool Show { get => showOnHealthBar; set => showOnHealthBar = value; }
 
         public string ParseDescription(Entity source, Context context)
         {

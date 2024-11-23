@@ -13,7 +13,7 @@ namespace Game.Statistics
         [SerializeField] private string humanReadableId;
         [SerializeField] private string title;
         [SerializeField] private Color color = Color.white;
-        [SerializeField] private bool isPercentage = false;
+        [SerializeField] private string format;
         [SerializeReference, SubclassSelector] private List<StatisticDefinitionData> data;
 
         public Sprite Icon => icon;
@@ -22,9 +22,9 @@ namespace Game.Statistics
         public string ColorHex => ColorUtility.ToHtmlStringRGBA(color);
         public Color Color => color;
         public string TextIcon => Icon != null ? $"<sprite name=\"{Icon.name.Trim()}\" color=#{ColorHex}>" : "";
-        public bool IsPercentage => isPercentage;
         public string HumanReadableId => humanReadableId;
         public List<StatisticDefinitionData> Data { get => data; set => data = value; }
+        public string Format { get => format; set => format = value; }
 
 #if UNITY_EDITOR
         private void OnValidate()

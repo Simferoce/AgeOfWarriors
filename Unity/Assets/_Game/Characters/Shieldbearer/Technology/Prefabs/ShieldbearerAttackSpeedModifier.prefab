@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &899619428102555062
+--- !u!1 &6623136301625411671
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,24 +8,24 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6999156395522084311}
-  - component: {fileID: 2439447710677529383}
-  - component: {fileID: 8954445296651028284}
-  - component: {fileID: 7114353416753970965}
+  - component: {fileID: 1523964538852943079}
+  - component: {fileID: 6134362812457299432}
+  - component: {fileID: 8035733402971178320}
+  - component: {fileID: 3007502274003414736}
   m_Layer: 0
-  m_Name: IncreaseShieldbearerDamagePercentageTechnology
+  m_Name: ShieldbearerAttackSpeedModifier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6999156395522084311
+--- !u!4 &1523964538852943079
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899619428102555062}
+  m_GameObject: {fileID: 6623136301625411671}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -34,25 +34,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2439447710677529383
+--- !u!114 &6134362812457299432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899619428102555062}
+  m_GameObject: {fileID: 6623136301625411671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8954445296651028284
+--- !u!114 &8035733402971178320
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899619428102555062}
+  m_GameObject: {fileID: 6623136301625411671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488678730301537
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488678730301537
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        definition: {fileID: 0}
+        value:
+          rid: 3390488678730301538
+    - rid: 3390488678730301538
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+--- !u!114 &3007502274003414736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6623136301625411671}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
@@ -61,41 +89,13 @@ MonoBehaviour:
   tags: 
   visibleByDefault: 1
   behaviours:
-  - rid: 3390488321798963294
+  - rid: 3390488678730301539
   references:
     version: 2
     RefIds:
-    - rid: 3390488321798963294
+    - rid: 3390488678730301539
       type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        definition: {fileID: 11400000, guid: 2760ac83c6c90a745bd931afb26b5317, type: 2}
+        definition: {fileID: 11400000, guid: fa8583d556561fe45a879e4a24677d2f, type: 2}
         reference:
-          name: damage
---- !u!114 &7114353416753970965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 899619428102555062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488321798963295
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488321798963295
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage
-        definition: {fileID: 0}
-        value:
-          rid: 3390488321798963296
-    - rid: 3390488321798963296
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 0.5
+          name: attack_speed

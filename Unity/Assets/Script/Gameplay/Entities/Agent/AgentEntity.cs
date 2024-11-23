@@ -1,8 +1,6 @@
 ﻿using Game.Character;
 using Game.Modifier;
-using Game.Statistics;
 using Game.Technology;
-using System.Linq;
 using UnityEngine;
 
 namespace Game.Agent
@@ -75,35 +73,7 @@ namespace Game.Agent
         public void SpawnAgentObject(CharacterDefinition characterDefinition, Vector3 position, int direction)
         {
             CharacterEntity character = characterDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
-
-            StatisticRepository statisticRepository = GetCachedComponent<StatisticRepository>();
-            StatisticRepository targetStatisticRepository = character.GetCachedComponent<StatisticRepository>();
-
-            foreach (Statistic statistic in statisticRepository.Statistics)
-            {
-                if (statistic.Definition == null)
-                    continue;
-
-                CharacterStatisticDefinitionData characterStatisticDefinitionData = statistic.Definition.Data.OfType<CharacterStatisticDefinitionData>().FirstOrDefault();
-                if (characterStatisticDefinitionData == null)
-                    continue;
-
-                if (characterStatisticDefinitionData.CharacterDefinition != characterDefinition && !characterDefinition.IsSpecialization(characterStatisticDefinitionData.CharacterDefinition))
-                    continue;
-
-                BaseStatisticDefinitionData baseStatisticDefinitionData = statistic.Definition.Data.OfType<BaseStatisticDefinitionData>().FirstOrDefault();
-                if (baseStatisticDefinitionData == null)
-                    continue;
-
-                Statistic newStatistic = statistic.Snapshot();
-                newStatistic.Definition = baseStatisticDefinitionData.Definition;
-                newStatistic.Initialize(character);
-
-                targetStatisticRepository.Add(newStatistic);
-            }
-
             OnAgentObjectSpawn?.Invoke(character.GetCachedComponent<AgentIdentity>());
-
             character.Initialize();
         }
     }
