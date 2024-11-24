@@ -2,6 +2,6 @@
 {
     public interface IModifierStack
     {
-        public int CurrentStack { get; set; }
+        public float CurrentStack { get; set; }
     }
 }

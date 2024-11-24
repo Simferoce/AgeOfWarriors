@@ -26,7 +26,7 @@ namespace Game.Modifier
             stackModifierBehaviour.OnStackChanged -= StackModifierBehaviour_OnStackChanged;
         }
 
-        private void StackModifierBehaviour_OnStackChanged(int oldValue, int newValue)
+        private void StackModifierBehaviour_OnStackChanged(float oldValue, float newValue)
         {
             if (newValue >= threshold.Get().GetModifiedValue<int>(Context.Empty))
             {
