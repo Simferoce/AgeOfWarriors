@@ -7,6 +7,5 @@
         Multiplier,
         Maximum,
         Minimum,
-        OneMinusMultiplier,
     }
 }

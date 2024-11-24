@@ -1,12 +1,17 @@
 ﻿using Game.Components;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game.Modifier
 {
     [Serializable]
-    public class OnAttackLandedModifierTrigger : ModifierTrigger
+    public class OnAttackLandedModifierTrigger : ModifierTrigger, IModifierTargetProvider
     {
+        [SerializeReference, SubclassSelector] private OnAttackLandedModifierTriggerFilter filter;
+
         private AttackFactory attackFactory;
+        private List<object> tagets;
 
         public override void Initialize(ModifierEntity modifier)
         {
@@ -17,6 +22,10 @@ namespace Game.Modifier
 
         private void AttackFactory_OnAttackLanded(AttackResult attackResult)
         {
+            if (!(filter == null || filter.Execute(attackResult)))
+                return;
+
+            tagets = new List<object> { attackResult.Target.Entity };
             Trigger();
         }
 
@@ -24,6 +33,11 @@ namespace Game.Modifier
         {
             base.Dispose();
             attackFactory.OnAttackLanded -= AttackFactory_OnAttackLanded;
+        }
+
+        public List<object> GetTargets()
+        {
+            return tagets;
         }
     }
 }

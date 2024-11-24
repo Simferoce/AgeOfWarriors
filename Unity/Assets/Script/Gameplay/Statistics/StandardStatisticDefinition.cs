@@ -37,8 +37,6 @@ namespace Game.Statistics
                     percentage += statistic.GetModifiedValue<float>(context);
                 else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Multiplier)
                     multiplier *= statistic.GetModifiedValue<float>(context);
-                else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.OneMinusMultiplier)
-                    multiplier *= 1 - statistic.GetModifiedValue<float>(context);
                 else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Maximum)
                     maximum = Mathf.Min(maximum, statistic.GetModifiedValue<float>(context));
                 else if (operatorStatisticDefinitionData.StatisticOperator == StatisticOperator.Minimum)
