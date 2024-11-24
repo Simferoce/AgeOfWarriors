@@ -50,6 +50,10 @@ namespace Game.Components
 
             float damage = attack.Damage;
             damage *= damageReduction;
+
+            if (attack.Flags.HasFlag(AttackData.Flag.Empowered))
+                damage *= 1.5f;
+
             float resultingDefense = currentDefense - attack.ArmorPenetration;
             if (resultingDefense < 0f)
                 resultingDefense = 0f;

@@ -8,6 +8,9 @@ namespace Game.Components
         public delegate void OnAttackLandedDelegate(AttackResult attackResult);
         public event OnAttackLandedDelegate OnAttackLanded;
 
+        public delegate void OnGenerateAttackDelegate(AttackData attackData);
+        public event OnGenerateAttackDelegate OnGenerateAttack;
+
         public Entity Entity { get; set; }
         public float LastTimeAttackLanded { get; private set; }
 
@@ -22,7 +25,26 @@ namespace Game.Components
             float leach = 0f,
             AttackData.Flag flags = AttackData.Flag.None)
         {
-            return new AttackData(damage, armorPenetration, leach, flags, this);
+            AttackData attackData = new AttackData(damage, armorPenetration, leach, flags, this);
+            NotifyGenerateAttack(attackData);
+            return attackData;
+        }
+
+        public void NotifyGenerateAttack(AttackData attackData)
+        {
+            OnGenerateAttack?.Invoke(attackData);
+
+            foreach (Entity entity in Entity.GetHierarchy())
+            {
+                if (entity == Entity)
+                    continue;
+
+                if (entity.TryGetCachedComponent<AttackFactory>(out AttackFactory attackFactory))
+                {
+                    attackFactory.NotifyGenerateAttack(attackData);
+                    return;
+                }
+            }
         }
 
         public void NotifyAttackResult(AttackResult attackResult)

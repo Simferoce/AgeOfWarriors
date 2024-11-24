@@ -5,9 +5,10 @@ namespace Game.Modifier
     [Serializable]
     public class StackModifierBehaviour : ModifierBehaviour, IModifierStack
     {
-        private int currentStack = 1;
+        private int currentStack = 0;
 
-        public event Action<StackModifierBehaviour> OnStackGained;
+        public delegate void OnStackChangedDelegate(int oldValue, int newValue);
+        public event OnStackChangedDelegate OnStackChanged;
 
         public int CurrentStack { get => currentStack; set => currentStack = value; }
 
@@ -16,15 +17,23 @@ namespace Game.Modifier
             IncreaseStack();
         }
 
+        public void Clear()
+        {
+            currentStack = 0;
+        }
+
         public void IncreaseStack()
         {
+            int old = currentStack;
             currentStack++;
-            OnStackGained?.Invoke(this);
+            OnStackChanged?.Invoke(old, currentStack);
         }
 
         public void DecreaseStack()
         {
+            int old = currentStack;
             currentStack--;
+            OnStackChanged?.Invoke(old, currentStack);
         }
     }
 }

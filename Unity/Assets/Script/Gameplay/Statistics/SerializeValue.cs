@@ -10,6 +10,9 @@ namespace Game.Statistics
     public class SerializeValueBool : SerializeValue<bool> { }
 
     [Serializable]
+    public class SerializeValueInteger : SerializeValue<int> { }
+
+    [Serializable]
     public class SerializeValue<T> : Value<T>
     {
         [SerializeField] private T value;

@@ -41,4 +41,10 @@ namespace Game.Modifier
     {
 
     }
+
+    [Serializable]
+    public class ModifierParameterValueInteger : ModifierParameterValue<int>
+    {
+
+    }
 }

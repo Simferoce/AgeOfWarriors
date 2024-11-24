@@ -27,4 +27,10 @@ namespace Game.Modifier
     {
 
     }
+
+    [Serializable]
+    public class StatisticIntegerModifierParameterFactory : StatisticModifierParameterFactory<int>
+    {
+
+    }
 }

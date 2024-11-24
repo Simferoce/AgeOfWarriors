@@ -475,7 +475,7 @@ PrefabInstance:
     - target: {fileID: 3643459750488179885, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 30932b679f153494380410c95faa30de, type: 2}
+      objectReference: {fileID: 11400000, guid: 98f9fa122e036124a93ef9af87cb0f41, type: 2}
     - target: {fileID: 3826648099923193716, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: 'm_ActiveFontFeatures.Array.data[0]'
       value: 1801810542
