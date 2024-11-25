@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Game.Modifier
 {
     [Serializable]
-    public abstract class ModifierTarget
+    public abstract class ModifierTargetFilter
     {
         protected ModifierEntity modifier;
 
@@ -13,6 +12,6 @@ namespace Game.Modifier
             this.modifier = modifier;
         }
 
-        public abstract List<object> GetTargets();
+        public abstract bool Execute(Entity target);
     }
 }

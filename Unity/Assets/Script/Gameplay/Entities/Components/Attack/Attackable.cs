@@ -77,7 +77,7 @@ namespace Game.Components
             //    damageRemaining = currentHealth - 0.01f;
             //}
 
-            AttackResult attackResult = new AttackResult(attack, damageRemaining, defenseDamagePrevented, damageRemaining >= currentHealth, this, resistedDeath);
+            AttackResult attackResult = new AttackResult(attack, damageRemaining, defenseDamagePrevented, damageRemaining >= currentHealth && !resistedDeath, this, resistedDeath);
             attack.Source.NotifyAttackResult(attackResult);
 
             OnDamageTaken?.Invoke(attackResult, this);
