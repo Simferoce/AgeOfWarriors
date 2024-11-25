@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 457ef5104dc5506478af5a40092efe1e, type: 3}
+  m_Name: FlatDamageVersusWeakStatisticDefinition
+  m_EditorClassIdentifier: 
+  id: 47ce85d6f6a27834780b440cb4330b89
+  icon: {fileID: -8086850440826228858, guid: 665809d0d2c840548bc049c603bae4d8, type: 3}
+  humanReadableId: flat_damage_versus_weak
+  title: Flat Damage Versus Weak
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
+  format: 
+  data:
+  - rid: 3390488728189272066
+  - rid: 3390488728189272067
+  - rid: 3390488728189272145
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488728189272066
+      type: {class: BaseStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+    - rid: 3390488728189272067
+      type: {class: OperatorStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        statisticOperator: 0
+    - rid: 3390488728189272145
+      type: {class: AttackTargetStateContextStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 99b7bdd6d7ee1eb4cb17ac49f054804e, type: 2}

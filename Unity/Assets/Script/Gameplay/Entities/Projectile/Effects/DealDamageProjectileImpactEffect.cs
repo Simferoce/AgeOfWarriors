@@ -11,9 +11,6 @@ namespace Game.Projectile
         [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private StatisticReference<float> armorPenetration;
 
-        public float Damage => damage?.Get()?.GetModifiedValue<float>(Context.Empty) ?? 0f;
-        public float ArmorPenetration => armorPenetration?.Get()?.GetModifiedValue<float>(Context.Empty) ?? 0f;
-
         public override void Initialize(ProjectileEntity projectile)
         {
             base.Initialize(projectile);
@@ -27,10 +24,12 @@ namespace Game.Projectile
                 return;
 
             AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
+            Context context = new AttackContext(attackable);
+
             AttackData attack = attackFactory.Generate(
                 target: attackable,
-                damage: Damage,
-                armorPenetration: ArmorPenetration,
+                damage: damage?.Get()?.GetModifiedValue<float>(context) ?? 0f,
+                armorPenetration: armorPenetration?.Get()?.GetModifiedValue<float>(context) ?? 0f,
                 flags: AttackData.Flag.Ranged);
 
             attackable.TakeAttack(attack);

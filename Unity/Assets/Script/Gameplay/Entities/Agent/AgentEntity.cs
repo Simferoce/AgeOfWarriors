@@ -75,6 +75,8 @@ namespace Game.Agent
             CharacterEntity character = characterDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
             OnAgentObjectSpawn?.Invoke(character.GetCachedComponent<AgentIdentity>());
             character.Initialize();
+
+            character.name = $"{characterDefinition.Title} - {faction}";
         }
     }
 }

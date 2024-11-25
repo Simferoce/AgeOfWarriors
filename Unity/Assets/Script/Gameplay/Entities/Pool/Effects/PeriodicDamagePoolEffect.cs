@@ -1,5 +1,6 @@
 ﻿using Game.Agent;
 using Game.Components;
+using Game.Statistics;
 using System;
 using UnityEngine;
 
@@ -8,8 +9,6 @@ namespace Game.Pool
     [Serializable]
     public class PeriodicDamagePoolEffect : PoolEffect
     {
-        public float Damage { get; set; }
-
         private float lastTimeApplied = float.MinValue;
 
         public override void Apply(PoolEntity pool, Target targeteable)
@@ -27,9 +26,10 @@ namespace Game.Pool
                 return;
 
             AttackFactory attackFactory = pool.GetCachedComponent<AttackFactory>();
+            Context context = new AttackContext(attackable);
             AttackData attack = attackFactory.Generate(
                 target: attackable,
-                damage: Damage
+                damage: 0.0f
                 );
 
             attackable.TakeAttack(attack);

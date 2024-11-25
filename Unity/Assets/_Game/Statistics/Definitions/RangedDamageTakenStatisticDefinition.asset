@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 56889f00aab0b8440b071b9dd15442a0
   icon: {fileID: 3201737593864979608, guid: 073bf77206b8f9d45b8c3f38b1db57f9, type: 3}
-  humanReadableId: ranged_damage
-  title: Ranged Damage
+  humanReadableId: ranged_damage_taken
+  title: Ranged Damage Taken
   color: {r: 0.90099996, g: 0.90099996, b: 0.08919903, a: 1}
   format: 
   data:

@@ -28,9 +28,10 @@ namespace Game.Modifier
             {
                 if (target is Entity entityTarget && entityTarget.TryGetCachedComponent<Attackable>(out Attackable attackable))
                 {
+                    Context context = new AttackContext(attackable);
                     AttackData attack = attackFactory.Generate(
                                             target: attackable,
-                                            damage: damage?.Get()?.GetModifiedValue<float>(Context.Empty) ?? 0f,
+                                            damage: damage?.Get()?.GetModifiedValue<float>(context) ?? 0f,
                                             flags: extraFlags
                                             );
 
