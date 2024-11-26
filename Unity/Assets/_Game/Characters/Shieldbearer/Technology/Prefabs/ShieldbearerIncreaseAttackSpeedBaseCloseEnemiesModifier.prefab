@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7394800990279387717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8299764015666192628}
+  - component: {fileID: 3900510801887772083}
+  - component: {fileID: 2306808823751815994}
+  - component: {fileID: 415914435910360919}
+  m_Layer: 0
+  m_Name: ShieldbearerIncreaseAttackSpeedBaseCloseEnemiesModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8299764015666192628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394800990279387717}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3900510801887772083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394800990279387717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2306808823751815994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394800990279387717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statistics:
+  - rid: 3390488750887534678
+  - rid: 3390488750887534700
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488750887534678
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        definition: {fileID: 0}
+        value:
+          rid: 3390488750887534693
+    - rid: 3390488750887534693
+      type: {class: ModifierStackValue, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        multiplier:
+          rid: 3390488750887534694
+    - rid: 3390488750887534694
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+    - rid: 3390488750887534700
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        value:
+          rid: 3390488750887534701
+    - rid: 3390488750887534701
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: range
+--- !u!114 &415914435910360919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7394800990279387717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  visibleByDefault: 1
+  behaviours:
+  - rid: 3390488750887534696
+  - rid: 3390488750887534688
+  references:
+    version: 2
+    RefIds:
+    - rid: 3390488750887534688
+      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: fa8583d556561fe45a879e4a24677d2f, type: 2}
+        reference:
+          name: attack_speed
+    - rid: 3390488750887534696
+      type: {class: CloseByTargetModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        target:
+          rid: 3390488750887534697
+    - rid: 3390488750887534697
+      type: {class: RadiusModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        center:
+          rid: 3390488750887534698
+        filter:
+          rid: 3390488750887534699
+        range:
+          name: range
+    - rid: 3390488750887534698
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488750887534699
+      type: {class: TargetEnemyModifierTargetFilter, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 

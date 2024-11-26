@@ -16,6 +16,9 @@ namespace Game.Statistics
 
         public virtual void Initialize(Entity entity)
         {
+            if (this.entity != null)
+                return;
+
             this.entity = entity;
         }
 

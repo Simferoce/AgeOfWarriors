@@ -16,9 +16,7 @@ namespace Game.Modifier
         {
             base.Initialize(modifier);
 
-            reference.Initialize(modifier);
-            statistic = reference.GetOrThrow().Snapshot(Context.Empty);
-            statistic.Definition = definition;
+            statistic = new StandardStatistic() { Definition = definition, Entity = modifier, Value = new EntityReferenceValue<T>() { Reference = reference } };
             statistic.Initialize(modifier);
 
             StatisticRepository statisticRepository = modifier.Target.Entity.GetCachedComponent<StatisticRepository>();
