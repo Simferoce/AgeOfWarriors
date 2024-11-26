@@ -28,8 +28,10 @@ namespace Game
         [SerializeField] private List<EntityTag> tags = new List<EntityTag>();
 
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
-
         public event OnParentChangedDelegate OnParentChanged;
+
+        public delegate void OnDestroyDelegate(Entity entity);
+        public event OnDestroyDelegate OnDeactivated;
 
         public Entity Parent
         {
@@ -76,6 +78,7 @@ namespace Game
             Parent = null;
             gameObject.SetActive(false);
 
+            OnDeactivated?.Invoke(this);
             GameObject.Destroy(this.gameObject);
         }
 

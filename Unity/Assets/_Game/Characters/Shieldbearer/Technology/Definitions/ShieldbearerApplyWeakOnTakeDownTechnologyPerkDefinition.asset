@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
-  m_Name: ShieldbearerApplyWeakOnKillTechnologyPerkDefinition
+  m_Name: ShieldbearerApplyWeakOnTakeDownTechnologyPerkDefinition
   m_EditorClassIdentifier: 
   id: 858276051f315c541891e4eb7c9d0bde
   title: 

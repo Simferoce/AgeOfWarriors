@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Components
@@ -11,12 +12,31 @@ namespace Game.Components
         public delegate void OnGenerateAttackDelegate(AttackData attackData);
         public event OnGenerateAttackDelegate OnGenerateAttack;
 
+        public delegate void OnDestroyDelegate(AttackFactory attackFactory);
+        public event OnDestroyDelegate OnDeactivated;
+
+        public delegate void OnTakeDownDelegate(AttackResult result);
+        public event OnTakeDownDelegate OnTakeDown;
+
         public Entity Entity { get; set; }
         public float LastTimeAttackLanded { get; private set; }
+
+        private List<Attackable> attackedAttackables = new List<Attackable>();
 
         private void Awake()
         {
             Entity = GetComponentInParent<Entity>();
+            Entity.OnDeactivated += Entity_OnDeactivated;
+        }
+
+        private void Entity_OnDeactivated(Entity entity)
+        {
+            OnDeactivated?.Invoke(this);
+        }
+
+        private void OnDestroy()
+        {
+            Entity.OnDeactivated -= Entity_OnDeactivated;
         }
 
         public AttackData Generate(Attackable target = null,
@@ -49,6 +69,13 @@ namespace Game.Components
 
         public void NotifyAttackResult(AttackResult attackResult)
         {
+            if (!attackedAttackables.Contains(attackResult.Target))
+            {
+                attackedAttackables.Add(attackResult.Target);
+                attackResult.Target.OnDeactivated += AttackResultTargetOnDeactivated;
+                attackResult.Target.OnDamageTaken += Target_OnDamageTaken;
+            }
+
             OnAttackLanded?.Invoke(attackResult);
             LastTimeAttackLanded = Time.time;
 
@@ -63,6 +90,19 @@ namespace Game.Components
                     return;
                 }
             }
+        }
+
+        private void Target_OnDamageTaken(AttackResult result, Attackable receiver)
+        {
+            if (result.KillingBlow)
+                OnTakeDown?.Invoke(result);
+        }
+
+        private void AttackResultTargetOnDeactivated(Attackable attackable)
+        {
+            attackable.OnDeactivated -= AttackResultTargetOnDeactivated;
+            attackable.OnDamageTaken -= Target_OnDamageTaken;
+            attackedAttackables.Add(attackable);
         }
 
         public override string ToString()

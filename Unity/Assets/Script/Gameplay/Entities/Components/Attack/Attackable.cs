@@ -1,4 +1,5 @@
 ﻿using Game.Statistics;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Components
@@ -29,10 +30,15 @@ namespace Game.Components
         }
 
         public delegate void OnDamageTakenDelegate(AttackResult result, Attackable receiver);
+        public event OnDamageTakenDelegate OnDamageTaken;
+
+        public delegate void OnDestroyDelegate(Attackable attackable);
+        public event OnDestroyDelegate OnDeactivated;
 
         public Entity Entity { get; set; }
         public float LastTimeAttacked { get; private set; }
-        public event OnDamageTakenDelegate OnDamageTaken;
+
+        private List<AttackFactory> hasBeenAttackedBy = new List<AttackFactory>();
 
         private void Awake()
         {
@@ -41,6 +47,12 @@ namespace Game.Components
 
         public void TakeAttack(AttackData attack)
         {
+            if (!hasBeenAttackedBy.Contains(attack.Source))
+            {
+                hasBeenAttackedBy.Add(attack.Source);
+                attack.Source.OnDeactivated += AttackSourceOnDeactivated;
+            }
+
             DefendAttackContext defendAttackContext = new DefendAttackContext(attack);
             float currentHealth = Entity.GetCachedComponent<StatisticRepository>().GetOrThrow<float>(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue(defendAttackContext);
             float currentDefense = Entity.GetCachedComponent<StatisticRepository>().Get<float>(StatisticDefinitionRegistry.Instance.Defense)?.GetModifiedValue(defendAttackContext) ?? 0f;
@@ -82,6 +94,12 @@ namespace Game.Components
 
             OnDamageTaken?.Invoke(attackResult, this);
             LastTimeAttacked = Time.time;
+        }
+
+        private void AttackSourceOnDeactivated(AttackFactory attackFactory)
+        {
+            attackFactory.OnDeactivated -= AttackSourceOnDeactivated;
+            hasBeenAttackedBy.Remove(attackFactory);
         }
 
         //public float Absorb(float damageRemaining, List<Shield> shields)

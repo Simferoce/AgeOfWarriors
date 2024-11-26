@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5899855880131558545}
   - component: {fileID: 7154317403813534222}
   m_Layer: 0
-  m_Name: ShieldbearerApplyWeakOnKillModifier
+  m_Name: ShieldbearerApplyWeakOnTakeDownModifier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,17 +121,9 @@ MonoBehaviour:
       type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         triggers:
-        - rid: 3390488728189272170
+        - rid: 3390488750887534664
         effects:
         - rid: 3390488728189272172
-    - rid: 3390488728189272170
-      type: {class: OnAttackLandedModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        filter:
-          rid: 3390488728189272171
-    - rid: 3390488728189272171
-      type: {class: OnAttackLandedModifierTriggerKillingBlowFilter, ns: Game.Modifier, asm: Assembly-CSharp}
-      data: 
     - rid: 3390488728189272172
       type: {class: ApplyModifierModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -167,4 +159,7 @@ MonoBehaviour:
           name: duration
     - rid: 3390488728189272192
       type: {class: TargetEnemyModifierTargetFilter, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488750887534664
+      type: {class: OnTakeDownModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 

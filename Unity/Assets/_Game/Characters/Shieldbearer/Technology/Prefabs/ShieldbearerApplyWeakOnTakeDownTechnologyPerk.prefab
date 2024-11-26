@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5374211428733810812}
   - component: {fileID: 2126855249755714265}
   m_Layer: 0
-  m_Name: ShieldbearerApplyWeakOnKillTechnologyPerk
+  m_Name: ShieldbearerApplyWeakOnTakeDownTechnologyPerk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
