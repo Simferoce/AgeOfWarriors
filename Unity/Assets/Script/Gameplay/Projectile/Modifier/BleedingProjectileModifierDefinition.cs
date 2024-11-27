@@ -13,12 +13,12 @@ namespace Game
             private float damagePerSeconds;
             private float duration;
 
-            public Modifier(IModifiable modifiable, BleedingProjectileModifierDefinition modifierDefinition, float damagePerSeconds, float duration, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, BleedingProjectileModifierDefinition modifierDefinition, float damagePerSeconds, float duration, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.damagePerSeconds = damagePerSeconds;
                 this.duration = duration;
 
-                this.projectile = modifiable.GetCachedComponent<Projectile>();
+                this.projectile = modifiable.Entity.GetCachedComponent<Projectile>();
                 projectile.OnImpacted += Projectile_OnImpacted;
             }
 
@@ -26,7 +26,7 @@ namespace Game
             {
                 foreach (ITargeteable targeteable in targeteables)
                 {
-                    if (targeteable.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+                    if (targeteable.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                     {
                         BleedingModifierDefinition.BleedingModifier modifier = modifiable.GetModifiers()
                             .FirstOrDefault(x => x is BleedingModifierDefinition.BleedingModifier bleedingModifier
@@ -41,7 +41,7 @@ namespace Game
                         }
                         else
                         {
-                            SpreadBleedingPerk.Modifier spreadModifier = projectile.AgentObject.GetCachedComponent<IModifiable>().GetModifiers().FirstOrDefault(x => x is SpreadBleedingPerk.Modifier) as SpreadBleedingPerk.Modifier;
+                            SpreadBleedingPerk.Modifier spreadModifier = projectile.AgentObject.GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is SpreadBleedingPerk.Modifier) as SpreadBleedingPerk.Modifier;
                             modifier.Increase(damagePerSeconds, duration, spreadModifier != null, spreadModifier?.SpreadDistance ?? 0f, projectile.AgentObject as Character);
                         }
                     }

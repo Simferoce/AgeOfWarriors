@@ -9,7 +9,7 @@ namespace Game
         {
             bool empowered = false;
 
-            List<Modifier> modifiers = (attacker as IComponent).GetCachedComponent<IModifiable>().GetModifiers();
+            List<Modifier> modifiers = (attacker as IComponent).GetCachedComponent<ModifierHandler>().GetModifiers();
 
             EmpoweredModifierDefinition.Modifier empowerment = modifiers.FirstOrDefault(x => x is EmpoweredModifierDefinition.Modifier) as EmpoweredModifierDefinition.Modifier;
             if (empowerment != null)
@@ -26,8 +26,8 @@ namespace Game
                 damage *= (1 - damageDealtReduction);
             }
 
-            if (target.GetCachedComponent<IModifiable>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
-                damage += (attacker as IComponent).GetCachedComponent<IModifiable>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
+            if (target.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
+                damage += (attacker as IComponent).GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
 
             return new Attack(new AttackSource(attacker).Add(source), damage, armorPenetration, leach, ranged, empowered, reflectable, overtime);
         }

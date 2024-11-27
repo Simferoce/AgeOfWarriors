@@ -12,7 +12,7 @@ namespace Game
 
             public bool IsMaxed => Stacks >= (definition as BleedingModifierDefinition).maxStack;
 
-            public BleedingModifier(IModifiable modifiable, BleedingModifierDefinition modifierDefinition, float duration, float damageOverTime, IModifierSource source) : base(modifiable, modifierDefinition, source, duration, damageOverTime)
+            public BleedingModifier(ModifierHandler modifiable, BleedingModifierDefinition modifierDefinition, float duration, float damageOverTime, IModifierSource source) : base(modifiable, modifierDefinition, source, duration, damageOverTime)
             {
                 Stacks++;
             }
@@ -31,7 +31,7 @@ namespace Game
                 }
                 else if (spread)
                 {
-                    Character character = modifiable.GetCachedComponent<Character>();
+                    Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                     foreach (AgentObject agent in AgentObject.All)
                     {
@@ -47,7 +47,7 @@ namespace Game
                         if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
                             continue;
 
-                        if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+                        if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                             continue;
 
                         if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > spreadDistance)

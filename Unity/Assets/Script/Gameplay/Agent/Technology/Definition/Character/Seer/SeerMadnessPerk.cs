@@ -14,9 +14,9 @@ namespace Game
 
             public override float? AttackPower => definition.attackPower;
 
-            public Modifier(IModifiable modifiable, SeerMadnessPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, SeerMadnessPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                character = modifiable.GetCachedComponent<Character>();
+                character = modifiable.Entity.GetCachedComponent<Character>();
                 affectedAbility = character.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
@@ -60,9 +60,9 @@ namespace Game
         [SerializeField] private ConfusionModifierDefinition confusionModifierDefinition;
         [SerializeField] private AbilityDefinition affectedAbility;
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
 
         public override string ParseDescription()

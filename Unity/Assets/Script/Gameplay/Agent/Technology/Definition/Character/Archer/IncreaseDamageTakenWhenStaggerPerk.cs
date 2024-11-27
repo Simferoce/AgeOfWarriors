@@ -9,7 +9,7 @@ namespace Game
         {
             public float IncreaseDamageTakenOfStaggered => definition.increaseDamageTakenOfStaggered;
 
-            public Modifier(IModifiable modifiable, IncreaseDamageTakenWhenStaggerPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, IncreaseDamageTakenWhenStaggerPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
             }
         }
@@ -21,9 +21,9 @@ namespace Game
             return string.Format(Description, increaseDamageTakenOfStaggered);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

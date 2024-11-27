@@ -7,16 +7,16 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GiveDefenseOnDeathPerk>
         {
-            public Modifier(IModifiable modifiable, GiveDefenseOnDeathPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, GiveDefenseOnDeathPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                modifiable.GetCachedComponent<Character>().OnDeath += Modifier_OnDeath;
+                modifiable.Entity.GetCachedComponent<Character>().OnDeath += Modifier_OnDeath;
             }
 
             private void Modifier_OnDeath()
             {
-                modifiable.GetCachedComponent<Character>().OnDeath -= Modifier_OnDeath;
+                modifiable.Entity.GetCachedComponent<Character>().OnDeath -= Modifier_OnDeath;
 
-                Character character = modifiable.GetCachedComponent<Character>();
+                Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                 foreach (AgentObject agent in AgentObject.All)
                 {
@@ -29,7 +29,7 @@ namespace Game
                     if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
                         continue;
 
-                    if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+                    if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                         continue;
 
                     if (agent.Faction != character.Faction)
@@ -48,7 +48,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                modifiable.GetCachedComponent<Character>().OnDeath -= Modifier_OnDeath;
+                modifiable.Entity.GetCachedComponent<Character>().OnDeath -= Modifier_OnDeath;
             }
         }
 
@@ -61,9 +61,9 @@ namespace Game
             return string.Format(Description, defense, StatisticFormatter.Percentage(reachPercentage, StatisticDefinition.Reach));
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

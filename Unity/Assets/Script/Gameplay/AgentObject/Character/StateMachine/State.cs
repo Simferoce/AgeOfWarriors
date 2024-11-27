@@ -41,7 +41,7 @@ namespace Game
 
             public void CheckStagger()
             {
-                if (character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsStagger != null).Any(x => x.IsStagger.Value))
+                if (character.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsStagger != null).Any(x => x.IsStagger.Value))
                 {
                     character.stateMachine.SetState(new StaggerState(character));
                 }

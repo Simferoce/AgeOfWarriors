@@ -14,7 +14,7 @@ namespace Game
             private float lastDamageDealt;
             private float startTime;
 
-            public Modifier(IModifiable modifiable, DamageOverTimeModifierDefinition modifierDefinition, IModifierSource source, float duration, float damageOverTime) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, DamageOverTimeModifierDefinition modifierDefinition, IModifierSource source, float duration, float damageOverTime) : base(modifiable, modifierDefinition, source)
             {
                 DamagePerSeconds = damageOverTime;
                 durationEffect = duration;
@@ -35,9 +35,9 @@ namespace Game
 
             private void DealDamage(float duration)
             {
-                if (modifiable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+                if (modifiable.Entity.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
                 {
-                    Character character = modifiable.GetCachedComponent<Character>();
+                    Character character = modifiable.Entity.GetCachedComponent<Character>();
                     if (character.Health > 0)
                     {
                         Attack attack = AttackUtility.Generate(character, DamagePerSeconds * duration, 0, 0, false, true, false, attackable, this);
@@ -64,7 +64,7 @@ namespace Game
             [SerializeField] private float damage;
             [SerializeField] private float duration;
 
-            public override Game.Modifier Instantiate(IModifiable modifiable, IModifierSource source)
+            public override Game.Modifier Instantiate(ModifierHandler modifiable, IModifierSource source)
             {
                 Modifier modifier = new DamageOverTimeModifierDefinition.Modifier(modifiable, definition, source, duration, damage);
                 return modifier;

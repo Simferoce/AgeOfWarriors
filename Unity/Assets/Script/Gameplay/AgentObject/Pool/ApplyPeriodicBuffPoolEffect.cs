@@ -13,7 +13,7 @@ namespace Game
 
             public abstract bool Applicable(Pool pool, ITargeteable targeteable);
 
-            public abstract Modifier Instanciate(IModifiable modifiable, IModifierSource modifierSource);
+            public abstract Modifier Instanciate(ModifierHandler modifiable, IModifierSource modifierSource);
         }
 
         public Instancier ModifierInstancier { get; set; }
@@ -27,14 +27,14 @@ namespace Game
             if (!ModifierInstancier.Applicable(pool, targeteable))
                 return;
 
-            if (!targeteable.TryGetCachedComponent<IModifiable>(out IModifiable modifiable))
+            if (!targeteable.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                 return;
 
             Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == ModifierInstancier.ModifierDefinition);
             if (modifier != null)
                 return;
 
-            modifier = ModifierInstancier.Instanciate(modifiable, pool.AddOrGetCachedComponent<Ownership>().Owner.GetCachedComponent<IModifierSource>());
+            modifier = ModifierInstancier.Instanciate(modifiable, pool.GetCachedComponent<IModifierSource>());
             modifiable.AddModifier(modifier);
             appliedModifiers.Add(modifier);
         }

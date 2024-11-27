@@ -24,7 +24,7 @@ namespace Game
 
             protected override void InternalUpdate()
             {
-                if (!character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.IsStagger != null).Any(x => x.IsStagger.Value))
+                if (!character.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsStagger != null).Any(x => x.IsStagger.Value))
                 {
                     character.stateMachine.SetState(new MoveState(character));
                     character.Animated.SetTrigger("EndStagger");

@@ -7,9 +7,9 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseDefenseBaseOnAttackPowerPerk>
         {
-            public override float? AttackPower => Mathf.Floor(modifiable.GetCachedComponent<Character>().Defense / definition.defenseRequired) * definition.attackPowerIncrease;
+            public override float? AttackPower => Mathf.Floor(modifiable.Entity.GetCachedComponent<Character>().Defense / definition.defenseRequired) * definition.attackPowerIncrease;
 
-            public Modifier(IModifiable modifiable, IncreaseDefenseBaseOnAttackPowerPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, IncreaseDefenseBaseOnAttackPowerPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
             }
         }
@@ -22,9 +22,9 @@ namespace Game
             return string.Format(Description, attackPowerIncrease, defenseRequired);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

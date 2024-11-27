@@ -13,7 +13,7 @@ namespace Game
 
             private int amountOfBleedApplied = 0;
 
-            public Modifier(IModifiable modifiable, AttackSpeedByBleedActivePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, AttackSpeedByBleedActivePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
             }
 
@@ -27,7 +27,7 @@ namespace Game
                 base.Update();
 
                 amountOfBleedApplied = 0;
-                foreach (Game.Modifier modifier in modifiable.GetCachedComponent<IModifierSource>().AppliedModifiers)
+                foreach (Game.Modifier modifier in modifiable.Entity.GetCachedComponent<IModifierSource>().AppliedModifiers)
                 {
                     if (modifier is not BleedingModifierDefinition.Modifier bleedingModifier)
                         continue;
@@ -44,9 +44,9 @@ namespace Game
             return string.Format(Description, attackSpeedPerBleedApplied);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

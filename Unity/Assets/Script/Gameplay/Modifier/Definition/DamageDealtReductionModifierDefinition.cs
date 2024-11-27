@@ -15,7 +15,7 @@ namespace Game
                 public float Amount { get => amount; set => amount = value; }
                 public float Duration { get => duration; set => duration = value; }
 
-                public override Game.Modifier Instantiate(IModifiable modifiable, IModifierSource source)
+                public override Game.Modifier Instantiate(ModifierHandler modifiable, IModifierSource source)
                 {
                     return new Modifier(modifiable, definition, amount, source).With(new CharacterModifierTimeElement(duration));
                 }
@@ -25,7 +25,7 @@ namespace Game
 
             private float amount;
 
-            public Modifier(IModifiable modifiable, DamageDealtReductionModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, DamageDealtReductionModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.amount = amount;
             }

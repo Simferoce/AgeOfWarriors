@@ -12,7 +12,7 @@ namespace Game
             private float defense;
 
             public Modifier(Character character, DefenseModifierDefinition modifierDefinition, float defense, IModifierSource source)
-                : base(character.GetCachedComponent<IModifiable>(), modifierDefinition, source)
+                : base(character.GetCachedComponent<ModifierHandler>(), modifierDefinition, source)
             {
                 this.defense = defense;
             }

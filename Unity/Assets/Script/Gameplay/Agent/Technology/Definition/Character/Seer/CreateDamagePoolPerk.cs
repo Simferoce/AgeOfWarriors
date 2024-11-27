@@ -13,9 +13,9 @@ namespace Game
 
             public bool HasModifier => currentAttackApplied >= definition.stack;
 
-            public Modifier(IModifiable modifiable, CreateDamagePoolPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, CreateDamagePoolPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                affectedAbility = modifiable.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
+                affectedAbility = modifiable.Entity.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
 
@@ -39,7 +39,7 @@ namespace Game
             public Game.Modifier GetModifier(Projectile projectile)
             {
                 currentAttackApplied = 0;
-                return new PoolProjectileModifierDefinition.Modifier(projectile.GetCachedComponent<IModifiable>(), definition.projectileModifierDefinition, definition.duration, definition.damage);
+                return new PoolProjectileModifierDefinition.Modifier(projectile.GetCachedComponent<ModifierHandler>(), definition.projectileModifierDefinition, definition.duration, definition.damage);
             }
         }
 
@@ -54,9 +54,9 @@ namespace Game
             return string.Format(Description, stack, damage, duration);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

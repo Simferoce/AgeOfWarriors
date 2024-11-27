@@ -25,13 +25,13 @@ namespace Game
         public virtual float? IncreaseDamageTaken => null;
         public virtual float? DefenseReduction => null;
 
-        public IModifiable Modifiable { get => modifiable; set => modifiable = value; }
+        public ModifierHandler Modifiable { get => modifiable; set => modifiable = value; }
         public IModifierSource Source { get; }
         public virtual bool Show => Definition.Show;
 
-        protected IModifiable modifiable;
+        protected ModifierHandler modifiable;
 
-        protected Modifier(IModifiable modifiable, IModifierSource source = null)
+        protected Modifier(ModifierHandler modifiable, IModifierSource source = null)
         {
             this.Source = source;
             this.modifiable = modifiable;
@@ -99,7 +99,7 @@ namespace Game
 
         public override ModifierDefinition Definition => definition;
 
-        protected Modifier(IModifiable modifiable, U modifierDefinition, IModifierSource source) : base(modifiable, source)
+        protected Modifier(ModifierHandler modifiable, U modifierDefinition, IModifierSource source) : base(modifiable, source)
         {
             definition = modifierDefinition;
         }

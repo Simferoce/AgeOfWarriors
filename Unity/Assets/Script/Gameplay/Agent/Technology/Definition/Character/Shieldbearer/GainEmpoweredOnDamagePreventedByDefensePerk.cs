@@ -13,9 +13,9 @@ namespace Game
 
             public float CurrentDamagePrevented { get => currentDamagePrevented; set => currentDamagePrevented = value; }
 
-            public Modifier(IModifiable modifiable, GainEmpoweredOnDamagePreventedByDefensePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, GainEmpoweredOnDamagePreventedByDefensePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                modifiable.GetCachedComponent<IAttackable>().OnDamageTaken += Modifier_OnDamageTaken;
+                modifiable.Entity.GetCachedComponent<IAttackable>().OnDamageTaken += Modifier_OnDamageTaken;
             }
 
             private void Modifier_OnDamageTaken(AttackResult attack, IAttackable source)
@@ -45,7 +45,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                modifiable.GetCachedComponent<IAttackable>().OnDamageTaken -= Modifier_OnDamageTaken;
+                modifiable.Entity.GetCachedComponent<IAttackable>().OnDamageTaken -= Modifier_OnDamageTaken;
             }
         }
 
@@ -57,9 +57,9 @@ namespace Game
             return string.Format(Description, damageToPrevent, empoweredModifierDefinition.PercentageDamageIncrease);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

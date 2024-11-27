@@ -20,10 +20,12 @@ namespace Game
         public int Direction => agentObject.Direction;
         public AgentObject AgentObject => agentObject;
         public bool IsCasting { get; set; }
+        public Entity Entity { get; private set; }
 
         private void Awake()
         {
             agentObject = GetComponentInParent<AgentObject>();
+            Entity = GetComponentInParent<Entity>();
         }
 
         [Header("Abilities")]

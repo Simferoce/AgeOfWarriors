@@ -4,8 +4,6 @@ namespace Game
 {
     public interface IStatisticProvider
     {
-        public string StatisticProviderName { get; }
-
         public bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic);
         public T GetStatisticOrDefault<T>(string path)
         {

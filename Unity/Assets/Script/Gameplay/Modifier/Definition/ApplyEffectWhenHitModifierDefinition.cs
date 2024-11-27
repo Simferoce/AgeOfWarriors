@@ -11,9 +11,9 @@ namespace Game
             private Instancier instancier;
             private IAttackable attackable;
 
-            public Modifier(IModifiable modifiable, ApplyEffectWhenHitModifierDefinition modifierDefinition, IModifierSource source, Instancier instancier) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, ApplyEffectWhenHitModifierDefinition modifierDefinition, IModifierSource source, Instancier instancier) : base(modifiable, modifierDefinition, source)
             {
-                attackable = modifiable.GetCachedComponent<IAttackable>();
+                attackable = modifiable.Entity.GetCachedComponent<IAttackable>();
                 attackable.OnDamageTaken += Attackable_OnDamageTaken;
                 this.instancier = instancier;
             }
@@ -23,7 +23,7 @@ namespace Game
                 if (attackResult.Attack.OverTime)
                     return;
 
-                IModifiable target = null;
+                ModifierHandler target = null;
                 IAttackSource source = attackResult.Attack.AttackSource.Sources.FirstOrDefault(x => x is IComponent component && component.TryGetCachedComponent(out target));
                 if (target != null && target.TryGetModifier(instancier.Definition, out Game.Modifier modifier))
                 {

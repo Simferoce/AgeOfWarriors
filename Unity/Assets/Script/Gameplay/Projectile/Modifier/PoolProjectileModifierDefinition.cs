@@ -11,9 +11,9 @@ namespace Game
             private float duration;
             private float damage;
 
-            public Modifier(IModifiable modifiable, PoolProjectileModifierDefinition modifierDefinition, float duration, float damage, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, PoolProjectileModifierDefinition modifierDefinition, float duration, float damage, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
             {
-                this.projectile = modifiable.GetCachedComponent<Projectile>();
+                this.projectile = modifiable.Entity.GetCachedComponent<Projectile>();
                 projectile.OnImpacted += Projectile_OnImpacted;
 
                 this.damage = damage;

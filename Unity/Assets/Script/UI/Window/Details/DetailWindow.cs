@@ -41,7 +41,7 @@ namespace Game
             foreach (StatisticDetailUI statisticDetailUI in statisticDetailUIs)
                 statisticDetailUI.Refresh(character);
 
-            List<Modifier> modifiers = character.GetCachedComponent<IModifiable>().GetModifiers().Where(x => x.Show).ToList();
+            List<Modifier> modifiers = character.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Show).ToList();
 
             int i = 0;
             for (; i < modifiers.Count && i < modifierDetailUIs.Count; ++i)

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public abstract class AgentObject : CachedMonobehaviour, IStatisticProvider
+    public abstract class AgentObject : Entity
     {
         public delegate void AttackedLanded(AttackResult attack);
 
@@ -52,32 +52,7 @@ namespace Game
             OnDestroyed?.Invoke(this);
         }
 
-        public T GetStatisticOrDefault<T>(string path)
-        {
-            return TryGetStatistic<T>(path, out T statistic) ? statistic : default;
-        }
-
-        public T GetStatisticOrDefault<T>(string path, T defaultValue)
-        {
-            return TryGetStatistic<T>(path, out T statistic) ? statistic : defaultValue;
-        }
-
-        public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            return TryGetStatisticInChildren(path, out statistic);
-        }
-
-        private bool TryGetStatisticInChildren<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            foreach (IStatisticProvider statisticProviderChild in statisticProviderChildren)
-            {
-                if (statisticProviderChild.TryGetStatistic<T>(path, out statistic))
-                    return true;
-            }
-
-            statistic = default;
-            return false;
-        }
+        
 
         public virtual void Spawn(Agent agent, int spawnNumber, int direction)
         {

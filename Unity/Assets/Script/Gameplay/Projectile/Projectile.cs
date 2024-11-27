@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [RequireComponent(typeof(ModifierHandler))]
-    public class Projectile : CachedMonobehaviour, IAttackSource, IStatisticProvider
+    public class Projectile : Entity, IAttackSource, IStatisticProvider
     {
         public delegate void Impacted(List<ITargeteable> targeteables);
 
@@ -44,7 +43,7 @@ namespace Game
             this.target = target;
             this.Parameters = paramters.ToList();
 
-            Ownership.SetOwner(this, agentObject);
+            // Ownership.SetOwner(this, agentObject);
 
             foreach (ProjectileMovement movement in projectileMovements)
                 movement.Initialize(this);
@@ -52,9 +51,9 @@ namespace Game
             foreach (ProjectileImpact effect in impacts)
                 effect.Initialize(this);
 
-            foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<IModifiable>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
+            foreach (IProjectileModifier projectileModifier in agentObject.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<IProjectileModifier>().Where(x => x.HasModifier))
             {
-                this.GetCachedComponent<IModifiable>().AddModifier(projectileModifier.GetModifier(this));
+                this.GetCachedComponent<ModifierHandler>().AddModifier(projectileModifier.GetModifier(this));
             }
         }
 
@@ -111,23 +110,6 @@ namespace Game
             StateValue = State.Dead;
 
             projectileDeath.Start(this, collision);
-        }
-
-        public bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            if (path.StartsWith("projectile"))
-                path = path.Slice("projectile".Length + 1);
-
-            foreach (object parameter in Parameters)
-            {
-                if (parameter is IStatisticProvider statisticProvider && path.StartsWith(statisticProvider.StatisticProviderName))
-                {
-                    return statisticProvider.TryGetStatistic<T>(path.Slice(statisticProvider.StatisticProviderName.Length + 1), out statistic);
-                }
-            }
-
-            statistic = default;
-            return false;
         }
     }
 }

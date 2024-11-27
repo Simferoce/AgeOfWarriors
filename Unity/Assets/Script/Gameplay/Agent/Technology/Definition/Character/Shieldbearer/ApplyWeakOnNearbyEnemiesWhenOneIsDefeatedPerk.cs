@@ -8,7 +8,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk>
         {
-            public Modifier(IModifiable modifiable, ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
@@ -21,9 +21,9 @@ namespace Game
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (evt.AgentObject.Faction != modifiable.GetCachedComponent<ITargeteable>().Faction)
+                if (evt.AgentObject.Faction != modifiable.Entity.GetCachedComponent<ITargeteable>().Faction)
                 {
-                    Character character = modifiable.GetCachedComponent<Character>();
+                    Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                     foreach (AgentObject agent in AgentObject.All)
                     {
@@ -39,7 +39,7 @@ namespace Game
                         if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
                             continue;
 
-                        if (!agent.TryGetCachedComponent<IModifiable>(out IModifiable targetModifiable))
+                        if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler targetModifiable))
                             continue;
 
                         if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.percentageReachAffect * character.Reach)
@@ -76,9 +76,9 @@ namespace Game
             return string.Format(Description, reductionAmount, StatisticFormatter.Percentage(percentageReachAffect, StatisticDefinition.Reach), duration);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

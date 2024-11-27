@@ -9,7 +9,7 @@ namespace Game
         {
             private float accumulatedTime = 0.0f;
 
-            public Modifier(IModifiable modifiable, GainShieldPeriodicallyPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, GainShieldPeriodicallyPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
             }
 
@@ -17,7 +17,7 @@ namespace Game
             {
                 base.Update();
 
-                if (modifiable.TryGetCachedComponent<Character>(out Character character) && character.IsActive && character.IsEngaged)
+                if (modifiable.Entity.TryGetCachedComponent<Character>(out Character character) && character.IsActive && character.IsEngaged)
                 {
                     if ((int)((accumulatedTime + Time.deltaTime) / definition.cooldown) != (int)(accumulatedTime / definition.cooldown))
                     {
@@ -39,9 +39,9 @@ namespace Game
             return string.Format(Description, cooldown, duration, amount);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

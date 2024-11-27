@@ -12,11 +12,11 @@ namespace Game
             private Character character;
             private float damage;
 
-            public Modifier(IModifiable modifiable, ReflectDamageModifierDefinition modifierDefinition, IModifierSource source, float damage) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, ReflectDamageModifierDefinition modifierDefinition, IModifierSource source, float damage) : base(modifiable, modifierDefinition, source)
             {
                 this.damage = damage;
-                attackable = modifiable.GetCachedComponent<IAttackable>();
-                character = modifiable.GetCachedComponent<Character>();
+                attackable = modifiable.Entity.GetCachedComponent<IAttackable>();
+                character = modifiable.Entity.GetCachedComponent<Character>();
                 attackable.OnDamageTaken += Attackable_OnDamageTaken;
             }
 

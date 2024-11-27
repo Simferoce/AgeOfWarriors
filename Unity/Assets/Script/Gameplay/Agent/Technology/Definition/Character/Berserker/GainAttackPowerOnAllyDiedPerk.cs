@@ -7,14 +7,14 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, GainAttackPowerOnAllyDiedPerk>
         {
-            public Modifier(IModifiable modifiable, GainAttackPowerOnAllyDiedPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, GainAttackPowerOnAllyDiedPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 EventChannelDeath.Instance.Susbribe(OnUnitDeath);
             }
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (evt.AgentObject.Faction == modifiable.GetCachedComponent<ITargeteable>().Faction && (IModifiable)evt.AgentObject != modifiable)
+                if (evt.AgentObject.Faction == modifiable.Entity.GetCachedComponent<ITargeteable>().Faction && evt.AgentObject != modifiable.Entity)
                 {
                     modifiable.AddModifier(
                         new AttackPowerModifierDefinition.AttackPowerModifier(modifiable,
@@ -42,9 +42,9 @@ namespace Game
             return string.Format(Description, attackPowerGain, buffDuration);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

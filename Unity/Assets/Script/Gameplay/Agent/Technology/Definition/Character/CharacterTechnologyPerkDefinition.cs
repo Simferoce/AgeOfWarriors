@@ -12,6 +12,6 @@ namespace Game
             return definition == affected || definition.IsSpecialization(affected);
         }
 
-        public abstract Modifier GetModifier(IModifiable modifiable);
+        public abstract Modifier GetModifier(ModifierHandler modifiable);
     }
 }

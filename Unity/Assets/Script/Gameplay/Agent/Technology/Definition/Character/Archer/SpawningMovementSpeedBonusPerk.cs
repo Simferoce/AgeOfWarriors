@@ -8,9 +8,9 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, SpawningMovementSpeedBonusPerk>
         {
-            public Modifier(IModifiable modifiable, SpawningMovementSpeedBonusPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ModifierHandler modifiable, SpawningMovementSpeedBonusPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                Character character = modifiable.GetCachedComponent<Character>();
+                Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                 foreach (AgentObject agent in AgentObject.All)
                 {
@@ -43,9 +43,9 @@ namespace Game
         [SerializeField, Range(0, 5)] private float movementSpeedIncrease;
         [SerializeField] private SpawningMovementSpeedBonusPerkEffect effect;
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }

@@ -7,12 +7,12 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackPowerBaseOnRemainingHealthPerk>
         {
-            public override float? AttackPower => modifiable.TryGetCachedComponent<Character>(out Character character)
+            public override float? AttackPower => modifiable.Entity.TryGetCachedComponent<Character>(out Character character)
                 && character.Health / character.MaxHealth < definition.attackpower
                 ? definition.threshold
                 : null;
 
-            public Modifier(IModifiable modifiable, IncreaseAttackPowerBaseOnRemainingHealthPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, IncreaseAttackPowerBaseOnRemainingHealthPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
             }
         }
@@ -26,9 +26,9 @@ namespace Game
             return string.Format(Description, attackpower, threshold);
         }
 
-        public override Game.Modifier GetModifier(IModifiable modifiable)
+        public override Game.Modifier GetModifier(ModifierHandler modifiable)
         {
-            return new Modifier(modifiable, this, modifiable.GetCachedComponent<IModifierSource>());
+            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
         }
     }
 }
