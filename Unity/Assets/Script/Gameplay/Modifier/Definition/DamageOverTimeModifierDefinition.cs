@@ -6,7 +6,7 @@ namespace Game
     [CreateAssetMenu(fileName = "DamageOverTimeModifierDefinition", menuName = "Definition/Modifier/DamageOverTimeModifierDefinition")]
     public class DamageOverTimeModifierDefinition : ModifierDefinition
     {
-        public class Modifier : Modifier<Modifier, DamageOverTimeModifierDefinition>, IAttackSource
+        public class Modifier : Modifier<Modifier, DamageOverTimeModifierDefinition>
         {
             public float DamagePerSeconds { get; set; }
 
@@ -35,12 +35,12 @@ namespace Game
 
             private void DealDamage(float duration)
             {
-                if (modifiable.Entity.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+                if (modifiable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
                 {
                     Character character = modifiable.Entity.GetCachedComponent<Character>();
                     if (character.Health > 0)
                     {
-                        Attack attack = AttackUtility.Generate(character, DamagePerSeconds * duration, 0, 0, false, true, false, attackable, this);
+                        Attack attack = modifiable.Entity.GetCachedComponent<AttackFactory>().Generate(DamagePerSeconds * duration, 0, 0, false, true, false, attackable);
                         attackable.TakeAttack(attack);
                     }
                 }

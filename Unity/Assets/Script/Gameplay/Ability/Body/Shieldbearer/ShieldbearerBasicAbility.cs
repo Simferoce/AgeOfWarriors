@@ -12,7 +12,7 @@ namespace Game
 
         public override float Cooldown => 0f;
 
-        private List<IAttackable> attackables;
+        private List<Attackable> attackables;
 
         public ShieldbearerBasicAbility(ShieldbearerBasicAbilityDefinition definition, string trigger) : base(definition, trigger)
         {
@@ -23,7 +23,7 @@ namespace Game
             if (!base.CanUse())
                 return false;
 
-            attackables = TargetUtility.GetTargets((ITargeteable target) => target.Faction != Caster.Faction && Mathf.Abs(this.Caster.CenterPosition.x - target.CenterPosition.x) < Range).OfType<IAttackable>().ToList();
+            attackables = TargetUtility.GetTargets((ITargeteable target) => target.Faction != Caster.Faction && Mathf.Abs(this.Caster.CenterPosition.x - target.CenterPosition.x) < Range).Select(x => x.GetCachedComponent<Attackable>()).Where(x => x != null).ToList();
             return attackables.Count > 0;
         }
 
@@ -31,9 +31,9 @@ namespace Game
         {
             base.InternalApply();
 
-            foreach (IAttackable attackable in attackables)
+            foreach (Attackable attackable in attackables)
             {
-                attackable.TakeAttack(AttackUtility.Generate(Caster.AgentObject as IAttackSource, Damage, 0, 0, false, false, true, attackable));
+                attackable.TakeAttack(Caster.Entity.GetCachedComponent<AttackFactory>().Generate(Damage, 0, 0, false, false, true, attackable));
             }
         }
 

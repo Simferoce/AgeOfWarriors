@@ -26,7 +26,7 @@ namespace Game
                     if (agent.Faction == character.Faction)
                         continue;
 
-                    if (!agent.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+                    if (!agent.TryGetCachedComponent<Attackable>(out Attackable attackable))
                         continue;
 
                     if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.distance)

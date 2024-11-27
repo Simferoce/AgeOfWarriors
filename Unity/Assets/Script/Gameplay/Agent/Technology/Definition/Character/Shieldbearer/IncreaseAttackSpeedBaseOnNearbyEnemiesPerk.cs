@@ -40,7 +40,7 @@ namespace Game
                     if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
                         continue;
 
-                    if (!agent.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+                    if (!agent.TryGetCachedComponent<Attackable>(out Attackable attackable))
                         continue;
 
                     if (character.Faction == targeteable.Faction)

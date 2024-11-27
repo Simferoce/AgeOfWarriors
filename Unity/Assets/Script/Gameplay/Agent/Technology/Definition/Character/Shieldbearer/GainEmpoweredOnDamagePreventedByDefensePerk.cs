@@ -15,10 +15,10 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, GainEmpoweredOnDamagePreventedByDefensePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                modifiable.Entity.GetCachedComponent<IAttackable>().OnDamageTaken += Modifier_OnDamageTaken;
+                modifiable.Entity.GetCachedComponent<Attackable>().OnAttackTaken += Modifier_OnDamageTaken;
             }
 
-            private void Modifier_OnDamageTaken(AttackResult attack, IAttackable source)
+            private void Modifier_OnDamageTaken(AttackResult attack)
             {
                 currentDamagePrevented += attack.DefenseDamagePrevented;
 
@@ -45,7 +45,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                modifiable.Entity.GetCachedComponent<IAttackable>().OnDamageTaken -= Modifier_OnDamageTaken;
+                modifiable.Entity.GetCachedComponent<Attackable>().OnAttackTaken -= Modifier_OnDamageTaken;
             }
         }
 

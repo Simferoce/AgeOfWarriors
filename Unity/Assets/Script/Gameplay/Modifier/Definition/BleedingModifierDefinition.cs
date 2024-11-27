@@ -6,7 +6,7 @@ namespace Game
     [CreateAssetMenu(fileName = "BleedingModifierDefinition", menuName = "Definition/Modifier/BleedingModifierDefinition")]
     public class BleedingModifierDefinition : DamageOverTimeModifierDefinition
     {
-        public class BleedingModifier : Modifier, IAttackSource
+        public class BleedingModifier : Modifier
         {
             public int Stacks { get; set; }
 

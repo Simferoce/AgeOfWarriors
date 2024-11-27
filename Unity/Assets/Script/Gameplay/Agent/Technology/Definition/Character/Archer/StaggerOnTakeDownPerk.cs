@@ -14,33 +14,34 @@ namespace Game
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (modifiable.Entity.GetCachedComponent<IAttackSource>().RecentlyAttacked(evt.AgentObject.GetCachedComponent<IAttackable>()))
-                {
-                    Character character = modifiable.Entity.GetCachedComponent<Character>();
+                throw new System.NotImplementedException();
+                //if (modifiable.Entity.GetCachedComponent<IAttackSource>().RecentlyAttacked(evt.AgentObject.GetCachedComponent<IAttackable>()))
+                //{
+                //    Character character = modifiable.Entity.GetCachedComponent<Character>();
 
-                    foreach (AgentObject agent in AgentObject.All)
-                    {
-                        if (agent == character)
-                            continue;
+                //    foreach (AgentObject agent in AgentObject.All)
+                //    {
+                //        if (agent == character)
+                //            continue;
 
-                        if (!agent.IsActive)
-                            continue;
+                //        if (!agent.IsActive)
+                //            continue;
 
-                        if (agent.Faction == character.Faction)
-                            continue;
+                //        if (agent.Faction == character.Faction)
+                //            continue;
 
-                        if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
-                            continue;
+                //        if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                //            continue;
 
-                        if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
-                            continue;
+                //        if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
+                //            continue;
 
-                        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.distanceEffect)
-                            continue;
+                //        if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.distanceEffect)
+                //            continue;
 
-                        modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, definition.duration, character));
-                    }
-                }
+                //        modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, definition.duration, character));
+                //    }
+
             }
 
             public override void Dispose()

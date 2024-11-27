@@ -10,7 +10,7 @@ namespace Game
         {
             public Modifier(ModifierHandler modifiable, GainProgressiveEmpowermentOnAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
 
             private void Modifier_OnAttackLanded(AttackResult attackResult)
@@ -35,7 +35,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded -= Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt -= Modifier_OnAttackLanded;
             }
         }
 

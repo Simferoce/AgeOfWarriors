@@ -10,14 +10,14 @@ namespace Game
         {
             public Modifier(ModifierHandler modifiable, ApplyWeakOnTargetHitByEmpoweredAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
 
             private void Modifier_OnAttackLanded(AttackResult attack)
             {
                 if (attack.Attack.Empowered)
                 {
-                    ModifierHandler targetModifiable = attack.Target.GetCachedComponent<ModifierHandler>();
+                    ModifierHandler targetModifiable = attack.Target.Entity.GetCachedComponent<ModifierHandler>();
                     Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x.Definition == definition.damageDealtReductionModifierDefinition);
                     if (modifier != null)
                     {
@@ -41,7 +41,7 @@ namespace Game
             {
                 base.Dispose();
 
-                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
         }
 

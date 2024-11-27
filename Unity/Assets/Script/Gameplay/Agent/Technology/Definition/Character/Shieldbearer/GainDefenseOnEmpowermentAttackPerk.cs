@@ -10,7 +10,7 @@ namespace Game
         {
             public Modifier(ModifierHandler modifiable, GainDefenseOnEmpowermentAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
 
             private void Modifier_OnAttackLanded(AttackResult attack)
@@ -39,7 +39,7 @@ namespace Game
             {
                 base.Dispose();
 
-                modifiable.Entity.GetCachedComponent<Character>().OnAttackLanded += Modifier_OnAttackLanded;
+                modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
         }
 

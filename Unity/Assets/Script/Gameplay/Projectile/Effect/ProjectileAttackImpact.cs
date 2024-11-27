@@ -25,9 +25,9 @@ namespace Game
                 && targeteable.IsActive
                 && projectile.Ignore != targeteable
                 && criteria.Execute(projectile.AgentObject.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
-                && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+                && targeteable.TryGetCachedComponent<Attackable>(out Attackable attackable))
             {
-                attack = AttackUtility.Generate(projectile.AgentObject as IAttackSource, damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, true, false, true, attackable, projectile);
+                attack = projectile.GetCachedComponent<AttackFactory>().Generate(damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, true, false, true, attackable);
                 attackable.TakeAttack(attack);
 
                 projectile.Kill(collision.gameObject);

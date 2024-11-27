@@ -14,7 +14,7 @@ namespace Game
         [SerializeField] private float delay;
 
         private float startedAt;
-        private List<IAttackable> targetsHit = new List<IAttackable>();
+        private List<Attackable> targetsHit = new List<Attackable>();
         private float currentDuration;
         private List<ITargeteable> targeteablesInEffect = new List<ITargeteable>();
 
@@ -65,11 +65,10 @@ namespace Game
             {
                 if (Time.time - startedAt > delay
                     && criteria.Execute(projectile.AgentObject.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
-                    && targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable)
+                    && targeteable.TryGetCachedComponent<Attackable>(out Attackable attackable)
                     && !targetsHit.Contains(attackable))
                 {
-                    Attack attack = AttackUtility.Generate(projectile.AgentObject as Character, damage.GetValueOrThrow(projectile), 0, 0, true, false, true, attackable, projectile);
-                    attack.AttackSource.Sources.Add(projectile);
+                    Attack attack = projectile.GetCachedComponent<AttackFactory>().Generate(damage.GetValueOrThrow(projectile), 0, 0, true, false, true, attackable);
                     attackable.TakeAttack(attack);
                     targetsHit.Add(attackable);
 

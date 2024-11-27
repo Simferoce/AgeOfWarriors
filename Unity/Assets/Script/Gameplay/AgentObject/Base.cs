@@ -1,9 +1,9 @@
-using System;
 using UnityEngine;
 
 namespace Game
 {
-    public class Base : AgentObject, IAttackable, ITargeteable, IBlock
+    [RequireComponent(typeof(Attackable))]
+    public class Base : AgentObject, ITargeteable, IBlock
     {
         [SerializeField] private float maxHealth;
         [SerializeField] private float defense;
@@ -21,7 +21,25 @@ namespace Game
         public float Defense => defense;
         public bool IsDead => Health <= 0;
 
-        public event Action<AttackResult, IAttackable> OnDamageTaken;
+        protected override void Awake()
+        {
+            base.Awake();
+            GetCachedComponent<Attackable>().OnAttackTaken += Base_OnAttackTaken;
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            GetCachedComponent<Attackable>().OnAttackTaken -= Base_OnAttackTaken;
+        }
+
+        private void Base_OnAttackTaken(AttackResult attackResult)
+        {
+            Health -= attackResult.DamageTaken;
+
+            if (Health <= 0 && !IsDead)
+                Death();
+        }
 
         public Vector3 ClosestPoint(Vector3 point)
         {
@@ -45,25 +63,6 @@ namespace Game
             base.Spawn(agent, spawnNumber, direction);
 
             Health = maxHealth;
-        }
-
-        public void TakeAttack(Attack attack)
-        {
-            AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
-                    this,
-                    currentHealth: Health,
-                    defense: Defense));
-
-            Health -= result.DamageToTake;
-
-            AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, this);
-            foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attackResult);
-
-            OnDamageTaken?.Invoke(attackResult, this);
-
-            if (Health <= 0 && !IsDead)
-                Death();
         }
     }
 }

@@ -9,8 +9,8 @@ namespace Game
         {
             public Modifier(ModifierHandler modifiable, GainHealthKillingBlowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                if (modifiable.Entity.TryGetCachedComponent<Character>(out Character character))
-                    character.OnAttackLanded += AgentObject_OnAttackLanded;
+                if (modifiable.Entity.TryGetCachedComponent<AttackFactory>(out AttackFactory attackFactory))
+                    attackFactory.OnAttackDealt += AgentObject_OnAttackLanded;
             }
 
             private void AgentObject_OnAttackLanded(AttackResult attackResult)
@@ -22,8 +22,8 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                if (modifiable.Entity.TryGetCachedComponent<Character>(out Character character))
-                    character.OnAttackLanded -= AgentObject_OnAttackLanded;
+                if (modifiable.Entity.TryGetCachedComponent<AttackFactory>(out AttackFactory attackFactory))
+                    attackFactory.OnAttackDealt -= AgentObject_OnAttackLanded;
             }
         }
 

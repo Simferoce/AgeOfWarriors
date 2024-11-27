@@ -1,34 +1,32 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "ReflectDamageModifierDefinition", menuName = "Definition/Modifier/ReflectDamageModifierDefinition")]
     public class ReflectDamageModifierDefinition : ModifierDefinition
     {
-        public class Modifier : Modifier<Modifier, ReflectDamageModifierDefinition>, IAttackSource
+        public class Modifier : Modifier<Modifier, ReflectDamageModifierDefinition>
         {
-            private IAttackable attackable;
+            private Attackable attackable;
             private Character character;
             private float damage;
 
             public Modifier(ModifierHandler modifiable, ReflectDamageModifierDefinition modifierDefinition, IModifierSource source, float damage) : base(modifiable, modifierDefinition, source)
             {
                 this.damage = damage;
-                attackable = modifiable.Entity.GetCachedComponent<IAttackable>();
+                attackable = modifiable.Entity.GetCachedComponent<Attackable>();
                 character = modifiable.Entity.GetCachedComponent<Character>();
-                attackable.OnDamageTaken += Attackable_OnDamageTaken;
+                attackable.OnAttackTaken += Attackable_OnDamageTaken;
             }
 
-            private void Attackable_OnDamageTaken(AttackResult attackResult, IAttackable attackable)
+            private void Attackable_OnDamageTaken(AttackResult attackResult)
             {
                 if (attackResult.Attack.Reflectable)
                 {
-                    IAttackable target = null;
-                    IAttackSource source = attackResult.Attack.AttackSource.Sources.FirstOrDefault(x => x is IComponent component && component.TryGetCachedComponent(out target));
+                    Attackable target = null;
                     if (target != null)
                     {
-                        Attack attack = AttackUtility.Generate(character, damage, 0, 0, false, false, false, target, this);
+                        Attack attack = modifiable.Entity.GetCachedComponent<AttackFactory>().Generate(damage, 0, 0, false, false, false, target);
                         target.TakeAttack(attack);
                     }
                 }
@@ -38,7 +36,7 @@ namespace Game
             {
                 base.Dispose();
 
-                attackable.OnDamageTaken -= Attackable_OnDamageTaken;
+                attackable.OnAttackTaken -= Attackable_OnDamageTaken;
             }
         }
     }

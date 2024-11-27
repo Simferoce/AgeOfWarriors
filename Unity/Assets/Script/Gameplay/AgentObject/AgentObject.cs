@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -8,8 +6,6 @@ namespace Game
     [RequireComponent(typeof(ModifierHandler))]
     public abstract class AgentObject : Entity
     {
-        public delegate void AttackedLanded(AttackResult attack);
-
         public enum Type
         {
             Building
@@ -36,14 +32,9 @@ namespace Game
         public virtual Faction OriginalFaction { get => Agent.Faction; }
         public List<Type> Types { get => types; }
         public string Name => name;
-        public virtual string StatisticProviderName => "agentobject";
-
-        private List<IStatisticProvider> statisticProviderChildren;
-
         protected virtual void Awake()
         {
             All.Add(this);
-            statisticProviderChildren = GetComponentsInChildren<IStatisticProvider>().Where(x => x != (IStatisticProvider)this).ToList();
         }
 
         protected virtual void OnDestroy()
@@ -51,8 +42,6 @@ namespace Game
             All.Remove(this);
             OnDestroyed?.Invoke(this);
         }
-
-        
 
         public virtual void Spawn(Agent agent, int spawnNumber, int direction)
         {

@@ -21,10 +21,10 @@ namespace Game
             if (targeteable.Faction == pool.Faction)
                 return;
 
-            if (!targeteable.TryGetCachedComponent<IAttackable>(out IAttackable attackable))
+            if (!targeteable.TryGetCachedComponent<Attackable>(out Attackable attackable))
                 return;
 
-            attackable.TakeAttack(new Attack(new AttackSource(pool), Damage, 0, 0, false, false, false, false));
+            attackable.TakeAttack(pool.GetCachedComponent<AttackFactory>().Generate(Damage, 0, 0, false, false, false, attackable));
         }
     }
 }

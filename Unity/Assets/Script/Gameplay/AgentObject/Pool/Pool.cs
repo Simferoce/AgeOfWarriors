@@ -5,7 +5,7 @@ using UnityEngine.Assertions;
 
 namespace Game
 {
-    public class Pool : AgentObject, IAttackSource
+    public class Pool : AgentObject
     {
         [SerializeField] private Collider2D hitbox;
         [SerializeReference, SubclassSelector] private List<PoolEffect> poolEffects;

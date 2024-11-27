@@ -8,9 +8,9 @@ namespace Game
         public float DamageTaken { get; set; }
         public float DefenseDamagePrevented { get; set; }
         public bool KillingBlow { get; set; }
-        public IAttackable Target { get; set; }
+        public Attackable Target { get; set; }
 
-        public AttackResult(Attack attack, float damageTaken, float defenseDamagePrevented, bool killingBlow, IAttackable target)
+        public AttackResult(Attack attack, float damageTaken, float defenseDamagePrevented, bool killingBlow, Attackable target)
         {
             Attack = attack;
             DamageTaken = damageTaken;
@@ -18,7 +18,7 @@ namespace Game
             KillingBlow = killingBlow;
             Target = target;
 
-            Debug.Log($"{target} is taking {damageTaken} (reduced by {defenseDamagePrevented}) from {attack.AttackSource.Sources[^1]}");
+            Debug.Log($"{target} is taking {damageTaken} (reduced by {defenseDamagePrevented}) from {attack.AttackFactory}");
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -9,22 +8,21 @@ namespace Game
         public class Modifier : Modifier<Modifier, ApplyEffectWhenHitModifierDefinition>
         {
             private Instancier instancier;
-            private IAttackable attackable;
+            private Attackable attackable;
 
             public Modifier(ModifierHandler modifiable, ApplyEffectWhenHitModifierDefinition modifierDefinition, IModifierSource source, Instancier instancier) : base(modifiable, modifierDefinition, source)
             {
-                attackable = modifiable.Entity.GetCachedComponent<IAttackable>();
-                attackable.OnDamageTaken += Attackable_OnDamageTaken;
+                attackable = modifiable.Entity.GetCachedComponent<Attackable>();
+                attackable.OnAttackTaken += AttackableOnAttackTaken;
                 this.instancier = instancier;
             }
 
-            private void Attackable_OnDamageTaken(AttackResult attackResult, IAttackable attackee)
+            private void AttackableOnAttackTaken(AttackResult attackResult)
             {
                 if (attackResult.Attack.OverTime)
                     return;
 
-                ModifierHandler target = null;
-                IAttackSource source = attackResult.Attack.AttackSource.Sources.FirstOrDefault(x => x is IComponent component && component.TryGetCachedComponent(out target));
+                ModifierHandler target = attackResult.Attack.AttackFactory.Entity.GetCachedComponent<ModifierHandler>();
                 if (target != null && target.TryGetModifier(instancier.Definition, out Game.Modifier modifier))
                 {
                     modifier.Refresh();
@@ -38,7 +36,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                attackable.OnDamageTaken -= Attackable_OnDamageTaken;
+                attackable.OnAttackTaken -= AttackableOnAttackTaken;
             }
         }
     }

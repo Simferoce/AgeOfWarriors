@@ -7,7 +7,9 @@ using UnityEngine;
 
 namespace Game
 {
-    public partial class Character : AgentObject<CharacterDefinition>, IAttackSource, IAttackable, ITargeteable, IModifierSource, IBlock, IAnimated
+    [RequireComponent(typeof(Attackable))]
+    [RequireComponent(typeof(AttackFactory))]
+    public partial class Character : AgentObject<CharacterDefinition>, ITargeteable, IModifierSource, IBlock, IAnimated
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -17,19 +19,15 @@ namespace Game
         [SerializeField] private Transform targetPosition;
 
         public event Action OnDeath;
-        public event AttackedLanded OnAttackLanded;
         public event Action<Modifier> OnModifierAdded;
-        public event Action<AttackResult, IAttackable> OnDamageTaken;
 
         public Animated Animated { get; set; }
         public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
-        public HashSet<IAttackable> RecentlyAttackedAttackeables { get; set; } = new HashSet<IAttackable>();
         public override bool IsActive { get => !IsDead; }
         public Vector3 CenterPosition { get => transform.position; }
         public Vector3 TargetPosition => targetPosition.position;
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
-        public override string StatisticProviderName => "character";
 
         public float Health { get; set; }
         public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
@@ -52,6 +50,8 @@ namespace Game
         protected override void Awake()
         {
             base.Awake();
+            GetCachedComponent<Attackable>().OnAttackTaken += OnAttackTaken;
+            GetCachedComponent<AttackFactory>().OnAttackDealt += OnAttackDealt;
         }
 
         public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
@@ -118,11 +118,6 @@ namespace Game
             this.Health = MaxHealth;
         }
 
-        public void Update()
-        {
-            RecentlyAttackedAttackeables.RemoveWhere(x => x is UnityEngine.Object o && o == null);
-        }
-
         public void FixedUpdate()
         {
             if (IsDead)
@@ -134,6 +129,20 @@ namespace Game
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            GetCachedComponent<Attackable>().OnAttackTaken -= OnAttackTaken;
+            GetCachedComponent<AttackFactory>().OnAttackDealt -= OnAttackDealt;
+        }
+
+        private void OnAttackTaken(AttackResult attackResult)
+        {
+            Health -= attackResult.DamageTaken;
+            if (Health < 0)
+                Death();
+        }
+
+        private void OnAttackDealt(AttackResult result)
+        {
+            Heal(result.DamageTaken * result.Attack.Leach);
         }
 
         public void SetDirection()
@@ -182,51 +191,6 @@ namespace Game
         {
             this.Health += amount;
             this.Health = Mathf.Clamp(Health, 0, MaxHealth);
-        }
-
-        public void AttackLanded(AttackResult attackResult)
-        {
-            RecentlyAttackedAttackeables.Add(attackResult.Target);
-            Heal(attackResult.DamageTaken * attackResult.Attack.Leach);
-            OnAttackLanded?.Invoke(attackResult);
-        }
-
-        public bool RecentlyAttacked(IAttackable attackable)
-        {
-            return RecentlyAttackedAttackeables.Contains(attackable);
-        }
-
-        public void TakeAttack(Attack attack)
-        {
-            AttackHandler.Result result = AttackHandler.TakeAttack(attack, new AttackHandler.Input(
-                    this,
-                    currentHealth: Health,
-                    defense: Defense,
-                    increaseDamageTaken: GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.IncreaseDamageTaken ?? 0),
-                    rangedDamageReduction: GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.RangedDamageReduction ?? 0),
-                    shields: GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList(),
-                    canResistDeath: GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow())));
-
-            Health -= result.DamageToTake;
-
-            if (result.ResistedDeath)
-            {
-                ResistKillingBlowPerk.Modifier modifier = (ResistKillingBlowPerk.Modifier)GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
-                if (modifier != null)
-                {
-                    modifier.ResistKillingBlow();
-                    Health = 0.001f;
-                }
-            }
-
-            AttackResult attackResult = new AttackResult(attack, result.DamageToTake, result.DefenseDamagePrevented, Health <= 0, this);
-            foreach (IAttackSource source in attack.AttackSource.Sources)
-                source.AttackLanded(attackResult);
-
-            OnDamageTaken?.Invoke(attackResult, this);
-
-            if (Health <= 0 && !IsDead)
-                Death();
         }
 
         #region Ability
