@@ -15,7 +15,7 @@ namespace Game
             base.Initialize(projectile);
 
             SolveForVelocity(projectile.transform.position, projectile.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, angle, out Vector3 velocity);
-            projectile.Rigidbody.velocity = velocity;
+            projectile.Rigidbody.linearVelocity = velocity;
         }
 
         public override void Update()

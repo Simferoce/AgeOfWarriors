@@ -13,7 +13,7 @@ namespace Game
             base.Initialize(projectile);
 
             SolveForAngle(projectile.transform.position, projectile.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, velocity, out float angle);
-            projectile.Rigidbody.velocity = new Vector2(Mathf.Sign(projectile.Target.TargetPosition.x - projectile.transform.position.x) * Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * velocity;
+            projectile.Rigidbody.linearVelocity = new Vector2(Mathf.Sign(projectile.Target.TargetPosition.x - projectile.transform.position.x) * Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad)) * velocity;
         }
 
         public override void Update()

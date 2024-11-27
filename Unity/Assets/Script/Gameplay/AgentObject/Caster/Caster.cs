@@ -63,7 +63,6 @@ namespace Game
             Profiler.BeginSample("Test");
             int v = AgentObject.GetStatisticOrDefault<int>("attackpower", 1);
             Profiler.EndSample();
-            Debug.Log(v);
 
             foreach (Ability ability in abilities)
             {
