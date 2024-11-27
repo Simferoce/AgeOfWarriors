@@ -13,5 +13,10 @@ namespace Game
 
         public float ReachPercentage => reachPercentage;
         public float DamagePercentage => damagePercentage;
+
+        public override Ability GetAbility()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

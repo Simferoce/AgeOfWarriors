@@ -9,6 +9,10 @@ namespace Game
 
         public override float Cooldown => 0f;
 
+        public ArcherBasicAbility(ArcherBasicAbilityDefinition definition, string trigger = "") : base(definition, trigger)
+        {
+        }
+
         public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
         {
             if (path.StartsWith(StatisticProviderName))

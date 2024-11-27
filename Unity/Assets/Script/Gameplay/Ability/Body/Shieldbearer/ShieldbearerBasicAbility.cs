@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Game
 {
@@ -8,6 +11,31 @@ namespace Game
         public float Range => Caster.GetCachedComponent<Character>().Reach * definition.ReachPercentage;
 
         public override float Cooldown => 0f;
+
+        private List<IAttackable> attackables;
+
+        public ShieldbearerBasicAbility(ShieldbearerBasicAbilityDefinition definition, string trigger) : base(definition, trigger)
+        {
+        }
+
+        public override bool CanUse()
+        {
+            if (!base.CanUse())
+                return false;
+
+            attackables = TargetUtility.GetTargets((ITargeteable target) => target.Faction != Caster.Faction && Mathf.Abs(this.Caster.CenterPosition.x - target.CenterPosition.x) < Range).OfType<IAttackable>().ToList();
+            return attackables.Count > 0;
+        }
+
+        public override void InternalApply()
+        {
+            base.InternalApply();
+
+            foreach (IAttackable attackable in attackables)
+            {
+                attackable.TakeAttack(AttackUtility.Generate(Caster.AgentObject as IAttackSource, Damage, 0, 0, false, false, true, attackable));
+            }
+        }
 
         public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
         {

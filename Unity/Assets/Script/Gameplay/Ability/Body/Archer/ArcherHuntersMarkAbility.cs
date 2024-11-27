@@ -10,6 +10,10 @@ namespace Game
 
         public override float Cooldown => definition.Cooldown;
 
+        public ArcherHuntersMarkAbility(ArcherHuntersMarkAbilityDefinition definition, string trigger = "") : base(definition, trigger)
+        {
+        }
+
         public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
         {
             if (path.StartsWith(StatisticProviderName))

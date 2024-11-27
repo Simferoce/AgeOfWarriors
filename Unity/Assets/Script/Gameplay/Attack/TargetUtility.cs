@@ -27,5 +27,24 @@ namespace Game
                 .OrderBy(x => x.Priority)
                 .ToList();
         }
+
+        public static List<ITargeteable> GetTargets(System.Func<ITargeteable, bool> predicat)
+        {
+            List<ITargeteable> potentialTargets = new List<ITargeteable>();
+            foreach (ITargeteable targetteable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
+            {
+                if (!targetteable.IsActive)
+                    continue;
+
+                if (!predicat.Invoke(targetteable))
+                    continue;
+
+                potentialTargets.Add(targetteable);
+            }
+
+            return potentialTargets
+                .OrderBy(x => x.Priority)
+                .ToList();
+        }
     }
 }

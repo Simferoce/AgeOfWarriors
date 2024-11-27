@@ -21,5 +21,10 @@ namespace Game
         public float Defense => defense;
         public float Cooldown => cooldown;
         public float BuffDuration => buffDuration;
+
+        public override Ability GetAbility()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

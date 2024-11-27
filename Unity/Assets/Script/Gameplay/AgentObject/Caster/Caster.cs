@@ -14,7 +14,6 @@ namespace Game
         public event System.Action OnCastEnd;
 
         public float LastAbilityUsed { get; set; }
-        public List<TransformTag> TransformTags { get; set; }
         public Agent Agent => agentObject.Agent;
         public Faction Faction => agentObject.Faction;
         public Vector3 CenterPosition => agentObject.transform.position;
@@ -25,7 +24,6 @@ namespace Game
         private void Awake()
         {
             agentObject = GetComponentInParent<AgentObject>();
-            TransformTags = GetComponentsInChildren<TransformTag>().ToList();
         }
 
         [Header("Abilities")]
@@ -45,7 +43,6 @@ namespace Game
             foreach (AbilityDefinition definition in abilitiesDefinition)
             {
                 Ability ability = definition.GetAbility();
-                ability.transform.parent = abilitiesParent.transform;
                 ability.Initialize(this);
                 ability.OnAbilityUsed += Ability_OnAbilityUsed;
 
@@ -96,7 +93,7 @@ namespace Game
 
         public bool CanUseAbility()
         {
-            if (AgentObject.GetStatisticOrDefault("health", 0.0f) <= 0 || AgentObject.GetStatisticOrDefault("isDead", false))
+            if (IsCasting || AgentObject.GetStatisticOrDefault("health", 0.0f) <= 0 || AgentObject.GetStatisticOrDefault("isDead", false))
                 return false;
 
             return true;

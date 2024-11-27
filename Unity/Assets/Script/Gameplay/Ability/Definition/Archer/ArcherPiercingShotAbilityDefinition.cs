@@ -21,5 +21,10 @@ namespace Game
         public float DamagePercentage => damagePercentage;
         public float Cooldown => cooldown;
         public float ArmorPenetration => armorPenetration;
+
+        public override Ability GetAbility()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

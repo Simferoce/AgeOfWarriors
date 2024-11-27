@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class Ability : MonoBehaviour, IStatisticProvider
+    public abstract class Ability
     {
         public Caster Caster { get; set; }
         public abstract float Cooldown { get; }
@@ -16,10 +16,9 @@ namespace Game
         public virtual bool IsActive => IsCasting;
         public virtual List<ITargeteable> Targets => new List<ITargeteable>();
         public AbilityDefinition Definition { get; set; }
-        public abstract string ParseDescription();
-        public Faction FactionWhenUsed { get; set; }
-
         public string StatisticProviderName => "ability";
+
+        public abstract string ParseDescription();
 
         public virtual void Initialize(Caster caster)
         {
@@ -32,22 +31,24 @@ namespace Game
 
         public abstract bool CanUse();
 
-        public virtual void Use()
+        public void Use()
         {
             InternalUse();
+            Caster.LastAbilityUsed = Time.time;
             OnAbilityUsed?.Invoke(this);
         }
 
         public abstract void InternalUse();
 
-        public abstract void Apply();
-
-        public abstract void Interrupt();
-
-        protected void PublishEffectApplied()
+        public void Apply()
         {
+            InternalApply();
             OnAbilityEffectApplied?.Invoke();
         }
+
+        public abstract void InternalApply();
+
+        public abstract void Interrupt();
 
         public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
         {
@@ -78,6 +79,12 @@ namespace Game
         where T : AbilityDefinition
     {
         protected T definition { get => Definition as T; set => Definition = value; }
+
+        protected Ability(T definition)
+        {
+            this.definition = definition;
+        }
+
         public override string ParseDescription() => Definition.ParseDescription();
     }
 }

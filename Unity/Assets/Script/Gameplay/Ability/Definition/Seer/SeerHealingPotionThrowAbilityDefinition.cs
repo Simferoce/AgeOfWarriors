@@ -17,5 +17,10 @@ namespace Game
         public float ReachPercentage => reachPercentage;
         public float Heal => heal;
         public float Cooldown => cooldown;
+
+        public override Ability GetAbility()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

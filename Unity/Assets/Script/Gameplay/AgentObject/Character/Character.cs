@@ -22,7 +22,6 @@ namespace Game
         public event Action<AttackResult, IAttackable> OnDamageTaken;
 
         public Animated Animated { get; set; }
-        public List<TransformTag> TransformTags { get; set; }
         public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
         public HashSet<IAttackable> RecentlyAttackedAttackeables { get; set; } = new HashSet<IAttackable>();
         public override bool IsActive { get => !IsDead; }
@@ -53,7 +52,6 @@ namespace Game
         protected override void Awake()
         {
             base.Awake();
-            TransformTags = GetComponentsInChildren<TransformTag>().ToList();
         }
 
         public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
