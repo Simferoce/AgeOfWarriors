@@ -11,14 +11,15 @@ namespace Game
             private int currentAttackApplied = 0;
             private Ability affectedAbility;
             private Character character;
-
-            public override float? AttackPower => definition.attackPower;
+            private Statistic<float> attackPowerFlat;
 
             public Modifier(ModifierHandler modifiable, SeerMadnessPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 character = modifiable.Entity.GetCachedComponent<Character>();
                 affectedAbility = character.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat, definition.attackPower);
+                StatisticRegistry.Register(attackPowerFlat);
             }
 
             private void AffectedAbility_OnAbilityEffectApplied()
@@ -51,6 +52,7 @@ namespace Game
             {
                 base.Dispose();
                 affectedAbility.OnAbilityEffectApplied -= AffectedAbility_OnAbilityEffectApplied;
+                StatisticRegistry.Unregister(attackPowerFlat);
             }
         }
 

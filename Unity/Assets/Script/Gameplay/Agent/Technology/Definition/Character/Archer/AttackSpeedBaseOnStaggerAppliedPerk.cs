@@ -8,12 +8,12 @@ namespace Game
         public class Modifier : Modifier<Modifier, AttackSpeedBaseOnStaggerAppliedPerk>
         {
             private int amountOfStaggerApplied = 0;
-
-            public override float? AttackSpeedPercentage => amountOfStaggerApplied * definition.attackSpeedByStaggerApplied;
+            private Statistic<float> attackSpeedPercentage;
 
             public Modifier(ModifierHandler modifiable, AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 modifiable.Entity.GetCachedComponent<IModifierSource>().OnModifierAdded += Modifier_OnModifierAdded;
+                attackSpeedPercentage = new Statistic<float>(StatisticDefinition.AttackSpeedPercentage);
             }
 
             public override float? GetStack()
@@ -25,6 +25,8 @@ namespace Game
             {
                 if (modifier is StaggerModifierDefinition.Modifier)
                     amountOfStaggerApplied++;
+
+                attackSpeedPercentage.SetValue(amountOfStaggerApplied * definition.attackSpeedByStaggerApplied);
             }
 
             public override void Dispose()

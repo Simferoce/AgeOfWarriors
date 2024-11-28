@@ -7,18 +7,23 @@ namespace Game
     {
         public class AttackPowerModifier : Modifier<AttackPowerModifier, AttackPowerModifierDefinition>
         {
-            private float amount;
-
-            public override float? AttackPower => amount;
+            private Statistic<float> attackPowerFlat;
 
             public AttackPowerModifier(ModifierHandler modifiable, AttackPowerModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                this.amount = amount;
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat, amount);
+                StatisticRegistry.Register(attackPowerFlat);
             }
 
             public override string ParseDescription()
             {
-                return string.Format(definition.Description, amount);
+                return string.Format(definition.Description, attackPowerFlat.GetValue());
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(attackPowerFlat);
             }
         }
     }

@@ -27,7 +27,7 @@ namespace Game
             if (!ModifierInstancier.Applicable(pool, targeteable))
                 return;
 
-            if (!targeteable.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
+            if (!(targeteable as Entity).TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                 return;
 
             Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == ModifierInstancier.ModifierDefinition);

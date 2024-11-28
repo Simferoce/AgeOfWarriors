@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Game
+﻿namespace Game
 {
     public class ArcherPiercingShotAbility : AnimationBaseCharacterAbility<ArcherPiercingShotAbilityDefinition>
     {
@@ -12,35 +10,6 @@ namespace Game
 
         public ArcherPiercingShotAbility(ArcherPiercingShotAbilityDefinition definition, string trigger = "") : base(definition, trigger)
         {
-        }
-
-        public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            if (path.StartsWith(StatisticProviderName))
-                path = path.Slice(StatisticProviderName.Length + 1);
-
-            if (path.SequenceEqual("damage"))
-            {
-                float damageTemporary = Damage;
-                statistic = __refvalue(__makeref(damageTemporary), T);
-                return true;
-            }
-            else if (path.SequenceEqual("range"))
-            {
-                float rangeTemporary = Range;
-                statistic = __refvalue(__makeref(rangeTemporary), T);
-                return true;
-            }
-            else if (path.SequenceEqual("armor_penetration"))
-            {
-                float armorPenetrationTemporary = ArmorPenetration;
-                statistic = __refvalue(__makeref(armorPenetrationTemporary), T);
-                return true;
-            }
-            else
-            {
-                return base.TryGetStatistic<T>(path, out statistic);
-            }
         }
 
         public override string ParseDescription()

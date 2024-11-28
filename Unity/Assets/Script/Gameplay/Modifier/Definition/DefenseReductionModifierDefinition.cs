@@ -7,14 +7,19 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, DefenseReductionModifierDefinition>
         {
-            public override float? DefenseReduction => defenseReduction;
-
-            private float defenseReduction;
+            private Statistic<float> defenseReduction;
 
             public Modifier(ModifierHandler modifiable, DefenseReductionModifierDefinition modifierDefinition, float duration, float reduction, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
             {
                 With(new CharacterModifierTimeElement(duration));
-                defenseReduction = reduction;
+                defenseReduction = new Statistic<float>(StatisticDefinition.DefenseFlat, -reduction);
+                StatisticRegistry.Register(defenseReduction);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(defenseReduction);
             }
         }
     }

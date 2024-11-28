@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 namespace Game
 {
@@ -7,10 +8,24 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseDamageTakenWhenStaggerPerk>
         {
-            public float IncreaseDamageTakenOfStaggered => definition.increaseDamageTakenOfStaggered;
+            private Statistic<float> damageTakenWhileStagger;
 
             public Modifier(ModifierHandler modifiable, IncreaseDamageTakenWhenStaggerPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                damageTakenWhileStagger = new Statistic<float>(StatisticDefinition.DamageTaken);
+                StatisticRegistry.Register(damageTakenWhileStagger);
+            }
+
+            public override void Update()
+            {
+                base.Update();
+                damageTakenWhileStagger.SetValue(modifiable.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x.IsStagger == true) ? definition.increaseDamageTakenOfStaggered : 0f);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(damageTakenWhileStagger);
             }
         }
 

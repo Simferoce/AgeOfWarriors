@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -49,30 +48,6 @@ namespace Game
         public abstract void InternalApply();
 
         public abstract void Interrupt();
-
-        public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            if (path.SequenceEqual("caster"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, Caster>(Caster);
-                return true;
-            }
-            else if (path.SequenceEqual("cooldown"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(Cooldown);
-                return true;
-            }
-            else if (path.StartsWith("caster"))
-            {
-                path = path.Slice("caster".Length + 1);
-                return Caster.AgentObject.TryGetStatistic(path, out statistic);
-            }
-            else
-            {
-                statistic = default;
-                return false;
-            }
-        }
     }
 
     public abstract class Ability<T> : Ability

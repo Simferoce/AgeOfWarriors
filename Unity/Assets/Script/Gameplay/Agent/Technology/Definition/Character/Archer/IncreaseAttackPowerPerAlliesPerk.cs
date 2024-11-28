@@ -7,14 +7,15 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackPowerPerAlliesPerk>
         {
-            private int amountOfAlliesPresentOnTheBattleField;
-
-            public override float? AttackPower => amountOfAlliesPresentOnTheBattleField * definition.attackPowerPerAlliesPresent;
-
             public override bool Show => amountOfAlliesPresentOnTheBattleField > 0;
+
+            private Statistic<float> attackPowerFlat;
+            private int amountOfAlliesPresentOnTheBattleField;
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackPowerPerAlliesPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat);
+                StatisticRegistry.Register(attackPowerFlat);
             }
 
             public override float? GetStack()
@@ -41,6 +42,14 @@ namespace Game
 
                     amountOfAlliesPresentOnTheBattleField++;
                 }
+
+                attackPowerFlat.SetValue(amountOfAlliesPresentOnTheBattleField * definition.attackPowerPerAlliesPresent);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(attackPowerFlat);
             }
         }
 

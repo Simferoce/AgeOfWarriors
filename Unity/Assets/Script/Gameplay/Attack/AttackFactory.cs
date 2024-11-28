@@ -33,12 +33,12 @@ namespace Game
 
             if (modifiers.Count > 0)
             {
-                float damageDealtReduction = modifiers.Max(x => x.DamageDealtReduction ?? 0);
+                float damageDealtReduction = modifiers.Max(x => x.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.DamageDealt, out Statistic<float> statistic) ? statistic.GetValue() : 0f);
                 damage *= (1 - damageDealtReduction);
             }
 
             if (attackable.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is DamageDealtReductionModifierDefinition.Modifier))
-                damage += Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.DamageDealtAgainstWeak ?? 0);
+                damage += Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.DamageDealtAgainstWeak, out Statistic<float> statistic) ? statistic.GetValue() : 0f);
 
             return new Attack(this, damage, armorPenetration, leach, ranged, empowered, reflectable, overtime);
         }

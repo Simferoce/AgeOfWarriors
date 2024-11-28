@@ -28,11 +28,18 @@ namespace Game
         private static StatisticDefinition damageDealtReduction;
 
         public static StatisticDefinition AttackPower => attackPower ??= Resources.Load<StatisticDefinition>("Definition/Statistic/AttackPowerStatisticDefinition");
+        public static StatisticDefinition AttackPowerFlat => null;
         public static StatisticDefinition Reach => reach ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ReachStatisticDefinition");
+        public static StatisticDefinition ReachPercentage => null;
+        public static StatisticDefinition Health => null;
         public static StatisticDefinition MaxHealth => maxHealth ??= Resources.Load<StatisticDefinition>("Definition/Statistic/MaxHealthStatisticDefinition");
+        public static StatisticDefinition MaxHealthFlat => null;
         public static StatisticDefinition Defense => defense ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DefenseStatisticDefinition");
+        public static StatisticDefinition DefenseFlat => null;
         public static StatisticDefinition AttackSpeed => attackSpeed ??= Resources.Load<StatisticDefinition>("Definition/Statistic/AttackSpeedStatisticDefinition");
+        public static StatisticDefinition AttackSpeedPercentage => null;
         public static StatisticDefinition Speed => speed ??= Resources.Load<StatisticDefinition>("Definition/Statistic/SpeedStatisticDefinition");
+        public static StatisticDefinition SpeedPercentage => null;
         public static StatisticDefinition Damage => damage ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageStatisticDefinition");
         public static StatisticDefinition Range => range ??= Resources.Load<StatisticDefinition>("Definition/Statistic/RangeStatisticDefinition");
         public static StatisticDefinition BuffDuration => buffDuration ??= Resources.Load<StatisticDefinition>("Definition/Statistic/BuffDurationStatisticDefinition");
@@ -41,11 +48,11 @@ namespace Game
         public static StatisticDefinition Threshold => threshold ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ThresholdStatisticDefinition");
         public static StatisticDefinition Heal => heal ??= Resources.Load<StatisticDefinition>("Definition/Statistic/HealStatisticDefinition");
         public static StatisticDefinition Shield => shield ??= Resources.Load<StatisticDefinition>("Definition/Statistic/ShieldStatisticDefinition");
-        public static StatisticDefinition RangedDamageReduction => rangedDamageReduction ??= Resources.Load<StatisticDefinition>("Definition/Statistic/RangedDamageReductionStatisticDefinition");
+        public static StatisticDefinition RangedDamageTaken => rangedDamageReduction ??= Resources.Load<StatisticDefinition>("Definition/Statistic/RangedDamageReductionStatisticDefinition");
         public static StatisticDefinition Stack => stack ??= Resources.Load<StatisticDefinition>("Definition/Statistic/StackStatisticDefinition");
-        public static StatisticDefinition DamageIncrease => damageIncrease ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageIncreaseStatisticDefinition");
-        public static StatisticDefinition DamageDealtAgainstWeakTarget => damageDealtAgainstWeakTarget ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageDealtAgainstWeakStatisticDefinition");
-        public static StatisticDefinition DamageDealtReduction => damageDealtReduction ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageDealtReductionDefinition");
+        public static StatisticDefinition DamageDealtAgainstWeak => damageDealtAgainstWeakTarget ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageDealtAgainstWeakStatisticDefinition");
+        public static StatisticDefinition DamageDealt => damageDealtReduction ??= Resources.Load<StatisticDefinition>("Definition/Statistic/DamageIncreaseStatisticDefinition");
+        public static StatisticDefinition DamageTaken => null;
 
         private static List<StatisticDefinition> all = null;
         public static List<StatisticDefinition> All => all ??= new List<StatisticDefinition>()

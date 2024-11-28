@@ -8,11 +8,24 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseDamageBaseOnEffectAppliedPerk>
         {
-            public override float? AttackPower => definition.attackPowerPerEffectApplied * Source.AppliedModifiers.Count(x =>
-                x.Definition is not CharacterTechnologyPerkDefinition);
+            private Statistic<float> attackPowerFlat;
 
             public Modifier(ModifierHandler modifiable, IncreaseDamageBaseOnEffectAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat);
+                StatisticRegistry.Register(attackPowerFlat);
+            }
+
+            public override void Update()
+            {
+                base.Update();
+                attackPowerFlat.SetValue(definition.attackPowerPerEffectApplied * Source.AppliedModifiers.Count(x => x.Definition is not CharacterTechnologyPerkDefinition));
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(attackPowerFlat);
             }
         }
 

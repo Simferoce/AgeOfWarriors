@@ -8,12 +8,25 @@ namespace Game
         public class Modifier : Modifier<Modifier, IncreaseAttackPowerBaseOnDurationAlivePerk>
         {
             private float startedAt;
-
-            public override float? AttackPower => definition.attackpowerPerSeconds * (Time.time - startedAt);
+            private Statistic<float> attackPowerFlat;
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackPowerBaseOnDurationAlivePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 startedAt = Time.time;
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat);
+                StatisticRegistry.Register(attackPowerFlat);
+            }
+
+            public override void Update()
+            {
+                base.Update();
+                attackPowerFlat.SetValue(definition.attackpowerPerSeconds * (Time.time - startedAt));
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(attackPowerFlat);
             }
         }
 

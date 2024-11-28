@@ -23,7 +23,6 @@ namespace Game
 
         public event System.Action<AgentObject> OnDestroyed;
 
-        public virtual bool IsActive { get => true; }
         public int Direction { get; protected set; }
         public Agent Agent { get; protected set; }
         public int SpawnNumber { get; private set; }
@@ -32,12 +31,14 @@ namespace Game
         public virtual Faction OriginalFaction { get => Agent.Faction; }
         public List<Type> Types { get => types; }
         public string Name => name;
-        protected virtual void Awake()
+
+        protected override void Awake()
         {
+            base.Awake();
             All.Add(this);
         }
 
-        protected virtual void OnDestroy()
+        protected override void OnDestroy()
         {
             All.Remove(this);
             OnDestroyed?.Invoke(this);

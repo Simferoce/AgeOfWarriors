@@ -7,10 +7,18 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackSpeedPerk>
         {
-            public override float? AttackPower => definition.amount;
+            private Statistic<float> attackSpeed;
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackSpeedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                attackSpeed = new Statistic<float>(StatisticDefinition.AttackSpeedPercentage, definition.amount);
+                StatisticRegistry.Register(attackSpeed);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(attackSpeed);
             }
         }
 

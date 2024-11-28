@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ namespace Game
             if (!base.CanUse())
                 return false;
 
-            attackables = TargetUtility.GetTargets((ITargeteable target) => target.Faction != Caster.Faction && Mathf.Abs(this.Caster.CenterPosition.x - target.CenterPosition.x) < Range).Select(x => x.GetCachedComponent<Attackable>()).Where(x => x != null).ToList();
+            attackables = TargetUtility.GetTargets((ITargeteable target) => target.Faction != Caster.Faction && Mathf.Abs(this.Caster.CenterPosition.x - target.CenterPosition.x) < Range).Select(x => (x as Entity).GetCachedComponent<Attackable>()).Where(x => x != null).ToList();
             return attackables.Count > 0;
         }
 
@@ -34,29 +33,6 @@ namespace Game
             foreach (Attackable attackable in attackables)
             {
                 attackable.TakeAttack(Caster.Entity.GetCachedComponent<AttackFactory>().Generate(Damage, 0, 0, false, false, true, attackable));
-            }
-        }
-
-        public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            if (path.StartsWith(StatisticProviderName))
-                path = path.Slice(StatisticProviderName.Length + 1);
-
-            if (path.SequenceEqual("damage"))
-            {
-                float damageTemporary = Damage;
-                statistic = __refvalue(__makeref(damageTemporary), T);
-                return true;
-            }
-            else if (path.SequenceEqual("range"))
-            {
-                float rangeTemporary = Range;
-                statistic = __refvalue(__makeref(rangeTemporary), T);
-                return true;
-            }
-            else
-            {
-                return base.TryGetStatistic<T>(path, out statistic);
             }
         }
 

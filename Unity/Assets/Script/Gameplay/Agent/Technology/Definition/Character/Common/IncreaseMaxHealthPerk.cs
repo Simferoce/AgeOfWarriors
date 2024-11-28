@@ -7,10 +7,18 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseMaxHealthPerk>
         {
-            public override float? MaxHealth => definition.amount;
+            private Statistic<float> maxHealthFlat;
 
             public Modifier(ModifierHandler modifiable, IncreaseMaxHealthPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                maxHealthFlat = new Statistic<float>(StatisticDefinition.MaxHealthFlat, definition.amount);
+                StatisticRegistry.Register(maxHealthFlat);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(maxHealthFlat);
             }
         }
 

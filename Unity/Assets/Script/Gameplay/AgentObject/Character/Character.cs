@@ -30,74 +30,27 @@ namespace Game
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
 
         public float Health { get; set; }
-        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.MaxHealth.HasValue).Sum(x => x.MaxHealth.Value); }
-        public float Defense { get => Definition.Defense + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.Defense.HasValue).Sum(x => x.Defense.Value); }
-        public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackSpeedPercentage.HasValue).Sum(x => x.AttackSpeedPercentage.Value)); }
-        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.AttackPower.HasValue).Sum(x => x.AttackPower.Value); }
-        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.SpeedPercentage.HasValue).Sum(x => x.SpeedPercentage.Value)); }
-        public float Reach { get => Definition.Reach * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.ReachPercentage.HasValue).Sum(x => x.ReachPercentage.Value)); }
+        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.MaxHealthFlat, out Statistic<float> value) ? a + value.GetValue() : a); }
+        public float Defense { get => Definition.Defense + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.DefenseFlat, out Statistic<float> value) ? a + value.GetValue() : a); }
+        public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.AttackSpeedPercentage, out Statistic<float> value) ? a + value.GetValue() : a)); }
+        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.AttackPowerFlat, out Statistic<float> value) ? a + value.GetValue() : a); }
+        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.SpeedPercentage, out Statistic<float> value) ? a + value.GetValue() : a)); }
+        public float Reach { get => Definition.Reach * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.ReachPercentage, out Statistic<float> value) ? a + value.GetValue() : a)); }
         public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
 
-        public bool IsEngaged => TargetUtility.GetTargets(this, engagedCriteria, this).FirstOrDefault() != null;
+        public bool IsEngaged => TargetUtility.GetTargets((x) => Mathf.Abs(x.CenterPosition.x - this.CenterPosition.x) < 0.5f).Count > 0;
         public bool IsInvulnerable => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
         public bool IsConfused => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }
         public bool IsInjured { get => Health < MaxHealth; }
 
         private StateMachine stateMachine = new StateMachine();
-        private TargetCriteria engagedCriteria = new IsEnemyTargetCriteria();
 
         protected override void Awake()
         {
             base.Awake();
             GetCachedComponent<Attackable>().OnAttackTaken += OnAttackTaken;
             GetCachedComponent<AttackFactory>().OnAttackDealt += OnAttackDealt;
-        }
-
-        public override bool TryGetStatistic<T>(ReadOnlySpan<char> path, out T statistic)
-        {
-            if (path.SequenceEqual("isDead"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, bool>(IsDead);
-                return true;
-            }
-            else if (path.SequenceEqual("health"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(Health);
-                return true;
-            }
-            else if (path.SequenceEqual("maxhealth"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(MaxHealth);
-                return true;
-            }
-            else if (path.SequenceEqual("defense"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(Defense);
-                return true;
-            }
-            else if (path.SequenceEqual("attackspeed"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(AttackSpeed);
-                return true;
-            }
-            else if (path.SequenceEqual("attackpower"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(AttackPower);
-                return true;
-            }
-            else if (path.SequenceEqual("speed"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(Speed);
-                return true;
-            }
-            else if (path.SequenceEqual("reach"))
-            {
-                statistic = StatisticUtility.ConvertGeneric<T, float>(Reach);
-                return true;
-            }
-
-            return base.TryGetStatistic<T>(name, out statistic);
         }
 
         public override void Spawn(Agent agent, int spawnNumber, int direction)

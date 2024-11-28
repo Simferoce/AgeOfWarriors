@@ -27,7 +27,7 @@ namespace Game
 
         public override bool CanUse()
         {
-            return Time.time - Caster.LastAbilityUsed > Caster.AgentObject.GetStatisticOrDefault<float>("attack_speed");
+            return Time.time - Caster.LastAbilityUsed > Caster.AgentObject[StatisticDefinition.AttackSpeed];
         }
 
         public override void InternalApply() { }

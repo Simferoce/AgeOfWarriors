@@ -1,5 +1,4 @@
 ﻿using System;
-using Unity.Profiling;
 using UnityEngine;
 
 namespace Game
@@ -9,28 +8,32 @@ namespace Game
     {
         [SerializeField] private string path;
 
-        public T GetValueOrThrow(IStatisticProvider statisticProvider)
+        public T GetValueOrThrow(Entity entity)
         {
-            return TryGetValue(statisticProvider, out T value) ? value : throw new Exception($"Could not resolve the path \"{path}\" for \"{statisticProvider}\"");
+            return TryGetValue(entity, out T value) ? value : throw new Exception($"Could not resolve the path \"{path}\" for \"{entity}\"");
         }
 
-        public T GetValueOrDefault(IStatisticProvider statisticProvider)
+        public T GetValueOrDefault(Entity entity)
         {
-            return TryGetValue(statisticProvider, out T value) ? value : default;
+            return TryGetValue(entity, out T value) ? value : default;
         }
 
-        private bool TryGetValue(IStatisticProvider statisticProvider, out T value)
+        private bool TryGetValue(Entity entity, out T value)
         {
-            using (new ProfilerMarker("Statistic.Resolve").Auto())
+            if (string.IsNullOrEmpty(path))
             {
-                if (string.IsNullOrEmpty(path))
-                {
-                    value = default(T);
-                    return false;
-                }
-
-                return statisticProvider.TryGetStatistic<T>(path, out value);
+                value = default(T);
+                return false;
             }
+
+            if (entity.StatisticRegistry.TryGetStatistic(path, out Statistic<T> statistic))
+            {
+                value = statistic.GetValue();
+                return true;
+            }
+
+            value = default(T);
+            return false;
         }
     }
 }

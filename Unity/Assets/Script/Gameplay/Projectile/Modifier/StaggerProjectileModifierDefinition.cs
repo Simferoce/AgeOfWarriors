@@ -23,7 +23,7 @@ namespace Game
             {
                 foreach (ITargeteable targeteable in targeteables)
                 {
-                    if (targeteable.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
+                    if ((targeteable as Entity).TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                     {
                         modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, duration, projectile.AgentObject as Character));
                     }

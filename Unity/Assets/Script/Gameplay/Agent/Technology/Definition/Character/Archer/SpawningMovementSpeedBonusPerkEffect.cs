@@ -7,14 +7,13 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, SpawningMovementSpeedBonusPerkEffect>
         {
-            public override float? SpeedPercentage => movementSpeedIncrease;
-
-            private float movementSpeedIncrease;
+            private Statistic<float> speedPercentage;
 
             public Modifier(ModifierHandler modifiable, SpawningMovementSpeedBonusPerkEffect modifierDefinition, IModifierSource modifierSource, float movementSpeedIncrease) : base(modifiable, modifierDefinition, modifierSource)
             {
-                this.movementSpeedIncrease = movementSpeedIncrease;
                 modifiable.Entity.GetCachedComponent<Caster>().OnAbilityUsed += Modifier_OnAbilityUsed;
+                speedPercentage = new Statistic<float>(StatisticDefinition.SpeedPercentage, movementSpeedIncrease);
+                StatisticRegistry.Register(speedPercentage);
             }
 
             private void Modifier_OnAbilityUsed(Ability obj)
@@ -26,6 +25,7 @@ namespace Game
             {
                 base.Dispose();
                 modifiable.Entity.GetCachedComponent<Caster>().OnAbilityUsed -= Modifier_OnAbilityUsed;
+                StatisticRegistry.Unregister(speedPercentage);
             }
         }
     }

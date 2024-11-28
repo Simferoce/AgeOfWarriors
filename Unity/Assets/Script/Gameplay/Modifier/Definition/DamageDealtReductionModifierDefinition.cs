@@ -21,18 +21,25 @@ namespace Game
                 }
             }
 
-            public override float? DamageDealtReduction => amount;
-
             private float amount;
+            private Statistic<float> damageDealt;
 
             public Modifier(ModifierHandler modifiable, DamageDealtReductionModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.amount = amount;
+                damageDealt = new Statistic<float>(StatisticDefinition.DamageDealt, amount);
+                StatisticRegistry.Register(damageDealt);
             }
 
             public override string ParseDescription()
             {
                 return string.Format(definition.Description, amount);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(damageDealt);
             }
         }
     }

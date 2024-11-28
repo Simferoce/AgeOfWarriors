@@ -5,29 +5,19 @@ using UnityEngine;
 
 namespace Game
 {
-    public abstract class Modifier : IModifier, IDisposable
+    public abstract class Modifier : IDisposable
     {
         public List<ModifierElement> modifierElements = new List<ModifierElement>();
         public abstract ModifierDefinition Definition { get; }
 
-        public virtual float? SpeedPercentage => null;
-        public virtual float? Defense => null;
-        public virtual float? MaxHealth => null;
-        public virtual float? AttackSpeedPercentage => null;
-        public virtual float? ReachPercentage => null;
-        public virtual float? AttackPower => null;
         public virtual bool? IsInvulnerable => null;
         public virtual bool? IsStagger => null;
         public virtual bool? IsConfused => null;
-        public virtual float? RangedDamageReduction => null;
-        public virtual float? DamageDealtReduction => null;
-        public virtual float? DamageDealtAgainstWeak => null;
-        public virtual float? IncreaseDamageTaken => null;
-        public virtual float? DefenseReduction => null;
 
         public ModifierHandler Modifiable { get => modifiable; set => modifiable = value; }
         public IModifierSource Source { get; }
         public virtual bool Show => Definition.Show;
+        public StatisticRegistry StatisticRegistry { get; set; } = new StatisticRegistry();
 
         protected ModifierHandler modifiable;
 

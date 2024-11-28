@@ -7,7 +7,6 @@ namespace Game
     [Serializable]
     public class ProjectileHealImpact : ProjectileImpact
     {
-        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private StatisticReference<float> heal;
 
         private float currentHeal;
@@ -27,8 +26,7 @@ namespace Game
             if (collision.CompareTag(GameTag.HIT_BOX) &&
                 collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
                 && targeteable.IsActive
-                && criteria.Execute(projectile.AgentObject.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
-                && targeteable.TryGetCachedComponent<Character>(out Character character))
+                && (targeteable as Entity).TryGetCachedComponent<Character>(out Character character))
             {
                 character.Heal(currentHeal);
 

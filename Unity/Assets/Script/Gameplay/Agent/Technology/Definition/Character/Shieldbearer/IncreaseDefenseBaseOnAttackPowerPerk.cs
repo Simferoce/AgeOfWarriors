@@ -7,10 +7,24 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseDefenseBaseOnAttackPowerPerk>
         {
-            public override float? AttackPower => Mathf.Floor(modifiable.Entity.GetCachedComponent<Character>().Defense / definition.defenseRequired) * definition.attackPowerIncrease;
+            private Statistic<float> attackPowerFlat;
 
             public Modifier(ModifierHandler modifiable, IncreaseDefenseBaseOnAttackPowerPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat, 0f);
+                StatisticRegistry.Register(attackPowerFlat);
+            }
+
+            public override void Update()
+            {
+                base.Update();
+                attackPowerFlat.SetValue(Mathf.Floor(modifiable.Entity.GetCachedComponent<Character>().Defense / definition.defenseRequired) * definition.attackPowerIncrease);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(attackPowerFlat);
             }
         }
 

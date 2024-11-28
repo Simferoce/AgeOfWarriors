@@ -8,7 +8,6 @@ namespace Game
     [Serializable]
     public class ProjectileTimedImpact : ProjectileImpact
     {
-        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private StatisticReference<float> duration;
         [SerializeField] private float delay;
@@ -64,8 +63,7 @@ namespace Game
             foreach (ITargeteable targeteable in targeteablesInEffect)
             {
                 if (Time.time - startedAt > delay
-                    && criteria.Execute(projectile.AgentObject.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
-                    && targeteable.TryGetCachedComponent<Attackable>(out Attackable attackable)
+                    && (targeteable as Entity).TryGetCachedComponent<Attackable>(out Attackable attackable)
                     && !targetsHit.Contains(attackable))
                 {
                     Attack attack = projectile.GetCachedComponent<AttackFactory>().Generate(damage.GetValueOrThrow(projectile), 0, 0, true, false, true, attackable);

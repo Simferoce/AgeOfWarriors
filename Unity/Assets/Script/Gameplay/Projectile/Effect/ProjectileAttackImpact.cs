@@ -7,7 +7,6 @@ namespace Game
     [Serializable]
     public class ProjectileAttackImpact : ProjectileImpact
     {
-        [SerializeReference, SubclassSelector] private TargetCriteria criteria;
         [SerializeField] private StatisticReference<float> damage;
         [SerializeField] private StatisticReference<float> armorPenetration;
 
@@ -24,8 +23,7 @@ namespace Game
                 collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
                 && targeteable.IsActive
                 && projectile.Ignore != targeteable
-                && criteria.Execute(projectile.AgentObject.GetCachedComponent<ITargeteable>(), targeteable, projectile, projectile.Faction, targeteable.Faction)
-                && targeteable.TryGetCachedComponent<Attackable>(out Attackable attackable))
+                && (targeteable as Entity).TryGetCachedComponent<Attackable>(out Attackable attackable))
             {
                 attack = projectile.GetCachedComponent<AttackFactory>().Generate(damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, true, false, true, attackable);
                 attackable.TakeAttack(attack);

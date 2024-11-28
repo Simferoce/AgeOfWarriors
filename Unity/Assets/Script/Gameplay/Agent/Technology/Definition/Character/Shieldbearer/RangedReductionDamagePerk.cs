@@ -7,10 +7,18 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, RangedReductionDamagePerk>
         {
-            public override float? RangedDamageReduction => definition.rangedDamageReduction;
+            private Statistic<float> rangedDamageReduction;
 
             public Modifier(ModifierHandler modifiable, RangedReductionDamagePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
+                rangedDamageReduction = new Statistic<float>(StatisticDefinition.RangedDamageTaken, definition.rangedDamageReduction);
+                StatisticRegistry.Register(rangedDamageReduction);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(rangedDamageReduction);
             }
         }
 

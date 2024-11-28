@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 namespace Game
 {
@@ -59,10 +58,6 @@ namespace Game
 
         private void Update()
         {
-            Profiler.BeginSample("Test");
-            int v = AgentObject.GetStatisticOrDefault<int>("attackpower", 1);
-            Profiler.EndSample();
-
             foreach (Ability ability in abilities)
             {
                 if (ability.IsActive)
@@ -95,7 +90,7 @@ namespace Game
 
         public bool CanUseAbility()
         {
-            if (IsCasting || AgentObject.GetStatisticOrDefault("health", 0.0f) <= 0 || AgentObject.GetStatisticOrDefault("isDead", false))
+            if (IsCasting || AgentObject[StatisticDefinition.Health] <= 0)
                 return false;
 
             return true;

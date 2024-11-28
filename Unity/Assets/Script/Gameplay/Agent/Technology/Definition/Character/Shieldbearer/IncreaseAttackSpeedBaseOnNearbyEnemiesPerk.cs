@@ -8,17 +8,18 @@ namespace Game
         public class Modifier : Modifier<Modifier, IncreaseAttackSpeedBaseOnNearbyEnemiesPerk>
         {
             private int numberOfNearbyEnemies;
+            private Statistic<float> attackSpeedPercentage;
 
-            public override float? AttackSpeedPercentage => numberOfNearbyEnemies * definition.attackSpeedIncreasePerEnemies;
             public override bool Show => numberOfNearbyEnemies > 0;
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackSpeedBaseOnNearbyEnemiesPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
+                attackSpeedPercentage = new Statistic<float>(StatisticDefinition.AttackSpeedPercentage, 0f);
             }
 
             public override string ParseDescription()
             {
-                return string.Format(Definition.Description, definition.attackSpeedIncreasePerEnemies, StatisticFormatter.Percentage(definition.percentageReach, StatisticDefinition.Reach), $"{AttackSpeedPercentage:0.0%}({numberOfNearbyEnemies}x{definition.attackSpeedIncreasePerEnemies:0.0%})");
+                return string.Format(Definition.Description, definition.attackSpeedIncreasePerEnemies, StatisticFormatter.Percentage(definition.percentageReach, StatisticDefinition.Reach), $"{attackSpeedPercentage.GetValue():0.0%}({numberOfNearbyEnemies}x{definition.attackSpeedIncreasePerEnemies:0.0%})");
             }
 
             public override void Update()
@@ -51,6 +52,14 @@ namespace Game
 
                     numberOfNearbyEnemies++;
                 }
+
+                attackSpeedPercentage.SetValue(numberOfNearbyEnemies * definition.attackSpeedIncreasePerEnemies);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(attackSpeedPercentage);
             }
         }
 

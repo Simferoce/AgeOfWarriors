@@ -7,13 +7,27 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackPowerBaseOnRemainingHealthPerk>
         {
-            public override float? AttackPower => modifiable.Entity.TryGetCachedComponent<Character>(out Character character)
-                && character.Health / character.MaxHealth < definition.attackpower
-                ? definition.threshold
-                : null;
+            private Statistic<float> attackPowerFlat;
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackPowerBaseOnRemainingHealthPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat);
+                StatisticRegistry.Register(attackPowerFlat);
+            }
+
+            public override void Update()
+            {
+                base.Update();
+                attackPowerFlat.SetValue(modifiable.Entity.TryGetCachedComponent<Character>(out Character character)
+                    && character.Health / character.MaxHealth < definition.attackpower
+                    ? definition.threshold
+                    : 0f);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(attackPowerFlat);
             }
         }
 
@@ -22,7 +36,6 @@ namespace Game
 
         public override string ParseDescription()
         {
-
             return string.Format(Description, attackpower, threshold);
         }
 

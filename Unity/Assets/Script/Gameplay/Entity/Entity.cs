@@ -1,61 +1,127 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class Entity : MonoBehaviour, IStatisticProvider
+    public class Entity : MonoBehaviour
     {
-        private Dictionary<Type, object> cached = new Dictionary<Type, object>();
-
-        public float this[string name] => GetValueOrThrow<float>(name);
-
-        public T GetValueOrThrow<T>(string name)
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void Init()
         {
-            return TryGetStatistic<T>(name, out T statistic) ? statistic : throw new Exception($"Unable to find the value with the name: {name}");
+            All = new List<Entity>();
         }
 
-        public T GetStatisticOrDefault<T>(string name, T defaultValue = default)
+        public static List<Entity> All = new List<Entity>();
+
+        public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
+        public event OnParentChangedDelegate OnParentChanged;
+
+        public delegate void OnDestroyDelegate(Entity entity);
+        public event OnDestroyDelegate OnDeactivated;
+
+        public Entity Parent
         {
-            return TryGetStatistic<T>(name, out T statistic) ? statistic : defaultValue;
+            get
+            {
+                return parent;
+            }
+            set
+            {
+                if (parent != null)
+                    parent.children.Remove(this);
+
+                OnParentChanged?.Invoke(this, parent, value);
+                parent = value;
+
+                if (parent != null)
+                    parent.children.Add(this);
+            }
+        }
+        public IReadOnlyList<Entity> Children => children;
+        public virtual bool IsActive { get => true; }
+        public StatisticRegistry StatisticRegistry { get => statisticRegistry; set => statisticRegistry = value; }
+
+        private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();
+        private Entity parent = null;
+        private List<Entity> children = new List<Entity>();
+        private StatisticRegistry statisticRegistry = new StatisticRegistry();
+        public Statistic this[StatisticDefinition definition] => statisticRegistry.GetStatisticOrThrow(definition);
+
+        protected virtual void Awake()
+        {
+            All.Add(this);
+            Link(statisticRegistry);
         }
 
-        public virtual bool TryGetStatistic<T>(ReadOnlySpan<char> name, out T statistic)
+        protected virtual void OnDestroy()
         {
-            statistic = default;
-            return false;
+            Parent = null;
+            All.Remove(this);
+        }
+
+
+        #region Components
+        public void Link<T>(T component)
+            where T : class
+        {
+            if (!cached.ContainsKey(typeof(T)))
+                cached[typeof(T)] = new List<object>();
+
+            cached[typeof(T)].Add(component);
         }
 
         public bool TryGetCachedComponent<T>(out T component)
+            where T : class
         {
-            component = GetCachedComponent<T>();
+            component = GetCachedComponent<T>() as T;
             return component != null;
         }
 
         public T GetCachedComponent<T>()
+            where T : class
         {
             if (cached.ContainsKey(typeof(T)))
             {
-                return (T)cached[typeof(T)];
+                return (T)cached[typeof(T)].FirstOrDefault();
             }
             else
             {
-                cached[typeof(T)] = GetComponent<T>();
-                return (T)cached[typeof(T)];
+                if (typeof(Component).IsAssignableFrom(typeof(T)))
+                    cached[typeof(T)] = GetComponentsInChildren<T>().Cast<object>().ToList();
+                else
+                    cached[typeof(T)] = new List<object>();
+
+                return (T)cached[typeof(T)].FirstOrDefault();
             }
         }
 
         public T AddOrGetCachedComponent<T>()
-            where T : Component
+            where T : class
         {
             T component = GetCachedComponent<T>();
             if (component != null)
                 return component;
 
-            component = gameObject.AddComponent<T>();
-            cached[typeof(T)] = component;
+            if (typeof(Component).IsAssignableFrom(typeof(T)))
+                component = gameObject.AddComponent(typeof(T)) as T;
+            else
+                component = Activator.CreateInstance(typeof(T)) as T;
 
+            cached[typeof(T)] = new List<object>() { component };
             return component;
         }
+
+        public IEnumerable<Entity> GetHierarchy()
+        {
+            Entity current = this;
+            while (current != null)
+            {
+                yield return current;
+                current = current.Parent;
+            }
+        }
+        #endregion
     }
 }

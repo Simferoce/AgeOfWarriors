@@ -9,7 +9,7 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, ReduceAttackSpeedPerk>
         {
-            private List<AttackSpeedReductionModifierDefinition.Modifier> currents = new List<AttackSpeedReductionModifierDefinition.Modifier>();
+            private List<AttackSpeedModifierDefinition.Modifier> currents = new List<AttackSpeedModifierDefinition.Modifier>();
 
             public Modifier(ModifierHandler modifiable, ReduceAttackSpeedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
@@ -43,7 +43,7 @@ namespace Game
 
                     if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.percentageReach * character.Reach)
                     {
-                        AttackSpeedReductionModifierDefinition.Modifier modifierOutOfRange = currents.FirstOrDefault(x => x.Modifiable == modifiable);
+                        AttackSpeedModifierDefinition.Modifier modifierOutOfRange = currents.FirstOrDefault(x => x.Modifiable == modifiable);
                         if (modifierOutOfRange != null)
                         {
                             modifiable.RemoveModifier(modifierOutOfRange);
@@ -53,10 +53,10 @@ namespace Game
                         continue;
                     }
 
-                    AttackSpeedReductionModifierDefinition.Modifier modifier = new AttackSpeedReductionModifierDefinition.Modifier(
+                    AttackSpeedModifierDefinition.Modifier modifier = new AttackSpeedModifierDefinition.Modifier(
                         modifiable,
                         definition.attackSpeedReductionModifierDefinition,
-                        definition.amount,
+                        -definition.amount,
                         Source);
                     modifiable.AddModifier(modifier);
                     currents.Add(modifier);
@@ -64,7 +64,7 @@ namespace Game
             }
         }
 
-        [SerializeField] private AttackSpeedReductionModifierDefinition attackSpeedReductionModifierDefinition;
+        [SerializeField] private AttackSpeedModifierDefinition attackSpeedReductionModifierDefinition;
         [SerializeField, Range(0, 5)] private float percentageReach;
         [SerializeField, Range(0, 1)] private float amount;
 

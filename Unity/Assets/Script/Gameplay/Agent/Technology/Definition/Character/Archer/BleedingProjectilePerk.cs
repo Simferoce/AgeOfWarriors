@@ -17,7 +17,7 @@ namespace Game
                 return new BleedingProjectileModifierDefinition.Modifier(
                     projectile.GetCachedComponent<ModifierHandler>(),
                     definition.bleedingProjectileModifierDefinition,
-                    definition.percentageAttackPower * modifiable.Entity["attack_power"],
+                    definition.percentageAttackPower * modifiable.Entity[StatisticDefinition.AttackPower],
                     definition.duration,
                     Source);
             }

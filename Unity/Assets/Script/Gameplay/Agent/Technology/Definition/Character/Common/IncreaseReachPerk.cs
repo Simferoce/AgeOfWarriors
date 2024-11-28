@@ -7,10 +7,18 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, IncreaseReachPerk>
         {
-            public override float? AttackPower => definition.amount;
+            private Statistic<float> reachPercentage;
 
             public Modifier(ModifierHandler modifiable, IncreaseReachPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
+                reachPercentage = new Statistic<float>(StatisticDefinition.ReachPercentage, definition.amount);
+                StatisticRegistry.Register(reachPercentage);
+            }
+
+            public override void Dispose()
+            {
+                base.Dispose();
+                StatisticRegistry.Unregister(reachPercentage);
             }
         }
 
