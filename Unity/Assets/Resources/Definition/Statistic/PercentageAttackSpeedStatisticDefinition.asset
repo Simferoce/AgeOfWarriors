@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
-  m_Name: BuffDurationStatisticDefinition
+  m_Name: PercentageAttackSpeedStatisticDefinition
   m_EditorClassIdentifier: 
-  id: cbdb2f244b5bcc947aa217190b37b0f5
-  icon: {fileID: 0}
-  humanReadableId: buff_duration
-  title: Buff Duration
-  color: {r: 0, g: 0, b: 0, a: 0}
+  id: d38927dee6d6a0741b3bcd0e950921fc
+  icon: {fileID: 1748120172, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  humanReadableId: attack_speed_percentage
+  title: Percentage Attack Speed
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}

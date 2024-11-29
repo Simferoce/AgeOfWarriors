@@ -12,7 +12,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, IncreaseDamageTakenWhenStaggerPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                damageTakenWhileStagger = new Statistic<float>(StatisticDefinition.DamageTaken);
+                damageTakenWhileStagger = new Statistic<float>(StatisticDefinition.PercentageDamageTaken);
                 StatisticRegistry.Register(damageTakenWhileStagger);
             }
 

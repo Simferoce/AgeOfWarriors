@@ -13,7 +13,7 @@ namespace Game
             public Modifier(ModifierHandler modifiable, AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
                 modifiable.Entity.GetCachedComponent<IModifierSource>().OnModifierAdded += Modifier_OnModifierAdded;
-                attackSpeedPercentage = new Statistic<float>(StatisticDefinition.AttackSpeedPercentage);
+                attackSpeedPercentage = new Statistic<float>(StatisticDefinition.PercentageAttackSpeed);
             }
 
             public override float? GetStack()

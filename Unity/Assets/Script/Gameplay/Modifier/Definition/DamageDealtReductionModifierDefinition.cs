@@ -27,7 +27,7 @@ namespace Game
             public Modifier(ModifierHandler modifiable, DamageDealtReductionModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 this.amount = amount;
-                damageDealt = new Statistic<float>(StatisticDefinition.DamageDealt, amount);
+                damageDealt = new Statistic<float>(StatisticDefinition.PercentageDamageDealt, amount);
                 StatisticRegistry.Register(damageDealt);
             }
 

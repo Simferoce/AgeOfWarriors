@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
-  m_Name: DamageDealtReductionDefinition
+  m_Name: FlatMaxHealthStatisticDefinition
   m_EditorClassIdentifier: 
-  id: 5f02395ac1a9d664c8074cace506fa10
-  icon: {fileID: 0}
-  humanReadableId: damage_dealt_reduction
-  title: Damage Dealt Reduction
-  color: {r: 0, g: 0, b: 0, a: 0}
+  id: 92d7f60cfbec2fb4fbb95578d2a82f3c
+  icon: {fileID: -1294603066, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  humanReadableId: health_max_flat
+  title: Flat Max Health
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}

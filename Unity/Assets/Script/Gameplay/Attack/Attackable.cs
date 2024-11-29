@@ -20,8 +20,8 @@ namespace Game
         {
             float defense = Entity[StatisticDefinition.Defense];
             float currentHealth = Entity[StatisticDefinition.Health];
-            float increaseDamageTaken = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.DamageTaken, out Statistic<float> statistic) ? statistic.GetValue() : 0f);
-            float rangedDamageReduction = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.RangedDamageTaken, out Statistic<float> statistic) ? statistic.GetValue() : 0f);
+            float increaseDamageTaken = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.PercentageDamageTaken, out Statistic<float> statistic) ? statistic.GetValue() : 0f);
+            float rangedDamageReduction = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Sum(x => x.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.RangedPercentageDamageTaken, out Statistic<float> statistic) ? statistic.GetValue() : 0f);
             List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();
             bool canResistDeath = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
 

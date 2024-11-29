@@ -11,7 +11,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackPowerPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat, definition.amount);
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.FlatAttackPower, definition.amount);
                 StatisticRegistry.Register(attackPowerFlat);
             }
 

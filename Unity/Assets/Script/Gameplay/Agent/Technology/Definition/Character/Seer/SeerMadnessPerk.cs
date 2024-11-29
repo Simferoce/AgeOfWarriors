@@ -18,7 +18,7 @@ namespace Game
                 character = modifiable.Entity.GetCachedComponent<Character>();
                 affectedAbility = character.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
-                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat, definition.attackPower);
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.FlatAttackPower, definition.attackPower);
                 StatisticRegistry.Register(attackPowerFlat);
             }
 

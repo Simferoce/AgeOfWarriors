@@ -12,7 +12,7 @@ namespace Game
             public Modifier(ModifierHandler modifiable, SpawningMovementSpeedBonusPerkEffect modifierDefinition, IModifierSource modifierSource, float movementSpeedIncrease) : base(modifiable, modifierDefinition, modifierSource)
             {
                 modifiable.Entity.GetCachedComponent<Caster>().OnAbilityUsed += Modifier_OnAbilityUsed;
-                speedPercentage = new Statistic<float>(StatisticDefinition.SpeedPercentage, movementSpeedIncrease);
+                speedPercentage = new Statistic<float>(StatisticDefinition.PercentageSpeed, movementSpeedIncrease);
                 StatisticRegistry.Register(speedPercentage);
             }
 

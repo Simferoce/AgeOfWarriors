@@ -11,7 +11,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, RangedReductionDamagePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                rangedDamageReduction = new Statistic<float>(StatisticDefinition.RangedDamageTaken, definition.rangedDamageReduction);
+                rangedDamageReduction = new Statistic<float>(StatisticDefinition.RangedPercentageDamageTaken, definition.rangedDamageReduction);
                 StatisticRegistry.Register(rangedDamageReduction);
             }
 

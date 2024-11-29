@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
-  m_Name: DamageDealtAgainstWeakStatisticDefinition
+  m_Name: PercentageDamageTakenStatisticDefinition
   m_EditorClassIdentifier: 
-  id: b036b5bdd1cc473499a87d48935769a2
+  id: a56c7d238fc416e47aca784fbbd6ab4a
   icon: {fileID: 0}
-  humanReadableId: damage_dealt_against_weak
-  title: Damage Dealt Against Weak
+  humanReadableId: damage_taken_percentage
+  title: Percentage Damage Taken
   color: {r: 0, g: 0, b: 0, a: 0}

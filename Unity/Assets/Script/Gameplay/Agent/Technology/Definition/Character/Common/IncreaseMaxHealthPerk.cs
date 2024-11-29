@@ -11,7 +11,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, IncreaseMaxHealthPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                maxHealthFlat = new Statistic<float>(StatisticDefinition.MaxHealthFlat, definition.amount);
+                maxHealthFlat = new Statistic<float>(StatisticDefinition.FlatMaxHealth, definition.amount);
                 StatisticRegistry.Register(maxHealthFlat);
             }
 

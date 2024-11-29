@@ -12,7 +12,7 @@ namespace Game
             public Modifier(ModifierHandler modifiable, DefenseReductionModifierDefinition modifierDefinition, float duration, float reduction, IModifierSource source = null) : base(modifiable, modifierDefinition, source)
             {
                 With(new CharacterModifierTimeElement(duration));
-                defenseReduction = new Statistic<float>(StatisticDefinition.DefenseFlat, -reduction);
+                defenseReduction = new Statistic<float>(StatisticDefinition.FlatDefense, -reduction);
                 StatisticRegistry.Register(defenseReduction);
             }
 

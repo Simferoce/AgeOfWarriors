@@ -13,7 +13,7 @@ namespace Game
             public Modifier(ModifierHandler modifiable, IncreaseAttackPowerBaseOnDurationAlivePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
                 startedAt = Time.time;
-                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat);
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.FlatAttackPower);
                 StatisticRegistry.Register(attackPowerFlat);
             }
 

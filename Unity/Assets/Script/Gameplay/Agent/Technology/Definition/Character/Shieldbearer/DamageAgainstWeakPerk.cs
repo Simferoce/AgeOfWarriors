@@ -11,7 +11,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, DamageAgainstWeakPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                damageDealtAgainstWeak = new Statistic<float>(StatisticDefinition.DamageDealtAgainstWeak, definition.damageDealtAgainstWeak);
+                damageDealtAgainstWeak = new Statistic<float>(StatisticDefinition.PercentageDamageDealtAgainstWeak, definition.damageDealtAgainstWeak);
                 StatisticRegistry.Register(damageDealtAgainstWeak);
             }
 

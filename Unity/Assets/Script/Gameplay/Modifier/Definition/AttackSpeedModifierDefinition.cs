@@ -11,7 +11,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, AttackSpeedModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                attackSpeedPercentage = new Statistic<float>(StatisticDefinition.AttackSpeedPercentage, amount);
+                attackSpeedPercentage = new Statistic<float>(StatisticDefinition.PercentageAttackSpeed, amount);
                 StatisticRegistry.Register(attackSpeedPercentage);
             }
 

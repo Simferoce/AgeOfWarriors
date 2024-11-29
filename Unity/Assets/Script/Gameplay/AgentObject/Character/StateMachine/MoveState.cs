@@ -18,7 +18,7 @@ namespace Game
 
             protected override void InternalExit()
             {
-
+                character.rigidbody.linearVelocity = Vector2.zero;
             }
 
             protected override void InternalUpdate()
@@ -40,11 +40,12 @@ namespace Game
                 if (CanMove())
                 {
                     character.Animated.SetFloat("SpeedRatio", 1, 0.25f);
-                    character.rigidbody.MovePosition(character.rigidbody.position + Vector2.right * character.Direction * character.Speed * Time.deltaTime);
+                    character.rigidbody.linearVelocity = Vector2.right * character.Direction * character.Speed;
                 }
                 else
                 {
                     character.Animated.SetFloat("SpeedRatio", 0f, 0.25f);
+                    character.rigidbody.linearVelocity = Vector2.zero;
                 }
 
                 CheckStagger();

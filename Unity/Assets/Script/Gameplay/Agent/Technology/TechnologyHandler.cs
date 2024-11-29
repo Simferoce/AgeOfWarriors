@@ -81,7 +81,7 @@ namespace Game
             {
                 if (agentObject is Character character && agentObject.Agent == agent)
                 {
-                    CurrentTechnology += Level.Instance.TechnologyGainMultiplier * character.TechnologyGainPerSecond * Time.deltaTime;
+                    CurrentTechnology += Level.Instance.TechnologyGainMultiplier * character.TechnologyPerSecond * Time.deltaTime;
                 }
             }
 

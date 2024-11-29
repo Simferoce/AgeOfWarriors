@@ -30,19 +30,28 @@ namespace Game
         public override Faction Faction => IsConfused ? Agent.Faction.GetConfusedFaction() : Agent.Faction;
 
         public float Health { get; set; }
-        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.MaxHealthFlat, out Statistic<float> value) ? a + value.GetValue() : a); }
-        public float Defense { get => Definition.Defense + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.DefenseFlat, out Statistic<float> value) ? a + value.GetValue() : a); }
-        public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.AttackSpeedPercentage, out Statistic<float> value) ? a + value.GetValue() : a)); }
-        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.AttackPowerFlat, out Statistic<float> value) ? a + value.GetValue() : a); }
-        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.SpeedPercentage, out Statistic<float> value) ? a + value.GetValue() : a)); }
-        public float Reach { get => Definition.Reach * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.ReachPercentage, out Statistic<float> value) ? a + value.GetValue() : a)); }
-        public float TechnologyGainPerSecond => Definition.TechnologyGainPerSecond;
+        public float MaxHealth { get => Definition.MaxHealth + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.FlatMaxHealth, out Statistic<float> value) ? a + value.GetValue() : a); }
+        public float Defense { get => Definition.Defense + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.FlatDefense, out Statistic<float> value) ? a + value.GetValue() : a); }
+        public float AttackSpeed { get => Definition.AttackSpeed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.PercentageAttackSpeed, out Statistic<float> value) ? a + value.GetValue() : a)); }
+        public float AttackPower { get => Definition.AttackPower + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.FlatAttackPower, out Statistic<float> value) ? a + value.GetValue() : a); }
+        public float Speed { get => Definition.Speed * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.PercentageSpeed, out Statistic<float> value) ? a + value.GetValue() : a)); }
+        public float Reach { get => Definition.Reach * (1 + GetCachedComponent<ModifierHandler>().GetModifiers().Aggregate(0f, (a, b) => b.StatisticRegistry.TryGetStatistic<float>(StatisticDefinition.PercentageReach, out Statistic<float> value) ? a + value.GetValue() : a)); }
+        public float TechnologyPerSecond => Definition.TechnologyPerSecond;
 
         public bool IsEngaged => TargetUtility.GetTargets((x) => Mathf.Abs(x.CenterPosition.x - this.CenterPosition.x) < 0.5f).Count > 0;
         public bool IsInvulnerable => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsInvulnerable.HasValue).Any(x => x.IsInvulnerable.Value);
         public bool IsConfused => GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsConfused.HasValue).Any(x => x.IsConfused.Value);
         public bool IsDead { get => stateMachine.Current is DeathState; }
         public bool IsInjured { get => Health < MaxHealth; }
+
+        private Statistic<float> health;
+        private Statistic<float> maxHealth;
+        private Statistic<float> defense;
+        private Statistic<float> attackSpeed;
+        private Statistic<float> attackPower;
+        private Statistic<float> speed;
+        private Statistic<float> reach;
+        private Statistic<float> technologyPerSeconds;
 
         private StateMachine stateMachine = new StateMachine();
 
@@ -67,16 +76,43 @@ namespace Game
                     this.GetCachedComponent<ModifierHandler>().AddModifier(modifier.GetModifier(this.GetCachedComponent<ModifierHandler>()));
             }
 
+            health = new Statistic<float>(StatisticDefinition.Health);
+            maxHealth = new Statistic<float>(StatisticDefinition.MaxHealth);
+            defense = new Statistic<float>(StatisticDefinition.Defense);
+            attackSpeed = new Statistic<float>(StatisticDefinition.AttackSpeed);
+            attackPower = new Statistic<float>(StatisticDefinition.AttackPower);
+            speed = new Statistic<float>(StatisticDefinition.Speed);
+            reach = new Statistic<float>(StatisticDefinition.Reach);
+            technologyPerSeconds = new Statistic<float>(StatisticDefinition.TechnologyPerSeconds);
+
+            StatisticRegistry.Register(health);
+            StatisticRegistry.Register(maxHealth);
+            StatisticRegistry.Register(defense);
+            StatisticRegistry.Register(attackSpeed);
+            StatisticRegistry.Register(attackPower);
+            StatisticRegistry.Register(speed);
+            StatisticRegistry.Register(reach);
+            StatisticRegistry.Register(technologyPerSeconds);
+
             stateMachine.Initialize(new MoveState(this));
             this.Health = MaxHealth;
         }
 
-        public void FixedUpdate()
+        private void Update()
         {
             if (IsDead)
                 return;
 
             stateMachine.Update();
+
+            health.SetValue(Health);
+            maxHealth.SetValue(MaxHealth);
+            defense.SetValue(Defense);
+            attackSpeed.SetValue(AttackSpeed);
+            attackPower.SetValue(AttackPower);
+            speed.SetValue(Speed);
+            reach.SetValue(Reach);
+            technologyPerSeconds.SetValue(TechnologyPerSecond);
         }
 
         protected override void OnDestroy()

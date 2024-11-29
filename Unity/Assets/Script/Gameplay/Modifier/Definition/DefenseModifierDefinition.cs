@@ -14,7 +14,7 @@ namespace Game
                 : base(character.GetCachedComponent<ModifierHandler>(), modifierDefinition, source)
             {
                 this.defense = defense;
-                defenseFlat = new Statistic<float>(StatisticDefinition.DefenseFlat, defense);
+                defenseFlat = new Statistic<float>(StatisticDefinition.FlatDefense, defense);
                 StatisticRegistry.Register(defenseFlat);
             }
 

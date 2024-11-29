@@ -8,7 +8,7 @@ namespace Game
         public static List<ITargeteable> GetTargets(System.Func<ITargeteable, bool> predicat)
         {
             List<ITargeteable> potentialTargets = new List<ITargeteable>();
-            foreach (ITargeteable targetteable in AgentObject.All.Select(x => x.GetCachedComponent<ITargeteable>()).Where(x => x != null))
+            foreach (ITargeteable targetteable in AgentObject.All.Select(x => x as ITargeteable).Where(x => x != null))
             {
                 if (!targetteable.IsActive)
                     continue;

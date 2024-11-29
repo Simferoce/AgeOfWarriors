@@ -5,7 +5,7 @@ namespace Game
 {
     public class StatisticRegistry
     {
-        private List<Statistic> statistics;
+        private List<Statistic> statistics = new List<Statistic>();
 
         public void Register(Statistic statistic)
         {

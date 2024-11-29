@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c06bc9f3838f31449053453fc58d9c5, type: 3}
-  m_Name: ThresholdStatisticDefinition
+  m_Name: FlatAttackPowerStatisticDefinition
   m_EditorClassIdentifier: 
-  id: 09492c31878ad1b4d9f17b48fd1c583c
-  icon: {fileID: 0}
-  humanReadableId: threshold
-  title: Threshold
-  color: {r: 0, g: 0, b: 0, a: 0}
+  id: 7cb40556d663229469e79e0adc900a42
+  icon: {fileID: 1776116179, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
+  humanReadableId: attack_power_flat
+  title: Flat Attack Power
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}

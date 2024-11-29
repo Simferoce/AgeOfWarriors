@@ -14,7 +14,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackSpeedBaseOnNearbyEnemiesPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                attackSpeedPercentage = new Statistic<float>(StatisticDefinition.AttackSpeedPercentage, 0f);
+                attackSpeedPercentage = new Statistic<float>(StatisticDefinition.PercentageAttackSpeed, 0f);
             }
 
             public override string ParseDescription()

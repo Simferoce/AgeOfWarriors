@@ -11,7 +11,7 @@ namespace Game
 
             public AttackPowerModifier(ModifierHandler modifiable, AttackPowerModifierDefinition modifierDefinition, float amount, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
             {
-                attackPowerFlat = new Statistic<float>(StatisticDefinition.AttackPowerFlat, amount);
+                attackPowerFlat = new Statistic<float>(StatisticDefinition.FlatAttackPower, amount);
                 StatisticRegistry.Register(attackPowerFlat);
             }
 

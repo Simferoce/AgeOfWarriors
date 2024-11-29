@@ -11,7 +11,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, IncreaseAttackSpeedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                attackSpeed = new Statistic<float>(StatisticDefinition.AttackSpeedPercentage, definition.amount);
+                attackSpeed = new Statistic<float>(StatisticDefinition.PercentageAttackSpeed, definition.amount);
                 StatisticRegistry.Register(attackSpeed);
             }
 

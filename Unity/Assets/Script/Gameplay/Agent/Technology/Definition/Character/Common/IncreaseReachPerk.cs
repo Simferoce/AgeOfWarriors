@@ -11,7 +11,7 @@ namespace Game
 
             public Modifier(ModifierHandler modifiable, IncreaseReachPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
             {
-                reachPercentage = new Statistic<float>(StatisticDefinition.ReachPercentage, definition.amount);
+                reachPercentage = new Statistic<float>(StatisticDefinition.PercentageReach, definition.amount);
                 StatisticRegistry.Register(reachPercentage);
             }
 
