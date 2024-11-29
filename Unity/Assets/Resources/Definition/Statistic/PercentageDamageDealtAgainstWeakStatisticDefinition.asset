@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: b036b5bdd1cc473499a87d48935769a2
   icon: {fileID: 0}
-  humanReadableId: damage_dealt_percentage_against_weak
-  title: Percetage Damage Dealt Against Weak
+  humanReadableId: percentage_damage_dealt_against_weak
+  title: Percentage Damage Dealt Against Weak
   color: {r: 0, g: 0, b: 0, a: 0}

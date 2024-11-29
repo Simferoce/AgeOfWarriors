@@ -23,9 +23,9 @@ namespace Game
                     return new SpeedModifierDefinition.Modifier(modifiable, slowEnemiesInPoolPerk.speedModifierDefinition, -slowEnemiesInPoolPerk.amount, modifierSource);
                 }
 
-                public override bool Applicable(Pool pool, ITargeteable targeteable)
+                public override bool Applicable(Pool pool, Target targeteable)
                 {
-                    if (pool.Faction == targeteable.Faction)
+                    if (pool.Faction == (targeteable.Entity as AgentObject).Faction)
                         return false;
 
                     return true;

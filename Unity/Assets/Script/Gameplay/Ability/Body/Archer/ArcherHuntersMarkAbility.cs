@@ -1,4 +1,4 @@
-﻿using System;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -12,6 +12,14 @@ namespace Game
 
         public ArcherHuntersMarkAbility(ArcherHuntersMarkAbilityDefinition definition, string trigger = "") : base(definition, trigger)
         {
+        }
+
+        public override bool CanUse()
+        {
+            if (Time.time - Caster.LastAbilityUsed > Caster.AgentObject[StatisticDefinition.AttackSpeed])
+                return false;
+
+            return true;
         }
 
         public override string ParseDescription()

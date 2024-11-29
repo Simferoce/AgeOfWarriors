@@ -9,7 +9,8 @@ namespace Game
 {
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(AttackFactory))]
-    public partial class Character : AgentObject<CharacterDefinition>, ITargeteable, IModifierSource, IBlock, IAnimated
+    [RequireComponent(typeof(Target))]
+    public partial class Character : AgentObject<CharacterDefinition>, IModifierSource, IBlock, IAnimated
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;

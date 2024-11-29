@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using UnityEngine.Assertions;
+﻿using UnityEngine.Assertions;
 
 namespace Game
 {
@@ -23,11 +22,6 @@ namespace Game
 
             animated = caster.GetCachedComponent<IAnimated>()?.Animated;
             Assert.IsNotNull(animated, "Cannot cast an animated ability if the caster does not own an animated component.");
-        }
-
-        public override bool CanUse()
-        {
-            return Time.time - Caster.LastAbilityUsed > Caster.AgentObject[StatisticDefinition.AttackSpeed];
         }
 
         public override void InternalApply() { }

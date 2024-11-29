@@ -29,13 +29,13 @@ namespace Game
                     if (!agent.IsActive)
                         continue;
 
-                    if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                    if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                         continue;
 
                     if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                         continue;
 
-                    if (character.Faction == targeteable.Faction)
+                    if (character.Faction == (targeteable.Entity as AgentObject).Faction)
                         continue;
 
                     if (modifiable.TryGetModifier(definition.attackSpeedReductionModifierDefinition, out _))

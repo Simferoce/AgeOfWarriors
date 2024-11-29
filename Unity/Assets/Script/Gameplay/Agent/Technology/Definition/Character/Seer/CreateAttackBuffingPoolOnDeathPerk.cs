@@ -16,9 +16,9 @@ namespace Game
 
             public override ModifierDefinition ModifierDefinition => createAttackBuffingPoolOnDeath.modifierDefinition;
 
-            public override bool Applicable(Pool pool, ITargeteable targeteable)
+            public override bool Applicable(Pool pool, Target targeteable)
             {
-                if (targeteable.Faction != pool.Faction)
+                if ((targeteable.Entity as AgentObject).Faction != pool.Faction)
                     return false;
 
                 return true;

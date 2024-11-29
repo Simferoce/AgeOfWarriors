@@ -1,4 +1,6 @@
-﻿namespace Game
+﻿using UnityEngine;
+
+namespace Game
 {
     public class BerserkerLeachingStrikeAbility : AnimationBaseCharacterAbility<BerserkerLeachingStrikeAbilityDefinition>
     {
@@ -10,6 +12,14 @@
 
         public BerserkerLeachingStrikeAbility(BerserkerLeachingStrikeAbilityDefinition definition, string trigger = "") : base(definition, trigger)
         {
+        }
+
+        public override bool CanUse()
+        {
+            if (Time.time - Caster.LastAbilityUsed > Caster.AgentObject[StatisticDefinition.AttackSpeed])
+                return false;
+
+            return true;
         }
 
         public override string ParseDescription()

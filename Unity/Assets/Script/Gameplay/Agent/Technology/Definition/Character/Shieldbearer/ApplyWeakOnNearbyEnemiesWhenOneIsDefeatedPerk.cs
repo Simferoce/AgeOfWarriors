@@ -21,7 +21,7 @@ namespace Game
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (evt.AgentObject.Faction != modifiable.Entity.GetCachedComponent<ITargeteable>().Faction)
+                if (evt.AgentObject.Faction != (modifiable.Entity as AgentObject).Faction)
                 {
                     Character character = modifiable.Entity.GetCachedComponent<Character>();
 
@@ -36,7 +36,7 @@ namespace Game
                         if (agent.Faction == character.Faction)
                             continue;
 
-                        if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                        if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                             continue;
 
                         if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler targetModifiable))

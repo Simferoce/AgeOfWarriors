@@ -11,7 +11,7 @@ namespace Game
         {
             public abstract ModifierDefinition ModifierDefinition { get; }
 
-            public abstract bool Applicable(Pool pool, ITargeteable targeteable);
+            public abstract bool Applicable(Pool pool, Target targeteable);
 
             public abstract Modifier Instanciate(ModifierHandler modifiable, IModifierSource modifierSource);
         }
@@ -20,14 +20,14 @@ namespace Game
 
         private List<Modifier> appliedModifiers = new List<Modifier>();
 
-        public override void Apply(Pool pool, ITargeteable targeteable)
+        public override void Apply(Pool pool, Target targeteable)
         {
             base.Apply(pool, targeteable);
 
             if (!ModifierInstancier.Applicable(pool, targeteable))
                 return;
 
-            if (!(targeteable as Entity).TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
+            if (!targeteable.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                 return;
 
             Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == ModifierInstancier.ModifierDefinition);

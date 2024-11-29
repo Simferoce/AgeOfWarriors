@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 73d27da68cca71f4ebc2e071904b1f80
   icon: {fileID: -1294603066, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  humanReadableId: health_max
+  humanReadableId: max_health
   title: Max Health
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}

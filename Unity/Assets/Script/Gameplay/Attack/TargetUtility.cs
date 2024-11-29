@@ -5,12 +5,12 @@ namespace Game
 {
     public static class TargetUtility
     {
-        public static List<ITargeteable> GetTargets(System.Func<ITargeteable, bool> predicat)
+        public static List<Target> GetTargets(System.Func<Target, bool> predicat)
         {
-            List<ITargeteable> potentialTargets = new List<ITargeteable>();
-            foreach (ITargeteable targetteable in AgentObject.All.Select(x => x as ITargeteable).Where(x => x != null))
+            List<Target> potentialTargets = new List<Target>();
+            foreach (Target targetteable in AgentObject.All.Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
             {
-                if (!targetteable.IsActive)
+                if (!targetteable.Entity.IsActive)
                     continue;
 
                 if (!predicat.Invoke(targetteable))
@@ -20,7 +20,7 @@ namespace Game
             }
 
             return potentialTargets
-                .OrderBy(x => x.Priority)
+                .OrderBy(x => (x.Entity as AgentObject).Priority)
                 .ToList();
         }
     }

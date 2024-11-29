@@ -24,9 +24,9 @@ namespace Game
                 return new ImpactReport(ImpactStatus.NotImpacted);
 
             if (collision.CompareTag(GameTag.HIT_BOX) &&
-                collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
-                && targeteable.IsActive
-                && (targeteable as Entity).TryGetCachedComponent<Character>(out Character character))
+                collision.gameObject.TryGetComponentInParent<Target>(out Target targeteable)
+                && targeteable.Entity.IsActive
+                && targeteable.Entity.TryGetCachedComponent<Character>(out Character character))
             {
                 character.Heal(currentHeal);
 

@@ -38,13 +38,13 @@ namespace Game
                     if (!agent.IsActive)
                         continue;
 
-                    if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                    if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                         continue;
 
                     if (!agent.TryGetCachedComponent<Attackable>(out Attackable attackable))
                         continue;
 
-                    if (character.Faction == targeteable.Faction)
+                    if (character.Faction == (targeteable.Entity as AgentObject).Faction)
                         continue;
 
                     if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.percentageReach * character.Reach)

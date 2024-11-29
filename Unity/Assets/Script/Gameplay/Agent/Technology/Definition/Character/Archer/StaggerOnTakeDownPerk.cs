@@ -30,7 +30,7 @@ namespace Game
                 //        if (agent.Faction == character.Faction)
                 //            continue;
 
-                //        if (!agent.TryGetCachedComponent<ITargeteable>(out ITargeteable targeteable))
+                //        if (!agent.TryGetCachedComponent<Target>(out Target targeteable))
                 //            continue;
 
                 //        if (!agent.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))

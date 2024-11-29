@@ -19,10 +19,10 @@ namespace Game
 
         public override bool CanUse()
         {
-            if (!base.CanUse())
+            if (Time.time - Caster.LastAbilityUsed < Caster.AgentObject[StatisticDefinition.AttackSpeed])
                 return false;
 
-            attackables = TargetUtility.GetTargets((ITargeteable target) => target.Faction != Caster.Faction && Mathf.Abs(this.Caster.CenterPosition.x - target.CenterPosition.x) < Range).Select(x => (x as Entity).GetCachedComponent<Attackable>()).Where(x => x != null).ToList();
+            attackables = TargetUtility.GetTargets((Target target) => (target.Entity as AgentObject).Faction != Caster.Faction && Mathf.Abs(this.Caster.CenterPosition.x - target.CenterPosition.x) < Range).Select(x => x.Entity.GetCachedComponent<Attackable>()).Where(x => x != null).ToList();
             return attackables.Count > 0;
         }
 

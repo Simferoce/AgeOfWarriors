@@ -14,7 +14,7 @@ namespace Game
 
             public void OnUnitDeath(EventChannelDeath.Event evt)
             {
-                if (evt.AgentObject.Faction == modifiable.Entity.GetCachedComponent<ITargeteable>().Faction && evt.AgentObject != modifiable.Entity)
+                if (evt.AgentObject.Faction == (modifiable.Entity as AgentObject).Faction && evt.AgentObject != modifiable.Entity)
                 {
                     modifiable.AddModifier(
                         new AttackPowerModifierDefinition.AttackPowerModifier(modifiable,

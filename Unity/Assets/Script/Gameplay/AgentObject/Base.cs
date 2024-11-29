@@ -3,7 +3,8 @@ using UnityEngine;
 namespace Game
 {
     [RequireComponent(typeof(Attackable))]
-    public class Base : AgentObject, ITargeteable, IBlock
+    [RequireComponent(typeof(Target))]
+    public class Base : AgentObject, IBlock
     {
         [SerializeField] private float maxHealth;
         [SerializeField] private float defense;

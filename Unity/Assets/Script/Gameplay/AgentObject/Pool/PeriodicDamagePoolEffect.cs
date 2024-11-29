@@ -10,7 +10,7 @@ namespace Game
 
         private float lastTimeApplied = float.MinValue;
 
-        public override void Apply(Pool pool, ITargeteable targeteable)
+        public override void Apply(Pool pool, Target targeteable)
         {
             if (Time.time - lastTimeApplied < 1f)
                 return;
@@ -18,10 +18,10 @@ namespace Game
             lastTimeApplied = Time.time;
             base.Apply(pool, targeteable);
 
-            if (targeteable.Faction == pool.Faction)
+            if ((targeteable.Entity as AgentObject).Faction == pool.Faction)
                 return;
 
-            if (!(targeteable as Entity).TryGetCachedComponent<Attackable>(out Attackable attackable))
+            if (targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
                 return;
 
             attackable.TakeAttack(pool.GetCachedComponent<AttackFactory>().Generate(Damage, 0, 0, false, false, false, attackable));

@@ -22,11 +22,11 @@ namespace Game
                 projectile.OnImpacted += Projectile_OnImpacted;
             }
 
-            private void Projectile_OnImpacted(List<ITargeteable> targeteables)
+            private void Projectile_OnImpacted(List<Target> targeteables)
             {
-                foreach (ITargeteable targeteable in targeteables)
+                foreach (Target targeteable in targeteables)
                 {
-                    if ((targeteable as Entity).TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
+                    if (targeteable.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                     {
                         BleedingModifierDefinition.BleedingModifier modifier = modifiable.GetModifiers()
                             .FirstOrDefault(x => x is BleedingModifierDefinition.BleedingModifier bleedingModifier

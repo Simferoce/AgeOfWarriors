@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: da3a889834bd2924eaccbe78d860142e
   icon: {fileID: -1540707902, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  humanReadableId: defense_flat
+  humanReadableId: flat_defense
   title: Flat Defense
   color: {r: 0.90099996, g: 0.90099996, b: 0.08919903, a: 1}

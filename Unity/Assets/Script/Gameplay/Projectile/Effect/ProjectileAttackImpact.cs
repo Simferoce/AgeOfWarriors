@@ -20,10 +20,10 @@ namespace Game
         public override ImpactReport Impact(GameObject collision)
         {
             if (collision.CompareTag(GameTag.HIT_BOX) &&
-                collision.gameObject.TryGetComponentInParent<ITargeteable>(out ITargeteable targeteable)
-                && targeteable.IsActive
+                collision.gameObject.TryGetComponentInParent<Target>(out Target targeteable)
+                && targeteable.Entity.IsActive
                 && projectile.Ignore != targeteable
-                && (targeteable as Entity).TryGetCachedComponent<Attackable>(out Attackable attackable))
+                && targeteable.Entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
             {
                 attack = projectile.GetCachedComponent<AttackFactory>().Generate(damage.GetValueOrThrow(projectile), armorPenetration.GetValueOrDefault(projectile), 0, true, false, true, attackable);
                 attackable.TakeAttack(attack);

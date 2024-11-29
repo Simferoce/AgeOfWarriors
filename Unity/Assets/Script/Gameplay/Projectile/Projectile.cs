@@ -7,7 +7,7 @@ namespace Game
     [RequireComponent(typeof(ModifierHandler))]
     public class Projectile : Entity
     {
-        public delegate void Impacted(List<ITargeteable> targeteables);
+        public delegate void Impacted(List<Target> targeteables);
 
         public enum State
         {
@@ -23,8 +23,8 @@ namespace Game
         public Rigidbody2D Rigidbody { get => rigidbody; set => rigidbody = value; }
         public AgentObject AgentObject { get => agentObject; set => agentObject = value; }
         public State StateValue { get => state; set => state = value; }
-        public ITargeteable Target { get => target; set => target = value; }
-        public ITargeteable Ignore { get; set; }
+        public Target Target { get => target; set => target = value; }
+        public Target Ignore { get; set; }
         public List<ProjectileMovement> ProjectileMovements { get => projectileMovements; set => projectileMovements = value; }
         public event Impacted OnImpacted;
         public Faction Faction { get; set; }
@@ -33,10 +33,10 @@ namespace Game
         public string StatisticProviderName => "projectile";
 
         private AgentObject agentObject;
-        private ITargeteable target;
+        private Target target;
         private State state = State.Alive;
 
-        public void Initialize(AgentObject agentObject, ITargeteable target, Faction faction, params object[] paramters)
+        public void Initialize(AgentObject agentObject, Target target, Faction faction, params object[] paramters)
         {
             this.Faction = faction;
             this.agentObject = agentObject;

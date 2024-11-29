@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: d38927dee6d6a0741b3bcd0e950921fc
   icon: {fileID: 1748120172, guid: 79e32300d7a0a564590dbb210e84652b, type: 3}
-  humanReadableId: attack_speed_percentage
+  humanReadableId: percentage_attack_speed
   title: Percentage Attack Speed
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}

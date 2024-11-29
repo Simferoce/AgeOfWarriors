@@ -1,4 +1,6 @@
-﻿namespace Game
+﻿using UnityEngine;
+
+namespace Game
 {
     public class ShieldbearerAttackBarrage : AnimationBaseCharacterAbility<ShieldbearerAttackBarrageAbilityDefinition>
     {
@@ -9,6 +11,14 @@
 
         public ShieldbearerAttackBarrage(ShieldbearerAttackBarrageAbilityDefinition definition, string trigger = "") : base(definition, trigger)
         {
+        }
+
+        public override bool CanUse()
+        {
+            if (Time.time - Caster.LastAbilityUsed > Caster.AgentObject[StatisticDefinition.AttackSpeed])
+                return false;
+
+            return true;
         }
 
         public override string ParseDescription()

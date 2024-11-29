@@ -24,20 +24,20 @@ namespace Game
 
                 if (currentAttackApplied >= definition.stack)
                 {
-                    if (affectedAbility.Targets.Count > 1)
-                    {
-                        throw new System.NotImplementedException();
-                        //GameObject gameObject = GameObject.Instantiate(definition.projectilePrefab, definition.origin.GetPosition(affectedAbility), Quaternion.identity);
-                        //Projectile projectile = gameObject.GetComponent<Projectile>();
-                        //projectile.Ignore = affectedAbility.Targets[0];
-                        //ProjectileAngledMovement projectileAngledMovement = projectile.ProjectileMovements.FirstOrDefault(x => x is ProjectileAngledMovement) as ProjectileAngledMovement;
-                        //projectileAngledMovement.Angle = 50;
+                    throw new System.NotImplementedException();
+                    //if (affectedAbility.Targets.Count > 1)
+                    //{
+                    //GameObject gameObject = GameObject.Instantiate(definition.projectilePrefab, definition.origin.GetPosition(affectedAbility), Quaternion.identity);
+                    //Projectile projectile = gameObject.GetComponent<Projectile>();
+                    //projectile.Ignore = affectedAbility.Targets[0];
+                    //ProjectileAngledMovement projectileAngledMovement = projectile.ProjectileMovements.FirstOrDefault(x => x is ProjectileAngledMovement) as ProjectileAngledMovement;
+                    //projectileAngledMovement.Angle = 50;
 
-                        //Character character = modifiable.Entity.GetCachedComponent<Character>();
-                        //projectile.Initialize(character, affectedAbility.Targets[1], affectedAbility.FactionWhenUsed, projectile.Parameters.ToArray());
+                    //Character character = modifiable.Entity.GetCachedComponent<Character>();
+                    //projectile.Initialize(character, affectedAbility.Targets[1], affectedAbility.FactionWhenUsed, projectile.Parameters.ToArray());
 
-                        currentAttackApplied = 0;
-                    }
+                    currentAttackApplied = 0;
+                    //}
                 }
             }
 

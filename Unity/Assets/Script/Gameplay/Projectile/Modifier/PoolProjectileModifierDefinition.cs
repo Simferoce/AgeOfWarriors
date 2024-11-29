@@ -20,7 +20,7 @@ namespace Game
                 this.duration = duration;
             }
 
-            private void Projectile_OnImpacted(System.Collections.Generic.List<ITargeteable> targeteables)
+            private void Projectile_OnImpacted(System.Collections.Generic.List<Target> targeteables)
             {
                 Vector3 position = Lane.Instance.Project(projectile.transform.position);
                 Pool pool = GameObject.Instantiate(definition.prefab, position, Quaternion.identity).GetComponent<Pool>();

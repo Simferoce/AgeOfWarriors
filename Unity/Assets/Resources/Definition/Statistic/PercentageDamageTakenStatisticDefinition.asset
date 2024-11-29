@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: a56c7d238fc416e47aca784fbbd6ab4a
   icon: {fileID: 0}
-  humanReadableId: damage_taken_percentage
+  humanReadableId: percentage_damage_taken
   title: Percentage Damage Taken
   color: {r: 0, g: 0, b: 0, a: 0}

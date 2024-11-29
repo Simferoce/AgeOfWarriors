@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
@@ -13,9 +12,7 @@ namespace Game
 
         public bool IsCasting { get; set; }
         public virtual bool IsActive => IsCasting;
-        public virtual List<ITargeteable> Targets => new List<ITargeteable>();
         public AbilityDefinition Definition { get; set; }
-        public string StatisticProviderName => "ability";
 
         public abstract string ParseDescription();
 
