@@ -3,16 +3,16 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "StaggerOnTakeDownPerk", menuName = "Definition/Technology/Archer/StaggerOnTakeDownPerk")]
-    public class StaggerOnTakeDownPerk : CharacterTechnologyPerkDefinition
+    public class StaggerOnTakeDownPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, StaggerOnTakeDownPerk>
         {
-            public Modifier(ModifierHandler modifiable, StaggerOnTakeDownPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(StaggerOnTakeDownPerk modifierDefinition) : base(modifierDefinition)
             {
-                EventChannelDeath.Instance.Susbribe(OnUnitDeath);
+                DeathEventChannel.Instance.Susbribe(OnUnitDeath);
             }
 
-            public void OnUnitDeath(EventChannelDeath.Event evt)
+            public void OnUnitDeath(DeathEventChannel.Event evt)
             {
                 throw new System.NotImplementedException();
                 //if (modifiable.Entity.GetCachedComponent<IAttackSource>().RecentlyAttacked(evt.AgentObject.GetCachedComponent<IAttackable>()))
@@ -47,7 +47,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                EventChannelDeath.Instance.Unsubcribe(OnUnitDeath);
+                DeathEventChannel.Instance.Unsubcribe(OnUnitDeath);
             }
         }
 
@@ -60,9 +60,9 @@ namespace Game
             return string.Format(Description, duration, distanceEffect);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

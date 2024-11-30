@@ -3,7 +3,7 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseAttackPowerPerAlliesPerk", menuName = "Definition/Technology/Archer/IncreaseAttackPowerPerAlliesPerk")]
-    public class IncreaseAttackPowerPerAlliesPerk : CharacterTechnologyPerkDefinition
+    public class IncreaseAttackPowerPerAlliesPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackPowerPerAlliesPerk>
         {
@@ -12,7 +12,7 @@ namespace Game
             private Statistic<float> attackPowerFlat;
             private int amountOfAlliesPresentOnTheBattleField;
 
-            public Modifier(ModifierHandler modifiable, IncreaseAttackPowerPerAlliesPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(IncreaseAttackPowerPerAlliesPerk modifierDefinition) : base(modifierDefinition)
             {
                 attackPowerFlat = new Statistic<float>(StatisticDefinition.FlatAttackPower);
                 StatisticRegistry.Register(attackPowerFlat);
@@ -60,9 +60,9 @@ namespace Game
             return string.Format(Description, attackPowerPerAlliesPresent);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

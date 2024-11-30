@@ -1,14 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "GainHealthKillingBlowPerk", menuName = "Definition/Technology/Berserker/GainHealthKillingBlowPerk")]
-    public class GainHealthKillingBlowPerk : CharacterTechnologyPerkDefinition
+    public class GainHealthKillingBlowPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GainHealthKillingBlowPerk>
         {
-            public Modifier(ModifierHandler modifiable, GainHealthKillingBlowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GainHealthKillingBlowPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 if (modifiable.Entity.TryGetCachedComponent<AttackFactory>(out AttackFactory attackFactory))
                     attackFactory.OnAttackDealt += AgentObject_OnAttackLanded;
             }
@@ -34,9 +41,9 @@ namespace Game
             return string.Format(this.Description, StatisticFormatter.Percentage(percentageHealMaxHealth, StatisticDefinition.MaxHealth));
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

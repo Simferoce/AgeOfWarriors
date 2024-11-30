@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
@@ -9,10 +10,17 @@ namespace Game
         {
             private Statistic<float> speedPercentage;
 
-            public Modifier(ModifierHandler modifiable, SpawningMovementSpeedBonusPerkEffect modifierDefinition, IModifierSource modifierSource, float movementSpeedIncrease) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(SpawningMovementSpeedBonusPerkEffect modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 modifiable.Entity.GetCachedComponent<Caster>().OnAbilityUsed += Modifier_OnAbilityUsed;
-                speedPercentage = new Statistic<float>(StatisticDefinition.PercentageSpeed, movementSpeedIncrease);
+
+                speedPercentage = new Statistic<float>(StatisticDefinition.PercentageSpeed, this.GetParameterValue<float>("movementSpeed"));
                 StatisticRegistry.Register(speedPercentage);
             }
 
@@ -27,6 +35,11 @@ namespace Game
                 modifiable.Entity.GetCachedComponent<Caster>().OnAbilityUsed -= Modifier_OnAbilityUsed;
                 StatisticRegistry.Unregister(speedPercentage);
             }
+        }
+
+        public override Game.Modifier Instantiate()
+        {
+            return new Modifier(this);
         }
     }
 }

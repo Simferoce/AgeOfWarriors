@@ -9,9 +9,15 @@ namespace Game
         {
             public override bool? IsConfused => true;
 
-            public Modifier(ModifierHandler modifiable, ConfusionModifierDefinition modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ConfusionModifierDefinition modifierDefinition) : base(modifierDefinition)
             {
             }
         }
+
+        public override Game.Modifier Instantiate()
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }

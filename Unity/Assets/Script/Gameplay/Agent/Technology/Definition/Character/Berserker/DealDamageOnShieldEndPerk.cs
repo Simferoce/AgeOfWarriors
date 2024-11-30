@@ -1,14 +1,21 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "DealDamageOnShieldEndPerk", menuName = "Definition/Technology/Berserker/DealDamageOnShieldEndPerk")]
-    public class DealDamageOnShieldEndPerk : CharacterTechnologyPerkDefinition
+    public class DealDamageOnShieldEndPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, DealDamageOnShieldEndPerk>
         {
-            public Modifier(ModifierHandler modifiable, DealDamageOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(DealDamageOnShieldEndPerk modifierDefinition) : base(modifierDefinition)
             {
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
+
                 modifiable.OnModifierAdded += Modifiable_ModifierRemoved;
             }
 
@@ -62,9 +69,9 @@ namespace Game
             return string.Format(Description, damagePerShieldPointAbsorbed, StatisticFormatter.Percentage(percentageReachExplosionRadius, StatisticDefinition.Reach));
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseAttackPowerBaseOnRemainingHealthPerk", menuName = "Definition/Technology/Berserker/IncreaseAttackPowerBaseOnRemainingHealthPerk")]
-    public class IncreaseAttackPowerBaseOnRemainingHealthPerk : CharacterTechnologyPerkDefinition
+    public class IncreaseAttackPowerBaseOnRemainingHealthPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackPowerBaseOnRemainingHealthPerk>
         {
             private Statistic<float> attackPowerFlat;
 
-            public Modifier(ModifierHandler modifiable, IncreaseAttackPowerBaseOnRemainingHealthPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(IncreaseAttackPowerBaseOnRemainingHealthPerk modifierDefinition) : base(modifierDefinition)
             {
                 attackPowerFlat = new Statistic<float>(StatisticDefinition.FlatAttackPower);
                 StatisticRegistry.Register(attackPowerFlat);
@@ -39,9 +39,9 @@ namespace Game
             return string.Format(Description, attackpower, threshold);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

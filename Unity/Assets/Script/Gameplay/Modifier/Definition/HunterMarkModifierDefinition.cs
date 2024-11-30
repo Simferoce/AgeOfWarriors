@@ -11,7 +11,7 @@ namespace Game
         //    private IAttackable attackable;
         //    public HuntersMarkAbilityEffect Source { get; set; }
 
-        //    public Modifier(ModifierHandler modifiable, HunterMarkModifierDefinition modifierDefinition, HuntersMarkAbilityEffect source, float damage, IAttackable attackable, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+        //    public Modifier(ModifierHandler modifiable, HunterMarkModifierDefinition modifierDefinition, HuntersMarkAbilityEffect source, float damage, IAttackable attackable, ModifierApplier modifierSource) : base(modifiable, modifierDefinition, modifierSource)
         //    {
         //        this.Source = source;
         //        this.attackable = attackable;
@@ -41,5 +41,9 @@ namespace Game
         //        attackable.OnDamageTaken -= OnAttackableDamageTaken;
         //    }
         //}
+        public override Modifier Instantiate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "AttackSpeedByBleedActivePerk", menuName = "Definition/Technology/Archer/AttackSpeedByBleedActivePerk")]
-    public class AttackSpeedByBleedActivePerk : CharacterTechnologyPerkDefinition
+    public class AttackSpeedByBleedActivePerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, AttackSpeedByBleedActivePerk>
         {
@@ -13,7 +13,7 @@ namespace Game
             private int amountOfBleedApplied = 0;
             private Statistic<float> attackSpeedPercentage;
 
-            public Modifier(ModifierHandler modifiable, AttackSpeedByBleedActivePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(AttackSpeedByBleedActivePerk modifierDefinition) : base(modifierDefinition)
             {
                 attackSpeedPercentage = new Statistic<float>(StatisticDefinition.PercentageAttackSpeed);
                 StatisticRegistry.Register(attackSpeedPercentage);
@@ -29,7 +29,7 @@ namespace Game
                 base.Update();
 
                 amountOfBleedApplied = 0;
-                foreach (Game.Modifier modifier in modifiable.Entity.GetCachedComponent<IModifierSource>().AppliedModifiers)
+                foreach (Game.Modifier modifier in modifiable.Entity.GetCachedComponent<ModifierApplier>().AppliedModifiers)
                 {
                     if (modifier is not BleedingModifierDefinition.Modifier bleedingModifier)
                         continue;
@@ -54,9 +54,9 @@ namespace Game
             return string.Format(Description, attackSpeedPerBleedApplied);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

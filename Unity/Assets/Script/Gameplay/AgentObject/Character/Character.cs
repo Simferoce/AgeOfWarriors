@@ -10,7 +10,7 @@ namespace Game
     [RequireComponent(typeof(Attackable))]
     [RequireComponent(typeof(AttackFactory))]
     [RequireComponent(typeof(Target))]
-    public partial class Character : AgentObject<CharacterDefinition>, IModifierSource, IBlock, IAnimated
+    public partial class Character : AgentObject<CharacterDefinition>, IBlock, IAnimated
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
@@ -20,10 +20,8 @@ namespace Game
         [SerializeField] private Transform targetPosition;
 
         public event Action OnDeath;
-        public event Action<Modifier> OnModifierAdded;
 
         public Animated Animated { get; set; }
-        public List<Modifier> AppliedModifiers { get; set; } = new List<Modifier>();
         public override bool IsActive { get => !IsDead; }
         public Vector3 CenterPosition { get => transform.position; }
         public Vector3 TargetPosition => targetPosition.position;
@@ -74,7 +72,7 @@ namespace Game
             foreach (ITechnologyModify modifier in modifiers)
             {
                 if (modifier.Affect(agentObjectDefinition))
-                    this.GetCachedComponent<ModifierHandler>().AddModifier(modifier.GetModifier(this.GetCachedComponent<ModifierHandler>()));
+                    this.GetCachedComponent<ModifierHandler>().AddModifier(modifier.Instantiate());
             }
 
             health = new Statistic<float>(StatisticDefinition.Health);
@@ -140,17 +138,6 @@ namespace Game
             transform.localScale = new Vector3(Mathf.Sign(IsConfused ? -Direction : Direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
         }
 
-        public void AddAppliedModifier(Modifier modifier)
-        {
-            AppliedModifiers.Add(modifier);
-            OnModifierAdded?.Invoke(modifier);
-        }
-
-        public void RemoveAppliedModifier(Modifier modifier)
-        {
-            AppliedModifiers.Remove(modifier);
-        }
-
         public Vector3 ClosestPoint(Vector3 point)
         {
             return Hitbox.ClosestPoint(point);
@@ -165,7 +152,7 @@ namespace Game
 
         public void Death()
         {
-            EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
+            DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { AgentObject = this });
             OnDeath?.Invoke();
             stateMachine.SetState(new DeathState(this));
 

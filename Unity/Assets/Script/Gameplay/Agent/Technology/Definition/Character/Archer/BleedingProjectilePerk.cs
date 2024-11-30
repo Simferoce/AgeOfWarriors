@@ -3,11 +3,11 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "BleedingProjectilePerk", menuName = "Definition/Technology/Archer/BleedingProjectilePerk")]
-    public class BleedingProjectilePerk : CharacterTechnologyPerkDefinition
+    public class BleedingProjectilePerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, BleedingProjectilePerk>, IProjectileModifier
         {
-            public Modifier(ModifierHandler modifiable, BleedingProjectilePerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(BleedingProjectilePerk modifierDefinition) : base(modifierDefinition)
             {
 
             }
@@ -32,9 +32,9 @@ namespace Game
             return string.Format(this.Description, StatisticFormatter.Percentage(percentageAttackPower, StatisticDefinition.AttackPower), duration, bleedingProjectileModifierDefinition.BleedingModifierDefinition.MaxStack);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

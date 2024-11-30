@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "DummyReflectPerk", menuName = "Definition/Technology/Seer/DummyReflectPerk")]
-    public class DummyReflectPerk : CharacterTechnologyPerkDefinition
+    public class DummyReflectPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, DummyReflectPerk>
         {
             //private Ownership ownership;
 
-            public Modifier(ModifierHandler modifiable, DummyReflectPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(DummyReflectPerk modifierDefinition) : base(modifierDefinition)
             {
                 //ownership = modifiable.AddOrGetCachedComponent<Ownership>();
                 //ownership.OnChildAdded += Ownership_OnChildAdded;
@@ -40,9 +40,9 @@ namespace Game
         [SerializeField] private ReflectDamageModifierDefinition reflectDamageModifierDefinition;
         [SerializeField] private float damage;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

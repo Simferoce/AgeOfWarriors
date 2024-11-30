@@ -15,6 +15,9 @@ namespace Game
             public AgentObjectDefinition LaneObjectDefinition;
         }
 
+        public delegate void OnEntityCreatedDelegate(Entity entity);
+        public event OnEntityCreatedDelegate OnEntityCreated;
+
         [SerializeField] private int commandSlot = 1;
         [SerializeField] private List<AgentObjectDefinition> agentObjectsDefinition = new List<AgentObjectDefinition>();
 
@@ -72,7 +75,11 @@ namespace Game
 
             commands.Add(new Command()
             {
-                Action = () => laneObjectDefinition.Spawn(agent, spawnPoint.transform.position, currentSpawnNumber++, spawnPoint.Direction),
+                Action = () =>
+                {
+                    Entity entity = laneObjectDefinition.Spawn(agent, spawnPoint.transform.position, currentSpawnNumber++, spawnPoint.Direction);
+                    OnEntityCreated?.Invoke(entity);
+                },
                 ProductionDuration = laneObjectDefinition.ProductionDuration,
                 LaneObjectDefinition = laneObjectDefinition
             });

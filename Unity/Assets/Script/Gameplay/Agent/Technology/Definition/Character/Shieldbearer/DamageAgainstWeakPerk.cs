@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "DamageAgainstWeakPerk", menuName = "Definition/Technology/Shieldbearer/DamageAgainstWeakPerk")]
-    public class DamageAgainstWeakPerk : CharacterTechnologyPerkDefinition
+    public class DamageAgainstWeakPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, DamageAgainstWeakPerk>
         {
             private Statistic<float> damageDealtAgainstWeak;
 
-            public Modifier(ModifierHandler modifiable, DamageAgainstWeakPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(DamageAgainstWeakPerk modifierDefinition) : base(modifierDefinition)
             {
                 damageDealtAgainstWeak = new Statistic<float>(StatisticDefinition.PercentageDamageDealtAgainstWeak, definition.damageDealtAgainstWeak);
                 StatisticRegistry.Register(damageDealtAgainstWeak);
@@ -29,9 +29,9 @@ namespace Game
             return string.Format(Description, damageDealtAgainstWeak);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

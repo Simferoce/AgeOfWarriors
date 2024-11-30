@@ -6,6 +6,11 @@ namespace Game
     [CreateAssetMenu(fileName = "DamageOverTimeModifierDefinition", menuName = "Definition/Modifier/DamageOverTimeModifierDefinition")]
     public class DamageOverTimeModifierDefinition : ModifierDefinition
     {
+        public override Game.Modifier Instantiate()
+        {
+            throw new NotImplementedException();
+        }
+
         public class Modifier : Modifier<Modifier, DamageOverTimeModifierDefinition>
         {
             public float DamagePerSeconds { get; set; }
@@ -14,7 +19,7 @@ namespace Game
             private float lastDamageDealt;
             private float startTime;
 
-            public Modifier(ModifierHandler modifiable, DamageOverTimeModifierDefinition modifierDefinition, IModifierSource source, float duration, float damageOverTime) : base(modifiable, modifierDefinition, source)
+            public Modifier(DamageOverTimeModifierDefinition modifierDefinition, float duration, float damageOverTime) : base(modifierDefinition)
             {
                 DamagePerSeconds = damageOverTime;
                 durationEffect = duration;
@@ -55,19 +60,6 @@ namespace Game
                 float duration = durationEffect - (lastDamageDealt - startTime);
                 if (duration > 0)
                     DealDamage(duration);
-            }
-        }
-
-        [Serializable]
-        public class ModifierInstancier : Instancier<DamageOverTimeModifierDefinition>
-        {
-            [SerializeField] private float damage;
-            [SerializeField] private float duration;
-
-            public override Game.Modifier Instantiate(ModifierHandler modifiable, IModifierSource source)
-            {
-                Modifier modifier = new DamageOverTimeModifierDefinition.Modifier(modifiable, definition, source, duration, damage);
-                return modifier;
             }
         }
     }

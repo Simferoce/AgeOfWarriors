@@ -21,7 +21,6 @@ namespace Game
 
         public void AddModifier(Modifier modifier)
         {
-            modifier.Initialize();
             modifiers.Add(modifier);
             OnModifierAdded?.Invoke(modifier);
         }

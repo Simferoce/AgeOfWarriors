@@ -3,7 +3,7 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseAttackSpeedBaseOnNearbyEnemiesPerk", menuName = "Definition/Technology/Shieldbearer/IncreaseAttackSpeedBaseOnNearbyEnemiesPerk")]
-    public class IncreaseAttackSpeedBaseOnNearbyEnemiesPerk : CharacterTechnologyPerkDefinition
+    public class IncreaseAttackSpeedBaseOnNearbyEnemiesPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseAttackSpeedBaseOnNearbyEnemiesPerk>
         {
@@ -12,7 +12,7 @@ namespace Game
 
             public override bool Show => numberOfNearbyEnemies > 0;
 
-            public Modifier(ModifierHandler modifiable, IncreaseAttackSpeedBaseOnNearbyEnemiesPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(IncreaseAttackSpeedBaseOnNearbyEnemiesPerk modifierDefinition) : base(modifierDefinition)
             {
                 attackSpeedPercentage = new Statistic<float>(StatisticDefinition.PercentageAttackSpeed, 0f);
             }
@@ -71,9 +71,9 @@ namespace Game
             return string.Format(Description, attackSpeedIncreasePerEnemies, StatisticFormatter.Percentage(percentageReach, StatisticDefinition.Reach), "");
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

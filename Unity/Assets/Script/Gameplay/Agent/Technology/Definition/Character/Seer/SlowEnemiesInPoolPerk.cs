@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "SlowEnemiesInPoolPerk", menuName = "Definition/Technology/Seer/SlowEnemiesInPoolPerk")]
-    public class SlowEnemiesInPoolPerk : CharacterTechnologyPerkDefinition
+    public class SlowEnemiesInPoolPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, SlowEnemiesInPoolPerk>
         {
@@ -18,9 +19,9 @@ namespace Game
                     this.slowEnemiesInPoolPerk = slowEnemiesInPoolPerk;
                 }
 
-                public override Game.Modifier Instanciate(ModifierHandler modifiable, IModifierSource modifierSource)
+                public override Game.Modifier Instanciate(ModifierHandler modifiable, ModifierApplier modifierSource)
                 {
-                    return new SpeedModifierDefinition.Modifier(modifiable, slowEnemiesInPoolPerk.speedModifierDefinition, -slowEnemiesInPoolPerk.amount, modifierSource);
+                    return new SpeedModifierDefinition.Modifier(slowEnemiesInPoolPerk.speedModifierDefinition, -slowEnemiesInPoolPerk.amount);
                 }
 
                 public override bool Applicable(Pool pool, Target targeteable)
@@ -34,8 +35,14 @@ namespace Game
 
             private Character character;
 
-            public Modifier(ModifierHandler modifiable, SlowEnemiesInPoolPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(SlowEnemiesInPoolPerk modifierDefinition) : base(modifierDefinition)
             {
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
+
                 character = modifiable.Entity.GetCachedComponent<Character>();
                 //character.AddOrGetCachedComponent<Ownership>().OnChildAdded += Character_OnChildEntitySpawned;
             }
@@ -61,9 +68,9 @@ namespace Game
         [SerializeField] private SpeedModifierDefinition speedModifierDefinition;
         [SerializeField, Range(0, 1)] private float amount;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

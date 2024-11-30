@@ -1,16 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "CreateDummyOnDeathPerk", menuName = "Definition/Technology/Seer/CreateDummyOnDeathPerk")]
-    public class CreateDummyOnDeathPerk : CharacterTechnologyPerkDefinition
+    public class CreateDummyOnDeathPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, CreateDummyOnDeathPerk>
         {
             private Character character;
 
-            public Modifier(ModifierHandler modifiable, CreateDummyOnDeathPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(CreateDummyOnDeathPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 character = modifiable.Entity.GetCachedComponent<Character>();
                 character.OnDeath += Character_OnDeath;
             }
@@ -22,7 +29,7 @@ namespace Game
                 ModifierHandler dummyModifiable = agentObject.GetCachedComponent<ModifierHandler>();
 
                 float maxHealth = (agentObject as Character).MaxHealth;
-                dummyModifiable.AddModifier(new DamageOverTimeModifierDefinition.Modifier(dummyModifiable, definition.damageOverTimeModifierDefinition, modifiable.Entity.GetCachedComponent<IModifierSource>(), 9999, maxHealth * definition.percentageHealth));
+                Source.Apply(dummyModifiable, new DamageOverTimeModifierDefinition.Modifier(definition.damageOverTimeModifierDefinition, 9999, maxHealth * definition.percentageHealth));
             }
 
             public override void Dispose()
@@ -35,9 +42,9 @@ namespace Game
         [SerializeField] private DamageOverTimeModifierDefinition damageOverTimeModifierDefinition;
         [SerializeField, Range(0, 1)] private float percentageHealth;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

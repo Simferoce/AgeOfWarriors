@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "RangedReductionDamagePerk", menuName = "Definition/Technology/Shieldbearer/RangedReductionDamagePerk")]
-    public class RangedReductionDamagePerk : CharacterTechnologyPerkDefinition
+    public class RangedReductionDamagePerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, RangedReductionDamagePerk>
         {
             private Statistic<float> rangedDamageReduction;
 
-            public Modifier(ModifierHandler modifiable, RangedReductionDamagePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(RangedReductionDamagePerk modifierDefinition) : base(modifierDefinition)
             {
                 rangedDamageReduction = new Statistic<float>(StatisticDefinition.RangedPercentageDamageTaken, definition.rangedDamageReduction);
                 StatisticRegistry.Register(rangedDamageReduction);
@@ -29,9 +29,9 @@ namespace Game
             return string.Format(Description, rangedDamageReduction);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

@@ -1,15 +1,21 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "GainDefenseOnEmpowermentAttackPerk", menuName = "Definition/Technology/Shieldbearer/GainDefenseOnEmpowermentAttackPerk")]
-    public class GainDefenseOnEmpowermentAttackPerk : CharacterTechnologyPerkDefinition
+    public class GainDefenseOnEmpowermentAttackPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GainDefenseOnEmpowermentAttackPerk>
         {
-            public Modifier(ModifierHandler modifiable, GainDefenseOnEmpowermentAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GainDefenseOnEmpowermentAttackPerk modifierDefinition) : base(modifierDefinition)
             {
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
 
@@ -24,13 +30,9 @@ namespace Game
                     }
                     else
                     {
-                        modifiable.AddModifier(
-                            new DefenseModifierDefinition.Modifier(
-                                modifiable.Entity.GetCachedComponent<Character>(),
-                                definition.defenseModifierDefinition,
-                                definition.defense,
-                                Source)
-                            .With(new CharacterModifierTimeElement(definition.buffDuration)));
+                        Source.Apply(modifiable, definition.defenseModifierDefinition.Instantiate()
+                            .With(new CharacterModifierTimeElement(definition.buffDuration)),
+                            new List<ModifierParameter>() { new ModifierParameter<float>("value", definition.defense), new ModifierParameter<StatisticDefinition>("definition", StatisticDefinition.FlatDefense) });
                     }
                 }
             }
@@ -45,16 +47,16 @@ namespace Game
 
         [SerializeField] private float buffDuration;
         [SerializeField] private float defense;
-        [SerializeField] private DefenseModifierDefinition defenseModifierDefinition;
+        [SerializeField] private StatisticModifierDefinition defenseModifierDefinition;
 
         public override string ParseDescription()
         {
             return string.Format(Description, defense, buffDuration);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

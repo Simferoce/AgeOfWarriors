@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseDefensePerk", menuName = "Definition/Technology/Common/IncreaseDefensePerk")]
-    public class IncreaseDefensePerk : CharacterTechnologyPerkDefinition
+    public class IncreaseDefensePerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseDefensePerk>
         {
             private Statistic<float> defenseFlat;
 
-            public Modifier(ModifierHandler modifiable, IncreaseDefensePerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(IncreaseDefensePerk modifierDefinition) : base(modifierDefinition)
             {
                 defenseFlat = new Statistic<float>(StatisticDefinition.FlatDefense, definition.amount);
                 StatisticRegistry.Register(defenseFlat);
@@ -24,9 +24,9 @@ namespace Game
 
         [SerializeField] private float amount;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

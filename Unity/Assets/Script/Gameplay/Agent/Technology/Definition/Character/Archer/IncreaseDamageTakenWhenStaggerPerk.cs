@@ -4,13 +4,13 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseDamageTakenWhenStaggerPerk", menuName = "Definition/Technology/Archer/IncreaseDamageTakenWhenStaggerPerk")]
-    public class IncreaseDamageTakenWhenStaggerPerk : CharacterTechnologyPerkDefinition
+    public class IncreaseDamageTakenWhenStaggerPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseDamageTakenWhenStaggerPerk>
         {
             private Statistic<float> damageTakenWhileStagger;
 
-            public Modifier(ModifierHandler modifiable, IncreaseDamageTakenWhenStaggerPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(IncreaseDamageTakenWhenStaggerPerk modifierDefinition) : base(modifierDefinition)
             {
                 damageTakenWhileStagger = new Statistic<float>(StatisticDefinition.PercentageDamageTaken);
                 StatisticRegistry.Register(damageTakenWhileStagger);
@@ -36,9 +36,9 @@ namespace Game
             return string.Format(Description, increaseDamageTakenOfStaggered);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

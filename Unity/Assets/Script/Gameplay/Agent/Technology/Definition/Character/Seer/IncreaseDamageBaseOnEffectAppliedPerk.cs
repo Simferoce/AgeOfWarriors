@@ -4,13 +4,13 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseDamageBaseOnEffectAppliedPerk", menuName = "Definition/Technology/Seer/IncreaseDamageBaseOnEffectAppliedPerk")]
-    public class IncreaseDamageBaseOnEffectAppliedPerk : CharacterTechnologyPerkDefinition
+    public class IncreaseDamageBaseOnEffectAppliedPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseDamageBaseOnEffectAppliedPerk>
         {
             private Statistic<float> attackPowerFlat;
 
-            public Modifier(ModifierHandler modifiable, IncreaseDamageBaseOnEffectAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(IncreaseDamageBaseOnEffectAppliedPerk modifierDefinition) : base(modifierDefinition)
             {
                 attackPowerFlat = new Statistic<float>(StatisticDefinition.FlatAttackPower);
                 StatisticRegistry.Register(attackPowerFlat);
@@ -31,9 +31,9 @@ namespace Game
 
         [SerializeField] private float attackPowerPerEffectApplied;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

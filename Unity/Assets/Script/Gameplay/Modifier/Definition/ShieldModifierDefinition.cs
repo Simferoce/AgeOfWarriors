@@ -12,7 +12,7 @@ namespace Game
             public float Remaining { get; set; }
             public float Initial { get; set; }
 
-            public Shield(ModifierHandler modifiable, ShieldModifierDefinition modifierDefinition, float initial, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Shield(ShieldModifierDefinition modifierDefinition, float initial) : base(modifierDefinition)
             {
                 Initial = initial;
                 Remaining = Initial;
@@ -42,14 +42,17 @@ namespace Game
             }
         }
 
-        public Shield CreateShield(ModifierHandler modifiable, float initial, float duration)
+        public Shield CreateShield(float initial, float duration)
         {
             return new Shield(
-                    modifiable,
                     this,
-                    initial,
-                    modifiable.Entity.GetCachedComponent<IModifierSource>())
+                    initial)
                 .With(new CharacterModifierTimeElement(duration));
+        }
+
+        public override Modifier Instantiate()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

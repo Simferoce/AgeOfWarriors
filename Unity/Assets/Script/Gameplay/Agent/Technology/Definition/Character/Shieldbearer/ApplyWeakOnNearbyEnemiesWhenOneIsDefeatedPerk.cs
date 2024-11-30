@@ -4,22 +4,22 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk", menuName = "Definition/Technology/Shieldbearer/ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk")]
-    public class ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk : CharacterTechnologyPerkDefinition
+    public class ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk>
         {
-            public Modifier(ModifierHandler modifiable, ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ApplyWeakOnNearbyEnemiesWhenOneIsDefeatedPerk modifierDefinition) : base(modifierDefinition)
             {
-                EventChannelDeath.Instance.Susbribe(OnUnitDeath);
+                DeathEventChannel.Instance.Susbribe(OnUnitDeath);
             }
 
             public override void Dispose()
             {
                 base.Dispose();
-                EventChannelDeath.Instance.Unsubcribe(OnUnitDeath);
+                DeathEventChannel.Instance.Unsubcribe(OnUnitDeath);
             }
 
-            public void OnUnitDeath(EventChannelDeath.Event evt)
+            public void OnUnitDeath(DeathEventChannel.Event evt)
             {
                 if (evt.AgentObject.Faction != (modifiable.Entity as AgentObject).Faction)
                 {
@@ -52,14 +52,10 @@ namespace Game
                         }
                         else
                         {
-                            targetModifiable.AddModifier(
-                                new DamageDealtReductionModifierDefinition.Modifier(
-                                    targetModifiable,
+                            Source.Apply(targetModifiable, new DamageDealtReductionModifierDefinition.Modifier(
                                     definition.damageDealtReductionModifierDefinition,
-                                    definition.reductionAmount,
-                                    Source)
-                                    .With(new CharacterModifierTimeElement(definition.duration))
-                            );
+                                    definition.reductionAmount)
+                                    .With(new CharacterModifierTimeElement(definition.duration)));
                         }
                     }
                 }
@@ -76,9 +72,9 @@ namespace Game
             return string.Format(Description, reductionAmount, StatisticFormatter.Percentage(percentageReachAffect, StatisticDefinition.Reach), duration);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

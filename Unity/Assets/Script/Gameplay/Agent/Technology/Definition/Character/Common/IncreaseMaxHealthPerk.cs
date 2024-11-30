@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseMaxHealthPerk", menuName = "Definition/Technology/Common/IncreaseMaxHealthPerk")]
-    public class IncreaseMaxHealthPerk : CharacterTechnologyPerkDefinition
+    public class IncreaseMaxHealthPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseMaxHealthPerk>
         {
             private Statistic<float> maxHealthFlat;
 
-            public Modifier(ModifierHandler modifiable, IncreaseMaxHealthPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(IncreaseMaxHealthPerk modifierDefinition) : base(modifierDefinition)
             {
                 maxHealthFlat = new Statistic<float>(StatisticDefinition.FlatMaxHealth, definition.amount);
                 StatisticRegistry.Register(maxHealthFlat);
@@ -24,9 +24,9 @@ namespace Game
 
         [SerializeField] private float amount;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

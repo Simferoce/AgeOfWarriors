@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseSpeedPowerPerk", menuName = "Definition/Technology/Common/IncreaseSpeedPowerPerk")]
-    public class IncreaseSpeedPowerPerk : CharacterTechnologyPerkDefinition
+    public class IncreaseSpeedPowerPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseSpeedPowerPerk>
         {
             private Statistic<float> speed;
 
-            public Modifier(ModifierHandler modifiable, IncreaseSpeedPowerPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(IncreaseSpeedPowerPerk modifierDefinition) : base(modifierDefinition)
             {
                 speed = new Statistic<float>(StatisticDefinition.PercentageSpeed, definition.amount);
                 StatisticRegistry.Register(speed);
@@ -24,9 +24,9 @@ namespace Game
 
         [SerializeField, Range(0, 1)] private float amount;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

@@ -1,16 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "GainSpeedKillingBlowPerk", menuName = "Definition/Technology/Berserker/GainSpeedKillingBlowPerk")]
-    public class GainSpeedKillingBlowPerk : CharacterTechnologyPerkDefinition
+    public class GainSpeedKillingBlowPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GainSpeedKillingBlowPerk>
         {
             private SpeedModifierDefinition speedModifierDefinition;
 
-            public Modifier(ModifierHandler modifiable, GainSpeedKillingBlowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GainSpeedKillingBlowPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 if (modifiable.Entity.TryGetCachedComponent<AttackFactory>(out AttackFactory attackFactory))
                     attackFactory.OnAttackDealt += AgentObject_OnAttackLanded;
             }
@@ -18,12 +25,11 @@ namespace Game
             private void AgentObject_OnAttackLanded(AttackResult attackResult)
             {
                 if (attackResult.KillingBlow)
-                    modifiable.AddModifier(new SpeedModifierDefinition.Modifier(
-                        modifiable,
+                {
+                    Source.Apply(modifiable, new SpeedModifierDefinition.Modifier(
                         speedModifierDefinition,
-                        definition.speed,
-                        Source)
-                            .With(new CharacterModifierTimeElement(definition.duration)));
+                        definition.speed).With(new CharacterModifierTimeElement(definition.duration)));
+                }
             }
 
             public override void Dispose()
@@ -43,9 +49,9 @@ namespace Game
             return string.Format(Description, speed, duration);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

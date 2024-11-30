@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Agent : MonoBehaviour
+    public class Agent : Entity
     {
         public static List<Agent> agents = new List<Agent>();
         public static Agent Player => agents.FirstOrDefault(x => x.Faction == Faction.Player);
@@ -15,6 +15,9 @@ namespace Game
         {
             agents = new List<Agent>();
         }
+
+        public delegate void OnEntityCreatedDelegate(Entity entity);
+        public event OnEntityCreatedDelegate OnEntityCreated;
 
         [SerializeField] private Faction faction;
         [SerializeField] private Base agentBase;
@@ -31,11 +34,27 @@ namespace Game
         public int Direction { get => direction; set => direction = value; }
         public TechnologyHandler Technology { get => technology; }
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             factory.Initialize(this);
             technology.Initialize(this);
             agentBehaviour.Initialize(this);
+
+            factory.OnEntityCreated += FactoryOnEntityCreated;
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            agentBehaviour.Dispose();
+
+            factory.OnEntityCreated -= FactoryOnEntityCreated;
+        }
+
+        private void FactoryOnEntityCreated(Entity entity)
+        {
+            OnEntityCreated?.Invoke(entity);
         }
 
         private void Start()
@@ -60,11 +79,6 @@ namespace Game
         private void OnDisable()
         {
             agents.Remove(this);
-        }
-
-        private void OnDestroy()
-        {
-            agentBehaviour.Dispose();
         }
 
         public bool SpawnLaneObject(int index)

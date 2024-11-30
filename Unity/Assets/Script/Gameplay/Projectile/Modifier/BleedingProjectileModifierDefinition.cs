@@ -13,7 +13,7 @@ namespace Game
             private float damagePerSeconds;
             private float duration;
 
-            public Modifier(ModifierHandler modifiable, BleedingProjectileModifierDefinition modifierDefinition, float damagePerSeconds, float duration, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, BleedingProjectileModifierDefinition modifierDefinition, float damagePerSeconds, float duration, ModifierApplier modifierSource) : base(modifierDefinition)
             {
                 this.damagePerSeconds = damagePerSeconds;
                 this.duration = duration;
@@ -35,14 +35,14 @@ namespace Game
 
                         if (modifier == null)
                         {
-                            modifier = new BleedingModifierDefinition.BleedingModifier(modifiable, definition.bleedingModifierDefinition, duration, damagePerSeconds, projectile.AgentObject as Character);
+                            modifier = new BleedingModifierDefinition.BleedingModifier(modifiable, definition.bleedingModifierDefinition, duration, damagePerSeconds, projectile.AgentObject.GetCachedComponent<ModifierApplier>());
 
                             modifiable.AddModifier(modifier);
                         }
                         else
                         {
                             SpreadBleedingPerk.Modifier spreadModifier = projectile.AgentObject.GetCachedComponent<ModifierHandler>().GetModifiers().FirstOrDefault(x => x is SpreadBleedingPerk.Modifier) as SpreadBleedingPerk.Modifier;
-                            modifier.Increase(damagePerSeconds, duration, spreadModifier != null, spreadModifier?.SpreadDistance ?? 0f, projectile.AgentObject as Character);
+                            modifier.Increase(damagePerSeconds, duration, spreadModifier != null, spreadModifier?.SpreadDistance ?? 0f, projectile.AgentObject.GetCachedComponent<ModifierApplier>());
                         }
                     }
                 }

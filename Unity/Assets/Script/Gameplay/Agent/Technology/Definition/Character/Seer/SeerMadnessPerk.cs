@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "SeerMadnessPerk", menuName = "Definition/Technology/Seer/SeerMadnessPerk")]
-    public class SeerMadnessPerk : CharacterTechnologyPerkDefinition
+    public class SeerMadnessPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, SeerMadnessPerk>
         {
@@ -13,8 +14,14 @@ namespace Game
             private Character character;
             private Statistic<float> attackPowerFlat;
 
-            public Modifier(ModifierHandler modifiable, SeerMadnessPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(SeerMadnessPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 character = modifiable.Entity.GetCachedComponent<Character>();
                 affectedAbility = character.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
@@ -33,10 +40,8 @@ namespace Game
                 }
                 else
                 {
-                    modifiable.AddModifier(new ConfusionModifierDefinition.Modifier(
-                            modifiable,
-                            definition.confusionModifierDefinition,
-                            Source)
+                    Source.Apply(modifiable, new ConfusionModifierDefinition.Modifier(
+                            definition.confusionModifierDefinition)
                         .With(new CharacterModifierTimeElement(definition.duration)));
 
                     currentAttackApplied = 0;
@@ -62,9 +67,9 @@ namespace Game
         [SerializeField] private ConfusionModifierDefinition confusionModifierDefinition;
         [SerializeField] private AbilityDefinition affectedAbility;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

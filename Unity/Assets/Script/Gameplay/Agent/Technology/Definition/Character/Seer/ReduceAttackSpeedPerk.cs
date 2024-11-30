@@ -5,13 +5,13 @@ using UnityEngine;
 namespace Game
 {
     [CreateAssetMenu(fileName = "ReduceAttackSpeedPerk", menuName = "Definition/Technology/Seer/ReduceAttackSpeed")]
-    public class ReduceAttackSpeedPerk : CharacterTechnologyPerkDefinition
+    public class ReduceAttackSpeedPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, ReduceAttackSpeedPerk>
         {
             private List<AttackSpeedModifierDefinition.Modifier> currents = new List<AttackSpeedModifierDefinition.Modifier>();
 
-            public Modifier(ModifierHandler modifiable, ReduceAttackSpeedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ReduceAttackSpeedPerk modifierDefinition) : base(modifierDefinition)
             {
             }
 
@@ -54,11 +54,11 @@ namespace Game
                     }
 
                     AttackSpeedModifierDefinition.Modifier modifier = new AttackSpeedModifierDefinition.Modifier(
-                        modifiable,
                         definition.attackSpeedReductionModifierDefinition,
-                        -definition.amount,
-                        Source);
-                    modifiable.AddModifier(modifier);
+                        -definition.amount);
+
+                    Source.Apply(modifiable, modifier);
+
                     currents.Add(modifier);
                 }
             }
@@ -68,9 +68,9 @@ namespace Game
         [SerializeField, Range(0, 5)] private float percentageReach;
         [SerializeField, Range(0, 1)] private float amount;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

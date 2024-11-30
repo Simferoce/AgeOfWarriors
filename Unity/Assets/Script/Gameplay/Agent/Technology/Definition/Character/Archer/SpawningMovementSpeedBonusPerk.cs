@@ -1,15 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "SpawningMovementSpeedBonusPerk", menuName = "Definition/Technology/Archer/SpawningMovementSpeedBonusPerk/SpawningMovementSpeedBonusPerk")]
-    public class SpawningMovementSpeedBonusPerk : CharacterTechnologyPerkDefinition
+    public class SpawningMovementSpeedBonusPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, SpawningMovementSpeedBonusPerk>
         {
-            public Modifier(ModifierHandler modifiable, SpawningMovementSpeedBonusPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(SpawningMovementSpeedBonusPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                 foreach (AgentObject agent in AgentObject.All)
@@ -35,7 +42,8 @@ namespace Game
                     return;
                 }
 
-                modifiable.AddModifier(new SpawningMovementSpeedBonusPerkEffect.Modifier(modifiable, definition.effect, source, definition.movementSpeedIncrease));
+                ModifierApplier modifierApplier = character.GetCachedComponent<ModifierApplier>();
+                modifierApplier.Apply(modifiable, definition.effect.Instantiate(), new List<ModifierParameter>() { new ModifierParameter<float>("movementSpeed", definition.movementSpeedIncrease) });
             }
         }
 
@@ -43,9 +51,9 @@ namespace Game
         [SerializeField, Range(0, 5)] private float movementSpeedIncrease;
         [SerializeField] private SpawningMovementSpeedBonusPerkEffect effect;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

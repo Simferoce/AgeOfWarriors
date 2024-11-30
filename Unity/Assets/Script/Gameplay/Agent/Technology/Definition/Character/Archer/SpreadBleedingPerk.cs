@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "SpreadBleedingPerk", menuName = "Definition/Technology/Archer/SpreadBleedingPerk")]
-    public class SpreadBleedingPerk : CharacterTechnologyPerkDefinition
+    public class SpreadBleedingPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, SpreadBleedingPerk>
         {
             public float SpreadDistance => definition.spreadDistance;
 
-            public Modifier(ModifierHandler modifiable, SpreadBleedingPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(SpreadBleedingPerk modifierDefinition) : base(modifierDefinition)
             {
             }
         }
@@ -21,9 +21,9 @@ namespace Game
             return string.Format(Description, spreadDistance);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

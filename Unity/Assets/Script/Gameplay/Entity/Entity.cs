@@ -53,6 +53,7 @@ namespace Game
         {
             All.Add(this);
             Link(statisticRegistry);
+            EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
         }
 
         protected virtual void OnDestroy()
@@ -60,7 +61,6 @@ namespace Game
             Parent = null;
             All.Remove(this);
         }
-
 
         #region Components
         public void Link<T>(T component)

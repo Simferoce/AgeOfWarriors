@@ -11,7 +11,7 @@ namespace Game
 
             public float PercentageDamageIncrease => definition.percentageDamageIncrease;
 
-            public Modifier(ModifierHandler modifiable, EmpoweredModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(EmpoweredModifierDefinition modifierDefinition) : base(modifierDefinition)
             {
                 stackModifierElement = new StackModifierElement();
                 stackModifierElement.IncreaseStack();
@@ -31,5 +31,10 @@ namespace Game
         [SerializeField, Range(0, 5)] private float percentageDamageIncrease;
 
         public float PercentageDamageIncrease => percentageDamageIncrease;
+
+        public override Game.Modifier Instantiate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

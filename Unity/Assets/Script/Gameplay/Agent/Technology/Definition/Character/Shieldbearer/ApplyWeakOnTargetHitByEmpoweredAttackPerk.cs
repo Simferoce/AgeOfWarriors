@@ -1,15 +1,22 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "ApplyWeakOnTargetHitByEmpoweredAttackPerk", menuName = "Definition/Technology/Shieldbearer/ApplyWeakOnTargetHitByEmpoweredAttackPerk")]
-    public class ApplyWeakOnTargetHitByEmpoweredAttackPerk : CharacterTechnologyPerkDefinition
+    public class ApplyWeakOnTargetHitByEmpoweredAttackPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, ApplyWeakOnTargetHitByEmpoweredAttackPerk>
         {
-            public Modifier(ModifierHandler modifiable, ApplyWeakOnTargetHitByEmpoweredAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ApplyWeakOnTargetHitByEmpoweredAttackPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
 
@@ -25,12 +32,10 @@ namespace Game
                     }
                     else
                     {
-                        targetModifiable.AddModifier(
+                        Source.Apply(modifiable,
                             new DamageDealtReductionModifierDefinition.Modifier(
-                                targetModifiable,
                                 definition.damageDealtReductionModifierDefinition,
-                                definition.damageReduction,
-                                Source)
+                                definition.damageReduction)
                             .With(new CharacterModifierTimeElement(definition.duration)));
                     }
                 }
@@ -54,9 +59,9 @@ namespace Game
             return string.Format(Description, duration, damageReduction);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Game
             private Projectile projectile;
             private float duration;
 
-            public Modifier(ModifierHandler modifiable, StaggerProjectileModifierDefinition modifierDefinition, float duration, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ModifierHandler modifiable, StaggerProjectileModifierDefinition modifierDefinition, float duration, ModifierApplier modifierSource) : base(modifierDefinition)
             {
                 this.duration = duration;
 
@@ -25,7 +25,7 @@ namespace Game
                 {
                     if (targeteable.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
                     {
-                        modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, duration, projectile.AgentObject as Character));
+                        modifiable.AddModifier(new StaggerModifierDefinition.Modifier(modifiable, definition.staggerModifierDefinition, duration, projectile.AgentObject.GetCachedComponent<ModifierApplier>()));
                     }
                 }
             }

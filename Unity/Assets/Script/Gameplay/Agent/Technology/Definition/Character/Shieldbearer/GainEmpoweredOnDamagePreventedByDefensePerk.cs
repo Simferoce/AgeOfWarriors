@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "GainEmpoweredOnDamagePreventedByDefensePerk", menuName = "Definition/Technology/Shieldbearer/GainEmpoweredOnDamagePreventedByDefensePerk")]
-    public class GainEmpoweredOnDamagePreventedByDefensePerk : CharacterTechnologyPerkDefinition
+    public class GainEmpoweredOnDamagePreventedByDefensePerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GainEmpoweredOnDamagePreventedByDefensePerk>
         {
@@ -13,8 +14,13 @@ namespace Game
 
             public float CurrentDamagePrevented { get => currentDamagePrevented; set => currentDamagePrevented = value; }
 
-            public Modifier(ModifierHandler modifiable, GainEmpoweredOnDamagePreventedByDefensePerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GainEmpoweredOnDamagePreventedByDefensePerk modifierDefinition) : base(modifierDefinition)
             {
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 modifiable.Entity.GetCachedComponent<Attackable>().OnAttackTaken += Modifier_OnDamageTaken;
             }
 
@@ -30,10 +36,8 @@ namespace Game
                     if (modifier != null)
                         modifier.Refresh();
                     else
-                        modifiable.AddModifier(new EmpoweredModifierDefinition.Modifier(
-                            modifiable,
-                            definition.empoweredModifierDefinition,
-                            Source));
+                        Source.Apply(modifiable, new EmpoweredModifierDefinition.Modifier(
+                            definition.empoweredModifierDefinition));
                 }
             }
 
@@ -57,9 +61,9 @@ namespace Game
             return string.Format(Description, damageToPrevent, empoweredModifierDefinition.PercentageDamageIncrease);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

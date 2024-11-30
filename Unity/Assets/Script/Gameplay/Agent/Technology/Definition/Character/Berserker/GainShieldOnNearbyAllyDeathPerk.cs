@@ -3,22 +3,21 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "GainShieldOnNearbyAllyDeathPerk", menuName = "Definition/Technology/Berserker/GainShieldOnNearbyAllyDeathPerk")]
-    public class GainShieldOnNearbyAllyDeathPerk : CharacterTechnologyPerkDefinition
+    public class GainShieldOnNearbyAllyDeathPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GainShieldOnNearbyAllyDeathPerk>
         {
-            public Modifier(ModifierHandler modifiable, GainShieldOnNearbyAllyDeathPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GainShieldOnNearbyAllyDeathPerk modifierDefinition) : base(modifierDefinition)
             {
-                EventChannelDeath.Instance.Susbribe(OnUnitDeath);
+                DeathEventChannel.Instance.Susbribe(OnUnitDeath);
             }
 
-            public void OnUnitDeath(EventChannelDeath.Event evt)
+            public void OnUnitDeath(DeathEventChannel.Event evt)
             {
                 if (evt.AgentObject.Faction == (modifiable.Entity as AgentObject).Faction
                     && evt.AgentObject != modifiable.Entity)
                 {
-
-                    modifiable.AddModifier(definition.shieldModifierDefinition.CreateShield(modifiable, definition.amount, definition.duration));
+                    Source.Apply(modifiable, definition.shieldModifierDefinition.CreateShield(definition.amount, definition.duration));
                 }
             }
 
@@ -26,7 +25,7 @@ namespace Game
             {
                 base.Dispose();
 
-                EventChannelDeath.Instance.Unsubcribe(OnUnitDeath);
+                DeathEventChannel.Instance.Unsubcribe(OnUnitDeath);
             }
         }
 
@@ -39,9 +38,9 @@ namespace Game
             return string.Format(Description, amount, duration);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

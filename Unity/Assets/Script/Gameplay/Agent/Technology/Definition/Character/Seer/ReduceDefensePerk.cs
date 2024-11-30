@@ -1,15 +1,22 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "ReduceDefensePerk", menuName = "Definition/Technology/Seer/ReduceDefensePerk")]
-    public class ReduceDefensePerk : CharacterTechnologyPerkDefinition
+    public class ReduceDefensePerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, ReduceDefensePerk>
         {
-            public Modifier(ModifierHandler modifiable, ReduceDefensePerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(ReduceDefensePerk modifierDefinition) : base(modifierDefinition)
             {
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
+
                 modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
 
@@ -18,14 +25,14 @@ namespace Game
                 Character character = modifiable.Entity.GetCachedComponent<Character>();
 
                 ModifierHandler targetModifiable = attack.Target.Entity.GetCachedComponent<ModifierHandler>();
-                Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x is DefenseReductionModifierDefinition.Modifier && x.Source == (IModifierSource)character);
+                Game.Modifier modifier = targetModifiable.GetModifiers().FirstOrDefault(x => x is DefenseReductionModifierDefinition.Modifier && x.Source == character.GetCachedComponent<ModifierApplier>());
                 if (modifier != null)
                 {
                     modifier.Refresh();
                 }
                 else
                 {
-                    targetModifiable.AddModifier(new DefenseReductionModifierDefinition.Modifier(targetModifiable, definition.defenseReductionModifierDefinition, definition.duration, definition.defenseReduction, character));
+                    Source.Apply(targetModifiable, new DefenseReductionModifierDefinition.Modifier(definition.defenseReductionModifierDefinition, definition.duration, definition.defenseReduction));
                 }
             }
 
@@ -45,9 +52,9 @@ namespace Game
             return string.Format(Description, defenseReduction, duration);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

@@ -1,26 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Game
 {
     public abstract class ModifierDefinition : Definition
     {
-        [Serializable]
-        public abstract class Instancier
-        {
-            public abstract ModifierDefinition Definition { get; set; }
-            public abstract Modifier Instantiate(ModifierHandler modifiable, IModifierSource source);
-        }
-
-        [Serializable]
-        public abstract class Instancier<T> : Instancier
-            where T : ModifierDefinition
-        {
-            [SerializeField] protected T definition;
-
-            public override ModifierDefinition Definition { get => definition; set => definition = (T)value; }
-        }
-
         [SerializeField] private string title;
         [SerializeField] private Sprite icon;
         [SerializeField] private string description;
@@ -35,5 +18,7 @@ namespace Game
         {
             return description;
         }
+
+        public abstract Game.Modifier Instantiate();
     }
 }

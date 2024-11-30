@@ -7,37 +7,46 @@ namespace Game
     {
         public class Modifier : Modifier<Modifier, ApplyEffectWhenHitModifierDefinition>
         {
-            private Instancier instancier;
             private Attackable attackable;
 
-            public Modifier(ModifierHandler modifiable, ApplyEffectWhenHitModifierDefinition modifierDefinition, IModifierSource source, Instancier instancier) : base(modifiable, modifierDefinition, source)
+            public Modifier(ApplyEffectWhenHitModifierDefinition modifierDefinition) : base(modifierDefinition)
             {
-                attackable = modifiable.Entity.GetCachedComponent<Attackable>();
-                attackable.OnAttackTaken += AttackableOnAttackTaken;
-                this.instancier = instancier;
             }
 
-            private void AttackableOnAttackTaken(AttackResult attackResult)
-            {
-                if (attackResult.Attack.OverTime)
-                    return;
+            //public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            //{
+            //    base.Initialize(modifiable, source, parameters);
+            //    attackable = modifiable.Entity.GetCachedComponent<Attackable>();
+            //    attackable.OnAttackTaken += AttackableOnAttackTaken;
+            //}
 
-                ModifierHandler target = attackResult.Attack.AttackFactory.Entity.GetCachedComponent<ModifierHandler>();
-                if (target != null && target.TryGetModifier(instancier.Definition, out Game.Modifier modifier))
-                {
-                    modifier.Refresh();
-                }
-                else if (target != null)
-                {
-                    target.AddModifier(instancier.Instantiate(target, Source));
-                }
-            }
+            //private void AttackableOnAttackTaken(AttackResult attackResult)
+            //{
+            //    if (attackResult.Attack.OverTime)
+            //        return;
 
-            public override void Dispose()
-            {
-                base.Dispose();
-                attackable.OnAttackTaken -= AttackableOnAttackTaken;
-            }
+            //    ModifierHandler target = attackResult.Attack.AttackFactory.Entity.GetCachedComponent<ModifierHandler>();
+            //    if (target != null && target.TryGetModifier(instancier.Definition, out Game.Modifier modifier))
+            //    {
+            //        modifier.Refresh();
+            //    }
+            //    else if (target != null)
+            //    {
+            //        target.AddModifier(instancier.Instantiate(target, Source));
+            //    }
+            //}
+
+            //public override void Dispose()
+            //{
+            //    base.Dispose();
+            //    attackable.OnAttackTaken -= AttackableOnAttackTaken;
+            //}
         }
+
+        public override Game.Modifier Instantiate()
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }

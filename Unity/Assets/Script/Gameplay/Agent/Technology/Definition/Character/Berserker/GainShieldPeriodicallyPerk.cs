@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "GainShieldPeriodicallyPerk", menuName = "Definition/Technology/Berserker/GainShieldPeriodicallyPerk")]
-    public class GainShieldPeriodicallyPerk : CharacterTechnologyPerkDefinition
+    public class GainShieldPeriodicallyPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GainShieldPeriodicallyPerk>
         {
             private float accumulatedTime = 0.0f;
 
-            public Modifier(ModifierHandler modifiable, GainShieldPeriodicallyPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GainShieldPeriodicallyPerk modifierDefinition) : base(modifierDefinition)
             {
             }
 
@@ -21,7 +21,7 @@ namespace Game
                 {
                     if ((int)((accumulatedTime + Time.deltaTime) / definition.cooldown) != (int)(accumulatedTime / definition.cooldown))
                     {
-                        modifiable.AddModifier(definition.shieldModifierDefinition.CreateShield(modifiable, definition.amount, definition.duration));
+                        Source.Apply(modifiable, definition.shieldModifierDefinition.CreateShield(definition.amount, definition.duration));
                     }
 
                     accumulatedTime += Time.deltaTime;
@@ -39,9 +39,9 @@ namespace Game
             return string.Format(Description, cooldown, duration, amount);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

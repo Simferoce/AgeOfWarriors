@@ -1,14 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "GiveDefenseOnDeathPerk", menuName = "Definition/Technology/Shieldbearer/GiveDefenseOnDeathPerk")]
-    public class GiveDefenseOnDeathPerk : CharacterTechnologyPerkDefinition
+    public class GiveDefenseOnDeathPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GiveDefenseOnDeathPerk>
         {
-            public Modifier(ModifierHandler modifiable, GiveDefenseOnDeathPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GiveDefenseOnDeathPerk modifierDefinition) : base(modifierDefinition)
             {
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 modifiable.Entity.GetCachedComponent<Character>().OnDeath += Modifier_OnDeath;
             }
 
@@ -38,10 +44,9 @@ namespace Game
                     if (Mathf.Abs((targeteable.ClosestPoint(character.CenterPosition) - character.CenterPosition).x) > definition.reachPercentage * character.Reach)
                         continue;
 
-                    modifiable.AddModifier(new DefenseModifierDefinition.Modifier(character,
-                        definition.defenseModifierDefinition,
-                        definition.defense,
-                        Source));
+                    Source.Apply(modifiable, definition.statisticModifierDefinition.Instantiate()
+                            .With(new CharacterModifierTimeElement(definition.duration)),
+                            new List<ModifierParameter>() { new ModifierParameter<float>("value", definition.defense), new ModifierParameter<StatisticDefinition>("definition", StatisticDefinition.FlatDefense) });
                 }
             }
 
@@ -54,16 +59,17 @@ namespace Game
 
         [SerializeField, Range(0, 5)] private float reachPercentage;
         [SerializeField] private float defense;
-        [SerializeField] private DefenseModifierDefinition defenseModifierDefinition;
+        [SerializeField] private float duration;
+        [SerializeField] private GiveDefenseOnDeathModifier statisticModifierDefinition;
 
         public override string ParseDescription()
         {
             return string.Format(Description, defense, StatisticFormatter.Percentage(reachPercentage, StatisticDefinition.Reach));
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "IncreaseReachPerk", menuName = "Definition/Technology/Common/IncreaseReachPerk")]
-    public class IncreaseReachPerk : CharacterTechnologyPerkDefinition
+    public class IncreaseReachPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, IncreaseReachPerk>
         {
             private Statistic<float> reachPercentage;
 
-            public Modifier(ModifierHandler modifiable, IncreaseReachPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(IncreaseReachPerk modifierDefinition) : base(modifierDefinition)
             {
                 reachPercentage = new Statistic<float>(StatisticDefinition.PercentageReach, definition.amount);
                 StatisticRegistry.Register(reachPercentage);
@@ -24,9 +24,9 @@ namespace Game
 
         [SerializeField, Range(0, 1)] private float amount;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

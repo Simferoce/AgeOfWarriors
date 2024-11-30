@@ -10,7 +10,7 @@ namespace Game
         {
             private StackModifierElement stackModifierElement;
 
-            public Modifier(ModifierHandler modifiable, ProgressiveEmpowermentModifierDefinition modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ProgressiveEmpowermentModifierDefinition modifierDefinition) : base(modifierDefinition)
             {
                 stackModifierElement = new StackModifierElement();
                 this.With(stackModifierElement);
@@ -29,10 +29,7 @@ namespace Game
                     Game.Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == empoweredModifierDefinition);
                     if (modifier == null)
                     {
-                        modifiable.AddModifier(new EmpoweredModifierDefinition.Modifier(
-                            modifiable,
-                            empoweredModifierDefinition,
-                            Source));
+                        Source.Apply(modifiable, new EmpoweredModifierDefinition.Modifier(empoweredModifierDefinition));
                     }
                     else
                     {
@@ -49,5 +46,10 @@ namespace Game
 
         public int MaxStack => maxStack;
         public EmpoweredModifierDefinition EmpoweredModifierDefinition => empoweredModifierDefinition;
+
+        public override Game.Modifier Instantiate()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

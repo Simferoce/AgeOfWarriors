@@ -7,6 +7,9 @@ namespace Game
 {
     public abstract class Modifier : IDisposable
     {
+        public delegate void OnDisposeDelegate(Modifier modifier);
+        public event OnDisposeDelegate OnDispose;
+
         public List<ModifierElement> modifierElements = new List<ModifierElement>();
         public abstract ModifierDefinition Definition { get; }
 
@@ -15,25 +18,33 @@ namespace Game
         public virtual bool? IsConfused => null;
 
         public ModifierHandler Modifiable { get => modifiable; set => modifiable = value; }
-        public IModifierSource Source { get; }
+        public ModifierApplier Source { get; private set; }
         public virtual bool Show => Definition.Show;
         public StatisticRegistry StatisticRegistry { get; set; } = new StatisticRegistry();
 
         protected ModifierHandler modifiable;
+        protected List<ModifierParameter> parameters;
 
-        protected Modifier(ModifierHandler modifiable, IModifierSource source = null)
+        public virtual void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
         {
+            this.parameters = parameters;
             this.Source = source;
             this.modifiable = modifiable;
 
-            if (Source != null)
-                Source.AddAppliedModifier(this);
-        }
-
-        public void Initialize()
-        {
             foreach (ModifierElement element in modifierElements)
                 element.Initialize();
+        }
+
+        public T GetParameterValue<T>(string name)
+        {
+            ModifierParameter modifierParameter = parameters.FirstOrDefault(x => x.Name == name);
+            if (modifierParameter == null)
+            {
+                Debug.LogError($"Expecting a parameter with name \"{name}\". Available parameters: {string.Join(", ", modifierParameter.ToString())}");
+                return default;
+            }
+
+            return modifierParameter.GetValue<T>();
         }
 
         public virtual string ParseDescription() { return Definition.ParseDescription(); }
@@ -76,12 +87,23 @@ namespace Game
 
         public virtual void Dispose()
         {
-            if (Source != null)
-                Source.RemoveAppliedModifier(this);
+            OnDispose?.Invoke(this);
+        }
+
+        public Modifier With(List<ModifierElement> modifierElements)
+        {
+            this.modifierElements.AddRange(modifierElements);
+            return this;
+        }
+
+        public Modifier With(ModifierElement modifierElement)
+        {
+            this.modifierElements.Add(modifierElement);
+            return this;
         }
     }
 
-    public abstract class Modifier<T, U> : Modifier
+    public class Modifier<T, U> : Modifier
         where T : Modifier<T, U>
         where U : ModifierDefinition
     {
@@ -89,18 +111,18 @@ namespace Game
 
         public override ModifierDefinition Definition => definition;
 
-        protected Modifier(ModifierHandler modifiable, U modifierDefinition, IModifierSource source) : base(modifiable, source)
+        protected Modifier(U modifierDefinition)
         {
             definition = modifierDefinition;
         }
 
-        public T With(List<ModifierElement> modifierElements)
+        public new T With(List<ModifierElement> modifierElements)
         {
             this.modifierElements.AddRange(modifierElements);
             return (T)this;
         }
 
-        public T With(ModifierElement modifierElement)
+        public new T With(ModifierElement modifierElement)
         {
             this.modifierElements.Add(modifierElement);
             return (T)this;

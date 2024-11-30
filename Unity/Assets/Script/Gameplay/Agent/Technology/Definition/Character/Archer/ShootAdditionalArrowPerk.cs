@@ -1,18 +1,25 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "ShootAdditionalArrowPerk", menuName = "Definition/Technology/Archer/ShootAdditionalArrowPerk")]
-    public class ShootAdditionalArrowPerk : CharacterTechnologyPerkDefinition
+    public class ShootAdditionalArrowPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, ShootAdditionalArrowPerk>
         {
             private int currentAttackApplied = 0;
             private Ability affectedAbility;
 
-            public Modifier(ModifierHandler modifiable, ShootAdditionalArrowPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(ShootAdditionalArrowPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 affectedAbility = modifiable.Entity.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
@@ -58,9 +65,9 @@ namespace Game
         [SerializeField] private GameObject projectilePrefab;
         //[SerializeReference, SubclassSelector] private ProjectileAbilityEffectOrigin origin;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

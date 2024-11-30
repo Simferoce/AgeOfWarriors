@@ -1,15 +1,22 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "GainProgressiveEmpowermentOnAttackPerk", menuName = "Definition/Technology/Shieldbearer/GainProgressiveEmpowermentOnAttackPerk")]
-    public class GainProgressiveEmpowermentOnAttackPerk : CharacterTechnologyPerkDefinition
+    public class GainProgressiveEmpowermentOnAttackPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GainProgressiveEmpowermentOnAttackPerk>
         {
-            public Modifier(ModifierHandler modifiable, GainProgressiveEmpowermentOnAttackPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GainProgressiveEmpowermentOnAttackPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 modifiable.Entity.GetCachedComponent<AttackFactory>().OnAttackDealt += Modifier_OnAttackLanded;
             }
 
@@ -25,10 +32,7 @@ namespace Game
                 }
                 else
                 {
-                    modifiable.AddModifier(new ProgressiveEmpowermentModifierDefinition.Modifier(
-                        modifiable,
-                        definition.modifierToGain,
-                        Source));
+                    Source.Apply(modifiable, new ProgressiveEmpowermentModifierDefinition.Modifier(definition.modifierToGain));
                 }
             }
 
@@ -46,9 +50,9 @@ namespace Game
             return string.Format(Description, modifierToGain.MaxStack, modifierToGain.EmpoweredModifierDefinition.PercentageDamageIncrease);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

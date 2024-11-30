@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -12,7 +13,7 @@ namespace Game
 
             public bool IsMaxed => Stacks >= (definition as BleedingModifierDefinition).maxStack;
 
-            public BleedingModifier(ModifierHandler modifiable, BleedingModifierDefinition modifierDefinition, float duration, float damageOverTime, IModifierSource source) : base(modifiable, modifierDefinition, source, duration, damageOverTime)
+            public BleedingModifier(BleedingModifierDefinition modifierDefinition, float duration, float damageOverTime) : base(modifierDefinition, duration, damageOverTime)
             {
                 Stacks++;
             }
@@ -22,7 +23,7 @@ namespace Game
                 return Stacks;
             }
 
-            public void Increase(float damagePerSeconds, float duration, bool spread, float spreadDistance, IModifierSource source)
+            public void Increase(float damagePerSeconds, float duration, bool spread, float spreadDistance, ModifierApplier source)
             {
                 if (!IsMaxed)
                 {
@@ -60,9 +61,8 @@ namespace Game
 
                         if (modifier == null)
                         {
-                            modifier = new BleedingModifier(modifiable, definition as BleedingModifierDefinition, duration, damagePerSeconds, Source);
-
-                            modifiable.AddModifier(modifier);
+                            modifier = new BleedingModifier(definition as BleedingModifierDefinition, duration, damagePerSeconds);
+                            Source.Apply(modifiable, modifier, new List<ModifierParameter>());
                         }
                         else
                         {

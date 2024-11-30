@@ -3,13 +3,13 @@
 namespace Game
 {
     [CreateAssetMenu(fileName = "DummyApplyDamageReductionWhenAttackedPerk", menuName = "Definition/Technology/Seer/DummyApplyDamageReductionWhenAttackedPerk")]
-    public class DummyApplyDamageReductionWhenAttackedPerk : CharacterTechnologyPerkDefinition
+    public class DummyApplyDamageReductionWhenAttackedPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, DummyApplyDamageReductionWhenAttackedPerk>
         {
             //private Ownership ownership;
 
-            public Modifier(ModifierHandler modifiable, DummyApplyDamageReductionWhenAttackedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(DummyApplyDamageReductionWhenAttackedPerk modifierDefinition) : base(modifierDefinition)
             {
                 //ownership = modifiable.AddOrGetCachedComponent<Ownership>();
                 //ownership.OnChildAdded += Ownership_OnChildAdded;
@@ -48,9 +48,9 @@ namespace Game
         [SerializeField, Range(0, 1)] private float amount;
         [SerializeField] private float duration;
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
 
         public override string ParseDescription()

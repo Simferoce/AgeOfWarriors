@@ -1,19 +1,25 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "AttackSpeedBaseOnStaggerAppliedPerk", menuName = "Definition/Technology/Archer/AttackSpeedBaseOnStaggerAppliedPerk")]
-    public class AttackSpeedBaseOnStaggerAppliedPerk : CharacterTechnologyPerkDefinition
+    public class AttackSpeedBaseOnStaggerAppliedPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, AttackSpeedBaseOnStaggerAppliedPerk>
         {
             private int amountOfStaggerApplied = 0;
             private Statistic<float> attackSpeedPercentage;
 
-            public Modifier(ModifierHandler modifiable, AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition, IModifierSource source) : base(modifiable, modifierDefinition, source)
+            public Modifier(AttackSpeedBaseOnStaggerAppliedPerk modifierDefinition) : base(modifierDefinition)
             {
-                modifiable.Entity.GetCachedComponent<IModifierSource>().OnModifierAdded += Modifier_OnModifierAdded;
                 attackSpeedPercentage = new Statistic<float>(StatisticDefinition.PercentageAttackSpeed);
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
+                modifiable.Entity.GetCachedComponent<ModifierApplier>().OnModifierAdded += Modifier_OnModifierAdded;
             }
 
             public override float? GetStack()
@@ -32,7 +38,7 @@ namespace Game
             public override void Dispose()
             {
                 base.Dispose();
-                modifiable.Entity.GetCachedComponent<IModifierSource>().OnModifierAdded -= Modifier_OnModifierAdded;
+                modifiable.Entity.GetCachedComponent<ModifierApplier>().OnModifierAdded -= Modifier_OnModifierAdded;
             }
         }
 
@@ -43,9 +49,9 @@ namespace Game
             return string.Format(Description, attackSpeedByStaggerApplied);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

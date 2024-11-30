@@ -1,14 +1,20 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "HealOnShieldEndPerk", menuName = "Definition/Technology/Berserker/HealOnShieldEndPerk")]
-    public class HealOnShieldEndPerk : CharacterTechnologyPerkDefinition
+    public class HealOnShieldEndPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, HealOnShieldEndPerk>
         {
-            public Modifier(ModifierHandler modifiable, HealOnShieldEndPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(HealOnShieldEndPerk modifierDefinition) : base(modifierDefinition)
             {
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 modifiable.OnModifierRemoved += Modifiable_ModifierRemoved;
             }
 
@@ -42,9 +48,9 @@ namespace Game
             return string.Format(Description, healPerShieldPointRemaining);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

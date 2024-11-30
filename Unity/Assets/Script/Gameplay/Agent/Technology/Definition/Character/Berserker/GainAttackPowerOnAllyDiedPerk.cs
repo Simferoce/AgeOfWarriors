@@ -1,27 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "GainAttackPowerOnAllyDiedPerk", menuName = "Definition/Technology/Berserker/GainAttackPowerOnAllyDiedPerk")]
-    public class GainAttackPowerOnAllyDiedPerk : CharacterTechnologyPerkDefinition
+    public class GainAttackPowerOnAllyDiedPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, GainAttackPowerOnAllyDiedPerk>
         {
-            public Modifier(ModifierHandler modifiable, GainAttackPowerOnAllyDiedPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(GainAttackPowerOnAllyDiedPerk modifierDefinition) : base(modifierDefinition)
             {
-                EventChannelDeath.Instance.Susbribe(OnUnitDeath);
+                DeathEventChannel.Instance.Susbribe(OnUnitDeath);
             }
 
-            public void OnUnitDeath(EventChannelDeath.Event evt)
+            public void OnUnitDeath(DeathEventChannel.Event evt)
             {
                 if (evt.AgentObject.Faction == (modifiable.Entity as AgentObject).Faction && evt.AgentObject != modifiable.Entity)
                 {
-                    modifiable.AddModifier(
-                        new AttackPowerModifierDefinition.AttackPowerModifier(modifiable,
-                            definition.attackPowerModifier,
-                            definition.attackPowerGain,
-                            Source)
-                        .With(new CharacterModifierTimeElement(definition.buffDuration)));
+                    Game.Modifier modifier = definition.Instantiate();
+                    modifier.With(new CharacterModifierTimeElement(definition.buffDuration));
+
+                    Source.Apply(modifiable, modifier,
+                        new List<ModifierParameter>() { new ModifierParameter<float>("value", definition.attackPowerGain), new ModifierParameter<StatisticDefinition>("definition", StatisticDefinition.FlatAttackPower) });
                 }
             }
 
@@ -29,22 +29,22 @@ namespace Game
             {
                 base.Dispose();
 
-                EventChannelDeath.Instance.Unsubcribe(OnUnitDeath);
+                DeathEventChannel.Instance.Unsubcribe(OnUnitDeath);
             }
         }
 
         [SerializeField] private float attackPowerGain;
         [SerializeField] private float buffDuration;
-        [SerializeField] private AttackPowerModifierDefinition attackPowerModifier;
+        [SerializeField] private StatisticModifierDefinition attackPowerModifier;
 
         public override string ParseDescription()
         {
             return string.Format(Description, attackPowerGain, buffDuration);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

@@ -1,42 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Game
 {
     [Serializable]
     public class ApplyPeriodicBuffPoolEffect : PoolEffect
     {
-        public abstract class Instancier
-        {
-            public abstract ModifierDefinition ModifierDefinition { get; }
-
-            public abstract bool Applicable(Pool pool, Target targeteable);
-
-            public abstract Modifier Instanciate(ModifierHandler modifiable, IModifierSource modifierSource);
-        }
-
-        public Instancier ModifierInstancier { get; set; }
-
         private List<Modifier> appliedModifiers = new List<Modifier>();
 
         public override void Apply(Pool pool, Target targeteable)
         {
             base.Apply(pool, targeteable);
 
-            if (!ModifierInstancier.Applicable(pool, targeteable))
-                return;
+            throw new System.NotImplementedException();
+            //if (!ModifierInstancier.Applicable(pool, targeteable))
+            //    return;
 
-            if (!targeteable.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
-                return;
+            //if (!targeteable.Entity.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifiable))
+            //    return;
 
-            Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == ModifierInstancier.ModifierDefinition);
-            if (modifier != null)
-                return;
+            //Modifier modifier = modifiable.GetModifiers().FirstOrDefault(x => x.Definition == ModifierInstancier.ModifierDefinition);
+            //if (modifier != null)
+            //    return;
 
-            modifier = ModifierInstancier.Instanciate(modifiable, pool.GetCachedComponent<IModifierSource>());
-            modifiable.AddModifier(modifier);
-            appliedModifiers.Add(modifier);
+            //modifier = ModifierInstancier.Instanciate(modifiable, pool.GetCachedComponent<ModifierApplier>());
+            //modifiable.AddModifier(modifier);
+            //appliedModifiers.Add(modifier);
         }
 
         public override void Dispose()

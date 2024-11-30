@@ -1,10 +1,11 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "CreateDamagePoolPerk", menuName = "Definition/Technology/Seer/CreateDamagePoolPerk")]
-    public class CreateDamagePoolPerk : CharacterTechnologyPerkDefinition
+    public class CreateDamagePoolPerk : ModifierDefinition
     {
         public class Modifier : Modifier<Modifier, CreateDamagePoolPerk>, IProjectileModifier
         {
@@ -13,8 +14,14 @@ namespace Game
 
             public bool HasModifier => currentAttackApplied >= definition.stack;
 
-            public Modifier(ModifierHandler modifiable, CreateDamagePoolPerk modifierDefinition, IModifierSource modifierSource) : base(modifiable, modifierDefinition, modifierSource)
+            public Modifier(CreateDamagePoolPerk modifierDefinition) : base(modifierDefinition)
             {
+
+            }
+
+            public override void Initialize(ModifierHandler modifiable, ModifierApplier source, List<ModifierParameter> parameters)
+            {
+                base.Initialize(modifiable, source, parameters);
                 affectedAbility = modifiable.Entity.GetCachedComponent<Caster>().Abilities.FirstOrDefault(x => x.Definition == definition.affectedAbility);
                 affectedAbility.OnAbilityEffectApplied += AffectedAbility_OnAbilityEffectApplied;
             }
@@ -54,9 +61,9 @@ namespace Game
             return string.Format(Description, stack, damage, duration);
         }
 
-        public override Game.Modifier GetModifier(ModifierHandler modifiable)
+        public override Game.Modifier Instantiate()
         {
-            return new Modifier(modifiable, this, modifiable.Entity.GetCachedComponent<IModifierSource>());
+            return new Modifier(this);
         }
     }
 }

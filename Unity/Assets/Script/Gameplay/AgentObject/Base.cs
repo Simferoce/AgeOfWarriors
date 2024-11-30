@@ -49,7 +49,7 @@ namespace Game
 
         public void Death()
         {
-            EventChannelDeath.Instance.Publish(new EventChannelDeath.Event() { AgentObject = this });
+            DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { AgentObject = this });
             Destroy(this.gameObject);
         }
 
