@@ -106,34 +106,31 @@ MonoBehaviour:
   tags: 
   visibleByDefault: 1
   behaviours:
-  - rid: 3390488750887534696
-  - rid: 3390488750887534688
+  - rid: 3390488823164829767
+  - rid: 3390488823164829771
   references:
     version: 2
     RefIds:
-    - rid: 3390488750887534688
-      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: fa8583d556561fe45a879e4a24677d2f, type: 2}
-        reference:
-          name: attack_speed
-    - rid: 3390488750887534696
-      type: {class: CloseByTargetModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 3390488823164829767
+      type: {class: StackModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488823164829771
+      type: {class: SetStackBaseOnTargetAvailableModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         target:
-          rid: 3390488750887534697
-    - rid: 3390488750887534697
+          rid: 3390488823164829772
+    - rid: 3390488823164829772
       type: {class: RadiusModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         center:
-          rid: 3390488750887534698
+          rid: 3390488823164829773
         filter:
-          rid: 3390488750887534699
+          rid: 3390488823164829774
         range:
           name: range
-    - rid: 3390488750887534698
+    - rid: 3390488823164829773
       type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 
-    - rid: 3390488750887534699
+    - rid: 3390488823164829774
       type: {class: TargetEnemyModifierTargetFilter, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 

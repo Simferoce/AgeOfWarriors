@@ -28,12 +28,6 @@ namespace Game.Projectile
 
             return projectileParameter.GetValue();
         }
-
-        public override bool TryGetDescription(out string description)
-        {
-            description = string.Empty;
-            return false;
-        }
     }
 
     [Serializable]

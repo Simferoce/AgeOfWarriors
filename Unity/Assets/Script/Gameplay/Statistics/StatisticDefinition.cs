@@ -7,7 +7,8 @@ using UnityEngine;
 
 namespace Game.Statistics
 {
-    public abstract class StatisticDefinition : Definition
+    [CreateAssetMenu(fileName = "StatisticDefinition", menuName = "Definition/Statistic/StatisticDefinition")]
+    public class StatisticDefinition : Definition
     {
         [SerializeField] private Sprite icon;
         [SerializeField] private string humanReadableId;
@@ -38,10 +39,5 @@ namespace Game.Statistics
             }
         }
 #endif
-    }
-
-    public abstract class StatisticDefinition<T> : StatisticDefinition
-    {
-        public abstract T Modify(T value, StatisticRepository repository, Context context);
     }
 }

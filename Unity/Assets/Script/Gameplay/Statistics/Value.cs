@@ -5,8 +5,6 @@ namespace Game.Statistics
     [Serializable]
     public abstract class Value
     {
-        public virtual bool ExpressiveDescription => true;
-
         protected Entity owner;
 
         public virtual void Initialize(Entity owner)
@@ -15,9 +13,8 @@ namespace Game.Statistics
         }
 
         public abstract T GetValue<T>();
-        public abstract Value Snapshot();
 
-        public abstract bool TryGetDescription(out string description);
+
     }
 
     [Serializable]
@@ -25,14 +22,9 @@ namespace Game.Statistics
     {
         public abstract ReferenceType GetValue();
 
-        public override Value Snapshot()
-        {
-            return new SerializeValue<ReferenceType>() { Value = GetValue() };
-        }
-
         public override T GetValue<T>()
         {
-            return StatisticConverter.ConvertGeneric<T, ReferenceType>(GetValue());
+            return StatisticUtility.ConvertGeneric<T, ReferenceType>(GetValue());
         }
     }
 }

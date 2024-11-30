@@ -31,7 +31,7 @@ namespace Game.Modifier
                 if (filter != null && !filter.Execute(entity))
                     continue;
 
-                if (Mathf.Abs(position.x - entity.transform.position.x) < range.Get().GetModifiedValue<float>(Context.Empty))
+                if (Mathf.Abs(position.x - entity.transform.position.x) < range.Get().Get<float>())
                 {
                     targets.Add(entity);
                 }

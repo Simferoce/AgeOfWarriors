@@ -10,7 +10,7 @@ namespace Game.Ability
     {
         [SerializeField] private StatisticReference<float> distance;
 
-        public float Distance => distance.GetOrThrow()?.GetModifiedValue(Context.Empty) ?? 0f;
+        public float Distance => distance.GetOrThrow()?.Get<float>( ) ?? 0f;
 
         public override void Initialize(AbilityEntity ability)
         {

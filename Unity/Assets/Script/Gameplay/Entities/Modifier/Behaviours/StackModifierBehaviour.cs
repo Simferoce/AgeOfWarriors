@@ -38,5 +38,13 @@ namespace Game.Modifier
 
             OnStackChanged?.Invoke(old, currentStack);
         }
+
+        public void SetStack(float amount)
+        {
+            float old = currentStack;
+            currentStack = amount;
+
+            OnStackChanged?.Invoke(old, currentStack);
+        }
     }
 }

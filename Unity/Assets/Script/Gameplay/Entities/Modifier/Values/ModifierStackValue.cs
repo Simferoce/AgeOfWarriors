@@ -16,12 +16,6 @@ namespace Game.Modifier
             multiplier.Initialize(owner);
         }
 
-        public override bool TryGetDescription(out string description)
-        {
-            description = $"...";
-            return true;
-        }
-
         public override float GetValue()
         {
             if (owner is not ModifierEntity modifier)

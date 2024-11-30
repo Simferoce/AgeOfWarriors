@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 6895146724590370043}
   - component: {fileID: 5916693326694478087}
   - component: {fileID: 1613868480933370482}
-  - component: {fileID: 8800150007170354499}
   m_Layer: 0
   m_Name: ShieldbearerInspiringPresenceModifier
   m_TagString: Untagged
@@ -59,20 +58,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 3390488834663514233
+    - rid: 3390488834663514236
   visibleByDefault: 1
   behaviours:
   - rid: 7754703150677491830
   - rid: 7754703150677491831
-  - rid: 3390488384832274446
   references:
     version: 2
     RefIds:
-    - rid: 3390488384832274446
-      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 3390488834663514233
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
+        name: duration
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        baseValue:
+          rid: 3390488834663514235
+    - rid: 3390488834663514235
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+    - rid: 3390488834663514236
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: defense
         definition: {fileID: 11400000, guid: 3286899521c922344bf7cbb75aa08c05, type: 2}
-        reference:
-          name: defense
+        baseValue:
+          rid: 3390488834663514238
+    - rid: 3390488834663514238
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: defense
     - rid: 7754703150677491830
       type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -82,43 +100,3 @@ MonoBehaviour:
       data:
         duration:
           name: duration
---- !u!114 &8800150007170354499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534274834742516742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488384832274449
-  - rid: 3390488384832274451
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488384832274449
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: defense
-        definition: {fileID: 0}
-        value:
-          rid: 3390488384832274450
-    - rid: 3390488384832274450
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: defense
-    - rid: 3390488384832274451
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: duration
-        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
-        value:
-          rid: 3390488384832274452
-    - rid: 3390488384832274452
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: duration

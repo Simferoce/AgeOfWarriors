@@ -1,6 +1,5 @@
 ﻿using Game.Agent;
 using Game.Components;
-using Game.Statistics;
 using System;
 using UnityEngine;
 
@@ -26,7 +25,6 @@ namespace Game.Pool
                 return;
 
             AttackFactory attackFactory = pool.GetCachedComponent<AttackFactory>();
-            Context context = new AttackContext(attackable);
             AttackData attack = attackFactory.Generate(
                 target: attackable,
                 damage: 0.0f

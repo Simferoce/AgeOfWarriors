@@ -1,42 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace Game.Statistics
 {
-    public class StatisticRepository : MonoBehaviour
+    [Serializable]
+    public class StatisticRepository
     {
         [SerializeReference, SubclassSelector] private List<Statistic> statistics = new List<Statistic>();
 
-        public IEnumerable<Statistic> Statistics => statistics.Concat(extensions.SelectMany(x => x.statistics));
+        public Statistic this[StatisticDefinition definition] => TryGet(definition, out Statistic statistic) ? statistic : throw new System.Exception($"Statistic with definition \"{definition}\" not found in {this}.");
 
-        private Entity entity;
-        private List<StatisticRepository> extensions = new List<StatisticRepository>();
+        public Entity Entity { get; private set; }
 
-        private void Awake()
-        {
-            entity = GetComponentInParent<Entity>();
-        }
-
-        public void Initialize()
+        public void Initialize(Entity Entity)
         {
             foreach (Statistic statistic in statistics)
-                statistic.Initialize(entity);
+                statistic.Initialize(Entity);
         }
 
         public void Add(Statistic statistic)
         {
+            statistic.Initialize(Entity);
             statistics.Add(statistic);
-        }
-
-        public void AddExtension(StatisticRepository extension)
-        {
-            extensions.Add(extension);
-        }
-
-        public void RemoveExtension(StatisticRepository extension)
-        {
-            extensions.Remove(extension);
         }
 
         public void Remove(Statistic statistic)
@@ -46,24 +33,24 @@ namespace Game.Statistics
 
         public bool TryGet<T>(StatisticDefinition definition, out Statistic<T> statistic)
         {
-            statistic = Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Definition == definition);
+            statistic = statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Definition == definition);
             return statistic != null;
         }
 
         public bool TryGet<T>(string name, out Statistic<T> statistic)
         {
-            statistic = Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
+            statistic = statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
             return statistic != null;
         }
 
         public Statistic<T> Get<T>(StatisticDefinition definition)
         {
-            return Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Definition == definition);
+            return statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Definition == definition);
         }
 
         public Statistic<T> Get<T>(string name)
         {
-            return Statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
+            return statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
         }
 
         public Statistic<T> GetOrThrow<T>(StatisticDefinition definition)
@@ -78,24 +65,24 @@ namespace Game.Statistics
 
         public bool TryGet(StatisticDefinition definition, out Statistic statistic)
         {
-            statistic = Statistics.FirstOrDefault(x => x.Definition == definition);
+            statistic = statistics.FirstOrDefault(x => x.Definition == definition);
             return statistic != null;
         }
 
         public bool TryGet(string name, out Statistic statistic)
         {
-            statistic = Statistics.FirstOrDefault(x => x.Name == name);
+            statistic = statistics.FirstOrDefault(x => x.Name == name);
             return statistic != null;
         }
 
         public Statistic Get(StatisticDefinition definition)
         {
-            return Statistics.FirstOrDefault(x => x.Definition == definition);
+            return statistics.FirstOrDefault(x => x.Definition == definition);
         }
 
         public Statistic Get(string name)
         {
-            return Statistics.FirstOrDefault(x => x.Name == name);
+            return statistics.FirstOrDefault(x => x.Name == name);
         }
 
         public Statistic GetOrThrow(StatisticDefinition definition)

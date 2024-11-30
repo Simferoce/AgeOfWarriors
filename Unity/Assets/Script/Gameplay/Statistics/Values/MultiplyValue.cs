@@ -20,10 +20,5 @@ namespace Game.Statistics
         {
             return a.GetValue<float>() * b.GetValue<float>();
         }
-
-        public override bool TryGetDescription(out string description)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

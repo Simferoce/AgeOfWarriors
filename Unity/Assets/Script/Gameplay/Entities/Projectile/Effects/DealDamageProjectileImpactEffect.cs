@@ -24,12 +24,10 @@ namespace Game.Projectile
                 return;
 
             AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
-            Context context = new AttackContext(attackable);
-
             AttackData attack = attackFactory.Generate(
                 target: attackable,
-                damage: damage?.Get()?.GetModifiedValue<float>(context) ?? 0f,
-                armorPenetration: armorPenetration?.Get()?.GetModifiedValue<float>(context) ?? 0f,
+                damage: damage?.Get()?.Get<float>() ?? 0f,
+                armorPenetration: armorPenetration?.Get()?.Get<float>() ?? 0f,
                 flags: AttackData.Flag.Ranged);
 
             attackable.TakeAttack(attack);

@@ -8,7 +8,6 @@ using UnityEngine;
 
 namespace Game
 {
-    [RequireComponent(typeof(StatisticRepository))]
     public abstract class Entity : MonoBehaviour, IEntity
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
@@ -26,6 +25,7 @@ namespace Game
         }
 
         [SerializeField] private List<EntityTag> tags = new List<EntityTag>();
+        [SerializeField] private StatisticRepository statisticRepository;
 
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
         public event OnParentChangedDelegate OnParentChanged;
@@ -55,6 +55,8 @@ namespace Game
         public virtual bool IsActive { get => true; }
         public List<EntityTag> Tags { get => tags; }
         public virtual Definition Definition { get; set; }
+        public Statistic this[StatisticDefinition definition] => StatisticRepository[definition];
+        public StatisticRepository StatisticRepository { get => statisticRepository; }
 
         private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();
         private Entity parent = null;
@@ -65,12 +67,12 @@ namespace Game
             All.Add(this);
             AddOrGetCachedComponent<ModifierApplier>();
             EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
+            Link<StatisticRepository>(statisticRepository);
         }
 
         public virtual void Initialize()
         {
-            StatisticRepository statisticRepository = AddOrGetCachedComponent<StatisticRepository>();
-            statisticRepository.Initialize();
+            StatisticRepository.Initialize(this);
         }
 
         public virtual void Deactivate()

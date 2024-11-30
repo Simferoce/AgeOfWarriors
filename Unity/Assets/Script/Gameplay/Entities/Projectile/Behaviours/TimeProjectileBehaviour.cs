@@ -28,7 +28,7 @@ namespace Game.Projectile
         {
             base.Update();
 
-            if (startedAt + duration.GetOrThrow().GetModifiedValue<float>(Context.Empty) > Time.time)
+            if (startedAt + duration.GetOrThrow().Get<float>() > Time.time)
                 return;
 
             foreach (IProjectileStandardEffect effect in effects)

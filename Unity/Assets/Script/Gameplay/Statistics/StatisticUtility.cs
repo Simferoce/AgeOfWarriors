@@ -1,6 +1,8 @@
-﻿namespace Game.Statistics
+﻿using System.Collections.Generic;
+
+namespace Game.Statistics
 {
-    public static class StatisticConverter
+    public static class StatisticUtility
     {
         /// <summary>
         /// Convert generic. Support conversion between double/float/int/boolean/string and same type.
@@ -158,6 +160,20 @@
             }
 
             throw new System.InvalidCastException($"Could not convert from {typeof(U).Name} to {typeof(T).Name}.");
+        }
+
+        public static float Sum(this IEnumerable<Entity> entities, StatisticDefinition definition)
+        {
+            float sum = 0;
+            foreach (Entity entity in entities)
+            {
+                if (entity.StatisticRepository.TryGet<float>(definition, out Statistic<float> statistic))
+                {
+                    sum += statistic.Get<float>();
+                }
+            }
+
+            return sum;
         }
     }
 }

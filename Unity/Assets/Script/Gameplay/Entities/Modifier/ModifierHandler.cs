@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Statistics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,12 +11,22 @@ namespace Game.Modifier
         public event Action<ModifierEntity> OnModifierRemoved;
         public event Action<ModifierEntity> OnModifierAdded;
         public Entity Entity { get; set; }
+        public Statistic this[StatisticDefinition definition] => statisticRepository[definition];
 
         private List<ModifierEntity> modifiers = new List<ModifierEntity>();
+        private StatisticRepository statisticRepository = new StatisticRepository();
 
         private void Awake()
         {
             Entity = GetComponentInParent<Entity>();
+
+            StatisticFloat flatDefense = new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f);
+            statisticRepository.Add(flatDefense);
+        }
+
+        private void Update()
+        {
+            statisticRepository[StatisticDefinitionRegistry.Instance.FlatDefense].Set(modifiers.Sum(StatisticDefinitionRegistry.Instance.FlatDefense));
         }
 
         public void Add(ModifierEntity modifier)

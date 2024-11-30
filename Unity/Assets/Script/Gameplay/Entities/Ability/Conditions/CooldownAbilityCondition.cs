@@ -11,7 +11,7 @@ namespace Game.Ability
 
         private float lastUsed = 0f;
 
-        public float Cooldown => cooldown.GetOrThrow().GetModifiedValue(Context.Empty);
+        public float Cooldown => cooldown.GetOrThrow().Get<float>();
 
         public override void Initialize(AbilityEntity ability)
         {

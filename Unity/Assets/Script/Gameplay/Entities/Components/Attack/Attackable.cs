@@ -53,15 +53,13 @@ namespace Game.Components
                 attack.Source.OnDeactivated += AttackSourceOnDeactivated;
             }
 
-            DefendAttackContext defendAttackContext = new DefendAttackContext(attack);
-            float currentHealth = Entity.GetCachedComponent<StatisticRepository>().GetOrThrow<float>(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue(defendAttackContext);
-            float currentDefense = Entity.GetCachedComponent<StatisticRepository>().Get<float>(StatisticDefinitionRegistry.Instance.Defense)?.GetModifiedValue(defendAttackContext) ?? 0f;
-            float damageReduction = Entity.GetCachedComponent<StatisticRepository>().Get<float>(StatisticDefinitionRegistry.Instance.DamageReduction)?.GetModifiedValue(defendAttackContext) ?? 0f;
+            float currentHealth = Entity.GetCachedComponent<StatisticRepository>().GetOrThrow<float>(StatisticDefinitionRegistry.Instance.Health).Get<float>();
+            float currentDefense = Entity.GetCachedComponent<StatisticRepository>().Get<float>(StatisticDefinitionRegistry.Instance.Defense)?.Get<float>() ?? 0f;
+            //float damageReduction = Entity.GetCachedComponent<StatisticRepository>().Get<float>(StatisticDefinitionRegistry.Instance.DamageReduction)?.Get<float>() ?? 0f;
             //List<Shield> shields = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().ToList();
             //bool canResistDeath = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
 
             float damage = attack.Damage;
-            damage *= damageReduction;
 
             if (attack.Flags.HasFlag(AttackData.Flag.Empowered))
                 damage *= 1.5f;

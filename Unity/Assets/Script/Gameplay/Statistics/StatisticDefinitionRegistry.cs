@@ -10,6 +10,7 @@ namespace Game.Statistics
         public StatisticDefinition Health => statisticDefinitions["health"];
         public StatisticDefinition MaxHealth => statisticDefinitions["max_health"];
         public StatisticDefinition Defense => statisticDefinitions["defense"];
+        public StatisticDefinition FlatDefense => statisticDefinitions["flat_defense"];
         public StatisticDefinition AttackPower => statisticDefinitions["attack_power"];
         public StatisticDefinition AttackSpeed => statisticDefinitions["attack_speed"];
         public StatisticDefinition Speed => statisticDefinitions["speed"];
@@ -17,6 +18,7 @@ namespace Game.Statistics
         public StatisticDefinition Cooldown => statisticDefinitions["cooldown"];
         public StatisticDefinition Stagger => statisticDefinitions["stagger"];
         public StatisticDefinition DamageReduction => statisticDefinitions["damage_reduction"];
+        public StatisticDefinition PercentageDamage => statisticDefinitions["percentage_damage"];
 
         private Dictionary<string, StatisticDefinition> statisticDefinitions = new Dictionary<string, StatisticDefinition>();
         private AsyncOperationHandle<IList<StatisticDefinition>> statisticsHandle;

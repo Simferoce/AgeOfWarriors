@@ -33,7 +33,7 @@ namespace Game.UI.Windows
             technologyDetailsPanelUI.technologyTree = technologyTree;
             technologyDetailsPanelUI.technologyPerkDefinition = technologyPerkDefinition;
             technologyDetailsPanelUI.title.text = technologyPerkDefinition.Title;
-            technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription(null, null);
+            technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription(null);
 
             TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
 

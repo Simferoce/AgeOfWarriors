@@ -28,7 +28,7 @@ namespace Game.Modifier
 
         private void StackModifierBehaviour_OnStackChanged(float oldValue, float newValue)
         {
-            if (newValue >= threshold.Get().GetModifiedValue<int>(Context.Empty))
+            if (newValue >= threshold.Get().Get<int>())
             {
                 Trigger();
             }

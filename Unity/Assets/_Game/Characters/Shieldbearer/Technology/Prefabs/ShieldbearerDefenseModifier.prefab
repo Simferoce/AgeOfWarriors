@@ -60,6 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statistics:
   - rid: 3390488678730301522
+  - rid: 3390488824619991112
   references:
     version: 2
     RefIds:
@@ -74,6 +75,17 @@ MonoBehaviour:
       type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: defense
+    - rid: 3390488824619991112
+      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: percentage_damage
+        definition: {fileID: 11400000, guid: 008ba1fb394b4a647b4bfbfe26afc726, type: 2}
+        value:
+          rid: 3390488824619991113
+    - rid: 3390488824619991113
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1.5
 --- !u!114 &4291904530993523286
 MonoBehaviour:
   m_ObjectHideFlags: 0

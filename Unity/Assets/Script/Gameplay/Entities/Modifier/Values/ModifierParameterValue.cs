@@ -28,12 +28,6 @@ namespace Game.Modifier
 
             return modifierParameter.GetValue();
         }
-
-        public override bool TryGetDescription(out string description)
-        {
-            description = string.Empty;
-            return false;
-        }
     }
 
     [Serializable]

@@ -28,7 +28,7 @@ namespace Game.Modifier
                 if (modifierHandler.TryGetUnique(definition, modifierApplier, out ModifierEntity modifierEntity))
                 {
                     StackModifierBehaviour stackModifierBehaviour = modifierEntity.Behaviours.FirstOrDefault(x => x is StackModifierBehaviour) as StackModifierBehaviour;
-                    stackModifierBehaviour?.DecreaseStack(amount.GetOrThrow().GetModifiedValue<float>(Context.Empty));
+                    stackModifierBehaviour?.DecreaseStack(amount.GetOrThrow().Get<float>());
                 }
             }
         }

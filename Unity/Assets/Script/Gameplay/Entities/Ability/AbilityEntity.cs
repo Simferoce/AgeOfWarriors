@@ -1,6 +1,5 @@
 ﻿using Game.Agent;
 using Game.Components;
-using Game.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,15 +31,15 @@ namespace Game.Ability
 
             base.Initialize();
 
-            GetCachedComponent<StatisticRepository>().AddExtension(caster.Entity.GetCachedComponent<StatisticRepository>());
-
             foreach (AbilityCondition condition in conditions)
                 condition.Initialize(this);
         }
 
         public abstract void Dispose();
 
-        public abstract void Tick();
+        public virtual void Tick()
+        {
+        }
 
         public virtual bool CanUse()
         {
@@ -66,7 +65,7 @@ namespace Game.Ability
 
         public string ParseDescription()
         {
-            return definition.ParseDescription(this, null);
+            return definition.ParseDescription(this);
         }
     }
 }

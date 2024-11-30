@@ -27,19 +27,19 @@ namespace Game.Character
         public List<TransformTag> TransformTags { get; set; }
         public Collider2D Hitbox { get => hitbox; set => hitbox = value; }
 
-        public float Health { get => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health).GetModifiedValue<float>(Context.Empty); set => (GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Health) as DynamicStatistic<float>).Set(value); }
-        public float MaxHealth => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.MaxHealth).GetModifiedValue<float>(Context.Empty);
-        public float Defense => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Defense).GetModifiedValue<float>(Context.Empty);
-        public float AttackSpeed => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.AttackSpeed).GetModifiedValue<float>(Context.Empty);
-        public float AttackPower => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.AttackPower).GetModifiedValue<float>(Context.Empty);
-        public float Speed => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Speed).GetModifiedValue<float>(Context.Empty);
-        public float Reach => GetCachedComponent<StatisticRepository>().GetOrThrow(StatisticDefinitionRegistry.Instance.Reach).GetModifiedValue<float>(Context.Empty);
+        public float Health { get => this[StatisticDefinitionRegistry.Instance.Health]; set => this[StatisticDefinitionRegistry.Instance.Health].Set(value); }
+        public float MaxHealth => this[StatisticDefinitionRegistry.Instance.MaxHealth];
+        public float Defense => this[StatisticDefinitionRegistry.Instance.Defense];
+        public float AttackSpeed => this[StatisticDefinitionRegistry.Instance.AttackSpeed];
+        public float AttackPower => this[StatisticDefinitionRegistry.Instance.AttackPower];
+        public float Speed => this[StatisticDefinitionRegistry.Instance.Speed];
+        public float Reach => this[StatisticDefinitionRegistry.Instance.Reach];
         public float TechnologyGainPerSecond => definition.TechnologyGainPerSecond;
 
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
         public bool IsInvulnerable => false;/*this.GetCachedComponent<GameModifierHandler>().GetModifiers().Any(x => x is IModifierInvulnerable);*/
         public bool IsConfused => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);*/
-        public bool IsStaggered => GetCachedComponent<StatisticRepository>().Get(StatisticDefinitionRegistry.Instance.Stagger)?.GetModifiedValue<bool>(Context.Empty) ?? false;
+        public bool IsStaggered => /*GetCachedComponent<StatisticRepository>().Get(StatisticDefinitionRegistry.Instance.Stagger)?.GetValue<bool>( ) ??*/ false;
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
 
@@ -68,6 +68,15 @@ namespace Game.Character
         {
             base.Initialize();
 
+            StatisticRepository.Add(new StatisticFloat("health", StatisticDefinitionRegistry.Instance.Health, definition.MaxHealth));
+            StatisticRepository.Add(new StatisticFloat("max_health", StatisticDefinitionRegistry.Instance.MaxHealth, definition.MaxHealth));
+            StatisticRepository.Add(new StatisticFloat("defense", StatisticDefinitionRegistry.Instance.Defense, definition.Defense));
+            StatisticRepository.Add(new StatisticFloat("attack_power", StatisticDefinitionRegistry.Instance.AttackPower, definition.AttackPower));
+            StatisticRepository.Add(new StatisticFloat("attack_speed", StatisticDefinitionRegistry.Instance.AttackSpeed, definition.AttackSpeed));
+            StatisticRepository.Add(new StatisticFloat("speed", StatisticDefinitionRegistry.Instance.Speed, definition.Speed));
+            StatisticRepository.Add(new StatisticFloat("reach", StatisticDefinitionRegistry.Instance.Reach, definition.Reach));
+            StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f));
+
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));
         }
@@ -75,6 +84,10 @@ namespace Game.Character
         public void Update()
         {
             stateMachine.Update();
+
+            ModifierHandler modifierHandler = GetCachedComponent<ModifierHandler>();
+            this[StatisticDefinitionRegistry.Instance.FlatDefense].Set<float>(modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]);
+            this[StatisticDefinitionRegistry.Instance.Defense].Set<float>(this[StatisticDefinitionRegistry.Instance.Defense].GetBase<float>() + this[StatisticDefinitionRegistry.Instance.FlatDefense]);
         }
 
         public void RefreshDirection()

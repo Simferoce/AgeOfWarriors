@@ -1,5 +1,4 @@
-﻿using Game.Statistics;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace Game.Modifier
@@ -15,12 +14,12 @@ namespace Game.Modifier
         public Sprite Icon { get => icon; }
         public string Title { get => title; }
 
-        public string ParseDescription(Entity source, Context context)
+        public string ParseDescription(Entity source)
         {
             if (source == null)
-                return description.Parse(prefab.GetComponent<Entity>(), context);
+                return description.Parse(prefab.GetComponent<Entity>());
 
-            return description.Parse(source, context);
+            return description.Parse(source);
         }
 
         public virtual UniqueType GetUniqueType()

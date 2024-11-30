@@ -18,7 +18,7 @@ namespace Game.Modifier
 
         public override ModifierParameter Create(object entity)
         {
-            return new ModifierParameter<T>(name, value.GetOrThrow().GetModifiedValue<T>(Context.Empty));
+            return new ModifierParameter<T>(name, value.GetOrThrow().Get<T>());
         }
     }
 
