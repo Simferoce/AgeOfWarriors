@@ -100,7 +100,6 @@ GameObject:
   - component: {fileID: -9219538325602513416}
   - component: {fileID: 4757967246084485677}
   - component: {fileID: 1176079378919801912}
-  - component: {fileID: 5794082563527842383}
   m_Layer: 0
   m_Name: SeerSphere
   m_TagString: Untagged
@@ -138,6 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209822909945610404
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
   - rid: 7754703128047648908
@@ -176,6 +178,17 @@ MonoBehaviour:
         duration: 0.2
         scale: 0.5
         stopSimulatedDelay: 0.05
+    - rid: 6209822909945610404
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        baseValue:
+          rid: 6209822909945610406
+    - rid: 6209822909945610406
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: damage
     - rid: 7754703128047648907
       type: {class: SelfRotateProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -236,34 +249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5794082563527842383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6675190562695518451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488384832274461
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488384832274461
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        value:
-          rid: 3390488384832274462
-    - rid: 3390488384832274462
-      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: damage
 --- !u!1 &8540451893314856808
 GameObject:
   m_ObjectHideFlags: 0

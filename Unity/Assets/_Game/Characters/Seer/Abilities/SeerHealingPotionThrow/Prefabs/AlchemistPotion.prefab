@@ -100,7 +100,6 @@ GameObject:
   - component: {fileID: -9219538325602513416}
   - component: {fileID: 4757967246084485677}
   - component: {fileID: 1176079378919801912}
-  - component: {fileID: 5794082563527842383}
   m_Layer: 0
   m_Name: AlchemistPotion
   m_TagString: Untagged
@@ -138,6 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209822909945610421
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
   - rid: 7754703144169767158
@@ -183,6 +185,17 @@ MonoBehaviour:
         duration: 0.25
         scale: 0.5
         stopSimulatedDelay: 0.05
+    - rid: 6209822909945610421
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: heal
+        definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
+        baseValue:
+          rid: 6209822909945610423
+    - rid: 6209822909945610423
+      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
+      data:
+        name: heal
     - rid: 7754703144169767125
       type: {class: SelfRotateProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -243,34 +256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5794082563527842383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6675190562695518451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488384832274499
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488384832274499
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: heal
-        definition: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
-        value:
-          rid: 3390488384832274500
-    - rid: 3390488384832274500
-      type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
-      data:
-        name: heal
 --- !u!1 &8540451893314856808
 GameObject:
   m_ObjectHideFlags: 0
