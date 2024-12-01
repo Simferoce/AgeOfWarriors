@@ -82,4 +82,19 @@ namespace Game.Statistics
         {
         }
     }
+
+    [Serializable]
+    public class StatisticBool : Statistic<bool>
+    {
+        public StatisticBool() : base("", null, new SerializeValueBool(false), null)
+        {
+        }
+        public StatisticBool(string name, StatisticDefinition definition, bool baseValue, Func<bool, bool> equation = null) : base(name, definition, new SerializeValueBool(baseValue), equation)
+        {
+        }
+
+        public StatisticBool(string name, StatisticDefinition definition, Value baseValue, Func<bool, bool> equation = null) : base(name, definition, baseValue, equation)
+        {
+        }
+    }
 }

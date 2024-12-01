@@ -21,13 +21,13 @@ namespace Game.Modifier
             Entity = GetComponentInParent<Entity>();
             statisticRepository.Initialize(this);
 
-            StatisticFloat flatDefense = new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f);
-            StatisticFloat multiplierDamage = new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f);
-            flatDefense.SetEquation((float baseValue) => baseValue + modifiers.Sum(StatisticDefinitionRegistry.Instance.FlatDefense));
-            multiplierDamage.SetEquation((float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierDamage));
+            StatisticFloat flatDefense = new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifiers.Sum(StatisticDefinitionRegistry.Instance.FlatDefense));
+            StatisticFloat multiplierDamage = new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierDamage));
+            StatisticBool stagger = new StatisticBool("stagger", StatisticDefinitionRegistry.Instance.Stagger, false, (bool baseValue) => baseValue || modifiers.Union(StatisticDefinitionRegistry.Instance.Stagger));
 
             statisticRepository.Add(flatDefense);
             statisticRepository.Add(multiplierDamage);
+            statisticRepository.Add(stagger);
         }
 
         public void Add(ModifierEntity modifier)

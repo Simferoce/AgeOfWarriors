@@ -189,5 +189,19 @@ namespace Game.Statistics
 
             return multiplier;
         }
+
+        public static bool Union(this IEnumerable<Entity> entities, StatisticDefinition definition)
+        {
+            bool result = false;
+            foreach (Entity entity in entities)
+            {
+                if (entity.StatisticRepository.TryGet<bool>(definition, out Statistic<bool> statistic))
+                {
+                    result |= statistic.Get<bool>();
+                }
+            }
+
+            return result;
+        }
     }
 }

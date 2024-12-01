@@ -39,7 +39,7 @@ namespace Game.Character
         public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
         public bool IsInvulnerable => false;/*this.GetCachedComponent<GameModifierHandler>().GetModifiers().Any(x => x is IModifierInvulnerable);*/
         public bool IsConfused => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);*/
-        public bool IsStaggered => /*GetCachedComponent<StatisticRepository>().Get(StatisticDefinitionRegistry.Instance.Stagger)?.GetValue<bool>( ) ??*/ false;
+        public bool IsStaggered => this[StatisticDefinitionRegistry.Instance.Stagger];
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
 
@@ -76,6 +76,7 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("speed", StatisticDefinitionRegistry.Instance.Speed, definition.Speed));
             StatisticRepository.Add(new StatisticFloat("reach", StatisticDefinitionRegistry.Instance.Reach, definition.Reach));
             StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]));
+            StatisticRepository.Add(new StatisticBool("stagger", StatisticDefinitionRegistry.Instance.Stagger, false, (bool baseValue) => modifierHandler[StatisticDefinitionRegistry.Instance.Stagger]));
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

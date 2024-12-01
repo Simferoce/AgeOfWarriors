@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1983515798842637665}
   - component: {fileID: 6591169466669658220}
   - component: {fileID: 2272586364108649392}
-  - component: {fileID: 5318381056780632600}
   m_Layer: 0
   m_Name: StaggerModifier
   m_TagString: Untagged
@@ -59,61 +58,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209822909945610322
+    - rid: 6209822909945610324
   visibleByDefault: 1
   behaviours:
-  - rid: 3390488662789587040
   - rid: 7754703144169767056
   references:
     version: 2
     RefIds:
-    - rid: 3390488662789587040
-      type: {class: StatisticModifierBehaviourBool, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 6209822909945610322
+      type: {class: StatisticBool, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
+        name: stagger
         definition: {fileID: 11400000, guid: 8289f2c2701c696408ecb8b8733b6d56, type: 2}
-        reference:
-          name: stagger
+        baseValue:
+          rid: 6209822909945610323
+    - rid: 6209822909945610323
+      type: {class: SerializeValueBool, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1
+    - rid: 6209822909945610324
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        baseValue:
+          rid: 6209822909945610326
+    - rid: 6209822909945610326
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
     - rid: 7754703144169767056
       type: {class: TimeModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         duration:
           name: duration
---- !u!114 &5318381056780632600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5914724204636337494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488662789587041
-  - rid: 3390488662789587057
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488662789587041
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: duration
-        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
-        value:
-          rid: 3390488662789587042
-    - rid: 3390488662789587042
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: duration
-    - rid: 3390488662789587057
-      type: {class: StandardStateStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: stagger
-        definition: {fileID: 0}
-        value:
-          rid: 3390488662789587058
-    - rid: 3390488662789587058
-      type: {class: SerializeValueBool, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 1
