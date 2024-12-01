@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8892924003226445137}
   - component: {fileID: 3440993708295511470}
   - component: {fileID: 3436625811054226847}
-  - component: {fileID: 7782073932053390979}
   m_Layer: 0
   m_Name: BerserkerLeachingStrike
   m_TagString: Untagged
@@ -59,6 +58,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209822909945610375
+    - rid: 6209822909945610377
+    - rid: 6209822909945610380
+    - rid: 6209822909945610383
   conditions:
   - rid: 7754703144169767099
   - rid: 7754703144169767100
@@ -73,6 +78,52 @@ MonoBehaviour:
     - rid: 3390488662789587061
       type: {class: IsFirstAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data: 
+    - rid: 6209822909945610375
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: cooldown
+        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
+        baseValue:
+          rid: 6209822909945610376
+    - rid: 6209822909945610376
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 5
+    - rid: 6209822909945610377
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        baseValue:
+          rid: 6209822909945610379
+    - rid: 6209822909945610379
+      type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        ratio: 1
+    - rid: 6209822909945610380
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        baseValue:
+          rid: 6209822909945610382
+    - rid: 6209822909945610382
+      type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        ratio: 1.5
+    - rid: 6209822909945610383
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: leach
+        definition: {fileID: 11400000, guid: e864fc16d0f0def478387446a9b41863, type: 2}
+        baseValue:
+          rid: 6209822909945610387
+    - rid: 6209822909945610387
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1.5
     - rid: 7754703144169767099
       type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data: 
@@ -115,69 +166,4 @@ MonoBehaviour:
           name: damage
         armorPenetration:
           name: 
---- !u!114 &7782073932053390979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 412271190907481078}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488662789586948
-  - rid: 3390488662789586950
-  - rid: 3390488662789586952
-  - rid: 3390488662789586955
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488662789586948
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage
-        definition: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
-        value:
-          rid: 3390488662789586949
-    - rid: 3390488662789586949
-      type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        casterDefinition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
-        ratio: 2
-    - rid: 3390488662789586950
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: range
-        definition: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
-        value:
-          rid: 3390488662789586951
-    - rid: 3390488662789586951
-      type: {class: CasterStatisticRatioAbilityValue, ns: Game.Ability, asm: Assembly-CSharp}
-      data:
-        casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
-        ratio: 1
-    - rid: 3390488662789586952
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: leach
-        definition: {fileID: 11400000, guid: e864fc16d0f0def478387446a9b41863, type: 2}
-        value:
-          rid: 3390488662789586954
-    - rid: 3390488662789586954
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 1
-    - rid: 3390488662789586955
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: cooldown
-        definition: {fileID: 11400000, guid: 2825126f3d8ee3941b6ea8c4d91818b8, type: 2}
-        value:
-          rid: 3390488662789586957
-    - rid: 3390488662789586957
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 5
+        extraFlags: 0
