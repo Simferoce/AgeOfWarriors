@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 6adad080ff7da2148918fc737137bb11
   icon: {fileID: -8086850440826228858, guid: 665809d0d2c840548bc049c603bae4d8, type: 3}
-  humanReadableId: percentage_damage
-  title: Percentage Damage
+  humanReadableId: multiplier_damage
+  title: Multiplier Damage
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
-  isPercentage: 0
+  format: 
   data:
   - rid: 3390488367809429611
   - rid: 3390488367809429612

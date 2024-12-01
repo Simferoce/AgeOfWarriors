@@ -12,9 +12,7 @@ namespace Game.Statistics
 
         public string Name { get => name; set => name = value; }
         public StatisticDefinition Definition { get => definition; set => definition = value; }
-        public Entity Entity { get => entity; set => entity = value; }
-
-        protected Entity entity;
+        protected StatisticRepository owner;
 
         protected Statistic(string name, StatisticDefinition definition, Value baseValue)
         {
@@ -23,18 +21,16 @@ namespace Game.Statistics
             this.baseValue = baseValue;
         }
 
-        public virtual void Initialize(Entity entity)
+        public virtual void Initialize(StatisticRepository owner)
         {
-            if (this.entity != null)
-                return;
-
-            this.entity = entity;
-            baseValue.Initialize(entity);
+            this.owner = owner;
+            baseValue.Initialize(owner);
         }
 
         public abstract T Get<T>();
         public abstract T GetBase<T>();
         public abstract void Set<T>(T value);
+        public abstract void SetEquation<T>(Func<T, T> modifier);
 
         public static implicit operator float(Statistic statistic) => statistic.Get<float>();
         public static implicit operator bool(Statistic statistic) => statistic.Get<bool>();
@@ -44,16 +40,11 @@ namespace Game.Statistics
     [Serializable]
     public abstract class Statistic<ReferenceType> : Statistic
     {
-        protected ReferenceType currentValue;
+        protected Func<ReferenceType, ReferenceType> equation;
 
-        public Statistic(string name, StatisticDefinition definition, Value baseValue) : base(name, definition, baseValue)
+        public Statistic(string name, StatisticDefinition definition, Value baseValue, Func<ReferenceType, ReferenceType> equation = null) : base(name, definition, baseValue)
         {
-        }
-
-        public override void Initialize(Entity entity)
-        {
-            base.Initialize(entity);
-            currentValue = baseValue.GetValue<ReferenceType>();
+            this.equation = equation;
         }
 
         public override T GetBase<T>()
@@ -63,27 +54,31 @@ namespace Game.Statistics
 
         public override T Get<T>()
         {
-            return StatisticUtility.ConvertGeneric<T, ReferenceType>(currentValue);
+            return StatisticUtility.ConvertGeneric<T, ReferenceType>(equation != null ? equation(baseValue.GetValue<ReferenceType>()) : baseValue.GetValue<ReferenceType>());
+        }
+
+        public override void SetEquation<T>(Func<T, T> equation)
+        {
+            this.equation = (Func<ReferenceType, ReferenceType>)(object)equation;
         }
 
         public override void Set<T>(T value)
         {
-            currentValue = StatisticUtility.ConvertGeneric<ReferenceType, T>(value);
+            baseValue = new SerializeValue<T>(value);
         }
     }
 
     [Serializable]
     public class StatisticFloat : Statistic<float>
     {
-        public StatisticFloat() : base("", null, new SerializeValueFloat(0f))
+        public StatisticFloat() : base("", null, new SerializeValueFloat(0f), null)
+        {
+        }
+        public StatisticFloat(string name, StatisticDefinition definition, float baseValue, Func<float, float> equation = null) : base(name, definition, new SerializeValueFloat(baseValue), equation)
         {
         }
 
-        public StatisticFloat(string name, StatisticDefinition definition, float baseValue) : base(name, definition, new SerializeValueFloat(baseValue))
-        {
-        }
-
-        public StatisticFloat(string name, StatisticDefinition definition, Value baseValue) : base(name, definition, baseValue)
+        public StatisticFloat(string name, StatisticDefinition definition, Value baseValue, Func<float, float> equation = null) : base(name, definition, baseValue, equation)
         {
         }
     }

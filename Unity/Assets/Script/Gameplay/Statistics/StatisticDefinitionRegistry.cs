@@ -18,6 +18,8 @@ namespace Game.Statistics
         public StatisticDefinition Cooldown => statisticDefinitions["cooldown"];
         public StatisticDefinition Stagger => statisticDefinitions["stagger"];
         public StatisticDefinition DamageReduction => statisticDefinitions["damage_reduction"];
+        public StatisticDefinition Damage => statisticDefinitions["damage"];
+        public StatisticDefinition MultiplierDamage => statisticDefinitions["multiplier_damage"];
         public StatisticDefinition PercentageDamage => statisticDefinitions["percentage_damage"];
 
         private Dictionary<string, StatisticDefinition> statisticDefinitions = new Dictionary<string, StatisticDefinition>();

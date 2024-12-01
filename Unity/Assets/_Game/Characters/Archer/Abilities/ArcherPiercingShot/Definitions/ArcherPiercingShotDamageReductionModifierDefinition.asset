@@ -18,8 +18,7 @@ MonoBehaviour:
   description:
     text: 
     parameters: []
-  prefab: {fileID: 2269961513953254250, guid: 05498e93bd888904bbed0484c39f971e, type: 3}
-  showOnHealthBar: 1
+  prefab: {fileID: 3798508246527741073, guid: 1a6d5626c88e48e458de0eb46a80fccb, type: 3}
   references:
     version: 2
     RefIds: []

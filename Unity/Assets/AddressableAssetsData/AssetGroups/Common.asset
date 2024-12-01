@@ -99,6 +99,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6adad080ff7da2148918fc737137bb11
+    m_Address: Assets/_Game/Statistics/Definitions/MultiplierDamageStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 73d27da68cca71f4ebc2e071904b1f80
     m_Address: Assets/_Game/Statistics/HealthMaxStatisticDefinition.asset
     m_ReadOnly: 0

@@ -23,10 +23,12 @@ namespace Game.Projectile
             if (!entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
                 return;
 
+            float damageValue = (damage?.Get()?.Get<float>() ?? 0f) * projectile[StatisticDefinitionRegistry.Instance.MultiplierDamage];
+
             AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
             AttackData attack = attackFactory.Generate(
                 target: attackable,
-                damage: damage?.Get()?.Get<float>() ?? 0f,
+                damage: damageValue,
                 armorPenetration: armorPenetration?.Get()?.Get<float>() ?? 0f,
                 flags: AttackData.Flag.Ranged);
 

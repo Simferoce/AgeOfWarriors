@@ -175,5 +175,19 @@ namespace Game.Statistics
 
             return sum;
         }
+
+        public static float Multiply(this IEnumerable<Entity> entities, StatisticDefinition definition)
+        {
+            float multiplier = 1f;
+            foreach (Entity entity in entities)
+            {
+                if (entity.StatisticRepository.TryGet<float>(definition, out Statistic<float> statistic))
+                {
+                    multiplier *= statistic.Get<float>();
+                }
+            }
+
+            return multiplier;
+        }
     }
 }

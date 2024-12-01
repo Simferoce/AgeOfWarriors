@@ -8,19 +8,11 @@ namespace Game.Modifier
     [Serializable]
     public class ModifierStackValue : Value<float>
     {
-        [SerializeReference, SubclassSelector] private Value multiplier;
-
-        public override void Initialize(Entity owner)
-        {
-            base.Initialize(owner);
-            multiplier.Initialize(owner);
-        }
-
         public override float GetValue()
         {
-            if (owner is not ModifierEntity modifier)
+            if (owner.Owner is not ModifierEntity modifier)
             {
-                Debug.LogError($"Expecting the owner of {nameof(ModifierStackValue)} to be {nameof(ModifierEntity)} but instead got {owner.GetType().Name}", owner);
+                Debug.LogError($"Expecting the owner of {nameof(ModifierStackValue)} to be {nameof(ModifierEntity)} but instead got {owner.GetType().Name}");
                 return default;
             }
 
@@ -31,7 +23,7 @@ namespace Game.Modifier
                 return default;
             }
 
-            return multiplier.GetValue<float>() * modifierBehaviour.CurrentStack;
+            return modifierBehaviour.CurrentStack;
         }
     }
 }

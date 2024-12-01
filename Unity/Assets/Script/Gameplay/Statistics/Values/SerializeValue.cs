@@ -9,6 +9,7 @@ namespace Game.Statistics
         public SerializeValueFloat(float value) : base(value)
         {
         }
+
     }
 
     [Serializable]
@@ -28,7 +29,7 @@ namespace Game.Statistics
     }
 
     [Serializable]
-    public abstract class SerializeValue<T> : Value<T>
+    public class SerializeValue<T> : Value<T>
     {
         [SerializeField] private T value;
 

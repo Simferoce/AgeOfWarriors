@@ -1669,7 +1669,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[2]'
       value: 
-      objectReference: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+      objectReference: {fileID: 11400000, guid: a0a3e2c88b079f4458c331514474afcc, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[3]'
       value: 

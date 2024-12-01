@@ -13,7 +13,7 @@ namespace Game.Projectile
 
         public override T GetValue()
         {
-            if (owner is not ProjectileEntity projectile)
+            if (owner.Owner is not ProjectileEntity projectile)
             {
                 Debug.LogError($"Expecting the owner to be of type {nameof(ProjectileEntity)} but instead got {owner.GetType()}.");
                 return default;

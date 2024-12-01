@@ -13,7 +13,7 @@ namespace Game.Modifier
 
         public override T GetValue()
         {
-            if (owner is not ModifierEntity modifier)
+            if (owner.Owner is not ModifierEntity modifier)
             {
                 Debug.LogError($"Expecting the owner to be of type {nameof(ModifierEntity)} but instead got {owner.GetType()}.");
                 return default;

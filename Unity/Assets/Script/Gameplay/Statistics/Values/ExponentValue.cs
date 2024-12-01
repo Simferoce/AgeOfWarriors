@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Statistics
 {
     [Serializable]
-    public class MultiplyValue : Value<float>
+    public class ExponentValue : Value<float>
     {
         [SerializeReference, SubclassSelector] private Value a;
         [SerializeReference, SubclassSelector] private Value b;
@@ -18,7 +18,7 @@ namespace Game.Statistics
 
         public override float GetValue()
         {
-            return a.GetValue<float>() * b.GetValue<float>();
+            return Mathf.Pow(a.GetValue<float>(), b.GetValue<float>());
         }
     }
 }

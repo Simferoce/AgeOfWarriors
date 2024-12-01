@@ -1,16 +1,26 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Game.Modifier
 {
     [Serializable]
     public class StackModifierBehaviour : ModifierBehaviour, IModifierStack
     {
+        [SerializeField]
+        private int startingStack = 1;
+
         private float currentStack = 0;
 
         public delegate void OnStackChangedDelegate(float oldValue, float newValue);
         public event OnStackChangedDelegate OnStackChanged;
 
         public float CurrentStack { get => currentStack; set => currentStack = value; }
+
+        public override void Initialize(ModifierEntity modifier)
+        {
+            base.Initialize(modifier);
+            currentStack = startingStack;
+        }
 
         public override void Refresh()
         {

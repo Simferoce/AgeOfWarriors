@@ -70,12 +70,12 @@ namespace Game.Character
 
             StatisticRepository.Add(new StatisticFloat("health", StatisticDefinitionRegistry.Instance.Health, definition.MaxHealth));
             StatisticRepository.Add(new StatisticFloat("max_health", StatisticDefinitionRegistry.Instance.MaxHealth, definition.MaxHealth));
-            StatisticRepository.Add(new StatisticFloat("defense", StatisticDefinitionRegistry.Instance.Defense, definition.Defense));
+            StatisticRepository.Add(new StatisticFloat("defense", StatisticDefinitionRegistry.Instance.Defense, definition.Defense, (float baseValue) => baseValue + this[StatisticDefinitionRegistry.Instance.FlatDefense]));
             StatisticRepository.Add(new StatisticFloat("attack_power", StatisticDefinitionRegistry.Instance.AttackPower, definition.AttackPower));
             StatisticRepository.Add(new StatisticFloat("attack_speed", StatisticDefinitionRegistry.Instance.AttackSpeed, definition.AttackSpeed));
             StatisticRepository.Add(new StatisticFloat("speed", StatisticDefinitionRegistry.Instance.Speed, definition.Speed));
             StatisticRepository.Add(new StatisticFloat("reach", StatisticDefinitionRegistry.Instance.Reach, definition.Reach));
-            StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f));
+            StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]));
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));
@@ -84,10 +84,6 @@ namespace Game.Character
         public void Update()
         {
             stateMachine.Update();
-
-            ModifierHandler modifierHandler = GetCachedComponent<ModifierHandler>();
-            this[StatisticDefinitionRegistry.Instance.FlatDefense].Set<float>(modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]);
-            this[StatisticDefinitionRegistry.Instance.Defense].Set<float>(this[StatisticDefinitionRegistry.Instance.Defense].GetBase<float>() + this[StatisticDefinitionRegistry.Instance.FlatDefense]);
         }
 
         public void RefreshDirection()

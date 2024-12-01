@@ -12,17 +12,18 @@ namespace Game.Statistics
 
         public Statistic this[StatisticDefinition definition] => TryGet(definition, out Statistic statistic) ? statistic : throw new System.Exception($"Statistic with definition \"{definition}\" not found in {this}.");
 
-        public Entity Entity { get; private set; }
+        public object Owner { get; private set; }
 
-        public void Initialize(Entity Entity)
+        public void Initialize(object owner)
         {
+            this.Owner = owner;
             foreach (Statistic statistic in statistics)
-                statistic.Initialize(Entity);
+                statistic.Initialize(this);
         }
 
         public void Add(Statistic statistic)
         {
-            statistic.Initialize(Entity);
+            statistic.Initialize(this);
             statistics.Add(statistic);
         }
 
@@ -41,6 +42,16 @@ namespace Game.Statistics
         {
             statistic = statistics.OfType<Statistic<T>>().FirstOrDefault(x => x.Name == name);
             return statistic != null;
+        }
+
+        public IEnumerable<Statistic<T>> GetAll<T>(StatisticDefinition definition)
+        {
+            return statistics.OfType<Statistic<T>>().Where(x => x.Definition == definition);
+        }
+
+        public IEnumerable<Statistic<T>> GetAll<T>()
+        {
+            return statistics.OfType<Statistic<T>>();
         }
 
         public Statistic<T> Get<T>(StatisticDefinition definition)

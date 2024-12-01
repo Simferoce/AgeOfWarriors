@@ -5,9 +5,9 @@ namespace Game.Statistics
     [Serializable]
     public abstract class Value
     {
-        protected Entity owner;
+        protected StatisticRepository owner;
 
-        public virtual void Initialize(Entity owner)
+        public virtual void Initialize(StatisticRepository owner)
         {
             this.owner = owner;
         }

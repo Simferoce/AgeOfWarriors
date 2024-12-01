@@ -12,7 +12,7 @@ namespace Game.Ability
 
         public override float GetValue()
         {
-            if (owner is not AbilityEntity ability)
+            if (owner.Owner is not AbilityEntity ability)
                 throw new Exception($"Excepting the type of {owner} to be of {nameof(AbilityEntity)}");
 
             return ability.Caster.Entity.GetCachedComponent<StatisticRepository>().GetOrThrow<float>(casterDefinition).Get<float>() * ratio;

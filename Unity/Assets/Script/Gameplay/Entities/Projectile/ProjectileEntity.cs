@@ -1,5 +1,6 @@
 ﻿using Game.Components;
 using Game.Modifier;
+using Game.Statistics;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
@@ -39,6 +40,10 @@ namespace Game.Projectile
             this.Target = target;
             this.parameters = parameters.ToList();
             Parent = source;
+
+            ModifierHandler modifierHandler = GetCachedComponent<ModifierHandler>();
+            StatisticFloat multiplierDamageStatistic = new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierDamage]);
+            StatisticRepository.Add(multiplierDamageStatistic);
 
             base.Initialize();
 

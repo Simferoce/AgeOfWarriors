@@ -19,14 +19,15 @@ namespace Game.Modifier
         private void Awake()
         {
             Entity = GetComponentInParent<Entity>();
+            statisticRepository.Initialize(this);
 
             StatisticFloat flatDefense = new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f);
-            statisticRepository.Add(flatDefense);
-        }
+            StatisticFloat multiplierDamage = new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f);
+            flatDefense.SetEquation((float baseValue) => baseValue + modifiers.Sum(StatisticDefinitionRegistry.Instance.FlatDefense));
+            multiplierDamage.SetEquation((float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierDamage));
 
-        private void Update()
-        {
-            statisticRepository[StatisticDefinitionRegistry.Instance.FlatDefense].Set(modifiers.Sum(StatisticDefinitionRegistry.Instance.FlatDefense));
+            statisticRepository.Add(flatDefense);
+            statisticRepository.Add(multiplierDamage);
         }
 
         public void Add(ModifierEntity modifier)
