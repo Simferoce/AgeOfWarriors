@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7545115530843669453}
   - component: {fileID: 2758302497919410123}
-  - component: {fileID: 2996155127380992667}
   - component: {fileID: 6229864869035163989}
   m_Layer: 0
   m_Name: ShieldbearerEmpoweredOnHitTechnologyPerk
@@ -46,34 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2996155127380992667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4774257945189528745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488685912784987
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488685912784987
-      type: {class: StandardIntegerStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: threshold
-        definition: {fileID: 0}
-        value:
-          rid: 3390488685912784988
-    - rid: 3390488685912784988
-      type: {class: SerializeValueInteger, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 3
 --- !u!114 &6229864869035163989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +58,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556175
   visibleByDefault: 1
   behaviours:
   - rid: 3390488685912784982
@@ -121,3 +95,14 @@ MonoBehaviour:
         name: threshold
         value:
           name: threshold
+    - rid: 6209823047454556175
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: threshold
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556189
+    - rid: 6209823047454556189
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: 3

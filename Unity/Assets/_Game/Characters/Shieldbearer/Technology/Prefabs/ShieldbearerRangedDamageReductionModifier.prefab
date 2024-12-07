@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4971086398875706646}
   - component: {fileID: 1535417913307073823}
-  - component: {fileID: 4655132928015035070}
   - component: {fileID: 1013384771038095548}
   m_Layer: 0
   m_Name: ShieldbearerRangedDamageReductionModifier
@@ -46,34 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4655132928015035070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6598875282862589358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488682020208725
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488682020208725
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: ranged_damage_reduction
-        definition: {fileID: 11400000, guid: 56889f00aab0b8440b071b9dd15442a0, type: 2}
-        value:
-          rid: 3390488682020208726
-    - rid: 3390488682020208726
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: ranged_damage_reduction
 --- !u!114 &1013384771038095548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,15 +58,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556167
   visibleByDefault: 1
-  behaviours:
-  - rid: 3390488682020208724
+  behaviours: []
   references:
     version: 2
     RefIds:
-    - rid: 3390488682020208724
-      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 6209823047454556167
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
+        name: ranged_damage_taken
         definition: {fileID: 11400000, guid: 56889f00aab0b8440b071b9dd15442a0, type: 2}
-        reference:
-          name: ranged_damage_reduction
+        baseValue:
+          rid: 6209823047454556169
+    - rid: 6209823047454556169
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: ranged_damage_taken

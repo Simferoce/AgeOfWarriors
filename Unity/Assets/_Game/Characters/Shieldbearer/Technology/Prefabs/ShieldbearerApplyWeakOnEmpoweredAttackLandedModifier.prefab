@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5874221667072583286}
   - component: {fileID: 4476918790201269765}
-  - component: {fileID: 327944508859751273}
   - component: {fileID: 2565356871626186747}
   m_Layer: 0
   m_Name: ShieldbearerApplyWeakOnEmpoweredAttackLandedModifier
@@ -46,46 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &327944508859751273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3574743574103973983}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488701582704727
-  - rid: 3390488702146314322
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488701582704727
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage_dealt
-        definition: {fileID: 0}
-        value:
-          rid: 3390488701582704728
-    - rid: 3390488701582704728
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: damage_dealt
-    - rid: 3390488702146314322
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: duration
-        definition: {fileID: 0}
-        value:
-          rid: 3390488702146314323
-    - rid: 3390488702146314323
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: duration
 --- !u!114 &2565356871626186747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +58,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556194
+    - rid: 6209823047454556197
   visibleByDefault: 1
   behaviours:
   - rid: 3390488701582704716
@@ -145,3 +108,25 @@ MonoBehaviour:
         name: duration
         value:
           name: duration
+    - rid: 6209823047454556194
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage_dealt
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556196
+    - rid: 6209823047454556196
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: damage_dealt
+    - rid: 6209823047454556197
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556199
+    - rid: 6209823047454556199
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration

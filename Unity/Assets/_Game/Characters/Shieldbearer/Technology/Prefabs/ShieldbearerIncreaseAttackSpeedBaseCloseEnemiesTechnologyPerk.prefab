@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4737256657691094979}
   - component: {fileID: 710101843072909957}
-  - component: {fileID: 6089997422190733966}
   - component: {fileID: 8607094006021495844}
   m_Layer: 0
   m_Name: ShieldbearerIncreaseAttackSpeedBaseCloseEnemiesTechnologyPerk
@@ -46,46 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6089997422190733966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5421720394858200810}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488750887534668
-  - rid: 3390488750887534670
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488750887534668
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: attack_speed
-        definition: {fileID: 0}
-        value:
-          rid: 3390488750887534669
-    - rid: 3390488750887534669
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 0.25
-    - rid: 3390488750887534670
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: range
-        definition: {fileID: 0}
-        value:
-          rid: 3390488750887534671
-    - rid: 3390488750887534671
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 2
 --- !u!114 &8607094006021495844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,6 +58,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556297
+    - rid: 6209823047454556299
   visibleByDefault: 1
   behaviours:
   - rid: 3390488750887534672
@@ -140,3 +103,25 @@ MonoBehaviour:
         name: range
         value:
           name: range
+    - rid: 6209823047454556297
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556298
+    - rid: 6209823047454556298
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1.05
+    - rid: 6209823047454556299
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556300
+    - rid: 6209823047454556300
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 2

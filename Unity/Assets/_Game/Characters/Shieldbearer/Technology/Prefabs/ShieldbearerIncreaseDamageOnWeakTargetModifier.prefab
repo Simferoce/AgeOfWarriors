@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3344910605123926914}
   - component: {fileID: 6628415400624289690}
-  - component: {fileID: 8463088250933051473}
   - component: {fileID: 9115810977683548452}
   m_Layer: 0
   m_Name: ShieldbearerIncreaseDamageOnWeakTargetModifier
@@ -46,34 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8463088250933051473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5096405364059711483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488728189272068
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488728189272068
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage
-        definition: {fileID: 0}
-        value:
-          rid: 3390488728189272153
-    - rid: 3390488728189272153
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: damage
 --- !u!114 &9115810977683548452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,15 +58,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556294
   visibleByDefault: 1
-  behaviours:
-  - rid: 3390488728189272071
+  behaviours: []
   references:
     version: 2
     RefIds:
-    - rid: 3390488728189272071
-      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 6209823047454556294
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
+        name: damage_versus_weak
         definition: {fileID: 11400000, guid: 47ce85d6f6a27834780b440cb4330b89, type: 2}
-        reference:
-          name: damage
+        baseValue:
+          rid: 6209823047454556296
+    - rid: 6209823047454556296
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: damage_versus_weak

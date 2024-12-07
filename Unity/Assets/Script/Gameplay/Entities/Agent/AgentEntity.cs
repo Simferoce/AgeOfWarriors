@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Game.Agent
 {
     [RequireComponent(typeof(ModifierApplier))]
+    [RequireComponent(typeof(ModifierHandler))]
     public class AgentEntity : Entity
     {
         [SerializeField] private FactionType faction;

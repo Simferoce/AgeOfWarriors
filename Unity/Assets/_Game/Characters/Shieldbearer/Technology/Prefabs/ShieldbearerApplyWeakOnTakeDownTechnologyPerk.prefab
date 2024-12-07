@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1925328646261901773}
   - component: {fileID: 5749100219243738177}
-  - component: {fileID: 5374211428733810812}
   - component: {fileID: 2126855249755714265}
   m_Layer: 0
   m_Name: ShieldbearerApplyWeakOnTakeDownTechnologyPerk
@@ -46,58 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5374211428733810812
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3600752891682495254}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488728189272177
-  - rid: 3390488728189272178
-  - rid: 3390488728189272179
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488728189272177
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage_dealt
-        definition: {fileID: 0}
-        value:
-          rid: 3390488728189272182
-    - rid: 3390488728189272178
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: range
-        definition: {fileID: 0}
-        value:
-          rid: 3390488728189272181
-    - rid: 3390488728189272179
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: duration
-        definition: {fileID: 0}
-        value:
-          rid: 3390488728189272180
-    - rid: 3390488728189272180
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 10
-    - rid: 3390488728189272181
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 2.5
-    - rid: 3390488728189272182
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 0.75
 --- !u!114 &2126855249755714265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +58,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556206
+    - rid: 6209823047454556210
+    - rid: 6209823047454556213
   visibleByDefault: 1
   behaviours:
   - rid: 3390488728189272183
@@ -159,3 +111,36 @@ MonoBehaviour:
         name: damage_dealt
         value:
           name: damage_dealt
+    - rid: 6209823047454556206
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage_dealt
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556207
+    - rid: 6209823047454556207
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0.75
+    - rid: 6209823047454556210
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556212
+    - rid: 6209823047454556212
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 5
+    - rid: 6209823047454556213
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: range
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556214
+    - rid: 6209823047454556214
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 2

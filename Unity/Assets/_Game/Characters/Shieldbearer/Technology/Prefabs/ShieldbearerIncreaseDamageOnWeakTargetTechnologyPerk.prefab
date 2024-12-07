@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3344910605123926914}
   - component: {fileID: 3492084751576787871}
-  - component: {fileID: 4500956986228329076}
   - component: {fileID: 3027119399068007874}
   m_Layer: 0
   m_Name: ShieldbearerIncreaseDamageOnWeakTargetTechnologyPerk
@@ -46,34 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4500956986228329076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5096405364059711483}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488728189272146
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488728189272146
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage
-        definition: {fileID: 0}
-        value:
-          rid: 3390488728189272147
-    - rid: 3390488728189272147
-      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 10
 --- !u!114 &3027119399068007874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +58,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556292
   visibleByDefault: 1
   behaviours:
   - rid: 3390488728189272148
@@ -118,6 +92,17 @@ MonoBehaviour:
     - rid: 3390488728189272152
       type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        name: damage
+        name: damage_versus_weak
         value:
-          name: damage
+          name: damage_versus_weak
+    - rid: 6209823047454556292
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage_versus_weak
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556293
+    - rid: 6209823047454556293
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 10

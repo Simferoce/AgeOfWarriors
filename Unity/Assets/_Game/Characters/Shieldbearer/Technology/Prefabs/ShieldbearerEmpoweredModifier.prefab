@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8249438824554493774}
   - component: {fileID: 7904386698603493662}
-  - component: {fileID: 6583461413149252120}
   - component: {fileID: 3936597110931998836}
   m_Layer: 0
   m_Name: ShieldbearerEmpoweredModifier
@@ -46,22 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6583461413149252120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3685490160354404855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics: []
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &3936597110931998836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,6 +58,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics: []
   visibleByDefault: 1
   behaviours:
   - rid: 3390488685912785000

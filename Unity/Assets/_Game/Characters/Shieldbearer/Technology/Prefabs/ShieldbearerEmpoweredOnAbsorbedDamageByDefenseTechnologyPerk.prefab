@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8214676536136310772}
   - component: {fileID: 6585118630355988008}
-  - component: {fileID: 2700774791827025954}
   - component: {fileID: 7375138088783003209}
   m_Layer: 0
   m_Name: ShieldbearerEmpoweredOnAbsorbedDamageByDefenseTechnologyPerk
@@ -46,34 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2700774791827025954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7370407955683573967}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488700399648865
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488700399648865
-      type: {class: StandardIntegerStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: threshold
-        definition: {fileID: 0}
-        value:
-          rid: 3390488700399648866
-    - rid: 3390488700399648866
-      type: {class: SerializeValueInteger, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 50
 --- !u!114 &7375138088783003209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,6 +58,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556182
   visibleByDefault: 1
   behaviours:
   - rid: 3390488700399648842
@@ -121,3 +95,14 @@ MonoBehaviour:
         name: threshold
         value:
           name: threshold
+    - rid: 6209823047454556182
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: threshold
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556184
+    - rid: 6209823047454556184
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: 50
