@@ -31,11 +31,14 @@ namespace Game.Statistics
         public abstract T GetBase<T>();
         public abstract void Set<T>(T value);
         public abstract void SetEquation<T>(Func<T, T> modifier);
+        public virtual bool TryGetDescription(out string description)
+        {
+            return baseValue.TryGetDescription(out description);
+        }
 
         public static implicit operator float(Statistic statistic) => statistic.Get<float>();
         public static implicit operator bool(Statistic statistic) => statistic.Get<bool>();
     }
-
 
     [Serializable]
     public abstract class Statistic<ReferenceType> : Statistic

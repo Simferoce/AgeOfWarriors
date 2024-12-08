@@ -12,16 +12,16 @@ namespace Game
 
         public override object GetValue(Entity source)
         {
-            //if (source.TryGetCachedComponent<StatisticRepository>(out StatisticRepository statisticRepository) && statisticRepository.TryGet(name, out Statistic statistic))
-            //{
-            //    StatisticDefinition definition = overrideDefinitionDescriptor != null ? overrideDefinitionDescriptor : statistic.Definition;
-            //    string formattedValue = statistic.GetFormattedValue(definition != null ? definition.Format : string.Empty, context);
+            if (source.StatisticRepository.TryGet(name, out Statistic statistic))
+            {
+                StatisticDefinition definition = overrideDefinitionDescriptor != null ? overrideDefinitionDescriptor : statistic.Definition;
+                string formattedValue = definition != null ? statistic.Get<float>().ToString(definition.Format) : statistic.Get<float>().ToString();
 
-            //    if (statistic.TryGetDescription(out string description, context))
-            //        return AddDefinitionFormat($"({description}) ({formattedValue})", definition);
-            //    else
-            //        return AddDefinitionFormat($"({formattedValue})", definition);
-            //}
+                if (statistic.TryGetDescription(out string description))
+                    return AddDefinitionFormat($"({description}) ({formattedValue})", definition);
+                else
+                    return AddDefinitionFormat($"({formattedValue})", definition);
+            }
 
             return $"{{{name}}}";
         }
