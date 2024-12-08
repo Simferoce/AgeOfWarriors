@@ -13,6 +13,7 @@ namespace Game.Statistics
         public StatisticDefinition FlatDefense => statisticDefinitions["flat_defense"];
         public StatisticDefinition AttackPower => statisticDefinitions["attack_power"];
         public StatisticDefinition AttackSpeed => statisticDefinitions["attack_speed"];
+        public StatisticDefinition MultiplierAttackSpeed => statisticDefinitions["multiplier_attack_speed"];
         public StatisticDefinition Speed => statisticDefinitions["speed"];
         public StatisticDefinition Reach => statisticDefinitions["reach"];
         public StatisticDefinition Cooldown => statisticDefinitions["cooldown"];

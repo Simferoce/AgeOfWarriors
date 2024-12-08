@@ -19,7 +19,7 @@ MonoBehaviour:
     text: 
     parameters: []
   prefab: {fileID: 7231879587680180711, guid: 4de4af56972f5794a9538feb0d7bdd05, type: 3}
-  technologyTreeIcon: {fileID: 0}
+  technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}
   requirements: []
   references:
     version: 2

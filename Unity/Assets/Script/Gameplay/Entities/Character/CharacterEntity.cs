@@ -72,7 +72,8 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("max_health", StatisticDefinitionRegistry.Instance.MaxHealth, definition.MaxHealth));
             StatisticRepository.Add(new StatisticFloat("defense", StatisticDefinitionRegistry.Instance.Defense, definition.Defense, (float baseValue) => baseValue + this[StatisticDefinitionRegistry.Instance.FlatDefense]));
             StatisticRepository.Add(new StatisticFloat("attack_power", StatisticDefinitionRegistry.Instance.AttackPower, definition.AttackPower));
-            StatisticRepository.Add(new StatisticFloat("attack_speed", StatisticDefinitionRegistry.Instance.AttackSpeed, definition.AttackSpeed));
+            StatisticRepository.Add(new StatisticFloat("attack_speed", StatisticDefinitionRegistry.Instance.AttackSpeed, definition.AttackSpeed, (float baseValue) => baseValue * this[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
+            StatisticRepository.Add(new StatisticFloat("multiplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
             StatisticRepository.Add(new StatisticFloat("speed", StatisticDefinitionRegistry.Instance.Speed, definition.Speed));
             StatisticRepository.Add(new StatisticFloat("reach", StatisticDefinitionRegistry.Instance.Reach, definition.Reach));
             StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]));

@@ -20,7 +20,7 @@ MonoBehaviour:
     parameters:
     - rid: 3390488678730301526
   prefab: {fileID: 5260313248293485178, guid: 56815ad208ee62946b8f7060c947b5b8, type: 3}
-  technologyTreeIcon: {fileID: -7612114061151743823, guid: 2a50200866bb2ec46b25ae0324e42799, type: 3}
+  technologyTreeIcon: {fileID: 4287196743007105525, guid: 0971139afa142b149b66296ac595fedf, type: 3}
   requirements: []
   references:
     version: 2

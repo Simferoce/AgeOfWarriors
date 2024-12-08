@@ -194,6 +194,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Window
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa8583d556561fe45a879e4a24677d2f
+    m_Address: Assets/_Game/Statistics/Definitions/PercentageAttackSpeedStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff6ee24adf3c8424aad04267addb363d
     m_Address: Assets/_Game/Statistics/AttackPowerStatisticDefinition.asset
     m_ReadOnly: 0

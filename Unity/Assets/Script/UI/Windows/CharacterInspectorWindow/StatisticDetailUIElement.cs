@@ -14,8 +14,8 @@ namespace Game.UI.Windows
 
         public void Refresh(CharacterEntity character)
         {
-            float baseValue = 0;
-            float total = 0;
+            float baseValue = character[definition].GetBase<float>();
+            float total = character[definition].Get<float>();
             float difference = total - baseValue;
 
             label.text = definition.Title;
