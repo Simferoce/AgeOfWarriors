@@ -16,7 +16,7 @@ namespace Game.Character
 
             protected override void InternalEnter()
             {
-                character.Animated.SetTrigger("Dead");
+                character.Animated.Play("Death");
                 startedAt = Time.time;
             }
 

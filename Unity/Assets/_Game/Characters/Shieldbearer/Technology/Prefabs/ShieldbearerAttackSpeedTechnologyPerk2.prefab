@@ -61,7 +61,7 @@ MonoBehaviour:
   statisticRepository:
     statistics:
     - rid: 6209823047454556170
-  visibleByDefault: 1
+  visibleByDefault: 0
   behaviours:
   - rid: 3390488678730301528
   references:

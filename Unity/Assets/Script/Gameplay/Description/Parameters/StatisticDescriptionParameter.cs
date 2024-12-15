@@ -9,13 +9,19 @@ namespace Game
     {
         [SerializeField] private string name;
         [SerializeField] private StatisticDefinition overrideDefinitionDescriptor;
+        [SerializeField] private bool asPercentage;
+        [SerializeReference, SubclassSelector] private IFloatAdjustment adjustment;
 
         public override object GetValue(Entity source)
         {
             if (source.StatisticRepository.TryGet(name, out Statistic statistic))
             {
                 StatisticDefinition definition = overrideDefinitionDescriptor != null ? overrideDefinitionDescriptor : statistic.Definition;
-                string formattedValue = definition != null ? statistic.Get<float>().ToString(definition.Format) : statistic.Get<float>().ToString();
+                float value = statistic.Get<float>();
+                if (adjustment != null)
+                    value = adjustment.Adjust(value);
+
+                string formattedValue = asPercentage ? value.ToString("0.0%") : value.ToString();
 
                 if (statistic.TryGetDescription(out string description))
                     return AddDefinitionFormat($"({description}) ({formattedValue})", definition);

@@ -21,15 +21,11 @@ namespace Game.Modifier
             Entity = GetComponentInParent<Entity>();
             statisticRepository.Initialize(this);
 
-            StatisticFloat flatDefense = new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifiers.Sum(StatisticDefinitionRegistry.Instance.FlatDefense));
-            StatisticFloat multiplierDamage = new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierDamage));
-            StatisticFloat multiplierAttackSpeed = new StatisticFloat("mutliplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed));
-            StatisticBool stagger = new StatisticBool("stagger", StatisticDefinitionRegistry.Instance.Stagger, false, (bool baseValue) => baseValue || modifiers.Union(StatisticDefinitionRegistry.Instance.Stagger));
-
-            statisticRepository.Add(flatDefense);
-            statisticRepository.Add(multiplierDamage);
-            statisticRepository.Add(multiplierAttackSpeed);
-            statisticRepository.Add(stagger);
+            statisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifiers.Sum(StatisticDefinitionRegistry.Instance.FlatDefense)));
+            statisticRepository.Add(new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierDamage)));
+            statisticRepository.Add(new StatisticFloat("ranged_damage_taken", StatisticDefinitionRegistry.Instance.RangeDamageTaken, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.RangeDamageTaken)));
+            statisticRepository.Add(new StatisticFloat("mutliplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed)));
+            statisticRepository.Add(new StatisticBool("stagger", StatisticDefinitionRegistry.Instance.Stagger, false, (bool baseValue) => baseValue || modifiers.Union(StatisticDefinitionRegistry.Instance.Stagger)));
         }
 
         public void Add(ModifierEntity modifier)

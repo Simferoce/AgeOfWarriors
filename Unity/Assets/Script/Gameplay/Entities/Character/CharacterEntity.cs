@@ -78,6 +78,7 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("reach", StatisticDefinitionRegistry.Instance.Reach, definition.Reach));
             StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]));
             StatisticRepository.Add(new StatisticBool("stagger", StatisticDefinitionRegistry.Instance.Stagger, false, (bool baseValue) => modifierHandler[StatisticDefinitionRegistry.Instance.Stagger]));
+            StatisticRepository.Add(new StatisticFloat("ranged_damage_taken", StatisticDefinitionRegistry.Instance.RangeDamageTaken, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.RangeDamageTaken]));
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

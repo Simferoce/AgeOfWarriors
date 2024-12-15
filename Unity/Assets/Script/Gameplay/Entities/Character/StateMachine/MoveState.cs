@@ -16,7 +16,8 @@ namespace Game.Character
 
             protected override void InternalEnter()
             {
-
+                if (character.Animated.GetCurrent() != "Move")
+                    character.Animated.Play("Move");
             }
 
             protected override void InternalExit()

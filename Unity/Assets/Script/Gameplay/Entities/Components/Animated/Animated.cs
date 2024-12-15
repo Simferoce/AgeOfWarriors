@@ -20,6 +20,7 @@ namespace Game.Components
 
         private Animator animator;
         private Dictionary<string, Damping> dampings = new Dictionary<string, Damping>();
+        private string currentState;
 
         private void Awake()
         {
@@ -35,36 +36,42 @@ namespace Game.Components
             }
         }
 
-        public void ClearTrigger(string trigger)
+        public void Play(string animationState)
         {
-            animator.ResetTrigger(trigger);
+            currentState = animationState;
+            animator.CrossFade(animationState, 0.1f);
         }
 
-        public void SetTrigger(string trigger)
+        public string GetCurrent()
         {
-            animator.SetTrigger(trigger);
+            return currentState;
         }
 
-        public void SetBool(string parameter, bool value)
+        public float GetCurrentAnimationClipLength()
         {
-            animator.SetBool(parameter, value);
+            return animator.GetCurrentAnimatorClipInfo(0)[0].clip.length;
         }
 
-        public void SetFloat(string trigger, float value)
+        public void SetSpeed(float speed)
         {
-            animator.SetFloat(trigger, value);
+            animator.speed = speed;
         }
 
-        public void SetFloat(string trigger, float value, float dampTime)
+        public void SetFloat(string key, float value)
         {
-            if (!dampings.ContainsKey(trigger))
+            animator.SetFloat(key, value);
+        }
+
+        public void SetFloat(string key, float value, float dampTime)
+        {
+            if (!dampings.ContainsKey(key))
             {
-                dampings[trigger] = new Damping() { Target = value, DampTime = dampTime };
+                dampings[key] = new Damping() { Target = value, DampTime = dampTime };
             }
             else
             {
-                dampings[trigger].Target = value;
-                dampings[trigger].DampTime = dampTime;
+                dampings[key].Target = value;
+                dampings[key].DampTime = dampTime;
             }
         }
 

@@ -68,7 +68,7 @@ MonoBehaviour:
   - rid: 3390488662789587060
   effects:
   - rid: 7754703283282509908
-  trigger: Ability
+  trigger: Standard Ability
   references:
     version: 2
     RefIds:

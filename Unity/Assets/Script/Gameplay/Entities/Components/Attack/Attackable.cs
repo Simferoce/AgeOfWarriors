@@ -64,6 +64,9 @@ namespace Game.Components
             if (attack.Flags.HasFlag(AttackData.Flag.Empowered))
                 damage *= 1.5f;
 
+            if (attack.Flags.HasFlag(AttackData.Flag.Ranged))
+                damage *= Entity[StatisticDefinitionRegistry.Instance.RangeDamageTaken];
+
             float resultingDefense = currentDefense - attack.ArmorPenetration;
             if (resultingDefense < 0f)
                 resultingDefense = 0f;

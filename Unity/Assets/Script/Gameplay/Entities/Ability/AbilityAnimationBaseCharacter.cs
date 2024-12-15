@@ -1,6 +1,7 @@
 ﻿using Game.Agent;
 using Game.Animation;
 using Game.Components;
+using Game.Statistics;
 using System.Collections.Generic;
 using System.Linq;
 #if UNITY_EDITOR
@@ -45,7 +46,7 @@ namespace Game.Ability
             Faction = Caster.Entity.GetCachedComponent<AgentIdentity>().Faction;
 
             Caster.BeginCast();
-            animated.SetTrigger(trigger);
+            animated.Play(trigger);
             Caster.LastAbilityUsed = Time.time;
             IsCasting = true;
             IsLingering = false;
@@ -64,6 +65,8 @@ namespace Game.Ability
         public override void Tick()
         {
             base.Tick();
+            animated.SetSpeed(Caster.Entity[StatisticDefinitionRegistry.Instance.AttackSpeed] * animated.GetCurrentAnimationClipLength());
+
             if (applied == false)
                 return;
 
@@ -105,6 +108,7 @@ namespace Game.Ability
 
         private void End()
         {
+            animated.SetSpeed(1f);
             Caster.EndCast();
             IsCasting = false;
 

@@ -28,3 +28,9 @@ MonoBehaviour:
       data:
         name: attack_speed
         overrideDefinitionDescriptor: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+        asPercentage: 1
+        adjustment:
+          rid: 6209823230701863038
+    - rid: 6209823230701863038
+      type: {class: MinusOneAdjustment, ns: Game, asm: Assembly-CSharp}
+      data: 

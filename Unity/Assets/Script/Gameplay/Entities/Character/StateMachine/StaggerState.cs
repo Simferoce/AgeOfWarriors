@@ -12,14 +12,13 @@ namespace Game.Character
 
             protected override void InternalEnter()
             {
-                character.Animated.ClearTrigger("EndStagger");
-                character.Animated.SetTrigger("Stagger");
+                character.Animated.Play("Stagger");
                 character.GetCachedComponent<Caster>().Interupt();
             }
 
             protected override void InternalExit()
             {
-                character.Animated.ClearTrigger("Stagger");
+                character.Animated.Play("Move");
             }
 
             protected override void InternalUpdate()
@@ -28,7 +27,6 @@ namespace Game.Character
                 if (!character.IsStaggered)
                 {
                     character.stateMachine.SetState(new MoveState(character));
-                    character.Animated.SetTrigger("EndStagger");
                 }
             }
         }
