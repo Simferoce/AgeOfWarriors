@@ -13,12 +13,24 @@ MonoBehaviour:
   m_Name: ShieldbearerWeakModifierDefinition
   m_EditorClassIdentifier: 
   id: 3b3926913a7273648af34556eedc2dd8
-  title: 
+  title: Weak
   icon: {fileID: 0}
   description:
-    text: 
-    parameters: []
+    text: Reduce damage dealt by {0}.
+    parameters:
+    - rid: 6209823347015942231
   prefab: {fileID: 2041740963804005176, guid: edb09626fa3f07241b6fb873b018de68, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 6209823347015942231
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage_dealt
+        overrideDefinitionDescriptor: {fileID: 0}
+        asPercentage: 1
+        adjustment:
+          rid: 6209823347015942238
+    - rid: 6209823347015942238
+      type: {class: OneMinusAdjustment, ns: Game, asm: Assembly-CSharp}
+      data: 

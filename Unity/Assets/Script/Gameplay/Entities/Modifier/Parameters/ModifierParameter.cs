@@ -1,4 +1,6 @@
-﻿namespace Game.Modifier
+﻿using Game.Statistics;
+
+namespace Game.Modifier
 {
     public abstract class ModifierParameter
     {
@@ -8,20 +10,27 @@
         {
             Name = name;
         }
+
+        public abstract T GetValue<T>();
     }
 
-    public class ModifierParameter<T> : ModifierParameter
+    public class ModifierParameter<ReferenceType> : ModifierParameter
     {
-        public T value;
+        public ReferenceType value;
 
-        public ModifierParameter(string name, T value) : base(name)
+        public ModifierParameter(string name, ReferenceType value) : base(name)
         {
             this.value = value;
         }
 
-        public T GetValue()
+        public ReferenceType GetValue()
         {
             return value;
+        }
+
+        public override T GetValue<T>()
+        {
+            return StatisticUtility.ConvertGeneric<T, ReferenceType>(GetValue());
         }
     }
 }

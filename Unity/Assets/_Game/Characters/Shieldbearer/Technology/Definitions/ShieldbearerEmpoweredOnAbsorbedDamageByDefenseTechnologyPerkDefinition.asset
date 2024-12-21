@@ -13,14 +13,25 @@ MonoBehaviour:
   m_Name: ShieldbearerEmpoweredOnAbsorbedDamageByDefenseTechnologyPerkDefinition
   m_EditorClassIdentifier: 
   id: 512290af0b2e05a4cb3bb9a35d705a99
-  title: 
+  title: Iron Skin
   icon: {fileID: 0}
   description:
-    text: 
-    parameters: []
+    text: For each {0} damage prevented by defense, gain a stack of empowered.
+    parameters:
+    - rid: 6209823347015942221
   prefab: {fileID: 7370407955683573967, guid: 3065398c1b9f51b468ca7b64d067566b, type: 3}
   technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}
   requirements: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823347015942221
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: threshold
+        overrideDefinitionDescriptor: {fileID: 0}
+        asPercentage: 0
+        adjustment:
+          rid: -2

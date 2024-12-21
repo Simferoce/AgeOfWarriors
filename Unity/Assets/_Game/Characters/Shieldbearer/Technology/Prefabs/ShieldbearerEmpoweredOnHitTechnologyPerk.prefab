@@ -85,24 +85,24 @@ MonoBehaviour:
         targets:
         - rid: 3390488685912784985
         parameterFactories:
-        - rid: 3390488685912784993
+        - rid: 6209823347015942217
     - rid: 3390488685912784985
       type: {class: TriggerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 
-    - rid: 3390488685912784993
-      type: {class: StatisticIntegerModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: threshold
-        value:
-          name: threshold
     - rid: 6209823047454556175
       type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: threshold
         definition: {fileID: 0}
         baseValue:
-          rid: 6209823047454556189
-    - rid: 6209823047454556189
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+          rid: 6209823347015942218
+    - rid: 6209823347015942217
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        name: 3
+        name: threshold
+        value:
+          name: threshold
+    - rid: 6209823347015942218
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 3

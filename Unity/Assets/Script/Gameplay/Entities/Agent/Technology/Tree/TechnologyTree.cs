@@ -48,6 +48,9 @@ namespace Game.Technology
             if (IsUnlocked(definition))
                 return new TechnologyPerkStatusUnlocked();
 
+            if (LevelSetup.Instance.UnrestrictedTechnology)
+                return new TechnologyPerkStatusUnlockable();
+
             int currentRow = UnlockableRow();
             if (currentRow == -1)
                 return new LockedTechnologyPerkStatus(LockedTechnologyPerkStatus.LockedReason.TreeCompleted);

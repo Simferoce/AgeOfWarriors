@@ -16,7 +16,8 @@ MonoBehaviour:
   title: Precise Attack
   icon: {fileID: 0}
   description:
-    text: 
+    text: Each 3th attack gives a stack of empowerment which increases the damage
+      of the next attack by 50%.
     parameters: []
   prefab: {fileID: 4774257945189528745, guid: a70fab6f35726d7458a6dd147418ee04, type: 3}
   technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}

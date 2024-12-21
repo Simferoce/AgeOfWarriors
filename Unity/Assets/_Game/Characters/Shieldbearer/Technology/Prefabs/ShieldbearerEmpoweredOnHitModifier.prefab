@@ -75,7 +75,7 @@ MonoBehaviour:
     - rid: 3390488685912784968
       type: {class: StackModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        startingStack: 1
+        startingStack: 0
     - rid: 3390488685912784969
       type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:

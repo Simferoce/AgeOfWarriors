@@ -236,9 +236,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   cheatCost: 1
-  maxCharacter: 1
+  maxCharacter: 3
   technologyGainMultiplier: 0
   factorySpeed: 10
+  unrestrictedTechnology: 1
 --- !u!4 &97917530
 Transform:
   m_ObjectHideFlags: 0

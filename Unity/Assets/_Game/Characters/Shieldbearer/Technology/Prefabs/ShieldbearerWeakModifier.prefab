@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7340492551494599630}
   - component: {fileID: 3706476490857453458}
-  - component: {fileID: 4217817068391181268}
   - component: {fileID: 7687628734011220698}
   m_Layer: 0
   m_Name: ShieldbearerWeakModifier
@@ -46,58 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4217817068391181268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2041740963804005176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad26997110c0068408ea4773f75fb0e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statistics:
-  - rid: 3390488701582704640
-  - rid: 3390488702146314319
-  - rid: 3390488728189272160
-  references:
-    version: 2
-    RefIds:
-    - rid: 3390488701582704640
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: damage_dealt
-        definition: {fileID: 0}
-        value:
-          rid: 3390488701582704730
-    - rid: 3390488701582704730
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: damage_dealt
-    - rid: 3390488702146314319
-      type: {class: StandardStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: duration
-        definition: {fileID: 0}
-        value:
-          rid: 3390488702146314320
-    - rid: 3390488702146314320
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        name: duration
-    - rid: 3390488728189272160
-      type: {class: StandardStateStatistic, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        name: weak
-        definition: {fileID: 0}
-        value:
-          rid: 3390488728189272161
-    - rid: 3390488728189272161
-      type: {class: SerializeValueBool, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        value: 1
 --- !u!114 &7687628734011220698
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,21 +58,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823347015942232
+    - rid: 6209823347015942235
   visibleByDefault: 1
   behaviours:
-  - rid: 3390488701582704715
   - rid: 3390488702146314317
   - rid: 3390488702146314318
-  - rid: 3390488728189272159
   references:
     version: 2
     RefIds:
-    - rid: 3390488701582704715
-      type: {class: StatisticModifierBehaviourFloat, ns: Game.Modifier, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 6adad080ff7da2148918fc737137bb11, type: 2}
-        reference:
-          name: damage_dealt
     - rid: 3390488702146314317
       type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -135,9 +78,25 @@ MonoBehaviour:
       data:
         duration:
           name: duration
-    - rid: 3390488728189272159
-      type: {class: StatisticModifierBehaviourBool, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 6209823347015942232
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        definition: {fileID: 11400000, guid: 99b7bdd6d7ee1eb4cb17ac49f054804e, type: 2}
-        reference:
-          name: weak
+        name: damage_dealt
+        definition: {fileID: 11400000, guid: 6adad080ff7da2148918fc737137bb11, type: 2}
+        baseValue:
+          rid: 6209823347015942234
+    - rid: 6209823347015942234
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: damage_dealt
+    - rid: 6209823347015942235
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        baseValue:
+          rid: 6209823347015942237
+    - rid: 6209823347015942237
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration

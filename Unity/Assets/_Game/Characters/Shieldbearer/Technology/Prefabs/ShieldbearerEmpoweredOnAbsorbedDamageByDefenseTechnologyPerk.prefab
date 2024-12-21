@@ -101,8 +101,8 @@ MonoBehaviour:
         name: threshold
         definition: {fileID: 0}
         baseValue:
-          rid: 6209823047454556184
-    - rid: 6209823047454556184
-      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+          rid: 6209823347015942224
+    - rid: 6209823347015942224
+      type: {class: SerializeValueInteger, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        name: 50
+        value: 50

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ShieldbearerEmpoweredModifierDefinition
   m_EditorClassIdentifier: 
   id: c501eb2c6227c984a90ffdeec74fba08
-  title: 
+  title: Empowered
   icon: {fileID: 0}
   description:
-    text: 
+    text: Increase damage by 50% of the next attack.
     parameters: []
   prefab: {fileID: 3685490160354404855, guid: 815ae1c797aa19643aa477cd555fe5e9, type: 3}
   references:

@@ -8,7 +8,7 @@ namespace Game.Modifier
     public class StatisticModifierParameterFactory<T> : ModifierParameterFactory
     {
         [SerializeField] private string name;
-        [SerializeField] private StatisticReference<T> value;
+        [SerializeField] private StatisticReference value;
 
         public override void Initialize(Entity entity)
         {

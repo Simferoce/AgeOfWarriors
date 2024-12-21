@@ -27,10 +27,11 @@ namespace Game.Ability
                 return;
 
             Attackable target = Ability.Targets[0].Entity.GetCachedComponent<Attackable>();
+            float damageValue = (damage?.Get()?.Get<float>() ?? 0f) * Ability.Caster.Entity[StatisticDefinitionRegistry.Instance.MultiplierDamage];
 
             AttackData attack = Ability.GetCachedComponent<AttackFactory>().Generate(
                 target: target,
-                damage: damage.Get()?.Get<float>() ?? 0f,
+                damage: damageValue,
                 armorPenetration: armorPenetration.Get()?.Get<float>() ?? 0f,
                 leach: leach.Get()?.Get<float>() ?? 0f,
                 flags: extraFlags);

@@ -8,7 +8,7 @@ namespace Game.Modifier
     [Serializable]
     public class DecreaseModifierStackEffect : ModifierEffect
     {
-        [SerializeField] private StatisticReference<int> amount;
+        [SerializeField] private StatisticReference amount;
         [SerializeReference, SubclassSelector] private ModifierTarget target;
         [SerializeField] private ModifierDefinition definition;
 

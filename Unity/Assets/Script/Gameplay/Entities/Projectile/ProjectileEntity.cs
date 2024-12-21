@@ -42,7 +42,7 @@ namespace Game.Projectile
             Parent = source;
 
             ModifierHandler modifierHandler = GetCachedComponent<ModifierHandler>();
-            StatisticFloat multiplierDamageStatistic = new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierDamage]);
+            StatisticFloat multiplierDamageStatistic = new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierDamage] * Parent[StatisticDefinitionRegistry.Instance.MultiplierDamage]);
             StatisticRepository.Add(multiplierDamageStatistic);
 
             base.Initialize();

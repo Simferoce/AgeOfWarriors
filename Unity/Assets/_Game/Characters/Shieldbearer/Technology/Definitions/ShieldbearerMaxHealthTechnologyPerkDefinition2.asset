@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShieldbearerMaxHealthTechnologyPerkDefinition2
   m_EditorClassIdentifier: 
   id: 77e88d5badeb2e540ab9592b33c86eb3
-  title: Increase Defense
+  title: Increase Max Health
   icon: {fileID: 0}
   description:
     text: Increase Defense by {0}.
@@ -25,8 +25,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 3390488678730301526
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
-        name: defense
-        overrideDefinitionDescriptor: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
+        name: max_health
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: b2357192271e2da41802a3d5de230ede, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

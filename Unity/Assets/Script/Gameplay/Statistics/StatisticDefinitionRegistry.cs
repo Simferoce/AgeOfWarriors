@@ -9,6 +9,7 @@ namespace Game.Statistics
     {
         public StatisticDefinition Health => statisticDefinitions["health"];
         public StatisticDefinition MaxHealth => statisticDefinitions["max_health"];
+        public StatisticDefinition FlatMaxHealth => statisticDefinitions["flat_max_health"];
         public StatisticDefinition Defense => statisticDefinitions["defense"];
         public StatisticDefinition FlatDefense => statisticDefinitions["flat_defense"];
         public StatisticDefinition AttackPower => statisticDefinitions["attack_power"];

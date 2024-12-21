@@ -8,7 +8,7 @@ namespace Game.Modifier
     [Serializable]
     public class StackModifierTrigger : ModifierTrigger
     {
-        [SerializeField] private StatisticReference<int> threshold;
+        [SerializeField] private StatisticReference threshold;
 
         private StackModifierBehaviour stackModifierBehaviour;
 

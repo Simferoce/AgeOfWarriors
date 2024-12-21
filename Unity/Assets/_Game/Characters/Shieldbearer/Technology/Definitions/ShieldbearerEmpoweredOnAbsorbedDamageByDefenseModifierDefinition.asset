@@ -13,12 +13,23 @@ MonoBehaviour:
   m_Name: ShieldbearerEmpoweredOnAbsorbedDamageByDefenseModifierDefinition
   m_EditorClassIdentifier: 
   id: 300ada43e5d60904bacda38f71d50324
-  title: 
+  title: Iron Skin
   icon: {fileID: 0}
   description:
-    text: 
-    parameters: []
+    text: For each {0} damage prevented by defense, gain a stack of empowered.
+    parameters:
+    - rid: 6209823347015942222
   prefab: {fileID: 7370407955683573967, guid: a5dad656ccc8abb489b8f2a4f352344e, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823347015942222
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: threshold
+        overrideDefinitionDescriptor: {fileID: 0}
+        asPercentage: 0
+        adjustment:
+          rid: -2

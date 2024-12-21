@@ -19,14 +19,14 @@ namespace Game.Modifier
                 return default;
             }
 
-            ModifierParameter<T> modifierParameter = modifier.Parameters.OfType<ModifierParameter<T>>().FirstOrDefault(x => x.Name == name);
+            ModifierParameter modifierParameter = modifier.Parameters.OfType<ModifierParameter>().FirstOrDefault(x => x.Name == name);
             if (modifierParameter == null)
             {
-                Debug.LogError($"Did not find a parameter with name \"{name}\" with type {nameof(T)} in \"{modifier.transform.GetFullPath()}\"", modifier);
+                Debug.LogError($"Did not find a parameter with name \"{name}\" in \"{modifier.transform.GetFullPath()}\"", modifier);
                 return default;
             }
 
-            return modifierParameter.GetValue();
+            return modifierParameter.GetValue<T>();
         }
     }
 
