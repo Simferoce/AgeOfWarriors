@@ -8,6 +8,7 @@ namespace Game.UI.Windows
     public class UITechnologySelectionTree : MonoBehaviour
     {
         [SerializeField] private Image image;
+        [SerializeField] private Image background;
 
         public event System.Action<UITechnologySelectionTree> OnSelect;
 
@@ -25,13 +26,13 @@ namespace Game.UI.Windows
 
         public void Select()
         {
-            image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.White);
+            background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red);
             OnSelect?.Invoke(this);
         }
 
         public void Deselect()
         {
-            image.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Gray);
+            background.color = WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red) * WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Gray);
         }
     }
 }

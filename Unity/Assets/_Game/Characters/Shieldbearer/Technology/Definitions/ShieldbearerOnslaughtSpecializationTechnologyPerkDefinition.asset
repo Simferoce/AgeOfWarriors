@@ -16,10 +16,10 @@ MonoBehaviour:
   title: 
   icon: {fileID: 0}
   description:
-    text: 
+    text: The onlaught is a unit that focuses on dealing maximum damage continuously.
     parameters: []
   prefab: {fileID: 5307242761281629144, guid: de82dbfed108b2a44bd52829c65d842c, type: 3}
-  technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}
+  technologyTreeIcon: {fileID: 21300000, guid: 4f4a54cd9887a3748b95b499d3b7193e, type: 3}
   requirements: []
   references:
     version: 2

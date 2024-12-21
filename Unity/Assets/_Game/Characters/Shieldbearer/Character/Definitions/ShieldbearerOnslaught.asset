@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ShieldbearerOnslaught
   m_EditorClassIdentifier: 
   id: 3ddf776ed1310c04f9b4c5200636d2a3
-  icon: {fileID: 750281812, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  icon: {fileID: 21300000, guid: 6f705d4655db19241a1b38296a878c95, type: 3}
   title: Shieldbearer - Onslaught
+  baseDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   productionDuration: 2
   cost: 15
-  baseDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
   reach: 0.5
   speed: 0.5
   attackSpeed: 2

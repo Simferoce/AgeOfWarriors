@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: ArcherLongbow
   m_EditorClassIdentifier: 
   id: 2a683f36d1e23b348a11b9d7031ddcc0
-  icon: {fileID: -1104553669, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  icon: {fileID: 21300000, guid: 8f60cba38fb4d3b4a94da0e2e663bbdb, type: 3}
   title: Archer - Longbow
+  baseDefinition: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   productionDuration: 2
   cost: 10
-  baseDefinition: {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   reach: 2.5
   speed: 0.5
   attackSpeed: 0.5
