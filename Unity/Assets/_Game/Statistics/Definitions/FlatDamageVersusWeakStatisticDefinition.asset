@@ -17,11 +17,9 @@ MonoBehaviour:
   humanReadableId: flat_damage_versus_weak
   title: Flat Damage Versus Weak
   color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
-  format: 
   data:
   - rid: 3390488728189272066
   - rid: 3390488728189272067
-  - rid: 3390488728189272145
   references:
     version: 2
     RefIds:
@@ -33,7 +31,3 @@ MonoBehaviour:
       type: {class: OperatorStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         statisticOperator: 0
-    - rid: 3390488728189272145
-      type: {class: AttackTargetStateContextStatisticDefinitionData, ns: Game.Statistics, asm: Assembly-CSharp}
-      data:
-        definition: {fileID: 11400000, guid: 99b7bdd6d7ee1eb4cb17ac49f054804e, type: 2}

@@ -81,7 +81,7 @@ MonoBehaviour:
     - rid: 3390488678730301531
       type: {class: ApplyModifierModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        definition: {fileID: 11400000, guid: f09fa3f328abbec4f9aa572d7629f673, type: 2}
+        definition: {fileID: 11400000, guid: 6dd814238a1a0e84e8ec65286e904a22, type: 2}
         targets:
         - rid: 3390488678730301532
         parameterFactories:
@@ -105,4 +105,4 @@ MonoBehaviour:
     - rid: 6209823047454556171
       type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        value: 10
+        value: 5

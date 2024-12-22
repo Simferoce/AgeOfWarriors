@@ -42,6 +42,7 @@ namespace Game.Character
         public bool IsStaggered => this[StatisticDefinitionRegistry.Instance.Stagger];
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
+        public bool IsWeak => this[StatisticDefinitionRegistry.Instance.Weak];
 
         private StateMachine stateMachine = new StateMachine();
         private ModifierHandler modifierHandler;
@@ -71,16 +72,20 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("health", StatisticDefinitionRegistry.Instance.Health, definition.MaxHealth));
             StatisticRepository.Add(new StatisticFloat("max_health", StatisticDefinitionRegistry.Instance.MaxHealth, definition.MaxHealth, (float baseValue) => baseValue + this[StatisticDefinitionRegistry.Instance.FlatMaxHealth]));
             StatisticRepository.Add(new StatisticFloat("defense", StatisticDefinitionRegistry.Instance.Defense, definition.Defense, (float baseValue) => baseValue + this[StatisticDefinitionRegistry.Instance.FlatDefense]));
-            StatisticRepository.Add(new StatisticFloat("attack_power", StatisticDefinitionRegistry.Instance.AttackPower, definition.AttackPower));
+            StatisticRepository.Add(new StatisticFloat("attack_power", StatisticDefinitionRegistry.Instance.AttackPower, definition.AttackPower, (float baseValue) => baseValue + this[StatisticDefinitionRegistry.Instance.FlatAttackPower]));
             StatisticRepository.Add(new StatisticFloat("attack_speed", StatisticDefinitionRegistry.Instance.AttackSpeed, definition.AttackSpeed, (float baseValue) => baseValue * this[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
             StatisticRepository.Add(new StatisticFloat("multiplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
             StatisticRepository.Add(new StatisticFloat("speed", StatisticDefinitionRegistry.Instance.Speed, definition.Speed));
             StatisticRepository.Add(new StatisticFloat("reach", StatisticDefinitionRegistry.Instance.Reach, definition.Reach));
             StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]));
-            StatisticRepository.Add(new StatisticBool("stagger", StatisticDefinitionRegistry.Instance.Stagger, false, (bool baseValue) => modifierHandler[StatisticDefinitionRegistry.Instance.Stagger]));
+            StatisticRepository.Add(new StatisticBool("stagger", StatisticDefinitionRegistry.Instance.Stagger, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Stagger]));
             StatisticRepository.Add(new StatisticFloat("ranged_damage_taken", StatisticDefinitionRegistry.Instance.RangeDamageTaken, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.RangeDamageTaken]));
             StatisticRepository.Add(new StatisticFloat("flat_max_health", StatisticDefinitionRegistry.Instance.FlatMaxHealth, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatMaxHealth]));
             StatisticRepository.Add(new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierDamage]));
+            StatisticRepository.Add(new StatisticFloat("flat_attack_power", StatisticDefinitionRegistry.Instance.FlatAttackPower, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatAttackPower]));
+            StatisticRepository.Add(new StatisticFloat("flat_damage_versus_weak", StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak]));
+            StatisticRepository.Add(new StatisticBool("weak", StatisticDefinitionRegistry.Instance.Weak, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Weak]));
+
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));
         }

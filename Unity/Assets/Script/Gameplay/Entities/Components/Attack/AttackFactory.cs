@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Game.Statistics;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -45,6 +46,9 @@ namespace Game.Components
             float leach = 0f,
             AttackData.Flag flags = AttackData.Flag.None)
         {
+            if (target != null && target.Entity[StatisticDefinitionRegistry.Instance.Weak])
+                damage += Entity.StatisticRepository.TryGet<float>(StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak, out Statistic<float> flatDamageVersusWeak) ? flatDamageVersusWeak : 0f;
+
             AttackData attackData = new AttackData(damage, armorPenetration, leach, flags, this);
             NotifyGenerateAttack(attackData);
             return attackData;

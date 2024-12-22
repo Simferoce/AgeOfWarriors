@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Increase Max Health
   icon: {fileID: 0}
   description:
-    text: Increase Defense by {0}.
+    text: Increase Max Health by {0}.
     parameters:
     - rid: 3390488678730301526
   prefab: {fileID: 5260313248293485178, guid: 56815ad208ee62946b8f7060c947b5b8, type: 3}

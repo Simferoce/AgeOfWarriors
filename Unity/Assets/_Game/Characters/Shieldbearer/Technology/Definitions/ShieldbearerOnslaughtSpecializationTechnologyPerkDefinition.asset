@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShieldbearerOnslaughtSpecializationTechnologyPerkDefinition
   m_EditorClassIdentifier: 
   id: 33f8086ad58aa13479fc4acc1cd7c004
-  title: 
+  title: Shieldbearer - Onslaught
   icon: {fileID: 0}
   description:
     text: The onlaught is a unit that focuses on dealing maximum damage continuously.

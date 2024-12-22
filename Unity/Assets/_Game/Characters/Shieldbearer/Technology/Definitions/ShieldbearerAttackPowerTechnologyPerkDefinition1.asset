@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: ShieldbearerAttackPowerTechnologyPerkDefinition1
   m_EditorClassIdentifier: 
   id: 563ef313d5698ce41b8b9bbd2ffc351f
-  title: Increase Attack Speed
+  title: Increase Attack Power
   icon: {fileID: 0}
   description:
-    text: Increase Attack Speed by {0}.
+    text: Increase Attack Power by {0}.
     parameters:
     - rid: 3390488678730301542
   prefab: {fileID: 2069518400063579166, guid: 6e01ed76c8b89644f88aa71987ce0e53, type: 3}
@@ -25,8 +25,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 3390488678730301542
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
-        name: attack_speed
-        overrideDefinitionDescriptor: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+        name: attack_power
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 730b30fdee20e634e807921bd2ff378f, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

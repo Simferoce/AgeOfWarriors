@@ -236,7 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterDefinition: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
   cheatCost: 1
-  maxCharacter: 3
+  maxCharacter: 1
   technologyGainMultiplier: 0
   factorySpeed: 10
   unrestrictedTechnology: 1
@@ -1588,7 +1588,7 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 60c536792737d9e4f836dc60987db4c4, type: 2}
+      objectReference: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[2]'
       value: 

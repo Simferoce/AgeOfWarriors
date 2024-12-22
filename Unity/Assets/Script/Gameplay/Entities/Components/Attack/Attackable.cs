@@ -60,7 +60,6 @@ namespace Game.Components
             //bool canResistDeath = Entity.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ResistKillingBlowPerk.Modifier modifier && modifier.CanResistsKillingBlow());
 
             float damage = attack.Damage;
-
             if (attack.Flags.HasFlag(AttackData.Flag.Empowered))
                 damage *= 1.5f;
 

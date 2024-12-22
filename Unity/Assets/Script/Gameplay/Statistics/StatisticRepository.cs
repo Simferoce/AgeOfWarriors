@@ -10,7 +10,7 @@ namespace Game.Statistics
     {
         [SerializeReference, SubclassSelector] private List<Statistic> statistics = new List<Statistic>();
 
-        public Statistic this[StatisticDefinition definition] => TryGet(definition, out Statistic statistic) ? statistic : throw new System.Exception($"Statistic with definition \"{definition}\" not found in {this}.");
+        public Statistic this[StatisticDefinition definition] => TryGet(definition, out Statistic statistic) ? statistic : throw new System.Exception($"Statistic with definition \"{definition}\" not found in {this.Owner}.");
 
         public object Owner { get; private set; }
 

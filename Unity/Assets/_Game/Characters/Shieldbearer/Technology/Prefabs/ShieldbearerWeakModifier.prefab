@@ -62,6 +62,7 @@ MonoBehaviour:
     statistics:
     - rid: 6209823347015942232
     - rid: 6209823347015942235
+    - rid: 6209823370988224613
   visibleByDefault: 1
   behaviours:
   - rid: 3390488702146314317
@@ -100,3 +101,14 @@ MonoBehaviour:
       type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: duration
+    - rid: 6209823370988224613
+      type: {class: StatisticBool, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: weak
+        definition: {fileID: 11400000, guid: 99b7bdd6d7ee1eb4cb17ac49f054804e, type: 2}
+        baseValue:
+          rid: 6209823370988224614
+    - rid: 6209823370988224614
+      type: {class: SerializeValueBool, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShieldbearerLeaderSpecializationTechnologyPerkDefinition
   m_EditorClassIdentifier: 
   id: 7c91a1d552a24304bae64b56b4ab9a64
-  title: 
+  title: Shieldbearer - Leader
   icon: {fileID: 0}
   description:
     text: The leader is a unity that specialize in defense and supporting its allies.

@@ -13,23 +13,12 @@ MonoBehaviour:
   m_Name: ShieldbearerMaxHealthModifierDefinition1
   m_EditorClassIdentifier: 
   id: 0fdf1442c4ff94a42b3723dc94663e5c
-  title: Increase Defense
+  title: 
   icon: {fileID: 0}
   description:
-    text: Increase Max Health by {0}.
-    parameters:
-    - rid: 3390488678730301525
+    text: 
+    parameters: []
   prefab: {fileID: 45420741193819176, guid: b48ef0a5790682349ae8e515d5897f37, type: 3}
   references:
     version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 3390488678730301525
-      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
-      data:
-        name: max_health
-        overrideDefinitionDescriptor: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
-        asPercentage: 0
-        adjustment:
-          rid: -2
+    RefIds: []

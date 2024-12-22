@@ -1,5 +1,6 @@
 ﻿using Game.Agent;
 using Game.Components;
+using Game.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +34,8 @@ namespace Game.Ability
 
             foreach (AbilityCondition condition in conditions)
                 condition.Initialize(this);
+
+            StatisticRepository.Add(new StatisticFloat("flat_damage_versus_weak", StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak, 0f, (float baseValue) => baseValue + caster.Entity[StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak]));
         }
 
         public abstract void Dispose();
