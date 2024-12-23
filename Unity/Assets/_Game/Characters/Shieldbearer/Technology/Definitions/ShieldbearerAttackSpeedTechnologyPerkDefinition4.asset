@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Increase Attack Speed
   icon: {fileID: 0}
   description:
-    text: Increase Attack Speed by {0}.
+    text: Increase attack speed by {0}.
     parameters:
     - rid: 3390488678730301542
   prefab: {fileID: 2069518400063579166, guid: 09458d15de309284db4cecdc3e7cff25, type: 3}

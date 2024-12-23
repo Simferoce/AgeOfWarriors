@@ -14,7 +14,7 @@ namespace Game.Technology
 
         public override bool Execute(TechnologyPerkDefinition technologyPerkDefinition, TechnologyTree technologyTree)
         {
-            return technologyTree.GetStatus(technologyPerkDefinition) is TechnologyPerkStatusUnlocked;
+            return technologyTree.GetStatus(this.technologyPerkDefinition) is TechnologyPerkStatusUnlocked;
         }
 
         public override string Format(TechnologyPerkDefinition technologyPerkDefinition, TechnologyTree technologyTree)

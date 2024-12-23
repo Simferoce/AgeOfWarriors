@@ -1,5 +1,6 @@
 ﻿using Game.Character;
 using Game.Statistics;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -14,9 +15,9 @@ namespace Game.UI.Windows
 
         public void Refresh(CharacterEntity character)
         {
-            float baseValue = character[definition].GetBase<float>();
-            float total = character[definition].Get<float>();
-            float difference = total - baseValue;
+            float baseValue = (float)Math.Round((double)character[definition].GetBase<float>(), 2);
+            float total = (float)Math.Round((double)character[definition].Get<float>(), 2);
+            float difference = (float)Math.Round((double)(total - baseValue), 2);
 
             label.text = definition.Title;
             value.text = total.ToString() + definition.TextIcon;

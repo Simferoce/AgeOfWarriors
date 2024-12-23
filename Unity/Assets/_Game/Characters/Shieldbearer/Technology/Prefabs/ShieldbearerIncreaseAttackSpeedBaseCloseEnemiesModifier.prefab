@@ -108,20 +108,20 @@ MonoBehaviour:
       type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         name: attack_speed
-        definition: {fileID: 11400000, guid: fa8583d556561fe45a879e4a24677d2f, type: 2}
+        definition: {fileID: 11400000, guid: c10d7758c1ee1c246b53ca08cc78f42c, type: 2}
         baseValue:
-          rid: 6209823047454556308
-    - rid: 6209823047454556308
-      type: {class: ExponentValue, ns: Game.Statistics, asm: Assembly-CSharp}
+          rid: 6209823394278146144
+    - rid: 6209823394278146144
+      type: {class: MultiplyValue, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         a:
-          rid: 6209823047454556309
+          rid: 6209823394278146145
         b:
-          rid: 6209823047454556310
-    - rid: 6209823047454556309
+          rid: 6209823394278146146
+    - rid: 6209823394278146145
       type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: attack_speed
-    - rid: 6209823047454556310
+    - rid: 6209823394278146146
       type: {class: ModifierStackValue, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 

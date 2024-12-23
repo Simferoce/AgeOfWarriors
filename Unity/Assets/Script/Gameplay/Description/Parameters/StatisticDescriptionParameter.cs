@@ -21,6 +21,7 @@ namespace Game
                 if (adjustment != null)
                     value = adjustment.Adjust(value);
 
+                value = (float)Math.Round(value, 2);
                 string formattedValue = asPercentage ? value.ToString("0.0%") : value.ToString();
 
                 if (statistic.TryGetDescription(out string description))

@@ -61,7 +61,7 @@ MonoBehaviour:
   statisticRepository:
     statistics:
     - rid: 6209823047454556342
-  visibleByDefault: 1
+  visibleByDefault: 0
   behaviours:
   - rid: 6209823047454556344
   references:
@@ -77,7 +77,7 @@ MonoBehaviour:
     - rid: 6209823047454556343
       type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        value: 0.333
+        value: 0.1
     - rid: 6209823047454556344
       type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:

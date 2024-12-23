@@ -10,7 +10,7 @@ namespace Game.Modifier
     public class RadiusModifierTarget : ModifierTarget
     {
         [SerializeReference, SubclassSelector] private ModifierTarget center;
-        [SerializeReference, SubclassSelector] private TargetEnemyModifierTargetFilter filter;
+        [SerializeReference, SubclassSelector] private ModifierTargetFilter filter;
         [SerializeField] private StatisticReference<float> range;
 
         public override void Initialize(ModifierEntity modifier)

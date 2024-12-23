@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Increase Attack Power
   icon: {fileID: 0}
   description:
-    text: Increase Attack Power by {0}.
+    text: Increase attack power by {0}.
     parameters:
     - rid: 3390488678730301536
   prefab: {fileID: 6623136301625411671, guid: 9dd6a37017241da4299ddbe502c8b155, type: 3}

@@ -16,7 +16,7 @@ MonoBehaviour:
   title: Increase Defense
   icon: {fileID: 0}
   description:
-    text: Increase Defense by {0}.
+    text: Increase defense by {0}.
     parameters:
     - rid: 3390488678730301526
   prefab: {fileID: 5260313248293485178, guid: 8fc5e83858e575f46b36ed6d4348f14b, type: 3}
@@ -25,8 +25,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 3390488678730301526
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
         name: defense
         overrideDefinitionDescriptor: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

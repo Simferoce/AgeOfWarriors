@@ -71,7 +71,7 @@ MonoBehaviour:
     - rid: 6209823047454556388
       type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        name: flat_defense
+        name: defense
         definition: {fileID: 11400000, guid: 3286899521c922344bf7cbb75aa08c05, type: 2}
         baseValue:
           rid: 6209823047454556390

@@ -63,14 +63,12 @@ MonoBehaviour:
     - rid: 6209823047454556367
     - rid: 6209823047454556370
     - rid: 6209823047454556385
-  visibleByDefault: 1
+  visibleByDefault: 0
   behaviours:
   - rid: 6209823047454556377
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 6209823047454556367
       type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
@@ -118,7 +116,7 @@ MonoBehaviour:
         center:
           rid: 6209823047454556382
         filter:
-          rid: -2
+          rid: 6209823394278146165
         range:
           name: range
     - rid: 6209823047454556382
@@ -147,3 +145,6 @@ MonoBehaviour:
       type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: duration
+    - rid: 6209823394278146165
+      type: {class: TargetAllyModifierTargetFilter, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 

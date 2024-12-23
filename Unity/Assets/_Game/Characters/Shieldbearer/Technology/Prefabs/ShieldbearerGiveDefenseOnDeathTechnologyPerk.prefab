@@ -63,7 +63,7 @@ MonoBehaviour:
     - rid: 6209823047454556356
     - rid: 6209823047454556358
     - rid: 6209823047454556373
-  visibleByDefault: 1
+  visibleByDefault: 0
   behaviours:
   - rid: 6209823047454556360
   references:
@@ -111,6 +111,7 @@ MonoBehaviour:
         parameterFactories:
         - rid: 6209823047454556365
         - rid: 6209823047454556366
+        - rid: 6209823394278146211
     - rid: 6209823047454556364
       type: {class: TriggerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 
@@ -137,3 +138,9 @@ MonoBehaviour:
       type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
         value: 5
+    - rid: 6209823394278146211
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+        value:
+          name: duration

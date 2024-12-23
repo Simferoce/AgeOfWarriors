@@ -14,11 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 5e12841170cf0ec488e6a83f1372f933
   title: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 0355a8dc764b37747a5f5f306652e0bb, type: 3}
   description:
-    text: 
-    parameters: []
+    text: Increase defense by {0}.
+    parameters:
+    - rid: 6209823394278146166
   prefab: {fileID: 8201163191751895834, guid: 0c6e97e432a59b949893e1ae00181658, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823394278146166
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: defense
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 3286899521c922344bf7cbb75aa08c05, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

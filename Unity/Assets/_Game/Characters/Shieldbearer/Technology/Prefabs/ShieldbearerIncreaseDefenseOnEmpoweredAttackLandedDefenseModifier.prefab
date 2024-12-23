@@ -65,6 +65,7 @@ MonoBehaviour:
   visibleByDefault: 1
   behaviours:
   - rid: 6209823047454556340
+  - rid: 6209823394278146051
   references:
     version: 2
     RefIds:
@@ -95,3 +96,7 @@ MonoBehaviour:
       data:
         duration:
           name: duration
+    - rid: 6209823394278146051
+      type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        type: 2

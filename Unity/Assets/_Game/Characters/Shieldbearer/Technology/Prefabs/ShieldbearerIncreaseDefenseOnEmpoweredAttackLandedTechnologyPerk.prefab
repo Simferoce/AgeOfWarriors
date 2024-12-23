@@ -62,7 +62,7 @@ MonoBehaviour:
     statistics:
     - rid: 6209823047454556311
     - rid: 6209823047454556313
-  visibleByDefault: 1
+  visibleByDefault: 0
   behaviours:
   - rid: 6209823047454556315
   references:

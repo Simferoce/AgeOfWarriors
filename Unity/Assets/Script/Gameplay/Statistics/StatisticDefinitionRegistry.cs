@@ -15,6 +15,7 @@ namespace Game.Statistics
         public StatisticDefinition AttackPower => statisticDefinitions["attack_power"];
         public StatisticDefinition FlatAttackPower => statisticDefinitions["flat_attack_power"];
         public StatisticDefinition AttackSpeed => statisticDefinitions["attack_speed"];
+        public StatisticDefinition PercentageAttackSpeed => statisticDefinitions["percentage_attack_speed"];
         public StatisticDefinition MultiplierAttackSpeed => statisticDefinitions["multiplier_attack_speed"];
         public StatisticDefinition Speed => statisticDefinitions["speed"];
         public StatisticDefinition Reach => statisticDefinitions["reach"];
