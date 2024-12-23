@@ -100,4 +100,19 @@ namespace Game.Statistics
         {
         }
     }
+
+    [Serializable]
+    public class StatisticEntity : Statistic<Entity>
+    {
+        public StatisticEntity() : base("", null, null, null)
+        {
+        }
+        public StatisticEntity(string name, StatisticDefinition definition, Entity baseValue, Func<Entity, Entity> equation = null) : base(name, definition, null, equation)
+        {
+        }
+
+        public StatisticEntity(string name, StatisticDefinition definition, Value baseValue, Func<Entity, Entity> equation = null) : base(name, definition, baseValue, equation)
+        {
+        }
+    }
 }

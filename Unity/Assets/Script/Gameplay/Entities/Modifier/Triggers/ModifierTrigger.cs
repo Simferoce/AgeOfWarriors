@@ -15,6 +15,11 @@ namespace Game.Modifier
             this.modifier = modifier;
         }
 
+        public virtual void Update()
+        {
+
+        }
+
         protected void Trigger()
         {
             OnTrigger?.Invoke(this);

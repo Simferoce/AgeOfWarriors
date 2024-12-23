@@ -24,6 +24,11 @@ namespace Game.Statistics
         {
             return entity.GetCachedComponent<StatisticRepository>().Get(name);
         }
+
+        public bool IsSet()
+        {
+            return !string.IsNullOrEmpty(name);
+        }
     }
 
     [Serializable]

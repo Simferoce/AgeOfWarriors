@@ -33,4 +33,10 @@ namespace Game.Modifier
     {
 
     }
+
+    [Serializable]
+    public class StatisticEntityModifierParameterFactory : StatisticModifierParameterFactory<Entity>
+    {
+
+    }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Statistics;
+using System;
 using UnityEngine;
 
 namespace Game.Modifier
@@ -6,8 +7,8 @@ namespace Game.Modifier
     [Serializable]
     public class StackModifierBehaviour : ModifierBehaviour, IModifierStack
     {
-        [SerializeField]
-        private int startingStack = 1;
+        [SerializeField] private int startingStack = 1;
+        [SerializeField] private StatisticReference maximum;
 
         private float currentStack = 0;
 
@@ -20,11 +21,13 @@ namespace Game.Modifier
         {
             base.Initialize(modifier);
             currentStack = startingStack;
+            maximum.Initialize(modifier);
         }
 
         public override void Refresh()
         {
-            IncreaseStack();
+            if (!maximum.IsSet() || maximum.GetOrThrow() > CurrentStack)
+                IncreaseStack();
         }
 
         public void Clear()

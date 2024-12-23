@@ -24,6 +24,14 @@ namespace Game.Modifier
                 effect.Initialize(modifier);
         }
 
+        public override Result Update()
+        {
+            foreach (ModifierTrigger trigger in triggers)
+                trigger.Update();
+
+            return base.Update();
+        }
+
         public override void Dispose()
         {
             base.Dispose();

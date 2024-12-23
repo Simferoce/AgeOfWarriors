@@ -10,6 +10,12 @@ namespace Game.Ability
         [SerializeField] private StatisticDefinition casterDefinition;
         [SerializeField, Range(0, 10)] private float ratio;
 
+        public override bool TryGetDescription(out string description)
+        {
+            description = $"<color=#{casterDefinition.ColorHex}>{ratio:0.0%}{casterDefinition.TextIcon}</color>";
+            return true;
+        }
+
         public override float GetValue()
         {
             if (owner.Owner is not AbilityEntity ability)
