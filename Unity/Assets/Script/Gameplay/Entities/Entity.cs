@@ -33,6 +33,9 @@ namespace Game
         public delegate void OnDestroyDelegate(Entity entity);
         public event OnDestroyDelegate OnDeactivated;
 
+        public delegate void OnDescendantAddedDelegate(Entity entity);
+        public event OnDescendantAddedDelegate OnDescendantAdded;
+
         public Entity Parent
         {
             get
@@ -42,13 +45,19 @@ namespace Game
             set
             {
                 if (parent != null)
+                {
+                    this.OnDescendantAdded -= parent.OnDescendantAdded;
                     parent.children.Remove(this);
+                }
 
                 OnParentChanged?.Invoke(this, parent, value);
                 parent = value;
-
                 if (parent != null)
+                {
+                    this.OnDescendantAdded += parent.OnDescendantAdded;
+                    parent.OnDescendantAdded?.Invoke(this);
                     parent.children.Add(this);
+                }
             }
         }
         public IReadOnlyList<Entity> Children => children;

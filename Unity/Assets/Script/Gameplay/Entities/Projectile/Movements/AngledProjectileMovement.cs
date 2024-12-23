@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Projectile
@@ -8,11 +9,13 @@ namespace Game.Projectile
     {
         [SerializeField] private float angle;
 
-        public float Angle { get => angle; set => angle = value; }
-
         public override void Initialize(ProjectileEntity projectile)
         {
             base.Initialize(projectile);
+
+            ProjectileParameter<float> projectileParameter = projectile.Parameters.FirstOrDefault(x => x.Name == "angle") as ProjectileParameter<float>;
+            if (projectileParameter != null)
+                angle = projectileParameter.GetValue();
 
             SolveForVelocity(projectile.transform.position, projectile.Target.TargetPosition, Physics2D.gravity.y * projectile.Rigidbody.gravityScale, angle, out Vector3 velocity);
 

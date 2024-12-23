@@ -34,6 +34,10 @@ namespace Game.Projectile
             if (processedEntities.Contains(target.Entity))
                 return;
 
+            ProjectileParameter<Target> projectileParameter = projectile.Parameters.FirstOrDefault(x => x.Name == "ignore") as ProjectileParameter<Target>;
+            if (projectileParameter != null && projectileParameter.GetValue() == target)
+                return;
+
             if (filter is IImpactProjectileTargetFilter impactImpactTargetFilter && !impactImpactTargetFilter.Execute(collider, target))
                 return;
 

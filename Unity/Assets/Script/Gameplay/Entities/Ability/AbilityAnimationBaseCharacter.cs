@@ -21,6 +21,7 @@ namespace Game.Ability
 
         public override List<Target> Targets => (conditions.FirstOrDefault(x => x is HasTargetAbilityCondition) as HasTargetAbilityCondition)?.Targets ?? base.Targets;
         public bool IsLingering { get; set; } = false;
+        public List<AbilityEffect> Effects { get => effects; set => effects = value; }
 
         private Animated animated;
         private bool applied = false;
@@ -65,7 +66,11 @@ namespace Game.Ability
         public override void Tick()
         {
             base.Tick();
-            animated.SetSpeed(Caster.Entity[StatisticDefinitionRegistry.Instance.AttackSpeed] * animated.GetCurrentAnimationClipLength());
+
+            float timeBetweenAttacks = 1 / Caster.Entity[StatisticDefinitionRegistry.Instance.AttackSpeed];
+            float animationDuration = animated.GetCurrentAnimationClipLength();
+            float speed = animationDuration / timeBetweenAttacks;
+            animated.SetSpeed(Mathf.Clamp(speed, 1, float.MaxValue));
 
             if (applied == false)
                 return;

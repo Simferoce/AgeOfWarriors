@@ -8,6 +8,8 @@
         {
             Name = name;
         }
+
+        public abstract ProjectileParameter Clone();
     }
 
     public class ProjectileParameter<T> : ProjectileParameter
@@ -27,6 +29,11 @@
         public T GetValue()
         {
             return value;
+        }
+
+        public override ProjectileParameter Clone()
+        {
+            return new ProjectileParameter<T>(this.Name, value);
         }
     }
 }

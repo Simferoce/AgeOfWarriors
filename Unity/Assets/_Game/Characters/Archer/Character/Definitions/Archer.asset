@@ -20,7 +20,7 @@ MonoBehaviour:
   cost: 10
   reach: 2
   speed: 0.5
-  attackSpeed: 0.5
+  attackSpeed: 1
   attackPower: 10
   maxHealth: 100
   defense: 5

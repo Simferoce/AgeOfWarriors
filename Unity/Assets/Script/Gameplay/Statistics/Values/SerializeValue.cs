@@ -6,15 +6,22 @@ namespace Game.Statistics
     [Serializable]
     public class SerializeValueFloat : SerializeValue<float>
     {
-        public SerializeValueFloat(float value) : base(value)
+        public SerializeValueFloat()
         {
         }
 
+        public SerializeValueFloat(float value) : base(value)
+        {
+        }
     }
 
     [Serializable]
     public class SerializeValueBool : SerializeValue<bool>
     {
+        public SerializeValueBool()
+        {
+        }
+
         public SerializeValueBool(bool value) : base(value)
         {
         }
@@ -23,6 +30,10 @@ namespace Game.Statistics
     [Serializable]
     public class SerializeValueInteger : SerializeValue<int>
     {
+        public SerializeValueInteger()
+        {
+        }
+
         public SerializeValueInteger(int value) : base(value)
         {
         }
@@ -34,6 +45,11 @@ namespace Game.Statistics
         [SerializeField] private T value;
 
         public T Value { get => value; set => this.value = value; }
+
+        public SerializeValue()
+        {
+            value = default;
+        }
 
         public SerializeValue(T value)
         {

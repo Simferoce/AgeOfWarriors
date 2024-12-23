@@ -14,6 +14,8 @@ namespace Game.Ability
         [SerializeReference, SubclassSelector] private ProjectileAbilityEffectOrigin origin;
         [SerializeReference, SubclassSelector] private List<ProjectileParameterFactory> parameters;
 
+        public event System.Action<ProjectileEntity> OnProjectileCreated;
+
         public override void Initialize(AbilityEntity ability)
         {
             base.Initialize(ability);
@@ -29,6 +31,8 @@ namespace Game.Ability
 
             float direction = Ability.Caster.Entity.GetCachedComponent<AgentIdentity>().Direction;
             projectile.Initialize(Ability, Ability.Targets[0], Ability.Faction, parameters.Select(x => x.Create(Ability)).Append(new ProjectileParameter<float>("direction", direction)).ToArray());
+
+            OnProjectileCreated?.Invoke(projectile);
         }
     }
 }

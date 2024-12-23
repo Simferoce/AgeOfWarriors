@@ -23,7 +23,8 @@ namespace Game.Projectile
             if (!entity.TryGetCachedComponent<Attackable>(out Attackable attackable))
                 return;
 
-            float damageValue = (damage?.Get()?.Get<float>() ?? 0f) * projectile[StatisticDefinitionRegistry.Instance.MultiplierDamage];
+
+            float damageValue = (damage?.Get()?.Get<float>() ?? 0f) * (projectile.StatisticRepository.TryGet(StatisticDefinitionRegistry.Instance.MultiplierDamage, out Statistic statistic) ? statistic.Get<float>() : 1f);
 
             AttackFactory attackFactory = projectile.GetCachedComponent<AttackFactory>();
             AttackData attack = attackFactory.Generate(

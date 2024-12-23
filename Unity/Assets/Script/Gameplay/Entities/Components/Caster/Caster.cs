@@ -15,6 +15,7 @@ namespace Game.Components
         public Entity Entity { get; set; }
 
         public event Action<AbilityEntity> OnAbilityUsed;
+        public event Action OnAbilityInitialized;
         public event Action OnCastBegin;
         public event Action OnCastEnd;
 
@@ -22,6 +23,7 @@ namespace Game.Components
         public float LastAbilityUsed { get; set; }
         public List<TransformTag> TransformTags { get; set; }
         public bool IsCasting { get; set; }
+
 
         private List<AbilityEntity> abilities = new List<AbilityEntity>();
 
@@ -45,6 +47,8 @@ namespace Game.Components
 
                 abilities.Add(ability);
             }
+
+            OnAbilityInitialized?.Invoke();
         }
 
         private void Ability_OnAbilityUsed(AbilityEntity ability)
