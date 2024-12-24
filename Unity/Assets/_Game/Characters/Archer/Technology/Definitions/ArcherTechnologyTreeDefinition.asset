@@ -44,7 +44,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8d0954081583cf242a52597fff1cbea4, type: 2}
     level: 10
   - nodes:
-    - {fileID: 11400000, guid: 8d0954081583cf242a52597fff1cbea4, type: 2}
+    - {fileID: 11400000, guid: c6f2a2d7dcc9e134281dc1fc3bd9074e, type: 2}
     - {fileID: 11400000, guid: 889216542590d08479a9e91c0eadf83a, type: 2}
     level: 15
   - nodes:

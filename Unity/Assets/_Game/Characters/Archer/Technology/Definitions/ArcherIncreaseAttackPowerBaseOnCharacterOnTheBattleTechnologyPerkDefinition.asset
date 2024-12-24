@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
+  m_Name: ArcherIncreaseAttackPowerBaseOnCharacterOnTheBattleTechnologyPerkDefinition
+  m_EditorClassIdentifier: 
+  id: c6f2a2d7dcc9e134281dc1fc3bd9074e
+  title: Strength In Number
+  icon: {fileID: 0}
+  description:
+    text: Increase attack power by {0} for each ally present on the battlefield.
+    parameters:
+    - rid: 6209823428713120450
+  prefab: {fileID: 3036985145265555826, guid: 1cbd480d4f3a9f34483a8c78cc75360f, type: 3}
+  technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}
+  requirements: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823428713120450
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: attack_power_per_stack
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 730b30fdee20e634e807921bd2ff378f, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
