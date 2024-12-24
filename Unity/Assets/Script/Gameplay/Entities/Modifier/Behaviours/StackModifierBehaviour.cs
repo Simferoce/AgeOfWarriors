@@ -26,8 +26,13 @@ namespace Game.Modifier
 
         public override void Refresh()
         {
-            if (!maximum.IsSet() || maximum.GetOrThrow() > CurrentStack)
+            if (!IsMaxed())
                 IncreaseStack();
+        }
+
+        public bool IsMaxed()
+        {
+            return maximum.IsSet() && maximum.GetOrThrow() <= CurrentStack;
         }
 
         public void Clear()

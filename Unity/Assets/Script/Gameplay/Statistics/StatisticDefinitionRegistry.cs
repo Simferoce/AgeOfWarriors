@@ -19,6 +19,7 @@ namespace Game.Statistics
         public StatisticDefinition MultiplierAttackSpeed => statisticDefinitions["multiplier_attack_speed"];
         public StatisticDefinition Speed => statisticDefinitions["speed"];
         public StatisticDefinition Reach => statisticDefinitions["reach"];
+        public StatisticDefinition Range => statisticDefinitions["range"];
         public StatisticDefinition Cooldown => statisticDefinitions["cooldown"];
         public StatisticDefinition Stagger => statisticDefinitions["stagger"];
         public StatisticDefinition Weak => statisticDefinitions["weak"];

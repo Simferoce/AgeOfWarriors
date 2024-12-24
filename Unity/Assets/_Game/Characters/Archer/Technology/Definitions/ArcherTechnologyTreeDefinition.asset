@@ -22,7 +22,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 8d0954081583cf242a52597fff1cbea4, type: 2}
     level: 0
   - nodes:
-    - {fileID: 11400000, guid: 8d0954081583cf242a52597fff1cbea4, type: 2}
+    - {fileID: 11400000, guid: a4d4c02c3ab0bf5429144204873a4f2c, type: 2}
     - {fileID: 11400000, guid: 8d0954081583cf242a52597fff1cbea4, type: 2}
     level: 0
   - nodes:

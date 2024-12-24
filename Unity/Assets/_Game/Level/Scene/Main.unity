@@ -239,7 +239,7 @@ MonoBehaviour:
   maxCharacter: 3
   technologyGainMultiplier: 0
   factorySpeed: 10
-  unrestrictedTechnology: 0
+  unrestrictedTechnology: 1
 --- !u!4 &97917530
 Transform:
   m_ObjectHideFlags: 0
