@@ -41,7 +41,7 @@ namespace Game.Statistics
     }
 
     [Serializable]
-    public abstract class Statistic<ReferenceType> : Statistic
+    public class Statistic<ReferenceType> : Statistic
     {
         protected Func<ReferenceType, ReferenceType> equation;
 

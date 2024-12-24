@@ -1,4 +1,5 @@
 ﻿using Game.Agent;
+using Game.Statistics;
 using System;
 
 namespace Game.Modifier
@@ -8,9 +9,9 @@ namespace Game.Modifier
     {
         public override bool Execute(Entity target)
         {
-            return modifier.Target.Entity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity selfIdentity)
+            return modifier.Target.Entity.StatisticRepository.TryGet("faction", out Statistic factionStatistic)
                 && target.TryGetCachedComponent<AgentIdentity>(out AgentIdentity targetIdentity)
-                && selfIdentity.Faction != targetIdentity.Faction;
+                && factionStatistic.Get<FactionType>() != targetIdentity.Faction;
         }
     }
 }

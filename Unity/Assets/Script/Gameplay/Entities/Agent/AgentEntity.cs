@@ -1,5 +1,6 @@
 ﻿using Game.Character;
 using Game.Modifier;
+using Game.Statistics;
 using Game.Technology;
 using UnityEngine;
 
@@ -40,6 +41,7 @@ namespace Game.Agent
             technology.Initialize(this);
             agentBehaviour.Initialize(this);
 
+            StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => Faction));
             base.Initialize();
         }
 

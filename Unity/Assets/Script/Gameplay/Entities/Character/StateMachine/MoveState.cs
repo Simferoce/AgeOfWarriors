@@ -22,7 +22,7 @@ namespace Game.Character
 
             protected override void InternalExit()
             {
-
+                character.rigidbody.linearVelocity = Vector2.zero;
             }
 
             protected override void InternalUpdate()

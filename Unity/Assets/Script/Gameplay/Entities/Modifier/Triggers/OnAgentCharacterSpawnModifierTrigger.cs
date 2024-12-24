@@ -11,12 +11,16 @@ namespace Game.Modifier
     public class OnAgentCharacterSpawnModifierTrigger : ModifierTrigger, IModifierTargetProvider
     {
         [SerializeField] private CharacterDefinition affected;
+        [SerializeReference, SubclassSelector] private ModifierTargetFilter modifierTargetFilter;
 
         private List<object> targets = new List<object>();
 
         public override void Initialize(ModifierEntity modifier)
         {
             base.Initialize(modifier);
+
+            if (modifierTargetFilter != null)
+                modifierTargetFilter.Initialize(modifier);
 
             Agent.AgentEntity agent = modifier.Target.Entity as Agent.AgentEntity;
             Assert.IsNotNull(agent, $"Expecting the type of the entity of {nameof(ModifierHandler)} to be of type {nameof(Agent)}");
@@ -31,7 +35,7 @@ namespace Game.Modifier
 
         private void AgentObjectSpawn(AgentIdentity agentIdentity)
         {
-            if (agentIdentity.Entity is CharacterEntity character && IsValid(character.GetDefinition()))
+            if (agentIdentity.Entity is CharacterEntity character && IsValid(character.GetDefinition()) && (modifierTargetFilter == null || modifierTargetFilter.Execute(character)))
             {
                 targets.Clear();
                 targets.Add(character);

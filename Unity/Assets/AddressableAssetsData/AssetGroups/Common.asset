@@ -141,6 +141,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Manager
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8df6dc8592651d341b60e493d7322dee
+    m_Address: Assets/_Game/Statistics/Definitions/MultiplierSpeedStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 98a7e08a8eb64464e80b5ca16af48196
     m_Address: Assets/_Game/UI/Window/InspectorCharacterWindow/Prefabs/InspectorCharacterWindow.prefab
     m_ReadOnly: 0

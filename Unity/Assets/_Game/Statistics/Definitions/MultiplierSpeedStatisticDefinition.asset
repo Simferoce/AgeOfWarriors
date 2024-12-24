@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
+  m_Name: MultiplierSpeedStatisticDefinition
+  m_EditorClassIdentifier: 
+  id: 8df6dc8592651d341b60e493d7322dee
+  icon: {fileID: -2678394577819576460, guid: 621ef731e92965243b21e4a9892cf089, type: 3}
+  humanReadableId: multiplier_speed
+  title: Multiplier Speed
+  color: {r: 0, g: 0.7490196, b: 0.31209156, a: 1}
+  data: []
+  references:
+    version: 2
+    RefIds: []

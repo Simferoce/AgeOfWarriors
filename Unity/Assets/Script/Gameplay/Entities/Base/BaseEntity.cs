@@ -1,6 +1,7 @@
 using Game.Agent;
 using Game.Components;
 using Game.EventChannel;
+using Game.Statistics;
 using System;
 using UnityEngine;
 
@@ -27,6 +28,7 @@ namespace Game
         {
             base.Awake();
             GetCachedComponent<Attackable>().OnDamageTaken += Base_OnDamageTaken;
+            StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => GetCachedComponent<AgentIdentity>().Faction));
         }
 
         private void Base_OnDamageTaken(AttackResult attackResult, Attackable attackable)
