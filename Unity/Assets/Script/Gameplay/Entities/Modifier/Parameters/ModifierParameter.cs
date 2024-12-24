@@ -12,6 +12,8 @@ namespace Game.Modifier
         }
 
         public abstract T GetValue<T>();
+
+        public abstract ModifierParameter Clone();
     }
 
     public class ModifierParameter<ReferenceType> : ModifierParameter
@@ -21,6 +23,11 @@ namespace Game.Modifier
         public ModifierParameter(string name, ReferenceType value) : base(name)
         {
             this.value = value;
+        }
+
+        public override ModifierParameter Clone()
+        {
+            return new ModifierParameter<ReferenceType>(Name, value);
         }
 
         public ReferenceType GetValue()

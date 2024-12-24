@@ -1,4 +1,5 @@
-﻿using Game.Statistics;
+﻿using Game.Character;
+using Game.Statistics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,7 +84,17 @@ namespace Game.Modifier
             if (uniqueType == UniqueType.BySource)
                 return TryGetModifier(definition, applier, out modifier);
 
+            if (uniqueType == UniqueType.ByCharacter)
+                return TryGetModifierByCharacter(definition, applier, out modifier);
+
             throw new NotImplementedException();
+        }
+
+        public bool TryGetModifierByCharacter(ModifierDefinition definition, ModifierApplier applier, out ModifierEntity modifier)
+        {
+            CharacterEntity characterEntity = applier.Entity.GetHierarchy().FirstOrDefault(x => x is CharacterEntity) as CharacterEntity;
+            modifier = modifiers.FirstOrDefault(x => x.Definition == definition && x.Applier.Entity.GetHierarchy().FirstOrDefault(x => x is CharacterEntity) == characterEntity);
+            return modifier != null;
         }
     }
 }

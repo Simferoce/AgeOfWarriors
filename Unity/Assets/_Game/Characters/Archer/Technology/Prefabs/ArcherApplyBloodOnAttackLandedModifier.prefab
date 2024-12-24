@@ -111,7 +111,7 @@ MonoBehaviour:
         triggers:
         - rid: 6209823407816311023
         effects:
-        - rid: 6209823407816311145
+        - rid: 6209823416208064584
     - rid: 6209823407816311023
       type: {class: OnAttackLandedModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
@@ -132,40 +132,39 @@ MonoBehaviour:
     - rid: 6209823407816311050
       type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 
-    - rid: 6209823407816311145
-      type: {class: ApplyBloodModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+    - rid: 6209823416208064584
+      type: {class: ApplyModifierModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         definition: {fileID: 11400000, guid: b70afe9c4eb269543b9b68541f59e206, type: 2}
         targets:
-        - rid: 6209823407816311146
+        - rid: 6209823416208064585
         parameterFactories:
-        - rid: 6209823407816311147
-        - rid: 6209823407816311148
-        - rid: 6209823407816311149
-        - rid: 6209823407816311150
-        spreadBloodPerk: {fileID: 11400000, guid: 2c550c17470fed4488089a6cdbbd2258, type: 2}
-    - rid: 6209823407816311146
+        - rid: 6209823416208064586
+        - rid: 6209823416208064587
+        - rid: 6209823416208064588
+        - rid: 6209823416208064589
+    - rid: 6209823416208064585
       type: {class: TriggerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
       data: 
-    - rid: 6209823407816311147
+    - rid: 6209823416208064586
       type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: attack_power_ratio
         value:
           name: attack_power_ratio
-    - rid: 6209823407816311148
+    - rid: 6209823416208064587
       type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: duration
         value:
           name: duration
-    - rid: 6209823407816311149
+    - rid: 6209823416208064588
       type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: maximum
         value:
           name: maximum
-    - rid: 6209823407816311150
+    - rid: 6209823416208064589
       type: {class: StatisticEntityModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
         name: source

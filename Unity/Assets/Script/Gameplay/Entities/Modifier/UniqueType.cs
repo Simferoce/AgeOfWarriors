@@ -4,6 +4,7 @@
     {
         None,
         ByDefinition,
-        BySource
+        BySource,
+        ByCharacter
     }
 }

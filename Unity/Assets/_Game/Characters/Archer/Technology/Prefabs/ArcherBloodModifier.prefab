@@ -105,7 +105,7 @@ MonoBehaviour:
     - rid: 6209823407816311007
       type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:
-        type: 2
+        type: 3
     - rid: 6209823407816311008
       type: {class: StackModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
       data:

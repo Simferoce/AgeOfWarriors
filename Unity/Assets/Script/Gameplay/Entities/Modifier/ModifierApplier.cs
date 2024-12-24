@@ -8,7 +8,9 @@ namespace Game.Modifier
     {
         public delegate void OnModifierRemovedDelegate(ModifierEntity modifier);
         public delegate void OnModifierAppliedDelegate(ModifierEntity modifier);
+        public delegate void OnChildModifierAppliedDelegate(ModifierEntity modifier);
         public event OnModifierAppliedDelegate OnModifierApplied;
+        public event OnChildModifierAppliedDelegate OnChildModifierApplied;
         public event OnModifierRemovedDelegate OnModifierRemoved;
 
         public Entity Entity { get; set; }
@@ -48,6 +50,16 @@ namespace Game.Modifier
             }
 
             OnModifierApplied?.Invoke(modifier);
+            NotifyApplied(Entity, modifier);
+        }
+
+        public void NotifyApplied(Entity entity, ModifierEntity modifier)
+        {
+            if (entity.TryGetCachedComponent<ModifierApplier>(out ModifierApplier modifierApplier))
+                modifierApplier.OnChildModifierApplied?.Invoke(modifier);
+
+            if (entity.Parent != null)
+                NotifyApplied(entity.Parent, modifier);
         }
 
         public void OnRemoved(ModifierEntity modifier)
