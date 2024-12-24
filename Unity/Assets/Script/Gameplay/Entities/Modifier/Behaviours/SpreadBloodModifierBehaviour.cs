@@ -45,9 +45,16 @@ namespace Game.Modifier
         private void Spread(Entity target)
         {
             bool madeNewApplication = false;
-            if ((target as Entity).GetCachedComponent<ModifierHandler>().TryGetUnique(definition, modifierApplier, out ModifierEntity modifier)
-                && (modifier.Behaviours.FirstOrDefault(x => x is StackModifierBehaviour) as StackModifierBehaviour).IsMaxed())
+            if ((target as Entity).GetCachedComponent<ModifierHandler>().TryGetUnique(definition, modifierApplier, out ModifierEntity modifier))
             {
+                StackModifierBehaviour stackModifierBehaviour = modifier.Behaviours.FirstOrDefault(x => x is StackModifierBehaviour) as StackModifierBehaviour;
+
+                if (!stackModifierBehaviour.IsMaxed())
+                    return;
+
+                if (stackModifierBehaviour.CurrentStack != stackModifierBehaviour.LastStack)
+                    return;
+
                 FactionType faction = modifier.Target.Entity.GetCachedComponent<AgentIdentity>().Faction;
 
                 foreach (Target potentialSpreadTarget in Target.All)
@@ -66,7 +73,6 @@ namespace Game.Modifier
                     {
                         modifierApplier.Apply(definition, potentialSpreadTarget.Entity.GetCachedComponent<ModifierHandler>(), potentialModifierEntity.Parameters.Select(x => x.Clone()).ToArray());
                     }
-
                     else if (!madeNewApplication)
                     {
                         madeNewApplication = true;

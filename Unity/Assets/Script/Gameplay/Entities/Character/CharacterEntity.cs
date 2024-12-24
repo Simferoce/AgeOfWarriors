@@ -86,6 +86,7 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("flat_attack_power", StatisticDefinitionRegistry.Instance.FlatAttackPower, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatAttackPower]));
             StatisticRepository.Add(new StatisticFloat("flat_damage_versus_weak", StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak]));
             StatisticRepository.Add(new StatisticBool("weak", StatisticDefinitionRegistry.Instance.Weak, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Weak]));
+            StatisticRepository.Add(new StatisticBool("dead", null, false, (bool baseValue) => baseValue || IsDead));
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

@@ -16,6 +16,7 @@ namespace Game.Modifier
         public event OnStackChangedDelegate OnStackChanged;
 
         public float CurrentStack { get => currentStack; set => currentStack = value; }
+        public float LastStack { get; set; } = -1;
 
         public override void Initialize(ModifierEntity modifier)
         {
@@ -26,6 +27,8 @@ namespace Game.Modifier
 
         public override void Refresh()
         {
+            LastStack = CurrentStack;
+
             if (!IsMaxed())
                 IncreaseStack();
         }
