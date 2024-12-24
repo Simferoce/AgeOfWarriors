@@ -8,6 +8,7 @@ using UnityEngine;
 namespace Game.Modifier
 {
     [Serializable]
+
     public class SpreadBloodModifierBehaviour : ModifierBehaviour
     {
         [SerializeField] private ModifierDefinition definition;
