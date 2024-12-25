@@ -1,4 +1,4 @@
-﻿using Game.Character;
+﻿using Game.Components;
 using Game.Statistics;
 using System;
 using UnityEngine;
@@ -18,10 +18,10 @@ namespace Game.Projectile
 
         public void Execute(Entity entity)
         {
-            if (!entity.TryGetCachedComponent<CharacterEntity>(out CharacterEntity character))
+            if (!entity.TryGetCachedComponent<IHealable>(out IHealable healable))
                 return;
 
-            character.Heal(heal.GetOrThrow().Get<float>());
+            healable.Heal(heal.GetOrThrow().Get<float>());
         }
     }
 }

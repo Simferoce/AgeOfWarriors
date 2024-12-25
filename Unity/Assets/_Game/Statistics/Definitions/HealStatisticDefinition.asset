@@ -16,9 +16,8 @@ MonoBehaviour:
   icon: {fileID: 3201737593864979608, guid: 073bf77206b8f9d45b8c3f38b1db57f9, type: 3}
   humanReadableId: heal
   title: Heal
-  color: {r: 1, g: 1, b: 1, a: 1}
-  isPercentage: 0
-  behaviors: []
+  color: {r: 0.7490196, g: 0.11372549, b: 0.11372549, a: 1}
+  data: []
   references:
     version: 2
     RefIds: []

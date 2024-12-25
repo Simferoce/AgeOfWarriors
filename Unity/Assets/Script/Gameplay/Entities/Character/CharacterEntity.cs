@@ -16,7 +16,7 @@ namespace Game.Character
     [RequireComponent(typeof(Target))]
     [RequireComponent(typeof(AttackFactory))]
     [RequireComponent(typeof(ModifierApplier))]
-    public partial class CharacterEntity : Entity<CharacterDefinition>
+    public partial class CharacterEntity : Entity<CharacterDefinition>, IHealable
     {
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
