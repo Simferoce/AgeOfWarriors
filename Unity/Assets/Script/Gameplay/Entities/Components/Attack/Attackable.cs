@@ -63,8 +63,11 @@ namespace Game.Components
             if (attack.Flags.HasFlag(AttackData.Flag.Empowered))
                 damage *= 1.5f;
 
-            if (attack.Flags.HasFlag(AttackData.Flag.Ranged))
-                damage *= Entity[StatisticDefinitionRegistry.Instance.RangeDamageTaken];
+            if (attack.Flags.HasFlag(AttackData.Flag.Ranged) && Entity.StatisticRepository.TryGet(StatisticDefinitionRegistry.Instance.RangeDamageTaken, out Statistic rangeDamageTakenStatistic))
+                damage *= rangeDamageTakenStatistic.Get<float>();
+
+            if (Entity.StatisticRepository.TryGet(StatisticDefinitionRegistry.Instance.DamageTaken, out Statistic damageTakenStatistic))
+                damage *= damageTakenStatistic.Get<float>();
 
             float resultingDefense = currentDefense - attack.ArmorPenetration;
             if (resultingDefense < 0f)
