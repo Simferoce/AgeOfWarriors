@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7df47b64b767f7145a841789f546d03d, type: 3}
-  m_Name: StatisticDefinition
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: BerserkerResistDeathInvulnerableModifierDefinition
   m_EditorClassIdentifier: 
-  id: dd83c840bbe2f1347a0187f1efae4f6c
+  id: d2c75a8b7a453a84ab95197d9c8da708
+  title: Invulnerability
   icon: {fileID: 0}
-  humanReadableId: 
-  title: 
-  color: {r: 1, g: 1, b: 1, a: 1}
-  format: 
-  data: []
+  description:
+    text: Prevent damage.
+    parameters: []
+  prefab: {fileID: 1748808398714091785, guid: 6b606f06d38445f46b893f8cc91c1683, type: 3}
   references:
     version: 2
     RefIds: []

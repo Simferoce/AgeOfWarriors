@@ -92,6 +92,7 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("multiplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierSpeed]));
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => GetCachedComponent<AgentIdentity>().Faction));
             StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach]));
+            StatisticRepository.Add(new StatisticBool("invulnerable", StatisticDefinitionRegistry.Instance.Invulnerable, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Invulnerable]));
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

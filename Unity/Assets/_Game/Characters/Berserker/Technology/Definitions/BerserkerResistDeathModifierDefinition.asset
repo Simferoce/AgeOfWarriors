@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: BerserkerResistDeathModifierDefinition
+  m_EditorClassIdentifier: 
+  id: e07c04a4d74436b449201bf7e9b21c73
+  title: 
+  icon: {fileID: 0}
+  description:
+    text: 
+    parameters: []
+  prefab: {fileID: 6549624445519714199, guid: 5a74c0401c0472446ab3ab161c661267, type: 3}
+  references:
+    version: 2
+    RefIds: []

@@ -31,6 +31,7 @@ namespace Game.Statistics
         public StatisticDefinition FlatDamageVersusWeak => statisticDefinitions["flat_damage_versus_weak"];
         public StatisticDefinition MultiplierDamage => statisticDefinitions["multiplier_damage"];
         public StatisticDefinition PercentageDamage => statisticDefinitions["percentage_damage"];
+        public StatisticDefinition Invulnerable => statisticDefinitions["invulnerable"];
 
         private Dictionary<string, StatisticDefinition> statisticDefinitions = new Dictionary<string, StatisticDefinition>();
         private AsyncOperationHandle<IList<StatisticDefinition>> statisticsHandle;

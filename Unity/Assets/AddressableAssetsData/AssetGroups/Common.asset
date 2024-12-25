@@ -218,6 +218,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dd83c840bbe2f1347a0187f1efae4f6c
+    m_Address: Assets/_Game/Statistics/Definitions/InvulnerableStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e864fc16d0f0def478387446a9b41863
     m_Address: Assets/_Game/Statistics/LeachDefinition.asset
     m_ReadOnly: 0
