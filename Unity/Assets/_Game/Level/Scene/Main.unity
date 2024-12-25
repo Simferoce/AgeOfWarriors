@@ -1599,10 +1599,14 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 71ef5a81b0132e0478a2cc1b244d3357, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: technology.technologyTreeDefinitions.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'technology.technologyTreeDefinitions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 05f2265648f06204c8b3e35d378d6c67, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'technology.technologyTreeDefinitions.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: a9fb559a92b01a647b19f42ade259fa3, type: 2}
     - target: {fileID: 5053631171570033998, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
