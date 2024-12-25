@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
+  m_Name: BerserkerIncreaseSpeedOnTakeDownTechnologyPerkDefinition
+  m_EditorClassIdentifier: 
+  id: 93a5a053be4c5c84292753b0ce7c9985
+  title: Battles Craving
+  icon: {fileID: 0}
+  description:
+    text: Gain {0} speed on take down as long as no abilities are used.
+    parameters:
+    - rid: 6209823458500018287
+  prefab: {fileID: 7231879587680180711, guid: bda3b19cf9387a04ab609c07e61b76f6, type: 3}
+  technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}
+  requirements: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6209823458500018287
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: speed
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 8df6dc8592651d341b60e493d7322dee, type: 2}
+        asPercentage: 1
+        adjustment:
+          rid: 6209823458500018288
+    - rid: 6209823458500018288
+      type: {class: MinusOneAdjustment, ns: Game, asm: Assembly-CSharp}
+      data: 
