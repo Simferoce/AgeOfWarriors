@@ -78,7 +78,7 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("percentage_attack_speed", StatisticDefinitionRegistry.Instance.PercentageAttackSpeed, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.PercentageAttackSpeed]));
             StatisticRepository.Add(new StatisticFloat("multiplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
             StatisticRepository.Add(new StatisticFloat("speed", StatisticDefinitionRegistry.Instance.Speed, definition.Speed, (float baseValue) => baseValue * this[StatisticDefinitionRegistry.Instance.MultiplierSpeed]));
-            StatisticRepository.Add(new StatisticFloat("reach", StatisticDefinitionRegistry.Instance.Reach, definition.Reach));
+            StatisticRepository.Add(new StatisticFloat("reach", StatisticDefinitionRegistry.Instance.Reach, definition.Reach, (float baseValue) => baseValue * this[StatisticDefinitionRegistry.Instance.MultiplierReach]));
             StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]));
             StatisticRepository.Add(new StatisticBool("stagger", StatisticDefinitionRegistry.Instance.Stagger, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Stagger]));
             StatisticRepository.Add(new StatisticFloat("ranged_damage_taken", StatisticDefinitionRegistry.Instance.RangeDamageTaken, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.RangeDamageTaken]));
@@ -91,6 +91,7 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticBool("dead", null, false, (bool baseValue) => baseValue || IsDead));
             StatisticRepository.Add(new StatisticFloat("multiplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierSpeed]));
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => GetCachedComponent<AgentIdentity>().Faction));
+            StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach]));
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

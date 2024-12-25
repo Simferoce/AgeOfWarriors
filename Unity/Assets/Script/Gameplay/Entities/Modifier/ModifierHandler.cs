@@ -34,6 +34,7 @@ namespace Game.Modifier
             statisticRepository.Add(new StatisticFloat("flat_damage_versus_weak", StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak, 0f, (float baseValue) => baseValue + modifiers.Sum(StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak)));
             statisticRepository.Add(new StatisticBool("weak", StatisticDefinitionRegistry.Instance.Weak, false, (bool baseValue) => baseValue || modifiers.Union(StatisticDefinitionRegistry.Instance.Weak)));
             statisticRepository.Add(new StatisticFloat("mutliplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierSpeed)));
+            statisticRepository.Add(new StatisticFloat("mutliplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierReach)));
         }
 
         public void Add(ModifierEntity modifier)

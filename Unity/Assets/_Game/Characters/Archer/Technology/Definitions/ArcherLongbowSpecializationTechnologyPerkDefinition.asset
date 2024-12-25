@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
+  m_Name: ArcherLongbowSpecializationTechnologyPerkDefinition
+  m_EditorClassIdentifier: 
+  id: 279fdb055cfc8834d90dedd782df43e4
+  title: Archer - Longbow
+  icon: {fileID: 0}
+  description:
+    text: Longbow archer define themselves by their supportive fire.
+    parameters: []
+  prefab: {fileID: 5307242761281629144, guid: d1fcfe2470fc16d4da75e9dcf4737dfd, type: 3}
+  technologyTreeIcon: {fileID: 21300000, guid: 6a3539509c248754b86bc730edc12fd1, type: 3}
+  requirements: []
+  references:
+    version: 2
+    RefIds: []

@@ -72,7 +72,7 @@ MonoBehaviour:
   - rid: 7754703133506797706
   effects:
   - rid: 7754703133506797698
-  trigger: SpecialAbility1
+  trigger: Special Ability 1
   references:
     version: 2
     RefIds:
