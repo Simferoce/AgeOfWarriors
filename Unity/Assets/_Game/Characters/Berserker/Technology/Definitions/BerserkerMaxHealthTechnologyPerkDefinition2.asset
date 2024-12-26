@@ -10,28 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
-  m_Name: BerserkerIncreaseAttackPowerBaseOnDurationTechnologyPerkDefinition
+  m_Name: BerserkerMaxHealthTechnologyPerkDefinition2
   m_EditorClassIdentifier: 
-  id: c44fee0afce60464ea61436321541d11
-  title: Relentless Push
+  id: 5ee055c3c6b91324ba4191c7e06aee2a
+  title: Increase Max Health
   icon: {fileID: 0}
   description:
-    text: Increase attack power by {0} for each second the unit has been alive for.
+    text: Increase max health by {0}.
     parameters:
-    - rid: 6209823451826356372
-  prefab: {fileID: 7231879587680180711, guid: def406159d7b1e741826977c09d05883, type: 3}
-  technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}
+    - rid: 6209823475028721671
+  prefab: {fileID: 5260313248293485178, guid: f5037da8f0a06d94480bae4451b29071, type: 3}
+  technologyTreeIcon: {fileID: 4287196743007105525, guid: 0971139afa142b149b66296ac595fedf, type: 3}
   requirements: []
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 6209823451826356372
+    - rid: 6209823475028721671
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
-        name: attack_power_per_stack
-        overrideDefinitionDescriptor: {fileID: 11400000, guid: 730b30fdee20e634e807921bd2ff378f, type: 2}
+        name: max_health
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: b2357192271e2da41802a3d5de230ede, type: 2}
         asPercentage: 0
         adjustment:
           rid: -2

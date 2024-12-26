@@ -71,7 +71,7 @@ MonoBehaviour:
   - rid: 3390488662789587061
   effects:
   - rid: 7754703144169767110
-  trigger: SpecialAbility1
+  trigger: Special Ability 1
   references:
     version: 2
     RefIds:
@@ -123,7 +123,7 @@ MonoBehaviour:
     - rid: 6209822909945610387
       type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:
-        value: 1.5
+        value: 1
     - rid: 7754703144169767099
       type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data: 
