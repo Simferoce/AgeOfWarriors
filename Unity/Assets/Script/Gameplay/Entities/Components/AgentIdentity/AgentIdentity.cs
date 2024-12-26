@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Statistics;
+using UnityEngine;
 
 namespace Game.Agent
 {
@@ -24,6 +25,26 @@ namespace Game.Agent
             Agent = agent;
 
             transform.localScale = new Vector3(Mathf.Sign(direction) * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+        }
+
+        public bool IsFirst()
+        {
+            int minPriority = int.MaxValue;
+            foreach (var entity in Entity.All)
+            {
+                if (entity.TryGetCachedComponent<AgentIdentity>(out AgentIdentity characterIdentity)
+                    && characterIdentity.Agent == Agent
+                    && !(entity.StatisticRepository.TryGet("dead", out Statistic deadStatistic) || deadStatistic.Get<bool>()))
+                {
+                    int priority = characterIdentity.Priority;
+                    if (priority < minPriority)
+                    {
+                        minPriority = priority;
+                    }
+                }
+            }
+
+            return minPriority == Priority;
         }
     }
 }

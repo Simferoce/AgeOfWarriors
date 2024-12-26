@@ -28,6 +28,7 @@ namespace Game.Components
         {
             Entity = GetComponentInParent<Entity>();
             Entity.OnDeactivated += Entity_OnDeactivated;
+            LastTimeAttackLanded = float.MinValue;
         }
 
         private void Entity_OnDeactivated(Entity entity)

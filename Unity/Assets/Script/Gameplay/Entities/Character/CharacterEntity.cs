@@ -37,7 +37,7 @@ namespace Game.Character
         public float Reach => this[StatisticDefinitionRegistry.Instance.Reach];
         public float TechnologyGainPerSecond => definition.TechnologyGainPerSecond;
 
-        public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 1f || this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 1f;
+        public bool IsEngaged => Time.time - this.GetCachedComponent<Attackable>().LastTimeAttacked < 2f || Time.time - this.GetCachedComponent<AttackFactory>().LastTimeAttackLanded < 2f;
         public bool IsInvulnerable => false;/*this.GetCachedComponent<GameModifierHandler>().GetModifiers().Any(x => x is IModifierInvulnerable);*/
         public bool IsConfused => false;/*this.GetCachedComponent<ModifierHandler>().GetModifiers().Any(x => x is ConfusionModifierDefinition.Modifier);*/
         public bool IsStaggered => this[StatisticDefinitionRegistry.Instance.Stagger];
@@ -47,7 +47,6 @@ namespace Game.Character
 
         private StateMachine stateMachine = new StateMachine();
         private ModifierHandler modifierHandler;
-        private float health;
 
         protected override void Awake()
         {
@@ -93,6 +92,7 @@ namespace Game.Character
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => GetCachedComponent<AgentIdentity>().Faction));
             StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach]));
             StatisticRepository.Add(new StatisticBool("invulnerable", StatisticDefinitionRegistry.Instance.Invulnerable, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Invulnerable]));
+            StatisticRepository.Add(new StatisticBool("engaged", null, false, (bool baseValue) => baseValue || IsEngaged));
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

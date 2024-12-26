@@ -22,6 +22,7 @@ namespace Game.Components
         private void Awake()
         {
             Entity = GetComponentInParent<Entity>();
+            LastTimeAttacked = float.MinValue;
         }
 
         public void TakeAttack(AttackData attack)
