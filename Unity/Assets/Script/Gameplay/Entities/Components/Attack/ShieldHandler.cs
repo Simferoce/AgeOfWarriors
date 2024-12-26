@@ -7,6 +7,9 @@ namespace Game.Components
     {
         private List<IShield> shields = new List<IShield>();
 
+        public delegate void OnShieldRemovedDelegate(IShield shield);
+        public event OnShieldRemovedDelegate OnShieldRemoved;
+
         public float Remaining => shields.Sum(x => x.Remaining);
 
         public float Absorb(float damage)
@@ -30,6 +33,7 @@ namespace Game.Components
         public void Remove(IShield shield)
         {
             shields.Remove(shield);
+            OnShieldRemoved?.Invoke(shield);
         }
     }
 }

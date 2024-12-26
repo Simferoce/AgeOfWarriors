@@ -12,8 +12,10 @@ namespace Game.Modifier
 
         public float Remaining { get => amount.Get(); }
         public float CurrentStack { get => Remaining; set => amount.Get().Set(value); }
+        public float InitialAmount => initialAmount;
 
         private Attackable attackable;
+        private float initialAmount;
 
         public override void Initialize(ModifierEntity modifier)
         {
@@ -22,6 +24,8 @@ namespace Game.Modifier
 
             attackable = modifier.Target.Entity.GetCachedComponent<Attackable>();
             attackable.ShieldHandler.Add(this);
+
+            initialAmount = Remaining;
         }
 
         public float Absorb(float damage)
