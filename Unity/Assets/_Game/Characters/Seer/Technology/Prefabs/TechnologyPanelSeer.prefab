@@ -911,7 +911,7 @@ PrefabInstance:
     - target: {fileID: 7279371964170803153, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
+      objectReference: {fileID: 11400000, guid: f2b4f963734aa694ab8ed9c392cdced6, type: 2}
     - target: {fileID: 7420992051220152127, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 

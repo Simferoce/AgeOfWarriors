@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: SeerReduceNearbyEnemiesAttackSpeedModifierEffectDefinition
+  m_EditorClassIdentifier: 
+  id: f6f6807a9ecd8e54db50d20e415974c7
+  title: Fear aura
+  icon: {fileID: 0}
+  description:
+    text: Reduce attack speed by {0}.
+    parameters:
+    - rid: 6209823478381281418
+  prefab: {fileID: 477229587393782666, guid: 9ffb2958e29ca944cbde0af1f6fab384, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 6209823478381281418
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: fa8583d556561fe45a879e4a24677d2f, type: 2}
+        asPercentage: 1
+        adjustment:
+          rid: 6209823478381281419
+    - rid: 6209823478381281419
+      type: {class: OneMinusAdjustment, ns: Game, asm: Assembly-CSharp}
+      data: 
