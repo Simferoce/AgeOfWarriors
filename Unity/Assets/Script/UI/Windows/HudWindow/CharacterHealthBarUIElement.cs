@@ -1,4 +1,5 @@
 using Game.Character;
+using Game.Components;
 using Game.Modifier;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace Game.UI.Windows
             if (Mathf.Sign(this.transform.lossyScale.x) == -1)
                 this.transform.localScale = new Vector3(-this.transform.localScale.x, this.transform.localScale.y, this.transform.localScale.z);
 
-            float shieldPercentage = 0/*character.Entity.GetCachedComponent<ModifierHandler>().GetModifiers().OfType<ShieldModifierDefinition.Shield>().Sum(x => x.Remaining) / character.MaxHealth;*/;
+            float shieldPercentage = character.GetCachedComponent<Attackable>().ShieldHandler.Remaining / character.MaxHealth;
             float healthPercentage = character.Health / character.MaxHealth;
 
             List<ModifierEntity> modifiers = character.GetCachedComponent<ModifierHandler>().GetModifiers().Where((ModifierEntity x) => x.IsVisible).ToList();

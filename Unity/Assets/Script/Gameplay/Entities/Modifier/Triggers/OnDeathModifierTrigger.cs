@@ -1,21 +1,35 @@
 ﻿using Game.EventChannel;
 using System;
+using UnityEngine;
 
 namespace Game.Modifier
 {
     [Serializable]
     public class OnDeathModifierTrigger : ModifierTrigger
     {
+        [SerializeReference, SubclassSelector] private ModifierTargetFilter targetFilter;
+
         public override void Initialize(ModifierEntity modifier)
         {
             base.Initialize(modifier);
             DeathEventChannel.Instance.Susbribe(OnDeath);
+
+            if (targetFilter != null)
+                targetFilter.Initialize(modifier);
         }
 
         private void OnDeath(DeathEventChannel.Event evt)
         {
-            if (evt.Entity == modifier.Target.Entity)
+            if (targetFilter == null && evt.Entity == modifier.Target.Entity)
                 Trigger();
+
+            if (targetFilter != null && targetFilter.Execute(evt.Entity))
+                Trigger();
+        }
+
+        public override void Update()
+        {
+            base.Update();
         }
 
         public override void Dispose()

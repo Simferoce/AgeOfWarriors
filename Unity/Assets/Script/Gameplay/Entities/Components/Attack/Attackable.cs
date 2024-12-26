@@ -6,39 +6,16 @@ namespace Game.Components
 {
     public class Attackable : MonoBehaviour
     {
-        public struct Input
-        {
-            public Attackable Attacked { get; set; }
-            public float CurrentHealth { get; set; }
-            public float Defense { get; set; }
-            public float IncreaseDamageTaken { get; set; }
-            public float RangedDamageReduction { get; set; }
-            //public List<Shield> Shields { get; set; }
-
-            public bool CanResistDeath { get; set; }
-
-            public Input(Attackable attacked, float currentHealth = 0, float defense = 0, float increaseDamageTaken = 0, float rangedDamageReduction = 0, /*List<Shield> shields = null,*/ bool canResistDeath = false)
-            {
-                Attacked = attacked;
-                CurrentHealth = currentHealth;
-                Defense = defense;
-                IncreaseDamageTaken = increaseDamageTaken;
-                RangedDamageReduction = rangedDamageReduction;
-                //Shields = shields;
-                CanResistDeath = canResistDeath;
-            }
-        }
-
         public delegate void OnDamageTakenDelegate(AttackResult result, Attackable receiver);
         public event OnDamageTakenDelegate OnDamageTaken;
         public delegate void OnDestroyDelegate(Attackable attackable);
         public event OnDestroyDelegate OnDeactivated;
-
         public delegate void OnPotentialDeathDelegate(AttackData attack, ref bool resist);
         public event OnPotentialDeathDelegate OnPotentialDeath;
 
         public Entity Entity { get; set; }
         public float LastTimeAttacked { get; private set; }
+        public ShieldHandler ShieldHandler { get; } = new ShieldHandler();
 
         private List<AttackFactory> hasBeenAttackedBy = new List<AttackFactory>();
 
@@ -85,11 +62,10 @@ namespace Game.Components
 
                 defenseDamagePrevented = damage - damageRemaining;
 
-                //float damageBeforeAbsortion = damageRemaining;
-                //for (int i = 0; i < shields.Count; i++)
-                //    shields[i].Absorb(damageRemaining, out damageRemaining);
+                float damageBeforeAbsortion = damageRemaining;
+                damageRemaining = ShieldHandler.Absorb(damageRemaining);
 
-                //float damageAbsorbed = damageBeforeAbsortion - damageRemaining;
+                float damageAbsorbed = damageBeforeAbsortion - damageRemaining;
 
                 if (currentHealth - damageRemaining <= 0)
                 {

@@ -37,7 +37,10 @@ namespace Game.Modifier
             base.Dispose();
 
             foreach (ModifierTrigger trigger in triggers)
+            {
+                trigger.Dispose();
                 trigger.OnTrigger -= Trigger_OnTrigger;
+            }
         }
 
         private void Trigger_OnTrigger(ModifierTrigger trigger)
