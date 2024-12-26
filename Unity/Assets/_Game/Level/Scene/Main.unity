@@ -1596,10 +1596,10 @@ PrefabInstance:
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'loadout.agentIdentitysDefinition.Array.data[3]'
       value: 
-      objectReference: {fileID: 11400000, guid: 71ef5a81b0132e0478a2cc1b244d3357, type: 2}
+      objectReference: {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: technology.technologyTreeDefinitions.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: 'technology.technologyTreeDefinitions.Array.data[1]'
@@ -1609,6 +1609,10 @@ PrefabInstance:
       propertyPath: 'technology.technologyTreeDefinitions.Array.data[2]'
       value: 
       objectReference: {fileID: 11400000, guid: a9fb559a92b01a647b19f42ade259fa3, type: 2}
+    - target: {fileID: 1278113342030530679, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+      propertyPath: 'technology.technologyTreeDefinitions.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: a36919002c2d6fc4098639b47bb5cc10, type: 2}
     - target: {fileID: 5053631171570033998, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
       propertyPath: m_Name
       value: PlayerAgent
