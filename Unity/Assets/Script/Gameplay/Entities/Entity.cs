@@ -65,6 +65,7 @@ namespace Game
         public List<EntityTag> Tags { get => tags; }
         public virtual Definition Definition { get; set; }
         public Statistic this[StatisticDefinition definition] => StatisticRepository[definition];
+        public Statistic this[string name] => StatisticRepository[name];
         public StatisticRepository StatisticRepository { get => statisticRepository; }
 
         private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();

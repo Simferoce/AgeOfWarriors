@@ -14,11 +14,9 @@ namespace Game.Pool
         [SerializeField] private Collider2D hitbox;
         [SerializeReference, SubclassSelector] private List<PoolEffect> poolEffects;
 
-        public float Duration { get; set; }
-
         private float startTime;
 
-        public void Initialize(Entity parent, FactionType faction)
+        public void Initialize(Entity parent)
         {
             Parent = parent;
             startTime = Time.time;
@@ -29,7 +27,7 @@ namespace Game.Pool
 
         private void FixedUpdate()
         {
-            foreach (Target target in Entity.All.Select(x => x.GetCachedComponent<Target>()).Where(x => x != null))
+            foreach (Target target in Target.All)
             {
                 if (!target.enabled)
                     continue;
@@ -41,7 +39,7 @@ namespace Game.Pool
                     poolEffect.Apply(this, target);
             }
 
-            if (Time.time - startTime > Duration)
+            if (Time.time - startTime > this["duration"])
             {
                 Destroy(gameObject);
                 return;

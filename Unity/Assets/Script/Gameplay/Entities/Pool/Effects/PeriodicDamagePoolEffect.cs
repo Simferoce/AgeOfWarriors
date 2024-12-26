@@ -27,7 +27,7 @@ namespace Game.Pool
             AttackFactory attackFactory = pool.GetCachedComponent<AttackFactory>();
             AttackData attack = attackFactory.Generate(
                 target: attackable,
-                damage: 0.0f
+                damage: pool["damage"]
                 );
 
             attackable.TakeAttack(attack);

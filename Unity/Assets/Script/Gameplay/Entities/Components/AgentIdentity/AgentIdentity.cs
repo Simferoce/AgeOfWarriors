@@ -6,11 +6,10 @@ namespace Game.Agent
     public class AgentIdentity : MonoBehaviour
     {
         public FactionType Faction => Agent.Faction;
-        public int Direction { get; protected set; }
-        public AgentEntity Agent { get; protected set; }
-        public int SpawnNumber { get; private set; }
+        public int Direction { get; set; }
+        public AgentEntity Agent { get; set; }
+        public int SpawnNumber { get; set; }
         public int Priority { get => SpawnNumber; }
-        public string Name => name;
         public Entity Entity { get; set; }
 
         public void Awake()
