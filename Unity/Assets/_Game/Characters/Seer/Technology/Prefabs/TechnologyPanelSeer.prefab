@@ -243,7 +243,7 @@ PrefabInstance:
     - target: {fileID: 1547399883964748269, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
+      objectReference: {fileID: 11400000, guid: 3b477d3a03d478948b7d5817dd996020, type: 2}
     - target: {fileID: 1621393958554630403, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
