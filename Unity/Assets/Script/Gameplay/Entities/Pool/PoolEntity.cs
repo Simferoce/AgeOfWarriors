@@ -1,5 +1,7 @@
-﻿using Game.Components;
+﻿using Game.Agent;
+using Game.Components;
 using Game.Modifier;
+using Game.Statistics;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -18,11 +20,14 @@ namespace Game.Pool
 
         public void Initialize(Entity parent)
         {
+            base.Initialize();
             Parent = parent;
             startTime = Time.time;
 
             foreach (PoolEffect poolEffect in poolEffects)
                 poolEffect.Initialize(this);
+
+            StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => GetCachedComponent<AgentIdentity>().Faction));
         }
 
         private void FixedUpdate()

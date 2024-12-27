@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Game.Statistics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -34,14 +35,14 @@ namespace Game.Modifier
             {
                 ModifierEntity modifierEntity = modifierApplier.CurrentlyAppliedModifiers.FirstOrDefault(x => x.Definition == definition && x.Target.Entity == target);
 
-                if (modifierEntity == null && target.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifierHandler) && !modifierHandler.TryGetUnique(definition, null, out _))
+                if (target.TryGetCachedComponent<ModifierHandler>(out ModifierHandler modifierHandler))
                     modifierApplier.Apply(definition, modifierHandler, parameterFactories.Select(x => x.Create(modifier)).ToArray());
             }
 
             for (int i = modifierApplier.CurrentlyAppliedModifiers.Count - 1; i >= 0; i--)
             {
                 ModifierEntity modifier = modifierApplier.CurrentlyAppliedModifiers[i];
-                if (modifier.Definition == definition && !targets.Contains(modifier.Target.Entity))
+                if (modifier.Definition == definition && !targets.Contains(modifier.Target.Entity) && !modifier.StatisticRepository.TryGet("duration", out Statistic durationStatistic))
                 {
                     modifier.Kill();
                 }
@@ -55,7 +56,7 @@ namespace Game.Modifier
             base.Dispose();
             foreach (ModifierEntity modifier in modifierApplier.CurrentlyAppliedModifiers)
             {
-                if (modifier.Definition == definition)
+                if (modifier.Definition == definition && !modifier.StatisticRepository.TryGet("duration", out Statistic durationStatistic))
                 {
                     modifier.Kill();
                 }

@@ -10,6 +10,8 @@ namespace Game.Statistics
 
         private Entity entity;
 
+        public string Name { get => name; set => name = value; }
+
         public void Initialize(Entity entity)
         {
             this.entity = entity;
