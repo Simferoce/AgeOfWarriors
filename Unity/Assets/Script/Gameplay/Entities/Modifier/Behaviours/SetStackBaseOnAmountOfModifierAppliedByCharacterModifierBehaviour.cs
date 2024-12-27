@@ -24,27 +24,28 @@ namespace Game.Modifier
         public override Result Update()
         {
             int stack = 0;
-            CountStack(character, ref stack);
+            CountStack(character, character["faction"].Get<FactionType>(), ref stack);
             stackModifierBehaviour.SetStack(stack);
 
             return base.Update();
         }
 
-        public void CountStack(Entity entity, ref int value)
+        public void CountStack(Entity entity, FactionType factionType, ref int value)
         {
             if (entity.TryGetCachedComponent<ModifierApplier>(out ModifierApplier modifierApplier))
             {
-                foreach (ModifierEntity modifier in modifierApplier.CurrentlyAppliedModifiers.Where(x => x.Definition == modifierDefinition))
+                foreach (ModifierEntity modifier in modifierApplier.CurrentlyAppliedModifiers.Where(x => modifierDefinition == null || x.Definition == modifierDefinition))
                 {
-                    if ((!modifier.Target.Entity.StatisticRepository.TryGet("dead", out Statistic<bool> dead) || !dead.Get<bool>()))
+                    if ((!modifier.Target.Entity.StatisticRepository.TryGet("dead", out Statistic<bool> dead) || !dead.Get<bool>())
+                        && modifier.Target.Entity["faction"].Get<FactionType>() != factionType)
                     {
-                        value += (int)(modifier.Behaviours.FirstOrDefault(x => x is IModifierStack) as IModifierStack).CurrentStack;
+                        value += (int)((modifier.Behaviours.FirstOrDefault(x => x is IModifierStack) as IModifierStack)?.CurrentStack ?? 1f);
                     }
                 }
             }
 
             foreach (Entity child in entity.Children)
-                CountStack(child, ref value);
+                CountStack(child, factionType, ref value);
         }
     }
 }
