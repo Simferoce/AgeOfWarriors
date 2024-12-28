@@ -93,6 +93,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Window
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4cd8e072d049f0645bbc311bfe3f522f
+    m_Address: Assets/_Game/Statistics/Definitions/ThornStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 56889f00aab0b8440b071b9dd15442a0
     m_Address: Assets/_Game/Statistics/Definitions/RangedDamageReductionStatisticDefinition.asset
     m_ReadOnly: 0

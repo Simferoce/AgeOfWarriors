@@ -89,6 +89,7 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach]));
             StatisticRepository.Add(new StatisticBool("invulnerable", StatisticDefinitionRegistry.Instance.Invulnerable, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Invulnerable]));
             StatisticRepository.Add(new StatisticBool("engaged", null, false, (bool baseValue) => baseValue || IsEngaged));
+            StatisticRepository.Add(new StatisticFloat("thorn", StatisticDefinitionRegistry.Instance.Thorn, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.Thorn]));
 
             Health = MaxHealth;
             stateMachine.Initialize(new MoveState(this));

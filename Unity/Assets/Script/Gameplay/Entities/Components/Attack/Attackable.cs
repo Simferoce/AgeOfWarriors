@@ -1,5 +1,6 @@
 ﻿using Game.Statistics;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Components
@@ -79,9 +80,20 @@ namespace Game.Components
 
             AttackResult attackResult = new AttackResult(attack, damageRemaining, defenseDamagePrevented, damageRemaining >= currentHealth && !resistedDeath, this, resistedDeath);
             attack.Source.NotifyAttackResult(attackResult);
-
             OnDamageTaken?.Invoke(attackResult, this);
             LastTimeAttacked = Time.time;
+
+            if (!attack.Flags.HasFlag(AttackData.Flag.Unreflectable) && Entity.StatisticRepository.TryGet(StatisticDefinitionRegistry.Instance.Thorn, out Statistic statisticThorn))
+            {
+                Attackable attackable = null;
+                attack.Source.Entity.GetHierarchy().FirstOrDefault(x => x.TryGetCachedComponent<Attackable>(out attackable));
+
+                if (attackable != null)
+                {
+                    AttackFactory attackFactory = Entity.AddOrGetCachedComponent<AttackFactory>();
+                    attackable.TakeAttack(attackFactory.Generate(attackable, statisticThorn.Get<float>(), flags: AttackData.Flag.Unreflectable));
+                }
+            }
         }
 
         private void AttackSourceOnDeactivated(AttackFactory attackFactory)

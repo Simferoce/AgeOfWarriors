@@ -26,6 +26,7 @@ namespace Game.Modifier
             ModifierHandler modifierHandler = characterEntity.AddOrGetCachedComponent<ModifierHandler>();
             ModifierApplier modifierApplier = modifier.AddOrGetCachedComponent<ModifierApplier>();
 
+            modifier.Target.Entity.EventChannelHandler.Publish(new DummyCreateEventChannel.Event(characterEntity));
             modifierApplier.Apply(damageOverTime, modifierHandler, damage.Create(modifier));
         }
 

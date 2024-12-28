@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
+  m_Name: SeerAddThornToDummyTechnologyPerkDefinition
+  m_EditorClassIdentifier: 
+  id: 74714e99f1572194694e4af613808190
+  title: Spiked Dummy
+  icon: {fileID: 0}
+  description:
+    text: Dummy spawn deals {0} damage each time it is attacked.
+    parameters:
+    - rid: 6209823505773756766
+  prefab: {fileID: 7231879587680180711, guid: 0a93f08140bb8ee4a976a0e4fcc2ee72, type: 3}
+  technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}
+  requirements: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823505773756766
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: thorn
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

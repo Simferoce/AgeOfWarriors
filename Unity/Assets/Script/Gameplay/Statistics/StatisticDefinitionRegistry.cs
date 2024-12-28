@@ -32,6 +32,7 @@ namespace Game.Statistics
         public StatisticDefinition MultiplierDamage => statisticDefinitions["multiplier_damage"];
         public StatisticDefinition PercentageDamage => statisticDefinitions["percentage_damage"];
         public StatisticDefinition Invulnerable => statisticDefinitions["invulnerable"];
+        public StatisticDefinition Thorn => statisticDefinitions["thorn"];
 
         private Dictionary<string, StatisticDefinition> statisticDefinitions = new Dictionary<string, StatisticDefinition>();
         private AsyncOperationHandle<IList<StatisticDefinition>> statisticsHandle;
