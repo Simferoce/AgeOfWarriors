@@ -1,45 +1,49 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.EventChannel
+namespace Game
 {
-    public class EventChannel<T>
+    public class EventChannel
+    {
+    }
+
+    public class EventChannel<T> : EventChannel
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void Init()
         {
-            instance = null;
+            global = null;
         }
 
-        public delegate void EventChannelHandler(T evt);
+        public delegate void EventChannelDelegate(T evt);
 
-        private static EventChannel<T> instance = null;
-        public static EventChannel<T> Instance
+        private static EventChannel<T> global = null;
+        public static EventChannel<T> Global
         {
             get
             {
-                if (instance == null)
-                    instance = new EventChannel<T>();
+                if (global == null)
+                    global = new EventChannel<T>();
 
-                return instance;
+                return global;
             }
         }
 
-        private List<EventChannelHandler> subscribers = new List<EventChannelHandler>();
+        private List<EventChannelDelegate> subscribers = new List<EventChannelDelegate>();
 
-        public void Susbribe(EventChannelHandler subscriber)
+        public void Subscribe(EventChannelDelegate subscriber)
         {
             subscribers.Add(subscriber);
         }
 
-        public void Unsubcribe(EventChannelHandler subscriber)
+        public void Unsubscribe(EventChannelDelegate subscriber)
         {
             subscribers.Remove(subscriber);
         }
 
         public void Publish(T evt)
         {
-            foreach (EventChannelHandler handler in subscribers)
+            foreach (EventChannelDelegate handler in subscribers)
             {
                 handler?.Invoke(evt);
             }

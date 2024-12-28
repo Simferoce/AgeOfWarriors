@@ -1,5 +1,4 @@
-﻿using Game.EventChannel;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Game.Modifier
@@ -12,7 +11,7 @@ namespace Game.Modifier
         public override void Initialize(ModifierEntity modifier)
         {
             base.Initialize(modifier);
-            DeathEventChannel.Instance.Susbribe(OnDeath);
+            DeathEventChannel.Global.Subscribe(OnDeath);
 
             if (targetFilter != null)
                 targetFilter.Initialize(modifier);
@@ -35,7 +34,7 @@ namespace Game.Modifier
         public override void Dispose()
         {
             base.Dispose();
-            DeathEventChannel.Instance.Unsubcribe(OnDeath);
+            DeathEventChannel.Global.Unsubscribe(OnDeath);
         }
     }
 }

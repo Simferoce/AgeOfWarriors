@@ -1,4 +1,4 @@
-﻿using Game.EventChannel;
+﻿using Game.Components;
 using Game.Modifier;
 using Game.Statistics;
 using System;
@@ -67,6 +67,7 @@ namespace Game
         public Statistic this[StatisticDefinition definition] => StatisticRepository[definition];
         public Statistic this[string name] => StatisticRepository[name];
         public StatisticRepository StatisticRepository { get => statisticRepository; }
+        public EventChannelHandler EventChannelHandler { get; set; } = new EventChannelHandler();
 
         private Dictionary<Type, List<object>> cached = new Dictionary<Type, List<object>>();
         private Entity parent = null;
@@ -76,7 +77,7 @@ namespace Game
         {
             All.Add(this);
             AddOrGetCachedComponent<ModifierApplier>();
-            EntityCreatedEventChannel.Instance.Publish(new EntityCreatedEventChannel.Event(this));
+            EntityCreatedEventChannel.Global.Publish(new EntityCreatedEventChannel.Event(this));
             Link<StatisticRepository>(statisticRepository);
         }
 

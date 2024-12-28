@@ -73,13 +73,19 @@ namespace Game.Agent
             return factory.QueueLaneObject(new AgentFactoryCommand(this, agentBase.SpawnPoint, characterDefinition.ProductionDuration / LevelSetup.Instance.FactorySpeed, characterDefinition), characterDefinition.Cost);
         }
 
-        public void SpawnAgentObject(CharacterDefinition characterDefinition, Vector3 position, int direction)
+        public CharacterEntity SpawnAgentObject(CharacterDefinition characterDefinition, Vector3 position, int direction)
         {
-            CharacterEntity character = characterDefinition.Spawn(this, position, nextSpawneeNumber++, direction);
+            return SpawnAgentObject(characterDefinition, position, direction, nextSpawneeNumber++);
+        }
+
+        public CharacterEntity SpawnAgentObject(CharacterDefinition characterDefinition, Vector3 position, int direction, int spawnNumber)
+        {
+            CharacterEntity character = characterDefinition.Spawn(this, position, spawnNumber, direction);
             OnAgentObjectSpawn?.Invoke(character.GetCachedComponent<AgentIdentity>());
             character.Initialize();
 
             character.name = $"{characterDefinition.Title} - {faction}";
+            return character;
         }
     }
 }

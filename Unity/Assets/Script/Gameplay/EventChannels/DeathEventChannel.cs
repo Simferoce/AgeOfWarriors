@@ -1,4 +1,4 @@
-﻿namespace Game.EventChannel
+﻿namespace Game
 {
     public class DeathEventChannel : EventChannel<DeathEventChannel.Event>
     {

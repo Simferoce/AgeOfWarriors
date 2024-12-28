@@ -1,10 +1,8 @@
 ﻿using Game.Agent;
 using Game.Components;
-using Game.EventChannel;
 using Game.Modifier;
 using Game.Statistics;
 using Game.Utilities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -21,8 +19,6 @@ namespace Game.Character
         [Header("Collision")]
         [SerializeField] private new Rigidbody2D rigidbody;
         [SerializeField] private Collider2D hitbox;
-
-        public event Action OnDeath;
 
         public Animated Animated { get; set; }
         public List<TransformTag> TransformTags { get; set; }
@@ -115,9 +111,8 @@ namespace Game.Character
             GetCachedComponent<Caster>().enabled = false;
             GetCachedComponent<Attackable>().OnDamageTaken -= OnDamageTaken;
             GetCachedComponent<AttackFactory>().OnAttackLanded -= OnAttackLanded;
-            DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { Entity = this });
+            EventChannelHandler.Publish(new DeathEventChannel.Event() { Entity = this });
 
-            OnDeath?.Invoke();
             stateMachine.SetState(new DeathState(this));
         }
 

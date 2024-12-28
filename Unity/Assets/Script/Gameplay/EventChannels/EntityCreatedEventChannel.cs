@@ -1,4 +1,4 @@
-﻿namespace Game.EventChannel
+﻿namespace Game
 {
     public class EntityCreatedEventChannel : EventChannel<EntityCreatedEventChannel.Event>
     {

@@ -1,6 +1,5 @@
 using Game.Agent;
 using Game.Components;
-using Game.EventChannel;
 using Game.Statistics;
 using System;
 using UnityEngine;
@@ -40,7 +39,7 @@ namespace Game
 
         public void Death()
         {
-            DeathEventChannel.Instance.Publish(new DeathEventChannel.Event() { Entity = this });
+            DeathEventChannel.Global.Publish(new DeathEventChannel.Event() { Entity = this });
 
             GetCachedComponent<Attackable>().OnDamageTaken -= Base_OnDamageTaken;
             Destroy(gameObject);
