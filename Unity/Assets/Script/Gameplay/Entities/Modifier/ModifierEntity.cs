@@ -1,4 +1,5 @@
 ﻿using Game.Components;
+using Game.Statistics;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -37,6 +38,8 @@ namespace Game.Modifier
 
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
                 modifierBehaviour.Initialize(this);
+
+            StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => Target.Entity["faction"].Get<FactionType>()));
         }
 
         private void Update()

@@ -35,6 +35,7 @@ namespace Game.Ability
             foreach (AbilityCondition condition in conditions)
                 condition.Initialize(this);
 
+            StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => caster.Entity["faction"].Get<FactionType>()));
             StatisticRepository.Add(new StatisticFloat("flat_damage_versus_weak", StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak, 0f, (float baseValue) => baseValue + caster.Entity[StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak]));
         }
 

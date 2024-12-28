@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: SeerReduceAttackPowerOnDummyAttackedDummyModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 6b7edc4f23f519149926d4eeb818df8a
+  title: 
+  icon: {fileID: 0}
+  description:
+    text: 
+    parameters: []
+  prefab: {fileID: 8964364954459259389, guid: 189839c3311fe7c43bd4cdbca1a0b3b0, type: 3}
+  references:
+    version: 2
+    RefIds: []

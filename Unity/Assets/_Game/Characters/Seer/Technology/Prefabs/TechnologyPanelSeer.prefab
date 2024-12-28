@@ -483,7 +483,7 @@ PrefabInstance:
     - target: {fileID: 3439084707464434463, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
+      objectReference: {fileID: 11400000, guid: 4067d9343d9019f48aefe09df7354317, type: 2}
     - target: {fileID: 3643459750488179885, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
