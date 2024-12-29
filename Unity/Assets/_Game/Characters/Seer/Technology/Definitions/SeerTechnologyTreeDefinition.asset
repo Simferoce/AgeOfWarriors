@@ -55,6 +55,6 @@ MonoBehaviour:
     level: 15
   - nodes:
     - {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
-    - {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
+    - {fileID: 11400000, guid: 30f032c88ebb5f84fa7c3afe1518d4ab, type: 2}
     - {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
     level: 20

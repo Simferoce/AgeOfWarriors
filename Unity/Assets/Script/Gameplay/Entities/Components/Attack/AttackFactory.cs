@@ -47,7 +47,7 @@ namespace Game.Components
             float leach = 0f,
             AttackData.Flag flags = AttackData.Flag.None)
         {
-            if (target != null && target.Entity[StatisticDefinitionRegistry.Instance.Weak])
+            if (target != null && target.Entity.StatisticRepository.TryGet(StatisticDefinitionRegistry.Instance.Weak, out Statistic statisticWeak) && statisticWeak.Get<bool>())
                 damage += Entity.StatisticRepository.TryGet<float>(StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak, out Statistic<float> flatDamageVersusWeak) ? flatDamageVersusWeak : 0f;
 
             AttackData attackData = new AttackData(damage, armorPenetration, leach, flags, this);

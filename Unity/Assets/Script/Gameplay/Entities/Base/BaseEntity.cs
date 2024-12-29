@@ -16,8 +16,8 @@ namespace Game
         [SerializeField] private SpawnPoint spawnPoint;
         [SerializeField] private Collider2D hitbox;
 
-        public float Health { get; set; }
-        public float MaxHealth { get => maxHealth; }
+        public float Health { get => this[StatisticDefinitionRegistry.Instance.Health]; set => this[StatisticDefinitionRegistry.Instance.Health].Set(value); }
+        public float MaxHealth => this[StatisticDefinitionRegistry.Instance.MaxHealth];
         public bool IsDead => Health <= 0;
         public SpawnPoint SpawnPoint { get => spawnPoint; set => spawnPoint = value; }
 
@@ -28,6 +28,9 @@ namespace Game
             base.Awake();
             GetCachedComponent<Attackable>().OnDamageTaken += Base_OnDamageTaken;
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => GetCachedComponent<AgentIdentity>().Faction));
+
+            StatisticRepository.Add(new StatisticFloat("health", StatisticDefinitionRegistry.Instance.Health, maxHealth));
+            StatisticRepository.Add(new StatisticFloat("max_health", StatisticDefinitionRegistry.Instance.MaxHealth, maxHealth));
         }
 
         private void Base_OnDamageTaken(AttackResult attackResult, Attackable attackable)
