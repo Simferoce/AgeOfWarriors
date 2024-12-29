@@ -14,11 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 006b6adb402372743a772d4ea309584b
   title: Healing Potion Throw
-  descriptionOld: Throw a potion that heals an ally on contact by {0}.
-  prefab: {fileID: 815283590128273858, guid: 08ed66d5d8883da4c9d3e88907deffd1, type: 3}
   description:
     text: Throw a potion that heals an ally on contact by {0}.
-    parameters: []
+    parameters:
+    - rid: 6209823544293720187
+  prefab: {fileID: 815283590128273858, guid: 08ed66d5d8883da4c9d3e88907deffd1, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823544293720187
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: heal
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 43442952713ba724d9f3d09e9d1abdf9, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

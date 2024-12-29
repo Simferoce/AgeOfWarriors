@@ -18,7 +18,7 @@ namespace Game.Projectile
 
         public void Execute(Entity entity)
         {
-            if (!entity.TryGetCachedComponent<IHealable>(out IHealable healable))
+            if (entity is not IHealable healable)
                 return;
 
             healable.Heal(heal.GetOrThrow().Get<float>());

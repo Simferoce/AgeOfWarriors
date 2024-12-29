@@ -14,11 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: e519c0b256b8cd84890c6167acfc1c87
   title: Piercing Shot
-  descriptionOld: Deals {0} damage with {1} armor penetration.
-  prefab: {fileID: 2354011339543092937, guid: 63ecacc2a71926c4db7262d713872a14, type: 3}
   description:
-    text: Deals {0} damage with {1} armor penetration.
-    parameters: []
+    text: Shot a piercing shot that deals {0} damage with {1} armor penetration.
+    parameters:
+    - rid: 6209823544293720193
+    - rid: 6209823544293720194
+  prefab: {fileID: 2354011339543092937, guid: 63ecacc2a71926c4db7262d713872a14, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823544293720193
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 6209823544293720194
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: armor_penetration
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 1687044977f8da6489e79d61a4fa60b9, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

@@ -14,13 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 156a5e5d2b7389c458935a45ae3476d7
   title: Dark Embrace
-  descriptionOld: Invoke a medium size dark fissure behind the first enemy in {0}
-    meters that deals {1} damage to all enemy in range.
-  prefab: {fileID: 1262703249881643635, guid: fc6a4b62da811034d98dbfc0f4757caf, type: 3}
   description:
     text: Invoke a medium size dark fissure behind the first enemy in {0} meters
       that deals {1} damage to all enemy in range.
-    parameters: []
+    parameters:
+    - rid: 6209823544293720188
+    - rid: 6209823544293720189
+  prefab: {fileID: 1262703249881643635, guid: fc6a4b62da811034d98dbfc0f4757caf, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823544293720188
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 6209823544293720189
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

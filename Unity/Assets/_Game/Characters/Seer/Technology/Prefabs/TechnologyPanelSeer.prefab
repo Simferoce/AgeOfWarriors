@@ -380,6 +380,18 @@ PrefabInstance:
       propertyPath: technologyPerkDefinition
       value: 
       objectReference: {fileID: 11400000, guid: eeb63566e5529524da744bf41eae42cd, type: 2}
+    - target: {fileID: 2708663279433217802, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2708663279433217802, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2708663279433217802, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2728948809451603155, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -623,7 +635,7 @@ PrefabInstance:
     - target: {fileID: 4499748531285568896, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
+      objectReference: {fileID: 11400000, guid: f275c8d916827da4c9a2bb4b4023e8c9, type: 2}
     - target: {fileID: 4607517342830681811, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: m_Padding.m_Left
       value: 100
@@ -983,7 +995,7 @@ PrefabInstance:
     - target: {fileID: 7631345307246280444, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
-      objectReference: {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
+      objectReference: {fileID: 11400000, guid: 61b5e313c2d08b649a9e44a3fb8fc1bc, type: 2}
     - target: {fileID: 7646781041695118866, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition
       value: 
@@ -1135,6 +1147,18 @@ PrefabInstance:
     - target: {fileID: 8191929389167865551, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215330481392870518, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215330481392870518, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8215330481392870518, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8309954668340247102, guid: 701d2763ff45167418ce36b797898bd0, type: 3}
       propertyPath: technologyPerkDefinition

@@ -35,8 +35,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: b7cddd3e756471a428fe4ad57cccb053, type: 2}
     level: 5
   - nodes:
-    - {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
-    - {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}
+    - {fileID: 11400000, guid: f275c8d916827da4c9a2bb4b4023e8c9, type: 2}
+    - {fileID: 11400000, guid: 61b5e313c2d08b649a9e44a3fb8fc1bc, type: 2}
     level: 10
   - nodes:
     - {fileID: 11400000, guid: 85813a3bb671cae4591b507c1dff9bca, type: 2}

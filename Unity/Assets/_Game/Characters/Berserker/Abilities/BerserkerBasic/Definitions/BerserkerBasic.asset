@@ -14,11 +14,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: dfa0ecdf3974904439b3c578bc907282
   title: Basic
-  descriptionOld: Deals {0} damage to a target at {1} meters.
-  prefab: {fileID: 234122527794856266, guid: a23b4828f80fc3e4c9fc2e5afafabe9d, type: 3}
   description:
     text: Deals {0} damage to a target at {1} meters.
-    parameters: []
+    parameters:
+    - rid: 6209823544293720195
+    - rid: 6209823544293720196
+  prefab: {fileID: 234122527794856266, guid: a23b4828f80fc3e4c9fc2e5afafabe9d, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823544293720195
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 6209823544293720196
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

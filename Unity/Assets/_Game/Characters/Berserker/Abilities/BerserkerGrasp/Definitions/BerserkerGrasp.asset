@@ -14,13 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 96bcb15ffca68c647bcecca181aee9c2
   title: Grasp
-  descriptionOld: Pull all enemies in {0} meters. Staggers the affected enemies for
-    {1} seconds. Trigger only if there is at least 2 enemies in range.
-  prefab: {fileID: 5897430954624599547, guid: 18ad5626a0432ca47aad335c827312a3, type: 3}
   description:
-    text: Pull all enemies in {0} meters. Staggers the affected enemies for {1} seconds.
-      Trigger only if there is at least 2 enemies in range.
-    parameters: []
+    text: 'Pull all enemies in {0} meters. Staggers the affected enemies for {1}
+      seconds. '
+    parameters:
+    - rid: 6209823544293720197
+    - rid: 6209823544293720198
+  prefab: {fileID: 5897430954624599547, guid: 18ad5626a0432ca47aad335c827312a3, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823544293720197
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 6209823544293720198
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: duration
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

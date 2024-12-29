@@ -14,13 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8123c5d3258092b4b87d0395fcd38f99
   title: Leaching Strike
-  descriptionOld: Deals {0} damage to a target at {1} meters and heals by {2:0.0%}
-    of damage dealt.
-  prefab: {fileID: 412271190907481078, guid: 6c3bd40318bfbd143bd5b5e2a25b2624, type: 3}
   description:
-    text: Deals {0} damage to a target at {1} meters and heals by {2:0.0%} of damage
+    text: Deals {0} damage to a target at {1} meters and heals for {2} of damage
       dealt.
-    parameters: []
+    parameters:
+    - rid: 6209823544293720199
+    - rid: 6209823544293720200
+    - rid: 6209823544293720201
+  prefab: {fileID: 412271190907481078, guid: 6c3bd40318bfbd143bd5b5e2a25b2624, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823544293720199
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 6209823544293720200
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 6209823544293720201
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: leach
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: e864fc16d0f0def478387446a9b41863, type: 2}
+        asPercentage: 1
+        adjustment:
+          rid: -2
