@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7073140828059977275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3688066728904335442}
+  - component: {fileID: 2096227298195770869}
+  - component: {fileID: 7321547174875826920}
+  m_Layer: 0
+  m_Name: ArcherIncreaseDamageTakenOnStaggerModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3688066728904335442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7073140828059977275}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2096227298195770869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7073140828059977275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7321547174875826920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7073140828059977275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823438895054848
+    - rid: 6209823438895054851
+  visibleByDefault: 0
+  behaviours:
+  - rid: 6209823438895054854
+  references:
+    version: 2
+    RefIds:
+    - rid: 6209823438895054848
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage_taken
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823438895054850
+    - rid: 6209823438895054850
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: damage_taken
+    - rid: 6209823438895054851
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823438895054853
+    - rid: 6209823438895054853
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+    - rid: 6209823438895054854
+      type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        triggers:
+        - rid: 6209823438895054855
+        effects:
+        - rid: 6209823438895054856
+    - rid: 6209823438895054855
+      type: {class: OnModifierAppliedModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        modifierDefinition: {fileID: 11400000, guid: f00b4886f786f804d8c42486328b8243, type: 2}
+    - rid: 6209823438895054856
+      type: {class: ApplyModifierModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: 62ea56e6aec0fe14bab8a5a44a094482, type: 2}
+        targets:
+        - rid: 6209823438895054857
+        parameterFactories:
+        - rid: 6209823438895054858
+        - rid: 6209823438895054859
+    - rid: 6209823438895054857
+      type: {class: TriggerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 6209823438895054858
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+        value:
+          name: duration
+    - rid: 6209823438895054859
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: damage_taken
+        value:
+          name: damage_taken

@@ -1,20 +1,36 @@
-﻿using Game.UI.Windows;
-using System.Collections;
+﻿using System.Collections;
 
 namespace Game
 {
     public class GameFlowManager : Manager<GameFlowManager>
     {
+        public IGameState CurrentState { get; private set; }
+
         public override IEnumerator InitializeAsync()
         {
-            Universe.Instance.OnLoaded += Instance_OnLoaded;
             yield break;
         }
 
-        private void Instance_OnLoaded(Universe universe)
+        public void LoadMainMenu()
         {
-            Universe.Instance.OnLoaded -= Instance_OnLoaded;
-            WindowManager.Instance.GetWindow<HudWindow>().Show();
+            if (CurrentState != null)
+                CurrentState.Exit();
+
+            MainMenu mainMenu = new MainMenu();
+            mainMenu.Load();
+
+            CurrentState = mainMenu;
+        }
+
+        public void LoadLevel(LevelDefinition levelDefinition)
+        {
+            if (CurrentState != null)
+                CurrentState.Exit();
+
+            Level level = new Level(levelDefinition);
+            level.Load();
+
+            CurrentState = level;
         }
     }
 }

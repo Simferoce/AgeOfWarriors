@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
+  m_Name: SeerReduceAttackPowerOnDummyAttackedTechnologyPerkDefinition
+  m_EditorClassIdentifier: 
+  id: 4067d9343d9019f48aefe09df7354317
+  title: Sapped Morale
+  icon: {fileID: 0}
+  description:
+    text: Whenever the dummy is hit, reduce attack damage of the attacker by {0}
+      for {1} seconds.
+    parameters:
+    - rid: 6209823505773757092
+    - rid: 6209823505773757094
+  prefab: {fileID: 7231879587680180711, guid: f7f2a5f3f7ef20240a6f9a26d178def4, type: 3}
+  technologyTreeIcon: {fileID: 2166502795694534490, guid: 3253c4222d112f6408b67738ee1b3de2, type: 3}
+  requirements: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823505773757092
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 730b30fdee20e634e807921bd2ff378f, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: 6209823505773757093
+    - rid: 6209823505773757093
+      type: {class: PositiveAdjustment, ns: Game, asm: Assembly-CSharp}
+      data: 
+    - rid: 6209823505773757094
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: duration
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

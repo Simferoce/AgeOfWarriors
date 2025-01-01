@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: ArcherIncreaseDamageTakenOnStaggerModifierDefinition
+  m_EditorClassIdentifier: 
+  id: 694cc780695c78f43985d8867fee4eda
+  title: 
+  icon: {fileID: 0}
+  description:
+    text: 
+    parameters: []
+  prefab: {fileID: 7073140828059977275, guid: 1ebd150c11d4d7d45914d87cfddeb9c1, type: 3}
+  references:
+    version: 2
+    RefIds: []

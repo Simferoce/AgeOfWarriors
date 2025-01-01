@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -37,6 +39,9 @@ namespace Game
 
         public IEnumerator Start()
         {
+            CultureInfo ci = new CultureInfo("en-US");
+            Thread.CurrentThread.CurrentCulture = ci;
+
             List<GameObject> managerPrefabs = new List<GameObject>();
             managerPrefabsHandle = Addressables.LoadAssetsAsync<GameObject>("Manager", (GameObject gameObject) => managerPrefabs.Add(gameObject));
             yield return managerPrefabsHandle;

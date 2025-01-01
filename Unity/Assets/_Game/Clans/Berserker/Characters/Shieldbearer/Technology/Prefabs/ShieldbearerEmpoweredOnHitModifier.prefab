@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4774257945189528745
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7545115530843669453}
+  - component: {fileID: 2758302497919410123}
+  - component: {fileID: 6229864869035163989}
+  m_Layer: 0
+  m_Name: ShieldbearerEmpoweredOnHitModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7545115530843669453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774257945189528745}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2758302497919410123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774257945189528745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6229864869035163989
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4774257945189528745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823047454556177
+  visibleByDefault: 1
+  behaviours:
+  - rid: 3390488685912784968
+  - rid: 3390488685912784969
+  - rid: 3390488685912784977
+  - rid: 3390488685912784995
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 3390488685912784968
+      type: {class: StackModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        startingStack: 0
+    - rid: 3390488685912784969
+      type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        triggers:
+        - rid: 3390488685912785005
+        effects:
+        - rid: 3390488685912784975
+    - rid: 3390488685912784975
+      type: {class: IncreaseModifierStackModiferEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        target:
+          rid: 3390488685912784976
+        definition: {fileID: 11400000, guid: ebd2dc0ebc9ee074280bf1918d1f4839, type: 2}
+    - rid: 3390488685912784976
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488685912784977
+      type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        triggers:
+        - rid: 3390488685912784978
+        effects:
+        - rid: 3390488685912784980
+        - rid: 3390488685912785001
+    - rid: 3390488685912784978
+      type: {class: StackModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        threshold:
+          name: threshold
+    - rid: 3390488685912784980
+      type: {class: ClearModifierStackModiferEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        target:
+          rid: 3390488685912784981
+        definition: {fileID: 11400000, guid: ebd2dc0ebc9ee074280bf1918d1f4839, type: 2}
+    - rid: 3390488685912784981
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488685912784995
+      type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        type: 1
+    - rid: 3390488685912785001
+      type: {class: ApplyModifierModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: c501eb2c6227c984a90ffdeec74fba08, type: 2}
+        targets:
+        - rid: 3390488685912785002
+        parameterFactories: []
+    - rid: 3390488685912785002
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 3390488685912785005
+      type: {class: OnAttackLandedModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        filter:
+          rid: -2
+    - rid: 6209823047454556177
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: threshold
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823047454556188
+    - rid: 6209823047454556188
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: threshold

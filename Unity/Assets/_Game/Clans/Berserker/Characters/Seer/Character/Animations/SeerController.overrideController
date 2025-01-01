@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SeerController
+  m_Controller: {fileID: 9100000, guid: 7271252879c91cc4d86e4bdd1f31c496, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 6e17ec9ae80c5c541a10f1bef08054d2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: b043b0d1127e5754bb67296166401da6, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5b4bf31c6ae3ae244b1fb392e7cf2e1d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 96e5860b0d1d4a648a9b9d914e4681a1, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 306d91c03358b0d4c810f9c361945b42, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 1b3c516ae24f6a140b88d7b672c9a7b7, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8cf47bf5ce16229409cb3260d53989ec, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: c8e972ed637dfcc40bc2d437be53b052, type: 2}

@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Name: ArcherHuntersMark
+  m_EditorClassIdentifier: 
+  id: 94bc3887fe1aaad468e21f5c79064f4f
+  title: Hunter's Mark
+  description:
+    text: Mark a target in {0} meters for {1} seconds which receive an additional
+      {2} damage per hit taken.
+    parameters:
+    - rid: 6209823544293720190
+    - rid: 6209823544293720191
+    - rid: 6209823544293720192
+  prefab: {fileID: 6398100958839073666, guid: cd61022fd62f5fe4d95b39b35ad3e644, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823544293720190
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 6209823544293720191
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: duration
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 6209823544293720192
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+--- !u!114 &4328000484182388948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: HunterMarkModifierDefinition
+  m_EditorClassIdentifier: 
+  id: c4720fddb23620c4b8ebe740273906c1
+  title: Hunter's Mark
+  icon: {fileID: -412835066, guid: 13762a5d936e24f4892137f16c4a55d9, type: 3}
+  description:
+    text: Receive an additional {0} damage per hit taken.
+    parameters: []
+  prefab: {fileID: 6668665993678449400, guid: 5d7b351e114e7724d91a74d62c48e074, type: 3}
+  references:
+    version: 2
+    RefIds: []

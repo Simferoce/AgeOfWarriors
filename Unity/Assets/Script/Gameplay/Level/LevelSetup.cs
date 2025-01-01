@@ -1,8 +1,5 @@
 using Game.Agent;
-using Game.Character;
-using System.Globalization;
 using System.Linq;
-using System.Threading;
 using UnityEngine;
 
 namespace Game
@@ -17,7 +14,6 @@ namespace Game
             Instance = null;
         }
 
-        [SerializeField] private CharacterDefinition characterDefinition;
         [SerializeField] private bool cheatCost;
         [SerializeField] private int maxCharacter = 10;
         [SerializeField] private float technologyGainMultiplier = 1;
@@ -33,8 +29,6 @@ namespace Game
         private void Awake()
         {
             Instance = this;
-            CultureInfo ci = new CultureInfo("en-US");
-            Thread.CurrentThread.CurrentCulture = ci;
         }
 
         [ContextMenu("LevelUp")]

@@ -27,8 +27,20 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 059947ec54c0ceb46955f3cbe50ddf82
+    m_Address: Assets/_Game/UI/Windows/LevelSelectionWindow/LevelSelectionWindow.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Window
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0daeb2d661b48664f9f8656c569beb36
     m_Address: Assets/_Game/UI/Window/InspectorModifierWindow/Prefabs/InspectorModifierWindow.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Window
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 133aadccb7a4a9949b8844e93c030716
+    m_Address: Assets/_Game/UI/Windows/LevelInspectorWindow/Prefabs/LevelInspectorWindow.prefab
     m_ReadOnly: 0
     m_SerializedLabels:
     - Window
@@ -56,6 +68,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2cda990e2423bbf4892e6590ba056729
+    m_Address: Assets/_Game/Envionments/Forest/Scenes/ForestLevel.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2f354585411abe24291b2717797ee247
     m_Address: Assets/_Game/Managers/StatisticDefinitionRegistry.prefab
@@ -147,6 +164,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Manager
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a767edaf74a3e44b8612ce00ea7d4ec
+    m_Address: Assets/_Game/Managers/GameSceneManager.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Manager
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8df6dc8592651d341b60e493d7322dee
     m_Address: Assets/_Game/Statistics/Definitions/MultiplierSpeedStatisticDefinition.asset
     m_ReadOnly: 0
@@ -206,6 +229,11 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b7bcffa99e9724942a2b12c0f3f415be
+    m_Address: Assets/_Game/Level/_Common/Definition/MainMenuSceneDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c00229f653d37c5459cd04d40e55219c
     m_Address: Assets/_Game/Manager/Prefabs/WindowManager.prefab
     m_ReadOnly: 0
@@ -247,6 +275,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fb79f784cfc8da945ba2bd0520423368
+    m_Address: Assets/_Game/Level/_Common/Scene/00-MainMenu.unity
+    m_ReadOnly: 0
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ff6ee24adf3c8424aad04267addb363d
     m_Address: Assets/_Game/Statistics/AttackPowerStatisticDefinition.asset

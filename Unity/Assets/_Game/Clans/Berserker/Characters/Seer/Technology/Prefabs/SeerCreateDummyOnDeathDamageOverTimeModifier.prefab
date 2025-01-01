@@ -1,0 +1,129 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &9055423145769596520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9025287542051521140}
+  - component: {fileID: 4634694128133744432}
+  - component: {fileID: 2325035229791734771}
+  m_Layer: 0
+  m_Name: SeerCreateDummyOnDeathDamageOverTimeModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9025287542051521140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055423145769596520}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4634694128133744432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055423145769596520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2325035229791734771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9055423145769596520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823505773756490
+    - rid: 6209823505773756493
+  visibleByDefault: 0
+  behaviours:
+  - rid: 6209823505773756499
+  references:
+    version: 2
+    RefIds:
+    - rid: 6209823505773756490
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: percentage_health_damage_per_seconds
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823505773756492
+    - rid: 6209823505773756492
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: percentage_health_damage_per_seconds
+    - rid: 6209823505773756493
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: damage
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823505773756495
+    - rid: 6209823505773756495
+      type: {class: MultiplyValue, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        a:
+          rid: 6209823505773756496
+        b:
+          rid: 6209823505773756497
+    - rid: 6209823505773756496
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: percentage_health_damage_per_seconds
+    - rid: 6209823505773756497
+      type: {class: TargetStatisticModifierValue, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        casterDefinition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+        target:
+          rid: 6209823505773756498
+    - rid: 6209823505773756498
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 6209823505773756499
+      type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        triggers:
+        - rid: 6209823505773756500
+        effects:
+        - rid: 6209823505773756501
+    - rid: 6209823505773756500
+      type: {class: PeriodicTimeModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 6209823505773756501
+      type: {class: DealDamageModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        target:
+          rid: 6209823505773756502
+        damage:
+          name: damage
+        extraFlags: 4
+    - rid: 6209823505773756502
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 

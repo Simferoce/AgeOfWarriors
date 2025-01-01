@@ -1,0 +1,146 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2699585991925002781
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2806811491898894271}
+  - component: {fileID: 5929290463519605178}
+  - component: {fileID: 2959403710070417746}
+  m_Layer: 0
+  m_Name: SeerCreatePoolOnDeathModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2806811491898894271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699585991925002781}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5929290463519605178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699585991925002781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2959403710070417746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699585991925002781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823484159983732
+    - rid: 6209823484159983735
+    - rid: 6209823484159983913
+  visibleByDefault: 0
+  behaviours:
+  - rid: 6209823484159983698
+  references:
+    version: 2
+    RefIds:
+    - rid: 6209823484159983698
+      type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        triggers:
+        - rid: 6209823484159983702
+        effects:
+        - rid: 6209823484159983707
+    - rid: 6209823484159983702
+      type: {class: OnDeathModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        targetFilter:
+          rid: 6209823484159983703
+    - rid: 6209823484159983703
+      type: {class: IsTargetFilter, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        modifierTarget:
+          rid: 6209823484159983704
+    - rid: 6209823484159983704
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 6209823484159983707
+      type: {class: CreateBuffPoolModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        prefab: {fileID: 2871873907386341064, guid: f74c67f9149591d48bbbd98b457d3532, type: 3}
+        definition: {fileID: 11400000, guid: 0ea3d07e31741d741888622866c9fe47, type: 2}
+        durationPool:
+          name: duration_pool
+        parameterFactories:
+        - rid: 6209823484159983738
+        - rid: 6209823484159983739
+    - rid: 6209823484159983732
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823484159983734
+    - rid: 6209823484159983734
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+    - rid: 6209823484159983735
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823484159983737
+    - rid: 6209823484159983737
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+    - rid: 6209823484159983738
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+        value:
+          name: attack_power
+    - rid: 6209823484159983739
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+        value:
+          name: duration
+    - rid: 6209823484159983913
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration_pool
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823484159983915
+    - rid: 6209823484159983915
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration_pool

@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1685216153793247818
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3762056874353552686}
+  - component: {fileID: 2641979750521406347}
+  - component: {fileID: 3242021679189157586}
+  m_Layer: 0
+  m_Name: ArcherIncreaseAttackSpeedBaseOnBloodAppliedModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3762056874353552686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685216153793247818}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2641979750521406347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685216153793247818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3242021679189157586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685216153793247818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823428713119941
+    - rid: 6209823428713119946
+  visibleByDefault: 1
+  behaviours:
+  - rid: 6209823428713119939
+  - rid: 6209823428713119940
+  references:
+    version: 2
+    RefIds:
+    - rid: 6209823428713119939
+      type: {class: SetStackBaseOnAmountOfModifierAppliedByCharacterModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        modifierDefinition: {fileID: 11400000, guid: b70afe9c4eb269543b9b68541f59e206, type: 2}
+    - rid: 6209823428713119940
+      type: {class: StackModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        startingStack: 0
+        maximum:
+          name: 
+    - rid: 6209823428713119941
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        definition: {fileID: 11400000, guid: c10d7758c1ee1c246b53ca08cc78f42c, type: 2}
+        baseValue:
+          rid: 6209823428713119943
+    - rid: 6209823428713119943
+      type: {class: MultiplyValue, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        a:
+          rid: 6209823428713119945
+        b:
+          rid: 6209823428713119944
+    - rid: 6209823428713119944
+      type: {class: ModifierStackValue, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 6209823428713119945
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_speed_per_stack
+    - rid: 6209823428713119946
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_speed_per_stack
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823428713119949
+    - rid: 6209823428713119949
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_speed_per_stack

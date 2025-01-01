@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2da2a6bacaf34da5da052d70c169c, type: 3}
+  m_Name: SeerBasic
+  m_EditorClassIdentifier: 
+  id: 583f27f933430694893ccbf3929fa8cf
+  title: Basic
+  descriptionOld: Throw a dark sphere that deals {0} damage to an enemy in {1} meters.
+  prefab: {fileID: 95085129432284298, guid: eb9b88921ce2598438363f68dc3259e1, type: 3}
+  description:
+    text: Throw a dark sphere that deals {0} damage to an enemy in {1} meters.
+    parameters: []
+  references:
+    version: 2
+    RefIds: []

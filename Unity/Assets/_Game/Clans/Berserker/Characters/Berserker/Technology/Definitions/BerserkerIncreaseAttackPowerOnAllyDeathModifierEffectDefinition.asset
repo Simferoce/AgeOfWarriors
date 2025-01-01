@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: BerserkerIncreaseAttackPowerOnAllyDeathModifierEffectDefinition
+  m_EditorClassIdentifier: 
+  id: c1351fabe9fe96a45b2cc61b8f6b6f76
+  title: Vengeance
+  icon: {fileID: 21300000, guid: 3dc6b1987b1481045b88e39383c9cca6, type: 3}
+  description:
+    text: Increase attack power by {0}.
+    parameters:
+    - rid: 6209823463429374091
+  prefab: {fileID: 6703684422447594440, guid: d0d646bb56735fd409ec69dbfbb8614f, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823463429374091
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 730b30fdee20e634e807921bd2ff378f, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

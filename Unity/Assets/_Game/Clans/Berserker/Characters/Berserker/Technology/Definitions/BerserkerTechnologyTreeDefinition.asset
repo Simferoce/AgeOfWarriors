@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ffc60288a9e8a141bf59d31ac5116a5, type: 3}
+  m_Name: BerserkerTechnologyTreeDefinition
+  m_EditorClassIdentifier: 
+  id: 05f2265648f06204c8b3e35d378d6c67
+  treeEditPanelPrefab: {fileID: 7604085960318588379, guid: e9ee6d80397f98d4abd20011b4cb077f, type: 3}
+  icon: {fileID: 21300000, guid: 3f81768c777543f4caa26855315337c2, type: 3}
+  rows:
+  - nodes:
+    - {fileID: 11400000, guid: f8583d2d75a38d847b58151ab613c6c9, type: 2}
+    - {fileID: 11400000, guid: 32fb815a265051b429a6611d80143204, type: 2}
+    - {fileID: 11400000, guid: b0a0279bdee0683458e9ca36026e3c12, type: 2}
+    level: 0
+  - nodes:
+    - {fileID: 11400000, guid: 72fd5361441b17542b2f584f799f509e, type: 2}
+    - {fileID: 11400000, guid: 3d58ce9bdbf80a841931ec933b213e03, type: 2}
+    level: 0
+  - nodes:
+    - {fileID: 11400000, guid: 83175c66b34e056438efe37ce801d2a7, type: 2}
+    - {fileID: 11400000, guid: 8f2d4e5b5dc992b4f92d075329559d6a, type: 2}
+    - {fileID: 11400000, guid: 2baa3dc6ce8ef25428a6819f573de483, type: 2}
+    level: 5
+  - nodes:
+    - {fileID: 11400000, guid: f5665bb7d7e06ea46b56363a415b77a7, type: 2}
+    - {fileID: 11400000, guid: 407eaaa36b36d7f4dad8340cc31d4999, type: 2}
+    level: 0
+  - nodes:
+    - {fileID: 11400000, guid: b14e6d4cb01abe745958b535a3143e02, type: 2}
+    - {fileID: 11400000, guid: de649637b0bdf904194128224eb2ce11, type: 2}
+    level: 10
+  - nodes:
+    - {fileID: 11400000, guid: 5ee055c3c6b91324ba4191c7e06aee2a, type: 2}
+    - {fileID: 11400000, guid: 9fa2ac44eeedb3f4db33fe8730e5d841, type: 2}
+    level: 0
+  - nodes:
+    - {fileID: 11400000, guid: eaa27d94bf9d25f4886ce81654d950e9, type: 2}
+    - {fileID: 11400000, guid: 425cf232ad1d9ae4b99954b58e8edc7d, type: 2}
+    - {fileID: 11400000, guid: cf7c0b9853731b94da6f72b85abe8aaf, type: 2}
+    level: 15
+  - nodes:
+    - {fileID: 11400000, guid: 93a5a053be4c5c84292753b0ce7c9985, type: 2}
+    - {fileID: 11400000, guid: c44fee0afce60464ea61436321541d11, type: 2}
+    level: 0
+  - nodes:
+    - {fileID: 11400000, guid: 49ade75647e4a344290f75b065a6510e, type: 2}
+    - {fileID: 11400000, guid: bb8edf168b1302c478fb7972004698d0, type: 2}
+    - {fileID: 11400000, guid: f2de217765d0e424baaeee74dc0a533d, type: 2}
+    level: 20

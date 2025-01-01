@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5875246191266239433
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4702521908131283551}
+  - component: {fileID: 3446861436922147434}
+  - component: {fileID: 8459106335251950517}
+  m_Layer: 0
+  m_Name: ArcherApplyBloodOnAttackLandedModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4702521908131283551
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875246191266239433}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3446861436922147434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875246191266239433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8459106335251950517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5875246191266239433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce2900b525ddb454f88561c69c87d013, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  statisticRepository:
+    statistics:
+    - rid: 6209823407816311013
+    - rid: 6209823407816311016
+    - rid: 6209823407816311019
+    - rid: 6209823407816311048
+  visibleByDefault: 0
+  behaviours:
+  - rid: 6209823407816311022
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 6209823407816311013
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: maximum
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823407816311015
+    - rid: 6209823407816311015
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: maximum
+    - rid: 6209823407816311016
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823407816311018
+    - rid: 6209823407816311018
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+    - rid: 6209823407816311019
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_power_ratio
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823407816311021
+    - rid: 6209823407816311021
+      type: {class: ModifierParameterValueFloat, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_power_ratio
+    - rid: 6209823407816311022
+      type: {class: TriggerModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        triggers:
+        - rid: 6209823407816311023
+        effects:
+        - rid: 6209823416208064584
+    - rid: 6209823407816311023
+      type: {class: OnAttackLandedModifierTrigger, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        filter:
+          rid: -2
+    - rid: 6209823407816311048
+      type: {class: StatisticEntity, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: source
+        definition: {fileID: 0}
+        baseValue:
+          rid: 6209823407816311049
+    - rid: 6209823407816311049
+      type: {class: ModifierTargetValue, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        target:
+          rid: 6209823407816311050
+    - rid: 6209823407816311050
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 6209823416208064584
+      type: {class: ApplyModifierModifierEffect, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        definition: {fileID: 11400000, guid: b70afe9c4eb269543b9b68541f59e206, type: 2}
+        targets:
+        - rid: 6209823416208064585
+        parameterFactories:
+        - rid: 6209823416208064586
+        - rid: 6209823416208064587
+        - rid: 6209823416208064588
+        - rid: 6209823416208064589
+    - rid: 6209823416208064585
+      type: {class: TriggerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 6209823416208064586
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_power_ratio
+        value:
+          name: attack_power_ratio
+    - rid: 6209823416208064587
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+        value:
+          name: duration
+    - rid: 6209823416208064588
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: maximum
+        value:
+          name: maximum
+    - rid: 6209823416208064589
+      type: {class: StatisticEntityModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: source
+        value:
+          name: source
