@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7450b1304045e14c80f2d48cf27503c, type: 3}
+  m_Name: SeerReachTechnologyPerkDefinition2
+  m_EditorClassIdentifier: 
+  id: 3428f56a46a1b59488e7b1ee22b4ce4c
+  title: Increase Reach
+  icon: {fileID: 0}
+  description:
+    text: Increase reach by {0}.
+    parameters:
+    - rid: 6209823438895054953
+  prefab: {fileID: 2069518400063579166, guid: edbaaae9b072e7b41b514a58903a9fbe, type: 3}
+  technologyTreeIcon: {fileID: -3004578306453013569, guid: 1e00a1a74e2f9e247ad3b235c08e6594, type: 3}
+  requirements: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 6209823438895054953
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: reach
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 93bd2179b462c234989eccb02262fb54, type: 2}
+        asPercentage: 1
+        adjustment:
+          rid: 6209823438895054956
+    - rid: 6209823438895054956
+      type: {class: MinusOneAdjustment, ns: Game, asm: Assembly-CSharp}
+      data: 
