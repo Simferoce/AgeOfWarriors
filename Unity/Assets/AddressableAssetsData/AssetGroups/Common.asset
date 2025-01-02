@@ -182,6 +182,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Manager
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8a2637e36757bc24b8df9a2a15cea481
+    m_Address: Assets/_Game/Statistics/Definitions/TechnologyGainStatisticDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8a767edaf74a3e44b8612ce00ea7d4ec
     m_Address: Assets/_Game/Managers/GameSceneManager.prefab
     m_ReadOnly: 0

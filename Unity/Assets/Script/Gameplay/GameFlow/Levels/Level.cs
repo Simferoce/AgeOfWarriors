@@ -27,12 +27,12 @@ namespace Game
                 yield return GameSceneManager.Instance.Load(levelDefinition.SceneDefinition);
                 List<BaseEntity> baseEntities = Entity.All.OfType<BaseEntity>().OrderBy(x => x.transform.position.x).ToList();
 
-                GameObject agentGameObject = GameObject.Instantiate(playerLoadout.CommanderDefinition.AgentPrefab);
-                AgentEntity playerAgent = agentGameObject.GetComponent<AgentEntity>();
+                GameObject agentGameObject = new GameObject($"Agent - {FactionType.Player}");
+                AgentEntity playerAgent = agentGameObject.AddComponent<AgentEntity>();
                 playerAgent.Initialize(new AgentBehaviourPlayer(), playerLoadout, FactionType.Player, baseEntities.FirstOrDefault(), 1);
 
-                GameObject opponentGameObject = GameObject.Instantiate(levelDefinition.Loadout.CommanderDefinition.AgentPrefab);
-                AgentEntity opponentAgent = opponentGameObject.GetComponent<AgentEntity>();
+                GameObject opponentGameObject = new GameObject($"Agent - {FactionType.Opponent}");
+                AgentEntity opponentAgent = opponentGameObject.AddComponent<AgentEntity>();
                 opponentAgent.Initialize(new AgentBehaviourAI(), levelDefinition.Loadout, FactionType.Opponent, baseEntities.LastOrDefault(), -1);
 
                 HudWindow hudWindow = WindowManager.Instance.GetWindow<HudWindow>();

@@ -16,13 +16,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 48a86755a63b91a4a9976b1f70ccf755, type: 3}
   title: Berserker - Warbringer
   baseDefinition: {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
-  productionDuration: 2
-  cost: 15
-  reach: 0.6
-  speed: 0.5
-  attackSpeed: 0.5
-  attackPower: 50
-  maxHealth: 100
-  defense: 5
-  technologyGainPerSecond: 1
-  prefab: {fileID: 4332170309865714560, guid: 92d073bce4909a9468716d3d1a26abd7, type: 3}
+  prefab: {fileID: 2988126598304029916, guid: 92d073bce4909a9468716d3d1a26abd7, type: 3}
+  technologyTreeDefinition: {fileID: 0}

@@ -16,13 +16,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 25ee91c257825084eba59f4fa4654fdf, type: 3}
   title: Archer
   baseDefinition: {fileID: 0}
-  productionDuration: 2
-  cost: 10
-  reach: 2
-  speed: 0.5
-  attackSpeed: 0.75
-  attackPower: 12.5
-  maxHealth: 100
-  defense: 5
-  technologyGainPerSecond: 0
-  prefab: {fileID: 6705402225686340843, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+  prefab: {fileID: 5217243639580789687, guid: 2807a4706479e3e438658b9041c7d804, type: 3}
+  technologyTreeDefinition: {fileID: 11400000, guid: a9fb559a92b01a647b19f42ade259fa3, type: 2}

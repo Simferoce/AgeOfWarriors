@@ -25,7 +25,7 @@ namespace Game
         }
 
         [SerializeField] private List<EntityTag> tags = new List<EntityTag>();
-        [SerializeField] private StatisticRepository statisticRepository;
+        [SerializeField] private StatisticRepository statisticRepository = new StatisticRepository();
 
         public delegate void OnParentChangedDelegate(Entity entity, Entity oldParent, Entity newParent);
         public event OnParentChangedDelegate OnParentChanged;

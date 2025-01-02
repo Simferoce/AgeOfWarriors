@@ -9,36 +9,34 @@ using UnityEngine;
 
 namespace Game.Technology
 {
-    [Serializable]
     public class TechnologyHandler : IDisposable
     {
-        public delegate void PerkAcquiredDelegate(TechnologyPerkDefinition technologyPerkDefinition);
+        public const float MaxTechnology = 100f;
 
-        [SerializeField] private float maxTechnology;
-        [SerializeField] private List<TechnologyTreeDefinition> technologyTreeDefinitions;
+        public delegate void PerkAcquiredDelegate(TechnologyPerkDefinition technologyPerkDefinition);
 
         public event PerkAcquiredDelegate OnPerkAcquired;
         public event Action OnLeveledUp;
 
         public float CurrentTechnology { get; set; }
         public float CurrentLevel { get; set; }
-        public float CurrentTechnologyNormalized { get => CurrentTechnology / maxTechnology; }
-        public float MaxTechnology { get => maxTechnology; set => maxTechnology = value; }
+        public float CurrentTechnologyNormalized { get => CurrentTechnology / MaxTechnology; }
         public IReadOnlyList<TechnologyTree> TechnologyTrees { get => technologyTrees; }
 
         private Agent.AgentEntity agent;
         private List<TechnologyTree> technologyTrees = new List<TechnologyTree>();
+        private List<TechnologyTreeDefinition> technologyTreeDefinitions;
 
         public void Initialize(Agent.AgentEntity agent)
         {
             this.agent = agent;
+        }
 
-            foreach (TechnologyTreeDefinition technologyTreeDefinition in technologyTreeDefinitions)
-            {
-                TechnologyTree technologyTree = technologyTreeDefinition.Instantiate(agent);
-                technologyTree.OnPerkAcquired += PerkAcquired;
-                technologyTrees.Add(technologyTree);
-            }
+        public void AddTree(TechnologyTreeDefinition technologyTreeDefinition)
+        {
+            TechnologyTree technologyTree = technologyTreeDefinition.Instantiate(agent);
+            technologyTree.OnPerkAcquired += PerkAcquired;
+            technologyTrees.Add(technologyTree);
         }
 
         private void PerkAcquired(TechnologyPerkDefinition perk)
@@ -68,9 +66,9 @@ namespace Game.Technology
                 }
             }
 
-            if (CurrentTechnology >= maxTechnology)
+            if (CurrentTechnology >= MaxTechnology)
             {
-                CurrentTechnology -= maxTechnology;
+                CurrentTechnology -= MaxTechnology;
                 LevelUp();
             }
         }

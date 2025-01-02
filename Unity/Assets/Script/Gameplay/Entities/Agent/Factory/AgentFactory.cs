@@ -1,20 +1,16 @@
 ﻿using Game.Character;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Game.Agent
 {
-    [Serializable]
     public class AgentFactory
     {
-        [SerializeField] private int commandSlot = 1;
-
         public float TimeBeforeNextProductionNormalized => commands.Count == 0 ? -1 : 1 - commands[0].Progress;
 
         private List<AgentFactoryCommand> commands = new List<AgentFactoryCommand>();
         private AgentEntity agent;
+        private int commandSlot = 1;
 
         public void Initialize(AgentEntity agent)
         {

@@ -2,6 +2,7 @@
 using Game.Modifier;
 using Game.Statistics;
 using Game.Technology;
+using System.Linq;
 using UnityEngine;
 
 namespace Game.Agent
@@ -10,9 +11,6 @@ namespace Game.Agent
     [RequireComponent(typeof(ModifierHandler))]
     public class AgentEntity : Entity
     {
-        [SerializeField] private TechnologyHandler technology;
-        [SerializeField] private AgentFactory factory;
-
         public delegate void AgentObjectSpawnDelegate(AgentIdentity agentIdentity);
 
         public event AgentObjectSpawnDelegate OnAgentObjectSpawn;
@@ -31,6 +29,8 @@ namespace Game.Agent
         private FactionType faction;
         private BaseEntity agentBase;
         private int direction;
+        private TechnologyHandler technology = new TechnologyHandler();
+        private AgentFactory factory = new AgentFactory();
 
         public void Initialize(AgentBehaviour agentBehaviour, AgentLoadout agentLoadout, FactionType faction, BaseEntity agentBase, int direction)
         {
@@ -44,6 +44,14 @@ namespace Game.Agent
             loadout.Initialize(this);
             technology.Initialize(this);
             agentBehaviour.Initialize(this);
+
+            foreach (TechnologyTreeDefinition tree in agentLoadout.CharacterDefinitions.Select(x => x.TechnologyTreeDefinition))
+            {
+                if (tree != null)
+                {
+                    technology.AddTree(tree);
+                }
+            }
 
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => Faction));
             AgentIdentity agentIdentity = agentBase.AddOrGetCachedComponent<AgentIdentity>();

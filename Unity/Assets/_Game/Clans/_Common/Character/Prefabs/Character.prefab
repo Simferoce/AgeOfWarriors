@@ -59,14 +59,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e9fa78c47bc8147bc985d3200f0230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: 
+  tags: 00000000
   statisticRepository:
-    statistics: []
+    statistics:
+    - rid: 7279809374671601732
+    - rid: 7279809374671601734
+    - rid: 7279809374671601736
+    - rid: 7279809374671601738
+    - rid: 7279809374671601740
+    - rid: 7279809374671601742
+    - rid: 7279809374671601744
+    - rid: 7279809374671601746
+    - rid: 7279809374671601748
   rigidbody: {fileID: 9215057588866617565}
   hitbox: {fileID: 8271833102721241429}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7279809374671601732
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: production_duration
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809374671601733
+    - rid: 7279809374671601733
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 2
+    - rid: 7279809374671601734
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: cost
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809374671601735
+    - rid: 7279809374671601735
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 15
+    - rid: 7279809374671601736
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: reach
+        definition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
+        baseValue:
+          rid: 7279809374671601737
+    - rid: 7279809374671601737
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0.5
+    - rid: 7279809374671601738
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: speed
+        definition: {fileID: 11400000, guid: b6e7acc220a4175489e13715c3932744, type: 2}
+        baseValue:
+          rid: 7279809374671601739
+    - rid: 7279809374671601739
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0.5
+    - rid: 7279809374671601740
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        definition: {fileID: 11400000, guid: d71a191ae10eaf24f8e2f26ada07d54a, type: 2}
+        baseValue:
+          rid: 7279809374671601741
+    - rid: 7279809374671601741
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 2
+    - rid: 7279809374671601742
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+        definition: {fileID: 11400000, guid: ff6ee24adf3c8424aad04267addb363d, type: 2}
+        baseValue:
+          rid: 7279809374671601743
+    - rid: 7279809374671601743
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 10
+    - rid: 7279809374671601744
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: max_health
+        definition: {fileID: 11400000, guid: 73d27da68cca71f4ebc2e071904b1f80, type: 2}
+        baseValue:
+          rid: 7279809374671601745
+    - rid: 7279809374671601745
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 100
+    - rid: 7279809374671601746
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: defense
+        definition: {fileID: 11400000, guid: 7f97419c07cf32d49ae612434c1fb6b8, type: 2}
+        baseValue:
+          rid: 7279809374671601747
+    - rid: 7279809374671601747
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 15
+    - rid: 7279809374671601748
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: technology_gain
+        definition: {fileID: 11400000, guid: 8a2637e36757bc24b8df9a2a15cea481, type: 2}
+        baseValue:
+          rid: 7279809374671601749
+    - rid: 7279809374671601749
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0
 --- !u!50 &9215057588866617565
 Rigidbody2D:
   serializedVersion: 5

@@ -1,4 +1,5 @@
 using Game.Agent;
+using Game.Technology;
 using System.Collections;
 using System.Linq;
 using UnityEngine;
@@ -28,14 +29,14 @@ namespace Game
         public void LevelUp()
         {
             AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
-            agentEntity.Technology.CurrentTechnology += agentEntity.Technology.MaxTechnology;
+            agentEntity.Technology.CurrentTechnology += TechnologyHandler.MaxTechnology;
         }
 
         [ContextMenu("LevelToMaxLevel")]
         public void LevelToMaxLevel()
         {
             AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
-            agentEntity.Technology.CurrentTechnology += agentEntity.Technology.MaxTechnology * 20;
+            agentEntity.Technology.CurrentTechnology += TechnologyHandler.MaxTechnology * 20;
         }
     }
 }

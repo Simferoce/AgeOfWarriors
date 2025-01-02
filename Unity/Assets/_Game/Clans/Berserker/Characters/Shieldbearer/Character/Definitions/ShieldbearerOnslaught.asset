@@ -16,13 +16,5 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 6f705d4655db19241a1b38296a878c95, type: 3}
   title: Shieldbearer - Onslaught
   baseDefinition: {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
-  productionDuration: 2
-  cost: 15
-  reach: 0.5
-  speed: 0.5
-  attackSpeed: 2
-  attackPower: 10
-  maxHealth: 100
-  defense: 15
-  technologyGainPerSecond: 0
-  prefab: {fileID: 7767413754373852290, guid: 00d8961f7d26e1a44ad58fcddff974d5, type: 3}
+  prefab: {fileID: 9124966954886177758, guid: 00d8961f7d26e1a44ad58fcddff974d5, type: 3}
+  technologyTreeDefinition: {fileID: 0}
