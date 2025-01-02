@@ -39,7 +39,7 @@ namespace Game.Ability
 
         public override bool CanUse()
         {
-            return base.CanUse() && effects.All(x => x.CanBeApplied()) && IsCasting == false;
+            return base.CanUse() && IsCasting == false;
         }
 
         public override void InternalUse()

@@ -19,41 +19,54 @@ namespace Game.Components
         public event Action OnCastBegin;
         public event Action OnCastEnd;
 
-        public List<AbilityEntity> Abilities { get => abilities; set => abilities = value; }
         public float LastAbilityUsed { get; set; }
         public List<TransformTag> TransformTags { get; set; }
         public bool IsCasting { get; set; }
-
+        public int AbilityCount => abilities.Count;
+        public List<AbilityEntity> Abilities { get => abilities; }
 
         private List<AbilityEntity> abilities = new List<AbilityEntity>();
+        private GameObject abilitiesParent;
 
-        private void Awake()
+        public void Initialize()
         {
             TransformTags = GetComponentsInChildren<TransformTag>().ToList();
             Entity = GetComponentInParent<Entity>();
-        }
-
-        private void Start()
-        {
-            GameObject abilitiesParent = new GameObject("Abilities");
+            abilitiesParent = new GameObject("Abilities");
             abilitiesParent.transform.parent = transform;
 
             foreach (AbilityDefinition definition in abilitiesDefinition)
-            {
-                AbilityEntity ability = definition.GetAbility();
-                ability.transform.parent = abilitiesParent.transform;
-                ability.Initialize(this);
-                ability.OnAbilityUsed += Ability_OnAbilityUsed;
-
-                abilities.Add(ability);
-            }
+                AddAbility(definition);
 
             OnAbilityInitialized?.Invoke();
         }
 
-        private void Ability_OnAbilityUsed(AbilityEntity ability)
+        public void AddAbility(AbilityDefinition definition)
         {
-            OnAbilityUsed?.Invoke(ability);
+            AbilityEntity ability = definition.GetAbility();
+            ability.transform.parent = abilitiesParent.transform;
+            ability.Initialize(this);
+
+            abilities.Add(ability);
+        }
+
+        public bool CanUse(int index)
+        {
+            if (IsCasting)
+                return false;
+
+            return index < abilities.Count && abilities[index].CanUse();
+        }
+
+        public void Use(int index)
+        {
+            abilities[index].Use();
+            OnAbilityUsed?.Invoke(abilities[index]);
+        }
+
+        public AbilityEntity Get(int index)
+        {
+            return abilities[index];
         }
 
         private void Update()
@@ -61,17 +74,16 @@ namespace Game.Components
             foreach (AbilityEntity ability in abilities)
             {
                 if (ability.IsCasting)
+                {
                     ability.Tick();
+                }
             }
         }
 
         private void OnDestroy()
         {
             foreach (AbilityEntity ability in abilities)
-            {
                 ability.Dispose();
-                ability.OnAbilityUsed -= Ability_OnAbilityUsed;
-            }
         }
 
         public void Interupt()

@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: c4f194203f2e279478793ce571f47640
   title: 
+  icon: {fileID: 21300000, guid: 0d4350df723728b4a83095f3444c0dd6, type: 3}
   description:
-    text: Increase the attack power and attack speed of every unit.
+    text: Increase the attack power, attack speed and speed of every unit for 10
+      seconds.
     parameters: []
   prefab: {fileID: 916287337667100849, guid: 7fb2fbcfe89032e45b19dce1ee05edf9, type: 3}
   references:

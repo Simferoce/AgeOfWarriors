@@ -1,17 +1,11 @@
-﻿using UnityEngine;
+﻿using Game.Ability;
+using UnityEngine;
 
 namespace Game
 {
     [CreateAssetMenu(fileName = "CommanderActiveDefinition", menuName = "Definition/CommanderActiveDefinition")]
-    public class CommanderActiveDefinition : Definition
+    public class CommanderActiveDefinition : AbilityDefinition
     {
-        [SerializeField] private string title;
-        [SerializeField] private Description description;
-        [SerializeField] private GameObject prefab;
 
-        public string ParseDescription(Entity source)
-        {
-            return description.Parse(source);
-        }
     }
 }

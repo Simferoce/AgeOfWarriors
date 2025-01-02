@@ -92,6 +92,10 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("thorn", StatisticDefinitionRegistry.Instance.Thorn, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.Thorn]));
 
             Health = MaxHealth;
+
+            Caster caster = GetCachedComponent<Caster>();
+            caster.Initialize();
+
             stateMachine.Initialize(new MoveState(this));
         }
 

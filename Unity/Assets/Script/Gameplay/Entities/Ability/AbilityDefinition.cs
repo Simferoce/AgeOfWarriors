@@ -6,10 +6,12 @@ namespace Game.Ability
     public class AbilityDefinition : Definition
     {
         [SerializeField] private string title;
+        [SerializeField] private Sprite icon;
         [SerializeField] private Description description;
         [SerializeField] private GameObject prefab;
 
         public string Title { get => title; }
+        public Sprite Icon { get => icon; set => icon = value; }
 
         public virtual string ParseDescription(Entity source)
         {

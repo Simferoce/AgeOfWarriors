@@ -1,5 +1,4 @@
-﻿using Game.Ability;
-using Game.Agent;
+﻿using Game.Agent;
 using Game.Components;
 using System.Linq;
 using UnityEngine;
@@ -28,13 +27,15 @@ namespace Game.Character
             protected override void InternalUpdate()
             {
                 character.RefreshDirection();
-                if (!character.IsDead && character.Health > 0 && character.GetCachedComponent<Caster>().IsCasting == false)
+                Caster caster = character.GetCachedComponent<Caster>();
+
+                if (!character.IsDead && character.Health > 0)
                 {
-                    foreach (AbilityEntity ability in character.GetCachedComponent<Caster>().Abilities)
+                    for (int i = 0; i < caster.AbilityCount; ++i)
                     {
-                        if (ability.CanUse())
+                        if (caster.CanUse(i))
                         {
-                            ability.Use();
+                            caster.Use(i);
                             break;
                         }
                     }

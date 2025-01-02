@@ -14,7 +14,6 @@ namespace Game.Ability
 
         public virtual bool Validate() { return false; }
         public abstract void Apply();
-        public virtual bool CanBeApplied() { return true; }
         public virtual void OnAbilityEnded() { }
         public virtual void OnAbilityStarted() { }
         public virtual void Interrupt() { }

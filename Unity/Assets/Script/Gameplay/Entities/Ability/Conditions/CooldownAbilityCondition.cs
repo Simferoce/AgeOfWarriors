@@ -5,13 +5,14 @@ using UnityEngine;
 namespace Game.Ability
 {
     [Serializable]
-    public class CooldownAbilityCondition : AbilityCondition
+    public class CooldownAbilityCondition : AbilityCondition, ICooldown
     {
         [SerializeField] private StatisticReference<float> cooldown;
 
         private float lastUsed = 0f;
 
-        public float Cooldown => cooldown.GetOrThrow().Get<float>();
+        public float Remaining => Mathf.Clamp(cooldown.GetOrThrow().Get<float>() - (Time.time - lastUsed), 0, cooldown.GetOrThrow().Get<float>());
+        public float Total => cooldown.GetOrThrow().Get<float>();
 
         public override void Initialize(AbilityEntity ability)
         {
@@ -22,7 +23,7 @@ namespace Game.Ability
 
         public override bool Execute()
         {
-            return Time.time - lastUsed > Cooldown;
+            return Time.time - lastUsed > cooldown.GetOrThrow().Get<float>();
         }
 
         public override void OnAbilityEnded()

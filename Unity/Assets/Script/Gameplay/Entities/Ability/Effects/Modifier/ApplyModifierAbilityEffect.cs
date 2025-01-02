@@ -11,6 +11,7 @@ namespace Game.Ability
     public class ApplyModifierAbilityEffect : AbilityEffect
     {
         [SerializeField] private ModifierDefinition modifierDefinition;
+        [SerializeField] private bool targetSelf;
         [SerializeReference, SubclassSelector] private List<ModifierParameterFactory> parameters;
 
         public override void Initialize(AbilityEntity ability)
@@ -27,8 +28,17 @@ namespace Game.Ability
 
             ModifierApplier modifierApplier = Ability.GetCachedComponent<ModifierApplier>();
 
-            foreach (ModifierHandler target in targets)
-                modifierApplier.Apply(modifierDefinition, target, parameters.Select(x => x.Create(Ability)).ToArray());
+            if (targetSelf)
+            {
+                modifierApplier.Apply(modifierDefinition, Ability.Caster.Entity.GetCachedComponent<ModifierHandler>(), parameters.Select(x => x.Create(Ability)).ToArray());
+            }
+            else
+            {
+                foreach (ModifierHandler target in targets)
+                {
+                    modifierApplier.Apply(modifierDefinition, target, parameters.Select(x => x.Create(Ability)).ToArray());
+                }
+            }
         }
     }
 }

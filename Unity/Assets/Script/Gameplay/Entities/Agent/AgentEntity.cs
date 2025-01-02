@@ -1,4 +1,5 @@
 ﻿using Game.Character;
+using Game.Components;
 using Game.Modifier;
 using Game.Statistics;
 using Game.Technology;
@@ -9,6 +10,7 @@ namespace Game.Agent
 {
     [RequireComponent(typeof(ModifierApplier))]
     [RequireComponent(typeof(ModifierHandler))]
+    [RequireComponent(typeof(Caster))]
     public class AgentEntity : Entity
     {
         public delegate void AgentObjectSpawnDelegate(AgentIdentity agentIdentity);
@@ -45,6 +47,15 @@ namespace Game.Agent
             technology.Initialize(this);
             agentBehaviour.Initialize(this);
 
+            StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => Faction));
+            AgentIdentity agentIdentity = agentBase.AddOrGetCachedComponent<AgentIdentity>();
+            agentIdentity.Set(this, nextSpawneeNumber++, direction);
+            agentBase.Initialize();
+
+            Caster caster = this.GetCachedComponent<Caster>();
+            caster.Initialize();
+            caster.AddAbility(agentLoadout.CommanderDefinition.Active);
+
             foreach (TechnologyTreeDefinition tree in agentLoadout.CharacterDefinitions.Select(x => x.TechnologyTreeDefinition))
             {
                 if (tree != null)
@@ -52,11 +63,6 @@ namespace Game.Agent
                     technology.AddTree(tree);
                 }
             }
-
-            StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => Faction));
-            AgentIdentity agentIdentity = agentBase.AddOrGetCachedComponent<AgentIdentity>();
-            agentIdentity.Set(this, nextSpawneeNumber++, direction);
-            agentBase.Initialize();
 
             base.Initialize();
         }

@@ -1,5 +1,4 @@
-﻿using Game.Agent;
-using Game.Components;
+﻿using Game.Components;
 using Game.Statistics;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,7 @@ using UnityEngine;
 namespace Game.Ability
 {
     [RequireComponent(typeof(AttackFactory))]
-    public abstract class AbilityEntity : Entity<AbilityDefinition>
+    public abstract class AbilityEntity : Entity<AbilityDefinition>, ICooldown
     {
         [SerializeReference, SubclassSelector] protected List<AbilityCondition> conditions = new List<AbilityCondition>();
 
@@ -23,12 +22,14 @@ namespace Game.Ability
         public virtual List<Target> Targets => new List<Target>();
         public override bool IsActive => base.IsActive && Caster.enabled;
         public FactionType Faction { get; set; }
+        public float Remaining => (conditions.FirstOrDefault(x => x is ICooldown) as ICooldown)?.Remaining ?? 0f;
+        public float Total => (conditions.FirstOrDefault(x => x is ICooldown) as ICooldown)?.Total ?? 0f;
 
         public virtual void Initialize(Caster caster)
         {
             Caster = caster;
             Parent = caster.Entity;
-            Faction = caster.Entity.GetCachedComponent<AgentIdentity>().Faction;
+            Faction = caster.Entity["faction"].Get<FactionType>();
 
             base.Initialize();
 

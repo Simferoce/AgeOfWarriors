@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8753361514612480985}
+  - component: {fileID: 8480127442901421598}
+  - component: {fileID: 3412509217037509149}
   m_Layer: 0
   m_Name: SavageCommanderActive
   m_TagString: Untagged
@@ -31,3 +33,136 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8480127442901421598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916287337667100849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3412509217037509149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916287337667100849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f679ba79f4b694dbbd33c492f6d790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  statisticRepository:
+    statistics:
+    - rid: 7279809374671601822
+    - rid: 7279809374671601824
+    - rid: 7279809374671601829
+    - rid: 7279809374671601827
+    - rid: 7279809374671601848
+  conditions:
+  - rid: 7279809374671601826
+  effects:
+  - rid: 7279809374671601831
+  references:
+    version: 2
+    RefIds:
+    - rid: 7279809374671601822
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809374671601823
+    - rid: 7279809374671601823
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 15
+    - rid: 7279809374671601824
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809374671601825
+    - rid: 7279809374671601825
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1.25
+    - rid: 7279809374671601826
+      type: {class: CooldownAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        cooldown:
+          name: cooldown
+    - rid: 7279809374671601827
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: cooldown
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809374671601828
+    - rid: 7279809374671601828
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 30
+    - rid: 7279809374671601829
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: speed
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809374671601830
+    - rid: 7279809374671601830
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 1.25
+    - rid: 7279809374671601831
+      type: {class: ApplyModifierAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        modifierDefinition: {fileID: 11400000, guid: 9b7027eb401dc924cb26b81b3bb8a5aa, type: 2}
+        targetSelf: 1
+        parameters:
+        - rid: 7279809374671601832
+        - rid: 7279809374671601833
+        - rid: 7279809374671601834
+        - rid: 7279809374671601850
+    - rid: 7279809374671601832
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+        value:
+          name: attack_power
+    - rid: 7279809374671601833
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        value:
+          name: attack_speed
+    - rid: 7279809374671601834
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: speed
+        value:
+          name: speed
+    - rid: 7279809374671601848
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: duration
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809374671601849
+    - rid: 7279809374671601849
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 10
+    - rid: 7279809374671601850
+      type: {class: StatisticModifierParameterFactory, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        name: duration
+        value:
+          name: duration
