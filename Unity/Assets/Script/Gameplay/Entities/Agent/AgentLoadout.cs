@@ -9,9 +9,11 @@ namespace Game.Agent
     [Serializable]
     public class AgentLoadout
     {
-        [SerializeField] private List<CharacterDefinition> agentIdentitysDefinition = new List<CharacterDefinition>();
+        [SerializeField] private CommanderDefinition commanderDefinition;
 
-        public int AmountOfAgentObjectAvailable => agentIdentitysDefinition.Count;
+        public int AmountOfAgentObjectAvailable => commanderDefinition.CharacterDefinitions.Count;
+        public CommanderDefinition CommanderDefinition { get => commanderDefinition; set => commanderDefinition = value; }
+        public List<CharacterDefinition> CharacterDefinitions { get => commanderDefinition.CharacterDefinitions; }
 
         private AgentEntity agent;
 
@@ -22,10 +24,10 @@ namespace Game.Agent
 
         public CharacterDefinition GetCharacterDefinitionAtIndex(int index)
         {
-            if (index >= agentIdentitysDefinition.Count)
+            if (index >= commanderDefinition.CharacterDefinitions.Count)
                 return null;
 
-            CharacterDefinition agentIdentityDefinition = agentIdentitysDefinition[index];
+            CharacterDefinition agentIdentityDefinition = commanderDefinition.CharacterDefinitions[index];
             ModifierHandler modifierHandler = agent.GetCachedComponent<ModifierHandler>();
             foreach (ModifierEntity modifier in modifierHandler.GetModifiers())
             {

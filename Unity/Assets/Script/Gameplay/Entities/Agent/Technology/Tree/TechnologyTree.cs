@@ -48,7 +48,7 @@ namespace Game.Technology
             if (IsUnlocked(definition))
                 return new TechnologyPerkStatusUnlocked();
 
-            if (LevelSetup.Instance.UnrestrictedTechnology)
+            if (CheatManager.Instance.UnrestrictedTechnology)
                 return new TechnologyPerkStatusUnlockable();
 
             int currentRow = UnlockableRow();

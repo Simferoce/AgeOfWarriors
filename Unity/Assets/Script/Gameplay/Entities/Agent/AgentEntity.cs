@@ -10,14 +10,8 @@ namespace Game.Agent
     [RequireComponent(typeof(ModifierHandler))]
     public class AgentEntity : Entity
     {
-        [SerializeField] private FactionType faction;
-        [SerializeField] private BaseEntity agentBase;
-        [SerializeField] private int direction;
-        [SerializeField] private float currencyGainRate = 5f;
         [SerializeField] private TechnologyHandler technology;
         [SerializeField] private AgentFactory factory;
-        [SerializeField] private AgentLoadout loadout;
-        [SerializeReference, SubclassSelector] private AgentBehaviour agentBehaviour;
 
         public delegate void AgentObjectSpawnDelegate(AgentIdentity agentIdentity);
 
@@ -32,24 +26,31 @@ namespace Game.Agent
         public FactionType Faction { get => faction; set => faction = value; }
 
         private int nextSpawneeNumber = 0;
+        private AgentLoadout loadout;
+        private AgentBehaviour agentBehaviour;
+        private FactionType faction;
+        private BaseEntity agentBase;
+        private int direction;
 
-        protected override void Awake()
+        public void Initialize(AgentBehaviour agentBehaviour, AgentLoadout agentLoadout, FactionType faction, BaseEntity agentBase, int direction)
         {
-            base.Awake();
+            loadout = agentLoadout;
+            this.agentBehaviour = agentBehaviour;
+            this.faction = faction;
+            this.agentBase = agentBase;
+            this.direction = direction;
+
             factory.Initialize(this);
             loadout.Initialize(this);
             technology.Initialize(this);
             agentBehaviour.Initialize(this);
 
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => Faction));
-            base.Initialize();
-        }
-
-        private void Start()
-        {
             AgentIdentity agentIdentity = agentBase.AddOrGetCachedComponent<AgentIdentity>();
             agentIdentity.Set(this, nextSpawneeNumber++, direction);
             agentBase.Initialize();
+
+            base.Initialize();
         }
 
         private void Update()
@@ -58,7 +59,7 @@ namespace Game.Agent
             technology.Update();
             agentBehaviour.Update();
 
-            Currency += currencyGainRate * Time.deltaTime;
+            Currency += 5f * Time.deltaTime;
         }
 
         protected override void OnDestroy()
@@ -70,7 +71,7 @@ namespace Game.Agent
         public bool TryQueueSpawnAgentObject(int index)
         {
             CharacterDefinition characterDefinition = Loadout.GetCharacterDefinitionAtIndex(index);
-            return factory.QueueLaneObject(new AgentFactoryCommand(this, agentBase.SpawnPoint, characterDefinition.ProductionDuration / LevelSetup.Instance.FactorySpeed, characterDefinition), characterDefinition.Cost);
+            return factory.QueueLaneObject(new AgentFactoryCommand(this, agentBase.SpawnPoint, characterDefinition.ProductionDuration / CheatManager.Instance.FactorySpeed, characterDefinition), characterDefinition.Cost);
         }
 
         public CharacterEntity SpawnAgentObject(CharacterDefinition characterDefinition, Vector3 position, int direction)

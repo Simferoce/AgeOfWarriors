@@ -219,3 +219,4 @@ C:\fakepath(69,8-58): warning X3571: pow(f, e) will not work for negative f, use
 C:\fakepath(77,9-43): warning X3571: pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
 
 [1229/223458.823:ERROR:media_internals.cc(112)] Cannot get RenderProcessHost
+[0101/135926.140:INFO:CONSOLE(1)] "Long rAF frame-time", source: file:///C:/Program%20Files/Adobe/Adobe%20Photoshop%202020/Required/www-rich-tooltips/build/external.js (1)

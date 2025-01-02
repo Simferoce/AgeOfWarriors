@@ -27,6 +27,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 04a81197fefa2354f9f2cffd8d7bae74
+    m_Address: Assets/_Game/Clans/Berserker/Commanders/Savage/Definitions/SavageCommanderDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Commander
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 059947ec54c0ceb46955f3cbe50ddf82
     m_Address: Assets/_Game/UI/Windows/LevelSelectionWindow/LevelSelectionWindow.prefab
     m_ReadOnly: 0
@@ -63,11 +69,23 @@ MonoBehaviour:
     m_SerializedLabels:
     - Window
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 239bedfe4c8e6dc45aa9fe3e6a65fd5c
+    m_Address: Assets/_Game/Clans/Berserker/Commanders/Chieftain/Definitions/ChieftainCommanderDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Commander
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2825126f3d8ee3941b6ea8c4d91818b8
     m_Address: Assets/_Game/Statistics/CooldownStatisticDefinition.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 291461f1c61680c41b56854932c63188
+    m_Address: Assets/_Game/Managers/CheatManager.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Manager
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2cda990e2423bbf4892e6590ba056729
     m_Address: Assets/_Game/Envionments/Forest/Scenes/ForestLevel.unity
@@ -176,6 +194,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 90f5bd1d0c7f2f040b64a02daa4bcf05
+    m_Address: Assets/_Game/Clans/Berserker/Commanders/Erudit/Definitions/EruditCommanderDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Commander
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 93bd2179b462c234989eccb02262fb54
     m_Address: Assets/_Game/Statistics/Definitions/MultiplierReachStatisticDefinition.asset
     m_ReadOnly: 0
@@ -246,6 +270,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c997f0dcdceda554a9f23040f9f0659d
+    m_Address: Assets/_Game/Managers/CommanderRepository.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Manager
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d71a191ae10eaf24f8e2f26ada07d54a
     m_Address: Assets/_Game/Statistics/AttackSpeedStatisticDefinition.asset
     m_ReadOnly: 0
@@ -263,6 +293,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f0845f13c7072ea47813157c0f019c1c
+    m_Address: Assets/_Game/UI/Windows/LoadoutSelectionWindow/Prefabs/LoadoutSelectionWindow.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Window
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f0b96f0279dab7541859a52945eef1cf
     m_Address: Assets/_Game/UI/Window/InspectorAbilityWindow/Prefabs/InspectorAbilityWindow.prefab

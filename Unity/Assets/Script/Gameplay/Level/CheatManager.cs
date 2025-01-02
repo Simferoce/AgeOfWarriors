@@ -1,19 +1,12 @@
 using Game.Agent;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class LevelSetup : MonoBehaviour
+    public class CheatManager : Manager<CheatManager>
     {
-        public static LevelSetup Instance;
-
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        static void Init()
-        {
-            Instance = null;
-        }
-
         [SerializeField] private bool cheatCost;
         [SerializeField] private int maxCharacter = 10;
         [SerializeField] private float technologyGainMultiplier = 1;
@@ -26,9 +19,9 @@ namespace Game
         public float FactorySpeed { get => factorySpeed; set => factorySpeed = value; }
         public bool UnrestrictedTechnology { get => unrestrictedTechnology; set => unrestrictedTechnology = value; }
 
-        private void Awake()
+        public override IEnumerator InitializeAsync()
         {
-            Instance = this;
+            yield break;
         }
 
         [ContextMenu("LevelUp")]

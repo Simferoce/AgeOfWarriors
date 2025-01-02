@@ -64,7 +64,7 @@ namespace Game.Technology
             {
                 if (character.TryGetCachedComponent<AgentIdentity>(out AgentIdentity agentIdentity) && agentIdentity.Agent == agent)
                 {
-                    CurrentTechnology += LevelSetup.Instance.TechnologyGainMultiplier * character.TechnologyGainPerSecond * Time.deltaTime;
+                    CurrentTechnology += CheatManager.Instance.TechnologyGainMultiplier * character.TechnologyGainPerSecond * Time.deltaTime;
                 }
             }
 

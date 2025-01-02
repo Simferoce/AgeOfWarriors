@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Game.Agent;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -8,14 +9,12 @@ namespace Game
     {
         [SerializeField] private SceneDefinition sceneDefinition;
         [SerializeField] private string title;
-        [SerializeField] private string description;
-        [SerializeField] private CommanderDefinition commanderDefinition;
+        [SerializeField] private AgentLoadout loadout;
         [SerializeReference, SubclassSelector] private List<LevelObjective> objectives;
 
         public SceneDefinition SceneDefinition { get => sceneDefinition; }
         public string Title { get => title; set => title = value; }
-        public string Description { get => description; set => description = value; }
-        public CommanderDefinition CommanderDefinition { get => commanderDefinition; set => commanderDefinition = value; }
+        public AgentLoadout Loadout { get => loadout; set => loadout = value; }
         public List<LevelObjective> Objectives { get => objectives; set => objectives = value; }
     }
 }

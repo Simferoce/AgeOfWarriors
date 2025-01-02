@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Game.Agent;
+using System.Collections;
 
 namespace Game
 {
@@ -22,12 +23,12 @@ namespace Game
             CurrentState = mainMenu;
         }
 
-        public void LoadLevel(LevelDefinition levelDefinition)
+        public void LoadLevel(LevelDefinition levelDefinition, AgentLoadout playerLoadout)
         {
             if (CurrentState != null)
                 CurrentState.Exit();
 
-            Level level = new Level(levelDefinition);
+            Level level = new Level(levelDefinition, playerLoadout);
             level.Load();
 
             CurrentState = level;

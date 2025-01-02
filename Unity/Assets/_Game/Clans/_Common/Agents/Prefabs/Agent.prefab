@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3037483473999663325}
   - component: {fileID: 6983515966081584196}
   m_Layer: 0
-  m_Name: OpponentAgent
+  m_Name: Agent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,26 +49,18 @@ MonoBehaviour:
   tags: 
   statisticRepository:
     statistics: []
-  faction: 2
-  agentBase: {fileID: 0}
-  direction: -1
-  currencyGainRate: 1
   technology:
-    maxTechnology: 0
-    technologyTreeDefinitions: []
+    maxTechnology: 100
+    technologyTreeDefinitions:
+    - {fileID: 11400000, guid: 493c9b5672c57964cae45e7167a0b422, type: 2}
+    - {fileID: 11400000, guid: 05f2265648f06204c8b3e35d378d6c67, type: 2}
+    - {fileID: 11400000, guid: a9fb559a92b01a647b19f42ade259fa3, type: 2}
+    - {fileID: 11400000, guid: a36919002c2d6fc4098639b47bb5cc10, type: 2}
   factory:
     commandSlot: 1
-  loadout:
-    agentIdentitysDefinition: []
-  agentBehaviour:
-    rid: 7754703125069692928
   references:
     version: 2
-    RefIds:
-    - rid: 7754703125069692928
-      type: {class: AgentBehaviourAI, ns: Game.Agent, asm: Assembly-CSharp}
-      data:
-        active: 1
+    RefIds: []
 --- !u!114 &3037483473999663325
 MonoBehaviour:
   m_ObjectHideFlags: 0
