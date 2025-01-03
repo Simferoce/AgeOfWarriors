@@ -8,9 +8,6 @@ using UnityEngine;
 
 namespace Game.Agent
 {
-    [RequireComponent(typeof(ModifierApplier))]
-    [RequireComponent(typeof(ModifierHandler))]
-    [RequireComponent(typeof(Caster))]
     public class AgentEntity : Entity
     {
         public delegate void AgentObjectSpawnDelegate(AgentIdentity agentIdentity);
@@ -36,6 +33,10 @@ namespace Game.Agent
 
         public void Initialize(AgentBehaviour agentBehaviour, AgentLoadout agentLoadout, FactionType faction, BaseEntity agentBase, int direction)
         {
+            ModifierHandler modifierHandler = AddOrGetCachedComponent<ModifierHandler>();
+            Caster caster = AddOrGetCachedComponent<Caster>();
+            ModifierApplier modifierApplier = AddOrGetCachedComponent<ModifierApplier>();
+
             loadout = agentLoadout;
             this.agentBehaviour = agentBehaviour;
             this.faction = faction;
@@ -48,13 +49,19 @@ namespace Game.Agent
             agentBehaviour.Initialize(this);
 
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => Faction));
+            StatisticRepository.Add(new StatisticFloat("flat_attack_power", StatisticDefinitionRegistry.Instance.FlatAttackPower, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatAttackPower]));
+            StatisticRepository.Add(new StatisticFloat("multiplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierSpeed]));
+            StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach]));
+            StatisticRepository.Add(new StatisticFloat("multiplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
+
             AgentIdentity agentIdentity = agentBase.AddOrGetCachedComponent<AgentIdentity>();
             agentIdentity.Set(this, nextSpawneeNumber++, direction);
             agentBase.Initialize();
 
-            Caster caster = this.GetCachedComponent<Caster>();
             caster.Initialize();
             caster.AddAbility(agentLoadout.CommanderDefinition.Active);
+
+            modifierApplier.Apply(agentLoadout.CommanderDefinition.Perk, modifierHandler);
 
             foreach (TechnologyTreeDefinition tree in agentLoadout.CharacterDefinitions.Select(x => x.TechnologyTreeDefinition))
             {

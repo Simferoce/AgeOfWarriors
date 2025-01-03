@@ -10,6 +10,7 @@ namespace Game.UI.Windows
     {
         [SerializeField] private TextMeshProUGUI levelName;
         [SerializeField] private CommanderDescriptionUIElement commanderDescription;
+        [SerializeField] private TextMeshProUGUI description;
 
         private LevelDefinition levelDefinition;
         private List<LevelObjectiveUIElement> levelObjectives;
@@ -37,6 +38,7 @@ namespace Game.UI.Windows
             levelObjectives[1].Refresh(levelDefinition.Objectives.Count > 1 ? levelDefinition.Objectives[1] : null);
             levelObjectives[2].Refresh(levelDefinition.Objectives.Count > 2 ? levelDefinition.Objectives[2] : null);
 
+            description.text = levelDefinition.Description;
             commanderDescription.Refresh(levelDefinition.Loadout.CommanderDefinition);
         }
 

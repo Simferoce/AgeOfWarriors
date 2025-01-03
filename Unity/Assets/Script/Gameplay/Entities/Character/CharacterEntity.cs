@@ -43,6 +43,7 @@ namespace Game.Character
 
         private StateMachine stateMachine = new StateMachine();
         private ModifierHandler modifierHandler;
+        private AgentEntity agent;
 
         protected override void Awake()
         {
@@ -65,6 +66,8 @@ namespace Game.Character
         {
             base.Initialize();
 
+            agent = GetCachedComponent<AgentIdentity>().Agent;
+
             StatisticRepository.Get("max_health").SetEquation((float baseValue) => baseValue + this[StatisticDefinitionRegistry.Instance.FlatMaxHealth]);
             StatisticRepository.Add(new StatisticFloat("flat_max_health", StatisticDefinitionRegistry.Instance.FlatMaxHealth, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatMaxHealth]));
             StatisticRepository.Add(new StatisticFloat("health", StatisticDefinitionRegistry.Instance.Health, this[StatisticDefinitionRegistry.Instance.MaxHealth]));
@@ -72,7 +75,7 @@ namespace Game.Character
             StatisticRepository.Get("attack_power").SetEquation((float baseValue) => baseValue + this[StatisticDefinitionRegistry.Instance.FlatAttackPower]);
             StatisticRepository.Get("attack_speed").SetEquation((float baseValue) => baseValue * (1 + this[StatisticDefinitionRegistry.Instance.PercentageAttackSpeed]) * this[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]);
             StatisticRepository.Add(new StatisticFloat("percentage_attack_speed", StatisticDefinitionRegistry.Instance.PercentageAttackSpeed, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.PercentageAttackSpeed]));
-            StatisticRepository.Add(new StatisticFloat("multiplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
+            StatisticRepository.Add(new StatisticFloat("multiplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed] * agent[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
             StatisticRepository.Get("speed").SetEquation((float baseValue) => baseValue * this[StatisticDefinitionRegistry.Instance.MultiplierSpeed]);
             StatisticRepository.Get("reach").SetEquation((float baseValue) => baseValue * this[StatisticDefinitionRegistry.Instance.MultiplierReach]);
             StatisticRepository.Add(new StatisticFloat("flat_defense", StatisticDefinitionRegistry.Instance.FlatDefense, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDefense]));
@@ -80,13 +83,13 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticFloat("ranged_damage_taken", StatisticDefinitionRegistry.Instance.RangeDamageTaken, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.RangeDamageTaken]));
             StatisticRepository.Add(new StatisticFloat("damage_taken", StatisticDefinitionRegistry.Instance.DamageTaken, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.DamageTaken]));
             StatisticRepository.Add(new StatisticFloat("multiplier_damage", StatisticDefinitionRegistry.Instance.MultiplierDamage, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierDamage]));
-            StatisticRepository.Add(new StatisticFloat("flat_attack_power", StatisticDefinitionRegistry.Instance.FlatAttackPower, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatAttackPower]));
+            StatisticRepository.Add(new StatisticFloat("flat_attack_power", StatisticDefinitionRegistry.Instance.FlatAttackPower, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatAttackPower] + agent[StatisticDefinitionRegistry.Instance.FlatAttackPower]));
             StatisticRepository.Add(new StatisticFloat("flat_damage_versus_weak", StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.FlatDamageVersusWeak]));
             StatisticRepository.Add(new StatisticBool("weak", StatisticDefinitionRegistry.Instance.Weak, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Weak]));
             StatisticRepository.Add(new StatisticBool("dead", null, false, (bool baseValue) => baseValue || IsDead));
-            StatisticRepository.Add(new StatisticFloat("multiplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierSpeed]));
+            StatisticRepository.Add(new StatisticFloat("multiplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierSpeed] * agent[StatisticDefinitionRegistry.Instance.MultiplierSpeed]));
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => GetCachedComponent<AgentIdentity>().Faction));
-            StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach]));
+            StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach] * agent[StatisticDefinitionRegistry.Instance.MultiplierReach]));
             StatisticRepository.Add(new StatisticBool("invulnerable", StatisticDefinitionRegistry.Instance.Invulnerable, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Invulnerable]));
             StatisticRepository.Add(new StatisticBool("engaged", null, false, (bool baseValue) => baseValue || IsEngaged));
             StatisticRepository.Add(new StatisticFloat("thorn", StatisticDefinitionRegistry.Instance.Thorn, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.Thorn]));

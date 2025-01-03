@@ -24,6 +24,7 @@ namespace Game.Modifier
         public override void Dispose()
         {
             base.Dispose();
+
             modifier.Target.Entity.GetCachedComponent<AttackFactory>().OnTakeDown -= OnTakeDownModifierTrigger_OnTakeDown;
         }
 

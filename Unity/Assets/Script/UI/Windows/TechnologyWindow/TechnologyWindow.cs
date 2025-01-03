@@ -37,10 +37,9 @@ namespace Game.UI.Windows
             }
 
             technologyWindow.technologySelectionTrees[0].Select();
-
             technologyWindow.Show();
 
-            Time.timeScale = 0f;
+            TimeManager.Instance.SetTimeScale(technologyWindow, 0);
 
             return technologyWindow;
         }
@@ -64,7 +63,7 @@ namespace Game.UI.Windows
         public override void Hide()
         {
             base.Hide();
-            Time.timeScale = 1f;
+            TimeManager.Instance.ClearTimeScale(this);
 
             foreach (UITechnologySelectionTree technologySelectionTree in technologySelectionTrees)
                 technologySelectionTree.OnSelect -= TechnologySelectionTree_OnSelect;

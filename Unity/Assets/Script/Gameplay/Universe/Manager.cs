@@ -6,7 +6,10 @@ namespace Game
 {
     public abstract class Manager : MonoBehaviour
     {
-        public abstract IEnumerator InitializeAsync();
+        public virtual IEnumerator InitializeAsync()
+        {
+            yield break;
+        }
     }
 
     public abstract class Manager<T> : Manager

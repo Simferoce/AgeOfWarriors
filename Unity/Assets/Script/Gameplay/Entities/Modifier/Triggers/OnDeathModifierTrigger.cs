@@ -19,9 +19,6 @@ namespace Game.Modifier
 
         private void OnDeath(DeathEventChannel.Event evt)
         {
-            if (targetFilter == null && evt.Entity == modifier.Target.Entity)
-                Trigger();
-
             if (targetFilter != null && targetFilter.Execute(evt.Entity))
                 Trigger();
         }

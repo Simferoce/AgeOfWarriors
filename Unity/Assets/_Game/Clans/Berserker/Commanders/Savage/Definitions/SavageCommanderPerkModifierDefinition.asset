@@ -13,12 +13,23 @@ MonoBehaviour:
   m_Name: SavageCommanderPerkModifierDefinition
   m_EditorClassIdentifier: 
   id: 861e13d4b8a7e464386354eff275bbc2
-  title: 
+  title: Rising Fury
   icon: {fileID: 0}
   description:
-    text: Increase the damage deal of every unit after each takedown.
-    parameters: []
+    text: Increase attack power by {0} each time an enemy dies.
+    parameters:
+    - rid: 7279809380488052832
   prefab: {fileID: 2557784674282065098, guid: 23aa7469ea0b2594d9c117550e85ffce, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7279809380488052832
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: attack_power_per_stack
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 730b30fdee20e634e807921bd2ff378f, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

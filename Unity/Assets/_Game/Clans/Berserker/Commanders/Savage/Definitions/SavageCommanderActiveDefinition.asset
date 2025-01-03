@@ -13,13 +13,57 @@ MonoBehaviour:
   m_Name: SavageCommanderActiveDefinition
   m_EditorClassIdentifier: 
   id: c4f194203f2e279478793ce571f47640
-  title: 
+  title: Frenzy
   icon: {fileID: 21300000, guid: 0d4350df723728b4a83095f3444c0dd6, type: 3}
   description:
-    text: Increase the attack power, attack speed and speed of every unit for 10
-      seconds.
-    parameters: []
+    text: Increase attack power by {0}, attack speed by {1} and speed by {2} of every
+      unit for {3} seconds.
+    parameters:
+    - rid: 7279809380488052804
+    - rid: 7279809380488052805
+    - rid: 7279809380488052807
+    - rid: 7279809380488052809
   prefab: {fileID: 916287337667100849, guid: 7fb2fbcfe89032e45b19dce1ee05edf9, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7279809380488052804
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: attack_power
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 730b30fdee20e634e807921bd2ff378f, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 7279809380488052805
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: attack_speed
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: fa8583d556561fe45a879e4a24677d2f, type: 2}
+        asPercentage: 1
+        adjustment:
+          rid: 7279809380488052806
+    - rid: 7279809380488052806
+      type: {class: MinusOneAdjustment, ns: Game, asm: Assembly-CSharp}
+      data: 
+    - rid: 7279809380488052807
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: speed
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 8df6dc8592651d341b60e493d7322dee, type: 2}
+        asPercentage: 1
+        adjustment:
+          rid: 7279809380488052808
+    - rid: 7279809380488052808
+      type: {class: MinusOneAdjustment, ns: Game, asm: Assembly-CSharp}
+      data: 
+    - rid: 7279809380488052809
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: duration
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 1ccc5b379e02eba4d9b26729c6ede2af, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

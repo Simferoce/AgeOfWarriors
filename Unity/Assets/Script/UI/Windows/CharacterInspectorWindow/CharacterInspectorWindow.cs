@@ -31,7 +31,7 @@ namespace Game.UI.Windows
 
         public void Refresh(CharacterEntity character)
         {
-            Time.timeScale = 0.0f;
+            TimeManager.Instance.SetTimeScale(this, 0);
 
             unitName.text = character.GetDefinition().Title;
             unitIcon.sprite = character.GetDefinition().Icon;
@@ -75,7 +75,7 @@ namespace Game.UI.Windows
         public override void Hide()
         {
             base.Hide();
-            Time.timeScale = 1.0f;
+            TimeManager.Instance.ClearTimeScale(this);
         }
 
         public void Close()

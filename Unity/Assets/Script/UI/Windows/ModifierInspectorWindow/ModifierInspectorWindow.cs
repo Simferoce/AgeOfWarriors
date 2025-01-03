@@ -17,6 +17,8 @@ namespace Game.UI.Windows
             modifierInspectorWindow.Refresh(modifier);
             modifierInspectorWindow.Show();
 
+            TimeManager.Instance.SetTimeScale(modifierInspectorWindow, 0f);
+
             return modifierInspectorWindow;
         }
 
@@ -30,6 +32,8 @@ namespace Game.UI.Windows
         public void Close()
         {
             Hide();
+
+            TimeManager.Instance.ClearTimeScale(this);
         }
     }
 }

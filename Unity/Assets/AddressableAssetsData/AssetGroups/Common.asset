@@ -282,6 +282,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Manager
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d05e188e79b93c34895bfe99ff941187
+    m_Address: Assets/_Game/Managers/TimeManager.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Manager
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d71a191ae10eaf24f8e2f26ada07d54a
     m_Address: Assets/_Game/Statistics/AttackSpeedStatisticDefinition.asset
     m_ReadOnly: 0

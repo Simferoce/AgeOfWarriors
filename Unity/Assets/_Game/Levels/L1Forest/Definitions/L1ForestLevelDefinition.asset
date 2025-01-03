@@ -15,6 +15,15 @@ MonoBehaviour:
   id: 8320415684e687443b030b74a24d4a8c
   sceneDefinition: {fileID: 11400000, guid: 0e6e0f9daac622545b4b04fb23955c2e, type: 2}
   title: 01 - Forest
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel
+    porta diam. Maecenas vehicula, ex ac maximus dapibus, turpis lacus lacinia magna,
+    quis porta ex arcu in justo. Nunc ultrices sapien eu elit pretium, ut scelerisque
+    quam ornare. Phasellus condimentum tellus pretium, tincidunt quam at, sodales
+    nulla. Cras dapibus malesuada eleifend. Class aptent taciti sociosqu ad litora
+    torquent per conubia nostra, per inceptos himenaeos. Praesent at tincidunt purus,
+    vel dignissim est. Etiam et ante mi. Sed vitae purus ut felis porta convallis.
+    Proin facilisis ante sit amet sapien bibendum convallis. Vestibulum ultrices
+    tincidunt eros, nec varius nunc. Proin varius justo non odio semper efficitur.
   loadout:
     commanderDefinition: {fileID: 11400000, guid: 04a81197fefa2354f9f2cffd8d7bae74, type: 2}
   objectives:

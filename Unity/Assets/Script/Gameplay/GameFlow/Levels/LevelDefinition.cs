@@ -9,6 +9,7 @@ namespace Game
     {
         [SerializeField] private SceneDefinition sceneDefinition;
         [SerializeField] private string title;
+        [SerializeField] private string description;
         [SerializeField] private AgentLoadout loadout;
         [SerializeReference, SubclassSelector] private List<LevelObjective> objectives;
 
@@ -16,5 +17,6 @@ namespace Game
         public string Title { get => title; set => title = value; }
         public AgentLoadout Loadout { get => loadout; set => loadout = value; }
         public List<LevelObjective> Objectives { get => objectives; set => objectives = value; }
+        public string Description { get => description; set => description = value; }
     }
 }

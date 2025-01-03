@@ -33,7 +33,7 @@ namespace Game.Camera
 
         private void Update()
         {
-            if (Time.timeScale <= 0)
+            if (TimeManager.Instance.TimeScale <= 0)
                 return;
 
             if (Input.GetMouseButtonDown(0))
