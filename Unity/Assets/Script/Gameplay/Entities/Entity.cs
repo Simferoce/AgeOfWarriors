@@ -21,7 +21,8 @@ namespace Game
         public enum EntityTag
         {
             Building,
-            Dummy
+            Dummy,
+            Ranged,
         }
 
         [SerializeField] private List<EntityTag> tags = new List<EntityTag>();

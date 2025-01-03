@@ -21,6 +21,7 @@ namespace Game.Statistics
         public StatisticDefinition MultiplierSpeed => statisticDefinitions["multiplier_speed"];
         public StatisticDefinition Reach => statisticDefinitions["reach"];
         public StatisticDefinition MultiplierReach => statisticDefinitions["multiplier_reach"];
+        public StatisticDefinition PercentageMultiplierReach => statisticDefinitions["ranged_percentage_reach"];
         public StatisticDefinition Range => statisticDefinitions["range"];
         public StatisticDefinition Cooldown => statisticDefinitions["cooldown"];
         public StatisticDefinition Stagger => statisticDefinitions["stagger"];

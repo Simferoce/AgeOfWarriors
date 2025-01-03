@@ -53,12 +53,12 @@ namespace Game.Agent
             StatisticRepository.Add(new StatisticFloat("multiplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierSpeed]));
             StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach]));
             StatisticRepository.Add(new StatisticFloat("multiplier_attack_speed", StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierAttackSpeed]));
-
+            StatisticRepository.Add(new StatisticFloat("ranged_percentage_reach", StatisticDefinitionRegistry.Instance.PercentageMultiplierReach, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.PercentageMultiplierReach]));
             AgentIdentity agentAgentIdentity = this.AddOrGetCachedComponent<AgentIdentity>();
             agentAgentIdentity.Set(this, int.MinValue, direction);
 
             AgentIdentity agentIdentity = agentBase.AddOrGetCachedComponent<AgentIdentity>();
-            agentIdentity.Set(this, nextSpawneeNumber++, direction);
+            agentIdentity.Set(this, int.MaxValue, direction);
             agentBase.Initialize();
 
             caster.Initialize();

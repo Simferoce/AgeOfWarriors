@@ -59,9 +59,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tags: 
   statisticRepository:
-    statistics: []
+    statistics:
+    - rid: 7279809401671385216
+    - rid: 7279809401671385221
+    - rid: 7279809401671385224
   visibleByDefault: 1
-  behaviours: []
+  behaviours:
+  - rid: 7279809401671385218
+  - rid: 7279809401671385219
+  - rid: 7279809401671385220
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7279809401671385216
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: reach_per_stack
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809401671385217
+    - rid: 7279809401671385217
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 0.4
+    - rid: 7279809401671385218
+      type: {class: SetStackBaseOnTechnologyLevel, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        target:
+          rid: 7279809401671385223
+        divider:
+          name: threshold
+    - rid: 7279809401671385219
+      type: {class: StackModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        startingStack: 0
+        maximum:
+          name: 
+    - rid: 7279809401671385220
+      type: {class: UniqueModifierBehaviour, ns: Game.Modifier, asm: Assembly-CSharp}
+      data:
+        type: 1
+    - rid: 7279809401671385221
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: threshold
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809401671385222
+    - rid: 7279809401671385222
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 10
+    - rid: 7279809401671385223
+      type: {class: HandlerModifierTarget, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 
+    - rid: 7279809401671385224
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: ranged_percentage_reach
+        definition: {fileID: 11400000, guid: 678d3a50795331245b06521e32052bfc, type: 2}
+        baseValue:
+          rid: 7279809401671385226
+    - rid: 7279809401671385226
+      type: {class: MultiplyValue, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        a:
+          rid: 7279809401671385227
+        b:
+          rid: 7279809401671385228
+    - rid: 7279809401671385227
+      type: {class: StatisticReferenceValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        reference:
+          name: reach_per_stack
+    - rid: 7279809401671385228
+      type: {class: ModifierStackValue, ns: Game.Modifier, asm: Assembly-CSharp}
+      data: 

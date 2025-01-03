@@ -95,6 +95,9 @@ MonoBehaviour:
       data:
         casterDefinition: {fileID: 11400000, guid: ace6cadc457dd1b4e90c5edc491000f1, type: 2}
         ratio: 1
+    - rid: 7279809401671385242
+      type: {class: PriorityAbilityTargetOrderBy, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
     - rid: 7754703286907174916
       type: {class: AttackSpeedAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
       data: 
@@ -104,7 +107,8 @@ MonoBehaviour:
         countInterval: {x: 1, y: 1}
         filter:
           rid: 7754703286907174918
-        orderBy: []
+        orderBy:
+        - rid: 7279809401671385242
     - rid: 7754703286907174918
       type: {class: AndAbilityTargetFilter, ns: Game.Ability, asm: Assembly-CSharp}
       data:

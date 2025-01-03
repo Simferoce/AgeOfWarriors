@@ -40,6 +40,7 @@ namespace Game.Character
         public bool IsDead => this.stateMachine.Current is DeathState;
         public bool IsInjured => this.Health < this.MaxHealth;
         public bool IsWeak => this[StatisticDefinitionRegistry.Instance.Weak];
+        public bool IsRanged => this.Tags.Contains(EntityTag.Ranged);
 
         private StateMachine stateMachine = new StateMachine();
         private ModifierHandler modifierHandler;
@@ -89,11 +90,11 @@ namespace Game.Character
             StatisticRepository.Add(new StatisticBool("dead", null, false, (bool baseValue) => baseValue || IsDead));
             StatisticRepository.Add(new StatisticFloat("multiplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierSpeed] * agent[StatisticDefinitionRegistry.Instance.MultiplierSpeed]));
             StatisticRepository.Add(new Statistic<FactionType>("faction", null, new SerializeValue<FactionType>(), (FactionType baseValue) => GetCachedComponent<AgentIdentity>().Faction));
-            StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach] * agent[StatisticDefinitionRegistry.Instance.MultiplierReach]));
+            StatisticRepository.Add(new StatisticFloat("multiplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifierHandler[StatisticDefinitionRegistry.Instance.MultiplierReach] * agent[StatisticDefinitionRegistry.Instance.MultiplierReach] * (IsRanged ? (1 + this[StatisticDefinitionRegistry.Instance.PercentageMultiplierReach]) : 1f)));
             StatisticRepository.Add(new StatisticBool("invulnerable", StatisticDefinitionRegistry.Instance.Invulnerable, false, (bool baseValue) => baseValue || modifierHandler[StatisticDefinitionRegistry.Instance.Invulnerable]));
             StatisticRepository.Add(new StatisticBool("engaged", null, false, (bool baseValue) => baseValue || IsEngaged));
             StatisticRepository.Add(new StatisticFloat("thorn", StatisticDefinitionRegistry.Instance.Thorn, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.Thorn]));
-
+            StatisticRepository.Add(new StatisticFloat("ranged_percentage_reach", StatisticDefinitionRegistry.Instance.PercentageMultiplierReach, 0f, (float baseValue) => baseValue + modifierHandler[StatisticDefinitionRegistry.Instance.PercentageMultiplierReach] + agent[StatisticDefinitionRegistry.Instance.PercentageMultiplierReach]));
             Health = MaxHealth;
 
             Caster caster = GetCachedComponent<Caster>();

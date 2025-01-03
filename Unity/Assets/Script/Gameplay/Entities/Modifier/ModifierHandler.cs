@@ -35,6 +35,7 @@ namespace Game.Modifier
             statisticRepository.Add(new StatisticBool("weak", StatisticDefinitionRegistry.Instance.Weak, false, (bool baseValue) => baseValue || modifiers.Union(StatisticDefinitionRegistry.Instance.Weak)));
             statisticRepository.Add(new StatisticFloat("mutliplier_speed", StatisticDefinitionRegistry.Instance.MultiplierSpeed, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierSpeed)));
             statisticRepository.Add(new StatisticFloat("mutliplier_reach", StatisticDefinitionRegistry.Instance.MultiplierReach, 1f, (float baseValue) => baseValue * modifiers.Multiply(StatisticDefinitionRegistry.Instance.MultiplierReach)));
+            statisticRepository.Add(new StatisticFloat("ranged_percentage_reach", StatisticDefinitionRegistry.Instance.PercentageMultiplierReach, 0f, (float baseValue) => baseValue + modifiers.Sum(StatisticDefinitionRegistry.Instance.PercentageMultiplierReach)));
             statisticRepository.Add(new StatisticBool("invulnerable", StatisticDefinitionRegistry.Instance.Invulnerable, false, (bool baseValue) => baseValue || modifiers.Union(StatisticDefinitionRegistry.Instance.Invulnerable)));
             statisticRepository.Add(new StatisticFloat("thorn", StatisticDefinitionRegistry.Instance.Thorn, 0f, (float baseValue) => baseValue + modifiers.Sum(StatisticDefinitionRegistry.Instance.Thorn)));
         }

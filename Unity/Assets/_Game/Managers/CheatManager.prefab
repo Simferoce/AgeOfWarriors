@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cheatCost: 1
-  maxCharacter: 10
+  maxCharacter: 1
   technologyGainMultiplier: 1
   factorySpeed: 10
   unrestrictedTechnology: 1

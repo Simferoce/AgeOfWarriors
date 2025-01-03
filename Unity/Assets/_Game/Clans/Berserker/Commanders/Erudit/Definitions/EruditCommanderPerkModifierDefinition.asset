@@ -13,13 +13,32 @@ MonoBehaviour:
   m_Name: EruditCommanderPerkModifierDefinition
   m_EditorClassIdentifier: 
   id: 5fed82736ea9b4448adbe39537d1b952
-  title: 
+  title: Breakthrough
   icon: {fileID: 0}
   description:
-    text: For each 10 points of technology, increase drastically the range of every
-      unit.
-    parameters: []
+    text: For each {0} technolgy level, increase the reach of ranged unit by {1}.
+    parameters:
+    - rid: 7279809401671385232
+    - rid: 7279809401671385233
   prefab: {fileID: 6787310539193901903, guid: 4090d66652a9ae64bbc36cdaeaf616bd, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7279809401671385232
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: threshold
+        overrideDefinitionDescriptor: {fileID: 0}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 7279809401671385233
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: reach_per_stack
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 678d3a50795331245b06521e32052bfc, type: 2}
+        asPercentage: 1
+        adjustment:
+          rid: -2

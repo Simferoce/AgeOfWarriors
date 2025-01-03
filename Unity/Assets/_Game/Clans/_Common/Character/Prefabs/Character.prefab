@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e9fa78c47bc8147bc985d3200f0230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tags: 00000000
+  tags: 
   statisticRepository:
     statistics:
     - rid: 7279809374671601732
