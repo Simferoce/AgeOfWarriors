@@ -30,7 +30,7 @@ namespace Game.Ability
             ProjectileEntity projectile = gameObject.GetComponent<ProjectileEntity>();
 
             float direction = Ability.Caster.Entity.GetCachedComponent<AgentIdentity>().Direction;
-            projectile.Initialize(Ability, Ability.Targets[0], Ability.Faction, parameters.Select(x => x.Create(Ability)).Append(new ProjectileParameter<float>("direction", direction)).ToArray());
+            projectile.Initialize(Ability, Ability.Targets.Count > 0 ? Ability.Targets[0] : null, Ability.Faction, parameters.Select(x => x.Create(Ability)).Append(new ProjectileParameter<float>("direction", direction)).ToArray());
 
             OnProjectileCreated?.Invoke(projectile);
         }

@@ -12,6 +12,7 @@ namespace Game.Projectile
         public override void Start(ProjectileEntity projectile, GameObject collision)
         {
             projectile.GetComponentInChildren<Animator>().SetTrigger(trigger);
+            projectile.Rigidbody.simulated = false;
             GameObject.Destroy(projectile.gameObject, duration);
         }
     }

@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 239bedfe4c8e6dc45aa9fe3e6a65fd5c
   title: Chiftain
   description: 
-  icon: {fileID: 21300000, guid: 65203bca2af2630409b1d4f89df199e9, type: 3}
-  agentPrefab: {fileID: 5053631171570033998, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+  icon: {fileID: 21300000, guid: d0da4384b925995408f1c330a2841a07, type: 3}
   perk: {fileID: 11400000, guid: ce61b59aaebc35d4e8276d7afcefdcea, type: 2}
   active: {fileID: 11400000, guid: 3e0407dc3f67e3341a0ff1984625d002, type: 2}
   characterDefinitions:

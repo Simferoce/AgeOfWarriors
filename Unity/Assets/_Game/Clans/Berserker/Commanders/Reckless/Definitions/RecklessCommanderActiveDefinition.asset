@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e670c065e913bdb428411f9524b8e0e7, type: 3}
+  m_Name: RecklessCommanderActiveDefinition
+  m_EditorClassIdentifier: 
+  id: 80559646b5a280c449419ece67947bfa
+  title: 
+  icon: {fileID: 0}
+  description:
+    text: 
+    parameters: []
+  prefab: {fileID: 3738713540031294512, guid: e4fa1377f60ec3e40ba01aa3dfe05c83, type: 3}
+  references:
+    version: 2
+    RefIds: []

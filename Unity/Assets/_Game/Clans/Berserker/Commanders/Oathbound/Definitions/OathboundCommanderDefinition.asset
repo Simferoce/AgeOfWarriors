@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82878a1f3e18f3c45aadc7d93f2e3454, type: 3}
+  m_Name: OathboundCommanderDefinition
+  m_EditorClassIdentifier: 
+  id: e57070f27e711e84fbe202bce911e744
+  title: Oathbound
+  description: 
+  icon: {fileID: 21300000, guid: 7eebbfba6e0aa9b4cb1a814b36e098d7, type: 3}
+  perk: {fileID: 11400000, guid: 713cba276e27f814da19036a0f2a3500, type: 2}
+  active: {fileID: 11400000, guid: 1ff0a223a81d5c0438f07f4cf246fa75, type: 2}
+  characterDefinitions:
+  - {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  - {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
+  - {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
+  - {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}

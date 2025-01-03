@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 04a81197fefa2354f9f2cffd8d7bae74
   title: Savage
   description: 
-  icon: {fileID: 21300000, guid: 0d4350df723728b4a83095f3444c0dd6, type: 3}
-  agentPrefab: {fileID: 5053631171570033998, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+  icon: {fileID: 21300000, guid: 2bed7e24a1613a448a2b8162b753e4e8, type: 3}
   perk: {fileID: 11400000, guid: 861e13d4b8a7e464386354eff275bbc2, type: 2}
   active: {fileID: 11400000, guid: c4f194203f2e279478793ce571f47640, type: 2}
   characterDefinitions:

@@ -26,6 +26,7 @@ namespace Game.Components
         {
             animator = GetComponent<Animator>();
             Entity = GetComponentInParent<Entity>();
+            Entity.Link(this);
         }
 
         private void Update()

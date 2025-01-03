@@ -127,7 +127,7 @@ namespace Game
             else
             {
                 if (typeof(Component).IsAssignableFrom(typeof(T)))
-                    cached[typeof(T)] = GetComponentsInChildren<T>().Cast<object>().ToList();
+                    cached[typeof(T)] = GetComponents<T>().Cast<object>().ToList();
                 else
                     cached[typeof(T)] = new List<object>();
 

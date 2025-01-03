@@ -15,8 +15,7 @@ MonoBehaviour:
   id: 90f5bd1d0c7f2f040b64a02daa4bcf05
   title: Erudit
   description: 
-  icon: {fileID: 21300000, guid: 9756199b46efc624a9452547b4581b26, type: 3}
-  agentPrefab: {fileID: 5053631171570033998, guid: 02197b55a5d514c4391049a5dc42874f, type: 3}
+  icon: {fileID: 21300000, guid: 76b2fabfb20fffc498433982167bcce3, type: 3}
   perk: {fileID: 11400000, guid: 5fed82736ea9b4448adbe39537d1b952, type: 2}
   active: {fileID: 11400000, guid: 8bcc91f3a0f635e479ded68cc92b6bf9, type: 2}
   characterDefinitions:

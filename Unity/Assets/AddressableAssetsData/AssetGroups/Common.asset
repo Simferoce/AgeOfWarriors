@@ -39,6 +39,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Window
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0d2ddc5ae9ddd1e46866ec5ef06dcebc
+    m_Address: Assets/_Game/Clans/Berserker/Commanders/Farsighted/Definitions/FarsightedCommanderDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Commander
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 0daeb2d661b48664f9f8656c569beb36
     m_Address: Assets/_Game/UI/Window/InspectorModifierWindow/Prefabs/InspectorModifierWindow.prefab
     m_ReadOnly: 0
@@ -133,6 +139,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5118a2c375723474790d6081aea6e24d
+    m_Address: Assets/_Game/Clans/Berserker/Commanders/Apathetic/Definitions/ApatheticCommanderDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Commander
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 56889f00aab0b8440b071b9dd15442a0
     m_Address: Assets/_Game/Statistics/Definitions/RangedDamageReductionStatisticDefinition.asset
@@ -300,11 +312,23 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e57070f27e711e84fbe202bce911e744
+    m_Address: Assets/_Game/Clans/Berserker/Commanders/Oathbound/Definitions/OathboundCommanderDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Commander
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e864fc16d0f0def478387446a9b41863
     m_Address: Assets/_Game/Statistics/LeachDefinition.asset
     m_ReadOnly: 0
     m_SerializedLabels:
     - Statistic
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e8d9024631bec434583e2f19d675ebeb
+    m_Address: Assets/_Game/Clans/Berserker/Commanders/Reckless/Definitions/RecklessCommanderDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Commander
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f0845f13c7072ea47813157c0f019c1c
     m_Address: Assets/_Game/UI/Windows/LoadoutSelectionWindow/Prefabs/LoadoutSelectionWindow.prefab
@@ -317,6 +341,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - Window
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f17983af416d105459fab43eb0f6efc0
+    m_Address: Assets/_Game/Clans/Berserker/Commanders/Merciless/Definitions/MercilessCommanderDefinition.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Commander
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: fa8583d556561fe45a879e4a24677d2f
     m_Address: Assets/_Game/Statistics/Definitions/PercentageAttackSpeedStatisticDefinition.asset
