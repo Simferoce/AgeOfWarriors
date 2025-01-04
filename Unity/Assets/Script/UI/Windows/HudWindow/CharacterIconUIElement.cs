@@ -15,13 +15,6 @@ namespace Game.UI.Windows
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI costText;
 
-        private void Start()
-        {
-            AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
-            agentEntity.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
-            Refresh();
-        }
-
         private void OnDestroy()
         {
             AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
@@ -34,9 +27,12 @@ namespace Game.UI.Windows
             Refresh();
         }
 
-        private void Refresh()
+        public void Refresh()
         {
             AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == FactionType.Player);
+            agentEntity.Technology.OnPerkAcquired -= Technology_OnPerkAcquired;
+            agentEntity.Technology.OnPerkAcquired += Technology_OnPerkAcquired;
+
             CharacterDefinition characterDefinition = agentEntity.Loadout.GetCharacterDefinitionAtIndex(index);
             if (characterDefinition == null)
             {

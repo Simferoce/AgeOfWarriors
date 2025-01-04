@@ -261,6 +261,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7279809401671385088
       type: {class: CollisionProjectileBehaviour, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -281,6 +283,8 @@ MonoBehaviour:
           name: other_damage
         range:
           name: scatter_range
+        filter:
+          rid: -2
     - rid: 7279809401671385165
       type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
       data:

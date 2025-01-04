@@ -21,7 +21,8 @@ namespace Game.UI.Windows
 
         public void Inspect()
         {
-            AbilityInspectorWindow.Open(characterAbility, slotName);
+            AbilityInspectorWindow abilityInspectorWindow = WindowManager.Instance.GetWindow<AbilityInspectorWindow>();
+            abilityInspectorWindow.Show(characterAbility, slotName);
         }
     }
 }

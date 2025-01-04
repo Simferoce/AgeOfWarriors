@@ -27,43 +27,40 @@ namespace Game.UI.Windows
         private TechnologyPerkDefinition technologyPerkDefinition;
         private TechnologyTree technologyTree;
 
-        public static TechnologyPerkInspectorWindow Open(TechnologyTree technologyTree, TechnologyPerkDefinition technologyPerkDefinition)
+        public void Show(TechnologyTree technologyTree, TechnologyPerkDefinition technologyPerkDefinition)
         {
-            TechnologyPerkInspectorWindow technologyDetailsPanelUI = WindowManager.Instance.GetWindow<TechnologyPerkInspectorWindow>();
-            technologyDetailsPanelUI.technologyTree = technologyTree;
-            technologyDetailsPanelUI.technologyPerkDefinition = technologyPerkDefinition;
-            technologyDetailsPanelUI.title.text = technologyPerkDefinition.Title;
-            technologyDetailsPanelUI.description.text = technologyPerkDefinition.ParseDescription(null);
+            base.Show();
+            this.technologyTree = technologyTree;
+            this.technologyPerkDefinition = technologyPerkDefinition;
+            title.text = technologyPerkDefinition.Title;
+            description.text = technologyPerkDefinition.ParseDescription(null);
 
             TechnologyPerkStatus technologyPerkStatus = technologyTree.GetStatus(technologyPerkDefinition);
 
             if (technologyPerkStatus is TechnologyPerkStatusUnlockable)
             {
-                technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.unlockableColor;
-                technologyDetailsPanelUI.button.interactable = true;
+                buttonImage.color = unlockableColor;
+                button.interactable = true;
             }
             else if (technologyPerkStatus is TechnologyPerkStatusUnlocked)
             {
-                technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.unlockedColor;
-                technologyDetailsPanelUI.button.interactable = false;
+                buttonImage.color = unlockedColor;
+                button.interactable = false;
             }
             else
             {
-                technologyDetailsPanelUI.buttonImage.color = technologyDetailsPanelUI.lockedColor;
-                technologyDetailsPanelUI.button.interactable = false;
+                buttonImage.color = lockedColor;
+                button.interactable = false;
             }
 
             if (technologyPerkDefinition.HasRequirements())
             {
-                technologyDetailsPanelUI.requirements.text = $"REQUIRE - {technologyPerkDefinition.FormatRequirements(technologyTree)}";
+                requirements.text = $"REQUIRE - {technologyPerkDefinition.FormatRequirements(technologyTree)}";
             }
             else
             {
-                technologyDetailsPanelUI.requirements.text = "";
+                requirements.text = "";
             }
-
-            technologyDetailsPanelUI.Show();
-            return technologyDetailsPanelUI;
         }
 
         public void Research()

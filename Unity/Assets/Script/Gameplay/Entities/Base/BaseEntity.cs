@@ -42,7 +42,7 @@ namespace Game
 
         public void Death()
         {
-            DeathEventChannel.Global.Publish(new DeathEventChannel.Event() { Entity = this });
+            EventChannelHandler.Publish(new DeathEventChannel.Event() { Entity = this });
 
             GetCachedComponent<Attackable>().OnDamageTaken -= Base_OnDamageTaken;
             Destroy(gameObject);

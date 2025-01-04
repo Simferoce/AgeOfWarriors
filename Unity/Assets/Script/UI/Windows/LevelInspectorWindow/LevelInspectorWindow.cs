@@ -20,13 +20,10 @@ namespace Game.UI.Windows
             levelObjectives = GetComponentsInChildren<LevelObjectiveUIElement>(true).ToList();
         }
 
-        public static LevelInspectorWindow Open(LevelDefinition levelDefinition)
+        public void Show(LevelDefinition levelDefinition)
         {
-            LevelInspectorWindow levelInspectorWindow = WindowManager.Instance.GetWindow<LevelInspectorWindow>();
-            levelInspectorWindow.Show();
-            levelInspectorWindow.Refresh(levelDefinition);
-
-            return levelInspectorWindow;
+            base.Show();
+            Refresh(levelDefinition);
         }
 
         public void Refresh(LevelDefinition levelDefinition)

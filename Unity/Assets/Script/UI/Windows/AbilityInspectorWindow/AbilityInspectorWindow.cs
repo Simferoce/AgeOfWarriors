@@ -11,25 +11,22 @@ namespace Game.UI.Windows
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private TextMeshProUGUI cooldownText;
 
-        public static AbilityInspectorWindow Open(AbilityEntity ability, string abilitySlotName)
+        public void Show(AbilityEntity ability, string abilitySlotName)
         {
-            AbilityInspectorWindow abilityInspectorWindow = WindowManager.Instance.GetWindow<AbilityInspectorWindow>();
-            abilityInspectorWindow.Show();
-            abilityInspectorWindow.title.text = ability.GetDefinition().Title;
-            abilityInspectorWindow.description.text = ability.ParseDescription();
+            base.Show();
+            title.text = ability.GetDefinition().Title;
+            description.text = ability.ParseDescription();
 
             float cooldown = 0f;//ability.GetCachedComponent<StatisticIndex>().Max(StatisticIdentifiant.Cooldown);
             if (cooldown > 0f)
             {
-                abilityInspectorWindow.cooldownText.alpha = 1f;
-                abilityInspectorWindow.cooldownText.text = $"{cooldown}{StatisticDefinitionRegistry.Instance.Cooldown.TextIcon}";
+                cooldownText.alpha = 1f;
+                cooldownText.text = $"{cooldown}{StatisticDefinitionRegistry.Instance.Cooldown.TextIcon}";
             }
             else
             {
-                abilityInspectorWindow.cooldownText.alpha = 0f;
+                cooldownText.alpha = 0f;
             }
-
-            return abilityInspectorWindow;
         }
 
         public void Close()

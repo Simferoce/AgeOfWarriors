@@ -15,7 +15,10 @@ namespace Game.UI.Windows
         private void Awake()
         {
             commanderAbilityUIElements = GetComponentsInChildren<CommanderAbilityUIElement>(true).ToList();
+        }
 
+        public void Refresh()
+        {
             AgentEntity agentEntity = Entity.All.OfType<AgentEntity>().FirstOrDefault(x => x.Faction == factionType);
             Caster caster = agentEntity.GetCachedComponent<Caster>();
 

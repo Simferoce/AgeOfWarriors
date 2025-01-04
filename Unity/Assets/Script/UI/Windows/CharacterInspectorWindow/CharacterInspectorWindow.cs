@@ -20,13 +20,10 @@ namespace Game.UI.Windows
         [SerializeField] private List<ModifierDetailUIElement> modifierDetailUIs = new List<ModifierDetailUIElement>();
         [SerializeField] private List<AbilityDetailUIElement> abilityDetailUIs = new List<AbilityDetailUIElement>();
 
-        public static CharacterInspectorWindow Open(CharacterEntity character)
+        public void Show(CharacterEntity character)
         {
-            CharacterInspectorWindow statisticDetailWindow = WindowManager.Instance.GetWindow<CharacterInspectorWindow>();
-            statisticDetailWindow.Show();
-            statisticDetailWindow.Refresh(character);
-
-            return statisticDetailWindow;
+            base.Show();
+            Refresh(character);
         }
 
         public void Refresh(CharacterEntity character)

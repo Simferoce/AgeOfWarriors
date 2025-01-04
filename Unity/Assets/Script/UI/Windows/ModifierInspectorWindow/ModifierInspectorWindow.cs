@@ -11,15 +11,10 @@ namespace Game.UI.Windows
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private Image icon;
 
-        public static ModifierInspectorWindow Open(ModifierEntity modifier)
+        public void Show(ModifierEntity modifier)
         {
-            ModifierInspectorWindow modifierInspectorWindow = WindowManager.Instance.GetWindow<ModifierInspectorWindow>();
-            modifierInspectorWindow.Refresh(modifier);
-            modifierInspectorWindow.Show();
-
-            TimeManager.Instance.SetTimeScale(modifierInspectorWindow, 0f);
-
-            return modifierInspectorWindow;
+            Refresh(modifier);
+            TimeManager.Instance.SetTimeScale(this, 0f);
         }
 
         public void Refresh(ModifierEntity modifier)

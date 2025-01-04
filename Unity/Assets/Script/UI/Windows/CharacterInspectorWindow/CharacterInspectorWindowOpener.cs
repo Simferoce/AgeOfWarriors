@@ -14,7 +14,8 @@ namespace Game.UI.Windows
 
         public void OpenDetail()
         {
-            CharacterInspectorWindow.Open(character);
+            CharacterInspectorWindow characterInspectorWindow = WindowManager.Instance.GetWindow<CharacterInspectorWindow>();
+            characterInspectorWindow.Show(character);
         }
     }
 }

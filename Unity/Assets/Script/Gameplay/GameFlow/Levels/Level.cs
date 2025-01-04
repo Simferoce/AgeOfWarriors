@@ -1,16 +1,15 @@
 ﻿using Game.Agent;
-using Game.UI.Windows;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
-    public class Level : IGameState
+    public partial class Level : IGameState
     {
+        public float TimeElapsed { get; private set; }
+
         private LevelDefinition levelDefinition;
         private AgentLoadout playerLoadout;
+        private StateMachine stateMachine;
 
         public Level(LevelDefinition levelDefinition, AgentLoadout playerLoadout)
         {
@@ -20,32 +19,29 @@ namespace Game
 
         public void Load()
         {
-            GameSceneManager.Instance.StartCoroutine(Operation());
+            stateMachine = new StateMachine();
+            stateMachine.Initialize(new InitializationState(this));
+        }
 
-            IEnumerator Operation()
+        public void Abandon()
+        {
+            if (stateMachine.Current is not ExecutionState)
             {
-                yield return GameSceneManager.Instance.Load(levelDefinition.SceneDefinition);
-                List<BaseEntity> baseEntities = Entity.All.OfType<BaseEntity>().OrderBy(x => x.transform.position.x).ToList();
-
-                GameObject agentGameObject = new GameObject($"Agent - {FactionType.Player}");
-                AgentEntity playerAgent = agentGameObject.AddComponent<AgentEntity>();
-                playerAgent.Initialize(new AgentBehaviourPlayer(), playerLoadout, FactionType.Player, baseEntities.FirstOrDefault(), 1);
-
-                GameObject opponentGameObject = new GameObject($"Agent - {FactionType.Opponent}");
-                AgentEntity opponentAgent = opponentGameObject.AddComponent<AgentEntity>();
-                opponentAgent.Initialize(new AgentBehaviourAI(), levelDefinition.Loadout, FactionType.Opponent, baseEntities.LastOrDefault(), -1);
-
-                HudWindow hudWindow = WindowManager.Instance.GetWindow<HudWindow>();
-                hudWindow.Show();
+                Debug.LogError($"Can only abandon a level in the \"{typeof(ExecutionState)}\" state. Currently in \"{stateMachine.Current.GetType()}\"");
+                return;
             }
+
+            stateMachine.ChangeState(new EndState(this, new AbandonEnd()));
         }
 
         public void Update()
         {
+            stateMachine.Update();
         }
 
         public void Exit()
         {
+            stateMachine.End();
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Game.UI.Windows
 
         public void Select()
         {
-            LevelInspectorWindow.Open(levelDefinition);
+            LevelInspectorWindow levelInspectorWindow = WindowManager.Instance.GetWindow<LevelInspectorWindow>();
+            levelInspectorWindow.Show(levelDefinition);
         }
     }
 }

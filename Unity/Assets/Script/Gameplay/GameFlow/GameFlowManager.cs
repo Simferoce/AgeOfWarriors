@@ -12,6 +12,12 @@ namespace Game
             yield break;
         }
 
+        private void Update()
+        {
+            if (CurrentState != null)
+                CurrentState.Update();
+        }
+
         public void LoadMainMenu()
         {
             if (CurrentState != null)

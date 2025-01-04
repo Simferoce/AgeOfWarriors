@@ -140,6 +140,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Statistic
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4e9c8adc9646a154e8ea7ee2ccb21ece
+    m_Address: Assets/_Game/UI/Windows/ModalWindow/Prefabs/ModalWindow.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Window
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5118a2c375723474790d6081aea6e24d
     m_Address: Assets/_Game/Clans/Berserker/Commanders/Apathetic/Definitions/ApatheticCommanderDefinition.asset
     m_ReadOnly: 0

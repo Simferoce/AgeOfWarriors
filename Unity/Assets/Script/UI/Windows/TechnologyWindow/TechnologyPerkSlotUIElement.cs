@@ -38,8 +38,9 @@ namespace Game.UI.Windows
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            TechnologyPerkInspectorWindow technologyDetailsPanelUI = TechnologyPerkInspectorWindow.Open(technologyTree, technologyPerkDefinition);
-            technologyDetailsPanelUI.OnHide += TechnologyDetailsPanelUI_OnHidden;
+            TechnologyPerkInspectorWindow technologyPerkInspectorWindow = WindowManager.Instance.GetWindow<TechnologyPerkInspectorWindow>();
+            technologyPerkInspectorWindow.Show(technologyTree, technologyPerkDefinition);
+            technologyPerkInspectorWindow.OnHide += TechnologyDetailsPanelUI_OnHidden;
         }
 
         private void TechnologyDetailsPanelUI_OnHidden(Window window)

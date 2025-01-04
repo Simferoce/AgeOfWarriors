@@ -3,10 +3,12 @@ using UnityEngine;
 
 namespace Game.UI.Windows
 {
-    public class Window : MonoBehaviour
+    public abstract class Window : MonoBehaviour
     {
         public event Action<Window> OnShow;
         public event Action<Window> OnHide;
+
+        public virtual bool IsUnique { get => true; }
 
         public virtual void Show()
         {
@@ -18,6 +20,9 @@ namespace Game.UI.Windows
         {
             gameObject.SetActive(false);
             OnHide?.Invoke(this);
+
+            if (!IsUnique)
+                Destroy(gameObject);
         }
     }
 }

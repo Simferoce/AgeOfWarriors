@@ -15,33 +15,29 @@ namespace Game.UI.Windows
         private AgentEntity agent;
         private List<UITechnologySelectionTree> technologySelectionTrees = new List<UITechnologySelectionTree>();
 
-        public static TechnologyWindow Open(AgentEntity agent)
+        public void Show(AgentEntity agent)
         {
-            TechnologyWindow technologyWindow = WindowManager.Instance.GetWindow<TechnologyWindow>();
-            technologyWindow.agent = agent;
+            base.Show();
+            this.agent = agent;
 
-            technologyWindow.technologyLevelUI.Refresh(agent);
-
-            technologyWindow.technologySelectionTrees.Clear();
-            for (int i = technologyWindow.selectionElementContainer.transform.childCount - 1; i >= 0; --i)
-                Destroy(technologyWindow.selectionElementContainer.transform.GetChild(i).gameObject);
+            technologyLevelUI.Refresh(agent);
+            technologySelectionTrees.Clear();
+            for (int i = selectionElementContainer.transform.childCount - 1; i >= 0; --i)
+                Destroy(selectionElementContainer.transform.GetChild(i).gameObject);
 
             foreach (TechnologyTree technologyTree in agent.Technology.TechnologyTrees)
             {
-                GameObject selection = Instantiate(technologyWindow.selectionElementPrefab, technologyWindow.selectionElementContainer.transform);
+                GameObject selection = Instantiate(selectionElementPrefab, selectionElementContainer.transform);
                 UITechnologySelectionTree technologySelectionTree = selection.GetComponent<UITechnologySelectionTree>();
                 technologySelectionTree.Initialize(technologyTree);
 
-                technologySelectionTree.OnSelect += technologyWindow.TechnologySelectionTree_OnSelect;
-                technologyWindow.technologySelectionTrees.Add(technologySelectionTree);
+                technologySelectionTree.OnSelect += TechnologySelectionTree_OnSelect;
+                technologySelectionTrees.Add(technologySelectionTree);
             }
 
-            technologyWindow.technologySelectionTrees[0].Select();
-            technologyWindow.Show();
+            technologySelectionTrees[0].Select();
 
-            TimeManager.Instance.SetTimeScale(technologyWindow, 0);
-
-            return technologyWindow;
+            TimeManager.Instance.SetTimeScale(this, 0);
         }
 
         private void TechnologySelectionTree_OnSelect(UITechnologySelectionTree technologySelectionTree)
