@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b4b21d65fb9214e9aa1b23e2c30c8b, type: 3}
+  m_Name: FerociousCommanderActiveDefinition
+  m_EditorClassIdentifier: 
+  id: b5535b56dd31a994f9e7d8c60484fcda
+  title: 
+  icon: {fileID: 0}
+  description:
+    text: 
+    parameters: []
+  prefab: {fileID: 3738713540031294512, guid: bafab9d8627b4a54f97baa327171efb9, type: 3}
+  references:
+    version: 2
+    RefIds: []

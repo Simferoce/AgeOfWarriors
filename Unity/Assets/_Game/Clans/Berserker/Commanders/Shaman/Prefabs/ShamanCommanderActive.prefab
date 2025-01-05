@@ -1,0 +1,153 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4146653169296385011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7141627167987886441}
+  - component: {fileID: 5654368242253173303}
+  - component: {fileID: 8584173530501847657}
+  m_Layer: 0
+  m_Name: ShamanCommanderActive
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7141627167987886441
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4146653169296385011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5654368242253173303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4146653169296385011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a288d77dab27ab4ab76b0dd5686bf76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8584173530501847657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4146653169296385011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5f679ba79f4b694dbbd33c492f6d790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tags: 
+  statisticRepository:
+    statistics:
+    - rid: 7279809401671385177
+    - rid: 7279809401671385179
+    - rid: 7279809401671385181
+    - rid: 7279809401671385184
+  conditions:
+  - rid: 7279809401671385183
+  effects:
+  - rid: 7279809401671385186
+  references:
+    version: 2
+    RefIds:
+    - rid: 7279809401671385177
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: initial_damage
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809401671385178
+    - rid: 7279809401671385178
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 200
+    - rid: 7279809401671385179
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: other_damage
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809401671385180
+    - rid: 7279809401671385180
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 125
+    - rid: 7279809401671385181
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: scatter_range
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809401671385182
+    - rid: 7279809401671385182
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 2
+    - rid: 7279809401671385183
+      type: {class: CooldownAbilityCondition, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        cooldown:
+          name: cooldown
+    - rid: 7279809401671385184
+      type: {class: StatisticFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        name: cooldown
+        definition: {fileID: 0}
+        baseValue:
+          rid: 7279809401671385185
+    - rid: 7279809401671385185
+      type: {class: SerializeValueFloat, ns: Game.Statistics, asm: Assembly-CSharp}
+      data:
+        value: 30
+    - rid: 7279809401671385186
+      type: {class: ProjectileAbilityEffect, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        projectilePrefab: {fileID: 3177283722428195489, guid: 0d73d8f5b03529240964e8a5e70be215, type: 3}
+        origin:
+          rid: 7279809401671385190
+        parameters:
+        - rid: 7279809401671385188
+        - rid: 7279809401671385191
+        - rid: 7279809401671385192
+    - rid: 7279809401671385188
+      type: {class: StatisticProjectileParameterFactoryFloat, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: initial_damage
+        value:
+          name: initial_damage
+    - rid: 7279809401671385190
+      type: {class: BaseProjectileAbilityEffectOrigin, ns: Game.Ability, asm: Assembly-CSharp}
+      data: 
+    - rid: 7279809401671385191
+      type: {class: StatisticProjectileParameterFactoryFloat, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: other_damage
+        value:
+          name: other_damage
+    - rid: 7279809401671385192
+      type: {class: StatisticProjectileParameterFactoryFloat, ns: Game.Ability, asm: Assembly-CSharp}
+      data:
+        name: scatter_range
+        value:
+          name: scatter_range

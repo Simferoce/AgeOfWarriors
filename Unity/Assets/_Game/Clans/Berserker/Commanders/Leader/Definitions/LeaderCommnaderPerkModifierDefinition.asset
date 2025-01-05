@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9b8b1f97dbb3a444a94941a0df1a563, type: 3}
+  m_Name: LeaderCommnaderPerkModifierDefinition
+  m_EditorClassIdentifier: 
+  id: ce61b59aaebc35d4e8276d7afcefdcea
+  title: 
+  icon: {fileID: 0}
+  description:
+    text: 'For each 100 ability used, add a permanent flag on the ground which increases
+      the movement speed, attack speed and damage of units in 1 meter. '
+    parameters: []
+  prefab: {fileID: 6678710707425086438, guid: 66bfa2ced2cb2e545a3a2ca6ccb97b2b, type: 3}
+  references:
+    version: 2
+    RefIds: []
