@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 96bcb15ffca68c647bcecca181aee9c2
   title: Grasp
+  icon: {fileID: 0}
   description:
     text: 'Pull all enemies in {0} meters. Staggers the affected enemies for {1}
       seconds. '
     parameters:
     - rid: 6209823544293720197
     - rid: 6209823544293720198
-  prefab: {fileID: 5897430954624599547, guid: 18ad5626a0432ca47aad335c827312a3, type: 3}
+  prefab: {fileID: 1731118330945259540, guid: 18ad5626a0432ca47aad335c827312a3, type: 3}
   references:
     version: 2
     RefIds:

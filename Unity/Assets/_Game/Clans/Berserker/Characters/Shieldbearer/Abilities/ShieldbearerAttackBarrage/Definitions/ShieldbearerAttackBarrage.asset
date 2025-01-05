@@ -14,20 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 2ab37e8c507d5354b8c42977274cd9f3
   title: Attack Barrage
+  icon: {fileID: 0}
   description:
     text: Execute 3 attacks dealing {0} damage in a burst on a target at {1} meters.
     parameters:
     - rid: 7754703303340195847
     - rid: 7754703303340195848
-  prefab: {fileID: 234122527794856266, guid: 6a679bb1f288ed742952ac06cf3653ed, type: 3}
+  prefab: {fileID: 7616870649645260953, guid: 6a679bb1f288ed742952ac06cf3653ed, type: 3}
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 7754703303340195847
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
         name: damage
+        overrideDefinitionDescriptor: {fileID: 0}
+        asPercentage: 0
+        adjustment:
+          rid: -2
     - rid: 7754703303340195848
       type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
       data:
         name: range
+        overrideDefinitionDescriptor: {fileID: 0}
+        asPercentage: 0
+        adjustment:
+          rid: -2

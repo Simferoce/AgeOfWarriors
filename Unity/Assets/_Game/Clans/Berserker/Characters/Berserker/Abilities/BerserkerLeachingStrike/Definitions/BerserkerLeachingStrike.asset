@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8123c5d3258092b4b87d0395fcd38f99
   title: Leaching Strike
+  icon: {fileID: 0}
   description:
     text: Deals {0} damage to a target at {1} meters and heals for {2} of damage
       dealt.
@@ -21,7 +22,7 @@ MonoBehaviour:
     - rid: 6209823544293720199
     - rid: 6209823544293720200
     - rid: 6209823544293720201
-  prefab: {fileID: 412271190907481078, guid: 6c3bd40318bfbd143bd5b5e2a25b2624, type: 3}
+  prefab: {fileID: 3436625811054226847, guid: 6c3bd40318bfbd143bd5b5e2a25b2624, type: 3}
   references:
     version: 2
     RefIds:

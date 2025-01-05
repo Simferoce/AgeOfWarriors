@@ -3,6 +3,6 @@
     public interface ICooldown
     {
         public float Remaining { get; }
-        public float Total { get; }
+        public float TotalCooldown { get; }
     }
 }

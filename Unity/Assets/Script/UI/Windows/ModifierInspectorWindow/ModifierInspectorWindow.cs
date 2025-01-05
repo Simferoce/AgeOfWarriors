@@ -1,5 +1,4 @@
-﻿using Game.Modifier;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,17 +10,17 @@ namespace Game.UI.Windows
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private Image icon;
 
-        public void Show(ModifierEntity modifier)
+        public void Show(IModifierInspectable modifier)
         {
             Refresh(modifier);
             TimeManager.Instance.SetTimeScale(this, 0f);
         }
 
-        public void Refresh(ModifierEntity modifier)
+        public void Refresh(IModifierInspectable modifier)
         {
-            modifierName.text = modifier.GetDefinition().Title;
-            description.text = modifier.ParseDescription();
-            icon.sprite = modifier.GetDefinition().Icon;
+            modifierName.text = modifier.GetTitle();
+            description.text = modifier.GetDescription();
+            icon.sprite = modifier.GetIcon();
         }
 
         public void Close()

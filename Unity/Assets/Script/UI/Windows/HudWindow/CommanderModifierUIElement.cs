@@ -37,7 +37,7 @@ namespace Game.UI.Windows
         public void OnClick()
         {
             ModifierInspectorWindow modifierInspectorWindow = WindowManager.Instance.GetWindow<ModifierInspectorWindow>();
-            modifierInspectorWindow.Show(modifier);
+            modifierInspectorWindow.Show(new ModifierInstanceInspectable(modifier));
         }
     }
 }

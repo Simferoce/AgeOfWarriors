@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3e0407dc3f67e3341a0ff1984625d002
   title: 
+  icon: {fileID: 0}
   description:
     text: Reduce the cost of unit production by 50% and increase the speed of production
       by 50%.
     parameters: []
-  prefab: {fileID: 3116297598868847998, guid: abbd79adea8d49c4ba57ec2f5afcc9cb, type: 3}
+  prefab: {fileID: -482724950285458856, guid: abbd79adea8d49c4ba57ec2f5afcc9cb, type: 3}
   references:
     version: 2
     RefIds: []

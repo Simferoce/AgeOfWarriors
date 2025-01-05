@@ -30,7 +30,7 @@ namespace Game.UI.Windows
 
         private void Update()
         {
-            float cooldownPercentage = caster.Get(index).Remaining / caster.Get(index).Total;
+            float cooldownPercentage = caster.Get(index).Remaining / caster.Get(index).TotalCooldown;
             fill.fillAmount = 1 - Mathf.Clamp01(cooldownPercentage);
 
             fill.color = caster.Get(index).CanUse() ? WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red) : WindowManager.Instance.GetColor(ColorRegistry.Identifiant.Red) * WindowManager.Instance.GetColor(ColorRegistry.Identifiant.LightGrayPurple);

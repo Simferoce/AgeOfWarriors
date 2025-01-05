@@ -75,10 +75,5 @@ namespace Game.Modifier
             foreach (ModifierBehaviour modifierBehaviour in Behaviours)
                 modifierBehaviour.Dispose();
         }
-
-        public string ParseDescription()
-        {
-            return definition.ParseDescription(this);
-        }
     }
 }

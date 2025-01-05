@@ -1,7 +1,4 @@
-﻿using Game.Ability;
-using Game.Character;
-using Game.Components;
-using Game.Modifier;
+﻿using Game.Statistics;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
@@ -20,29 +17,31 @@ namespace Game.UI.Windows
         [SerializeField] private List<ModifierDetailUIElement> modifierDetailUIs = new List<ModifierDetailUIElement>();
         [SerializeField] private List<AbilityDetailUIElement> abilityDetailUIs = new List<AbilityDetailUIElement>();
 
-        public void Show(CharacterEntity character)
+        public void Show(ICharacterInspectable character)
         {
             base.Show();
             Refresh(character);
         }
 
-        public void Refresh(CharacterEntity character)
+        public void Refresh(ICharacterInspectable character)
         {
             TimeManager.Instance.SetTimeScale(this, 0);
 
-            unitName.text = character.GetDefinition().Title;
-            unitIcon.sprite = character.GetDefinition().Icon;
+            unitName.text = character.GetTitle();
+            unitIcon.sprite = character.GetIcon();
 
-            healthImage.fillAmount = character.Health / character.MaxHealth;
-            healthText.text = character.Health.ToString();
-            maxHealthText.text = character.MaxHealth.ToString();
+            float health = character.GetStatistic(StatisticDefinitionRegistry.Instance.Health);
+            float maxHealth = character.GetStatistic(StatisticDefinitionRegistry.Instance.MaxHealth);
+            healthImage.fillAmount = health / maxHealth;
+            healthText.text = health.ToString();
+            maxHealthText.text = maxHealth.ToString();
 
             StatisticDetailUIElement[] statisticDetailUIs = GetComponentsInChildren<StatisticDetailUIElement>();
 
             foreach (StatisticDetailUIElement statisticDetailUI in statisticDetailUIs)
                 statisticDetailUI.Refresh(character);
 
-            List<ModifierEntity> modifiers = character.GetCachedComponent<ModifierHandler>().GetModifiers().Where(x => x.IsVisible).ToList();
+            List<IModifierInspectable> modifiers = character.GetModifierInspectables().ToList();
 
             int i = 0;
             for (; i < modifiers.Count && i < modifierDetailUIs.Count; ++i)
@@ -54,7 +53,7 @@ namespace Game.UI.Windows
             for (; i < modifierDetailUIs.Count; ++i)
                 modifierDetailUIs[i].gameObject.SetActive(false);
 
-            List<AbilityEntity> abilities = character.GetCachedComponent<Caster>().Abilities.ToList();
+            List<IAbilityInspectable> abilities = character.GetAbilityInspectables();
             abilities.Reverse();
 
             int j = 0;

@@ -23,7 +23,7 @@ MonoBehaviour:
     - rid: 7279809380488052805
     - rid: 7279809380488052807
     - rid: 7279809380488052809
-  prefab: {fileID: 916287337667100849, guid: 7fb2fbcfe89032e45b19dce1ee05edf9, type: 3}
+  prefab: {fileID: 3412509217037509149, guid: 7fb2fbcfe89032e45b19dce1ee05edf9, type: 3}
   references:
     version: 2
     RefIds:

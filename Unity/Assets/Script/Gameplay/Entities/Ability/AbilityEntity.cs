@@ -23,7 +23,7 @@ namespace Game.Ability
         public override bool IsActive => base.IsActive && Caster.enabled;
         public FactionType Faction { get; set; }
         public float Remaining => (conditions.FirstOrDefault(x => x is ICooldown) as ICooldown)?.Remaining ?? 0f;
-        public float Total => (conditions.FirstOrDefault(x => x is ICooldown) as ICooldown)?.Total ?? 0f;
+        public float TotalCooldown => (conditions.FirstOrDefault(x => x is ICooldown) as ICooldown)?.TotalCooldown ?? 0f;
 
         public virtual void Initialize(Caster caster)
         {
@@ -66,11 +66,6 @@ namespace Game.Ability
         protected void PublishEffectApplied()
         {
             OnAbilityEffectApplied?.Invoke();
-        }
-
-        public string ParseDescription()
-        {
-            return definition.ParseDescription(this);
         }
     }
 }

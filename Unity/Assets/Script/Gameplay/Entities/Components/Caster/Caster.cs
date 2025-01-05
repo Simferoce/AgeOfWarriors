@@ -24,6 +24,7 @@ namespace Game.Components
         public bool IsCasting { get; set; }
         public int AbilityCount => abilities.Count;
         public List<AbilityEntity> Abilities { get => abilities; }
+        public List<AbilityDefinition> AbilitiesDefinition { get => abilitiesDefinition; set => abilitiesDefinition = value; }
 
         private List<AbilityEntity> abilities = new List<AbilityEntity>();
         private GameObject abilitiesParent;

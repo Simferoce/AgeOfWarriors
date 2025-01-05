@@ -18,7 +18,7 @@ MonoBehaviour:
   description:
     text: 
     parameters: []
-  prefab: {fileID: 3738713540031294512, guid: bafab9d8627b4a54f97baa327171efb9, type: 3}
+  prefab: {fileID: -2670462005780611235, guid: bafab9d8627b4a54f97baa327171efb9, type: 3}
   references:
     version: 2
     RefIds: []

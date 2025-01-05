@@ -12,7 +12,7 @@ namespace Game
         [SerializeField] private StatisticDefinition ratioDefinitionDescriptor;
         [SerializeReference, SubclassSelector] private IFloatAdjustment adjustment;
 
-        public override object GetValue(Entity source)
+        public override object GetValue(Entity source, bool showValue)
         {
             if (source.StatisticRepository.TryGet(name, out Statistic statistic))
             {

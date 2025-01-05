@@ -1,6 +1,4 @@
-﻿using Game.Modifier;
-using System.Linq;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,15 +11,15 @@ namespace Game.UI.Windows
         [SerializeField] private TextMeshProUGUI stackText;
         [SerializeField] private Image overlay;
 
-        private ModifierEntity modifier;
+        private IModifierInspectable modifier;
 
-        public void Refresh(ModifierEntity modifier)
+        public void Refresh(IModifierInspectable modifier)
         {
             this.modifier = modifier;
-            icon.sprite = modifier.GetDefinition().Icon;
-            overlay.fillAmount = modifier?.Behaviours.OfType<IModifierDuration>().FirstOrDefault()?.GetPercentageRemainingDuration() ?? 0;
+            icon.sprite = modifier.GetIcon();
+            overlay.fillAmount = modifier.GetPercentageRemainingDuration() ?? 0;
 
-            float? stackValue = modifier?.Behaviours.OfType<IModifierStack>().FirstOrDefault()?.CurrentStack;
+            float? stackValue = modifier.GetStack();
             if (stackValue == null)
             {
                 stack.SetActive(false);

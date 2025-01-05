@@ -14,11 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 583f27f933430694893ccbf3929fa8cf
   title: Basic
-  descriptionOld: Throw a dark sphere that deals {0} damage to an enemy in {1} meters.
-  prefab: {fileID: 95085129432284298, guid: eb9b88921ce2598438363f68dc3259e1, type: 3}
+  icon: {fileID: 0}
   description:
     text: Throw a dark sphere that deals {0} damage to an enemy in {1} meters.
-    parameters: []
+    parameters:
+    - rid: 7279809441985724495
+    - rid: 7279809441985724496
+  prefab: {fileID: 6690321384844425705, guid: eb9b88921ce2598438363f68dc3259e1, type: 3}
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 7279809441985724495
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: damage
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: 00df8ac314188b945945353a3fbb705b, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2
+    - rid: 7279809441985724496
+      type: {class: StatisticDescriptionParameter, ns: Game, asm: Assembly-CSharp}
+      data:
+        name: range
+        overrideDefinitionDescriptor: {fileID: 11400000, guid: a2aa5c999dfb39e4a989f3c6b532ecbf, type: 2}
+        asPercentage: 0
+        adjustment:
+          rid: -2

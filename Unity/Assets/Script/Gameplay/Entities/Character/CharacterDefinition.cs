@@ -1,5 +1,9 @@
-﻿using Game.Agent;
+﻿using Game.Ability;
+using Game.Agent;
+using Game.Components;
+using Game.Statistics;
 using Game.Technology;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Character
@@ -25,6 +29,16 @@ namespace Game.Character
         public TechnologyTreeDefinition TechnologyTreeDefinition { get => technologyTreeDefinition; set => technologyTreeDefinition = value; }
         public float ProductionDuration => prefab["production_duration"];
         public float Cost => prefab["cost"];
+
+        public List<AbilityDefinition> GetAbilities()
+        {
+            return prefab.GetCachedComponent<Caster>().AbilitiesDefinition;
+        }
+
+        public Statistic GetStatistic(StatisticDefinition statisticDefinition)
+        {
+            return prefab[statisticDefinition];
+        }
 
         public bool IsSpecialization(CharacterDefinition agentIdentityDefinition)
         {

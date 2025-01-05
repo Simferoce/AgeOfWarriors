@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 006b6adb402372743a772d4ea309584b
   title: Healing Potion Throw
+  icon: {fileID: 0}
   description:
     text: Throw a potion that heals an ally on contact by {0}.
     parameters:
     - rid: 6209823544293720187
-  prefab: {fileID: 815283590128273858, guid: 08ed66d5d8883da4c9d3e88907deffd1, type: 3}
+  prefab: {fileID: 8382389830139093115, guid: 08ed66d5d8883da4c9d3e88907deffd1, type: 3}
   references:
     version: 2
     RefIds:

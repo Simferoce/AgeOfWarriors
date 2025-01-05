@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: dfa0ecdf3974904439b3c578bc907282
   title: Basic
+  icon: {fileID: 0}
   description:
     text: Deals {0} damage to a target at {1} meters.
     parameters:
     - rid: 6209823544293720195
     - rid: 6209823544293720196
-  prefab: {fileID: 234122527794856266, guid: a23b4828f80fc3e4c9fc2e5afafabe9d, type: 3}
+  prefab: {fileID: 6568924092644030035, guid: a23b4828f80fc3e4c9fc2e5afafabe9d, type: 3}
   references:
     version: 2
     RefIds:

@@ -1,5 +1,4 @@
-﻿using Game.Ability;
-using Game.Statistics;
+﻿using Game.Statistics;
 using TMPro;
 using UnityEngine;
 
@@ -11,13 +10,13 @@ namespace Game.UI.Windows
         [SerializeField] private TextMeshProUGUI description;
         [SerializeField] private TextMeshProUGUI cooldownText;
 
-        public void Show(AbilityEntity ability, string abilitySlotName)
+        public void Show(IAbilityInspectable ability)
         {
             base.Show();
-            title.text = ability.GetDefinition().Title;
-            description.text = ability.ParseDescription();
+            title.text = ability.GetTitle();
+            description.text = ability.GetDescription();
 
-            float cooldown = 0f;//ability.GetCachedComponent<StatisticIndex>().Max(StatisticIdentifiant.Cooldown);
+            float cooldown = ability.GetCooldown();
             if (cooldown > 0f)
             {
                 cooldownText.alpha = 1f;

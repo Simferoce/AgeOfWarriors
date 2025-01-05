@@ -1,5 +1,4 @@
-﻿using Game.Ability;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,18 +10,18 @@ namespace Game.UI.Windows
         [SerializeField] private string slotName;
         [SerializeField] private TextMeshProUGUI slotNameText;
 
-        private AbilityEntity characterAbility;
+        private IAbilityInspectable ability;
 
-        public void Refresh(AbilityEntity characterAbility)
+        public void Refresh(IAbilityInspectable characterAbility)
         {
-            this.characterAbility = characterAbility;
+            this.ability = characterAbility;
             slotNameText.text = slotName;
         }
 
         public void Inspect()
         {
             AbilityInspectorWindow abilityInspectorWindow = WindowManager.Instance.GetWindow<AbilityInspectorWindow>();
-            abilityInspectorWindow.Show(characterAbility, slotName);
+            abilityInspectorWindow.Show(ability);
         }
     }
 }

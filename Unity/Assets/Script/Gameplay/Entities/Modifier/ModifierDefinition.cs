@@ -17,9 +17,9 @@ namespace Game.Modifier
         public string ParseDescription(Entity source)
         {
             if (source == null)
-                return description.Parse(prefab.GetComponent<Entity>());
+                return description.Parse(prefab.GetComponent<Entity>(), false);
 
-            return description.Parse(source);
+            return description.Parse(source, true);
         }
 
         public virtual UniqueType GetUniqueType()

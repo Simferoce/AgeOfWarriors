@@ -1,5 +1,4 @@
-﻿using Game.Character;
-using Game.Statistics;
+﻿using Game.Statistics;
 using System;
 using TMPro;
 using UnityEngine;
@@ -13,10 +12,11 @@ namespace Game.UI.Windows
         [SerializeField] private TextMeshProUGUI modifierValue;
         [SerializeField] private StatisticDefinition definition;
 
-        public void Refresh(CharacterEntity character)
+        public void Refresh(ICharacterInspectable character)
         {
-            float baseValue = (float)Math.Round((double)character[definition].GetBase<float>(), 2);
-            float total = (float)Math.Round((double)character[definition].Get<float>(), 2);
+            float statisticValue = character.GetStatistic(definition);
+            float baseValue = (float)Math.Round((double)statisticValue, 2);
+            float total = (float)Math.Round((double)statisticValue, 2);
             float difference = (float)Math.Round((double)(total - baseValue), 2);
 
             label.text = definition.Title;

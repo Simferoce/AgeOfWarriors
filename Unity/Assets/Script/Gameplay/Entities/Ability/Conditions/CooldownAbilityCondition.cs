@@ -12,7 +12,7 @@ namespace Game.Ability
         private float lastUsed = 0f;
 
         public float Remaining => Mathf.Clamp(cooldown.GetOrThrow().Get<float>() - (Time.time - lastUsed), 0, cooldown.GetOrThrow().Get<float>());
-        public float Total => cooldown.GetOrThrow().Get<float>();
+        public float TotalCooldown => cooldown.GetOrThrow().Get<float>();
 
         public override void Initialize(AbilityEntity ability)
         {
