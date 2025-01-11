@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
+  m_Name: RockthrowerCharacterDefinition
+  m_EditorClassIdentifier: 
+  id: 5dd9edebb96b5aa4ca80f21a53eaedc7
+  icon: {fileID: 0}
+  title: Rockthrower
+  baseDefinition: {fileID: 0}
+  prefab: {fileID: 1828141002479464864, guid: 131aaea7c4836774e94aa21924450b6b, type: 3}
+  technologyTreeDefinition: {fileID: 0}
