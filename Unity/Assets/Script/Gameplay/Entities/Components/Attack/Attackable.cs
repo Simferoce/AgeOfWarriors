@@ -88,7 +88,7 @@ namespace Game.Components
                 Attackable attackable = null;
                 attack.Source.Entity.GetHierarchy().FirstOrDefault(x => x.TryGetCachedComponent<Attackable>(out attackable));
 
-                if (attackable != null)
+                if (attackable != null && statisticThorn.Get<float>() > 0f)
                 {
                     AttackFactory attackFactory = Entity.AddOrGetCachedComponent<AttackFactory>();
                     attackable.TakeAttack(attackFactory.Generate(attackable, statisticThorn.Get<float>(), flags: AttackData.Flag.Unreflectable));

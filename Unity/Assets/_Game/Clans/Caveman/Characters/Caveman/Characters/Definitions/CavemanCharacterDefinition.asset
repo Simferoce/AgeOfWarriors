@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
+  m_Name: CavemanCharacterDefinition
+  m_EditorClassIdentifier: 
+  id: 13a31bf21b84c3a4b93042cb0b8331e6
+  icon: {fileID: 0}
+  title: Caveman
+  baseDefinition: {fileID: 0}
+  prefab: {fileID: 8159676396048288095, guid: e85217d4552323e46bb3782a93b371a6, type: 3}
+  technologyTreeDefinition: {fileID: 11400000, guid: 05f2265648f06204c8b3e35d378d6c67, type: 2}

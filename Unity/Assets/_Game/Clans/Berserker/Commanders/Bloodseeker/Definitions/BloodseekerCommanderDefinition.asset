@@ -19,7 +19,7 @@ MonoBehaviour:
   perk: {fileID: 11400000, guid: 861e13d4b8a7e464386354eff275bbc2, type: 2}
   active: {fileID: 11400000, guid: c4f194203f2e279478793ce571f47640, type: 2}
   characterDefinitions:
-  - {fileID: 11400000, guid: f10751a9193c2804caf86d23164cab5b, type: 2}
+  - {fileID: 11400000, guid: 13a31bf21b84c3a4b93042cb0b8331e6, type: 2}
   - {fileID: 11400000, guid: c56e927deca89a0489ae45f81e216bd3, type: 2}
   - {fileID: 11400000, guid: 4aa03e995be41dd4b8f06f98b68b3ac9, type: 2}
   - {fileID: 11400000, guid: 97fc51b46f2ebbe49a1921ff727afb6b, type: 2}
