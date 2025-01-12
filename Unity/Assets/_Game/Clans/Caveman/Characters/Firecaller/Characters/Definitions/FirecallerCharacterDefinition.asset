@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
+  m_Name: FirecallerCharacterDefinition
+  m_EditorClassIdentifier: 
+  id: 000791f36a2ad4d4694fbc3534683b81
+  icon: {fileID: 0}
+  title: Firecaller
+  baseDefinition: {fileID: 0}
+  prefab: {fileID: 2975917933439702988, guid: 732eef50feab66f44ad224dcc29626cd, type: 3}
+  technologyTreeDefinition: {fileID: 0}

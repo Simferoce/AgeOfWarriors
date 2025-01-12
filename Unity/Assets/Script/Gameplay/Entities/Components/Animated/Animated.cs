@@ -1,17 +1,37 @@
-﻿using System;
+﻿using Game.Extensions;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Components
 {
     [RequireComponent(typeof(Animator))]
     public class Animated : MonoBehaviour
     {
+        [Serializable]
+        private class SerializeAnimationEventDispatcher
+        {
+            [SerializeField] private string key;
+            [SerializeField] private UnityEvent evt;
+
+            public string Key { get => key; set => key = value; }
+
+            public void Dispatch()
+            {
+                evt?.Invoke();
+            }
+        }
+
         private class Damping
         {
             public float DampTime;
             public float Target;
         }
+
+        [SerializeField]
+        private List<SerializeAnimationEventDispatcher> serializeAnimationEventDispatchers = new List<SerializeAnimationEventDispatcher>();
 
         public event Action OnAbilityUsed;
 
@@ -41,6 +61,18 @@ namespace Game.Components
         {
             currentState = animationState;
             animator.CrossFade(animationState, 0.1f);
+        }
+
+        public void DispatchEvent(string key)
+        {
+            SerializeAnimationEventDispatcher serializeAnimationEventDispatcher = serializeAnimationEventDispatchers.FirstOrDefault(x => x.Key == key);
+            if (serializeAnimationEventDispatcher == null)
+            {
+                Debug.LogError($"Could not find a dispatcher with the key \"{key}\" in \"{this.transform.GetFullPath()}\".", this);
+                return;
+            }
+
+            serializeAnimationEventDispatcher.Dispatch();
         }
 
         public string GetCurrent()
