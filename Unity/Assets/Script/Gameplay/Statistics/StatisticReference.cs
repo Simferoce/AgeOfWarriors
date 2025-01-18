@@ -54,5 +54,10 @@ namespace Game.Statistics
         {
             return entity.GetCachedComponent<StatisticRepository>().Get<T>(name);
         }
+
+        public bool HasValue()
+        {
+            return !string.IsNullOrEmpty(name);
+        }
     }
 }
