@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: TotemistControllerController
+  m_Controller: {fileID: 9100000, guid: 7271252879c91cc4d86e4bdd1f31c496, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 5b4bf31c6ae3ae244b1fb392e7cf2e1d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8d1f53019c7135346923a1158ef5214f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 306d91c03358b0d4c810f9c361945b42, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5abb1cc49e8127d418ef73fc248fe5c8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8cf47bf5ce16229409cb3260d53989ec, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5f1e4d9936428074c8499230a8e8ec00, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 6e17ec9ae80c5c541a10f1bef08054d2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 926430d2d19f3924cab2e149b0c1e529, type: 2}

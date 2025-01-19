@@ -20,6 +20,6 @@ MonoBehaviour:
   active: {fileID: 11400000, guid: c4f194203f2e279478793ce571f47640, type: 2}
   characterDefinitions:
   - {fileID: 11400000, guid: 9c7e6a3eb4ff7ed45ab4d49636535750, type: 2}
-  - {fileID: 11400000, guid: 5dd9edebb96b5aa4ca80f21a53eaedc7, type: 2}
+  - {fileID: 11400000, guid: d04b0b6e67c04cc42b886428b6b80c35, type: 2}
   - {fileID: 11400000, guid: 000791f36a2ad4d4694fbc3534683b81, type: 2}
   - {fileID: 11400000, guid: 37d31d98fac861048ab95f67024e9e7b, type: 2}
