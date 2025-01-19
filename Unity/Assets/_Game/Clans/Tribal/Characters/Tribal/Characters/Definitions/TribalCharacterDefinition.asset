@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
+  m_Name: TribalCharacterDefinition
+  m_EditorClassIdentifier: 
+  id: 9c7e6a3eb4ff7ed45ab4d49636535750
+  icon: {fileID: 0}
+  title: Tribal
+  baseDefinition: {fileID: 0}
+  prefab: {fileID: 8957279331380673538, guid: 3709fc43a6721f34b9819bb53ce657c8, type: 3}
+  technologyTreeDefinition: {fileID: 0}
