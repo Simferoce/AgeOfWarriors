@@ -223,8 +223,8 @@ MonoBehaviour:
     - rid: 3390488840131837997
   rigidbody: {fileID: -9219538325602513416}
   projectileMovements:
-  - rid: 7754703133506797683
   - rid: 7754703133506797684
+  - rid: 8170070099778338906
   behaviours:
   - rid: 7754703144169766983
   - rid: 7754703144169767004
@@ -288,9 +288,6 @@ MonoBehaviour:
       type: {class: ProjectileParameterValueFloat, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
         name: armor_penetration
-    - rid: 7754703133506797683
-      type: {class: AlignWithVelocityProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
-      data: 
     - rid: 7754703133506797684
       type: {class: StraightProjectileMovement, ns: Game.Projectile, asm: Assembly-CSharp}
       data:
@@ -345,6 +342,9 @@ MonoBehaviour:
           name: damage
         armorPenetration:
           name: armor_penetration
+    - rid: 8170070099778338906
+      type: {class: AlignInShootDirection, ns: Game.Projectile, asm: Assembly-CSharp}
+      data: 
 --- !u!50 &-9219538325602513416
 Rigidbody2D:
   serializedVersion: 5

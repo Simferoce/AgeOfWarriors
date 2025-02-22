@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c888fb3182e833147b7c32b0f170c45c, type: 3}
+  m_Name: PoisonStalkerCharacterDefinition
+  m_EditorClassIdentifier: 
+  id: 54f788b367cc90f4b836222600d7e615
+  icon: {fileID: 0}
+  title: Poison Stalker
+  baseDefinition: {fileID: 0}
+  prefab: {fileID: 8117476169492717414, guid: 3bb165b66e6a79f4c9c54650721815c1, type: 3}
+  technologyTreeDefinition: {fileID: 0}
